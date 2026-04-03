@@ -1,0 +1,94 @@
+---
+title: "Examples"
+description: "Real conversations you can have with your AI assistant via MCP"
+---
+
+# Example Conversations
+
+Once connected, just chat naturally. The AI picks the right tools automatically.
+
+## Revenue Analysis
+
+<Accordion title="Cross-platform revenue breakdown">
+**You:** "What's my total revenue this month across Stripe, Shopify, and Whop? Break it down by source."
+
+**Tools used:** `get_stripe_financials` + `get_shopify_data` + `get_whop_data`
+
+The AI pulls payment data from all three platforms and presents a unified breakdown.
+</Accordion>
+
+<Accordion title="MRR trends and health">
+**You:** "What's my MRR? How does it compare to last month? What's my churn rate?"
+
+**Tools used:** `get_stripe_financials` (mode: metrics)
+
+Returns MRR, ARR, churn rates, NRR, GRR, quick ratio — all from daily metric snapshots.
+</Accordion>
+
+## Ad Performance
+
+<Accordion title="ROAS by source">
+**You:** "Show me ROAS by source for the last 30 days"
+
+**Tools used:** `get_attribution` (groupBy: source)
+
+Returns each source with page views, ad spend, conversions, revenue, ROAS, and ROI.
+</Accordion>
+
+<Accordion title="Campaign drill-down">
+**You:** "Drill into Meta Ads — show me ROAS by campaign. Then show the ads for the best one."
+
+**Tools used:** `get_attribution` (groupBy: campaign) → `get_attribution` (groupBy: ad)
+
+Multi-step drill-down from source → campaign → individual ad performance.
+</Accordion>
+
+## Churn Investigation
+
+<Accordion title="Understand why customers leave">
+**You:** "Which customers churned last week? Pull up their recent conversations."
+
+**Tools used:** `get_stripe_financials` (subscriptions, status: canceled) → `get_conversations`
+
+Finds canceled subs, looks up conversations, reads messages to surface churn patterns.
+</Accordion>
+
+## Customer Journey
+
+<Accordion title="Full journey from first visit to purchase">
+**You:** "Show me the full journey for john@example.com"
+
+**Tools used:** `get_contacts` → `get_contacts` (sessions) → `get_conversations` → `get_conversion_events`
+
+Traces: first ad click → website visits → conversations → conversions.
+</Accordion>
+
+## Daily Brief
+
+<Accordion title="Morning business report">
+**You:** "Give me a daily brief: yesterday's revenue, new subs, ad spend, notable conversations."
+
+**Tools used:** `get_stripe_financials` + `get_attribution` + `get_conversations`
+
+Combines financial metrics, attribution, and conversation activity into one update.
+</Accordion>
+
+## Top Customers
+
+<Accordion title="LTV analysis">
+**You:** "Who are my top 10 customers by lifetime value?"
+
+**Tools used:** `get_conversion_events` (mode: ltv, sort: -ltv, limit: 10)
+
+Contacts ranked by total revenue with acquisition source and campaign.
+</Accordion>
+
+## Call Analysis
+
+<Accordion title="Sales call review">
+**You:** "Show me the longest sales calls this week. Summarize what was discussed."
+
+**Tools used:** `get_call_data` (list, sort: -duration) → `get_call_data` (transcript)
+
+Lists calls by duration, pulls transcripts for AI summarization.
+</Accordion>

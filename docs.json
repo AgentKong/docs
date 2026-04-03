@@ -2,10 +2,10 @@
   "$schema": "https://mintlify.com/docs.json",
   "name": "Agent Kong",
   "logo": {
-    "dark": "/images/logo-dark.svg",
-    "light": "/images/logo-light.svg"
+    "dark": "/logo/dark.svg",
+    "light": "/logo/light.svg"
   },
-  "favicon": "/images/favicon.png",
+  "favicon": "/favicon.svg",
   "colors": {
     "primary": "#a855f7",
     "light": "#c084fc",
@@ -41,7 +41,8 @@
     {
       "group": "Getting Started",
       "pages": [
-        "introduction",
+        "index",
+        "quickstart",
         "authentication"
       ]
     },
@@ -57,61 +58,76 @@
     {
       "group": "API Reference",
       "pages": [
-        "api-reference/overview"
+        "api-reference/introduction"
       ]
     },
     {
       "group": "Contacts",
       "pages": [
-        "api-reference/contacts/list-contacts",
-        "api-reference/contacts/create-contact",
-        "api-reference/contacts/get-contact",
-        "api-reference/contacts/update-contact",
-        "api-reference/contacts/delete-contact"
+        "api-reference/endpoint/list-contacts",
+        "api-reference/endpoint/create-contact",
+        "api-reference/endpoint/get-contact",
+        "api-reference/endpoint/update-contact",
+        "api-reference/endpoint/delete-contact"
       ]
     },
     {
       "group": "Conversations",
       "pages": [
-        "api-reference/conversations/list-conversations",
-        "api-reference/conversations/get-conversation",
-        "api-reference/conversations/update-conversation"
+        "api-reference/endpoint/list-conversations",
+        "api-reference/endpoint/get-conversation",
+        "api-reference/endpoint/update-conversation"
       ]
     },
     {
       "group": "Messages",
       "pages": [
-        "api-reference/messages/list-messages",
-        "api-reference/messages/send-message"
+        "api-reference/endpoint/list-messages",
+        "api-reference/endpoint/send-message"
+      ]
+    },
+    {
+      "group": "Agents",
+      "pages": [
+        "api-reference/endpoint/list-agents",
+        "api-reference/endpoint/get-agent"
       ]
     },
     {
       "group": "Stripe",
       "pages": [
-        "api-reference/stripe/payments",
-        "api-reference/stripe/subscriptions",
-        "api-reference/stripe/customers",
-        "api-reference/stripe/metrics",
-        "api-reference/stripe/products"
+        "api-reference/endpoint/stripe-payments",
+        "api-reference/endpoint/stripe-subscriptions",
+        "api-reference/endpoint/stripe-customers",
+        "api-reference/endpoint/stripe-metrics",
+        "api-reference/endpoint/stripe-products"
       ]
     },
     {
       "group": "Shopify",
       "pages": [
-        "api-reference/shopify/orders",
-        "api-reference/shopify/customers",
-        "api-reference/shopify/products",
-        "api-reference/shopify/analytics",
-        "api-reference/shopify/abandoned-carts"
+        "api-reference/endpoint/shopify-orders",
+        "api-reference/endpoint/shopify-customers",
+        "api-reference/endpoint/shopify-products",
+        "api-reference/endpoint/shopify-analytics",
+        "api-reference/endpoint/shopify-abandoned-carts"
       ]
     },
     {
       "group": "Attribution",
       "pages": [
-        "api-reference/attribution/data",
-        "api-reference/attribution/utms",
-        "api-reference/attribution/presets",
-        "api-reference/attribution/contacts-by-ltv"
+        "api-reference/endpoint/attribution-data",
+        "api-reference/endpoint/attribution-utms",
+        "api-reference/endpoint/attribution-presets",
+        "api-reference/endpoint/attribution-contacts-by-ltv"
+      ]
+    },
+    {
+      "group": "Voice Calls",
+      "pages": [
+        "api-reference/endpoint/list-calls",
+        "api-reference/endpoint/get-call",
+        "api-reference/endpoint/get-call-transcript"
       ]
     }
   ],
@@ -125,7 +141,7 @@
       "mode": "simple"
     }
   },
-  "openapi": "openapi.json",
+  "openapi": "api-reference/openapi.json",
   "footerSocials": {
     "github": "https://github.com/AgentKong",
     "website": "https://agentkong.com"

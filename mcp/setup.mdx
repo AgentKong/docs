@@ -1,0 +1,128 @@
+---
+title: "Quick Setup"
+description: "Add the Agent Kong MCP server to Claude, Cursor, VS Code, or any MCP client"
+---
+
+# Quick Setup
+
+<Steps>
+  <Step title="Get your API key">
+    Go to **Settings → API Keys → Generate New Key** in your Agent Kong dashboard. Enable all read scopes.
+  </Step>
+  <Step title="Copy your Business ID">
+    Find it in your browser URL: `app.agentkong.com/business/your-id-here/...`
+  </Step>
+  <Step title="Add the MCP server">
+    Pick your AI tool below and paste the configuration.
+  </Step>
+</Steps>
+
+## Claude Desktop
+
+Open **Claude Desktop → Settings → Developer → Edit Config** and add:
+
+```json claude_desktop_config.json
+{
+  "mcpServers": {
+    "agentkong": {
+      "command": "npx",
+      "args": ["-y", "@cortana-ai/mcp-server@latest"],
+      "env": {
+        "AGENTKONG_API_KEY": "sk-ak-your-api-key",
+        "AGENTKONG_BUSINESS_ID": "your-business-id",
+        "AGENTKONG_API_URL": "https://agent-kong-app.vercel.app"
+      }
+    }
+  }
+}
+```
+
+Restart Claude Desktop. You'll see a hammer icon in the chat input — your tools are loaded.
+
+## Claude Code
+
+```bash
+claude mcp add agentkong -- npx -y @cortana-ai/mcp-server@latest
+```
+
+Then set environment variables:
+
+```bash
+export AGENTKONG_API_KEY="sk-ak-your-api-key"
+export AGENTKONG_BUSINESS_ID="your-business-id"
+export AGENTKONG_API_URL="https://agent-kong-app.vercel.app"
+```
+
+## Cursor
+
+Open **Cursor → Settings → MCP Servers** or edit `~/.cursor/mcp.json`:
+
+```json ~/.cursor/mcp.json
+{
+  "mcpServers": {
+    "agentkong": {
+      "command": "npx",
+      "args": ["-y", "@cortana-ai/mcp-server@latest"],
+      "env": {
+        "AGENTKONG_API_KEY": "sk-ak-your-api-key",
+        "AGENTKONG_BUSINESS_ID": "your-business-id",
+        "AGENTKONG_API_URL": "https://agent-kong-app.vercel.app"
+      }
+    }
+  }
+}
+```
+
+## VS Code
+
+Add to `.vscode/mcp.json` in any workspace:
+
+```json .vscode/mcp.json
+{
+  "servers": {
+    "agentkong": {
+      "command": "npx",
+      "args": ["-y", "@cortana-ai/mcp-server@latest"],
+      "env": {
+        "AGENTKONG_API_KEY": "sk-ak-your-api-key",
+        "AGENTKONG_BUSINESS_ID": "your-business-id",
+        "AGENTKONG_API_URL": "https://agent-kong-app.vercel.app"
+      }
+    }
+  }
+}
+```
+
+## Windsurf
+
+Add to your Windsurf MCP config:
+
+```json
+{
+  "mcpServers": {
+    "agentkong": {
+      "command": "npx",
+      "args": ["-y", "@cortana-ai/mcp-server@latest"],
+      "env": {
+        "AGENTKONG_API_KEY": "sk-ak-your-api-key",
+        "AGENTKONG_BUSINESS_ID": "your-business-id",
+        "AGENTKONG_API_URL": "https://agent-kong-app.vercel.app"
+      }
+    }
+  }
+}
+```
+
+## Configuration Reference
+
+| Variable | Required | Description |
+|----------|----------|-------------|
+| `AGENTKONG_API_KEY` | Yes | Your API key starting with `sk-ak-` |
+| `AGENTKONG_BUSINESS_ID` | Yes | Business UUID from your dashboard URL |
+| `AGENTKONG_API_URL` | No | API base URL. Defaults to `https://agent-kong-app.vercel.app` |
+
+## npm Package
+
+<Card title="@cortana-ai/mcp-server" icon="npm" href="https://www.npmjs.com/package/@cortana-ai/mcp-server">
+  View on npm
+</Card>

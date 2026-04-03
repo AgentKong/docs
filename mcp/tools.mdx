@@ -1,0 +1,154 @@
+---
+title: "Available Tools"
+description: "All MCP tools the AI can use to query your business data"
+---
+
+# Available Tools
+
+The AI discovers these tools automatically via MCP. Just ask questions in natural language.
+
+## get_attribution
+
+Full attribution table with drill-down by source, campaign, medium, and ad.
+
+| Parameter | Type | Required | Description |
+|-----------|------|----------|-------------|
+| `startDate` | string | Yes | Start date ISO 8601 |
+| `endDate` | string | Yes | End date ISO 8601 |
+| `groupBy` | enum | No | `source`, `campaign`, `medium`, `ad`. Default: `source` |
+| `attributionModel` | enum | No | `last_click`, `first_click`, `paid_priority`, `scientific` |
+| `sources` | string | No | Pipe-separated: `"Meta Ads\|\|\|Google Ads"` |
+| `campaigns` | string | No | Pipe-separated filter |
+| `currency` | string | No | Currency code. Default: `USD` |
+| `timezone` | string | No | IANA timezone. Default: `America/New_York` |
+
+**Returns:** pageViews, leads, conversions (per event type with count/revenue), totalRevenue, totalLTV, ROAS, ROI, costPerConversion, ad spend.
+
+<Accordion title="Drill-down workflow">
+1. Start with `groupBy=source` to see top-level channels
+2. Filter by a source → switch to `groupBy=campaign`
+3. Filter by campaign → switch to `groupBy=ad` for individual ad performance
+</Accordion>
+
+---
+
+## get_stripe_financials
+
+Stripe payments, subscriptions, customers, SaaS metrics, and products.
+
+| Parameter | Type | Required | Description |
+|-----------|------|----------|-------------|
+| `mode` | enum | Yes | `payments`, `subscriptions`, `customers`, `metrics`, `products` |
+| `from` / `to` | string | For metrics/payments | Date range ISO 8601 |
+| `status` | string | No | `succeeded`, `active`, `canceled`, etc. |
+| `periodType` | enum | No | `daily` or `monthly` (metrics mode) |
+| `sort` | string | No | `-totalRevenue`, `-amount`, `-paymentDate` |
+
+<Accordion title="Mode details">
+- **payments** — Payment history with amounts, status, customer info
+- **subscriptions** — Active/historical with MRR contribution per sub
+- **customers** — Roster with LTV, MRR, churn dates
+- **metrics** — Daily/monthly KPIs: MRR, ARR, churn, NRR, GRR, ARPU, LTV, quick ratio
+- **products** — Product catalog with pricing
+</Accordion>
+
+---
+
+## get_shopify_data
+
+Shopify e-commerce data across 5 modes.
+
+| Parameter | Type | Required | Description |
+|-----------|------|----------|-------------|
+| `mode` | enum | Yes | `orders`, `customers`, `products`, `analytics`, `abandoned-carts` |
+| `from` / `to` | string | For analytics | Date range |
+| `financialStatus` | string | No | `paid`, `pending`, `refunded` |
+| `rfmSegment` | string | No | `Champions`, `Loyal`, `At Risk`, `New` |
+| `sort` | string | No | `-totalSpent`, `-totalRevenue` |
+
+---
+
+## get_whop_data
+
+Whop marketplace payments, customers, and memberships.
+
+| Parameter | Type | Required | Description |
+|-----------|------|----------|-------------|
+| `mode` | enum | Yes | `payments`, `connections`, `customers`, `memberships` |
+| `from` / `to` | string | No | Date range |
+| `status` | string | No | `active`, `canceled` |
+| `eventType` | string | No | `payment.succeeded`, `membership.went_valid` |
+
+---
+
+## get_conversations
+
+Conversation threads and full message history.
+
+| Parameter | Type | Required | Description |
+|-----------|------|----------|-------------|
+| `mode` | enum | Yes | `list` or `messages` |
+| `conversationId` | string | For messages | Conversation ID |
+| `contactId` | string | No | Filter by contact |
+| `starred` | string | No | `true` / `false` |
+| `replyMode` | string | No | `AUTO`, `MANUAL`, `HYBRID` |
+
+<Tip>First `list` conversations to find the ID, then use `messages` mode to read the thread.</Tip>
+
+---
+
+## get_call_data
+
+Voice call logs and transcripts.
+
+| Parameter | Type | Required | Description |
+|-----------|------|----------|-------------|
+| `mode` | enum | Yes | `list`, `get`, `transcript` |
+| `callId` | string | For get/transcript | Call ID |
+| `from` / `to` | string | No | Date range |
+| `agentId` | string | No | Filter by AI agent |
+
+<Tip>Use `list` with `sort=-duration` to find longest calls, then `transcript` to read them.</Tip>
+
+---
+
+## get_contacts
+
+CRM contacts and customer journey tracking.
+
+| Parameter | Type | Required | Description |
+|-----------|------|----------|-------------|
+| `mode` | enum | Yes | `list`, `get`, `sessions` |
+| `contactId` | string | For get/sessions | Contact ID |
+| `search` | string | No | Search name, email, phone |
+| `email` | string | No | Exact email match |
+| `tag` | string | No | Filter by tag name |
+| `include` | string | No | `tags`, `customFields` (comma-separated) |
+
+<Tip>Full customer journey: `get` contact → `sessions` for visits → conversations → conversions</Tip>
+
+---
+
+## get_conversion_events
+
+Conversion entries and LTV analysis.
+
+| Parameter | Type | Required | Description |
+|-----------|------|----------|-------------|
+| `mode` | enum | Yes | `list` or `ltv` |
+| `configName` | string | No | `purchase`, `lead`, etc. |
+| `contactId` | string | No | Filter by contact |
+| `from` / `to` | string | No | Date range |
+| `sort` | string | No | `-eventValue`, `-ltv` |
+
+---
+
+## get_utms
+
+Returns all available UTM values (sources, campaigns, mediums, ads) and their hierarchy. No parameters required.
+
+---
+
+## get_presets
+
+Returns attribution column presets (funnel views). No parameters required.

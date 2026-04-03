@@ -1,0 +1,66 @@
+---
+title: "Authentication"
+description: "Create and manage API keys for the Agent Kong API and MCP Server"
+---
+
+# Authentication
+
+All API requests and the MCP server require a Bearer token. API keys are scoped to a specific business with configurable permissions.
+
+## Create an API Key
+
+<Steps>
+  <Step title="Open Settings">
+    Navigate to **Settings → API Keys** in your Agent Kong dashboard.
+  </Step>
+  <Step title="Generate New Key">
+    Click **Generate New Key**. Give it a name (e.g., "MCP Server" or "Dashboard").
+  </Step>
+  <Step title="Select Scopes">
+    Enable the scopes you need. For full MCP access, enable all read scopes.
+  </Step>
+  <Step title="Copy the Key">
+    Your key starts with `sk-ak-`. Copy it immediately — it won't be shown again.
+  </Step>
+</Steps>
+
+## Using the API Key
+
+```bash
+curl -H "Authorization: Bearer sk-ak-your-api-key" \
+  https://agent-kong-app.vercel.app/api/v1/businesses/{businessId}/contacts
+```
+
+## Available Scopes
+
+| Scope | Access |
+|-------|--------|
+| `contacts:read` | List and search contacts |
+| `contacts:write` | Create, update, delete contacts |
+| `conversations:read` | List conversations, read messages, call logs |
+| `conversations:write` | Update conversation metadata |
+| `messages:read` | Read message history |
+| `messages:write` | Send messages |
+| `agents:read` | List and view agent configurations |
+| `agents:write` | Create, update, delete agents |
+| `appointments:read` | List and view appointments |
+| `appointments:write` | Create, update, delete appointments |
+| `conversions:read` | View conversion entries and configs |
+| `conversions:write` | Create conversion entries |
+| `tracking:read` | View tracking sessions |
+| `tags:read` / `tags:write` | Manage tags |
+| `custom_fields:read` / `custom_fields:write` | Manage custom fields |
+| `attribution:read` | Full attribution table, UTMs, presets, LTV |
+| `stripe:read` | Stripe payments, subscriptions, customers, metrics |
+| `shopify:read` | Shopify orders, customers, products, analytics |
+| `whop:read` | Whop payments, customers, memberships |
+
+## Find Your Business ID
+
+Your Business ID is in your dashboard URL:
+
+```
+https://app.agentkong.com/business/cf3383a0-55f6-45d8-ab57-484edd63770c/tracking
+                                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                                     This is your Business ID
+```

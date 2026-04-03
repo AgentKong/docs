@@ -1,0 +1,45 @@
+---
+title: "MCP Server"
+description: "Connect Claude, Cursor, VS Code, or any AI tool to your Agent Kong business data"
+---
+
+# MCP Server
+
+The Agent Kong MCP (Model Context Protocol) server gives AI tools full read access to your business data. Ask questions in natural language — the AI picks the right tools automatically.
+
+## What is MCP?
+
+MCP is an open protocol that lets AI assistants connect to external data sources. Instead of copy-pasting data into Claude, the AI can directly query your attribution, Stripe, Shopify, conversations, and CRM data.
+
+## What data can the AI access?
+
+<CardGroup cols={2}>
+  <Card title="Attribution" icon="chart-mixed">
+    ROAS, ROI, ad spend, conversions by source/campaign/ad. Multi-model attribution.
+  </Card>
+  <Card title="Stripe Financials" icon="credit-card">
+    MRR, ARR, payments, subscriptions, churn rates, customer LTV, daily metrics.
+  </Card>
+  <Card title="Shopify" icon="cart-shopping">
+    Orders, customers, products, daily analytics, abandoned carts, RFM segments.
+  </Card>
+  <Card title="Conversations" icon="messages">
+    Full conversation threads, message history, AI agent performance.
+  </Card>
+  <Card title="Voice Calls" icon="phone">
+    Call logs, durations, full transcripts for sales call analysis.
+  </Card>
+  <Card title="CRM Contacts" icon="address-book">
+    Contact records, tags, custom fields, tracking sessions, customer journeys.
+  </Card>
+</CardGroup>
+
+## Install
+
+```bash
+npx -y @cortana-ai/mcp-server@latest
+```
+
+<Card title="Setup Guide" icon="rocket" href="/mcp/setup">
+  Get running in under 5 minutes
+</Card>

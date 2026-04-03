@@ -1,33 +1,65 @@
 ---
-title: 'Introduction'
-description: 'Example section for showcasing API endpoints'
+title: "API Overview"
+description: "The Agent Kong Public REST API v1"
 ---
 
-<Note>
-  If you're not looking to build API reference documentation, you can delete
-  this section by removing the api-reference folder.
-</Note>
+# API Reference
 
-## Welcome
+The Agent Kong Public API provides programmatic access to contacts, conversations, messages, agents, appointments, conversions, tracking sessions, tags, custom fields, financial data (Stripe, Shopify, Whop), and voice call logs/transcripts.
 
-There are two ways to build API documentation: [OpenAPI](https://mintlify.com/docs/api-playground/openapi/setup) and [MDX components](https://mintlify.com/docs/api-playground/mdx/configuration). For the starter kit, we are using the following OpenAPI specification.
+## Base URL
 
-<Card
-  title="Plant Store Endpoints"
-  icon="leaf"
-  href="https://github.com/mintlify/starter/blob/main/api-reference/openapi.json"
->
-  View the OpenAPI specification file
-</Card>
+```
+https://agent-kong-app.vercel.app/api/v1/businesses/{businessId}
+```
+
+All endpoints are scoped to a business and require Bearer token authentication.
 
 ## Authentication
 
-All API endpoints are authenticated using Bearer tokens and picked up from the specification file.
+```bash
+Authorization: Bearer sk-ak-your-api-key
+```
+
+See [Authentication](/authentication) for creating and managing API keys.
+
+## Response Format
 
 ```json
-"security": [
-  {
-    "bearerAuth": []
+{
+  "data": [...],
+  "pagination": {
+    "page": 1,
+    "limit": 20,
+    "total": 150,
+    "totalPages": 8
   }
-]
+}
 ```
+
+## Endpoint Groups
+
+<CardGroup cols={2}>
+  <Card title="Contacts" icon="address-book" href="/api-reference/endpoint/list-contacts">
+    CRUD + tag management for CRM contacts
+  </Card>
+  <Card title="Conversations" icon="messages" href="/api-reference/endpoint/list-conversations">
+    List, read, and update conversation threads
+  </Card>
+  <Card title="Stripe" icon="credit-card" href="/api-reference/endpoint/stripe-payments">
+    Payments, subscriptions, customers, metrics, products
+  </Card>
+  <Card title="Shopify" icon="cart-shopping" href="/api-reference/endpoint/shopify-orders">
+    Orders, customers, products, analytics, abandoned carts
+  </Card>
+  <Card title="Attribution" icon="chart-mixed" href="/api-reference/endpoint/attribution-data">
+    Full attribution table, UTMs, presets, LTV analysis
+  </Card>
+  <Card title="Voice Calls" icon="phone" href="/api-reference/endpoint/list-calls">
+    Call logs, metadata, and full transcripts
+  </Card>
+</CardGroup>
+
+<Note>
+  The endpoint pages below are auto-generated from the OpenAPI specification. You can import the spec into Postman or any API client.
+</Note>
