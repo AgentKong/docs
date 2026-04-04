@@ -196,7 +196,7 @@
     ]
   },
   "api": {
-    "baseUrl": "https://agent-kong-app.vercel.app",
+    "baseUrl": "https://app.usecortana.ai",
     "auth": {
       "method": "bearer",
       "name": "Authorization"
