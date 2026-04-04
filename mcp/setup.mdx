@@ -1,13 +1,13 @@
 ---
 title: "Quick Setup"
-description: "Add the Agent Kong MCP server to Claude, Cursor, VS Code, or any MCP client"
+description: "Add the Cortana AI MCP server to Claude, Cursor, VS Code, or any MCP client"
 ---
 
 # Quick Setup
 
 <Steps>
   <Step title="Get your API key">
-    Go to **Settings → API Keys → Generate New Key** in your Agent Kong dashboard. Enable all read scopes.
+    Go to **Settings → API Keys → Generate New Key** in your Cortana AI dashboard. Enable all read scopes.
   </Step>
   <Step title="Copy your Business ID">
     Find it in your browser URL: `app.usecortana.ai/business/your-id-here/...`
@@ -23,12 +23,12 @@ The fastest way — no installation needed. Works directly in your browser at [c
 
 1. Go to **Claude.ai → Settings → Connectors**
 2. Click **"Add custom connector"**
-3. Enter name: `Agent Kong`
+3. Enter name: `Cortana AI`
 4. Enter URL: `https://app.usecortana.ai/api/mcp`
 5. Click **Advanced settings** and add your API key as a Bearer token
 6. Click **Add**
 
-Start chatting — Claude will discover all Agent Kong tools automatically.
+Start chatting — Claude will discover all Cortana AI tools automatically.
 
 ## Claude Desktop
 
@@ -37,7 +37,7 @@ Open **Claude Desktop → Settings → Developer → Edit Config** and add:
 ```json claude_desktop_config.json
 {
   "mcpServers": {
-    "agentkong": {
+    "cortana-ai": {
       "command": "npx",
       "args": ["-y", "@cortana-ai/mcp-server@latest"],
       "env": {
@@ -55,7 +55,7 @@ Restart Claude Desktop. You'll see a hammer icon in the chat input — your tool
 ## Claude Code
 
 ```bash
-claude mcp add agentkong -- npx -y @cortana-ai/mcp-server@latest
+claude mcp add cortana-ai -- npx -y @cortana-ai/mcp-server@latest
 ```
 
 Then set environment variables:
@@ -73,7 +73,7 @@ Open **Cursor → Settings → MCP Servers** or edit `~/.cursor/mcp.json`:
 ```json ~/.cursor/mcp.json
 {
   "mcpServers": {
-    "agentkong": {
+    "cortana-ai": {
       "command": "npx",
       "args": ["-y", "@cortana-ai/mcp-server@latest"],
       "env": {
@@ -93,7 +93,7 @@ Add to `.vscode/mcp.json` in any workspace:
 ```json .vscode/mcp.json
 {
   "servers": {
-    "agentkong": {
+    "cortana-ai": {
       "command": "npx",
       "args": ["-y", "@cortana-ai/mcp-server@latest"],
       "env": {
@@ -113,7 +113,7 @@ Add to your Windsurf MCP config:
 ```json
 {
   "mcpServers": {
-    "agentkong": {
+    "cortana-ai": {
       "command": "npx",
       "args": ["-y", "@cortana-ai/mcp-server@latest"],
       "env": {

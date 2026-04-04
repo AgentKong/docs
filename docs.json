@@ -1,6 +1,6 @@
 {
   "$schema": "https://mintlify.com/docs.json",
-  "name": "Agent Kong",
+  "name": "Cortana AI",
   "logo": {
     "dark": "/logo/dark.svg",
     "light": "/logo/light.svg"
@@ -207,8 +207,8 @@
   },
   "openapi": "api-reference/openapi.json",
   "footerSocials": {
-    "github": "https://github.com/AgentKong",
-    "website": "https://agentkong.com"
+    "github": "https://github.com/cortana-ai",
+    "website": "https://usecortana.ai"
   },
   "feedback": {
     "thumbsRating": true

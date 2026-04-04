@@ -1,12 +1,12 @@
 {
   "openapi": "3.1.0",
   "info": {
-    "title": "AgentKong Public API",
+    "title": "Cortana AI Public API",
     "version": "1.0.0",
-    "description": "The AgentKong Public API enables programmatic access to contacts, conversations, messages, agents, appointments, conversions, tracking sessions, tags, custom fields, financial data (Stripe, Shopify, Whop), and voice call logs/transcripts. All endpoints are scoped to a business and require Bearer token authentication.",
+    "description": "The Cortana AI Public API enables programmatic access to contacts, conversations, messages, agents, appointments, conversions, tracking sessions, tags, custom fields, financial data (Stripe, Shopify, Whop), and voice call logs/transcripts. All endpoints are scoped to a business and require Bearer token authentication.",
     "contact": {
-      "name": "AgentKong Support",
-      "url": "https://agentkong.com"
+      "name": "Cortana AI Support",
+      "url": "https://usecortana.ai"
     }
   },
   "servers": [
