@@ -9,14 +9,7 @@
   "colors": {
     "primary": "#a855f7",
     "light": "#c084fc",
-    "dark": "#9333ea",
-    "background": {
-      "dark": "#0d0117"
-    },
-    "anchors": {
-      "from": "#a855f7",
-      "to": "#7c3aed"
-    }
+    "dark": "#9333ea"
   },
   "theme": "palm",
   "layout": "sidenav",
