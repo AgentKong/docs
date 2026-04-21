@@ -24,7 +24,16 @@
           {
             "group": "Ad Tracking Training",
             "icon": "crosshairs",
-            "pages": []
+            "pages": [
+              {
+                "group": "A-Z Setup Guide",
+                "pages": [
+                  "1-connect-integrations",
+                  "2-setup-pixel",
+                  "3"
+                ]
+              }
+            ]
           },
           {
             "group": "AI Agents Training",
