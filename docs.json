@@ -19,12 +19,19 @@
   "navigation": {
     "tabs": [
       {
-        "tab": "Ad Tracking Docs",
-        "icon": "crosshairs"
-      },
-      {
-        "tab": "AI Agent Docs",
-        "icon": "robot"
+        "tab": "Cortana Training",
+        "groups": [
+          {
+            "group": "Ad Tracking Training",
+            "icon": "crosshairs",
+            "pages": []
+          },
+          {
+            "group": "AI Agents Training",
+            "icon": "user-robot",
+            "pages": []
+          }
+        ]
       },
       {
         "tab": "Developer Docs",
@@ -196,9 +203,6 @@
             ]
           }
         ]
-      },
-      {
-        "tab": "Cortana Platform Guide"
       }
     ]
   },
