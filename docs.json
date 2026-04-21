@@ -31,7 +31,11 @@
                   "1-connect-integrations",
                   "2-setup-pixel",
                   "3",
-                  "4-conversion-tracking"
+                  "4-conversion-tracking",
+                  {
+                    "group": "Untitled Group",
+                    "pages": []
+                  }
                 ]
               }
             ]
