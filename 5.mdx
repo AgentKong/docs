@@ -2,112 +2,112 @@
 title: "5) URL Parameters (CRITICAL)"
 ---
 
-## <u>URL Parameters (CRITICAL)</u>
+<AccordionGroup>
+  <Accordion title="Meta Ads">
+    <div style={{position: 'relative', paddingBottom: '57.87949015063732%', height: 0}}>
+  <iframe src="https://www.loom.com/embed/400f93b302a24285914fb5b0715b1f22" frameBorder="0" webkitallowfullscreen mozallowfullscreen allowFullScreen style={{position: 'absolute', top: 0, left: 0, width: '100%', height: '100%'}} />
+</div>
+
+    # URL Parameters for Meta Ads
+
+    Setting up URL parameters for your Meta ads is a straightforward process, but it’s the most critical step for accurate attribution. Here is how to get them installed and verified.
+
+    ### 1. Adding Parameters to a Single Ad
+
+    To get started, navigate to the **Ad** level in your Meta Ads Manager.
+
+    1. Scroll down to the **Tracking** section.
+    2. Locate the **URL parameters** field.
+    3. Copy the specific parameter string provided in your dashboard and paste it directly into this box.
+
+    ### 2. Bulk Editing Multiple Ads
+
+    If you have dozens of ads to update, you don't need to do them one by one.
+
+    1. Select all the ads you want to update from the Ads Manager list.
+    2. Click **Edit**.
+    3. Scroll down to the **Tracking** section and paste your URL parameters into the field.
+    4. Hit **Publish**.
+
+    <Warning>
+      **Note on Publishing:** When you hit publish, Meta will momentarily pause your ads while they review the changes. This is a standard small change, so ads are typically back up and running within 5 to 15 minutes.
+    </Warning>
+
+    ### 3. Verifying Your Setup
+
+    It's important to keep an eye on your tracking status to ensure everything is configured properly. There are two main ways to do this:
+
+    ### In Meta Ads Manager
+
+    I recommend customizing your columns in Ads Manager to include **URL parameters**. This allows you to visibly confirm at a glance which ads have the tracking code installed and which do not.
+
+    ### In Your Attribution Dashboard
+
+    Inside your tracking table, look for the **Tracking** column. This acts as a "root check" for your setup:
+
+    - **Green Checkmark:** You’re good to go! The URL parameters are configured properly.
+    - **Red Triangle:** There is an error in the string.
+    - **Red X:** Parameters are missing entirely.
+
+    <Tip>
+      If you see anything other than a green checkmark, simply click the icon to see exactly what is missing or misconfigured so you can fix it quickly.
+    </Tip>
+
+    ```jsx
+    utm_source=Meta+Ads&utm_medium={{adset.name}}&utm_campaign={{campaign.name}}&utm_content={{ad.name}}&campaign_id={{campaign.id}}&medium_id={{adset.id}}&content_id={{ad.id}}
+    ```
+
+    > NOTE: we are backwards compatible with Hyros URL Parameters
+  </Accordion>
+</AccordionGroup>
 
 <AccordionGroup>
+  <Accordion title="Google Ads">
+    <div style={{position: 'relative', paddingBottom: '57.961783439490446%', height: 0}}>
+  <iframe src="https://www.loom.com/embed/3a7cedf0ea0f416a93eb953f300a605d" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen style={{position: 'absolute', top: 0, left: 0, width: '100%', height: '100%'}} />
+</div>
 
-<Accordion title="Meta Ads">
+    # URL Parameters for Google Ads
 
-<div style={{position: 'relative', paddingBottom: '57.87949015063732%', height: 0}}><iframe src="https://www.loom.com/embed/400f93b302a24285914fb5b0715b1f22" frameBorder="0" webkitallowfullscreen mozallowfullscreen allowFullScreen style={{position: 'absolute', top: 0, left: 0, width: '100%', height: '100%'}}></iframe></div>
+    Adding URL parameters to your Google Ads account is quite simple. Whether you're updating your existing campaigns or starting a fresh one, here’s how to get your tracking set up.
 
-# URL Parameters for Meta Ads
+    ### For Existing Campaigns
 
-Setting up URL parameters for your Meta ads is a straightforward process, but it’s the most critical step for accurate attribution. Here is how to get them installed and verified.
+    If you already have Google ads running, follow these steps to bulk update your tracking:
 
-### 1. Adding Parameters to a Single Ad
+    1. Navigate to **Campaigns** in your Google Ads dashboard.
+    2. Click the **Settings** tab.
+    3. Select all the campaigns you want to track.
+    4. Click the **Edit** button and select **Change tracking templates**.
+    5. Copy and paste the URL parameter string provided in your dashboard into the **New tracking template** field. It should look something like this: {lpurl}?utm\_campaign={campaignname}&utm\_medium={medium}&utm\_id={campaignid}.
+    6. Hit **Apply**.
 
-To get started, navigate to the **Ad** level in your Meta Ads Manager.
+    <Note>
+      The `{lpurl}` tag is essentially the landing page URL that Google will forward to, followed by your specific campaign ID, medium ID, ad ID, and keywords for accurate attribution.
+    </Note>
 
-1. Scroll down to the **Tracking** section.
-2. Locate the **URL parameters** field.
-3. Copy the specific parameter string provided in your dashboard and paste it directly into this box.
+    ### For New Campaigns
 
-### 2. Bulk Editing Multiple Ads
+    If you’re creating a new campaign from scratch, you can set your tracking template during the setup process:
 
-If you have dozens of ads to update, you don't need to do them one by one.
+    1. Start your new campaign creation.
+    2. Navigate to the **Campaign settings** section.
+    3. Scroll to the bottom, click **More settings**, and then select **Campaign URL options**.
+    4. Paste your tracking code into the **Tracking template** field.
+    5. Click **Next** and continue with your campaign build—away you go!
 
-1. Select all the ads you want to update from the Ads Manager list.
-2. Click **Edit**.
-3. Scroll down to the **Tracking** section and paste your URL parameters into the field.
-4. Hit **Publish**.
-
-<Warning>**Note on Publishing:** When you hit publish, Meta will momentarily pause your ads while they review the changes. This is a standard small change, so ads are typically back up and running within 5 to 15 minutes.</Warning>
-
-### 3. Verifying Your Setup
-
-It's important to keep an eye on your tracking status to ensure everything is configured properly. There are two main ways to do this:
-
-### In Meta Ads Manager
-
-I recommend customizing your columns in Ads Manager to include **URL parameters**. This allows you to visibly confirm at a glance which ads have the tracking code installed and which do not.
-
-### In Your Attribution Dashboard
-
-Inside your tracking table, look for the **Tracking** column. This acts as a "root check" for your setup:
-
-- **Green Checkmark:** You’re good to go! The URL parameters are configured properly.
-- **Red Triangle:** There is an error in the string.
-- **Red X:** Parameters are missing entirely.
-
-<Tip>If you see anything other than a green checkmark, simply click the icon to see exactly what is missing or misconfigured so you can fix it quickly.</Tip>
-
-```jsx
-utm_source=Meta+Ads&utm_medium={{adset.name}}&utm_campaign={{campaign.name}}&utm_content={{ad.name}}&campaign_id={{campaign.id}}&medium_id={{adset.id}}&content_id={{ad.id}}
-```
-
-> NOTE: we are backwards compatible with Hyros URL Parameters
->
-
-
-</Accordion>
+    <Tip>
+      Setting your tracking at the campaign level ensures that all ads within that campaign automatically inherit the correct URL parameters, saving you time and preventing manual errors.
+    </Tip>
+  </Accordion>
+</AccordionGroup>
 
 <AccordionGroup>
-
-<Accordion title="Google Ads">
-
-<div style="position: relative; padding-bottom: 57.961783439490446%; height: 0;"><iframe src="https://www.loom.com/embed/3a7cedf0ea0f416a93eb953f300a605d" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"></iframe></div>
-
-# URL Parameters for Google Ads
-
-Adding URL parameters to your Google Ads account is quite simple. Whether you're updating your existing campaigns or starting a fresh one, here’s how to get your tracking set up.
-
-### For Existing Campaigns
-
-If you already have Google ads running, follow these steps to bulk update your tracking:
-
-1. Navigate to **Campaigns** in your Google Ads dashboard.
-2. Click the **Settings** tab.
-3. Select all the campaigns you want to track.
-4. Click the **Edit** button and select **Change tracking templates**.
-5. Copy and paste the URL parameter string provided in your dashboard into the **New tracking template** field. It should look something like this: {lpurl}?utm_campaign={campaignname}&utm_medium={medium}&utm_id={campaignid}.
-6. Hit **Apply**.
-
-<Note>The `{lpurl}` tag is essentially the landing page URL that Google will forward to, followed by your specific campaign ID, medium ID, ad ID, and keywords for accurate attribution.</Note>
-
-### For New Campaigns
-
-If you’re creating a new campaign from scratch, you can set your tracking template during the setup process:
-
-1. Start your new campaign creation.
-2. Navigate to the **Campaign settings** section.
-3. Scroll to the bottom, click **More settings**, and then select **Campaign URL options**.
-4. Paste your tracking code into the **Tracking template** field.
-5. Click **Next** and continue with your campaign build—away you go!
-
-<Tip>Setting your tracking at the campaign level ensures that all ads within that campaign automatically inherit the correct URL parameters, saving you time and preventing manual errors.</Tip>
-
-</Accordion>
+  <Accordion title="TikTok Ads">
+  </Accordion>
+</AccordionGroup>
 
 <AccordionGroup>
-
-<Accordion title="TikTok Ads">
-
-
-
-</Accordion>
-
-<AccordionGroup>
-
-<Accordion title="Bing Ads">
-
-</Accordion>
+  <Accordion title="Bing Ads">
+  </Accordion>
+</AccordionGroup>
