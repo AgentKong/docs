@@ -1,4 +1,52 @@
 ---
-title: 'untitled-page'
+title: "4) Conversion Set Up"
 ---
+<div style={{ position: 'relative', paddingBottom: '57.961783439490446%', height: 0 }}>
+  <iframe
+    src="https://www.loom.com/embed/3d88f4d53d77411681dcfaee67b83645"
+    frameborder="0"
+    webkitallowfullscreen
+    mozallowfullscreen
+    allowfullscreen
+    style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%' }}
+  ></iframe>
+</div>
 
+# Conversion Event Setup
+
+Alright, now that we have our pixel installed and our contact tracking dialed in, we’re going to head over to the **Conversion Setup** tab. This is where you’ll create, edit, and map data for your conversion events so you know exactly what’s happening in your funnel.
+
+## Getting Started with Events
+
+Right out of the gate, we give you a set of standard events—things like Lead, Intro Call Booked, Appointment Shown, and New Deals Closed. These are the basics, but you aren’t limited to them.
+
+<Tip>You can create **unlimited custom events**. If you want to track a "VIP Webinar Upsell," just click **Add Custom Event**, give it a name, and a description.</Tip>
+
+## Configuring Your Tracking Mode
+
+This is an important one. You have two ways to track how contacts interact with your events:
+
+- **Track all conversions:** This records every single time an event happens for a contact. This is the recommended setting for most setups.
+- **Track first only:** This is a hard stop. It will only record the very first time a specific conversion happens for a contact and ignore everything after that.
+
+### Pro Tip: Filtering vs. Tracking
+
+I generally recommend tracking **all** conversions. Why? Because you can always filter the data later in your reports. For example, if someone reschedules an appointment, you might want to track both events but only *show* one unique booking every 14 days in your attribution table to keep your cost-per-booking numbers accurate.
+
+## Revenue Categories
+
+When an event involves money, you need to decide how that revenue is categorized in your dashboard.
+
+<CardGroup cols={2}><Card title="New Revenue" icon="money-bill-wave">Revenue collected from a specific transaction at the time a customer converts (e.g., a Shopify order or the first payment of a subscription).</Card><Card title="LTV (Lifetime Value)" icon="chart-line-up">The total value of all successful payments from a source over time. This helps you track the long-term ROI of your campaigns.</Card></CardGroup>
+
+## Adding Conversion Sources
+
+A conversion event is just a bucket; you need to tell it where the data is coming from. These are your **Conversion Sources**.
+
+<Steps><Step title="Select an Event">Click the edit icon next to any event (like "New Deals Closed").</Step><Step title="Add Source">Click **Add Source** and choose your integration. We support everything from Webhooks and CSV uploads to native integrations like Salesforce and Meta Ads.</Step><Step title="Map the Data">If you’re using Stripe, for example, you can select specific events like "Checkout Completed" and even filter it so it only triggers for specific products.</Step></Steps>
+
+<Note>**Automatic Setup:** When you connect a native payment processor like **Stripe** or **Whop**, we automatically create an "All Payments LTV" event for you. We know the best methodology for tracking this, so we handle the heavy lifting out of the box.</Note>
+
+Our system doesn't really care where the data comes from—you can have multiple sources (like a Webhook and a CRM) all feeding into a single "Intro Call Booked" event. This gives you the "Lego pieces" you need to build a tracking setup that fits your specific business.
+
+If you have any questions on how to map these out, feel free to reach out to the support team in the bottom right!

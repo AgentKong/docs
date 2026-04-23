@@ -1,4 +1,48 @@
 ---
 title: '2) Setup Pixel'
 ---
+<div style={{ position: 'relative', paddingBottom: '57.845975680370586%', height: 0 }}>
+  <iframe
+    src="https://www.loom.com/embed/391a6b3e9394476bac2fa90662ccaf7d"
+    frameborder="0"
+    webkitallowfullscreen
+    mozallowfullscreen
+    allowfullscreen
+    style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%' }}
+  ></iframe>
+</div>
 
+# Setting Up Your Tracking Pixel
+
+Alright, now that we have your integrations connected, the next thing we’re going to do is set up our pixel. This is the key to getting that 100% tracking accuracy, so let’s dive in.
+
+## Enable Ad Tracking
+
+First things first, head over to the **Ad Tracking** page in the sidebar. If this is your first time here, you might see a button to turn it on—go ahead and click that to activate ad tracking for your account.
+
+Once that's active, navigate to the **Tracking Pixels** tab.
+
+## Improve Tracking Accuracy
+
+Before we create the pixel, let's talk about accuracy. By default, most tracking is "third-party," which browsers like Safari and Brave often block. To bypass these privacy blockers, we're going to set up a **Custom Tracking Domain**.
+
+<Note>**Why do this?** A custom subdomain makes your pixel load as a first-party script. Without this, you’ll get about 98% accuracy. With it, you’re hitting 100%.</Note>
+
+### Setting Up Your Custom Subdomain
+
+1. Click **Set Up Now** under "Improve Tracking Accuracy."
+2. Enter a subdomain (e.g., use.yourdomain.com) and click **Add Domain**.
+3. You’ll be prompted to add two DNS records to your domain provider:
+    - **CNAME Record:** Pointing to our tracking engine.
+    - **TXT Record:** For verification.
+4. Once added, click **Verify Domain**.
+
+## Creating and Installing Your Pixel
+
+Now that your domain is verified, it’s time to get that code onto your site.
+
+<Steps><Step title="Create Your Pixel">Click **Create Your First Pixel** (or **Create Pixel** in the top right). Give it a name—like "Main Website"—and click **Create**.</Step><Step title="Copy the Code">You’ll see a snippet of code under "Copy and paste this script in your web head tracking code." Click the **Click to copy** button.</Step><Step title="Install on Your Website">Go to your website builder (GoHighLevel, WordPress, Webflow, etc.) and find the **Head tracking code** section. Paste the snippet there and hit **Save**.</Step></Steps>
+
+<Tip>If you're not sure where your "Head tracking code" section is, a quick Google search for "[Your Platform Name] head tracking code" will show you exactly where to paste it. The concept is the same across all platforms!</Tip>
+
+Once that's saved, your pixel is live and you're ready to start tracking with total accuracy.
