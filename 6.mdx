@@ -1,0 +1,50 @@
+---
+title: "6) Setup AI Ad Optimization"
+---
+
+<div style={{position: 'relative', paddingBottom: '57.90387955993051%', height: 0}}><iframe src="https://www.loom.com/embed/d8dccbababd140c19e95f430ef5b4bff" frameBorder="0" webkitallowfullscreen mozallowfullscreen allowFullScreen style={{position: 'absolute', top: 0, left: 0, width: '100%', height: '100%'}}></iframe></div>
+
+
+# AI Ad Optimization
+
+AI Ad Optimization allows the system to send data directly back to your ad accounts and pixels. This ensures your platforms know exactly who is converting—not just as a lead, but all the way through your sales funnel. The better the signal you provide to your pixel, the better your ad performance will be.
+
+<Note>The setup interface is identical for Meta CAPI, Google Ads CAPI, and TikTok Events API. In this guide, we’ll focus on the Meta CAPI setup.</Note>
+
+### Step 1: Connect Meta CAPI
+
+To get started, head over to the **AI Ad Optimization** page and select **Connect Meta CAPI**.
+
+1. **Configuration Name:** Give it a name you’ll recognize (e.g., "Main Website").
+2. **Meta Pixel ID:** Go to your Facebook Events Manager and grab your **Dataset ID** (previously known as Pixel ID).
+3. **Access Token:** In Events Manager, go to **Settings**, scroll down to **Conversions API**, and click **Generate access token**. Copy and paste that token into the system.
+
+### Step 2: Event Filtering & Compliance
+
+- **Event Filtering:** We recommend selecting **Only send back Meta Ads**. This ensures the highest match quality (we aim for a 9.3 out of 10), as Meta will only receive data for events it can directly attribute.
+- **Limited Data Use (LDU):** If you need to be CCPA or GDPR compliant, toggle **Enable Limited Data Use** in the Advanced Settings. If you aren't sure, you can usually leave this alone.
+
+### Step 3: Event Mapping
+
+Once connected, click **Manage** to start mapping your conversion events to Meta’s event types.
+
+1. Toggle on the events you want to send back (e.g., Lead, Appointment Booked).
+2. **Event Type:** Choose the closest match from Meta’s standard list (e.g., "Schedule" for a booked appointment).
+3. **Action Source:** This is crucial for optimization. Tell Meta where the event happened—usually **Website**, but could be a **Phone Call** or **Physical Store**.
+
+### Step 4: Creating & Confirming Custom Events
+
+If Meta doesn't have a standard event that fits your needs (like "Appointment Shown"), you can create a custom one:
+
+1. Click **Create New Custom Event** and name it.
+2. Follow the prompts to send a **Test Event** to Meta.
+3. **Crucial Step:** Go back to your Meta Events Manager, click **Overview**, and look for **Confirm custom events that belong to you**. You must click **Review Events** and **Confirm** before Meta will allow you to use that custom event for ad optimization.
+
+### Advanced "Hack World" Settings
+
+If you want to take your optimization to the next level, try these advanced features:
+
+- **Multiple Event Mappings:** You can send a single event back to Meta as two different event types. For example, if someone buys a VIP upgrade, you can send it back as a "Purchase" *and* a custom "VIP Upsell" event to train the pixel on both.
+- **Fixed Event Values:** If you don't have a dynamic value, you can set a manual **Event Value**. For example, you can tell Meta every lead is worth $50 and every appointment is worth $100. This helps the algorithm prioritize the right traffic based on your internal valuations.
+
+<Tip>Once everything is set up, use the **Monitoring** tab to see exactly which events are being sent back to your platforms in real-time.</Tip>
