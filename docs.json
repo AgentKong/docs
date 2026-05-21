@@ -161,7 +161,13 @@
               "api-reference/endpoint/stripe-subscriptions",
               "api-reference/endpoint/stripe-customers",
               "api-reference/endpoint/stripe-metrics",
-              "api-reference/endpoint/stripe-products"
+              "api-reference/endpoint/stripe-products",
+              "api-reference/endpoint/stripe-invoices",
+              "api-reference/endpoint/stripe-disputes",
+              "api-reference/endpoint/stripe-payment-intents",
+              "api-reference/endpoint/stripe-payment-links",
+              "api-reference/endpoint/stripe-prices",
+              "api-reference/endpoint/stripe-promotion-codes"
             ]
           },
           {
@@ -198,6 +204,12 @@
               "api-reference/endpoint/list-calls",
               "api-reference/endpoint/get-call",
               "api-reference/endpoint/get-call-transcript"
+            ]
+          },
+          {
+            "group": "Meetings",
+            "pages": [
+              "api-reference/endpoint/meetings"
             ]
           },
           {

@@ -3,7 +3,7 @@
   "info": {
     "title": "Cortana AI Public API",
     "version": "1.0.0",
-    "description": "The Cortana AI Public API enables programmatic access to contacts, conversations, messages, agents, appointments, conversions, tracking sessions, tags, custom fields, financial data (Stripe, Shopify, Whop), voice call logs/transcripts, and agency-level business creation. Most endpoints are scoped to a business (`/api/v1/businesses/{businessId}/...`); creating a new business uses `POST /api/v1/businesses`, and **agency business templates** (same as *Copy as template* in the app) are listed with `GET /api/v1/businesses/templates` for use as `templateId` on create. All endpoints require Bearer token authentication.",
+    "description": "The Cortana AI Public API enables programmatic access to contacts, conversations, messages, agents, appointments, conversions, tracking sessions, tags, custom fields, financial data (Stripe, Shopify, Whop), attribution analytics, voice call logs/transcripts, meeting data, and agency-level business creation. Most endpoints are scoped to a business (`/api/v1/businesses/{businessId}/...`); creating a new business uses `POST /api/v1/businesses`, and **agency business templates** (same as *Copy as template* in the app) are listed with `GET /api/v1/businesses/templates` for use as `templateId` on create. All endpoints require Bearer token authentication.",
     "contact": {
       "name": "Cortana AI Support",
       "url": "https://usecortana.ai"
@@ -66,12 +66,20 @@
       "description": "Shopify e-commerce data — orders, customers, products, analytics, abandoned carts"
     },
     {
+      "name": "Attribution",
+      "description": "Attribution analytics — full attribution table, distinct UTM values, column presets, and contacts ranked by lifetime value"
+    },
+    {
       "name": "Whop",
       "description": "Whop payment data — payments, connections"
     },
     {
       "name": "Voice Calls",
       "description": "Voice call logs and transcripts"
+    },
+    {
+      "name": "Meetings",
+      "description": "Fathom meeting metadata, structured fields, transcripts, and aggregated insights"
     },
     {
       "name": "Businesses",
@@ -4784,6 +4792,1573 @@
           },
           "403": {
             "description": "Insufficient scope"
+          },
+          "429": {
+            "description": "Rate limit exceeded"
+          }
+        }
+      }
+    },
+    "/api/v1/businesses/{businessId}/stripe/invoices": {
+      "get": {
+        "operationId": "listStripeInvoices",
+        "summary": "List Stripe invoices",
+        "description": "Returns invoices fetched live from the connected Stripe account. Supports filtering by customer, status, and creation date range. Amounts are in the smallest currency unit (e.g. cents).",
+        "tags": [
+          "Stripe"
+        ],
+        "parameters": [
+          {
+            "name": "businessId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            },
+            "description": "The business ID"
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 100,
+              "default": 20
+            },
+            "description": "Maximum number of invoices to return"
+          },
+          {
+            "name": "from",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "format": "date-time"
+            },
+            "description": "Only include invoices created on or after this date (ISO 8601)"
+          },
+          {
+            "name": "to",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "format": "date-time"
+            },
+            "description": "Only include invoices created on or before this date (ISO 8601)"
+          },
+          {
+            "name": "customerId",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            },
+            "description": "Filter by Stripe customer ID"
+          },
+          {
+            "name": "status",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "draft",
+                "open",
+                "paid",
+                "uncollectible",
+                "void"
+              ]
+            },
+            "description": "Filter by invoice status"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of Stripe invoices",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "id": {
+                            "type": "string"
+                          },
+                          "status": {
+                            "type": [
+                              "string",
+                              "null"
+                            ]
+                          },
+                          "amountDue": {
+                            "type": "integer",
+                            "description": "Amount due in the smallest currency unit"
+                          },
+                          "amountPaid": {
+                            "type": "integer",
+                            "description": "Amount paid in the smallest currency unit"
+                          },
+                          "currency": {
+                            "type": "string"
+                          },
+                          "hostedUrl": {
+                            "type": [
+                              "string",
+                              "null"
+                            ]
+                          },
+                          "created": {
+                            "type": [
+                              "string",
+                              "null"
+                            ],
+                            "format": "date-time"
+                          },
+                          "dueDate": {
+                            "type": [
+                              "string",
+                              "null"
+                            ],
+                            "format": "date-time"
+                          },
+                          "customerEmail": {
+                            "type": [
+                              "string",
+                              "null"
+                            ]
+                          }
+                        }
+                      }
+                    },
+                    "hasMore": {
+                      "type": "boolean",
+                      "description": "Whether more invoices are available from Stripe"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Validation error or no connected Stripe account"
+          },
+          "401": {
+            "description": "Missing or invalid Bearer token"
+          },
+          "403": {
+            "description": "Insufficient scope"
+          },
+          "429": {
+            "description": "Rate limit exceeded"
+          }
+        }
+      }
+    },
+    "/api/v1/businesses/{businessId}/stripe/disputes": {
+      "get": {
+        "operationId": "listStripeDisputes",
+        "summary": "List Stripe disputes",
+        "description": "Returns payment disputes (chargebacks) fetched live from the connected Stripe account. Amounts are in the smallest currency unit (e.g. cents).",
+        "tags": [
+          "Stripe"
+        ],
+        "parameters": [
+          {
+            "name": "businessId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            },
+            "description": "The business ID"
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 100,
+              "default": 20
+            },
+            "description": "Maximum number of disputes to return"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of Stripe disputes",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "id": {
+                            "type": "string"
+                          },
+                          "amount": {
+                            "type": "integer",
+                            "description": "Disputed amount in the smallest currency unit"
+                          },
+                          "currency": {
+                            "type": "string"
+                          },
+                          "reason": {
+                            "type": [
+                              "string",
+                              "null"
+                            ]
+                          },
+                          "status": {
+                            "type": [
+                              "string",
+                              "null"
+                            ]
+                          },
+                          "created": {
+                            "type": [
+                              "string",
+                              "null"
+                            ],
+                            "format": "date-time"
+                          },
+                          "evidenceDueBy": {
+                            "type": [
+                              "string",
+                              "null"
+                            ],
+                            "format": "date-time",
+                            "description": "Deadline to submit evidence"
+                          },
+                          "paymentIntentId": {
+                            "type": [
+                              "string",
+                              "null"
+                            ]
+                          }
+                        }
+                      }
+                    },
+                    "hasMore": {
+                      "type": "boolean",
+                      "description": "Whether more disputes are available from Stripe"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Validation error or no connected Stripe account"
+          },
+          "401": {
+            "description": "Missing or invalid Bearer token"
+          },
+          "403": {
+            "description": "Insufficient scope"
+          },
+          "429": {
+            "description": "Rate limit exceeded"
+          }
+        }
+      }
+    },
+    "/api/v1/businesses/{businessId}/stripe/payment-intents": {
+      "get": {
+        "operationId": "listStripePaymentIntents",
+        "summary": "List Stripe payment intents",
+        "description": "Returns synced payment records that have an associated Stripe payment intent. Supports pagination and filtering by status, customer, and payment date range.",
+        "tags": [
+          "Stripe"
+        ],
+        "parameters": [
+          {
+            "name": "businessId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            },
+            "description": "The business ID"
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "default": 1
+            },
+            "description": "Page number"
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 100,
+              "default": 20
+            },
+            "description": "Items per page"
+          },
+          {
+            "name": "from",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "format": "date-time"
+            },
+            "description": "Only include payments on or after this date (ISO 8601)"
+          },
+          {
+            "name": "to",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "format": "date-time"
+            },
+            "description": "Only include payments on or before this date (ISO 8601)"
+          },
+          {
+            "name": "status",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            },
+            "description": "Filter by payment status"
+          },
+          {
+            "name": "stripeCustomerId",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            },
+            "description": "Filter by Stripe customer ID"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Paginated list of payment intents",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "id": {
+                            "type": "string"
+                          },
+                          "paymentIntentId": {
+                            "type": [
+                              "string",
+                              "null"
+                            ]
+                          },
+                          "amount": {
+                            "type": [
+                              "number",
+                              "null"
+                            ]
+                          },
+                          "currency": {
+                            "type": "string"
+                          },
+                          "status": {
+                            "type": "string"
+                          },
+                          "paymentDate": {
+                            "type": "string",
+                            "format": "date-time"
+                          },
+                          "customer": {
+                            "type": [
+                              "object",
+                              "null"
+                            ],
+                            "properties": {
+                              "stripeCustomerId": {
+                                "type": "string"
+                              },
+                              "name": {
+                                "type": [
+                                  "string",
+                                  "null"
+                                ]
+                              },
+                              "email": {
+                                "type": [
+                                  "string",
+                                  "null"
+                                ]
+                              }
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "pagination": {
+                      "$ref": "#/components/schemas/Pagination"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Validation error"
+          },
+          "401": {
+            "description": "Missing or invalid Bearer token"
+          },
+          "403": {
+            "description": "Insufficient scope"
+          },
+          "429": {
+            "description": "Rate limit exceeded"
+          }
+        }
+      }
+    },
+    "/api/v1/businesses/{businessId}/stripe/payment-links": {
+      "get": {
+        "operationId": "listStripePaymentLinks",
+        "summary": "List Stripe payment links",
+        "description": "Returns payment links fetched live from the connected Stripe account.",
+        "tags": [
+          "Stripe"
+        ],
+        "parameters": [
+          {
+            "name": "businessId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            },
+            "description": "The business ID"
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 100,
+              "default": 20
+            },
+            "description": "Maximum number of payment links to return"
+          },
+          {
+            "name": "active",
+            "in": "query",
+            "schema": {
+              "type": "boolean"
+            },
+            "description": "Filter by active state"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of Stripe payment links",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "id": {
+                            "type": "string"
+                          },
+                          "url": {
+                            "type": "string"
+                          },
+                          "active": {
+                            "type": "boolean"
+                          },
+                          "metadata": {
+                            "type": "object"
+                          }
+                        }
+                      }
+                    },
+                    "hasMore": {
+                      "type": "boolean",
+                      "description": "Whether more payment links are available from Stripe"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Validation error or no connected Stripe account"
+          },
+          "401": {
+            "description": "Missing or invalid Bearer token"
+          },
+          "403": {
+            "description": "Insufficient scope"
+          },
+          "429": {
+            "description": "Rate limit exceeded"
+          }
+        }
+      }
+    },
+    "/api/v1/businesses/{businessId}/stripe/prices": {
+      "get": {
+        "operationId": "listStripePrices",
+        "summary": "List Stripe prices",
+        "description": "Returns synced Stripe prices for the business. Supports pagination and filtering by product, active state, and price type.",
+        "tags": [
+          "Stripe"
+        ],
+        "parameters": [
+          {
+            "name": "businessId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            },
+            "description": "The business ID"
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "default": 1
+            },
+            "description": "Page number"
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 100,
+              "default": 50
+            },
+            "description": "Items per page"
+          },
+          {
+            "name": "active",
+            "in": "query",
+            "schema": {
+              "type": "boolean"
+            },
+            "description": "Filter by active state"
+          },
+          {
+            "name": "productId",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            },
+            "description": "Filter by internal product ID"
+          },
+          {
+            "name": "type",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "recurring",
+                "one_time"
+              ]
+            },
+            "description": "Filter by price type"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Paginated list of Stripe prices",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "id": {
+                            "type": "string"
+                          },
+                          "stripePriceId": {
+                            "type": "string"
+                          },
+                          "amount": {
+                            "type": [
+                              "number",
+                              "null"
+                            ]
+                          },
+                          "currency": {
+                            "type": "string"
+                          },
+                          "type": {
+                            "type": [
+                              "string",
+                              "null"
+                            ]
+                          },
+                          "interval": {
+                            "type": [
+                              "string",
+                              "null"
+                            ]
+                          },
+                          "intervalCount": {
+                            "type": [
+                              "integer",
+                              "null"
+                            ]
+                          },
+                          "active": {
+                            "type": "boolean"
+                          },
+                          "nickname": {
+                            "type": [
+                              "string",
+                              "null"
+                            ]
+                          },
+                          "product": {
+                            "type": [
+                              "object",
+                              "null"
+                            ],
+                            "properties": {
+                              "name": {
+                                "type": "string"
+                              },
+                              "stripeProductId": {
+                                "type": "string"
+                              }
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "pagination": {
+                      "$ref": "#/components/schemas/Pagination"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Validation error"
+          },
+          "401": {
+            "description": "Missing or invalid Bearer token"
+          },
+          "403": {
+            "description": "Insufficient scope"
+          },
+          "429": {
+            "description": "Rate limit exceeded"
+          }
+        }
+      }
+    },
+    "/api/v1/businesses/{businessId}/stripe/promotion-codes": {
+      "get": {
+        "operationId": "listStripePromotionCodes",
+        "summary": "List Stripe promotion codes",
+        "description": "Returns promotion codes fetched live from the connected Stripe account, including the underlying coupon and redemption counts.",
+        "tags": [
+          "Stripe"
+        ],
+        "parameters": [
+          {
+            "name": "businessId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            },
+            "description": "The business ID"
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 100,
+              "default": 20
+            },
+            "description": "Maximum number of promotion codes to return"
+          },
+          {
+            "name": "active",
+            "in": "query",
+            "schema": {
+              "type": "boolean"
+            },
+            "description": "Filter by active state"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of Stripe promotion codes",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "id": {
+                            "type": "string"
+                          },
+                          "code": {
+                            "type": "string"
+                          },
+                          "active": {
+                            "type": "boolean"
+                          },
+                          "coupon": {
+                            "type": [
+                              "object",
+                              "null"
+                            ],
+                            "properties": {
+                              "percentOff": {
+                                "type": [
+                                  "number",
+                                  "null"
+                                ]
+                              },
+                              "amountOff": {
+                                "type": [
+                                  "number",
+                                  "null"
+                                ]
+                              },
+                              "currency": {
+                                "type": [
+                                  "string",
+                                  "null"
+                                ]
+                              },
+                              "duration": {
+                                "type": [
+                                  "string",
+                                  "null"
+                                ]
+                              }
+                            }
+                          },
+                          "timesRedeemed": {
+                            "type": "integer"
+                          },
+                          "maxRedemptions": {
+                            "type": [
+                              "integer",
+                              "null"
+                            ]
+                          }
+                        }
+                      }
+                    },
+                    "hasMore": {
+                      "type": "boolean",
+                      "description": "Whether more promotion codes are available from Stripe"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Validation error or no connected Stripe account"
+          },
+          "401": {
+            "description": "Missing or invalid Bearer token"
+          },
+          "403": {
+            "description": "Insufficient scope"
+          },
+          "429": {
+            "description": "Rate limit exceeded"
+          }
+        }
+      }
+    },
+    "/api/v1/businesses/{businessId}/attribution/data": {
+      "get": {
+        "operationId": "getAttributionData",
+        "summary": "Get attribution table",
+        "description": "Returns the full attribution table grouped by source, campaign, medium, or ad. Each row includes page views, unique visitors, leads, ad spend, conversions by event type, revenue, ROAS, and ROI. The response also includes a daily summary time series and the filters that were applied. Required: startDate and endDate.",
+        "tags": [
+          "Attribution"
+        ],
+        "parameters": [
+          {
+            "name": "businessId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            },
+            "description": "The business ID"
+          },
+          {
+            "name": "startDate",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "date-time"
+            },
+            "description": "Start of the reporting window (ISO 8601, required)"
+          },
+          {
+            "name": "endDate",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "date-time"
+            },
+            "description": "End of the reporting window (ISO 8601, required)"
+          },
+          {
+            "name": "groupBy",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "source",
+                "campaign",
+                "medium",
+                "ad"
+              ],
+              "default": "source"
+            },
+            "description": "Dimension to group attribution rows by"
+          },
+          {
+            "name": "attributionModel",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "last_click",
+                "first_click",
+                "paid_priority",
+                "scientific"
+              ],
+              "default": "last_click"
+            },
+            "description": "Attribution model used to credit conversions"
+          },
+          {
+            "name": "sources",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            },
+            "description": "Comma-separated list of source values to filter by"
+          },
+          {
+            "name": "campaigns",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            },
+            "description": "Comma-separated list of campaign values to filter by"
+          },
+          {
+            "name": "mediums",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            },
+            "description": "Comma-separated list of medium values to filter by"
+          },
+          {
+            "name": "ads",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            },
+            "description": "Comma-separated list of ad values to filter by"
+          },
+          {
+            "name": "eventTypes",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            },
+            "description": "Comma-separated list of conversion event types to include"
+          },
+          {
+            "name": "presetId",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            },
+            "description": "Attribution preset whose column configuration should be applied"
+          },
+          {
+            "name": "currency",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "minLength": 3,
+              "maxLength": 3
+            },
+            "description": "ISO 4217 currency code to convert revenue and spend into (defaults to USD)"
+          },
+          {
+            "name": "timezone",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            },
+            "description": "IANA timezone for date bucketing (defaults to the business timezone)"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Attribution table with daily summary and applied filters",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "type": "object",
+                      "description": "Assembled attribution results",
+                      "properties": {
+                        "data": {
+                          "type": "array",
+                          "description": "Attribution rows for the selected grouping",
+                          "items": {
+                            "type": "object"
+                          }
+                        },
+                        "dailySummary": {
+                          "type": "array",
+                          "description": "Per-day revenue, spend, page views, and conversions",
+                          "items": {
+                            "type": "object"
+                          }
+                        },
+                        "globalTotals": {
+                          "type": "object",
+                          "description": "Aggregate totals across all rows"
+                        }
+                      }
+                    },
+                    "filters": {
+                      "type": "object",
+                      "description": "The resolved filters applied to this query"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Validation error"
+          },
+          "401": {
+            "description": "Missing or invalid Bearer token"
+          },
+          "403": {
+            "description": "Insufficient scope"
+          },
+          "429": {
+            "description": "Rate limit exceeded"
+          }
+        }
+      }
+    },
+    "/api/v1/businesses/{businessId}/attribution/utms": {
+      "get": {
+        "operationId": "getAttributionUtms",
+        "summary": "Get UTM values",
+        "description": "Returns the distinct UTM source, medium, campaign, and ad values seen across tracking sessions and conversion entries, plus a hierarchy that maps each source to its campaigns, each campaign to its mediums, and each medium to its ads. Useful for building attribution filter UIs.",
+        "tags": [
+          "Attribution"
+        ],
+        "parameters": [
+          {
+            "name": "businessId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            },
+            "description": "The business ID"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Distinct UTM values and their hierarchy",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "sources": {
+                          "type": "array",
+                          "items": {
+                            "type": "string"
+                          }
+                        },
+                        "campaigns": {
+                          "type": "array",
+                          "items": {
+                            "type": "string"
+                          }
+                        },
+                        "mediums": {
+                          "type": "array",
+                          "items": {
+                            "type": "string"
+                          }
+                        },
+                        "ads": {
+                          "type": "array",
+                          "items": {
+                            "type": "string"
+                          }
+                        },
+                        "hierarchy": {
+                          "type": "object",
+                          "description": "Maps each parent value to its child values",
+                          "properties": {
+                            "sourceToCampaigns": {
+                              "type": "object"
+                            },
+                            "campaignToMediums": {
+                              "type": "object"
+                            },
+                            "mediumToAds": {
+                              "type": "object"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Missing or invalid Bearer token"
+          },
+          "403": {
+            "description": "Insufficient scope"
+          },
+          "429": {
+            "description": "Rate limit exceeded"
+          }
+        }
+      }
+    },
+    "/api/v1/businesses/{businessId}/attribution/presets": {
+      "get": {
+        "operationId": "getAttributionPresets",
+        "summary": "List attribution presets",
+        "description": "Returns the saved attribution column presets for the business. Each preset records its default grouping, whether unique metrics are shown, and the ordered list of conversion columns it displays.",
+        "tags": [
+          "Attribution"
+        ],
+        "parameters": [
+          {
+            "name": "businessId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            },
+            "description": "The business ID"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of attribution presets",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "id": {
+                            "type": "string"
+                          },
+                          "name": {
+                            "type": "string"
+                          },
+                          "groupBy": {
+                            "type": "string",
+                            "description": "Default grouping dimension for the preset"
+                          },
+                          "isDefault": {
+                            "type": "boolean"
+                          },
+                          "showUniqueMetrics": {
+                            "type": "boolean"
+                          },
+                          "conversionColumns": {
+                            "type": "array",
+                            "description": "Ordered conversion columns shown by this preset",
+                            "items": {
+                              "type": "object",
+                              "properties": {
+                                "id": {
+                                  "type": "string"
+                                },
+                                "configId": {
+                                  "type": "string"
+                                },
+                                "configName": {
+                                  "type": "string"
+                                },
+                                "configDisplayName": {
+                                  "type": "string"
+                                },
+                                "visible": {
+                                  "type": "boolean"
+                                },
+                                "order": {
+                                  "type": "integer"
+                                },
+                                "showCostPer": {
+                                  "type": "boolean"
+                                },
+                                "showUniqueMetrics": {
+                                  "type": "boolean"
+                                },
+                                "showUniqueMode": {
+                                  "type": "string"
+                                }
+                              }
+                            }
+                          },
+                          "createdAt": {
+                            "type": "string",
+                            "format": "date-time"
+                          },
+                          "updatedAt": {
+                            "type": "string",
+                            "format": "date-time"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Missing or invalid Bearer token"
+          },
+          "403": {
+            "description": "Insufficient scope"
+          },
+          "429": {
+            "description": "Rate limit exceeded"
+          }
+        }
+      }
+    },
+    "/api/v1/businesses/{businessId}/attribution/contacts-by-ltv": {
+      "get": {
+        "operationId": "getContactsByLtv",
+        "summary": "List contacts by LTV",
+        "description": "Returns contacts ranked by lifetime value, calculated as the sum of their CASH_COLLECTED conversion entry values. Each contact includes its conversion count and acquisition attribution (the source, campaign, medium, and ad of its first conversion).",
+        "tags": [
+          "Attribution"
+        ],
+        "parameters": [
+          {
+            "name": "businessId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            },
+            "description": "The business ID"
+          },
+          {
+            "name": "configName",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            },
+            "description": "Restrict the LTV calculation to a single conversion config by name"
+          },
+          {
+            "name": "from",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "format": "date-time"
+            },
+            "description": "Only include conversion entries that occurred on or after this date (ISO 8601)"
+          },
+          {
+            "name": "to",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "format": "date-time"
+            },
+            "description": "Only include conversion entries that occurred on or before this date (ISO 8601)"
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 200,
+              "default": 50
+            },
+            "description": "Maximum number of contacts to return"
+          },
+          {
+            "name": "sort",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "ltv",
+                "-ltv"
+              ],
+              "default": "-ltv"
+            },
+            "description": "Sort order by lifetime value (-ltv = highest first)"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Contacts ranked by lifetime value",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "contactId": {
+                            "type": "string"
+                          },
+                          "ltv": {
+                            "type": "number",
+                            "description": "Sum of CASH_COLLECTED conversion entry values"
+                          },
+                          "conversionCount": {
+                            "type": "integer",
+                            "description": "Number of matching conversion entries for this contact"
+                          },
+                          "contact": {
+                            "type": [
+                              "object",
+                              "null"
+                            ],
+                            "properties": {
+                              "name": {
+                                "type": "string"
+                              },
+                              "firstName": {
+                                "type": "string"
+                              },
+                              "lastName": {
+                                "type": "string"
+                              },
+                              "email": {
+                                "type": "string"
+                              },
+                              "phone": {
+                                "type": "string"
+                              }
+                            }
+                          },
+                          "acquisitionSource": {
+                            "type": [
+                              "string",
+                              "null"
+                            ],
+                            "description": "Source of the contact's first conversion"
+                          },
+                          "acquisitionCampaign": {
+                            "type": [
+                              "string",
+                              "null"
+                            ],
+                            "description": "Campaign of the contact's first conversion"
+                          },
+                          "acquisitionMedium": {
+                            "type": [
+                              "string",
+                              "null"
+                            ],
+                            "description": "Medium of the contact's first conversion"
+                          },
+                          "acquisitionAd": {
+                            "type": [
+                              "string",
+                              "null"
+                            ],
+                            "description": "Ad of the contact's first conversion"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Validation error"
+          },
+          "401": {
+            "description": "Missing or invalid Bearer token"
+          },
+          "403": {
+            "description": "Insufficient scope"
+          },
+          "429": {
+            "description": "Rate limit exceeded"
+          }
+        }
+      }
+    },
+    "/api/v1/businesses/{businessId}/meetings": {
+      "get": {
+        "operationId": "getMeetings",
+        "summary": "Get meetings (Fathom)",
+        "description": "Returns Fathom meeting data. A single endpoint with four modes selected via the `mode` query parameter: `list` (default — meeting metadata), `get` (a single meeting with structured fields, requires `meetingId`), `insights` (aggregated breakdown across all matching meetings), and `transcript` (full transcript for one meeting, requires `meetingId`). The response shape depends on the selected mode.",
+        "tags": [
+          "Meetings"
+        ],
+        "parameters": [
+          {
+            "name": "businessId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            },
+            "description": "The business ID"
+          },
+          {
+            "name": "mode",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "list",
+                "get",
+                "insights",
+                "transcript"
+              ],
+              "default": "list"
+            },
+            "description": "Which view of the meetings data to return"
+          },
+          {
+            "name": "meetingId",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            },
+            "description": "Meeting ID — required when mode is get or transcript"
+          },
+          {
+            "name": "contactId",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            },
+            "description": "Filter meetings by contact ID"
+          },
+          {
+            "name": "callTypeId",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            },
+            "description": "Filter meetings by call type ID"
+          },
+          {
+            "name": "salesRepEmail",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            },
+            "description": "Filter meetings by the email of the sales rep who recorded them"
+          },
+          {
+            "name": "outcome",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "PURCHASED",
+                "VERBAL_COMMIT",
+                "PROPOSAL_REQUESTED",
+                "FOLLOW_UP_SCHEDULED",
+                "UNDER_REVIEW",
+                "STALLED",
+                "LOST",
+                "NO_DECISION"
+              ]
+            },
+            "description": "Filter meetings by call outcome"
+          },
+          {
+            "name": "isStructured",
+            "in": "query",
+            "schema": {
+              "type": "boolean"
+            },
+            "description": "Filter by whether the meeting has structured fields extracted"
+          },
+          {
+            "name": "fromDate",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "format": "date-time"
+            },
+            "description": "Only include meetings on or after this date (ISO 8601)"
+          },
+          {
+            "name": "toDate",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "format": "date-time"
+            },
+            "description": "Only include meetings on or before this date (ISO 8601)"
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 50,
+              "default": 20
+            },
+            "description": "Maximum number of meetings to return (list mode)"
+          },
+          {
+            "name": "cursor",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            },
+            "description": "Pagination cursor — the meeting ID to start after (list mode)"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Meeting data. Shape depends on the mode: list returns data plus a pagination cursor; get returns a single meeting; insights returns an aggregated breakdown; transcript returns the full transcript.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "description": "An array of meetings (list mode) or a single object (get, insights, transcript modes)"
+                    },
+                    "pagination": {
+                      "type": "object",
+                      "description": "Cursor pagination (list mode only)",
+                      "properties": {
+                        "limit": {
+                          "type": "integer"
+                        },
+                        "cursor": {
+                          "type": [
+                            "string",
+                            "null"
+                          ],
+                          "description": "Cursor for the next page, or null if there are no more results"
+                        },
+                        "hasMore": {
+                          "type": "boolean"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Validation error (e.g. missing meetingId for mode=get or mode=transcript)"
+          },
+          "401": {
+            "description": "Missing or invalid Bearer token"
+          },
+          "403": {
+            "description": "Insufficient scope"
+          },
+          "404": {
+            "description": "Meeting not found"
+          },
+          "413": {
+            "description": "Transcript exceeds the 2 MB response limit"
           },
           "429": {
             "description": "Rate limit exceeded"
