@@ -11,8 +11,8 @@
   },
   "servers": [
     {
-      "url": "/",
-      "description": "Current environment"
+      "url": "https://app.usecortana.ai",
+      "description": "Production"
     }
   ],
   "security": [
