@@ -9,7 +9,7 @@ _Simply put, url parameters are data points you add inside of a URL._
 _Lets say your URL was:_
 
 <Note>
-  www.example.com/landingpage?utm\_source=Instagram&utm\_campaign=happy
+  [www.example.com/landingpage?utm\\\_source=Instagram&utm\\\_campaign=happy](http://www.example.com/landingpage?utm\_source=Instagram&utm\_campaign=happy)
 </Note>
 
 Everything before the "?" is your domain, and everything after is considered a URL parameter.
@@ -88,7 +88,7 @@ You can add URL parameters to your ads (videos below) or custom URL parameters i
   <iframe src="https://www.loom.com/embed/3a7cedf0ea0f416a93eb953f300a605d" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen style={{position: 'absolute', top: 0, left: 0, width: '100%', height: '100%'}} />
 </div>
 
-    # URL Parameters for Google Ads
+    # Adding URL Parameters for Google Ads
 
     Adding URL parameters to your Google Ads account is quite simple. Whether you're updating your existing campaigns or starting a fresh one, here’s how to get your tracking set up.
 
@@ -103,12 +103,6 @@ You can add URL parameters to your ads (videos below) or custom URL parameters i
     5. Copy and paste the URL parameters below in your dashboard into the **New tracking template** field.
     6. Hit **Apply**.
 
-    <Note>
-      ```text wrap
-      {lpurl}?campaign_id={campaignid}&medium_id={adgroupid}&ad_id={creative}&utm_keyword={keyword}
-      ```
-    </Note>
-
     ### For New Campaigns
 
     If you’re creating a new campaign from scratch, you can set your tracking template during the setup process:
@@ -119,9 +113,37 @@ You can add URL parameters to your ads (videos below) or custom URL parameters i
     4. Paste your tracking code into the **Tracking template** field.
     5. Click **Next** and continue with your campaign build—away you go!
 
-    <Tip>
-      Setting your tracking at the campaign level ensures that all ads within that campaign automatically inherit the correct URL parameters, saving you time and preventing manual errors.
-    </Tip>
+    > Setting your tracking at the campaign level ensures that all ads within that campaign automatically inherit the correct URL parameters, saving you time and preventing manual errors.
+
+    ## URL Template: Google Search, RSA, Display & Video
+
+    <Note>
+      ```text wrap
+      {lpurl}?utm_source=Google+Ads&campaign_id={campaignid}&medium_id={adgroupid}&ad_id={creative}&utm_term={keyword}
+      ```
+    </Note>
+
+    ### 
+
+    ## URL Template: Demand Gen
+
+    <Note>
+      ```text wrap
+      {lpurl}?utm_source=Google+Ads&campaign_id={campaignid}&medium_id={adgroupid}&ad_id={creative}
+      ```
+    </Note>
+
+    ### 
+
+    ## URL Template: Performance Max
+
+    <Note>
+      ```text wrap
+      {lpurl}?utm_source=Google+Ads&campaign_id={campaignid}&medium_id={adgroupid}&ad_id={creative}&utm_term={keyword}
+      ```
+    </Note>
+
+    ### 
   </Accordion>
 
   <Accordion title="TikTok Ads">
