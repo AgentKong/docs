@@ -2,15 +2,11 @@
 title: "9) How to set up Shopify"
 ---
 
-<iframe
-  src="https://www.loom.com/embed/e80f1c3d40a34c619f1ce1c591a70cd5"
-    frameBorder="0"
-      webkitallowfullscreen
-        mozallowfullscreen
-          allowFullScreen
-            style={{ width: '100%', height: '400px' }}
-            ></iframe>
+<iframe src="https://www.loom.com/embed/e80f1c3d40a34c619f1ce1c591a70cd5" frameBorder="0" webkitallowfullscreen mozallowfullscreen allowFullScreen style={{ width: '100%', height: '400px' }} />
 
+<Expandable title=" ">
+  Alright, so in this video I'm going to walk you through how to set up Shopify because Shopify does have a bit of an interesting setup here. So, first thing we're going to do is we're going to go ahead and we're going to click Connect on Shopify. Then it's going to go ahead and it's going to ask you for a store name. I'm just going to quickly pause and get a store name here. Alright, you're literally just going to copy and paste the store name that you get from your Shopify website when you log in, right? You're going to go ahead, you're going to hit Continue. Then it's going to ask you to copy this snippet code. You're going to hit this Theme Editor button and it's going to click here. Then I'm just going to read this instruction over You can see the left side pane, layout.theme, or like theme.login. Then we're going to add the snippet just before the head code. Hit Save and go. So, let's go ahead, let's hit this Theme button. I believe it automatically opens up. So you don't have to worry about going anywhere. And then you're going to see, probably up here, what you want to do is do a forward slash or a Command F or Control F so you can do Find. And if I come back, let's just go ahead. Let's copy this so that way you guys can see how I would do it. Copy it. Now go in here, hit paste, and you're going to see there's only one of one. Okay, there's only one head code with the forward slash. This is the end of the header code. Then, we're going to take that script from here, and we're going to go right above it. So we actually already have one in place. I'm going to show you what it looks like if we didn't have one in place. So what we're going to do is we're just going to come here. We're going to hit Enter. We just want to add a nice line break in between it and then go ahead, hit paste and paste the script that we have inside of there. Once that's done, you're simply going to hit save. I'm not going to do it because this was already how it needed to be. So I'm just going to exit this out, and then you're going to go ahead and hit I pasted the snippet. Then we have to add one more pixel code inside of Shopify, so we're going to copy this. Then you're going to click this Events button over here. It's going to open you to the right spot. You're going to see we already have one connected, but you would go ahead and you'd hit add custom pixel, call it whatever you want, and then in here, you're going to go ahead, you're going to paste it for permissions, hit not required for data sale, hit data does not qualify as data sale, and then go ahead at the top and hit this save button. Then when you hit save, you're going to go ahead, you're going to hit connect, and once that is done, you would come back, you would hit install snippet, and then it would ask you to visit your website. You'd basically visit your website, and then this will go ahead, it will fire, and it will say awesome, we have seen you. So that's pretty much it when it comes to setting up the Shopify snippet and the pixel, just so we can track absolutely everything on the site. And once that has gone ahead, and, uhm, I won't actually be able to do it. So I'm going to have to pause real quick. So once that is done, you're then obviously going to go to the conversion setup so we can start triggering the different conversions, and I'm just going to show you how this actually works. So let's say we wanted to go ahead and we wanted to do, uhm, view product, we'd go ahead, we would add a new source, we'd come here, we'd hit Shopify, and then we would do the view product. Now you see I already have this set up, so we can just go ahead just do, for example, a test one here. Let's do purchase paid. It's going to open this, it's going to give us a webhook to copy, we're going to copy it, then we're going to hit this open Shopify button, there's some instructions here, so you're going to hit open Shopify, ah, wrong store, uhm, let me add it on this site, let's take a look. Perfect. Then we're going to hit this create webhook button, we're going to choose the product that we want, so this one specifically here for the order paid, it says order payment, so we'll always tell you the proper name in the event inside of Shopify so you don't have to second guess it. So we're going to come back, we're going to do, it was the order Paid. Perfect. You can format as a JSON. Paste the URL in there and then for the version, go, uh, October 2025 and then hit save. Sorry, I forgot to copy this. So we're going to copy the webhook URL and then we're going to come in and then we're going to paste it. There we go. Hit save. And then you're obviously going to want to send a test. so hit those three buttons. Hit send test. And then boom, you're going to see that we received the test. Everything was in there nice and good. And then you'd simply hit submit. And that would be pretty much it for setting up your different webhooks. There's obviously going to be things like view product. I'm just going to kind of walk you through the different examples. So we're going to have view product. CartCreator, I think, is a Shopify Plus. So if you have Shopify Plus to let you track that. If you don't, that'll be I believe you can. There's going to be Add to Cart. There's going to be the Initiate Checkout. And then there's going to be the actual online order. So those are typically going to be the main ones that you're going to set up for Shopify. And that's it. That's an end to end Shopify setup. If you have any questions, please feel free to reach out to the team. Thank you.
+</Expandable>
 
 # Shopify Integration & Conversion Tracking
 
@@ -29,9 +25,9 @@ First, head over to the **Integrations** tab and find **Shopify**.
 The system will generate a script snippet. We need to add this to your theme’s code:
 
 1. Copy the snippet provided in the dashboard.
-2. Click **Theme Editor** (or navigate to **Online Store > Themes > Edit Code** in Shopify).
+2. Click **Theme Editor** (or navigate to **Online Store \> Themes \> Edit Code** in Shopify).
 3. Open the theme.liquid file.
-4. Search (Cmd/Ctrl + F) for `</head>`.
+4. Search (Cmd/Ctrl \+ F) for `</head>`.
 5. Paste your snippet on a new line just **before** the `</head>` tag.
 6. Hit **Save**, then return to our dashboard and click **I pasted the snippet**.
 
@@ -44,8 +40,8 @@ Next, we’ll use Shopify’s "Customer Events" to track deep data like cart add
 3. Click **Add custom pixel**, give it a name (e.g., "Our Pixel"), and click **Add pixel**.
 4. Paste the code into the editor.
 5. **Customer Privacy Settings:**
-    - **Permission:** Select **Not required**.
-    - **Data sale:** Select **Data collected does not qualify as data sale**.
+   - **Permission:** Select **Not required**.
+   - **Data sale:** Select **Data collected does not qualify as data sale**.
 6. Click **Save**, then click **Connect** at the top.
 7. Return to the dashboard and click **Verify your site**. This will open your store in a new tab to confirm the pixel is firing.
 
@@ -56,16 +52,16 @@ Now that the tracking is live, we need to map specific events like purchases bac
 1. Go to **Conversion Setup** and select the event you want to track (e.g., **Order Payment** or **Purchase Paid**).
 2. Click **Add Source**, select **Shopify**, and choose the corresponding **Shopify Event**.
 3. Copy the **Webhook URL** provided.
-4. Click **Open Shopify Webhooks** (or go to **Shopify Settings > Notifications > Webhooks**).
+4. Click **Open Shopify Webhooks** (or go to **Shopify Settings \> Notifications \> Webhooks**).
 5. Click **Create Webhook**:
-    - **Event:** Select the matching event (e.g., "Order payment").
-    - **Format:** JSON.
-    - **URL:** Paste the Webhook URL you copied.
-    - **API Version:** October 2025 (or the latest recommended).
+   - **Event:** Select the matching event (e.g., "Order payment").
+   - **Format:** JSON.
+   - **URL:** Paste the Webhook URL you copied.
+   - **API Version:** October 2025 (or the latest recommended).
 6. Click **Save**.
 
 <Tip>
-**Verify Your Webhook:** After saving, click the three dots next to your new webhook in Shopify and hit **Send test notification**. You should see a "Received" status with a green checkmark in our dashboard.
+  **Verify Your Webhook:** After saving, click the three dots next to your new webhook in Shopify and hit **Send test notification**. You should see a "Received" status with a green checkmark in our dashboard.
 </Tip>
 
 ### Standard Shopify Events
