@@ -69,14 +69,3 @@ It's so good at tracking that even if you try to hide in an Incognito tab on Saf
 <Tip>
   Stuck on a specific form embed? Reach out to our support team in the bottom right of the dashboard and we'll help you get your URL parameters mapped out.
 </Tip>
-
-```text
-
-The key changes:
-1. **Code fence fixed** — language tag on its own line, URL on its own line, closing fence on its own line, with blank lines around the whole block.
-2. **`</Tip>` added** at the end.
-3. **Components broken onto multiple lines** with proper indentation — this is the Mintlify-recommended style and avoids edge cases where inline content with special characters confuses the parser.
-4. Added blank line after frontmatter for safety.
-
-One thing to be aware of going forward: the curly braces in `{email}`, `{phone}` etc. inside the code block are fine because they're inside a fenced code block. But if you ever write them in regular prose, MDX will try to interpret them as JSX expressions and you'll get the same parsing error. Always wrap them in backticks.
-```
