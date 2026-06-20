@@ -22,7 +22,7 @@
         "tab": "Ad Tracking Feature",
         "icon": "crosshairs",
         "pages": [
-          "untitled-page",
+          "cal-overview",
           {
             "group": "A-Z Setup Guide",
             "icon": "rocket",
@@ -81,7 +81,10 @@
       },
       {
         "tab": "Cortana Calendar Feature",
-        "icon": "calendar"
+        "icon": "calendar",
+        "pages": [
+          "cal-overview"
+        ]
       },
       {
         "tab": "Developer Docs",
