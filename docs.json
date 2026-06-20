@@ -19,7 +19,7 @@
   "navigation": {
     "tabs": [
       {
-        "tab": "Ad Tracking Training",
+        "tab": "Ad Tracking Feature",
         "icon": "crosshairs",
         "pages": [
           "untitled-page",
@@ -44,7 +44,7 @@
         ]
       },
       {
-        "tab": "AI Agents Training",
+        "tab": "AI Agents Feature",
         "icon": "robot",
         "groups": [
           {
@@ -80,6 +80,10 @@
         ]
       },
       {
+        "tab": "Cortana Calendar Feature",
+        "icon": "calendar"
+      },
+      {
         "tab": "Developer Docs",
         "icon": "code",
         "groups": [
@@ -98,178 +102,177 @@
               "mcp/tools",
               "mcp/examples"
             ]
+          },
+          {
+            "group": "API Reference",
+            "pages": [
+              {
+                "group": "Overview",
+                "pages": [
+                  "api-reference/introduction"
+                ]
+              },
+              {
+                "group": "Agents",
+                "pages": [
+                  "api-reference/endpoint/list-agents",
+                  "api-reference/endpoint/create-agent",
+                  "api-reference/endpoint/get-agent",
+                  "api-reference/endpoint/update-agent",
+                  "api-reference/endpoint/delete-agent"
+                ]
+              },
+              {
+                "group": "Appointments",
+                "pages": [
+                  "api-reference/endpoint/list-appointments",
+                  "api-reference/endpoint/create-appointment",
+                  "api-reference/endpoint/get-appointment",
+                  "api-reference/endpoint/update-appointment",
+                  "api-reference/endpoint/delete-appointment"
+                ]
+              },
+              {
+                "group": "Attribution",
+                "pages": [
+                  "api-reference/endpoint/attribution-data",
+                  "api-reference/endpoint/attribution-utms",
+                  "api-reference/endpoint/attribution-presets",
+                  "api-reference/endpoint/attribution-contacts-by-ltv"
+                ]
+              },
+              {
+                "group": "Businesses",
+                "pages": [
+                  "api-reference/endpoint/create-business",
+                  "api-reference/endpoint/list-business-templates"
+                ]
+              },
+              {
+                "group": "Contacts",
+                "pages": [
+                  "api-reference/endpoint/list-contacts",
+                  "api-reference/endpoint/create-contact",
+                  "api-reference/endpoint/get-contact",
+                  "api-reference/endpoint/update-contact",
+                  "api-reference/endpoint/delete-contact",
+                  "api-reference/endpoint/assign-contact-tag",
+                  "api-reference/endpoint/unassign-contact-tag"
+                ]
+              },
+              {
+                "group": "Conversations",
+                "pages": [
+                  "api-reference/endpoint/list-conversations",
+                  "api-reference/endpoint/get-conversation",
+                  "api-reference/endpoint/update-conversation"
+                ]
+              },
+              {
+                "group": "Conversions",
+                "pages": [
+                  "api-reference/endpoint/list-conversion-configs",
+                  "api-reference/endpoint/get-conversion-config",
+                  "api-reference/endpoint/list-conversion-sources",
+                  "api-reference/endpoint/create-conversion-source",
+                  "api-reference/endpoint/get-conversion-source",
+                  "api-reference/endpoint/update-conversion-source",
+                  "api-reference/endpoint/delete-conversion-source",
+                  "api-reference/endpoint/list-conversion-entries",
+                  "api-reference/endpoint/create-conversion-entry",
+                  "api-reference/endpoint/get-conversion-entry",
+                  "api-reference/endpoint/delete-conversion-entry"
+                ]
+              },
+              {
+                "group": "Custom Fields",
+                "pages": [
+                  "api-reference/endpoint/list-custom-fields",
+                  "api-reference/endpoint/create-custom-field",
+                  "api-reference/endpoint/get-custom-field",
+                  "api-reference/endpoint/update-custom-field",
+                  "api-reference/endpoint/delete-custom-field"
+                ]
+              },
+              {
+                "group": "Messages",
+                "pages": [
+                  "api-reference/endpoint/list-messages",
+                  "api-reference/endpoint/send-message"
+                ]
+              },
+              {
+                "group": "Meeting Recordings",
+                "pages": [
+                  "api-reference/endpoint/meetings"
+                ]
+              },
+              {
+                "group": "Shopify",
+                "pages": [
+                  "api-reference/endpoint/shopify-orders",
+                  "api-reference/endpoint/shopify-customers",
+                  "api-reference/endpoint/shopify-products",
+                  "api-reference/endpoint/shopify-analytics",
+                  "api-reference/endpoint/shopify-abandoned-carts"
+                ]
+              },
+              {
+                "group": "Stripe",
+                "pages": [
+                  "api-reference/endpoint/stripe-payments",
+                  "api-reference/endpoint/stripe-subscriptions",
+                  "api-reference/endpoint/stripe-customers",
+                  "api-reference/endpoint/stripe-metrics",
+                  "api-reference/endpoint/stripe-products",
+                  "api-reference/endpoint/stripe-invoices",
+                  "api-reference/endpoint/stripe-disputes",
+                  "api-reference/endpoint/stripe-payment-intents",
+                  "api-reference/endpoint/stripe-payment-links",
+                  "api-reference/endpoint/stripe-prices",
+                  "api-reference/endpoint/stripe-promotion-codes"
+                ]
+              },
+              {
+                "group": "Tags",
+                "pages": [
+                  "api-reference/endpoint/list-tags",
+                  "api-reference/endpoint/create-tag",
+                  "api-reference/endpoint/get-tag",
+                  "api-reference/endpoint/update-tag",
+                  "api-reference/endpoint/delete-tag"
+                ]
+              },
+              {
+                "group": "Tracking Sessions",
+                "pages": [
+                  "api-reference/endpoint/list-tracking-sessions",
+                  "api-reference/endpoint/get-tracking-session"
+                ]
+              },
+              {
+                "group": "Voice Calls",
+                "pages": [
+                  "api-reference/endpoint/list-calls",
+                  "api-reference/endpoint/get-call",
+                  "api-reference/endpoint/get-call-transcript"
+                ]
+              },
+              {
+                "group": "Whop",
+                "pages": [
+                  "api-reference/endpoint/whop-payments",
+                  "api-reference/endpoint/whop-connections",
+                  "api-reference/endpoint/whop-customers",
+                  "api-reference/endpoint/whop-memberships"
+                ]
+              }
+            ]
           }
         ]
       },
       {
-        "tab": "API Reference",
-        "icon": "square-terminal",
-        "groups": [
-          {
-            "group": "Overview",
-            "pages": [
-              "api-reference/introduction"
-            ]
-          },
-          {
-            "group": "Businesses",
-            "pages": [
-              "api-reference/endpoint/create-business",
-              "api-reference/endpoint/list-business-templates"
-            ]
-          },
-          {
-            "group": "Contacts",
-            "pages": [
-              "api-reference/endpoint/list-contacts",
-              "api-reference/endpoint/create-contact",
-              "api-reference/endpoint/get-contact",
-              "api-reference/endpoint/update-contact",
-              "api-reference/endpoint/delete-contact",
-              "api-reference/endpoint/assign-contact-tag",
-              "api-reference/endpoint/unassign-contact-tag"
-            ]
-          },
-          {
-            "group": "Conversations",
-            "pages": [
-              "api-reference/endpoint/list-conversations",
-              "api-reference/endpoint/get-conversation",
-              "api-reference/endpoint/update-conversation"
-            ]
-          },
-          {
-            "group": "Messages",
-            "pages": [
-              "api-reference/endpoint/list-messages",
-              "api-reference/endpoint/send-message"
-            ]
-          },
-          {
-            "group": "Agents",
-            "pages": [
-              "api-reference/endpoint/list-agents",
-              "api-reference/endpoint/create-agent",
-              "api-reference/endpoint/get-agent",
-              "api-reference/endpoint/update-agent",
-              "api-reference/endpoint/delete-agent"
-            ]
-          },
-          {
-            "group": "Stripe",
-            "pages": [
-              "api-reference/endpoint/stripe-payments",
-              "api-reference/endpoint/stripe-subscriptions",
-              "api-reference/endpoint/stripe-customers",
-              "api-reference/endpoint/stripe-metrics",
-              "api-reference/endpoint/stripe-products",
-              "api-reference/endpoint/stripe-invoices",
-              "api-reference/endpoint/stripe-disputes",
-              "api-reference/endpoint/stripe-payment-intents",
-              "api-reference/endpoint/stripe-payment-links",
-              "api-reference/endpoint/stripe-prices",
-              "api-reference/endpoint/stripe-promotion-codes"
-            ]
-          },
-          {
-            "group": "Shopify",
-            "pages": [
-              "api-reference/endpoint/shopify-orders",
-              "api-reference/endpoint/shopify-customers",
-              "api-reference/endpoint/shopify-products",
-              "api-reference/endpoint/shopify-analytics",
-              "api-reference/endpoint/shopify-abandoned-carts"
-            ]
-          },
-          {
-            "group": "Attribution",
-            "pages": [
-              "api-reference/endpoint/attribution-data",
-              "api-reference/endpoint/attribution-utms",
-              "api-reference/endpoint/attribution-presets",
-              "api-reference/endpoint/attribution-contacts-by-ltv"
-            ]
-          },
-          {
-            "group": "Whop",
-            "pages": [
-              "api-reference/endpoint/whop-payments",
-              "api-reference/endpoint/whop-connections",
-              "api-reference/endpoint/whop-customers",
-              "api-reference/endpoint/whop-memberships"
-            ]
-          },
-          {
-            "group": "Voice Calls",
-            "pages": [
-              "api-reference/endpoint/list-calls",
-              "api-reference/endpoint/get-call",
-              "api-reference/endpoint/get-call-transcript"
-            ]
-          },
-          {
-            "group": "Meetings",
-            "pages": [
-              "api-reference/endpoint/meetings"
-            ]
-          },
-          {
-            "group": "Appointments",
-            "pages": [
-              "api-reference/endpoint/list-appointments",
-              "api-reference/endpoint/create-appointment",
-              "api-reference/endpoint/get-appointment",
-              "api-reference/endpoint/update-appointment",
-              "api-reference/endpoint/delete-appointment"
-            ]
-          },
-          {
-            "group": "Tags",
-            "pages": [
-              "api-reference/endpoint/list-tags",
-              "api-reference/endpoint/create-tag",
-              "api-reference/endpoint/get-tag",
-              "api-reference/endpoint/update-tag",
-              "api-reference/endpoint/delete-tag"
-            ]
-          },
-          {
-            "group": "Custom Fields",
-            "pages": [
-              "api-reference/endpoint/list-custom-fields",
-              "api-reference/endpoint/create-custom-field",
-              "api-reference/endpoint/get-custom-field",
-              "api-reference/endpoint/update-custom-field",
-              "api-reference/endpoint/delete-custom-field"
-            ]
-          },
-          {
-            "group": "Conversions",
-            "pages": [
-              "api-reference/endpoint/list-conversion-configs",
-              "api-reference/endpoint/get-conversion-config",
-              "api-reference/endpoint/list-conversion-sources",
-              "api-reference/endpoint/create-conversion-source",
-              "api-reference/endpoint/get-conversion-source",
-              "api-reference/endpoint/update-conversion-source",
-              "api-reference/endpoint/delete-conversion-source",
-              "api-reference/endpoint/list-conversion-entries",
-              "api-reference/endpoint/create-conversion-entry",
-              "api-reference/endpoint/get-conversion-entry",
-              "api-reference/endpoint/delete-conversion-entry"
-            ]
-          },
-          {
-            "group": "Tracking Sessions",
-            "pages": [
-              "api-reference/endpoint/list-tracking-sessions",
-              "api-reference/endpoint/get-tracking-session"
-            ]
-          }
-        ]
-      },
-      {
-        "tab": "Platform Walkthrough",
+        "tab": "Platform / UI Walkthrough",
         "icon": "book-open",
         "groups": [
           {
