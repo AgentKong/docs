@@ -63,6 +63,16 @@ Once connected, just chat naturally. The AI picks the right tools automatically.
   Traces: first ad click → website visits → conversations → conversions.
 </Accordion>
 
+## Form Submissions
+
+<Accordion title="Leads who submitted but didn't book">
+  **You:** "Show me everyone who filled out the Discovery Call form this week but never booked, and what they answered."
+
+  **Tools used:** `get_form_submissions` (mode: list, status: SUBMITTED, eventTypeId: discovery, from: -7 days)
+
+  Returns each lead's name/email/phone, their submitted `formData` answers, and attribution — filter to rows where `convertedToAppointmentId` is null to find drop-offs.
+</Accordion>
+
 ## Daily Brief
 
 <Accordion title="Morning business report">

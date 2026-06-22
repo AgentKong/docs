@@ -214,6 +214,68 @@ Fathom meeting recordings — sales call data including transcripts, AI summarie
 
 ---
 
+## get\_form\_submissions
+
+Booking-form submissions (leads) — anyone who filled out a booking form at any stage (partial, submitted, or booked). Includes the exact answers the visitor submitted (`formData`) plus their attribution (UTMs, click IDs, referrer).
+
+| Parameter | Type | Required | Description |
+| --- | --- | --- | --- |
+| `mode` | enum | Yes | `list`, `get` |
+| `submissionId` | string | For get | Form submission ID |
+| `status` | enum | No | `POTENTIAL`, `QUALIFIED`, `DISQUALIFIED`, `BOOKED`, `PARTIAL`, `SUBMITTED` — `PARTIAL` = started, `SUBMITTED` = completed form, `BOOKED` = booked a slot |
+| `eventTypeId` | string | No | Filter by event type (which booking form) |
+| `contactId` | string | No | Filter by contact |
+| `from` / `to` | string | No | ISO 8601 date range — filters by submission date (`createdAt`) |
+| `sort` | string | No | `createdAt` or `-createdAt` (default newest first) |
+| `limit` | number | No | List mode page size (max 100, default 20) |
+| `page` | number | No | Page number |
+
+<Accordion title="Mode details">
+  - **list** — Form submissions matching your filters. Each row has `name` / `email` / `phone`, the submitted `formData`, `attribution`, `status`, and `convertedToAppointmentId` when the lead booked. Paginated.
+  - **get** — A single submission by id, full detail. Requires `submissionId`.
+</Accordion>
+
+**Example response (list mode):**
+
+```json
+{
+  "data": [
+    {
+      "id": "a1b2c3d4-...",
+      "eventTypeId": "evt_...",
+      "eventTypeName": "Discovery Call",
+      "contactId": "ctc_...",
+      "status": "SUBMITTED",
+      "name": "Jane Doe",
+      "email": "jane@example.com",
+      "phone": "+15551234567",
+      "formData": {
+        "What's your monthly ad spend?": "$10k–$25k",
+        "Biggest challenge": "Attribution is broken"
+      },
+      "attribution": {
+        "utmSource": "facebook",
+        "utmMedium": "paid",
+        "utmCampaign": "q2-leadgen",
+        "fbclid": "IwAR...",
+        "referrer": "https://facebook.com",
+        "landingPage": "https://acme.com/book"
+      },
+      "convertedToAppointmentId": null,
+      "createdAt": "2026-06-21T14:03:00.000Z",
+      "updatedAt": "2026-06-21T14:03:00.000Z"
+    }
+  ],
+  "pagination": { "page": 1, "limit": 20, "total": 1, "totalPages": 1 }
+}
+```
+
+<Tip>
+  **Workflow:** Use `status: "SUBMITTED"` (or `PARTIAL`) to find leads who filled the form but have no `convertedToAppointmentId` yet — i.e. submitted but never booked. Filter by `eventTypeId` to scope to one booking form.
+</Tip>
+
+---
+
 ## get\_utms
 
 Returns all available UTM values (sources, campaigns, mediums, ads) and their hierarchy. No parameters required.
