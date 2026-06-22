@@ -1,0 +1,60 @@
+---
+title: "Meta Ads MCP"
+description: "Create, manage, and launch Meta ads from your AI assistant, with media upload built in. The first MCP that turns your LLM into a full ad operator."
+---
+
+The Meta Ads MCP is the standout of the Cortana connector. As of June 21, 2026, it is the first MCP that lets your AI assistant run a Meta ad account end to end, from drafting campaigns to uploading the creative itself.
+
+<Note>
+  Everything is created paused. Going live, changing budgets, and any action that spends money always require your confirmation. Ad management is opt-in.
+</Note>
+
+## What makes it different
+
+You may already know the original Meta Ads MCP for managing campaigns, ad sets, and ads through natural language. Cortana keeps all of that, then adds the missing piece: media.
+
+<CardGroup cols={2}>
+  <Card title="Full ad management" icon="meta">
+    Create and edit campaigns, ad sets, creatives, and ads. Adjust targeting, budgets, and schedules, all from a conversation.
+  </Card>
+
+  <Card title="Media upload from your LLM" icon="cloud-arrow-up">
+    New. Hand your assistant an image or a video and it uploads the file straight to your ad account, then builds the ad around it.
+  </Card>
+</CardGroup>
+
+Because the assistant can both create the ad and supply the creative, you can go from an idea to a finished, paused ad without ever leaving the chat. That is what we mean by a full ad operator over MCP.
+
+## Bring your own media
+
+Your assistant can take media you provide and put it to work in your ad account.
+
+<Steps>
+  <Step title="Upload an image">
+    Use the upload image tool to push a still image into your account. It returns an image hash you can drop straight into a creative.
+  </Step>
+  <Step title="Upload a video">
+    Use the upload video tool to send a video. Large files run through a chunked upload, and you can poll the status until it finishes processing.
+  </Step>
+  <Step title="Build the ad">
+    Once the media is in place, the create creative, create ad set, and create ad tools assemble a complete, paused ad ready for your review.
+  </Step>
+</Steps>
+
+## Tied to real revenue
+
+The Meta Ads MCP does not run in isolation. Because Cortana already connects your revenue and attribution data, your assistant can see which ads brought in paying customers, then create more like them.
+
+<Card title="Compare spend to revenue" icon="chart-line">
+  Ask your assistant to find the ads that sourced your highest-LTV customers, then draft new paused ads modeled on the winners.
+</Card>
+
+## Staying safe
+
+<Note>
+  Three guardrails are always on: ad management is opt-in behind a separate consent checkbox, every ad is created paused, and any spend or go-live action waits for your explicit confirmation.
+</Note>
+
+<Card title="Connect the MCP" icon="rocket" href="/mcp/setup">
+  Add the connector in Claude, ChatGPT, Cursor, or VS Code, then enable ad management on the consent screen.
+</Card>

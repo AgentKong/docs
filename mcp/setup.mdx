@@ -1,140 +1,63 @@
 ---
-title: "Quick Setup"
-description: "Add the Cortana AI MCP server to Claude, Cursor, VS Code, or any MCP client"
+title: "Connect"
+description: "Add the Cortana connector to Claude, ChatGPT, Cursor, or VS Code, and choose what it can do."
 ---
 
-# Quick Setup
+Most people connect with the hosted connector over OAuth, no API key needed. Power users can also run the connector locally with an API key.
+
+## Option 1: Hosted connector (recommended)
 
 <Steps>
-  <Step title="Get your API key">
-    Go to **Settings → API Keys → Generate New Key** in your Cortana AI dashboard. Enable all read scopes.
+  <Step title="Add the connector">
+    In your AI tool, add a custom connector using the MCP URL `https://app.usecortana.ai/api/mcp`. In Claude.ai this is Settings, then Connectors, then Add custom connector.
   </Step>
-  <Step title="Copy your Business ID">
-    Find it in your browser URL: `app.usecortana.ai/business/your-id-here/...`
+  <Step title="Log in to Cortana">
+    You are sent to Cortana to sign in, the same account you use for the dashboard.
   </Step>
-  <Step title="Add the MCP server">
-    Pick your AI tool below and paste the configuration.
+  <Step title="Pick your businesses">
+    Choose which business or businesses the assistant is allowed to access.
+  </Step>
+  <Step title="Approve permissions">
+    Review the consent screen and approve. Ad analytics is granted by default.
   </Step>
 </Steps>
 
-## Claude.ai (Remote Connector)
+This works in Claude (web and desktop), ChatGPT, Codex, and any client that supports remote MCP connectors. The assistant discovers every Cortana tool automatically.
 
-The fastest way — no installation needed. Works directly in your browser at [claude.ai](https://claude.ai).
+## Read vs manage
 
-1. Go to **Claude.ai → Settings → Connectors**
-2. Click **"Add custom connector"**
-3. Enter name: `Cortana AI`
-4. Enter URL: `https://app.usecortana.ai/api/mcp`
-5. Click **Add**
+<CardGroup cols={2}>
+  <Card title="Read (default)" icon="eye">
+    Attribution, revenue, CRM, sales calls, and YouTube data. Granted as soon as you connect.
+  </Card>
 
-Start chatting — Claude will discover all Cortana AI tools automatically.
+  <Card title="Manage (opt-in)" icon="sliders">
+    Create, update, launch, and pause Meta ads. Requires the opt-in checkbox on the consent screen.
+  </Card>
+</CardGroup>
 
-## Claude Desktop
+<Warning>
+  The manage checkbox lets the assistant spend money on ads. Everything is created paused, and going live or changing budgets requires your confirmation. Leave it unchecked if you only want reads.
+</Warning>
 
-Open **Claude Desktop → Settings → Developer → Edit Config** and add:
+## Option 2: Local connector (advanced)
 
-```json claude_desktop_config.json
-{
-  "mcpServers": {
-    "cortana-ai": {
-      "command": "npx",
-      "args": ["-y", "@cortana-ai/mcp-server@latest"],
-      "env": {
-        "CORTANA_API_KEY": "sk-ak-your-api-key",
-        "CORTANA_BUSINESS_ID": "your-business-id",
-        "CORTANA_API_URL": "https://app.usecortana.ai"
-      }
-    }
-  }
-}
-```
+Prefer to run the connector yourself with an API key? Install the npm package and add it to your client config.
 
-Restart Claude Desktop. You'll see a hammer icon in the chat input — your tools are loaded.
-
-## Claude Code
+Claude Code:
 
 ```bash
-claude mcp add cortana-ai -- npx -y @cortana-ai/mcp-server@latest
+claude mcp add cortana -- npx -y @cortana-ai/mcp-server@latest
 ```
 
-Then set environment variables:
-
-```bash
-export CORTANA_API_KEY="sk-ak-your-api-key"
-export CORTANA_BUSINESS_ID="your-business-id"
-export CORTANA_API_URL="https://app.usecortana.ai"
-```
-
-## Cursor
-
-Open **Cursor → Settings → MCP Servers** or edit `~/.cursor/mcp.json`:
-
-```json ~/.cursor/mcp.json
-{
-  "mcpServers": {
-    "cortana-ai": {
-      "command": "npx",
-      "args": ["-y", "@cortana-ai/mcp-server@latest"],
-      "env": {
-        "CORTANA_API_KEY": "sk-ak-your-api-key",
-        "CORTANA_BUSINESS_ID": "your-business-id",
-        "CORTANA_API_URL": "https://app.usecortana.ai"
-      }
-    }
-  }
-}
-```
-
-## VS Code
-
-Add to `.vscode/mcp.json` in any workspace:
-
-```json .vscode/mcp.json
-{
-  "servers": {
-    "cortana-ai": {
-      "command": "npx",
-      "args": ["-y", "@cortana-ai/mcp-server@latest"],
-      "env": {
-        "CORTANA_API_KEY": "sk-ak-your-api-key",
-        "CORTANA_BUSINESS_ID": "your-business-id",
-        "CORTANA_API_URL": "https://app.usecortana.ai"
-      }
-    }
-  }
-}
-```
-
-## Windsurf
-
-Add to your Windsurf MCP config:
+Claude Desktop, Cursor, or VS Code config:
 
 ```json
-{
-  "mcpServers": {
-    "cortana-ai": {
-      "command": "npx",
-      "args": ["-y", "@cortana-ai/mcp-server@latest"],
-      "env": {
-        "CORTANA_API_KEY": "sk-ak-your-api-key",
-        "CORTANA_BUSINESS_ID": "your-business-id",
-        "CORTANA_API_URL": "https://app.usecortana.ai"
-      }
-    }
-  }
-}
+{ "mcpServers": { "cortana": { "command": "npx", "args": ["-y", "@cortana-ai/mcp-server@latest"], "env": { "CORTANA_API_KEY": "sk-ak-your-api-key", "CORTANA_BUSINESS_ID": "your-business-id" } } } }
 ```
 
-## Configuration Reference
+Generate an API key in Settings, then API Keys. See [Authentication](/authentication) for presets and scopes, and for finding your Business ID.
 
-| Variable | Required | Description |
-|----------|----------|-------------|
-| `CORTANA_API_KEY` | Yes | Your API key starting with `sk-ak-` |
-| `CORTANA_BUSINESS_ID` | Yes | Business UUID from your dashboard URL |
-| `CORTANA_API_URL` | No | API base URL. Defaults to `https://app.usecortana.ai` |
-
-## npm Package
-
-<Card title="@cortana-ai/mcp-server" icon="npm" href="https://www.npmjs.com/package/@cortana-ai/mcp-server">
-  View on npm
+<Card title="Available Tools" icon="wrench" href="/mcp/tools">
+  Browse every tool the connector exposes, grouped by domain.
 </Card>

@@ -1,54 +1,64 @@
 ---
 title: "MCP Server"
-description: "Connect Claude, Cursor, VS Code, or any AI tool to your Cortana AI business data"
+description: "Connect Claude, ChatGPT, Cursor, or any AI tool to your Cortana business data, and let it manage your Meta ads."
 ---
 
-# MCP Server
+The Cortana MCP connector gives an AI assistant a live connection to your business data across six domains, and it can now create and manage Meta ads too. Ask questions in natural language and the assistant picks the right tools automatically.
 
-The Cortana AI MCP (Model Context Protocol) server gives AI tools full read access to your business data. Ask questions in natural language — the AI picks the right tools automatically.
+<Note>
+  The standout: Cortana ties ad spend to actual revenue and closed customers, not just platform metrics. Your assistant can compare Meta spend to Stripe revenue in one conversation.
+</Note>
+
+<Card title="Featured: Meta Ads MCP" icon="meta" href="/mcp/meta-ads">
+  The standout of the connector. Manage your full Meta ad account and upload images and videos straight from your AI assistant. The first MCP that lets your LLM create and run ads end to end.
+</Card>
 
 ## What is MCP?
 
-MCP is an open protocol that lets AI assistants connect to external data sources. Instead of copy-pasting data into Claude, the AI can directly query your attribution, Stripe, Shopify, conversations, and CRM data.
+MCP (Model Context Protocol) is an open standard that lets AI assistants connect to external data and tools. Instead of copy-pasting exports into Claude, the assistant queries your Cortana data directly, then acts on it.
 
-## What data can the AI access?
+## The six domains
 
 <CardGroup cols={2}>
-  <Card title="Attribution" icon="chart-mixed">
-    ROAS, ROI, ad spend, conversions by source/campaign/ad. Multi-model attribution.
+  <Card title="Marketing attribution" icon="chart-mixed">
+    ROAS, ROI, ad spend, and conversions by source, campaign, medium, or ad. Multi-model attribution.
   </Card>
-  <Card title="Stripe Financials" icon="credit-card">
-    MRR, ARR, payments, subscriptions, churn rates, customer LTV, daily metrics.
+
+  <Card title="Revenue" icon="credit-card">
+    Stripe, Shopify, and Whop: payments, subscriptions, orders, MRR, ARR, churn, and LTV.
   </Card>
-  <Card title="Shopify" icon="cart-shopping">
-    Orders, customers, products, daily analytics, abandoned carts, RFM segments.
+
+  <Card title="Customers (CRM)" icon="address-book">
+    Contacts, tags, custom fields, conversations, call logs and transcripts, conversions, and journeys.
   </Card>
-  <Card title="Whop" icon="store">
-    Payments, customers, memberships, marketplace connections.
+
+  <Card title="Sales calls" icon="video">
+    Fathom meeting transcripts, AI summaries, objections, pain points, and prospect questions.
   </Card>
-  <Card title="Conversations" icon="messages">
-    Full conversation threads, message history, AI agent performance.
+
+  <Card title="YouTube analytics" icon="youtube">
+    Channel and video metrics, retention, traffic sources, transcripts, and AI insight narratives.
   </Card>
-  <Card title="Voice Calls" icon="phone">
-    Call logs, durations, full transcripts for sales call analysis.
-  </Card>
-  <Card title="Fathom Meetings" icon="video">
-    Meeting recordings with full transcripts, AI summaries, attendees, action items, and structured insights — problems, pain points, objections, and prospect questions.
-  </Card>
-  <Card title="CRM Contacts" icon="address-book">
-    Contact records, tags, custom fields, tracking sessions, customer journeys.
-  </Card>
-  <Card title="YouTube Organic" icon="youtube">
-    Channel stats, video metrics (views, watch time, retention), per-dimension breakouts (traffic source, device, country, demographics), full transcripts, AI-generated insight narratives, and full-text search across video content.
+
+  <Card title="Meta ad management" icon="meta">
+    New. Create campaigns, ad sets, creatives, and ads, upload your own media, and pause or launch with your confirmation.
   </Card>
 </CardGroup>
 
-## Install
+## The cross-domain superpower
 
-```bash
-npx -y @cortana-ai/mcp-server@latest
-```
+Each domain is useful on its own, but the value is combining them in a single question. Because Cortana already connects your ad platforms, revenue tools, and CRM, the assistant can answer things no single dashboard can, like which campaigns brought in customers who actually stuck around.
 
-<Card title="Setup Guide" icon="rocket" href="/mcp/setup">
-  Get running in under 5 minutes
+A few examples:
+
+- Compare Meta ad spend to Stripe revenue this month, by campaign.
+- Find the ads that brought in your highest-LTV customers, then build more like them.
+- Pull the objections from last week's sales calls and the ad that sourced each lead.
+
+## Read by default, manage by opt-in
+
+Read tools are available as soon as you connect. Ad management tools (anything that creates, launches, or spends) require a separate opt-in checkbox on the consent screen. Everything is created paused, and going live or changing budgets always requires your confirmation.
+
+<Card title="Connect" icon="rocket" href="/mcp/setup">
+  Add the connector in Claude, ChatGPT, Cursor, or VS Code in about two minutes.
 </Card>

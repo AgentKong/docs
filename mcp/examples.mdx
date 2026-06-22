@@ -10,193 +10,239 @@ Once connected, just chat naturally. The AI picks the right tools automatically.
 ## Revenue Analysis
 
 <Accordion title="Cross-platform revenue breakdown">
-**You:** "What's my total revenue this month across Stripe, Shopify, and Whop? Break it down by source."
+  **You:** "What's my total revenue this month across Stripe, Shopify, and Whop? Break it down by source."
 
-**Tools used:** `get_stripe_financials` + `get_shopify_data` + `get_whop_data`
+  **Tools used:** `get_stripe_financials` \+ `get_shopify_data` \+ `get_whop_data`
 
-The AI pulls payment data from all three platforms and presents a unified breakdown.
+  The AI pulls payment data from all three platforms and presents a unified breakdown.
 </Accordion>
 
 <Accordion title="MRR trends and health">
-**You:** "What's my MRR? How does it compare to last month? What's my churn rate?"
+  **You:** "What's my MRR? How does it compare to last month? What's my churn rate?"
 
-**Tools used:** `get_stripe_financials` (mode: metrics)
+  **Tools used:** `get_stripe_financials` (mode: metrics)
 
-Returns MRR, ARR, churn rates, NRR, GRR, quick ratio — all from daily metric snapshots.
+  Returns MRR, ARR, churn rates, NRR, GRR, quick ratio — all from daily metric snapshots.
 </Accordion>
 
 ## Ad Performance
 
 <Accordion title="ROAS by source">
-**You:** "Show me ROAS by source for the last 30 days"
+  **You:** "Show me ROAS by source for the last 30 days"
 
-**Tools used:** `get_attribution` (groupBy: source)
+  **Tools used:** `get_attribution` (groupBy: source)
 
-Returns each source with page views, ad spend, conversions, revenue, ROAS, and ROI.
+  Returns each source with page views, ad spend, conversions, revenue, ROAS, and ROI.
 </Accordion>
 
 <Accordion title="Campaign drill-down">
-**You:** "Drill into Meta Ads — show me ROAS by campaign. Then show the ads for the best one."
+  **You:** "Drill into Meta Ads — show me ROAS by campaign. Then show the ads for the best one."
 
-**Tools used:** `get_attribution` (groupBy: campaign) → `get_attribution` (groupBy: ad)
+  **Tools used:** `get_attribution` (groupBy: campaign) → `get_attribution` (groupBy: ad)
 
-Multi-step drill-down from source → campaign → individual ad performance.
+  Multi-step drill-down from source → campaign → individual ad performance.
 </Accordion>
 
 ## Churn Investigation
 
 <Accordion title="Understand why customers leave">
-**You:** "Which customers churned last week? Pull up their recent conversations."
+  **You:** "Which customers churned last week? Pull up their recent conversations."
 
-**Tools used:** `get_stripe_financials` (subscriptions, status: canceled) → `get_conversations`
+  **Tools used:** `get_stripe_financials` (subscriptions, status: canceled) → `get_conversations`
 
-Finds canceled subs, looks up conversations, reads messages to surface churn patterns.
+  Finds canceled subs, looks up conversations, reads messages to surface churn patterns.
 </Accordion>
 
 ## Customer Journey
 
 <Accordion title="Full journey from first visit to purchase">
-**You:** "Show me the full journey for john@example.com"
+  **You:** "Show me the full journey for [john@example.com](mailto:john@example.com)"
 
-**Tools used:** `get_contacts` → `get_contacts` (sessions) → `get_conversations` → `get_conversion_events`
+  **Tools used:** `get_contacts` → `get_contacts` (sessions) → `get_conversations` → `get_conversion_events`
 
-Traces: first ad click → website visits → conversations → conversions.
+  Traces: first ad click → website visits → conversations → conversions.
 </Accordion>
 
 ## Daily Brief
 
 <Accordion title="Morning business report">
-**You:** "Give me a daily brief: yesterday's revenue, new subs, ad spend, notable conversations."
+  **You:** "Give me a daily brief: yesterday's revenue, new subs, ad spend, notable conversations."
 
-**Tools used:** `get_stripe_financials` + `get_attribution` + `get_conversations`
+  **Tools used:** `get_stripe_financials` \+ `get_attribution` \+ `get_conversations`
 
-Combines financial metrics, attribution, and conversation activity into one update.
+  Combines financial metrics, attribution, and conversation activity into one update.
 </Accordion>
 
 ## Top Customers
 
 <Accordion title="LTV analysis">
-**You:** "Who are my top 10 customers by lifetime value?"
+  **You:** "Who are my top 10 customers by lifetime value?"
 
-**Tools used:** `get_conversion_events` (mode: ltv, sort: -ltv, limit: 10)
+  **Tools used:** `get_conversion_events` (mode: ltv, sort: -ltv, limit: 10)
 
-Contacts ranked by total revenue with acquisition source and campaign.
+  Contacts ranked by total revenue with acquisition source and campaign.
 </Accordion>
 
 ## Call Analysis
 
 <Accordion title="Sales call review">
-**You:** "Show me the longest sales calls this week. Summarize what was discussed."
+  **You:** "Show me the longest sales calls this week. Summarize what was discussed."
 
-**Tools used:** `get_call_data` (list, sort: -duration) → `get_call_data` (transcript)
+  **Tools used:** `get_call_data` (list, sort: -duration) → `get_call_data` (transcript)
 
-Lists calls by duration, pulls transcripts for AI summarization.
+  Lists calls by duration, pulls transcripts for AI summarization.
 </Accordion>
 
 ## Fathom Meetings
 
 <Accordion title="Top objections this month">
-**You:** "What objections are coming up most on sales calls this month?"
+  **You:** "What objections are coming up most on sales calls this month?"
 
-**Tools used:** `get_meetings` (mode: insights, fromDate: month start)
+  **Tools used:** `get_meetings` (mode: insights, fromDate: month start)
 
-Returns aggregated `objections` ranked by frequency with sample meeting IDs you can drill into. The AI uses these to identify the top blockers in your pipeline.
+  Returns aggregated `objections` ranked by frequency with sample meeting IDs you can drill into. The AI uses these to identify the top blockers in your pipeline.
 </Accordion>
 
 <Accordion title="Pain points across discovery calls">
-**You:** "What are the top pain points prospects mention on Discovery calls?"
+  **You:** "What are the top pain points prospects mention on Discovery calls?"
 
-**Tools used:** `get_meetings` (mode: insights, callTypeId: discovery)
+  **Tools used:** `get_meetings` (mode: insights, callTypeId: discovery)
 
-Filters insights to a specific call type so problems and pain points reflect early-funnel conversations only.
+  Filters insights to a specific call type so problems and pain points reflect early-funnel conversations only.
 </Accordion>
 
 <Accordion title="Read a specific meeting transcript">
-**You:** "Pull up the transcript of yesterday's demo with Kasey Flynn."
+  **You:** "Pull up the transcript of yesterday's demo with Kasey Flynn."
 
-**Tools used:** `get_meetings` (list, search) → `get_meetings` (transcript)
+  **Tools used:** `get_meetings` (list, search) → `get_meetings` (transcript)
 
-Lists recent meetings to find the right ID, then pulls the full transcript with speaker, timestamp, and text per entry.
+  Lists recent meetings to find the right ID, then pulls the full transcript with speaker, timestamp, and text per entry.
 </Accordion>
 
 <Accordion title="Action items from a meeting">
-**You:** "What action items came out of the meeting with `<contact name>`?"
+  **You:** "What action items came out of the meeting with `<contact name>`?"
 
-**Tools used:** `get_contacts` → `get_meetings` (list, contactId) → `get_meetings` (get)
+  **Tools used:** `get_contacts` → `get_meetings` (list, contactId) → `get_meetings` (get)
 
-Looks up the contact, finds their meetings, then returns the structured `actionItems` and `nextSteps` from the meeting.
+  Looks up the contact, finds their meetings, then returns the structured `actionItems` and `nextSteps` from the meeting.
 </Accordion>
 
 <Accordion title="Sales rep performance">
-**You:** "Which sales rep ran the most meetings last week? What were the outcomes?"
+  **You:** "Which sales rep ran the most meetings last week? What were the outcomes?"
 
-**Tools used:** `get_meetings` (mode: insights, fromDate: -7 days)
+  **Tools used:** `get_meetings` (mode: insights, fromDate: -7 days)
 
-Returns `salesRepBreakdown` (count per rep) and `outcomeBreakdown` (counts of `PURCHASED`, `LOST`, `STALLED`, etc.).
+  Returns `salesRepBreakdown` (count per rep) and `outcomeBreakdown` (counts of `PURCHASED`, `LOST`, `STALLED`, etc.).
 </Accordion>
 
 <Accordion title="What questions do prospects ask?">
-**You:** "What are the top questions prospects ask on sales calls?"
+  **You:** "What are the top questions prospects ask on sales calls?"
 
-**Tools used:** `get_meetings` (mode: insights)
+  **Tools used:** `get_meetings` (mode: insights)
 
-Returns `aggregatedInsights.prospectQuestions` ranked by frequency — useful for sales enablement, FAQ writing, and product positioning.
+  Returns `aggregatedInsights.prospectQuestions` ranked by frequency — useful for sales enablement, FAQ writing, and product positioning.
 </Accordion>
 
 <Accordion title="Meetings linked to a deal that closed">
-**You:** "We just closed `<contact email>`. Pull all the meetings we had with them and summarize the journey."
+  **You:** "We just closed `<contact email>`. Pull all the meetings we had with them and summarize the journey."
 
-**Tools used:** `get_contacts` (email filter) → `get_meetings` (list, contactId) → `get_meetings` (get) per meeting
+  **Tools used:** `get_contacts` (email filter) → `get_meetings` (list, contactId) → `get_meetings` (get) per meeting
 
-Builds a deal narrative from first discovery to close — problems raised, objections handled, next steps that worked.
+  Builds a deal narrative from first discovery to close — problems raised, objections handled, next steps that worked.
 </Accordion>
 
 ## YouTube Performance
 
 <Accordion title="Channel-level views over a custom range">
-**You:** "How many YouTube views did my channel get in the last 7 days?"
+  **You:** "How many YouTube views did my channel get in the last 7 days?"
 
-**Tools used:** `list_youtube_channels` → `get_youtube_channel_metrics` (channelId, ~7-day range)
+  **Tools used:** `list_youtube_channels` → `get_youtube_channel_metrics` (channelId, ~7-day range)
 
-The AI picks the channel, then calls the channel-rollup tool **once** to return the total — no per-video summing.
+  The AI picks the channel, then calls the channel-rollup tool **once** to return the total — no per-video summing.
 </Accordion>
 
 <Accordion title="Top videos with retention story">
-**You:** "What's my top-performing video by 30-day views? Why is it doing well?"
+  **You:** "What's my top-performing video by 30-day views? Why is it doing well?"
 
-**Tools used:** `list_youtube_videos` (sort: views30d, limit: 1) → `get_youtube_video`
+  **Tools used:** `list_youtube_videos` (sort: views30d, limit: 1) → `get_youtube_video`
 
-Returns the top video, then pulls full detail including retention curve and AI insight narrative.
+  Returns the top video, then pulls full detail including retention curve and AI insight narrative.
 </Accordion>
 
 <Accordion title="Daily views breakdown">
-**You:** "Give me a day-by-day breakdown of YouTube views for the last 14 days."
+  **You:** "Give me a day-by-day breakdown of YouTube views for the last 14 days."
 
-**Tools used:** `get_youtube_channel_metrics` (includeDaily: true)
+  **Tools used:** `get_youtube_channel_metrics` (includeDaily: true)
 
-Returns the `daily[]` array with one row per date so the AI can present a chart-ready series.
+  Returns the `daily[]` array with one row per date so the AI can present a chart-ready series.
 </Accordion>
 
 <Accordion title="Where do my views come from?">
-**You:** "What are the top traffic sources for my best video?"
+  **You:** "What are the top traffic sources for my best video?"
 
-**Tools used:** `list_youtube_videos` (sort: views30d, limit: 1) → `get_youtube_metrics` (dimension: trafficSource)
+  **Tools used:** `list_youtube_videos` (sort: views30d, limit: 1) → `get_youtube_metrics` (dimension: trafficSource)
 
-Drills into a single video's traffic source breakdown — YT Search vs. Suggested Video vs. External URL, etc.
+  Drills into a single video's traffic source breakdown — YT Search vs. Suggested Video vs. External URL, etc.
 </Accordion>
 
 <Accordion title="Find videos by content">
-**You:** "Find all my videos that talk about Meta ads, then summarize the most-watched one."
+  **You:** "Find all my videos that talk about Meta ads, then summarize the most-watched one."
 
-**Tools used:** `search_youtube_videos` (query: "meta ads") → `get_youtube_video` on the top match
+  **Tools used:** `search_youtube_videos` (query: "meta ads") → `get_youtube_video` on the top match
 
-Full-text search across title + description + hook + transcript + AI insight narrative. Returns `matchedIn` so the AI knows whether the match was in the metadata, the transcript, or the analysis text.
+  Full-text search across title \+ description \+ hook \+ transcript \+ AI insight narrative. Returns `matchedIn` so the AI knows whether the match was in the metadata, the transcript, or the analysis text.
 </Accordion>
 
 <Accordion title="Quote from a transcript">
-**You:** "What did I say about pricing in my Cortana Ads Manager video?"
+  **You:** "What did I say about pricing in my Cortana Ads Manager video?"
 
-**Tools used:** `search_youtube_videos` (query: "Cortana Ads Manager") → `get_youtube_transcript`
+  **Tools used:** `search_youtube_videos` (query: "Cortana Ads Manager") → `get_youtube_transcript`
 
-Finds the video, returns timestamped segments so the AI can quote the exact moment with `start` time references.
+  Finds the video, returns timestamped segments so the AI can quote the exact moment with `start` time references.
+</Accordion>
+
+## Ad Management
+
+<Warning>
+  These prompts can spend money. Ad management is opt-in, everything is created paused, and going live always asks for your confirmation first.
+</Warning>
+
+<Accordion title="Find and pause your worst ads">
+  **You:** "Show my worst 5 ads over the last 7 days, then pause them."
+
+  **Tools used:** `get_ad_insights` (or `get_attribution`, groupBy: ad) then `pause_entity`
+
+  The AI ranks your ads by performance, shows the bottom five, and pauses them on your confirmation.
+</Accordion>
+
+<Accordion title="Compare spend to real revenue">
+  **You:** "Compare my Meta spend to my Stripe revenue this month, by campaign."
+
+  **Tools used:** `get_attribution` (groupBy: campaign) and `get_stripe_financials`
+
+  This is the cross-domain answer no single ad dashboard can give: spend tied to actual revenue.
+</Accordion>
+
+<Accordion title="Make test ads from an image">
+  **You:** "Make 3 paused test ads from this image, target the US, 50 dollars per day each."
+
+  **Tools used:** `upload_ad_image` then `create_creative`, `create_ad_set`, `create_ad`
+
+  The AI uploads your image and builds three paused ads. Nothing spends until you activate them.
+</Accordion>
+
+<Accordion title="Make an ad from a video">
+  **You:** "Make an ad from this video."
+
+  **Tools used:** `upload_ad_video` (or `create_video_upload` plus `get_video_status`) then `create_creative` and `create_ad`
+
+  The AI uploads the video, waits until it is ready, and assembles a paused ad.
+</Accordion>
+
+<Accordion title="Scale a winner">
+  **You:** "Find the ad that brought in my highest-LTV customers and build two more like it."
+
+  **Tools used:** `get_attribution` and `get_conversion_events` (ltv) then `create_creative`, `create_ad_set`, `create_ad`
+
+  Ties ad performance to lifetime value, then drafts new paused ads modeled on the winner.
 </Accordion>

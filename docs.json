@@ -87,14 +87,13 @@
         ]
       },
       {
-        "tab": "Developer Docs",
+        "tab": "Developer Docs + MCP",
         "icon": "code",
         "groups": [
           {
             "group": "Getting Started",
             "pages": [
-              "authentication",
-              "quickstart"
+              "authentication"
             ]
           },
           {
@@ -102,6 +101,7 @@
             "pages": [
               "mcp/overview",
               "mcp/setup",
+              "mcp/meta-ads",
               "mcp/tools",
               "mcp/examples"
             ]
