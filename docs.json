@@ -136,6 +136,13 @@
                 ]
               },
               {
+                "group": "Form Submissions",
+                "pages": [
+                  "api-reference/endpoint/list-form-submissions",
+                  "api-reference/endpoint/get-form-submission"
+                ]
+              },
+              {
                 "group": "Attribution",
                 "pages": [
                   "api-reference/endpoint/attribution-data",

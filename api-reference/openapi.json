@@ -42,6 +42,10 @@
       "description": "Manage appointments"
     },
     {
+      "name": "Form Submissions",
+      "description": "Read booking-form submissions (leads) — the answers visitors submit plus attribution"
+    },
+    {
       "name": "Conversions",
       "description": "Conversion configs, sources, and entries"
     },
@@ -1824,6 +1828,139 @@
           "429": {
             "$ref": "#/components/responses/RateLimited"
           }
+        }
+      }
+    },
+    "/api/v1/businesses/{businessId}/form-submissions": {
+      "get": {
+        "tags": [
+          "Form Submissions"
+        ],
+        "operationId": "listFormSubmissions",
+        "summary": "List form submissions",
+        "description": "List booking-form submissions (a submission is a BookingLead — a booking-form fill at any stage: PARTIAL, SUBMITTED, BOOKED, DISQUALIFIED). Each row includes the submitted answers (formData) and attribution.",
+        "parameters": [
+          {
+            "name": "businessId",
+            "in": "path",
+            "required": true,
+            "schema": { "type": "string", "format": "uuid" },
+            "description": "The business ID"
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "schema": { "type": "integer", "minimum": 1, "default": 1 },
+            "description": "Page number"
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "schema": { "type": "integer", "minimum": 1, "maximum": 100, "default": 20 },
+            "description": "Items per page"
+          },
+          {
+            "name": "eventTypeId",
+            "in": "query",
+            "schema": { "type": "string", "format": "uuid" },
+            "description": "Filter by event type (which booking form)"
+          },
+          {
+            "name": "contactId",
+            "in": "query",
+            "schema": { "type": "string", "format": "uuid" },
+            "description": "Filter by contact"
+          },
+          {
+            "name": "status",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "enum": ["POTENTIAL", "QUALIFIED", "DISQUALIFIED", "BOOKED", "PARTIAL", "SUBMITTED"]
+            },
+            "description": "Filter by status (PARTIAL = started, SUBMITTED = completed form, BOOKED = booked a slot)"
+          },
+          {
+            "name": "from",
+            "in": "query",
+            "schema": { "type": "string", "format": "date-time" },
+            "description": "Start of date range (ISO 8601), filters by createdAt"
+          },
+          {
+            "name": "to",
+            "in": "query",
+            "schema": { "type": "string", "format": "date-time" },
+            "description": "End of date range (ISO 8601), filters by createdAt"
+          },
+          {
+            "name": "sort",
+            "in": "query",
+            "schema": { "type": "string", "enum": ["createdAt", "-createdAt"], "default": "-createdAt" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Paginated list of form submissions",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "type": "array",
+                      "items": { "$ref": "#/components/schemas/FormSubmission" }
+                    },
+                    "pagination": { "$ref": "#/components/schemas/Pagination" }
+                  }
+                }
+              }
+            }
+          },
+          "401": { "$ref": "#/components/responses/Unauthorized" },
+          "429": { "$ref": "#/components/responses/RateLimited" }
+        }
+      }
+    },
+    "/api/v1/businesses/{businessId}/form-submissions/{submissionId}": {
+      "get": {
+        "tags": [
+          "Form Submissions"
+        ],
+        "operationId": "getFormSubmission",
+        "summary": "Get a form submission",
+        "parameters": [
+          {
+            "name": "businessId",
+            "in": "path",
+            "required": true,
+            "schema": { "type": "string", "format": "uuid" },
+            "description": "The business ID"
+          },
+          {
+            "name": "submissionId",
+            "in": "path",
+            "required": true,
+            "schema": { "type": "string", "format": "uuid" },
+            "description": "The form submission ID"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Form submission details",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "data": { "$ref": "#/components/schemas/FormSubmission" }
+                  }
+                }
+              }
+            }
+          },
+          "401": { "$ref": "#/components/responses/Unauthorized" },
+          "404": { "$ref": "#/components/responses/NotFound" },
+          "429": { "$ref": "#/components/responses/RateLimited" }
         }
       }
     },
@@ -8587,6 +8724,48 @@
           "contactMemoryEnabled": {
             "type": "boolean"
           }
+        }
+      },
+      "FormSubmission": {
+        "type": "object",
+        "description": "A booking-form submission (BookingLead) — a form fill at any stage.",
+        "properties": {
+          "id": { "type": "string", "format": "uuid" },
+          "eventTypeId": { "type": "string", "format": "uuid", "description": "The event type (booking form) this submission belongs to" },
+          "eventTypeName": { "type": "string", "nullable": true },
+          "contactId": { "type": "string", "format": "uuid", "nullable": true },
+          "status": {
+            "type": "string",
+            "enum": ["POTENTIAL", "QUALIFIED", "DISQUALIFIED", "BOOKED", "PARTIAL", "SUBMITTED"],
+            "description": "PARTIAL = started, SUBMITTED = completed form, BOOKED = booked a slot"
+          },
+          "name": { "type": "string", "nullable": true },
+          "email": { "type": "string", "nullable": true },
+          "phone": { "type": "string", "nullable": true },
+          "formData": {
+            "type": "object",
+            "nullable": true,
+            "additionalProperties": true,
+            "description": "The answers the visitor submitted, keyed by question label"
+          },
+          "attribution": {
+            "type": "object",
+            "properties": {
+              "utmSource": { "type": "string", "nullable": true },
+              "utmMedium": { "type": "string", "nullable": true },
+              "utmCampaign": { "type": "string", "nullable": true },
+              "utmContent": { "type": "string", "nullable": true },
+              "utmTerm": { "type": "string", "nullable": true },
+              "fbclid": { "type": "string", "nullable": true },
+              "gclid": { "type": "string", "nullable": true },
+              "ttclid": { "type": "string", "nullable": true },
+              "referrer": { "type": "string", "nullable": true },
+              "landingPage": { "type": "string", "nullable": true }
+            }
+          },
+          "convertedToAppointmentId": { "type": "string", "format": "uuid", "nullable": true, "description": "The appointment id if this submission booked" },
+          "createdAt": { "type": "string", "format": "date-time" },
+          "updatedAt": { "type": "string", "format": "date-time" }
         }
       },
       "Appointment": {
