@@ -29,7 +29,7 @@
         "tab": "Ad Tracking Feature",
         "icon": "crosshairs",
         "pages": [
-          "untitled-page",
+          "Tracking-Checklist",
           {
             "group": "A-Z Setup Guide",
             "icon": "rocket",
