@@ -19,10 +19,17 @@
   "navigation": {
     "tabs": [
       {
+        "tab": "Home",
+        "icon": "house",
+        "pages": [
+          "index"
+        ]
+      },
+      {
         "tab": "Ad Tracking Feature",
         "icon": "crosshairs",
         "pages": [
-          "cal-overview",
+          "untitled-page",
           {
             "group": "A-Z Setup Guide",
             "icon": "rocket",
