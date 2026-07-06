@@ -94,6 +94,13 @@
         ]
       },
       {
+        "tab": "Automation",
+        "icon": "bolt",
+        "pages": [
+          "automation"
+        ]
+      },
+      {
         "tab": "Developer Docs + MCP",
         "icon": "code",
         "groups": [

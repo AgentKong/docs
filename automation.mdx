@@ -1,0 +1,258 @@
+---
+title: "Automation"
+description: "Connect Cortana to n8n, Zapier, or Make to trigger workflows on new conversions and contacts, and read or write your data from anywhere."
+---
+
+Automations connect Cortana to the tools you already build workflows in. Turn on a trigger and your workflow starts the moment a new conversion or contact happens in Cortana. Add an action and your workflow can create conversions and contacts, or pull in your attribution, CRM, Stripe, Shopify, and Whop data.
+
+<Note>
+  All three tools work the same way under the hood: one API key per business, the same two trigger events, and the same read and write access. Pick whichever tool your team already uses.
+</Note>
+
+## Choose your platform
+
+<CardGroup cols={3}>
+  <Card href="https://www.npmjs.com/package/n8n-nodes-cortana-ai">
+    <svg viewBox="0 0 500 200" fill="none" role="img" aria-label="n8n" style={{ height: '26px', width: 'auto', marginBottom: '10px' }}>
+      <path fill="#EA4B71" clipRule="evenodd" fillRule="evenodd" d="m239,83c-11.183,0 -20.58,-7.649 -23.244,-18l-27.508,0c-5.866,0 -10.872,4.241 -11.836,10.027l-0.987,5.919c-0.936,5.619 -3.779,10.509 -7.799,14.054c4.02,3.545 6.863,8.435 7.799,14.054l0.987,5.919c0.964,5.786 5.97,10.027 11.836,10.027l3.508,0c2.664,-10.351 12.061,-18 23.244,-18c13.255,0 24,10.745 24,24c0,13.255 -10.745,24 -24,24c-11.183,0 -20.58,-7.649 -23.244,-18l-3.508,0c-11.732,0 -21.744,-8.482 -23.673,-20.054l-0.987,-5.919c-0.964,-5.786 -5.97,-10.027 -11.836,-10.027l-9.508,0c-2.664,10.351 -12.061,18 -23.244,18c-11.183,0 -20.58,-7.649 -23.244,-18l-13.512,0c-2.664,10.351 -12.061,18 -23.244,18c-13.2548,0 -24,-10.745 -24,-24c0,-13.255 10.7452,-24 24,-24c11.183,0 20.58,7.649 23.244,18l13.512,0c2.664,-10.351 12.061,-18 23.244,-18c11.183,0 20.58,7.649 23.244,18l9.508,0c5.866,0 10.872,-4.241 11.836,-10.027l0.987,-5.919c1.929,-11.572 11.941,-20.054 23.673,-20.054l27.508,0c2.664,-10.351 12.061,-18 23.244,-18c13.255,0 24,10.745 24,24c0,13.255 -10.745,24 -24,24zm0,-12c6.627,0 12,-5.373 12,-12c0,-6.627 -5.373,-12 -12,-12c-6.627,0 -12,5.373 -12,12c0,6.627 5.373,12 12,12zm-180,36c6.627,0 12,-5.373 12,-12c0,-6.627 -5.373,-12 -12,-12c-6.6274,0 -12,5.373 -12,12c0,6.627 5.3726,12 12,12zm72,-12c0,6.627 -5.373,12 -12,12c-6.627,0 -12,-5.373 -12,-12c0,-6.627 5.373,-12 12,-12c6.627,0 12,5.373 12,12zm96,36c0,6.627 -5.373,12 -12,12c-6.627,0 -12,-5.373 -12,-12c0,-6.627 5.373,-12 12,-12c6.627,0 12,5.373 12,12z" />
+      <path fill="currentColor" clipRule="evenodd" fillRule="evenodd" d="m407.017,86.887l0,-0.571c4.187,-2.097 8.374,-5.719 8.374,-12.867c0,-10.294 -8.469,-16.489 -20.173,-16.489c-11.99,0 -20.554,6.576 -20.554,16.679c0,6.863 3.996,10.58 8.374,12.677l0,0.571c-4.853,1.716 -10.658,6.863 -10.658,15.441c0,10.388 8.564,17.632 22.743,17.632c14.178,0 22.457,-7.244 22.457,-17.632c0,-8.578 -5.71,-13.63 -10.563,-15.441zm-11.894,-21.158c4.758,0 8.278,3.049 8.278,8.196c0,5.147 -3.616,8.197 -8.278,8.197c-4.663,0 -8.565,-3.05 -8.565,-8.197c0,-5.242 3.712,-8.196 8.565,-8.196zm0,45.081c-5.52,0 -9.992,-3.526 -9.992,-9.531c0,-5.432 3.711,-9.531 9.896,-9.531c6.091,0 9.802,4.003 9.802,9.722c0,5.814 -4.282,9.34 -9.706,9.34z" />
+      <path fill="currentColor" d="m432.26,119.007l12.18,0l0,-25.829c0,-8.483 5.139,-12.2 10.943,-12.2c5.71,0 10.182,3.813 10.182,11.628l0,26.401l12.18,0l0,-28.879c0,-12.486 -7.232,-19.729 -18.555,-19.729c-7.137,0 -11.134,2.859 -13.989,6.576l-0.761,0l-1.047,-5.623l-11.133,0l0,47.655z" />
+      <path fill="currentColor" d="m324.44,119.007l-12.18,0l0,-47.655l11.133,0l1.047,5.623l0.761,0c2.855,-3.717 6.852,-6.576 13.989,-6.576c11.323,0 18.555,7.243 18.555,19.729l0,28.879l-12.18,0l0,-26.401c0,-7.815 -4.472,-11.628 -10.182,-11.628c-5.804,0 -10.943,3.717 -10.943,12.2l0,25.829z" />
+    </svg>
+
+    Open-source, self-hosted or cloud. **Public** — install the community node yourself, no invite needed.
+  </Card>
+
+  <Card href="https://zapier.com/developer/public-invite/237168/d28d8b9c662b8c7869d8180dc581efc4/">
+    <svg viewBox="0 0 500 136" fill="none" role="img" aria-label="Zapier" style={{ height: '20px', width: 'auto', marginBottom: '14px' }}>
+      <path fill="currentColor" d="M117.414 92.8436L117.344 92.6204L161.801 51.921V32.311H90.4769V51.921H133.079L133.149 52.1089L89.1265 92.8436V112.454H162.517V92.8436H117.414Z" />
+      <path fill="currentColor" d="M206.296 30.4438C198.069 30.4438 191.364 31.6846 186.181 34.1662C181.354 36.3289 177.287 39.8922 174.509 44.3939C171.852 48.9252 170.183 53.9674 169.613 59.1894L191.254 62.2308C192.037 57.6199 193.603 54.3516 195.951 52.4258C198.621 50.4116 201.911 49.3939 205.251 49.5489C209.643 49.5489 212.829 50.7232 214.81 53.0716C216.771 55.4201 217.769 58.6728 217.769 62.9588V65.0959H196.961C186.369 65.0959 178.76 67.4444 174.134 72.1414C169.507 76.8384 167.198 83.0385 167.206 90.7416C167.206 98.6325 169.515 104.504 174.134 108.355C178.752 112.207 184.561 114.121 191.56 114.097C200.241 114.097 206.919 111.111 211.592 105.138C214.352 101.467 216.323 97.2655 217.381 92.7965H218.168L221.151 112.406H240.761V62.7475C240.761 52.4845 238.056 44.5349 232.647 38.8985C227.237 33.2621 218.454 30.4438 206.296 30.4438ZM213.154 91.6575C210.042 94.2525 205.968 95.5442 200.895 95.5442C196.714 95.5442 193.81 94.8123 192.182 93.3484C191.389 92.6558 190.757 91.797 190.333 90.833C189.909 89.8691 189.702 88.8235 189.728 87.7707C189.681 86.7778 189.838 85.7858 190.187 84.8552C190.536 83.9246 191.071 83.0748 191.759 82.3574C192.503 81.6595 193.381 81.1197 194.34 80.7706C195.299 80.4214 196.318 80.2701 197.337 80.3259H217.804V81.6763C217.846 83.5851 217.448 85.4779 216.642 87.2085C215.835 88.9391 214.642 90.4613 213.154 91.6575Z" />
+      <path fill="currentColor" d="M359.329 32.311H336.161V112.465H359.329V32.311Z" />
+      <path fill="currentColor" d="M496.109 32.311C489.565 32.311 484.406 34.6203 480.633 39.2391C477.924 42.5583 475.865 47.4628 474.456 53.9524H473.775L470.746 32.311H450.959V112.454H474.128V71.3548C474.128 66.1725 475.341 62.1996 477.768 59.4362C480.194 56.6728 484.672 55.2911 491.201 55.2911H499.996V32.311H496.109Z" />
+      <path fill="currentColor" d="M427.991 34.9311C422.582 31.7137 415.76 30.1089 407.524 30.1167C394.561 30.1167 384.415 33.8078 377.088 41.1899C369.76 48.572 366.097 58.7488 366.097 71.7204C365.91 79.5627 367.622 87.3338 371.087 94.3716C374.259 100.643 379.199 105.848 385.296 109.343C391.433 112.89 398.733 114.667 407.195 114.674C414.515 114.674 420.629 113.547 425.537 111.293C430.152 109.268 434.17 106.094 437.209 102.075C440.103 98.129 442.252 93.6879 443.55 88.9701L423.588 83.3806C422.748 86.4485 421.13 89.2474 418.891 91.5064C416.636 93.761 412.859 94.8883 407.559 94.8883C401.258 94.8883 396.561 93.0839 393.468 89.475C391.226 86.8682 389.817 83.1458 389.194 78.3196H443.856C444.079 76.0651 444.196 74.1745 444.196 72.648V67.6574C444.328 60.9531 442.943 54.3056 440.145 48.2119C437.526 42.6607 433.289 38.0313 427.991 34.9311ZM406.855 49.2217C416.249 49.2217 421.576 53.8443 422.836 63.0896H389.605C390.133 60.0048 391.411 57.0972 393.328 54.6233C396.373 51.0144 400.882 49.2139 406.855 49.2217Z" />
+      <path fill="currentColor" d="M347.993 0.00751876C346.25 -0.0517559 344.513 0.239929 342.885 0.865259C341.257 1.49059 339.772 2.43677 338.517 3.64761C337.28 4.87005 336.31 6.3364 335.669 7.95351C335.028 9.57063 334.73 11.3032 334.795 13.0415C334.732 14.791 335.031 16.5346 335.672 18.1635C336.314 19.7925 337.284 21.2718 338.522 22.5091C339.761 23.7464 341.241 24.7152 342.87 25.3551C344.5 25.995 346.244 26.2922 347.993 26.2282C349.731 26.2939 351.465 25.9968 353.082 25.3559C354.699 24.7151 356.165 23.7444 357.387 22.5058C358.599 21.2544 359.545 19.7709 360.168 18.1444C360.792 16.5179 361.08 14.7822 361.015 13.0415C361.095 11.3111 360.814 9.583 360.188 7.96756C359.563 6.35213 358.608 4.88487 357.384 3.65944C356.159 2.43401 354.693 1.47735 353.078 0.850567C351.463 0.223787 349.735 -0.0593172 348.005 0.0192726L347.993 0.00751876Z" />
+      <path fill="currentColor" d="M300.14 30.1167C292.25 30.1167 285.909 32.5943 281.118 37.5496C277.571 41.2211 274.969 46.701 273.309 53.9891H272.569L269.54 32.3477H249.753V135.494H272.921V93.0095H273.767C274.474 95.8422 275.465 98.5961 276.726 101.229C278.686 105.518 281.9 109.113 285.944 111.539C290.137 113.827 294.86 114.966 299.635 114.839C309.335 114.839 316.721 111.062 321.794 103.507C326.866 95.9529 329.403 85.4121 329.403 71.8848C329.403 58.8193 326.949 48.5916 322.04 41.2016C317.132 33.8117 309.832 30.1167 300.14 30.1167ZM302.489 88.195C299.788 92.1092 295.561 94.0663 289.807 94.0663C287.435 94.1758 285.07 93.7185 282.91 92.7322C280.749 91.7459 278.855 90.259 277.384 88.3947C274.385 84.6293 272.89 79.4743 272.898 72.9298V71.4033C272.898 64.757 274.393 59.6686 277.384 56.138C280.374 52.6075 284.515 50.8617 289.807 50.9009C295.663 50.9009 299.917 52.7601 302.571 56.4785C305.225 60.197 306.552 65.3833 306.552 72.0373C306.568 78.9184 305.221 84.3043 302.512 88.195H302.489Z" />
+      <path fill="#FF4F00" d="M80.1543 92.8433H0V112.477H80.1543V92.8433Z" />
+    </svg>
+
+    Connect to 8,000+ apps. **Private** — accept the invite link below to add it to your account.
+  </Card>
+
+  <Card href="https://www.make.com/en/hq/app-invitation/0a69a212d2056298b14b4e1860e15a1b">
+    <div style={{ display: 'flex', alignItems: 'center', gap: '6px', marginBottom: '10px' }}>
+      <svg viewBox="0 0 24 24" fill="#6D00CC" role="img" aria-label="Make" style={{ height: '22px', width: '22px' }}>
+        <path d="M13.38 3.498c-.27 0-.511.19-.566.465L9.85 18.986a.58.58 0 0 0 .453.678l4.095.826a.58.58 0 0 0 .682-.455l2.963-15.021a.58.58 0 0 0-.453-.678l-4.096-.826a.6.6 0 0 0-.113-.012zm-5.876.098a.58.58 0 0 0-.516.318L.062 17.697a.575.575 0 0 0 .256.774l3.733 1.877a.58.58 0 0 0 .775-.258l6.926-13.781a.577.577 0 0 0-.256-.776L7.762 3.658a.6.6 0 0 0-.258-.062m11.74.115a.576.576 0 0 0-.576.576v15.426c0 .318.258.578.576.578h4.178a.58.58 0 0 0 .578-.578V4.287a.58.58 0 0 0-.578-.576Z" />
+      </svg>
+      <span style={{ fontSize: '17px', fontWeight: 700 }}>Make</span>
+    </div>
+
+    Visual, drag-and-drop automation. **Private** — accept the invite link below to add it to your account.
+  </Card>
+</CardGroup>
+
+<Tip>
+  n8n is a public community node, so anyone can find and install it from n8n's own node directory. Zapier and Make review every app before it's public, so until Cortana finishes that review, those two are **private** integrations you join with an invite link — the links above and below add Cortana to your account instantly, no waiting on us.
+</Tip>
+
+## 1. Create an API key
+
+Every tool connects with an API key scoped to one business. That key can't read or write anything outside of it.
+
+<Steps>
+  <Step title="Open your business Settings">
+    Go to your business, then **Settings**, then the **Automations** tab.
+  </Step>
+  <Step title="Create an API key">
+    Click **Create API key**, give it a name (for example "n8n" or "Zapier"), and choose **Full access** (read and write) or **Read only**.
+  </Step>
+  <Step title="Copy it now">
+    The key is shown once, starts with `sk-ak-`. Paste it into the tool when you connect it below.
+  </Step>
+</Steps>
+
+<Note>
+  Building this by hand instead of through a no-code tool? The same API key works with our [REST API](/api-reference/introduction). See [Authentication](/authentication) for scopes and presets.
+</Note>
+
+## 2. Connect your tool
+
+<Tabs>
+  <Tab title="n8n">
+    ### Install
+
+    <Steps>
+      <Step title="Open Community Nodes">
+        In n8n, go to **Settings**, then **Community Nodes**, then click **Install**.
+      </Step>
+      <Step title="Install the package">
+        Enter `n8n-nodes-cortana-ai` and click **Install**.
+      </Step>
+      <Step title="Add your credential">
+        Create a **Cortana AI API** credential and paste in your API key. One credential covers every business the key can access — you pick the business on each node.
+      </Step>
+    </Steps>
+
+    ### Trigger
+
+    One trigger node, **Cortana AI Trigger**, with two events you can turn on separately:
+
+    | Event | Fires when |
+    |---|---|
+    | New Conversion | A conversion (lead, sale, signup, etc.) is recorded. Can be filtered to specific conversion types. |
+    | New Contact | A new contact is created. |
+
+    ### Actions
+
+    One action node, **Cortana AI**, covering 18 resources:
+
+    - **Write:** create a conversion (matched to a contact by email or phone), create a contact
+    - **Read:** everything else — see [what you can read](#what-you-can-read) below
+
+    <Card title="View on npm" icon="npm" href="https://www.npmjs.com/package/n8n-nodes-cortana-ai" horizontal />
+  </Tab>
+
+  <Tab title="Zapier">
+    ### Install
+
+    <Steps>
+      <Step title="Accept the invite">
+        Open the [Zapier invite link](https://zapier.com/developer/public-invite/237168/d28d8b9c662b8c7869d8180dc581efc4/) and accept it. This adds Cortana AI to your Zapier account, it's a private integration, not a public listing.
+      </Step>
+      <Step title="Connect your account">
+        In a Zap, search for **Cortana AI**, choose a trigger or action, and connect with your API key.
+      </Step>
+      <Step title="Pick your business">
+        Every trigger and action has a **Business** dropdown. Choose the business the Zap should read or write to.
+      </Step>
+    </Steps>
+
+    ### Triggers
+
+    | Trigger | Fires when |
+    |---|---|
+    | New Conversion | A conversion is recorded. Optional filter by conversion type. |
+    | New Contact | A new contact is created. |
+
+    ### Actions
+
+    - **Create Conversion** — matches or creates the contact by email or phone, then records the conversion
+    - **Create Contact** — matches or creates a contact, no duplicates
+
+    ### Searches (read)
+
+    Around 30 search steps for looking up data mid-Zap: Contacts, Conversion Types, Attribution (data, UTMs, presets, contacts by LTV), Agents, Appointments, Conversations, Messages, Custom Fields, Form Submissions, Tags, Tracking Sessions, Voice Calls, Meeting Recordings, and full read access to Stripe, Shopify, and Whop.
+  </Tab>
+
+  <Tab title="Make">
+    ### Install
+
+    <Steps>
+      <Step title="Accept the invite">
+        Open the [Make invite link](https://www.make.com/en/hq/app-invitation/0a69a212d2056298b14b4e1860e15a1b) and accept it. This adds Cortana AI to your Make account, it's a private app, not a public listing.
+      </Step>
+      <Step title="Add a module">
+        In a scenario, search for **Cortana AI**, add a module, and connect it with your API key.
+      </Step>
+      <Step title="Pick your business">
+        Every module has a **Business** field. Choose the business the module should read or write to.
+      </Step>
+    </Steps>
+
+    ### Triggers
+
+    | Trigger | Fires when |
+    |---|---|
+    | Watch New Conversions | A conversion is recorded. |
+    | Watch New Contacts | A new contact is created. |
+
+    Both are instant (webhook-based) triggers, no polling delay.
+
+    ### Actions
+
+    - **Create Conversion** — matches or creates the contact by email or phone, then records the conversion
+    - **Create Contact** — matches or creates a contact, no duplicates
+    - **Find Contact** — look up a contact by email, phone, or search term
+    - **Make an API Call** — a raw, authenticated call to any endpoint, for anything the other modules don't cover
+
+    ### Searches (read)
+
+    The same breadth as Zapier: Agents, Appointments, Conversations, Messages, Custom Fields, Form Submissions, Tags, Tracking Sessions, Voice Calls, Meeting Recordings, Businesses, Attribution (data, UTMs, presets, contacts by LTV), and full read access to Stripe, Shopify, and Whop.
+  </Tab>
+</Tabs>
+
+## What you can read
+
+Every read action across all three tools pulls from the same places:
+
+<CardGroup cols={2}>
+  <Card title="Contacts & CRM" icon="address-book">
+    Contacts, tags, custom fields, conversations, messages, appointments, form submissions, tracking sessions, voice calls and transcripts, meeting recordings.
+  </Card>
+
+  <Card title="Attribution" icon="chart-mixed">
+    Aggregated attribution data by source, campaign, medium, or ad, plus known UTMs, saved presets, and contacts ranked by lifetime value.
+  </Card>
+
+  <Card title="Stripe" icon="credit-card">
+    Payments, subscriptions, customers, products, invoices, disputes, payment intents, payment links, prices, promotion codes, and revenue metrics.
+  </Card>
+
+  <Card title="Shopify & Whop" icon="cart-shopping">
+    Shopify orders, customers, products, analytics, and abandoned carts. Whop payments, connections, customers, and memberships.
+  </Card>
+</CardGroup>
+
+## What a trigger payload looks like
+
+Both events send the same shape, whichever tool receives them. `data.contact` is `null` for anonymous conversions.
+
+```json
+{
+  "event": "conversion.created",
+  "deliveryId": "a1b2c3d4-...",
+  "timestamp": "2026-07-06T12:00:00Z",
+  "businessId": "biz_...",
+  "id": "conv_...",
+  "data": {
+    "conversion": {
+      "id": "conv_...",
+      "type": "purchase",
+      "displayName": "New Deals Closed",
+      "value": 99.9,
+      "currency": "USD",
+      "occurredAt": "2026-07-06T12:00:00Z"
+    },
+    "contact": {
+      "id": "contact_...",
+      "email": "jane@example.com",
+      "firstName": "Jane",
+      "lastName": "Doe"
+    },
+    "attribution": {
+      "source": "facebook",
+      "medium": "cpc",
+      "campaign": "summer_sale"
+    }
+  }
+}
+```
+
+## FAQ
+
+<AccordionGroup>
+  <Accordion title="Can one API key cover more than one business?">
+    Yes. The key can reach every business it was granted access to, you just pick which business each node, Zap, or module acts on.
+  </Accordion>
+
+  <Accordion title="My trigger isn't firing anymore, what do I check?">
+    If you edited the trigger (changed the business or the conversion type filter) or the key was revoked, turn the trigger off and back on. That re-registers it with Cortana. Also check the API key hasn't been deleted from **Settings → Automations**.
+  </Accordion>
+
+  <Accordion title="Is there a rate limit?">
+    Yes, 60 requests per minute per API key. n8n automatically waits and retries once if it hits the limit; Zapier and Make will show a throttled error and retry shortly after.
+  </Accordion>
+
+  <Accordion title="Which tool should I pick?">
+    They all cover the same data. n8n is the cheapest if you're comfortable self-hosting or already pay for n8n cloud. Zapier has the largest app directory. Make is the most visual if you like building flows on a canvas.
+  </Accordion>
+</AccordionGroup>
