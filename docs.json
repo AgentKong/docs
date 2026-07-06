@@ -95,10 +95,7 @@
       },
       {
         "tab": "Automation",
-        "icon": "bolt",
-        "pages": [
-          "automation"
-        ]
+        "icon": "bolt"
       },
       {
         "tab": "Developer Docs + MCP",
@@ -108,6 +105,12 @@
             "group": "Getting Started",
             "pages": [
               "authentication"
+            ]
+          },
+          {
+            "group": "Webhooks / Automations",
+            "pages": [
+              "automation"
             ]
           },
           {
