@@ -94,10 +94,6 @@
         ]
       },
       {
-        "tab": "Automation",
-        "icon": "bolt"
-      },
-      {
         "tab": "Developer Docs + MCP",
         "icon": "code",
         "groups": [
@@ -108,7 +104,7 @@
             ]
           },
           {
-            "group": "Webhooks / Automations",
+            "group": "Webhooks",
             "pages": [
               "automation"
             ]
