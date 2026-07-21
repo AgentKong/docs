@@ -1,0 +1,148 @@
+---
+title: "4) Sending Email"
+description: "Verify your own domain so booking confirmations and reminders come from you instead of a default address."
+icon: "envelope"
+---
+
+{/* TODO: verify — no Loom walkthrough was supplied for this page. Add the embed + a
+    verbatim transcript inside an <Accordion title="Video transcript"> here once recorded. */}
+
+## Overview
+
+Every booking sends email — a confirmation when someone books, and a reminder before the meeting. Out of the box those go out from a Cortana address. **Sending Email** lets you send them from your own domain instead, so they arrive as you.
+
+You'll find it under **Appointments → Settings → Sending Email**. Clicking **Add a sending domain** there takes you to **Settings → Sending Emails**, the business-wide page where domains are managed — the same domains are used for reports and notifications, not just bookings.
+
+This is worth doing before you send real invitations. Mail from your own verified domain is far more likely to reach the inbox than mail from a shared default address.
+
+<Note>
+  **Nothing breaks if you skip it.** The page states it plainly: *Until a domain is verified, emails use a default address and nothing breaks.* Confirmations and reminders still send — they just don't come from you.
+</Note>
+
+---
+
+## 1. Add Your Domain
+
+<Steps>
+  <Step title="Open the sending domains page">
+    Go to **Appointments → Settings → Sending Email** and click **Add a sending domain**.
+
+    If you have none yet you'll see *No sending domains yet — Add one below to send email from your own domain.*
+
+    <Frame caption="The sending domains page. The first domain you add becomes your default automatically.">
+      <img src="/images/appointments/sending-email/01-sending-domain.png" alt="The Sending Emails settings page showing an empty state with no sending domains, and a form with Domain, Sender email and optional Sender name fields plus an Add domain button." />
+    </Frame>
+  </Step>
+
+  <Step title="Fill in the three fields">
+    | Field | What it is | Example |
+    | --- | --- | --- |
+    | **Domain** | The domain emails are sent from. | `acme.com` |
+    | **Sender email** | The "From" address recipients see. Use an address on this domain so it authenticates. | `bookings@acme.com` |
+    | **Sender name** *(optional)* | The display name shown as the sender. | `Acme Bookings` |
+
+    Click **Add domain**. The first domain you add becomes your default automatically.
+  </Step>
+
+  <Step title="Add the DNS records">
+    After adding the domain you'll be shown DNS records to publish with whoever hosts your domain — your registrar or DNS provider.
+
+    Copy each record exactly. A single wrong character means verification never completes.
+  </Step>
+
+  <Step title="Wait for verification">
+    Verification runs once the records are live. DNS changes can take up to 48 hours to propagate, though they're often much quicker.
+
+    Until the domain verifies, emails keep going out from the default address.
+  </Step>
+</Steps>
+
+<Warning>
+  **The sender email must be on the domain you added.** An address on a different domain won't authenticate, and mail sent from it is likely to be filtered as spoofing. If your domain is `acme.com`, the sender must be something like `bookings@acme.com` — not a Gmail or Outlook address.
+</Warning>
+
+---
+
+## 2. Check It Worked
+
+The fastest test is the one you already know how to do:
+
+1. Open one of your booking calendars and book yourself in, using an address you can check. See [1) Creating Your Booking Calendar](/cal-calendars).
+2. Look at the confirmation email when it arrives.
+3. Check the **From** name and address are yours, not the default.
+
+If it still shows the default address, the domain hasn't verified yet.
+
+---
+
+## Settings Reference
+
+| Setting | What it does | Default | Recommendation |
+| --- | --- | --- | --- |
+| **Domain** | The domain emails are sent from. | None | Use the domain your customers already recognise. |
+| **Sender email** | The From address recipients see. | None | A monitored address like `bookings@` — replies go here. |
+| **Sender name** | Display name on the email. | Empty | Your business name. Blank means recipients see only the address. |
+| **Default domain** | Which domain is used when several exist. | The first one added | Keep your main customer-facing domain as default. |
+
+---
+
+## Troubleshooting
+
+<AccordionGroup>
+  <Accordion title="My domain still isn't verified">
+    Re-check the DNS records character by character against what the page shows — a trailing dot or a missing prefix is enough to fail. Then give it time; propagation can take up to 48 hours. If your DNS provider adds the domain name to record names automatically, make sure you haven't ended up with a doubled-up host like `mail.acme.com.acme.com`.
+  </Accordion>
+
+  <Accordion title="Emails are still coming from the default address">
+    Either the domain hasn't verified, or it isn't set as default. Both are visible on the sending domains page.
+  </Accordion>
+
+  <Accordion title="Confirmations are landing in spam">
+    That's exactly what this page fixes. An unverified domain falls back to a shared default address, which is more likely to be filtered. Verify your own domain and send from an address on it.
+  </Accordion>
+
+  <Accordion title="No email arrives at all">
+    First check the notification itself is switched on — open the calendar, go to **Notifications**, and confirm **Booking Confirmed** is active. Sending domains only control *who it comes from*, not *whether it sends*.
+  </Accordion>
+</AccordionGroup>
+
+---
+
+## FAQ
+
+<AccordionGroup>
+  <Accordion title="Do I need my own domain to take bookings?">
+    No. Everything works without one — emails just come from a default address.
+  </Accordion>
+
+  <Accordion title="Does this affect anything other than booking emails?">
+    Yes. The same verified domains are used for reports and other notifications across the business, so verifying once improves all of it.
+  </Accordion>
+
+  <Accordion title="Can I use a subdomain?">
+    Yes — a subdomain such as `mail.acme.com` is common, and keeps booking mail separate from your main corporate email reputation.
+  </Accordion>
+
+  <Accordion title="Can different calendars send from different addresses?">
+    No. The sending identity is set per business, not per calendar. Every booking email from the business uses the default sending domain.
+  </Accordion>
+
+  <Accordion title="Where do replies go?">
+    To the sender email you set. Use an address someone actually monitors — invitees do reply to confirmations.
+  </Accordion>
+</AccordionGroup>
+
+---
+
+## Next Steps
+
+<CardGroup cols={2}>
+  <Card title="1) Creating Your Booking Calendar" icon="calendar-plus" href="/cal-calendars">
+    Build a booking page and test the whole flow end to end.
+  </Card>
+  <Card title="3) Calendar Sync" icon="rotate" href="/cal-calendar-sync">
+    Connect GoHighLevel, Calendly or iClosed.
+  </Card>
+</CardGroup>
+
+If any of this doesn't match what you're seeing, reach out to the support team in the bottom right.

@@ -97,6 +97,15 @@
               "cal-overview",
               "cal-calendars"
             ]
+          },
+          {
+            "group": "Configuring Your Calendar",
+            "icon": "sliders",
+            "pages": [
+              "cal-schedule",
+              "cal-calendar-sync",
+              "cal-sending-email"
+            ]
           }
         ]
       },

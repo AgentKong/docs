@@ -1,0 +1,165 @@
+---
+title: "3) Calendar Sync"
+description: "Connect GoHighLevel, Calendly or iClosed so their bookings flow into Cortana, matched to the right rep."
+icon: "rotate"
+---
+
+{/* TODO: verify — no Loom walkthrough was supplied for this page. Add the embed + a
+    verbatim transcript inside an <Accordion title="Video transcript"> here once recorded. */}
+
+## Overview
+
+**Calendar Sync** connects the booking tools you already use. As the page puts it: *Sync your booking tools into Cortana. Connect GoHighLevel, Calendly, or iClosed and their bookings flow in automatically, matched to the right rep.*
+
+You'll find it under **Appointments → Settings → Calendar Sync**.
+
+This matters because bookings made outside Cortana are invisible to your reporting until they're synced. Once connected, an appointment booked in GoHighLevel shows up on **Business Cal** alongside everything else, attributed to the right person — so your dashboard reflects all of your calls, not just the ones booked on a Cortana page.
+
+<Note>
+  **Google, Outlook and Zoom are not on this page.** The page says so itself: *Looking for Google, Outlook, or Zoom? Those connect per rep under Settings → Users → My Profile.*
+
+  The difference is who owns the connection. GoHighLevel, Calendly and iClosed connect once **for the whole business**. Google, Outlook and Zoom connect **per person**, because they're that individual's calendar and video account.
+</Note>
+
+---
+
+## 1. Connect a Booking Tool
+
+Each tool appears as its own card, whether or not it's connected.
+
+<Frame caption="The Calendar Sync tab. Each card shows its connection and how many reps are mapped.">
+  <img src="/images/appointments/calendar-sync/01-calendar-sync.png" alt="The Calendar Sync sub-tab showing cards for GHL Calendar Mirror, Calendly Calendar Mirror and iClosed Calendar Mirror, each with a description, a rep mapping count, and either a Manage reps button or a Connect in Integrations link." />
+</Frame>
+
+| Card | What it does |
+| --- | --- |
+| **GHL Calendar Mirror** | *Match your reps to GoHighLevel so the correct owner flows both ways.* Two-way — status changes you make in Cortana are pushed back to GoHighLevel. |
+| **Calendly Calendar Mirror** | *Match your reps to Calendly so the correct host shows on mirrored bookings.* |
+| **iClosed Calendar Mirror** | *Sync your iClosed events and their bookings into Cortana, mapped to the right rep.* |
+
+A card that isn't connected yet shows **Connect in Integrations** — the connection itself is made on the business **Integrations** page, then managed here. A connected card shows its mapping status and a **Manage reps** button.
+
+---
+
+## 2. Map Your Reps
+
+This is the step people skip, and it's the one that decides whether bookings land on the right person.
+
+<Steps>
+  <Step title="Open rep mapping">
+    Click **Manage reps** on a connected card. The dialog has two tabs — **Reps** and **Calendars**.
+
+    <Frame caption="Rep mapping. Unmapped people fall back to the default owner rather than going ownerless.">
+      <img src="/images/appointments/calendar-sync/02-manage-reps.png" alt="The GHL Calendar Mirror dialog on the Reps tab, showing a Default GoHighLevel owner selector, a list of external users with their email addresses and the Cortana rep each is mapped to, and a Sync button." />
+    </Frame>
+  </Step>
+
+  <Step title="Set a default owner">
+    **Default owner** catches anything unmatched: *Bookings for an unmapped rep land here, so they're never ownerless. Can be any GHL user — e.g. a shared inbox.*
+
+    Set this first. It's your safety net.
+  </Step>
+
+  <Step title="Match each person">
+    Under **Team members** you'll see a count like *2 of 3 mapped to a Cortana rep*, then every user from the external tool with their email and current mapping.
+
+    Cortana matches on email address automatically where it can. For anyone showing **Not mapped**, pick the right person from the dropdown. As the dialog explains: *Unmapped reps had no Cortana rep with a matching email, so their bookings fall back to the default owner. Pick a rep from the dropdown to map them — the emails don't need to match.*
+
+    Use **Sync** to re-pull the user list after adding someone in the external tool.
+  </Step>
+
+  <Step title="Check the Calendars tab">
+    Switch to **Calendars** to see which calendars from that tool have been mirrored into Cortana.
+  </Step>
+</Steps>
+
+<Warning>
+  **Mirrored calendars are read-only in Cortana.** They exist so external bookings appear in your reporting. Edit their questions, hours or reminders in the tool that owns them — GoHighLevel, Calendly or iClosed — not here.
+</Warning>
+
+---
+
+## 3. Understand What Each Tool Can Do
+
+The tools differ in what they support. This matters when you're deciding which to route bookings through.
+
+| | GoHighLevel | Calendly | iClosed | Google / Outlook |
+| --- | --- | --- | --- | --- |
+| Connects for | Whole business | Whole business | Whole business | Each person |
+| Bookings flow in | Yes | Yes | Yes | — |
+| Book *into* it from a Cortana page | Yes | Yes | Yes | Events only |
+| Rep mapping | Yes | Yes | Yes | The connection is the person |
+| Send a specific host a booking | Yes | **No** | **No** | — |
+| Reschedule / cancel pushes back | Yes | **No** | **No** | Yes |
+| Blocks your busy time | — | — | — | Yes |
+
+<Note>
+  **Calendly and iClosed cannot be pinned to a specific host.** Those tools own their own host assignment, so routing rules that send a booking to a named person or pool are greyed out for calendars bound to them, with the reason shown. Use GoHighLevel or a native Cortana calendar when you need routing.
+</Note>
+
+<Warning>
+  **Reschedules and cancellations only push back to GoHighLevel.** If an invitee cancels a Calendly or iClosed booking through a Cortana link, the booking is cancelled in Cortana but stays live in the other tool. Until that changes, cancel those in the owning tool as well.
+</Warning>
+
+---
+
+## Troubleshooting
+
+<AccordionGroup>
+  <Accordion title="Bookings are all landing on one person">
+    That person is set as your **default owner** and the real reps aren't mapped. Open **Manage reps** and map each external user to a Cortana rep.
+  </Accordion>
+
+  <Accordion title="A rep shows as Not mapped even though they exist in both tools">
+    Automatic matching is by email, and theirs differ between systems. Map them manually — the dialog confirms the emails don't need to match.
+  </Accordion>
+
+  <Accordion title="A new rep from the external tool isn't in the list">
+    Click **Sync** in the rep dialog to re-pull the user list.
+  </Accordion>
+
+  <Accordion title="External bookings aren't appearing at all">
+    Confirm the tool is still connected on the business **Integrations** page — a disconnected integration shows a banner at the top of the app. Newly created external calendars are also picked up on a schedule rather than instantly, so allow a couple of hours before assuming something is wrong.
+  </Accordion>
+
+  <Accordion title="I cancelled in Cortana but the invitee still has the meeting">
+    Expected for Calendly and iClosed — cancellations don't push back to those tools. Cancel it there too.
+  </Accordion>
+</AccordionGroup>
+
+---
+
+## FAQ
+
+<AccordionGroup>
+  <Accordion title="Do I have to use one of these? ">
+    No. Cortana's own booking calendars work on their own. These connections exist so bookings taken elsewhere still show up in your reporting.
+  </Accordion>
+
+  <Accordion title="Where do I connect Google Calendar?">
+    Under **Settings → Users → My Profile**, per person. Connecting it blocks your existing busy time out of your availability and creates a real calendar event for each booking.
+  </Accordion>
+
+  <Accordion title="Can I use a shared inbox as the default owner?">
+    Yes — the default owner can be any user in the external tool, including a shared inbox.
+  </Accordion>
+
+  <Accordion title="Will a mirrored booking be attributed to my ads?">
+    It appears in your reporting with the rep and time, but attribution depends on how the lead reached the external tool. Bookings taken on a Cortana booking page carry full attribution because the page tracks the visit itself.
+  </Accordion>
+</AccordionGroup>
+
+---
+
+## Next Steps
+
+<CardGroup cols={2}>
+  <Card title="4) Sending Email" icon="envelope" href="/cal-sending-email">
+    Send confirmations and reminders from your own domain.
+  </Card>
+  <Card title="2) Schedule & Working Hours" icon="clock" href="/cal-schedule">
+    Set the business timezone and each team member's hours.
+  </Card>
+</CardGroup>
+
+If any of this doesn't match what you're seeing, reach out to the support team in the bottom right.
