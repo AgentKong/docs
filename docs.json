@@ -90,7 +90,8 @@
         "tab": "Cortana Calendar Feature",
         "icon": "calendar",
         "pages": [
-          "cal-overview"
+          "cal-overview",
+          "cal-calendars"
         ]
       },
       {
