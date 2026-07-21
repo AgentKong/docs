@@ -89,9 +89,15 @@
       {
         "tab": "Cortana Calendar Feature",
         "icon": "calendar",
-        "pages": [
-          "cal-overview",
-          "cal-calendars"
+        "groups": [
+          {
+            "group": "Getting Started",
+            "icon": "rocket",
+            "pages": [
+              "cal-overview",
+              "cal-calendars"
+            ]
+          }
         ]
       },
       {
