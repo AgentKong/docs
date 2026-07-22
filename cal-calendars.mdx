@@ -1,6 +1,6 @@
 ---
 title: "1) Creating Your Booking Calendar"
-description: "Create a booking calendar, build its form, set availability and routing, and share a link people can book on."
+description: "Make a booking page, choose the questions you ask, set the hours you are free, and share a link people can book on."
 icon: "calendar-plus"
 ---
 
@@ -10,18 +10,24 @@ icon: "calendar-plus"
 
 ## Overview
 
-**Calendars** is where you build the booking pages people actually book on. Each calendar is one bookable event, such as a discovery call, an onsite visit or a support session. It has its own web address, its own questions, its own hours, and its own reminder emails.
+**Calendars** is where you build the booking pages people book on.
+
+Each calendar is one kind of meeting. A discovery call. An onsite visit. A support session.
+
+Each one gets its own web address, its own questions, its own hours and its own reminder emails.
 
 You'll find it in the **Appointments** area of your business, on the **Calendars** tab.
 
-By the end of this page you will have a live link like `https://app.usecortana.ai/your-business/strategy-call` that anyone can open, answer a few questions on, pick a time, and book. The booking lands in **Business Cal**, and the invitee gets a confirmation email automatically.
+By the end of this page you will have a live link. It looks like `https://app.usecortana.ai/your-business/strategy-call`.
+
+Anyone can open that link, answer a few questions, pick a time and book. The booking then shows up in **Business Cal**. The person who booked gets a confirmation email straight away.
 
 <Note>
   **Before you start**
 
-  - Your business must already exist and you must be signed in to it.
-  - To assign bookings to specific people, invite them as **team members** first. If you skip this, every booking is assigned to the business owner, which is fine for a solo setup.
-  - Connecting Google, Outlook or Zoom is **optional**. A calendar works without them; connecting one only adds calendar invites and video links. See **Settings → Calendar Sync**.
+  - Your business must already exist, and you must be signed in to it.
+  - Do you want bookings to go to specific people? Then invite them as **team members** first. If you skip this, every booking goes to the business owner. That is fine if you work on your own.
+  - Connecting Google, Outlook or Zoom is **optional**. Your calendar works without them. Connecting one only adds calendar invites and video links. You'll find this under **Settings → Calendar Sync**.
 </Note>
 
 ---
@@ -30,89 +36,111 @@ By the end of this page you will have a live link like `https://app.usecortana.a
 
 <Steps>
   <Step title="Open the Calendars tab">
-    Go to **Appointments** in the left sidebar, then click the **Calendars** tab. You'll see every calendar in the business as a card showing its colour, length, number of bookings, page views, and web address.
+    Go to **Appointments** in the left sidebar. Then click the **Calendars** tab.
+
+    You'll see every calendar in the business as a card. Each card shows its colour, its length, how many bookings it has, how many people viewed it, and its web address.
 
     Click **Add calendar** at the top right.
 
-    <Frame caption="The Calendars tab. Each card is one bookable event; Add calendar starts a new one.">
+    <Frame caption="The Calendars tab. Each card is one kind of meeting. Add calendar starts a new one.">
       <img src="/images/appointments/calendars/01-calendars-tab.png" alt="The Calendars tab of the Appointments area, showing a grid of booking calendar cards with their duration, booking count and web address. The Add calendar button at the top right is highlighted." />
     </Frame>
   </Step>
 
   <Step title="Give it a title">
-    A **Create calendar** dialog opens with a single **Title** field and the hint *Give it a title. You'll build the form next*.
+    A **Create calendar** dialog opens. It has one **Title** field and the hint *Give it a title. You'll build the form next*.
 
-    Type what your invitee should see, for example `Strategy Call`, then click **Continue**.
+    Type what you want people to see. For example, `Strategy Call`. Then click **Continue**.
 
-    The title also generates the web address, so keep it short and human. You can change both later.
+    The title also builds the web address. So keep it short and plain. You can change both later.
 
-    <Frame caption="The Create calendar dialog only asks for a title. Everything else is set in the builder.">
+    <Frame caption="The Create calendar dialog only asks for a title. You set everything else in the builder.">
       <img src="/images/appointments/calendars/02-create-dialog.png" alt="The Create calendar dialog with a single Title text field and Cancel and Continue buttons. The Title field and the Continue button are highlighted." />
     </Frame>
   </Step>
 </Steps>
 
 <Warning>
-  **Your calendar is live the moment you click Continue.** There is no separate publish step. The web address returns a real, bookable page immediately, including the placeholder description described in Step 3. Finish setting it up before you share the link.
+  **Your calendar goes live the moment you click Continue.** There is no separate publish button.
+
+  Anyone with the web address can book on it right away. They will also see the sample wording covered in Step 3, which is not what you want.
+
+  So finish setting the calendar up before you share the link with anyone.
 </Warning>
 
 ---
 
 ## 2. Set the Details
 
-Clicking **Continue** opens the builder. It has four tabs, **Details**, **Questions**, **Availability** and **Notifications**, plus **Share** and **View Site** buttons.
+Clicking **Continue** opens the builder.
+
+It has four tabs. **Details**, **Questions**, **Availability** and **Notifications**. It also has **Share** and **View Site** buttons.
 
 <Tip>
-  The button at the top right doubles as your save indicator. It reads **Saved** when everything is stored, and turns into an active blue **Save** the moment you change something. If it says **Save**, you have unsaved work.
+  The button at the top right also tells you whether your work is stored.
 
-  The **Ending rules** dialog is separate and has its own **Cancel** and **Save** buttons.
+  It reads **Saved** when everything is stored. It turns into a blue **Save** button the moment you change something. So if it says **Save**, click it. You have work that is not stored yet.
+
+  The **Ending rules** dialog is separate. It has its own **Cancel** and **Save** buttons.
 </Tip>
 
 <Steps>
   <Step title="Check the name, address and description">
-    Under **Basic Details** you'll find:
+    Under **Basic Details** you'll find four things.
 
-    - **Name**: the heading on your booking page.
-    - **Event URL**: the last part of the web address. It follows your title automatically until you edit it by hand, after which it stops following. The full address is shown underneath as **Full link**.
-    - **Connected domains**: which domain the link uses. `app.usecortana.ai` is marked **default**. Your own domains appear here too, marked **not verified** until their DNS is set up.
-    - **Description**: rich text shown on the booking page beneath the title, with a formatting toolbar.
+    - **Name**: the big heading people see on your booking page.
+    - **Event URL**: the last part of your web address. It copies your title until you type over it. After that it stays as you typed it. You'll see the whole address underneath as **Full link**.
+    - **Connected domains**: which web address your link uses. `app.usecortana.ai` is marked **default**. Any of your own web addresses show here too. They stay marked **not verified** until you finish the setup with the company you bought them from.
+    - **Description**: the text under the title on your booking page. You can format it with the toolbar above the box.
 
-    <Frame caption="Basic Details. The Event URL sets the last part of your public booking address.">
+    <Frame caption="Basic Details. The Event URL sets the last part of the address people book on.">
       <img src="/images/appointments/calendars/03-details-basic.png" alt="The Basic Details section of the calendar builder showing the Name field, the Event URL field with the connected domain prefix, and the full booking link. The Event URL area is highlighted." />
     </Frame>
   </Step>
 </Steps>
 
 <Warning>
-  **Replace the description before you share the link.** New calendars ship with a placeholder that reads `{Insert short main offer callout}` followed by `✅ {Key Outcome 1}`, `✅ {Key Outcome 2}` and `✅ {Key Outcome 3}`. This is **not** hidden sample text. It renders on your live booking page exactly as written, to real leads. Overwrite it with your own copy.
+  **Rewrite the description before you share the link.**
+
+  New calendars come with sample wording. It reads `{Insert short main offer callout}`, then `✅ {Key Outcome 1}`, `✅ {Key Outcome 2}` and `✅ {Key Outcome 3}`.
+
+  This is **not** hidden text. Your customers see it on the live page, word for word. Delete it and write your own.
 </Warning>
 
 <Steps>
   <Step title="Choose which calendar to book into">
-    Under **Calendar**, pick where bookings should be created. **Cortana Calendar** is the default and means Cortana owns the availability and the booking.
+    Under **Calendar**, pick where each booking should be created.
 
-    If you choose an external system instead, that system owns availability and the booking is created there, but it still syncs back into Cortana, just as if it had been booked here. Selecting an external system hides the **Scheduling Rules**, **Distribution & Team** and **Availability** settings, because that system controls them.
+    **Cortana Calendar** is the normal choice. It means Cortana decides your free times and stores the booking.
+
+    You can pick another booking system instead. Then that system decides your free times and stores the booking. The booking still shows up in Cortana, exactly as if it had been made here.
+
+    If you pick another system, the **Scheduling Rules**, **Distribution & Team** and **Availability** settings disappear. That system controls them now, so there is nothing for you to set here.
   </Step>
 
   <Step title="Set the scheduling rules">
-    **Scheduling Rules** control limits, buffers and booking behaviour. Each numeric field has its own unit dropdown.
+    **Scheduling Rules** set your limits, your gaps between meetings, and what people can do after booking.
 
-    <Frame caption="Scheduling Rules and Distribution & Team, with the shipped defaults.">
+    Each box with a number in it has its own dropdown next to it for minutes, hours or days.
+
+    <Frame caption="Scheduling Rules and Distribution & Team, showing the settings every new calendar starts with.">
       <img src="/images/appointments/calendars/04-scheduling-rules.png" alt="The Scheduling Rules section showing Duration 30 minutes, Slot Interval 30 minutes, Buffer Before and After 0 minutes, Min Notice 1 hour, Rolling Window 1 month, Max Bookings per Slot 1, and Allow Reschedule and Allow Cancellation both switched on. The Slot Interval field is highlighted." />
     </Frame>
 
-    See the [Scheduling rules reference](#scheduling-rules) below for what every field does and what we recommend.
+    The [Scheduling rules reference](#scheduling-rules) further down explains every box and what we suggest you put in it.
   </Step>
 
   <Step title="Choose how bookings are shared out">
-    **Distribution & Team** decides who gets the meeting.
+    **Distribution & Team** decides who takes each meeting.
 
-    - **Round Robin (Prioritize Availability)** *(default)*: whoever is free at the chosen time gets the meeting, least-booked host first. Shows the most bookable slots. **Add a single host here for straightforward one-on-one booking.**
-    - **Round Robin (True & Equal)**: strictly equal distribution. Hosts take turns, and a host who is too far ahead cannot take new meetings even when they are the only one free; those slots are hidden until the others catch up.
+    - **Round Robin (Prioritize Availability)** *(the normal choice)*: the meeting goes to whoever is free at that time. If more than one person is free, the one with the fewest bookings gets it. This shows people the most times to choose from. **If you take all the calls yourself, add only yourself here.**
+    - **Round Robin (True & Equal)**: everyone takes an exactly equal share. Your team takes strict turns. If one person is too far ahead, they cannot take a new meeting, even when they are the only one free. Those times stay hidden until the others catch up.
 
-    Click **Add Member** to assign specific people. If you add nobody, the panel reads *No team members added. Bookings will be assigned to the business owner.*
+    Click **Add Member** to pick who takes the calls.
 
-    <Frame caption="Distribution & Team. With no members added, every booking goes to the business owner.">
+    Add nobody and the panel reads *No team members added. Bookings will be assigned to the business owner.*
+
+    <Frame caption="Distribution & Team. Add nobody and every booking goes to the business owner.">
       <img src="/images/appointments/calendars/05-distribution.png" alt="The Distribution and Team section showing the two round robin modes as selectable cards, a Team Members area with an Add Member button, and a message stating no team members are added so bookings go to the business owner. The Add Member button is highlighted." />
     </Frame>
   </Step>
@@ -124,55 +152,67 @@ Clicking **Continue** opens the builder. It has four tabs, **Details**, **Questi
 
 <Steps>
   <Step title="Create the form">
-    Open the **Questions** tab. A new calendar has no form yet. You'll see *A form holds the questions people answer when they book*, with two buttons:
+    Open the **Questions** tab. A new calendar has no form yet.
 
-    - **Create a form**: makes a new form named after your calendar and pre-filled with **Name**, **Email** and **Phone**, all required.
-    - **Select a form**: reuses a form that already exists on another calendar.
+    You'll see *A form holds the questions people answer when they book*, and two buttons.
+
+    - **Create a form**: builds a new form named after your calendar. It already asks for **Name**, **Email** and **Phone**, and all three must be filled in.
+    - **Select a form**: uses a form you already built on another calendar.
 
     Click **Create a form**.
 
-    <Frame caption="A new form starts with Name, Email and Phone on Page 1, plus an empty Page 2.">
+    <Frame caption="A new form starts with Name, Email and Phone on Page 1. It also adds an empty Page 2.">
       <img src="/images/appointments/calendars/06-questions.png" alt="The Questions tab after creating a form, showing Page 1 containing Name, Email and Phone, an empty Page 2, an Add page button, and the Endings section below. A live preview of the booking page is shown alongside." />
     </Frame>
   </Step>
 </Steps>
 
 <Warning>
-  **Creating a form also creates an empty Page 2.** Your invitee has to click through that blank page before the calendar unlocks. Either add a question to it, or remove it, so people aren't clicking past an empty screen.
+  **Creating a form also creates an empty Page 2.**
+
+  People have to click past that blank screen before they can pick a time. Some will give up there.
+
+  So either add a question to Page 2, or delete the page.
 </Warning>
 
 <Note>
-  **Forms can be shared between calendars.** **Select a form** links to the *same* form, so editing a question changes it on every calendar using it. Cortana warns you when the form is already in use elsewhere. Duplicating a calendar always makes its own private copy instead.
+  **Two calendars can use one form.**
+
+  **Select a form** points at the *same* form, not a copy. So editing a question changes it on every calendar that uses that form. Cortana tells you when a form is already in use somewhere else.
+
+  Copying a calendar works differently. The copy always gets its own private form.
 </Note>
 
 <Steps>
   <Step title="Add your qualifying questions">
-    Click **Add question** under the page you want it on. The picker explains: *Pick a field to collect its answer, or create a new one. Every question saves to the contact, so answers are reusable and scoreable.*
+    Click **Add question** under the page you want the question on.
 
-    It's grouped into:
+    The picker says: *Pick a field to collect its answer, or create a new one. Every question saves to the contact, so answers are reusable and scoreable.*
+
+    The questions come in four groups.
 
     - **Contact fields**: First Name, Last Name, Company Website, City, State / Province, Zip / Postal Code, Country.
-    - **Content**: **Text Block**, for a message, heading or colour with no input.
-    - **Custom fields**: every custom field already on your business, with its answer type.
-    - **Create a field**: make a brand new one without leaving the builder.
+    - **Content**: **Text Block**. This shows a message, a heading or a block of colour. People do not answer it.
+    - **Custom fields**: every question you already made for this business, with the kind of answer it takes.
+    - **Create a field**: build a brand new question without leaving this screen.
 
-    Use the search box at the top to filter, or to create a field by name.
+    Use the search box at the top to find a question fast. You can also type a new name there to create one.
 
-    <Frame caption="The field picker. Every answer saves onto the contact record, so it can be reused and scored.">
+    <Frame caption="The field picker. Every answer is saved onto the person's record, so you can use it again and score it.">
       <img src="/images/appointments/calendars/07-field-library.png" alt="The Add a question dialog showing a search box and grouped lists of contact fields, a Text Block content option, existing custom fields with their answer types, and a Create a new field option." />
     </Frame>
   </Step>
 
   <Step title="Style the booking page">
-    The right-hand panel has two tabs, **Calendar** and **Field settings**. Under **Calendar** you can set:
+    The panel on the right has two tabs, **Calendar** and **Field settings**. Under **Calendar** you can set five things.
 
-    - **Calendar type**: **Calendar Combo** shows the form and calendar together; **Application + Cal** puts the whole application before booking.
-    - **Hide title**, **Transition** and **Sticky Contact** (which pre-fills details for returning visitors).
-    - **Theme**: six light themes (Sage, Snow, Cream, Azure, Blush, Lavender) and six dark ones (Midnight, Royal, Obsidian, Forest, Ember, Rose).
+    - **Calendar type**: **Calendar Combo** shows the questions and the calendar side by side. **Application + Cal** asks every question first, then shows the calendar.
+    - **Hide title**, **Transition** and **Sticky Contact**. **Sticky Contact** fills in the details of people who have booked with you before.
+    - **Theme**: six light looks (Sage, Snow, Cream, Azure, Blush, Lavender) and six dark ones (Midnight, Royal, Obsidian, Forest, Ember, Rose).
     - **Colors**: Text, Accent, Button and Button Text.
-    - **Logo**: PNG, JPG or WebP, up to 2 MB.
+    - **Logo**: a PNG, JPG or WebP image file, up to 2 MB.
 
-    The centre column previews the real booking page as you edit, with **Desktop** and **Mobile** toggles.
+    The middle column shows your real booking page as you edit it. Use the **Desktop** and **Mobile** buttons to see how it looks on a computer and on a phone.
   </Step>
 </Steps>
 
@@ -180,37 +220,51 @@ Clicking **Continue** opens the builder. It has four tabs, **Details**, **Questi
 
 ## 4. Score Your Leads
 
-Lead scoring puts a number on how good each enquiry is, based on how they answered your form. You attach points to individual answers, and Cortana adds them up when someone books.
+Lead scoring puts a number on how good each enquiry is. The number comes from how people answer your questions.
 
-It is worth setting up if you want to spot your best enquiries at a glance, or send high-value leads to a senior rep automatically.
+You give points to individual answers. Cortana adds them up when someone books.
+
+Set this up if you want to spot your best enquiries at a glance. It also lets you send your biggest enquiries straight to a senior salesperson.
 
 <Steps>
   <Step title="Open a question's field settings">
-    On the **Questions** tab, click the question you want to score in the left-hand form column. It loads into the panel on the right.
+    Go to the **Questions** tab. In the form column on the left, click the question you want to score. It opens in the panel on the right.
 
-    Switch that panel from **Calendar** to **Field settings**, then scroll to the **Lead score** box at the bottom.
+    Switch that panel from **Calendar** to **Field settings**. Then scroll down to the **Lead score** box at the bottom.
 
-    Only four question types can be scored: **single select**, **multi-select**, **dropdown** and **number**. If the box shows explanatory text instead of inputs, that question type cannot carry points.
+    Only four kinds of question can be scored: **single select**, **multi-select**, **dropdown** and **number**.
+
+    If the box shows a sentence instead of number boxes, that kind of question cannot hold points. Pick a different question.
   </Step>
 
   <Step title="Give the answers points">
-    **For choice questions**, you get one row per option with a small number box. Type the points each answer is worth. Blank or `0` means that answer adds nothing, and negative numbers are allowed for answers that disqualify.
+    **For questions with set answers**, you get one row per answer, each with a small number box. Type in what each answer is worth.
 
-    For example, on a Budget question: `Under $1k` = `0`, `$1k to $5k` = `10`, `$5k+` = `25`.
+    Leave it blank or type `0` and that answer adds nothing. You can also type a minus number for answers you do not want.
 
-    **For number questions**, you build ranges instead: a minimum, a maximum, and the points. Leave the minimum or maximum blank for open-ended. The first matching range wins, so put the most specific one first and do not let ranges overlap.
+    Say you ask about budget. You could score `Under $1k` as `0`, `$1k to $5k` as `10`, and `$5k+` as `25`.
 
-    <Frame caption="Field settings for a Budget question, with points against each answer.">
+    **For questions that take a number**, you build ranges instead. Each range has a lowest number, a highest number, and the points. Leave the lowest or the highest blank to leave that end open.
+
+    The first range that fits wins. So put your narrowest range at the top, and never let two ranges overlap.
+
+    <Frame caption="Field settings for a Budget question, with points next to each answer.">
       <img src="/images/appointments/calendars/15-lead-scoring.png" alt="The calendar builder Questions tab with a Budget question selected. The right-hand Field settings panel shows the field type, a Required toggle, a Hide field till ready toggle, and a Lead score box with a number input beside each of the low, mid and high options." />
     </Frame>
   </Step>
 
   <Step title="Let it save">
-    Click outside the box and it saves on its own. There is no separate save button. If something goes wrong you'll see **Could not save the lead score**.
+    Click anywhere outside the box. Your points save on their own. There is no save button here.
+
+    If something goes wrong you'll see **Could not save the lead score**. Click back into the box and type the number again.
   </Step>
 
   <Step title="See the scores">
-    Once people start booking, the **Lead Score** column on the **Events** tab shows a coloured badge per booking. Hover it for a **Why** breakdown listing which answers earned which points. The contact record carries the latest score as **AI Lead Score**.
+    Once people start booking, go to the **Events** tab. The **Lead Score** column shows a coloured badge for each booking.
+
+    Hover over a badge for a **Why** breakdown. It lists which answers earned which points.
+
+    The person's record keeps their latest score as **AI Lead Score**.
 
     | Score | Tier |
     | --- | --- |
@@ -224,42 +278,54 @@ It is worth setting up if you want to spot your best enquiries at a glance, or s
 <Warning>
   **The badge and your routing rules use two different numbers.**
 
-  The badge shows a **0 to 100 score**, worked out as a percentage of the maximum points the form could award.
+  The badge shows a score out of 100. It is how many points someone scored, as a share of the most your form could ever give.
 
-  Routing rules compare against the **raw points total** instead. If you write a rule saying *Lead score is greater than 20*, that means 20 actual points, not 20 out of 100.
+  Your rules do not use that. They use the plain points total. Write a rule saying *Lead score is greater than 20* and it means 20 real points, not 20 out of 100.
 
-  Add up the points you handed out and use that scale when writing rules. Setting a threshold of `80` when your form only awards 35 points in total means the rule can never fire.
+  So add up the points you handed out, and write your rules on that scale. Set a rule at `80` when your whole form only gives 35 points and the rule can never happen.
 </Warning>
 
 <Note>
-  **Points live on the question's underlying field, not on this one calendar.** If the same field is used on another booking form, it carries the same points there too. Changing a weight changes scoring everywhere that field is used.
+  **Points belong to the question itself, not to this one calendar.**
 
-  Two other things worth knowing: the 0 to 100 score counts every scored question's best possible answer in its maximum, including questions the lead never reached, so adding a heavily weighted question lowers everyone's percentage. And changing weights never re-scores bookings you already have, since each score is a snapshot from the moment it was submitted.
+  Use the same question on another booking form and it carries the same points there. Change a number here and it changes everywhere that question is used.
+
+  Two more things are worth knowing.
+
+  The score out of 100 counts the best possible answer to every scored question, even questions the person never reached. So adding a big-points question pushes everyone's percentage down.
+
+  Changing points never rescores bookings you already have. Each score is a snapshot from the moment the person booked.
 </Note>
 
 ## 5. Route People With Ending Rules
 
-**Ending rules** decide what happens after someone answers your questions: book normally, get sent somewhere else, or be turned away politely.
+**Ending rules** decide what happens after someone answers your questions. They can book as normal, be sent somewhere else, or be turned away politely.
 
 <Steps>
   <Step title="Open Ending rules">
-    At the bottom of the **Questions** tab, click **Ending rules**. The dialog explains the model in one line: *Rules run top to bottom; the first match wins. If none match, the Default books the calendar.*
+    Go to the bottom of the **Questions** tab and click **Ending rules**.
 
-    <Frame caption="Ending rules. The Default at the bottom always exists and cannot be deleted.">
+    The dialog explains how it works in one line: *Rules run top to bottom; the first match wins. If none match, the Default books the calendar.*
+
+    <Frame caption="Ending rules. The Default sits at the bottom. It always exists and you cannot delete it.">
       <img src="/images/appointments/calendars/08-endings.png" alt="The Ending rules dialog explaining that rules run top to bottom with first match winning, showing an Add rule button and a pinned Default rule with options to redirect to a URL or show a message after booking." />
     </Frame>
   </Step>
 
   <Step title="Add a rule">
-    Click **Add rule**. Each rule reads as a sentence:
+    Click **Add rule**. Each rule reads like a sentence.
 
-    - **When**: pick **Answer** (and then which question) or **Lead score**, then a comparison such as **Equals**, and a value. **Add condition** adds more.
-    - **Then**: what to do. **Show the calendar** is the normal outcome; you can also send the booking to a specific person or pool, point them at a different event, or disqualify them.
-    - **Screen after booking**: optional. Leave it off to use the Default screen.
+    - **When**: pick **Answer**, then which question, or pick **Lead score**. Then pick how to compare it, such as **Equals**, and type the value. Click **Add condition** to add more tests to the same rule.
+    - **Then**: pick what happens. **Show the calendar** lets them book as normal. You can instead give the meeting to one chosen person, or to a group who take turns. You can also send them to a different meeting type, or turn them away.
+    - **Screen after booking**: this one is optional. Leave it switched off and they see the Default screen.
   </Step>
 
   <Step title="Set the Default screen">
-    The **Default** at the bottom books normally when nothing else matches. Choose what invitees see afterwards, either **Show a message** or **Redirect to a URL**. If you redirect, **URL parameters** lets you pass the event name, date, time, score and any answer through to your own thank-you page.
+    The **Default** sits at the bottom. It books people in as normal when no other rule fits.
+
+    Pick what people see once they have booked. Choose **Show a message** or **Redirect to a URL**.
+
+    Choose **Redirect to a URL** and you can also use **URL parameters**. This passes the meeting name, the date, the time, the score and any answer over to your own thank-you page.
 
     Click **Save**.
   </Step>
@@ -271,43 +337,59 @@ It is worth setting up if you want to spot your best enquiries at a glance, or s
 
 <Steps>
   <Step title="Set weekly hours">
-    Open the **Availability** tab. **Weekly Availability** is pre-filled **Monday to Friday, 09:00 to 17:00**, with Saturday and Sunday closed.
+    Open the **Availability** tab.
 
-    Use **Add time slot** to add a second window to a day, for example mornings and late afternoons only. Clear every slot on a day to close it.
+    **Weekly Availability** is already filled in as **Monday to Friday, 09:00 to 17:00**. Saturday and Sunday are closed.
 
-    <Frame caption="Weekly Availability, pre-filled Monday to Friday 09:00–17:00. Date overrides sit underneath.">
+    Click **Add time slot** to add a second window to a day. That is handy if you only take calls in the morning and late afternoon.
+
+    To close a day, delete every time slot on it.
+
+    <Frame caption="Weekly Availability, already filled in as Monday to Friday, 09:00 to 17:00. Date overrides sit underneath.">
       <img src="/images/appointments/calendars/09-availability.png" alt="The Availability tab showing weekly availability with Monday to Friday set to 09:00 to 17:00 and weekends empty, the business timezone displayed above, and a Date Overrides section with an Add date override button." />
     </Frame>
   </Step>
 
   <Step title="Add holidays or one-off hours">
-    **Date overrides** handle specific dates, such as a holiday or a day with unusual hours. An override **replaces** the weekly hours for that date rather than adding to them.
+    Use **Date overrides** for single dates, such as a holiday or a day with odd hours.
+
+    An override **replaces** your normal hours for that date. It does not add to them. So type in every hour you want to be bookable that day.
   </Step>
 </Steps>
 
 <Warning>
-  **These hours are in your business timezone, not each person's own.** The timezone in use is shown at the top of the Weekly Availability section. Set it under **Settings → Schedule**. There is no per-person timezone, and no holiday or time-off setting for individual hosts. Personal time off only blocks a slot if it is on a connected Google or Outlook calendar.
+  **These hours use your business clock, not each person's own local clock.**
+
+  You'll see which one is in use at the top of the Weekly Availability section. To change it, go to **Settings → Schedule**.
+
+  You cannot set a different local clock for each person. You cannot set holidays or time off for one person either.
+
+  Someone's personal time off only blocks a booking if it sits on a Google or Outlook calendar they have connected. Otherwise people can still book them during it.
 </Warning>
 
 ---
 
 ## 7. Check the Reminder Emails
 
-Open the **Notifications** tab. Every new calendar ships with two active notifications:
+Open the **Notifications** tab. Every new calendar comes with two messages already switched on.
 
 | Notification | Trigger | Timing | Sent by | Sent to |
 | --- | --- | --- | --- | --- |
 | **Booking Confirmed** | Booking Confirmed | Immediately | Email | Invitee |
 | **Upcoming Booking Reminder** | Reminder | 1 day before | Email | Invitee |
 
-Click either one to edit the subject and message, change the timing, or switch it off. Use the merge fields to drop in the invitee's name, the date, the time and the join link.
+Click either one to change its subject line and wording, change when it goes out, or switch it off.
 
-<Frame caption="The two notifications every new calendar starts with.">
+Use the merge fields to drop in real details. They fill in the person's name, the date, the time and the join link for you.
+
+<Frame caption="The two messages every new calendar starts with.">
   <img src="/images/appointments/calendars/10-notifications.png" alt="The Notifications tab of the calendar builder showing a Booking Confirmed email to the invitee and an Upcoming Booking Reminder email set to send one day before, each with editable subject and message fields." />
 </Frame>
 
 <Note>
-  SMS is available as well as email, but only once Twilio is connected to the business **and** has a sendable number. Until then the SMS option stays greyed out. Emails send from your own domain once you've set one up under **Settings → Sending Email**.
+  You can send text messages as well as emails. First you need to connect Twilio to your business, and it must have a number that can send. Until then the SMS option stays greyed out and you cannot click it.
+
+  Emails go out from your own web address once you set one up. Do that under **Settings → Sending Email**.
 </Note>
 
 ---
@@ -316,13 +398,13 @@ Click either one to edit the subject and message, change the timing, or switch i
 
 <Steps>
   <Step title="Open Share">
-    Click **Share** at the top of the builder. You get five ways to hand the calendar out:
+    Click **Share** at the top of the builder. You get five ways to hand out your calendar.
 
-    - **Booking link**: your main shareable URL. Works everywhere.
-    - **Short link**: easier to paste into DMs and social posts. **Customize** lets you set your own ending.
-    - **QR code**: downloadable, for print, decks and signage.
-    - **Embed on your site**: a snippet to paste into a custom HTML block. UTM and ad-click parameters forward automatically, so bookings stay attributed. For Notion, use the booking link instead.
-    - **One-time link**: expires after the first visit. Good for private invites.
+    - **Booking link**: your main link. This is the one to give people. It works everywhere.
+    - **Short link**: a shorter link, easier to paste into direct messages and social posts. Click **Customize** to choose how it ends.
+    - **QR code**: an image you can download. Use it on printouts, slides and signs.
+    - **Embed on your site**: a small piece of code. Paste it into a custom HTML block on your website. It keeps the tracking tags from your ad links, so you can still see which ad each booking came from. For Notion, use the booking link instead. The code will not work there.
+    - **One-time link**: stops working after someone opens it once. Good for private invites.
 
     <Frame caption="The Share dialog. The Booking link is the one to give people.">
       <img src="/images/appointments/calendars/11-share.png" alt="The Share dialog showing a short link with a Customize button, the main booking link, a QR code, an embed snippet for a website, and a Generate one-time link button." />
@@ -334,13 +416,15 @@ Click either one to edit the subject and message, change the timing, or switch i
 
 ## 9. Test It Yourself
 
-Always book your own calendar once before sending it to anyone.
+Always book your own calendar once before you send it to anyone.
 
 <Steps>
   <Step title="Open the booking page">
-    Click **View Site**, or open the **Booking link** in a private window so you see it as a stranger does.
+    Click **View Site**. Or open the **Booking link** in a private browser window, so you see the page as a stranger does.
 
-    The invitee answers your questions one page at a time. Their timezone is detected automatically and shown at the bottom, and they can change it. The phone field picks its country from their location.
+    People answer your questions one page at a time. The page works out their local time on its own and shows it at the bottom. They can change it if it is wrong.
+
+    The phone box picks their country for them.
 
     <Frame caption="The public booking page. The calendar stays greyed out until the questions are answered.">
       <img src="/images/appointments/calendars/12-public-page.png" alt="The public booking page showing the event title, description, the Name and Email questions, a greyed-out month calendar on the right, and the detected timezone at the bottom." />
@@ -348,38 +432,46 @@ Always book your own calendar once before sending it to anyone.
   </Step>
 
   <Step title="Answer the questions and continue">
-    Fill each field, then click the **round checkmark button** at the bottom of the form to move on. Pressing **Enter** does the same thing.
+    Fill in each box. Then click the **round checkmark button** at the bottom of the form to move on. Pressing **Enter** does the same thing.
 
-    The calendar on the right stays locked and greyed until the last page is answered. That is deliberate, so you capture the lead before showing your availability.
+    The calendar on the right stays locked and grey until you answer the last page.
+
+    That is on purpose. It means you get the person's details before you show them your free times.
   </Step>
 
   <Step title="Pick a day and a time">
-    Once the form is done the calendar unlocks and only the days you're actually available on become clickable. Choose a day, then a time.
+    Finish the form and the calendar unlocks. Only the days you are free on can be clicked.
 
-    Click **Select Timeslot** to confirm.
+    Pick a day, then pick a time.
+
+    Click **Select Timeslot** to confirm it.
   </Step>
 
   <Step title="Check the confirmation">
-    You should see **Booking Confirmed!**, the date and time, the duration, the timezone, and **Reschedule** and **Cancel** buttons, the same two links the invitee gets in their email.
+    You should now see **Booking Confirmed!**, plus the date, the time, how long the meeting is and the local clock in use.
 
-    <Frame caption="The confirmation an invitee sees, with self-service reschedule and cancel.">
+    You'll also see **Reschedule** and **Cancel** buttons. These are the same two links the person gets in their email.
+
+    <Frame caption="The confirmation people see, with buttons to move or cancel the booking themselves.">
       <img src="/images/appointments/calendars/13-confirmed.png" alt="The booking confirmation screen reading Booking Confirmed, stating a confirmation email is on its way, and showing the booked date, time, duration, timezone and Reschedule and Cancel buttons." />
     </Frame>
   </Step>
 
   <Step title="Confirm it reached your dashboard">
-    Go back to **Appointments**. The booking appears on the **Business Cal** tab on its day, and as a row on **Events → Appointment Booked** with the invitee's name, email and date.
+    Go back to **Appointments**. Your booking sits on the **Business Cal** tab, on the day you picked.
 
-    Your calendar card on the **Calendars** tab now shows **1 booking**.
+    It also shows as a row under **Events → Appointment Booked**, with the person's name, email and date.
 
-    <Frame caption="The test booking on Business Cal, confirming the whole chain works.">
+    Open the **Calendars** tab. Your calendar card now shows **1 booking**.
+
+    <Frame caption="The test booking on Business Cal. Seeing it here proves the whole chain works.">
       <img src="/images/appointments/calendars/14-verify.png" alt="The Business Cal month view with the newly created test appointment visible on its day, showing the booking time and the invitee's name." />
     </Frame>
   </Step>
 </Steps>
 
 <Check>
-  If the booking shows up here, your calendar is working end to end: the link resolves, the form captures, availability calculates, the booking writes, and the confirmation sends.
+  Can you see the booking here? Then your calendar works from start to finish. The link opens, the form collects the details, your free times work out correctly, the booking is stored, and the confirmation email goes out.
 </Check>
 
 ---
@@ -390,35 +482,35 @@ Always book your own calendar once before sending it to anyone.
 
 | Setting | What it does | Default | Recommendation |
 | --- | --- | --- | --- |
-| **Duration** | How long the meeting is. | 30 minutes | Match the real length. It's what gets blocked on your calendar. |
-| **Slot Interval** | How often a start time is offered. | 30 minutes | Keep equal to Duration for back-to-back slots. Set it larger to space meetings out. Must not be smaller than Duration. |
-| **Buffer Before** | Protected time before a booking. | 0 minutes | 5–10 minutes if you need to prepare. |
-| **Buffer After** | Protected time after a booking. | 0 minutes | 5–15 minutes for notes and overruns. |
-| **Min Notice** | How soon someone can book. | 1 hour | Raise to 12–24 hours if same-day bookings catch you out. |
-| **Rolling Window** | How far ahead people can book. | 1 month | 1 month suits most sales calls. |
-| **Max Bookings / Day** | Cap on bookings per day. | Unlimited | Set a cap to protect deep-work days. |
-| **Max Bookings / Slot** | How many people can take the same time. | 1 | Leave at 1 unless you're running group sessions. |
-| **Allow Reschedule** | Lets invitees move their own booking. | On | Leave on. It cuts no-shows. |
-| **Allow Cancellation** | Lets invitees cancel their own booking. | On | Leave on. A cancelled slot is better than a no-show. |
+| **Duration** | Sets how long the meeting lasts. | 30 minutes | Match how long your calls really take. This is the time blocked out on your calendar. |
+| **Slot Interval** | Sets how often a start time is offered. | 30 minutes | Keep it the same as Duration for back-to-back calls. Make it bigger to leave gaps. Never make it smaller than Duration. |
+| **Buffer Before** | Keeps time free before each booking. | 0 minutes | Use 5 to 10 minutes if you like to prepare first. |
+| **Buffer After** | Keeps time free after each booking. | 0 minutes | Use 5 to 15 minutes for writing notes and for calls that run over. |
+| **Min Notice** | Sets how soon someone can book you. | 1 hour | Raise it to 12 or 24 hours if same-day bookings catch you out. |
+| **Rolling Window** | Sets how far ahead people can book. | 1 month | 1 month suits most sales calls. Leave it alone unless you book up further out. |
+| **Max Bookings / Day** | Caps how many bookings you take in one day. | Unlimited, so people can book you all day | Set a cap to keep some days free for other work. |
+| **Max Bookings / Slot** | Sets how many people can take the same time. | 1 | Leave it at 1. Only raise it if you run group sessions. |
+| **Allow Reschedule** | Lets people move their own booking without asking you. | On | Leave it on. It means fewer people simply not turning up. |
+| **Allow Cancellation** | Lets people cancel their own booking without asking you. | On | Leave it on. A cancelled slot you can resell beats an empty one. |
 
 ### Distribution
 
 | Setting | What it does | Default |
 | --- | --- | --- |
-| **Round Robin (Prioritize Availability)** | Whoever is free gets the meeting, least-booked first. Shows the most bookable slots. | Selected |
-| **Round Robin (True & Equal)** | Strict turn-taking. A host too far ahead is hidden until the others catch up. | Not selected by default |
-| **Team Members** | Who bookings are assigned to. | Empty. Every booking goes to the business owner |
+| **Round Robin (Prioritize Availability)** | Gives the meeting to whoever is free. If several are free, the one with the fewest bookings gets it. Shows people the most times to choose from. | On. Every new calendar starts here |
+| **Round Robin (True & Equal)** | Makes your team take strict turns. Anyone too far ahead is hidden until the others catch up. | Off. Switch it on only if an exactly equal split matters |
+| **Team Members** | Sets who your bookings go to. | Empty. Every booking goes to the business owner |
 
 ### Booking page
 
 | Setting | What it does | Default |
 | --- | --- | --- |
-| **Calendar type** | Form and calendar together, or application first. | Calendar Combo |
-| **Theme** | Six light and six dark presets. | Follows your app theme at creation |
-| **Colors** | Text, Accent, Button, Button Text. | Accent and Button `#3B82F6` |
-| **Logo** | PNG, JPG or WebP. | None. Maximum 2 MB |
-| **Sticky Contact** | Pre-fills details for returning visitors. | On |
-| **Hide title** | Hides the event name on the booking page. | Off |
+| **Calendar type** | Chooses whether people see the questions and calendar together, or answer everything first. | Calendar Combo, so both show together |
+| **Theme** | Sets the overall look. Six light and six dark ones. | Whichever look you use in Cortana when you make the calendar |
+| **Colors** | Sets the Text, Accent, Button and Button Text colours. | Blue, `#3B82F6`, for Accent and Button |
+| **Logo** | Puts your logo on the page. Takes PNG, JPG or WebP files. | No logo. Files up to 2 MB |
+| **Sticky Contact** | Fills in the details of people who booked with you before. | On, so returning people type less |
+| **Hide title** | Hides the meeting name on the booking page. | Off, so the name is shown |
 
 ---
 
@@ -426,37 +518,53 @@ Always book your own calendar once before sending it to anyone.
 
 <AccordionGroup>
   <Accordion title="The booking page shows {Key Outcome 1} to real visitors">
-    That's the placeholder description every new calendar starts with. Open **Details → Description**, delete it, and write your own. It is live text, not a preview.
+    That is the sample wording every new calendar starts with. It is live text, not a preview.
+
+    Go to **Details → Description**, delete it, and write your own.
   </Accordion>
 
   <Accordion title="No times are showing, or every day is greyed out">
-    Work through these in order:
+    Work through these five in order.
 
-    1. **The form isn't finished.** The calendar deliberately stays locked until the last question is answered. Complete the form and click the round checkmark button.
-    2. **The day has no hours.** Only weekdays with hours in **Availability** become clickable. Weekends are closed by default.
-    3. **A date override closed it.** Check **Availability → Date overrides**; an override replaces that day's hours entirely.
-    4. **Min Notice is filtering the day out.** With a large Min Notice, the next day or two disappear.
-    5. **Times are taken.** A slot vanishes once it's booked, or when it clashes with a connected Google or Outlook calendar.
+    1. **The form is not finished.** The calendar stays locked on purpose until the last question is answered. Fill it in, then click the round checkmark button.
+    2. **The day has no hours.** Only days with hours in **Availability** can be clicked. Weekends are closed to start with.
+    3. **A date override closed it.** Check **Availability → Date overrides**. An override wipes out that day's normal hours completely.
+    4. **Min Notice is hiding the day.** Set Min Notice high and the next day or two disappear.
+    5. **The times are taken.** A time vanishes once someone books it. It also vanishes when it clashes with something on a connected Google or Outlook calendar.
   </Accordion>
 
   <Accordion title="Invitees get stuck on a blank page in the middle of the form">
-    Creating a form also creates an empty **Page 2**. Open **Questions**, and either add a question to Page 2 or remove the page.
+    Creating a form also creates an empty **Page 2**. That blank screen is what they are stuck on.
+
+    Open **Questions**. Either add a question to Page 2, or delete the page.
   </Accordion>
 
-  <Accordion title="The booking link 404s">
-    Check the calendar's toggle on the **Calendars** tab. A calendar that is switched off does not serve its page. Also confirm the **Event URL** matches the link you shared; editing it by hand changes the address immediately.
+  <Accordion title="The booking link shows an error page instead of the calendar">
+    Go to the **Calendars** tab and check the calendar's on and off switch. A calendar that is switched off does not show its page.
+
+    Then check the **Event URL** matches the link you shared. Edit it by hand and the address changes straight away, which breaks any link you already sent out.
   </Accordion>
 
   <Accordion title="Confirmation emails aren't arriving">
-    Check **Notifications** and confirm the **Booking Confirmed** notification is switched on. Then check **Settings → Sending Email**: until a domain is verified, emails fall back to the default sender and are more likely to land in spam. Ask the invitee to check their spam folder.
+    Open **Notifications** and check the **Booking Confirmed** message is switched on.
+
+    Then go to **Settings → Sending Email**. Until your web address is verified, emails go out from a shared sender. Those land in spam more often.
+
+    Also ask the person to look in their spam folder.
   </Accordion>
 
   <Accordion title="Bookings go to the wrong person">
-    With no team members added, every booking goes to the business owner. Add the right people under **Details → Distribution & Team**, and check your **Ending rules**. A rule that routes to a specific host overrides the round-robin setting.
+    Add nobody to the team and every booking goes to the business owner.
+
+    Add the right people under **Details → Distribution & Team**.
+
+    Then check your **Ending rules**. A rule that gives the meeting to one chosen person beats the taking-turns setting.
   </Accordion>
 
   <Accordion title="I edited a question and it changed on another calendar">
-    Forms can be shared. If you used **Select a form**, both calendars point at the same form. Use **Change → Create a form** to give this calendar its own copy.
+    Two calendars can use one form. If you used **Select a form**, both calendars point at the same one.
+
+    Click **Change → Create a form** to give this calendar its own separate copy.
   </Accordion>
 </AccordionGroup>
 
@@ -466,35 +574,51 @@ Always book your own calendar once before sending it to anyone.
 
 <AccordionGroup>
   <Accordion title="Do I need to connect Google Calendar to take bookings?">
-    No. A calendar works on its own. Connecting Google or Outlook adds two things: your existing busy time blocks out slots automatically, and each booking creates a real calendar event with a video link.
+    No. Your calendar works on its own.
+
+    Connecting Google or Outlook adds two things. Anything already in your diary blocks out that time here. And each booking creates a real diary entry with a video link.
   </Accordion>
 
   <Accordion title="How do I stop people booking me at the last minute?">
-    Raise **Min Notice** under **Details → Scheduling Rules**. It's 1 hour by default; 12 or 24 hours is a common change.
+    Raise **Min Notice** under **Details → Scheduling Rules**.
+
+    It starts at 1 hour. Most people change it to 12 or 24 hours.
   </Accordion>
 
   <Accordion title="Can I use my own domain instead of app.usecortana.ai?">
-    Yes. Domains you've connected appear under **Event URL → Connected domains**. They stay marked *not verified* until their DNS records are in place.
+    Yes. Any web address you have connected shows under **Event URL → Connected domains**.
+
+    They stay marked *not verified* until their DNS records are set up.
   </Accordion>
 
   <Accordion title="Can I ask qualifying questions and turn people away?">
-    Yes. That is what **Ending rules** are for. Add a rule such as *When Budget Equals Under $1k, Then disqualify*, and choose whether they see a message or get redirected.
+    Yes. That is exactly what **Ending rules** do.
+
+    Add a rule such as *When Budget Equals Under $1k, Then disqualify*. Then pick whether those people see a message or get sent to another page.
   </Accordion>
 
   <Accordion title="Where do the answers go?">
-    Onto the contact record. Every question saves to the contact, so answers are reusable across forms and can be scored. You'll also see them against the booking in **Events → Form Submitted**.
+    They save onto the person's record. Every question saves there, so you can use the answers on other forms and give them points.
+
+    You'll also see them next to the booking under **Events → Form Submitted**.
   </Accordion>
 
   <Accordion title="Can two calendars share the same set of questions?">
-    Yes. Use **Select a form** on the second calendar. Remember they then stay in sync, so editing one edits both.
+    Yes. Click **Select a form** on the second calendar.
+
+    Just remember the two stay tied together after that. Edit a question on one and it changes on both.
   </Accordion>
 
   <Accordion title="Can invitees reschedule or cancel themselves?">
-    Yes, while **Allow Reschedule** and **Allow Cancellation** are on. Both links appear on the confirmation screen and in their confirmation email.
+    Yes, as long as **Allow Reschedule** and **Allow Cancellation** are switched on.
+
+    Both links show on the confirmation screen and in their confirmation email.
   </Accordion>
 
   <Accordion title="Do bookings from my ads stay attributed?">
-    Yes. The booking page tracks its own visits, and the embed snippet forwards UTM and ad-click parameters automatically, so a booking is recorded as an attributed conversion rather than just a calendar entry.
+    Yes. The booking page counts its own visits. The website code you paste in also carries over the tracking tags from your ad links.
+
+    So each booking is recorded as a sale you can trace back to an ad, not just a diary entry.
   </Accordion>
 </AccordionGroup>
 
@@ -517,4 +641,4 @@ Always book your own calendar once before sending it to anyone.
   </Card>
 </CardGroup>
 
-If any of this doesn't match what you're seeing, reach out to the support team in the bottom right.
+If any of this does not match what you see on screen, message the support team using the button in the bottom right.

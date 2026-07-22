@@ -1,6 +1,6 @@
 ---
 title: "3) Calendar Sync"
-description: "Connect GoHighLevel, Calendly or iClosed so their bookings appear in Cortana, and take bookings straight into them from a Cortana page."
+description: "Connect GoHighLevel, Calendly or iClosed so their bookings show up in Cortana, and book straight into them from a Cortana page."
 icon: "rotate"
 ---
 
@@ -9,94 +9,96 @@ icon: "rotate"
 
 ## Overview
 
-If your team already books calls in GoHighLevel, Calendly or iClosed, **Calendar Sync** joins those tools to Cortana so you stop having two separate pictures of your calendar.
+Your team may already book calls in GoHighLevel, Calendly or iClosed. **Calendar Sync** joins those tools to Cortana. You then stop having two separate pictures of your calendar.
 
-It does two separate jobs, and it helps to keep them apart in your head.
+It does two jobs. Keep them apart in your head.
 
 <CardGroup cols={2}>
   <Card title="Bookings come in" icon="arrow-down-to-line">
-    Cortana copies every booking made in the other tool into your calendar and reports, automatically. The original booking still lives in that tool, and that tool is still in charge of it.
+    Cortana copies every booking made in the other tool into your calendar and your reports. This happens on its own. The booking still lives in the other tool, and that tool is still in charge of it.
   </Card>
   <Card title="Bookings go out" icon="arrow-up-from-line">
-    You can point a Cortana booking page at one of those tools. The lead books on your Cortana page, but the meeting is created over in GoHighLevel, Calendly or iClosed.
+    You can point a Cortana booking page at one of those tools. The lead books on your Cortana page. The meeting itself gets created over in GoHighLevel, Calendly or iClosed.
   </Card>
 </CardGroup>
 
-You'll find this page inside the Appointments area, at **Appointments → Settings → Calendar Sync**. That is a different Settings to the one in the main left sidebar.
+To find this page, go to **Appointments → Settings → Calendar Sync**. This is a different Settings to the one in the main left sidebar.
 
 <Note>
-  **Two words used throughout this page.**
+  **Two words you will see on this page.**
 
-  **GHL** is short for **GoHighLevel**. The product uses both.
+  **GHL** is short for **GoHighLevel**. The product uses both names.
 
-  A **mirror** is a read-only copy. When Cortana mirrors a calendar, it makes its own copy of that calendar and keeps copying the bookings across. You cannot edit a mirrored calendar's questions, hours or reminders in Cortana, because the other tool owns them.
+  A **mirror** is a copy you can look at but not change. When Cortana mirrors a calendar, it makes its own copy and keeps copying the bookings across. You cannot change a mirrored calendar's questions, hours or reminders in Cortana. The other tool owns those.
 </Note>
 
 <Note>
-  **Google, Outlook and Zoom are not on this page.** They connect per person, under **Settings → Users → My Profile**, because they are that individual's own calendar and video account. GoHighLevel, Calendly and iClosed connect once for the whole business, which is why they live here.
+  **Google, Outlook and Zoom are not on this page.** Each person connects those alone, under **Settings → Users → My Profile**. They are that one person's own calendar and video account. GoHighLevel, Calendly and iClosed get connected once for the whole business, so they live here instead.
 </Note>
 
 ---
 
 ## 1. Connect a Tool
 
-Connecting happens on the business **Integrations** page, not here. Go to **Settings → Integrations**, find GoHighLevel, Calendly or iClosed, click **Connect**, and sign in to that tool when it asks. Once it is connected, come back to **Appointments → Settings → Calendar Sync** to manage it.
+You connect the tool on the business **Integrations** page, not here. Go to **Settings → Integrations**. Find GoHighLevel, Calendly or iClosed. Click **Connect**, then sign in to that tool when it asks you.
 
-Each tool then appears here as its own card.
+Now come back to **Appointments → Settings → Calendar Sync** to manage it.
+
+Each tool then shows up here as its own card.
 
 <Frame caption="The Calendar Sync tab. Each card shows how many of your team have been matched to that tool.">
   <img src="/images/appointments/calendar-sync/01-calendar-sync.png" alt="The Calendar Sync sub-tab showing cards for GHL Calendar Mirror, Calendly Calendar Mirror and iClosed Calendar Mirror, each with a description and either a Manage reps button or a Connect in Integrations link." />
 </Frame>
 
-A card for a tool you have not connected yet shows **Connect in Integrations**. A connected card shows how many of your team have been matched, and a **Manage reps** button.
+A tool you have not connected yet shows **Connect in Integrations**. Click that to go and connect it. A connected card shows how many of your team have been matched, plus a **Manage reps** button.
 
 ---
 
 ## 2. What Happens After You Connect
 
-This part is automatic, but it is **not instant**, and knowing the timing saves a support ticket.
+This part runs on its own. It is **not instant**. Knowing the timing saves you a support ticket.
 
 <Steps>
   <Step title="Cortana copies the tool's calendars, within about two hours">
-    A background job runs every two hours. On its next run after you connect, it creates one Cortana calendar for every calendar or event type that exists in the other tool. If you have seven calendars in GoHighLevel, you get seven mirrors.
+    Cortana checks the other tool every two hours. On the next check after you connect, it creates one Cortana calendar for every calendar in the other tool. In Calendly these are called event types. Seven calendars in GoHighLevel gives you seven copies here.
 
-    Nothing appears at the moment you connect. If you look straight away and see nothing, that is expected.
+    Nothing shows up the moment you connect. If you look straight away and see nothing, that is normal.
   </Step>
 
   <Step title="Or press Pull, if you don't want to wait">
-    Open **Manage reps → Calendars** and click **Pull**. It does the same thing immediately and tells you how many it found, for example *Pulled 7 calendar(s)*.
+    Open **Manage reps → Calendars** and click **Pull**. This does the same job right now. It then tells you how many it found, for example *Pulled 7 calendar(s)*.
   </Step>
 
   <Step title="From then on, bookings arrive on their own">
-    Once the mirrors exist, appointments flow in continuously with no action from you.
+    Once the copies exist, new bookings come across with no action from you.
 
-    | Tool | How fast a new booking appears |
+    | Tool | How fast a new booking shows up in Cortana |
     | --- | --- |
-    | **GoHighLevel** | Immediately, with a safety-net check every 15 minutes |
-    | **Calendly** | Immediately, with a safety-net check every 5 minutes |
-    | **iClosed** | Checked every 5 minutes |
+    | **GoHighLevel** | Straight away. Cortana also double-checks every 15 minutes, in case one gets missed. |
+    | **Calendly** | Straight away. Cortana also double-checks every 5 minutes, in case one gets missed. |
+    | **iClosed** | Cortana checks every 5 minutes, so a booking can take up to 5 minutes. |
   </Step>
 </Steps>
 
 <Warning>
-  **Existing bookings are not imported.** The sync only looks about one day into the past, so calls booked before you connected will not appear. It does look up to 90 days ahead, so meetings already in the diary for the coming weeks do come across.
+  **Bookings made before you connected do not come across.** Cortana only looks about one day into the past. Calls booked earlier than that stay in the other tool only. It does look 90 days ahead, so meetings already in the diary for the coming weeks do come across.
 </Warning>
 
 <Note>
-  **Mirrored calendars are read-only in Cortana.** They arrive with rescheduling and cancelling switched off, so invitees are sent to the other tool to change their booking. If you edit a mirror's booking rules in Cortana they will be overwritten on the next two-hourly refresh. Change questions, hours and reminders in the tool the calendar came from.
+  **You cannot change a mirrored calendar in Cortana.** These copies arrive with rescheduling and cancelling switched off. Leads are sent to the other tool to change their booking. Anything you change here gets wiped on the next two-hourly check. Change the questions, hours and reminders in the tool the calendar came from.
 
-  Renaming a calendar in the other tool does **not** rename its Cortana mirror. The mirror keeps the name it was created with.
+  Renaming a calendar in the other tool does **not** rename the Cortana copy. The copy keeps the name it started with.
 </Note>
 
 ---
 
 ## 3. Match Your Team to the Other Tool
 
-This is the step people skip, and it decides whether bookings land on the right person.
+People skip this step. It decides whether bookings land on the right person, so do not skip it.
 
 <Steps>
-  <Step title="Open rep matching">
-    Click **Manage reps** on a connected card. The dialog has two tabs, **Reps** and **Calendars**.
+  <Step title="Open the matching screen">
+    Click **Manage reps** on a connected card. Reps are the people on your team who take the calls. The window has two tabs, **Reps** and **Calendars**.
 
     <Frame caption="Rep matching. Anyone not matched falls back to the default owner instead of having no owner at all.">
       <img src="/images/appointments/calendar-sync/02-manage-reps.png" alt="The GHL Calendar Mirror dialog on the Reps tab, showing a Default GoHighLevel owner selector, a list of external users with their email addresses and the Cortana team member each is matched to, and a Sync button." />
@@ -104,21 +106,21 @@ This is the step people skip, and it decides whether bookings land on the right 
   </Step>
 
   <Step title="Set a default owner first">
-    **Default owner** catches anything unmatched, so a booking is never left without an owner. It can be any user in the other tool, including a general "Sales Team" user rather than a named person.
+    **Default owner** catches anyone you have not matched. A booking then always has someone's name on it. Pick any user from the other tool. A general account such as "Sales Team" works fine here.
 
-    Set this before anything else. It is your safety net.
+    Set this before you do anything else. It is your safety net.
   </Step>
 
   <Step title="Match each person">
-    Under **Team members** you'll see a count such as *2 of 3 mapped to a Cortana rep*, then every user from the other tool with their email address.
+    Under **Team members** you will see a count such as *2 of 3 mapped to a Cortana rep*. Below that you get every user from the other tool, with their email address.
 
-    Cortana pairs people up automatically when the email address is identical in both systems. Where it isn't, nothing breaks, you just pick the right person from the dropdown yourself. The email addresses do not need to match.
+    Cortana pairs people up for you when the email address is exactly the same in both tools. When it is not the same, nothing breaks. Just pick the right person from the dropdown yourself. The two email addresses do not have to match.
 
-    Use **Sync** to refresh the list after adding someone in the other tool.
+    Added someone new in the other tool? Click **Sync** to bring the list up to date.
   </Step>
 
   <Step title="Check the Calendars tab">
-    Switch to **Calendars** to confirm every booking calendar you care about is listed. Each one shown is being copied into Cortana. There is nothing to switch on here, the list is just confirmation.
+    Click **Calendars** and read the list. Check that every booking calendar you care about is on it. Every calendar shown is being copied into Cortana. There is nothing to switch on here. The list is only there to reassure you.
   </Step>
 </Steps>
 
@@ -126,69 +128,69 @@ This is the step people skip, and it decides whether bookings land on the right 
 
 ## 4. Take Bookings Straight Into Another Tool
 
-As well as pulling bookings in, you can point a Cortana booking page **at** one of these tools. Cortana becomes the front door, and the meeting is created in the tool your team already works from.
+You can also point a Cortana booking page **at** one of these tools. Cortana becomes the front door. The meeting itself gets created in the tool your team already works from.
 
-This is worth doing when your reps live in GoHighLevel all day but you want a branded booking page with your own questions, lead scoring and ad tracking in front of it.
+This is worth doing when your team lives in GoHighLevel all day. You still get a branded booking page with your own questions, lead scoring and ad tracking in front of it.
 
 <Steps>
   <Step title="Open the calendar and go to Details">
-    In **Appointments → Calendars**, open the booking calendar you want, and stay on the **Details** tab.
+    Go to **Appointments → Calendars**. Open the booking calendar you want. Stay on the **Details** tab.
   </Step>
 
   <Step title="Change the Calendar setting">
-    Under **Calendar**, change **Cortana Calendar** to **Go High Level**, **Calendly** or **iClosed**. A tool you have not connected is greyed out with a note telling you to connect it in Integrations first.
+    Under **Calendar**, change **Cortana Calendar** to **Go High Level**, **Calendly** or **iClosed**. A tool you have not connected is greyed out. A note next to it tells you to connect it in Integrations first.
   </Step>
 
   <Step title="Pick the exact calendar to book into">
-    A second dropdown appears listing the real calendars pulled live from that account. Choose the one the meeting should be created in.
+    A second dropdown shows up. It lists the real calendars in that account, fetched fresh. Choose the one the meeting should be created in.
 
-    You must pick one. Saving without it is blocked, with a message such as *Select a GoHighLevel calendar for this booking calendar.*
+    You have to pick one. Cortana blocks you from saving without it. You will see a message such as *Select a GoHighLevel calendar for this booking calendar.*
   </Step>
 </Steps>
 
 ### What changes once a page is pointed at another tool
 
-| | Who handles it |
+| What | Who looks after it now |
 | --- | --- |
-| Available times shown to the lead | The other tool. Cortana asks it live for open slots. |
-| Working hours, buffers, round robin | The other tool. Cortana hides its own **Availability** tab and shows a "Managed by" panel instead. |
-| Who the meeting is assigned to | The other tool. |
-| Your questions, lead scoring and routing | Cortana, on the booking page as normal. |
-| Confirmation email, calendar invite, reminders | **The other tool.** Cortana does not send them for these bookings. |
-| Ad tracking and reporting | Cortana, as with any of its own booking pages. |
+| The times the lead can pick from | The other tool. Cortana asks it for free times as the lead is looking. |
+| Working hours, gaps between calls, and taking turns | The other tool. Cortana hides its own **Availability** tab and shows a "Managed by" panel instead. |
+| Who the meeting is given to | The other tool. Cortana has no say in it. |
+| Your questions, lead scoring and rules | Cortana. These stay on the booking page as normal. |
+| Confirmation email, calendar invite, reminders | **The other tool.** Cortana does not send any of these for these bookings. |
+| Ad tracking and reporting | Cortana, the same as on any of its own booking pages. |
 
 <Warning>
-  **If the other tool is unreachable, the booking page shows no available times at all.** It does not quietly fall back to Cortana's own hours, because offering a time the other tool has not agreed to would double-book your rep. An empty calendar on a connected page usually means the other tool is down or the connection has expired.
+  **If Cortana cannot reach the other tool, the booking page shows no times at all.** It will not quietly use Cortana's own hours instead. A time the other tool has not agreed to could double-book the person taking the call. So an empty booking page usually means the other tool is down, or your connection has stopped working.
 </Warning>
 
 <Note>
-  **Some Calendly accounts finish on Calendly's own page.** On plans where Calendly's API does not allow Cortana to create the booking directly, the lead is handed off to Calendly to pick their time. They still answer your Cortana questions first.
+  **Some Calendly accounts finish on Calendly's own page.** On those plans, Calendly does not let Cortana create the booking for you. The lead is passed to Calendly to pick their time there. They still answer your Cortana questions first.
 </Note>
 
 ---
 
 ## 5. What Each Tool Can and Cannot Do
 
-The three tools are not equivalent. This table is worth reading before you decide which to route bookings through.
+The three tools do not all do the same things. Read this table before you decide which one to send bookings through.
 
-| | GoHighLevel | Calendly | iClosed | Google / Outlook |
+| Question | GoHighLevel | Calendly | iClosed | Google / Outlook |
 | --- | --- | --- | --- | --- |
-| **Who connects it** | Once, for the whole business | Once, for the whole business | Once, for the whole business | Each person connects their own |
-| **Bookings made there appear in Cortana** | Yes | Yes | Yes | No. Google and Outlook are your personal calendar, not a booking tool, so there is nothing to pull in. |
-| **A Cortana page can book into it** | Yes | Yes | Yes | Cortana adds the meeting to your calendar so it shows in your day, but leads cannot pick a time from it directly. |
-| **Matching your team to their users** | Needed | Needed | Needed | Not needed. Each person connects their own account, so Cortana already knows whose calendar it is. |
-| **Send a booking to one named rep** | Yes | No | No | Not applicable |
-| **Cancelling in Cortana also cancels there** | Yes | No | No | Yes |
-| **Hides times you are already busy** | No | No | No | Yes. Cortana reads your existing meetings and will not offer those times to leads. |
+| **Who connects it** | Once, for the whole business | Once, for the whole business | Once, for the whole business | Each person connects their own account |
+| **Bookings made there show up in Cortana** | Yes, all of them | Yes, all of them | Yes, all of them | No. These are personal calendars, not booking tools, so there is nothing to pull in. |
+| **A Cortana page can book into it** | Yes, pick it in **Details** | Yes, pick it in **Details** | Yes, pick it in **Details** | No. Cortana adds the meeting to your calendar so you see it, but leads cannot pick a time from it. |
+| **You must match your team to their users** | Yes, in **Manage reps** | Yes, in **Manage reps** | Yes, in **Manage reps** | No. Each person connects their own account, so Cortana already knows whose calendar it is. |
+| **Cortana can send a booking to one named person** | Yes, set it in **Ending rules** | No. Calendly picks the person itself. | No. iClosed picks the person itself. | No. Leads never book on these calendars directly. |
+| **Cancelling in Cortana also cancels it there** | Yes, straight away | No. You have to cancel in Calendly too. | No. You have to cancel in iClosed too. | Yes, the meeting is removed from your calendar. |
+| **Hides times you are already busy** | No. It does not check your personal calendar. | No. It does not check your personal calendar. | No. It does not check your personal calendar. | Yes. Cortana reads your meetings and hides those times from leads. |
 
 <Warning>
   **With Calendly and iClosed you cannot choose who a booking goes to.** Those tools decide that themselves, using their own settings.
 
-  This matters if you use routing rules. In **Ending rules**, the options for sending a booking to a specific rep, or to a group of reps who take turns, appear greyed out on any Calendly or iClosed calendar, and hovering over them explains why. If you need Cortana to send a lead to one named person, use GoHighLevel or a Cortana booking calendar instead.
+  This matters if you use rules to send leads to certain people. Open **Ending rules** on a Calendly or iClosed calendar. Two options are greyed out there. One sends the booking to a chosen person. The other sends it to a group of people who take turns. Hover over either one and Cortana tells you why it is greyed out. Need to send a lead to one named person? Use GoHighLevel or a Cortana booking calendar instead.
 </Warning>
 
 <Warning>
-  **Cancellations and reschedules only reach GoHighLevel.** If a lead cancels a Calendly or iClosed booking using a link Cortana sent them, Cortana marks it cancelled but Calendly or iClosed still show it as live, so the lead may still get a reminder from them. Cancel it in the owning tool as well. This applies whether you cancel it or the lead does.
+  **Cancellations and changes of time only reach GoHighLevel.** Say a lead cancels a Calendly or iClosed booking using a link Cortana sent them. Cortana marks it cancelled, but Calendly or iClosed still think the call is going ahead. The lead may still get a reminder from them, and the time stays blocked. So cancel it in that tool as well. Do this whether you cancelled it or the lead did.
 </Warning>
 
 ---
@@ -197,35 +199,35 @@ The three tools are not equivalent. This table is worth reading before you decid
 
 <AccordionGroup>
   <Accordion title="I connected the tool but no calendars appeared">
-    Expected for up to two hours. The job that copies calendars across runs every two hours, and connecting does not trigger it. To skip the wait, open **Manage reps → Calendars** and click **Pull**.
+    This is normal for up to two hours. Cortana copies calendars across every two hours, and connecting does not start that off. Do not want to wait? Open **Manage reps → Calendars** and click **Pull**.
   </Accordion>
 
   <Accordion title="Bookings are all landing on one person">
-    That person is set as your **default owner** and the real team members have not been matched. Open **Manage reps** and pick the right Cortana person for each user in the list.
+    That person is set as your **Default owner**, and you have not matched the rest of the team yet. Open **Manage reps**. Pick the right Cortana person for each user in the list.
   </Accordion>
 
   <Accordion title="Someone shows as Not mapped even though they exist in both tools">
-    Automatic matching only works when the email address is identical in both systems. Pick them from the dropdown manually. The addresses do not need to match.
+    Cortana only pairs people up on its own when the email address is exactly the same in both tools. Pick that person from the dropdown yourself. The two addresses do not have to match.
   </Accordion>
 
   <Accordion title="A calendar I just created in the other tool isn't here">
-    New calendars are picked up on the two-hourly refresh, not immediately. Click **Pull** to fetch it now.
+    Cortana picks up new calendars on its two-hourly check, not right away. Click **Pull** to fetch it now.
   </Accordion>
 
   <Accordion title="Old bookings never came across">
-    They will not. The sync reaches about one day into the past, so anything booked before you connected stays only in the other tool. Meetings already scheduled for the next 90 days do come across.
+    They will not come across. Cortana only reaches about one day into the past. Anything booked before you connected stays in the other tool only. Meetings already booked for the next 90 days do come across.
   </Accordion>
 
   <Accordion title="I renamed a calendar in the other tool and Cortana still shows the old name">
-    Expected. A mirror keeps the name it was created with. Rename it in Cortana as well if the difference is confusing.
+    This is normal. A copy keeps the name it started with. Rename it in Cortana too if the difference confuses your team.
   </Accordion>
 
   <Accordion title="A connected booking page shows no available times">
-    The connection has probably expired. Go to **Settings → Integrations**: a working connection reads **Connected**, a broken one offers **Reconnect**. Sign in again. Cortana deliberately shows no times rather than guessing, so this fails visibly rather than double-booking someone.
+    Your connection has most likely stopped working. Go to **Settings → Integrations**. A working connection reads **Connected**. A broken one offers **Reconnect**. Click that and sign in again. Cortana shows no times rather than guessing, so the problem is easy to spot instead of double-booking someone.
   </Accordion>
 
   <Accordion title="I cancelled in Cortana but the lead still has the meeting">
-    Expected for Calendly and iClosed. Cancel it in that tool too.
+    This is normal for Calendly and iClosed. Go and cancel it in that tool too.
   </Accordion>
 </AccordionGroup>
 
@@ -235,27 +237,27 @@ The three tools are not equivalent. This table is worth reading before you decid
 
 <AccordionGroup>
   <Accordion title="Do I have to use any of these?">
-    No. Cortana's own booking calendars work on their own. These connections exist so calls booked elsewhere still show up in your reporting, and so you can keep using a tool your team already knows.
+    No. Cortana's own booking calendars work fine on their own. These connections exist for two reasons. Calls booked elsewhere still show up in your reporting. And your team can keep using a tool they already know.
   </Accordion>
 
   <Accordion title="Is the sync really two-way?">
-    Only with GoHighLevel, and even then only for the booking itself. Bookings come **in** from all three tools. Changes only go back **out** to GoHighLevel. Calendly and iClosed receive nothing from Cortana except a new booking made through a Cortana page.
+    Only with GoHighLevel, and even then only for the booking itself. Bookings come **in** from all three tools. Changes only go back **out** to GoHighLevel. Calendly and iClosed get nothing back from Cortana, apart from a new booking made on a Cortana page.
   </Accordion>
 
   <Accordion title="Where do I connect Google Calendar?">
-    Under **Settings → Users → My Profile**, per person. Connecting it hides times you are already busy and adds each booking to your own calendar.
+    Go to **Settings → Users → My Profile**. Each person does this for themselves. Once connected, Cortana hides the times you are already busy and adds each booking to your own calendar.
   </Accordion>
 
   <Accordion title="Can I use a shared inbox as the default owner?">
-    Yes. The default owner can be any user in the other tool, including a general team account.
+    Yes. **Default owner** can be any user in the other tool, including a general team account.
   </Accordion>
 
   <Accordion title="Will a mirrored booking show which ad produced it?">
-    You will always see the booking, the rep and the time. Whether Cortana can also tell you the ad depends on how the lead arrived. If they came through a Cortana booking page or a tracked link, the ad source is recorded. If they went straight to a Calendly link from somewhere untracked, the booking shows no ad source.
+    You will always see the booking, the person taking the call and the time. Whether Cortana can also name the ad depends on how the lead got there. Came through a Cortana booking page or a tracked link? The ad is recorded. Went straight to a Calendly link from somewhere untracked? The booking shows no ad.
   </Accordion>
 
-  <Accordion title="Can I stop mirroring one calendar without disconnecting the tool?">
-    Yes. In **Manage reps → Calendars**, use **Unsync** on that calendar and confirm. Its existing appointments are kept, and it will not be recreated on the next refresh.
+  <Accordion title="Can I stop copying one calendar without disconnecting the tool?">
+    Yes. Go to **Manage reps → Calendars**. Click **Unsync** on that calendar and confirm. The appointments you already have are kept. Cortana will not create the calendar again on the next check.
   </Accordion>
 </AccordionGroup>
 
@@ -272,4 +274,4 @@ The three tools are not equivalent. This table is worth reading before you decid
   </Card>
 </CardGroup>
 
-If any of this doesn't match what you're seeing, reach out to the support team in the bottom right.
+If any of this does not match what you are seeing, reach out to the support team in the bottom right.

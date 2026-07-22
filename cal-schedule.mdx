@@ -1,6 +1,6 @@
 ---
 title: "2) Schedule & Working Hours"
-description: "Set your business booking timezone, default slot length, and each team member's working hours."
+description: "Pick the timezone your bookings run on, and set the hours each person on your team can take calls."
 icon: "clock"
 ---
 
@@ -9,24 +9,26 @@ icon: "clock"
 
 ## Overview
 
-**Schedule** sets two things that apply across every booking calendar in the business: the **timezone** all times are shown and stored in, and each team member's **working hours**.
+**Schedule** controls two things for every booking page in your business.
 
-You'll find it under **Appointments → Settings → Schedule**.
+The first is your timezone. That is the clock all times are shown and saved in. The second is working hours. Those are the hours each person on your team can be booked.
 
-This page is the foundation the rest of the booking system sits on. Get the timezone wrong and every calendar in the business offers the wrong times. Get someone's working hours wrong and they'll be booked outside them, or never booked at all.
+To open it, go to **Appointments → Settings → Schedule**.
+
+Everything else in booking sits on top of this page. If the timezone is wrong, every booking page offers the wrong times. If someone's hours are wrong, they get booked when they are busy, or they never get booked at all.
 
 <Note>
   **Before you start**
 
-  - Create at least one booking calendar first. See [1) Creating Your Booking Calendar](/cal-calendars). Working hours only matter once something is bookable.
-  - Invite your team members. Only people who are already members of the business appear in the working-hours list.
+  - Make at least one booking page first. See [1) Creating Your Booking Calendar](/cal-calendars). Working hours only do something once people can book you.
+  - Add your team members. Only people who already have an account in your business show up in the working hours list.
 </Note>
 
 ---
 
 ## 1. Set the Business Booking Defaults
 
-The **Availability** panel at the top controls booking defaults for the whole business: *the timezone slots are shown in and the default slot length*.
+The **Availability** panel sits at the top of the page. It holds two settings for the whole business. One is the timezone your times are shown in. The other is the meeting length new booking pages start with.
 
 <Frame caption="Settings → Schedule. Business timezone and slot length at the top, per-member working hours below.">
   <img src="/images/appointments/schedule/01-schedule.png" alt="The Schedule sub-tab of Appointments Settings, showing an Availability panel with a Timezone dropdown and a Slot length field with a Save button, and a Working hours section listing a team member with their weekly hours." />
@@ -34,43 +36,47 @@ The **Availability** panel at the top controls booking defaults for the whole bu
 
 <Steps>
   <Step title="Choose the timezone">
-    Pick the timezone your business books in, for example `(UTC+05:30) Sri Jayawardenepura`.
+    Pick the timezone your business works in. For example, `(UTC+05:30) Sri Jayawardenepura`.
 
-    Every time in the product is interpreted in this timezone: the working hours below, the hours on each calendar, and the times shown on **Business Cal**. Invitees still see slots converted to *their* own timezone on the booking page, so this is not what your customers see. It is the reference clock everything else is measured against.
+    Every time in the product is read against this clock. That covers the working hours below, the hours on each booking page, and the times you see on **Business Cal**.
+
+    Your customers do not see this timezone. The booking page turns every time into their own local time for them. This setting is just the clock your team's times are measured from.
 
     Click **Save**.
   </Step>
 
   <Step title="Set the default slot length">
-    **Slot** is the default meeting length, in minutes, applied to new booking calendars.
+    **Slot** is how long a meeting lasts, in minutes. New booking pages start with this length.
 
-    Changing it does **not** alter calendars that already exist. Each calendar keeps its own **Duration** under **Details → Scheduling Rules**. Set this to whatever length you create most often so you're not editing every new calendar.
+    Changing it does **not** touch booking pages you already made. Each one keeps its own **Duration** under **Details → Scheduling Rules**.
+
+    Put in the length you use most often. Then you will not have to edit every new booking page.
 
     Click **Save**.
   </Step>
 </Steps>
 
 <Warning>
-  **Change the timezone before you take real bookings, not after.** Existing appointments keep the time they were booked at, so shifting the business timezone later changes how already-booked meetings read on your calendar. If you must change it, do it when nothing is on the books.
+  **Set the timezone before you take real bookings, not after.** Meetings that are already booked keep the exact time they were booked at. So if you change the business timezone later, those meetings will show up at a different hour on your calendar and you may miss them. If you have to change it, do it on a day when nothing is booked.
 </Warning>
 
 ---
 
 ## 2. Set Each Team Member's Working Hours
 
-Below the defaults, **Working hours · per team member** lists everyone in the business. Each person has their own weekly grid.
+Under the defaults you will see **Working hours · per team member**. It lists everyone in your business. Each person gets their own week to fill in.
 
 <Steps>
   <Step title="Pick a team member">
-    Select the person you want to edit. Their week is listed Sunday through Saturday.
+    Click the person you want to edit. Their week runs from Sunday to Saturday.
   </Step>
 
   <Step title="Set their hours for each day">
-    For each day, set a start and end time, for example `9:00am` to `5:00pm`. Mark a day **Unavailable** to close it.
+    Give each day a start time and an end time. For example, `9:00am` to `5:00pm`. To close a day, mark it **Unavailable**.
 
-    New members default to **9:00am–5:00pm, Monday through Saturday**, with Sunday unavailable.
+    New people start with **9:00am–5:00pm, Monday through Saturday**. Sunday starts closed.
 
-    Click **Save** when you're done with that person.
+    Click **Save** when you finish that person.
 
     <Frame caption="Working hours are per person, and separate from each calendar's own hours.">
       <img src="/images/appointments/schedule/02-working-hours.png" alt="The Working hours section showing a team member with Sunday marked unavailable and Monday through Saturday set to 9:00am to 5:00pm, with a note explaining the hours are in the business timezone." />
@@ -80,41 +86,47 @@ Below the defaults, **Working hours · per team member** lists everyone in the b
 
 ### How working hours combine with calendar hours
 
-This is the single most important thing on the page, and the product states it directly underneath the grid:
+This is the most important idea on the page. The product says it right under the grid:
 
 > These hours are in the business timezone. You are bookable at these hours ∩ each event type's own hours.
 
-In plain terms: **a slot is only offered when both sets of hours agree.**
+That `∩` symbol means "where both overlap". In other words, a time is only offered when it sits inside **both** sets of hours.
 
-| Your working hours | The calendar's hours | What invitees can book |
-| --- | --- | --- |
-| Mon–Fri 9–5 | Mon–Fri 9–5 | Mon–Fri 9–5 |
-| Mon–Fri 9–5 | Mon–Fri 9–12 | Mon–Fri 9–12 |
-| Mon–Fri 1–5 | Mon–Fri 9–12 | **Nothing**. The two never overlap |
-| Saturday 9–5 | Mon–Fri only | **Nothing on Saturday** |
+In plain words: **a time is only offered when both sets of hours are open.** Your own hours have to be open, and the booking page's hours have to be open too.
 
-If a calendar is showing no times at all, an accidental non-overlap here is the usual reason.
+| Your working hours | The booking page's hours | What a customer can book | Why |
+| --- | --- | --- | --- |
+| Mon to Fri, 9am to 5pm | Mon to Fri, 9am to 5pm | Mon to Fri, 9am to 5pm | Both are open at the same times, so nothing is lost. |
+| Mon to Fri, 9am to 5pm | Mon to Fri, 9am to 12pm | Mon to Fri, 9am to 12pm | You are the wider one, so the booking page decides. |
+| Mon to Fri, 1pm to 5pm | Mon to Fri, 9am to 12pm | **Nothing at all** | You start at 1pm and the page shuts at 12pm, so they never touch. |
+| Saturday only, 9am to 5pm | Mon to Fri only | **Nothing on Saturday** | The booking page is closed Saturday, so your Saturday hours go unused. |
+
+Seeing no times on a booking page? Two sets of hours that never touch is nearly always the cause. Check them both.
 
 <Note>
-  A team member with **no working hours configured at all** is treated as unrestricted, so the calendar's own hours decide. A member who *has* been configured but has no hours on a given day is unavailable that day. Removing all of someone's hours is not the same as never setting them.
+  If you have never set any hours for someone, they count as free all week. The booking page's own hours then decide when people can book them.
+
+  That is different from clearing someone's hours. Once you have set hours, any day you leave empty means they are closed that day. So blanking a day out is not the same as never touching it.
 </Note>
 
 <Warning>
-  **There is no per-person timezone.** Everyone's hours are read in the business timezone set at the top of this page. A team member in another country needs their hours entered as the business-timezone equivalent. Someone working 9am to 5pm in London, with the business set to Sri Lanka time, should be entered as 1:30pm to 9:30pm.
+  **Each person cannot have their own timezone.** Everyone's hours are read in the business timezone you set at the top of this page.
 
-  **There is also no holiday or time-off setting here.** A day off only removes slots if it's a busy event on that person's connected Google or Outlook calendar, or if you close the date on the individual calendar under **Availability → Date overrides**.
+  So a team member in another country needs their hours typed in as the matching business time. Say someone works 9am to 5pm in London, and your business is set to Sri Lanka time. You would type their hours as 1:30pm to 9:30pm.
+
+  **You also cannot book holidays or time off here.** A day off only takes times off your booking page in two ways. Either the day is marked busy on that person's connected Google or Outlook calendar. Or you close that date on the booking page itself, under **Availability → Date overrides**.
 </Warning>
 
 ---
 
 ## Settings Reference
 
-| Setting | What it does | Default | Recommendation |
+| Setting | What it does | Default | What we suggest |
 | --- | --- | --- | --- |
-| **Timezone** | The reference clock for all working hours, calendar hours and dashboard times. | Set when the business was created | Set once, before taking bookings. Use the timezone the team actually works in. |
-| **Slot** | Default meeting length applied to newly created calendars. | 30 minutes | Match your most common call length. Doesn't affect existing calendars. |
-| **Working hours** | When each team member can be booked, per day. | 9:00am–5:00pm, Mon–Sat; Sunday unavailable | Trim to real hours. Most teams should close Saturday. |
-| **Unavailable** | Closes a day entirely for that person. | Sunday only | Use for regular non-working days, not one-off time off. |
+| **Timezone** | Sets the clock used for all working hours, booking page hours and dashboard times. | Whatever you picked when you set the business up | Set it once, before you take bookings. Use the timezone your team really works in. |
+| **Slot** | Sets how long a meeting is on booking pages you make from now on. | 30 minutes | Use your most common call length. It leaves your older booking pages alone. |
+| **Working hours** | Sets the hours each team member can be booked, day by day. | 9:00am–5:00pm, Mon–Sat, with Sunday closed | Cut it back to the hours they really work. Most teams close Saturday. |
+| **Unavailable** | Closes a whole day for that person, so nobody can book them. | Only Sunday is closed | Use it for days they never work. Do not use it for a one off day off. |
 
 ---
 
@@ -122,23 +134,27 @@ If a calendar is showing no times at all, an accidental non-overlap here is the 
 
 <AccordionGroup>
   <Accordion title="A calendar shows no available times at all">
-    Almost always a non-overlap. Compare the member's working hours here against that calendar's hours under **Calendars → Availability**. A slot only appears where both agree. Also check the calendar actually has team members assigned. With none, bookings fall to the business owner, so it is the *owner's* hours that matter.
+    Nearly always your two sets of hours never touch. Open **Calendars → Availability** and compare that booking page's hours with the person's hours here. A time only shows up when both are open.
+
+    Also check that the booking page has team members on it. If it has none, bookings go to the business owner. In that case it is the owner's hours that count, so check those.
   </Accordion>
 
   <Accordion title="Someone is getting booked outside their working hours">
-    Check you edited the right person. The grid is per team member and it is easy to save changes against the wrong one. Then confirm their hours are entered in the **business** timezone, not their own local time.
+    First make sure you edited the right person. Each person has their own grid, and it is easy to save your changes onto someone else by mistake.
+
+    Then check their hours are typed in business time, not the time on their own clock.
   </Accordion>
 
   <Accordion title="Times on Business Cal look an hour or two out">
-    The business booking timezone here is what **Business Cal** renders in. If times look shifted, this dropdown is the first place to check.
+    **Business Cal** shows times in the business timezone from this page. If times look shifted, check that dropdown first.
   </Accordion>
 
   <Accordion title="A team member doesn't appear in the working-hours list">
-    They aren't a member of this business yet. Invite them under **Settings → Users** first, then come back. The list only shows existing members.
+    They are not in your business yet. Go to **Settings → Users** and invite them. Then come back here. The list only shows people who already joined.
   </Accordion>
 
   <Accordion title="I changed the slot length but my calendars didn't change">
-    That's expected. **Slot** only applies to calendars created after the change. Existing ones keep their own **Duration**, editable per calendar under **Details → Scheduling Rules**.
+    That is normal. **Slot** only applies to booking pages you make after the change. Older ones keep their own length. To change one, open it and edit **Duration** under **Details → Scheduling Rules**.
   </Accordion>
 </AccordionGroup>
 
@@ -148,23 +164,25 @@ If a calendar is showing no times at all, an accidental non-overlap here is the 
 
 <AccordionGroup>
   <Accordion title="Do invitees see times in my timezone or theirs?">
-    Theirs. The booking page detects their timezone and converts every slot into it, with a picker so they can change it. The timezone here is the reference your team's hours are measured in.
+    They see their own. The booking page works out where they are and shows every time in their local clock. They also get a dropdown to change it. The timezone here is only the clock your team's hours are measured from.
   </Accordion>
 
   <Accordion title="Can two people have different working hours?">
-    Yes. That is the point of the per-member grid. Each person's hours are independent, and a booking is only offered when someone who can take it is free.
+    Yes. That is why each person gets their own grid. Nobody's hours affect anybody else's. A time is only offered when at least one person who can take that meeting is free.
   </Accordion>
 
   <Accordion title="How do I take a day off?">
-    Not from this page. Either block the time on your connected Google or Outlook calendar, or close that specific date on the individual booking calendar under **Availability → Date overrides**.
+    Not from this page. You have two options. Block the time on your connected Google or Outlook calendar. Or open the booking page and close that date under **Availability → Date overrides**.
   </Accordion>
 
   <Accordion title="What if I work split hours, like mornings and late afternoons?">
-    Working hours here are one window per day. For split availability, set the wider window here and use multiple time slots on the individual calendar under **Calendars → Availability**, where **Add time slot** lets you add a second window per day.
+    This page only lets you set one block of time per day. So set the wider block here, covering both parts of your day.
+
+    Then open **Calendars → Availability** on the booking page itself. Click **Add time slot** to add a second block of time to that day.
   </Accordion>
 
   <Accordion title="Do I need to set working hours at all?">
-    No. Someone with no hours configured is unrestricted, and the calendar's own hours decide. Set them when you want to protect personal time across every calendar at once.
+    No. If you never set hours for someone, they count as free, and the booking page's own hours decide. Set them when you want to protect your personal time across every booking page at once.
   </Accordion>
 </AccordionGroup>
 
@@ -174,11 +192,11 @@ If a calendar is showing no times at all, an accidental non-overlap here is the 
 
 <CardGroup cols={2}>
   <Card title="3) Calendar Sync" icon="rotate" href="/cal-calendar-sync">
-    Connect GoHighLevel, Calendly or iClosed so external bookings flow in automatically.
+    Connect GoHighLevel, Calendly or iClosed so bookings made there show up here on their own.
   </Card>
   <Card title="1) Creating Your Booking Calendar" icon="calendar-plus" href="/cal-calendars">
     Build a booking page, set its own hours, and share the link.
   </Card>
 </CardGroup>
 
-If any of this doesn't match what you're seeing, reach out to the support team in the bottom right.
+If any of this does not match what you see on screen, message the support team at the bottom right.
