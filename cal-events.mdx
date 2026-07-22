@@ -1,0 +1,171 @@
+---
+title: "6) Events"
+description: "The tables behind your calendar: every booking, every form submission, and the funnel from page view to booked call."
+icon: "table-list"
+---
+
+{/* TODO: verify. No Loom walkthrough was supplied for this page. Add the embed and a
+    verbatim transcript inside an <Accordion title="Video transcript"> here once recorded. */}
+
+## Overview
+
+**Events** is the record side of the Appointments area. Where **Business Cal** shows you a calendar, Events shows you tables you can sort, search and read.
+
+You'll find it at **Appointments → Events**. It has two sub-tabs:
+
+<CardGroup cols={2}>
+  <Card title="Appointment Booked" icon="calendar-check">
+    Every booking as a row, with its status and lead score. This is where you work through calls in bulk.
+  </Card>
+  <Card title="Form Submitted" icon="chart-simple">
+    Everyone who touched a booking page, including people who started the form and never finished. This is where you see how well a booking page converts.
+  </Card>
+</CardGroup>
+
+---
+
+## 1. Appointment Booked
+
+A row per booking, with these columns:
+
+| Column | What it shows |
+| --- | --- |
+| **Contact** | Name and email address. |
+| **Scheduled Date** | The date and time of the meeting. |
+| **Status** | Booked, Shown, Not shown, Completed, Rescheduled or Cancelled. Click it to change it. |
+| **Lead Score** | The 0 to 100 score from their form answers, if you have scoring set up. Hover for a breakdown of which answers earned points. |
+| **Phone** | Their number. |
+| **Created** | When the booking was made, as opposed to when the meeting is. |
+
+<Frame caption="Appointment Booked. Every booking with its status and lead score.">
+  <img src="/images/appointments/events/01-appointment-booked.png" alt="The Appointment Booked sub-tab showing a table of bookings with columns for contact, scheduled date, status, lead score, phone and created date." />
+</Frame>
+
+**Created** versus **Scheduled Date** is a useful pair. A large gap between them means people book a long way out, which usually means more no-shows and a case for reminders closer to the meeting.
+
+A dash in **Lead Score** means that booking has no score, either because the form has no scored questions or because it was made before you set scoring up. Scores are never backdated. See [Score Your Leads](/cal-calendars#4-score-your-leads).
+
+<Warning>
+  **This table can show a different clock to Business Cal.** The two tabs read the time from different settings, so the same booking can appear at two different times on two tabs of the same screen.
+
+  A booking made for 10:30 in a business set to Sri Lanka time shows as `10:30` on **Business Cal** but as `1:00 AM GMT-4` here.
+
+  **Business Cal is the one to trust**, because it uses your booking timezone under **Settings → Schedule**. If the two disagree, do not assume a booking has moved.
+</Warning>
+
+---
+
+## 2. Form Submitted
+
+This sub-tab answers a different question: not "what is booked" but "how well is this booking page working".
+
+<Frame caption="Form Submitted. The funnel across the top, every lead underneath.">
+  <img src="/images/appointments/events/02-form-submitted.png" alt="The Form Submitted sub-tab showing four funnel cards for page views, partial, form submission and booked, above a Booking Leads table with status, name, email, phone, calendar, outcome, created and responses columns." />
+</Frame>
+
+### The funnel
+
+Four cards across the top:
+
+| Card | What it counts |
+| --- | --- |
+| **Page views** | People who opened a booking page. |
+| **Partial** | People who started filling the form and stopped. |
+| **Form submission** | People who finished the form. |
+| **Booked** | People who went on to pick a time. |
+
+Read them as a drop-off. Plenty of page views but few partials means the page is not convincing. Plenty of submissions but few bookings usually means your available times are too thin, or too far out.
+
+<Note>
+  **Partial rows are real leads.** Cortana captures the name and email a couple of seconds after someone types a valid address, before they finish. Somebody who abandoned halfway is still a person you can follow up, and they only appear here.
+</Note>
+
+### The Booking Leads table
+
+| Column | What it shows |
+| --- | --- |
+| **Status** | Partial, Form submission or Booked. |
+| **Name**, **Email**, **Phone** | What they gave you. A dash means they never reached that field. |
+| **Calendar** | Which booking page they were on. |
+| **Outcome** | What your routing rules did with them. |
+| **Created** | When they arrived. |
+| **Responses** | **View** opens their full answers. |
+
+**Outcome** is worth understanding, because it tells you your rules are working:
+
+- **Calendar** means they were shown the calendar normally.
+- **Routed** means one of your **Ending rules** matched and sent them somewhere specific.
+- A dash means no routing ran, which is normal for a partial lead who never finished.
+
+Use **All Statuses** to filter, and the search box to find a person. Click a row to open that contact's full journey.
+
+---
+
+## Troubleshooting
+
+<AccordionGroup>
+  <Accordion title="The time here doesn't match Business Cal">
+    Known behaviour, see the warning above. The two tabs read the timezone from different settings. Trust **Business Cal**.
+  </Accordion>
+
+  <Accordion title="Lead Score is empty for everyone">
+    Nothing on that form is scored yet. Scoring is set per question, under **Calendars → Questions → Field settings → Lead score**, and only single select, multi-select, dropdown and number questions can carry points. See [Score Your Leads](/cal-calendars#4-score-your-leads).
+  </Accordion>
+
+  <Accordion title="Scores appeared for new bookings but not old ones">
+    Expected. A score is worked out when the form is submitted and never recalculated, so adding weights today does not score yesterday's bookings.
+  </Accordion>
+
+  <Accordion title="Page views are much higher than form submissions">
+    Normal to a point, but a very wide gap usually means the page is asking for too much too early, or the description still contains the placeholder text new calendars ship with. Open the booking link yourself and read it as a stranger.
+  </Accordion>
+
+  <Accordion title="Lots of partials and almost no bookings">
+    People are filling the form and finding nothing they can book. Check the calendar has hours that overlap the team's working hours, and that **Min Notice** is not pushing the next opening too far out.
+  </Accordion>
+
+  <Accordion title="A booking is on Business Cal but not in this table">
+    Check which sub-tab you are on. **Appointment Booked** lists bookings, **Form Submitted** lists people who used a booking page. A booking added by hand with **New Booking** appears in the first but not the second, because nobody filled in a form.
+  </Accordion>
+</AccordionGroup>
+
+---
+
+## FAQ
+
+<AccordionGroup>
+  <Accordion title="What is the difference between Partial and Form submission?">
+    **Partial** started the form and stopped. **Form submission** finished it but has not picked a time yet. Both are contactable leads.
+  </Accordion>
+
+  <Accordion title="Can I see what someone answered?">
+    Yes. Click **View** in the **Responses** column.
+  </Accordion>
+
+  <Accordion title="Does this only cover Cortana booking pages?">
+    **Appointment Booked** includes everything, including bookings synced in from GoHighLevel, Calendly and iClosed. **Form Submitted** only covers Cortana booking pages, since it is measuring how your own pages perform.
+  </Accordion>
+
+  <Accordion title="Can I export this?">
+    Not from this tab today. Contact records and their booking history live under **Contacts**.
+  </Accordion>
+
+  <Accordion title="Why does a booking show a dash for phone?">
+    Either the form did not ask for one, or they were a partial lead who stopped before reaching it.
+  </Accordion>
+</AccordionGroup>
+
+---
+
+## Next Steps
+
+<CardGroup cols={2}>
+  <Card title="1) Creating Your Booking Calendar" icon="calendar-plus" href="/cal-calendars">
+    Tune the page, the questions, or the routing behind these numbers.
+  </Card>
+  <Card title="5) Business Cal" icon="calendar-days" href="/cal-business-cal">
+    Back to the calendar view.
+  </Card>
+</CardGroup>
+
+If any of this doesn't match what you're seeing, reach out to the support team in the bottom right.

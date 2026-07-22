@@ -1,0 +1,201 @@
+---
+title: "5) Business Cal"
+description: "See every booking across your team in one calendar, change a booking's status, and add a meeting by hand."
+icon: "calendar-days"
+---
+
+{/* TODO: verify. No Loom walkthrough was supplied for this page. Add the embed and a
+    verbatim transcript inside an <Accordion title="Video transcript"> here once recorded. */}
+
+## Overview
+
+**Business Cal** is the working calendar for the whole business. Every booking is here regardless of which booking page produced it, who it was assigned to, or whether it came from Cortana or from GoHighLevel, Calendly or iClosed.
+
+You'll find it at **Appointments → Business Cal**, and it is the tab you land on by default.
+
+Use it to see what the week looks like, to mark what happened after a call, and to add a meeting that was arranged some other way, over the phone or by email.
+
+<Note>
+  **Before you start**
+
+  - You need at least one booking. See [1) Creating Your Booking Calendar](/cal-calendars) if you have none yet.
+  - Set your business timezone first under [2) Schedule & Working Hours](/cal-schedule). Everything on this tab is drawn in that timezone.
+</Note>
+
+---
+
+## 1. Read the Calendar
+
+<Frame caption="Business Cal in Month view. Every booking across every calendar and every rep.">
+  <img src="/images/appointments/business-cal/01-month.png" alt="The Business Cal tab showing a month grid for July 2026 with appointment chips on various days, each showing a time and a contact name, plus Filter, Day, Week, Month and New Booking controls above the grid." />
+</Frame>
+
+Each booking appears as a chip showing its **start time** and the **contact's name**. The colour comes from the booking calendar it belongs to, which is how you tell a discovery call from an onsite visit at a glance. Set that colour on the **Calendars** tab.
+
+Two things to look out for:
+
+- A chip with a **line through it** is a cancelled booking. It stays on the calendar as a record rather than disappearing.
+- **+N more** appears when a day has more bookings than fit. Click it to see the rest of that day.
+
+Switch between **Day**, **Week** and **Month** at the top right, and move through time with the arrows beside the month name.
+
+<Warning>
+  **Day and Week views only show 07:00 to 19:00.** Anything booked earlier or later is not drawn in those two views. It is still there, and still visible in **Month** view and on the **Events** tab, but if a booking seems to have vanished when you switch to Week, this is why.
+</Warning>
+
+---
+
+## 2. Filter Down to What You Care About
+
+Click **Filter** to narrow the calendar.
+
+<Frame caption="The filter panel. Hide whole calendars or individual people, including anything unassigned.">
+  <img src="/images/appointments/business-cal/02-filter.png" alt="The Business Cal filter panel open, listing team member names with toggles including an Unassigned entry, over the month grid." />
+</Frame>
+
+You can hide or show:
+
+- **Calendars**, so you can look at just your sales calls without onsite visits in the way.
+- **Team members**, so a rep can see only their own day. The list includes **Unassigned**, which catches bookings that never got an owner.
+
+The filter also lets you **change a calendar's colour** from a small palette, which is the quickest way to make one type of meeting stand out.
+
+Filters affect what you see only. They do not change any booking.
+
+---
+
+## 3. Open a Booking
+
+Click any chip to open its details. You get the title, status, date, start and end time, duration, timezone, the contact, the location or meeting link, the description, and any notes.
+
+If the booking came from one of your forms, the answers are listed here as **Responses**, so you can read what the lead told you before you dial.
+
+The contact's email and phone are clickable, so you can start an email or a call straight from the panel. A cancelled booking also shows its cancellation reason.
+
+### Change the status
+
+The status dropdown is how you record what actually happened:
+
+| Status | Use it when |
+| --- | --- |
+| **Booked** | The default. The meeting is on. |
+| **Shown** | They turned up. |
+| **Not shown** | They did not turn up. |
+| **Completed** | The meeting happened and is done with. |
+| **Rescheduled** | Moved to another time. |
+| **Cancelled** | Not happening. |
+
+Changing the status here also sends it back to GoHighLevel when the booking came from there, and it protects your change: the next automatic sync will not overwrite a status you set by hand.
+
+<Warning>
+  **Setting a booking to Cancelled here is a label, not a cancellation.** It marks the record and adjusts who is next in the round-robin, but it does **not** free the time slot for someone else to book, does **not** stop the reminder emails already queued for that meeting, and does **not** remove the event from a connected Google or Outlook calendar.
+
+  To genuinely cancel, use the **Cancel** link from the booking confirmation or the invitee's email. That releases the slot and stops the reminders.
+</Warning>
+
+### Change who it is assigned to
+
+The same panel lets you reassign the booking to another team member, or clear the assignment. This is the fix when a round-robin sends a call to the wrong person.
+
+---
+
+## 4. Add a Booking by Hand
+
+**New Booking** creates a meeting without anyone going through a booking page. Use it for calls agreed over the phone, by email, or in a DM.
+
+<Frame caption="The New Booking dialog. It writes straight to your calendar without going through a booking page.">
+  <img src="/images/appointments/business-cal/04-new-booking.png" alt="The New Booking dialog showing fields for the destination calendar, video provider, contact search, assignee, date, timezone, time, duration, title, description and location." />
+</Frame>
+
+<Steps>
+  <Step title="Choose where it goes">
+    Pick the destination calendar, **Google** or **Outlook**, and a video provider, **Google Meet**, **Zoom**, **Teams** or none. Options you have not connected are locked. Connect them per person under **Settings → Users → My Profile**.
+  </Step>
+
+  <Step title="Pick the contact">
+    Search for an existing contact. You'll see a preview of their history so you know who you are booking.
+  </Step>
+
+  <Step title="Set the details">
+    Choose who it is assigned to, then the date, timezone, time and duration, and give it a title. Description and location are optional.
+  </Step>
+
+  <Step title="Create it">
+    Cortana checks the slot, creates the event on the connected calendar, saves the booking and sends a confirmation email. If the calendar event fails, the whole thing is rolled back rather than leaving you with a half-made booking.
+  </Step>
+</Steps>
+
+<Warning>
+  **A hand-made booking does not reserve its time slot.** It appears on your calendar, but the booking pages do not know about it, so a lead can still book that same time. If you add meetings this way regularly, block the time on your connected Google or Outlook calendar too, which booking pages do respect.
+</Warning>
+
+---
+
+## Troubleshooting
+
+<AccordionGroup>
+  <Accordion title="A booking is missing from Week or Day view">
+    Those two views only draw 07:00 to 19:00. Check **Month** view or the **Events** tab, where every booking appears regardless of time.
+  </Accordion>
+
+  <Accordion title="Times look wrong by a few hours">
+    Business Cal draws times in your business booking timezone, set under **Appointments → Settings → Schedule**. Check that first. Note that the **Events** tab can show a different clock, see the warning on [6) Events](/cal-events).
+  </Accordion>
+
+  <Accordion title="I cancelled a booking but the lead still got a reminder">
+    Setting the status to **Cancelled** does not stop queued reminders. Use the **Cancel** link from the booking confirmation or the invitee's email instead, which stops them properly.
+  </Accordion>
+
+  <Accordion title="A time I cancelled still isn't bookable">
+    Same cause. The status change does not release the slot. Cancelling through the invitee's cancel link does.
+  </Accordion>
+
+  <Accordion title="Bookings show as Unassigned">
+    They were created without an owner. Open each one and pick a team member, then add team members to that booking calendar under **Calendars → Details → Distribution & Team** so it does not keep happening.
+  </Accordion>
+
+  <Accordion title="The calendar looks empty">
+    Check the **Filter** panel. A calendar or team member hidden earlier stays hidden.
+  </Accordion>
+</AccordionGroup>
+
+---
+
+## FAQ
+
+<AccordionGroup>
+  <Accordion title="Does this show bookings from GoHighLevel, Calendly and iClosed?">
+    Yes, once those tools are connected and their calendars have been copied across. See [3) Calendar Sync](/cal-calendar-sync).
+  </Accordion>
+
+  <Accordion title="Can a rep see only their own bookings?">
+    Yes. Use **Filter** and switch off everyone else.
+  </Accordion>
+
+  <Accordion title="What is the difference between Completed and Shown?">
+    **Shown** records that they turned up. **Completed** records that the meeting is finished and dealt with. Pick one convention as a team and stick to it, since both feed your reporting.
+  </Accordion>
+
+  <Accordion title="Why is a cancelled booking still on my calendar?">
+    Deliberately. Cancellations stay visible with a line through them so you keep the history rather than losing it.
+  </Accordion>
+
+  <Accordion title="Can I drag a booking to a different time?">
+    No. Use the **Reschedule** link from the booking, which moves it properly and updates the invitee.
+  </Accordion>
+</AccordionGroup>
+
+---
+
+## Next Steps
+
+<CardGroup cols={2}>
+  <Card title="6) Events" icon="table-list" href="/cal-events">
+    The tables behind this calendar, including the form to booking funnel.
+  </Card>
+  <Card title="1) Creating Your Booking Calendar" icon="calendar-plus" href="/cal-calendars">
+    Build another booking page.
+  </Card>
+</CardGroup>
+
+If any of this doesn't match what you're seeing, reach out to the support team in the bottom right.
