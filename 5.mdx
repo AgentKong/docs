@@ -80,7 +80,7 @@ You can add URL parameters to your ads (videos below) or custom URL parameters i
     utm_source=Meta+Ads&utm_medium={{adset.name}}&utm_campaign={{campaign.name}}&utm_content={{ad.name}}&campaign_id={{campaign.id}}&medium_id={{adset.id}}&content_id={{ad.id}}
     ```
 
-    > IMPORTANT: we are backwards compatible with Hyros URL Parameters "h\_ad\_id={{ad.id}}".  We recommend migrating to Cortana's url parameters due to data cleanliness and better organization. (Example, our url parameter template will include the name of the ad in the raw url, where as hyros will not)
+    > IMPORTANT: we are backwards compatible with Hyros URL Parameters `h_ad_id={{ad.id}}`.  We recommend migrating to Cortana's url parameters due to data cleanliness and better organization. (Example, our url parameter template will include the name of the ad in the raw url, where as hyros will not)
   </Accordion>
 
   <Accordion title="Google Ads">
@@ -144,6 +144,65 @@ You can add URL parameters to your ads (videos below) or custom URL parameters i
   </Accordion>
 
   <Accordion title="Bing Ads">
+    # Adding URL Parameters for Microsoft (Bing) Ads
+
+    Microsoft Advertising uses **tracking templates** — the same idea as Google Ads. You paste one template and every ad underneath it inherits the tracking automatically. Microsoft applies templates in a cascade (**account → campaign → ad group → ad**), so setting it once at the account level covers everything.
+
+    ### For Existing Campaigns
+
+    If you already have Microsoft ads running, set the template once at the account level:
+
+    1. In **Microsoft Advertising**, open **Settings**.
+    2. Go to **Account level options** (or **Tracking template** under URL options).
+    3. Paste the template below in your dashboard into the **Tracking template** field.
+    4. Click **Save**.
+
+    ### For New Campaigns
+
+    You can also set the tracking template while building a campaign:
+
+    1. Start your new campaign.
+    2. In the campaign settings, open **Campaign URL options**.
+    3. Paste your tracking template into the **Tracking template** field.
+    4. Continue building your campaign.
+
+    > Setting the template at the account or campaign level means every ad inside inherits the correct parameters automatically — no need to tag ads one by one.
+
+    ### Verifying Your Setup
+
+    Inside your tracking table, look for the **URL Params** column, exactly like Meta and Google:
+
+    - **Green Checkmark:** Configured correctly.
+    - **Red Triangle:** There's an error in the string.
+    - **Red X:** Parameters are missing.
+
+    <Tip>
+      Click the icon on any ad to see exactly what's missing or misconfigured, and to copy the correct template for that campaign type.
+    </Tip>
+
+    ## URL Template: Search, Audience & Dynamic Search Ads
+
+    <Note>
+      ```text wrap
+      {lpurl}?utm_source=Bing+Ads&campaign_id={CampaignId}&medium_id={AdGroupId}&ad_id={AdId}&utm_term={keyword}
+      ```
+    </Note>
+
+    ## URL Template: Shopping & Performance Max
+
+    Microsoft Shopping and Performance Max campaigns have **no ad-level or asset-group macros**, so campaign is the deepest level available — `campaign_id` alone is the correct, complete tag for these campaign types.
+
+    <Note>
+      ```text wrap
+      {lpurl}?utm_source=Bing+Ads&campaign_id={CampaignId}
+      ```
+    </Note>
+
+    <Warning>
+      Keep **auto-tagging on** in Microsoft Advertising. The `msclkid` it adds is Cortana's fallback when a click carries no other identifiers, and it is **required for Microsoft (Bing) CAPI** to send conversions back.
+    </Warning>
+
+    > **Coming from Hyros?** Leave your existing Microsoft Ads templates exactly as they are — Cortana reads the Hyros Bing parameters (`h_campaign_id`, `bng_id`, `h_ad_id`) natively, so your attribution keeps working without touching a thing. If you'd like cleaner data going forward, you can migrate to the Cortana templates above, but it is not required.
   </Accordion>
 
   <Accordion title="Organic Attribution (YouTube, Email, IG Organic, etc)">

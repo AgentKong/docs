@@ -1,0 +1,167 @@
+---
+title: "4) Sending Email"
+description: "Send booking confirmations and reminders from your own web address, so they look like they come from you."
+---
+
+{/* TODO: verify. No Loom walkthrough was supplied for this page. Add the embed + a
+    verbatim transcript inside an <Accordion title="Video transcript"> here once recorded. */}
+
+## Overview
+
+A booking can send two emails. One confirms the booking. One reminds the person before the meeting.
+
+Out of the box, both come from a Cortana address. **Sending Email** lets you send them from your own domain instead. Your domain is the part of your email address after the @ sign, like `acme.com`.
+
+Do this and your emails arrive with your business name on them, not ours.
+
+You'll find it under **Appointments → Settings → Sending Email**. Click **Add a sending domain** and you land on **Settings → Sending Emails**. That page holds the domains for your whole business. The same domains are used for reports and other alerts, not just bookings.
+
+Do this before you send real invitations. Email from your own checked domain is much more likely to land in the inbox than email from a shared default address.
+
+<Note>
+  **Nothing breaks if you skip it.** The page says so plainly: *Until a domain is verified, emails use a default address and nothing breaks.* Confirmations and reminders still go out. They just do not come from you.
+</Note>
+
+---
+
+## 1. Add Your Domain
+
+<Steps>
+  <Step title="Open the sending domains page">
+    Go to **Appointments → Settings → Sending Email**. Click **Add a sending domain**.
+
+    If you have not added one yet, you'll see this message: *No sending domains yet. Add one below to send email from your own domain.*
+
+    <Frame caption="The sending domains page. The first domain you add becomes your default automatically.">
+      <img src="/images/appointments/sending-email/01-sending-domain.png" alt="The Sending Emails settings page showing an empty state with no sending domains, and a form with Domain, Sender email and optional Sender name fields plus an Add domain button." />
+    </Frame>
+  </Step>
+
+  <Step title="Fill in the three fields">
+    | Field | What it is | Example |
+    | --- | --- | --- |
+    | **Domain** | The web address your emails are sent from. Emails go out from here. | `acme.com` |
+    | **Sender email** | The address people see in the "From" line. It must end in the domain above. | `bookings@acme.com` |
+    | **Sender name** *(optional)* | The name people see next to the address. | `Acme Bookings` |
+
+    Now click **Add domain**. The first domain you add becomes your default automatically.
+  </Step>
+
+  <Step title="Add the DNS records">
+    Next you'll see some DNS records. These are small lines of text that prove the domain is yours.
+
+    You add them wherever you bought or manage your web address. That is the company you bought it from, or whoever runs its settings for you.
+
+    Copy each line exactly as shown. One wrong character stops it from ever finishing.
+  </Step>
+
+  <Step title="Wait for verification">
+    The check starts on its own once your lines of text are live.
+
+    A change like this can take up to 48 hours to spread across the internet. It is often much faster. The check finishes once it has spread.
+
+    Until it finishes, your emails keep going out from the default address. Nothing is lost in the meantime.
+  </Step>
+</Steps>
+
+<Warning>
+  **The sender email must end in the domain you added.** An address on a different domain cannot be proven as yours. Mail servers are likely to treat it as fake and filter it to spam, so your customers may never see the confirmation. If your domain is `acme.com`, use something like `bookings@acme.com`. Do not use a Gmail or Outlook address.
+</Warning>
+
+---
+
+## 2. Check It Worked
+
+The quickest test is one you already know how to do.
+
+1. Open one of your booking calendars. Book yourself in, using an email address you can open. See [1) Creating Your Booking Calendar](/cal-calendars).
+2. Wait for the confirmation email to arrive.
+3. Look at the **From** line. The name and address should be yours, not the default.
+
+Still showing the default address? Your domain has not finished being checked yet. Wait, then test again.
+
+---
+
+## Settings Reference
+
+| Setting | What it does | Default | Recommendation |
+| --- | --- | --- | --- |
+| **Domain** | Sets the web address your emails go out from. | Empty. You type one in yourself. | Use the domain your customers already know you by. |
+| **Sender email** | Sets the address people see in the From line. | Empty. You type one in yourself. | Use an address someone reads, like `bookings@`. Replies land there. |
+| **Sender name** | Sets the name people see next to the address. | Empty, because it is optional. | Use your business name. Leave it blank and people see only the address. |
+| **Default domain** | Picks which domain is used when you have added more than one. | The first domain you added. | Keep the domain your customers know as the default. |
+
+---
+
+## Troubleshooting
+
+<AccordionGroup>
+  <Accordion title="My domain still isn't verified">
+    Open your DNS provider and compare each line against what the page shows. Check it character by character.
+
+    A dot on the end, or a missing piece at the front, is enough to break it. Fix any difference, then wait. The change can take up to 48 hours to spread.
+
+    Some DNS providers add your domain name to the end for you. Check you have not ended up with a doubled name like `mail.acme.com.acme.com`. If you have, delete the extra part.
+  </Accordion>
+
+  <Accordion title="Emails are still coming from the default address">
+    Two things cause this. Either the domain has not been checked yet, or it is not set as your default.
+
+    Open the sending domains page. Both are shown there, so you can see which one it is.
+  </Accordion>
+
+  <Accordion title="Confirmations are landing in spam">
+    This page is the fix. A domain that has not been checked falls back to a shared default address, and mail servers filter those more often.
+
+    Add your own domain, add the DNS records, and send from an address on that domain.
+  </Accordion>
+
+  <Accordion title="No email arrives at all">
+    Check the email itself is switched on first. Open the calendar, go to **Notifications**, and make sure **Booking Confirmed** is turned on.
+
+    Sending domains only change *who the email comes from*. They do not control *whether it sends*.
+  </Accordion>
+</AccordionGroup>
+
+---
+
+## FAQ
+
+<AccordionGroup>
+  <Accordion title="Do I need my own domain to take bookings?">
+    No. Everything works without one. Your emails just come from a default address instead of yours.
+  </Accordion>
+
+  <Accordion title="Does this affect anything other than booking emails?">
+    Yes. Your business uses the same checked domains for reports and other alerts. Set it up once and all of them improve.
+  </Accordion>
+
+  <Accordion title="Can I use a subdomain?">
+    Yes. A subdomain is a domain with a word in front, like `mail.acme.com`. Lots of people use one.
+
+    It keeps your booking email separate from your normal work email. If booking mail ever gets marked as spam, your main email is not dragged down with it.
+  </Accordion>
+
+  <Accordion title="Can different calendars send from different addresses?">
+    No. You set the sending address once for the whole business, not per calendar. Every booking email uses your default sending domain.
+  </Accordion>
+
+  <Accordion title="Where do replies go?">
+    Replies go to the sender email you set. Pick an address someone actually reads. People do reply to booking confirmations.
+  </Accordion>
+</AccordionGroup>
+
+---
+
+## Next Steps
+
+<CardGroup cols={2}>
+  <Card title="1) Creating Your Booking Calendar" icon="calendar-plus" href="/cal-calendars">
+    Build a booking page and test the whole thing from start to finish.
+  </Card>
+  <Card title="3) Calendar Sync" icon="rotate" href="/cal-calendar-sync">
+    Connect GoHighLevel, Calendly or iClosed.
+  </Card>
+</CardGroup>
+
+If any of this does not match what you see on screen, message the support team in the bottom right.

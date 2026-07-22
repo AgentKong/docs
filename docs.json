@@ -89,8 +89,32 @@
       {
         "tab": "Cortana Calendar Feature",
         "icon": "calendar",
-        "pages": [
-          "cal-overview"
+        "groups": [
+          {
+            "group": "Getting Started",
+            "icon": "rocket",
+            "pages": [
+              "cal-overview",
+              "cal-calendars"
+            ]
+          },
+          {
+            "group": "Configuring Your Calendar",
+            "icon": "sliders",
+            "pages": [
+              "cal-schedule",
+              "cal-calendar-sync",
+              "cal-sending-email"
+            ]
+          },
+          {
+            "group": "Managing Bookings",
+            "icon": "calendar-days",
+            "pages": [
+              "cal-business-cal",
+              "cal-events"
+            ]
+          }
         ]
       },
       {
