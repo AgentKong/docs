@@ -14,15 +14,61 @@ title: "6) Setup AI Ad Optimization"
 
 AI Ad Optimization allows the system to send data directly back to your ad accounts and pixels. This ensures your platforms know exactly who is converting—not just as a lead, but all the way through your sales funnel. The better the signal you provide to your pixel, the better your ad performance will be.
 
-<Note>
-  The setup interface is identical for Meta CAPI, Google Ads CAPI, and TikTok Events API. In this guide, we’ll focus on the Meta CAPI setup.
-</Note>
+<Note>The short version: your pixel quietly grabs each platform's click identifier the moment someone lands, sticks it on their session, follows them through your entire funnel, and hands it back when they convert. That's what lets Meta and Google tie a $5,000 sale weeks later back to the exact ad click that started it.</Note>
+
+## How It Works
+
+Every conversion you send back travels the same path, no matter the platform:
+
+<Steps>
+  <Step title="Capture on click">
+    When a visitor lands from an ad, the URL carries a **click identifier** (like `gclid` or `fbclid`). Our pixel reads it on page load—no action needed from you.
+  </Step>
+  <Step title="Store on the session">
+    We save that identifier (plus a browser ID) on the visitor's tracking session, alongside their UTMs, page views, and device data.
+  </Step>
+  <Step title="Match through the funnel">
+    As that person becomes a lead, books an appointment, shows up, and buys, every event stays stitched to the original session—and therefore to the original click ID.
+  </Step>
+  <Step title="Send it back">
+    When a conversion fires, we pass the event **and** the stored click ID back to the platform through its Conversion API (Meta CAPI, Google Ads CAPI, TikTok Events API).
+  </Step>
+  <Step title="The platform learns">
+    Meta and Google match that click ID to the original ad touchpoint and credit the conversion—even if it happened days later, on a different device, or entirely offline (a sales call, a physical store). Their algorithm now knows *who actually converts* and optimizes toward more people like them.
+  </Step>
+</Steps>
+
+### What We Capture From Each Platform
+
+Cortana auto-captures the same class of signals for every ad network—a **click ID** (ties the visitor to a specific ad click) and a **browser ID** (a first-party identifier that improves match rates).
+
+| Platform | Identifiers we auto-capture | Where it comes from | Used for |
+| --- | --- | --- | --- |
+| **Meta** | `fbc` (click ID, from `fbclid`), `fbp` (browser ID) | `fbclid` URL parameter + first-party cookie on pixel load | Meta attribution **+** Meta CAPI |
+| **Google** | `gclid`, `gbraid`, `wbraid` | Click-ID URL parameter on pixel load | Google Ads attribution **+** Google Ads CAPI |
+| **TikTok** | `ttclid` | `ttclid` URL parameter on pixel load | TikTok attribution **+** TikTok Events API |
+
+<Tip>None of this requires field mapping. As long as the [pixel](/2-setup-pixel) is installed and your ads carry the standard click ID (they do by default), these identifiers are captured automatically on the first page load.</Tip>
+
+### A Note on Google's Braid Click IDs (`gbraid` / `wbraid`)
+
+Google doesn't always send a `gclid`. On iOS and other privacy-restricted traffic, it sends a **braid-type click ID** instead—`gbraid` (web-to-app / iOS) or `wbraid` (privacy-restricted iOS web). For many advertisers **~20% of Google click IDs are braid-type**, simply because so much traffic originates on iOS.
+
+<Info>**Cortana handles `gbraid` and `wbraid` exactly like `gclid`.** For pixel-tracked traffic they're auto-captured from the URL, stored on the session, and used for both Google Ads attribution and Google CAPI. There's **no form mapping and no extra setup**—if you can track a `gclid`, you're already tracking your braid traffic too.</Info>
+
+## Setup
+
+<Note>The setup flow is nearly identical for **Meta CAPI**, **Google Ads CAPI**, and **TikTok Events API**. Pick your platform below.</Note>
+
+<AccordionGroup>
+
+<Accordion title="Meta CAPI" icon="facebook">
 
 ### Step 1: Connect Meta CAPI
 
-To get started, head over to the **AI Ad Optimization** page and select **Connect Meta CAPI**.
+Head over to the **AI Ad Optimization** page and select **Connect Meta CAPI**.
 
-1. **Configuration Name:** Give it a name you’ll recognize (e.g., "Main Website").
+1. **Configuration Name:** Give it a name you'll recognize (e.g., "Main Website").
 2. **Meta Pixel ID:** Go to your Facebook Events Manager and grab your **Dataset ID** (previously known as Pixel ID).
 3. **Access Token:** In Events Manager, go to **Settings**, scroll down to **Conversions API**, and click **Generate access token**. Copy and paste that token into the system.
 
@@ -33,10 +79,10 @@ To get started, head over to the **AI Ad Optimization** page and select **Connec
 
 ### Step 3: Event Mapping
 
-Once connected, click **Manage** to start mapping your conversion events to Meta’s event types.
+Once connected, click **Manage** to start mapping your conversion events to Meta's event types.
 
 1. Toggle on the events you want to send back (e.g., Lead, Appointment Booked).
-2. **Event Type:** Choose the closest match from Meta’s standard list (e.g., "Schedule" for a booked appointment).
+2. **Event Type:** Choose the closest match from Meta's standard list (e.g., "Schedule" for a booked appointment).
 3. **Action Source:** This is crucial for optimization. Tell Meta where the event happened—usually **Website**, but could be a **Phone Call** or **Physical Store**.
 
 ### Step 4: Creating & Confirming Custom Events
@@ -54,6 +100,49 @@ If you want to take your optimization to the next level, try these advanced feat
 - **Multiple Event Mappings:** You can send a single event back to Meta as two different event types. For example, if someone buys a VIP upgrade, you can send it back as a "Purchase" _and_ a custom "VIP Upsell" event to train the pixel on both.
 - **Fixed Event Values:** If you don't have a dynamic value, you can set a manual **Event Value**. For example, you can tell Meta every lead is worth $50 and every appointment is worth $100. This helps the algorithm prioritize the right traffic based on your internal valuations.
 
-<Tip>
-  Once everything is set up, use the **Monitoring** tab to see exactly which events are being sent back to your platforms in real-time.
-</Tip>
+</Accordion>
+
+<Accordion title="Google Ads CAPI" icon="google">
+
+Google works the same way as Meta—send validated conversions back so the algorithm optimizes toward buyers—but a few terms differ. Where Meta talks about a Pixel/Dataset and standard events, Google talks about your **Google Ads account** and **conversion actions**. Under the hood, Cortana attaches the stored `gclid`, `gbraid`, or `wbraid` to each event so Google can match it to the original click.
+
+<Note>Field labels can vary slightly between accounts. If anything on your **Connect Google Ads CAPI** screen doesn't match the wording below, follow the on-screen prompts—the flow is the same.</Note>
+
+### Step 1: Connect Google Ads CAPI
+
+Head to the **AI Ad Optimization** page and select **Connect Google Ads CAPI**.
+
+1. **Configuration Name:** Give it a name you'll recognize (e.g., "Main Website").
+2. **Google Ads Account:** Select the Google Ads account you connected back in [Connect Integrations](/1-connect-integrations). If you haven't linked Google Ads yet, do that first—the CAPI connection reuses that authorization.
+3. **Customer ID:** Confirm your Google Ads **Customer ID** (the 10-digit `123-456-7890` number in the top corner of your Google Ads account).
+
+<Tip>Because the connection runs through your authorized Google Ads account, you don't paste in a manual access token the way you do for Meta—linking the account handles the credentials for you.</Tip>
+
+### Step 2: Event Filtering & Compliance
+
+- **Event Filtering:** As with Meta, we recommend **Only send back Google Ads traffic**. This keeps match quality high by only sending Google events it can attribute to a click.
+- **Restricted Data Processing:** If you need to honor CCPA/GDPR-style requests, enable the compliance toggle in Advanced Settings. If you aren't sure, you can usually leave this alone.
+
+### Step 3: Map Events to Conversion Actions
+
+In Google, every conversion you optimize for is a **conversion action**. Before you can map an event, that conversion action needs to exist in your Google Ads account (**Goals → Conversions → Summary → New conversion action → Import → track conversions from Cortana / API**).
+
+Once your conversion actions exist, click **Manage** to map them:
+
+1. Toggle on the events you want to send back (e.g., Lead, Appointment Booked).
+2. **Conversion Action:** Choose the matching Google conversion action from the dropdown for each event.
+3. **Action Source:** Tell Google where the event happened—**Website**, **Phone Call**, or **Store**. This is what unlocks offline conversion optimization (e.g., a closed sales call weeks later).
+
+### Step 4: Confirm & Test
+
+1. Fire a **Test Event** from the mapping screen.
+2. In Google Ads, open **Goals → Conversions** and confirm the conversion action status flips to **Recording conversions** (it can take a few hours for the first events to register).
+3. Once you see events landing, you're live.
+
+<Warning>New Google conversion actions often show **"Inactive"** or **"No recent conversions"** until the first events arrive and Google verifies the source. Give it a little time before assuming something's broken—then check the **Monitoring** tab.</Warning>
+
+</Accordion>
+
+</AccordionGroup>
+
+<Tip>Once everything is set up, use the **Monitoring** tab to see exactly which events are being sent back to your platforms in real-time.</Tip>
