@@ -4,7 +4,7 @@ description: "Set your business booking timezone, default slot length, and each 
 icon: "clock"
 ---
 
-{/* TODO: verify — no Loom walkthrough was supplied for this page. Add the embed + a
+{/* TODO: verify. No Loom walkthrough was supplied for this page. Add the embed + a
     verbatim transcript inside an <Accordion title="Video transcript"> here once recorded. */}
 
 ## Overview
@@ -18,7 +18,7 @@ This page is the foundation the rest of the booking system sits on. Get the time
 <Note>
   **Before you start**
 
-  - Create at least one booking calendar first — see [1) Creating Your Booking Calendar](/cal-calendars). Working hours only matter once something is bookable.
+  - Create at least one booking calendar first. See [1) Creating Your Booking Calendar](/cal-calendars). Working hours only matter once something is bookable.
   - Invite your team members. Only people who are already members of the business appear in the working-hours list.
 </Note>
 
@@ -26,7 +26,7 @@ This page is the foundation the rest of the booking system sits on. Get the time
 
 ## 1. Set the Business Booking Defaults
 
-The **Availability** panel at the top controls booking defaults for the whole business — *the timezone slots are shown in and the default slot length*.
+The **Availability** panel at the top controls booking defaults for the whole business: *the timezone slots are shown in and the default slot length*.
 
 <Frame caption="Settings → Schedule. Business timezone and slot length at the top, per-member working hours below.">
   <img src="/images/appointments/schedule/01-schedule.png" alt="The Schedule sub-tab of Appointments Settings, showing an Availability panel with a Timezone dropdown and a Slot length field with a Save button, and a Working hours section listing a team member with their weekly hours." />
@@ -34,9 +34,9 @@ The **Availability** panel at the top controls booking defaults for the whole bu
 
 <Steps>
   <Step title="Choose the timezone">
-    Pick the timezone your business books in — for example `(UTC+05:30) Sri Jayawardenepura`.
+    Pick the timezone your business books in, for example `(UTC+05:30) Sri Jayawardenepura`.
 
-    Every time in the product is interpreted in this timezone: the working hours below, the hours on each calendar, and the times shown on **Business Cal**. Invitees still see slots converted to *their* own timezone on the booking page, so this is not what your customers see — it's the reference clock everything else is measured against.
+    Every time in the product is interpreted in this timezone: the working hours below, the hours on each calendar, and the times shown on **Business Cal**. Invitees still see slots converted to *their* own timezone on the booking page, so this is not what your customers see. It is the reference clock everything else is measured against.
 
     Click **Save**.
   </Step>
@@ -44,7 +44,7 @@ The **Availability** panel at the top controls booking defaults for the whole bu
   <Step title="Set the default slot length">
     **Slot** is the default meeting length, in minutes, applied to new booking calendars.
 
-    Changing it does **not** alter calendars that already exist — each calendar keeps its own **Duration** under **Details → Scheduling Rules**. Set this to whatever length you create most often so you're not editing every new calendar.
+    Changing it does **not** alter calendars that already exist. Each calendar keeps its own **Duration** under **Details → Scheduling Rules**. Set this to whatever length you create most often so you're not editing every new calendar.
 
     Click **Save**.
   </Step>
@@ -66,7 +66,7 @@ Below the defaults, **Working hours · per team member** lists everyone in the b
   </Step>
 
   <Step title="Set their hours for each day">
-    For each day, set a start and end time — for example `9:00am` to `5:00pm`. Mark a day **Unavailable** to close it.
+    For each day, set a start and end time, for example `9:00am` to `5:00pm`. Mark a day **Unavailable** to close it.
 
     New members default to **9:00am–5:00pm, Monday through Saturday**, with Sunday unavailable.
 
@@ -90,17 +90,17 @@ In plain terms: **a slot is only offered when both sets of hours agree.**
 | --- | --- | --- |
 | Mon–Fri 9–5 | Mon–Fri 9–5 | Mon–Fri 9–5 |
 | Mon–Fri 9–5 | Mon–Fri 9–12 | Mon–Fri 9–12 |
-| Mon–Fri 1–5 | Mon–Fri 9–12 | **Nothing** — the two never overlap |
+| Mon–Fri 1–5 | Mon–Fri 9–12 | **Nothing**. The two never overlap |
 | Saturday 9–5 | Mon–Fri only | **Nothing on Saturday** |
 
 If a calendar is showing no times at all, an accidental non-overlap here is the usual reason.
 
 <Note>
-  A team member with **no working hours configured at all** is treated as unrestricted — the calendar's own hours decide. A member who *has* been configured but has no hours on a given day is unavailable that day. Removing all of someone's hours is not the same as never setting them.
+  A team member with **no working hours configured at all** is treated as unrestricted, so the calendar's own hours decide. A member who *has* been configured but has no hours on a given day is unavailable that day. Removing all of someone's hours is not the same as never setting them.
 </Note>
 
 <Warning>
-  **There is no per-person timezone.** Everyone's hours are read in the business timezone set at the top of this page. A team member in another country needs their hours entered as the business-timezone equivalent — someone working 9–5 in London, with the business set to Sri Lanka time, should be entered as 1:30pm–9:30pm.
+  **There is no per-person timezone.** Everyone's hours are read in the business timezone set at the top of this page. A team member in another country needs their hours entered as the business-timezone equivalent. Someone working 9am to 5pm in London, with the business set to Sri Lanka time, should be entered as 1:30pm to 9:30pm.
 
   **There is also no holiday or time-off setting here.** A day off only removes slots if it's a busy event on that person's connected Google or Outlook calendar, or if you close the date on the individual calendar under **Availability → Date overrides**.
 </Warning>
@@ -122,11 +122,11 @@ If a calendar is showing no times at all, an accidental non-overlap here is the 
 
 <AccordionGroup>
   <Accordion title="A calendar shows no available times at all">
-    Almost always a non-overlap. Compare the member's working hours here against that calendar's hours under **Calendars → Availability**. A slot only appears where both agree. Also check the calendar actually has team members assigned — with none, bookings fall to the business owner, so it's the *owner's* hours that matter.
+    Almost always a non-overlap. Compare the member's working hours here against that calendar's hours under **Calendars → Availability**. A slot only appears where both agree. Also check the calendar actually has team members assigned. With none, bookings fall to the business owner, so it is the *owner's* hours that matter.
   </Accordion>
 
   <Accordion title="Someone is getting booked outside their working hours">
-    Check you edited the right person — the grid is per team member and it's easy to save changes against the wrong one. Then confirm their hours are entered in the **business** timezone, not their own local time.
+    Check you edited the right person. The grid is per team member and it is easy to save changes against the wrong one. Then confirm their hours are entered in the **business** timezone, not their own local time.
   </Accordion>
 
   <Accordion title="Times on Business Cal look an hour or two out">
@@ -134,7 +134,7 @@ If a calendar is showing no times at all, an accidental non-overlap here is the 
   </Accordion>
 
   <Accordion title="A team member doesn't appear in the working-hours list">
-    They aren't a member of this business yet. Invite them under **Settings → Users** first, then come back — the list only shows existing members.
+    They aren't a member of this business yet. Invite them under **Settings → Users** first, then come back. The list only shows existing members.
   </Accordion>
 
   <Accordion title="I changed the slot length but my calendars didn't change">
@@ -152,7 +152,7 @@ If a calendar is showing no times at all, an accidental non-overlap here is the 
   </Accordion>
 
   <Accordion title="Can two people have different working hours?">
-    Yes — that's the point of the per-member grid. Each person's hours are independent, and a booking is only offered when someone who can take it is free.
+    Yes. That is the point of the per-member grid. Each person's hours are independent, and a booking is only offered when someone who can take it is free.
   </Accordion>
 
   <Accordion title="How do I take a day off?">
