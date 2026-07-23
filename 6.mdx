@@ -31,7 +31,7 @@ Every conversion you send back travels the same path, no matter the platform:
     As that person becomes a lead, books an appointment, shows up, and buys, every event stays stitched to the original session—and therefore to the original click ID.
   </Step>
   <Step title="Send it back">
-    When a conversion fires, we pass the event **and** the stored click ID back to the platform through its Conversion API (Meta CAPI, Google Ads CAPI, TikTok Events API).
+    When a conversion fires, we pass the event **and** the stored click ID back to the platform through its Conversion API (Meta CAPI, Google Ads CAPI, TikTok Events API, and the Whop Conversions API).
   </Step>
   <Step title="The platform learns">
     Meta and Google match that click ID to the original ad touchpoint and credit the conversion—even if it happened days later, on a different device, or entirely offline (a sales call, a physical store). Their algorithm now knows *who actually converts* and optimizes toward more people like them.
@@ -47,6 +47,7 @@ Cortana auto-captures the same class of signals for every ad network—a **click
 | **Meta** | `fbc` (click ID, from `fbclid`), `fbp` (browser ID) | `fbclid` URL parameter + first-party cookie on pixel load | Meta attribution **+** Meta CAPI |
 | **Google** | `gclid`, `gbraid`, `wbraid` | Click-ID URL parameter on pixel load | Google Ads attribution **+** Google Ads CAPI |
 | **TikTok** | `ttclid` | `ttclid` URL parameter on pixel load | TikTok attribution **+** TikTok Events API |
+| **Whop** | `waid`, `wasid`, `wacid` | Whop ad parameters on the landing URL, read on pixel load | Whop Ads attribution **+** Whop Conversions API |
 
 <Tip>None of this requires field mapping. As long as the [pixel](/2-setup-pixel) is installed and your ads carry the standard click ID (they do by default), these identifiers are captured automatically on the first page load.</Tip>
 
@@ -58,7 +59,7 @@ Google doesn't always send a `gclid`. On iOS and other privacy-restricted traffi
 
 ## Setup
 
-<Note>The setup flow is nearly identical for **Meta CAPI**, **Google Ads CAPI**, and **TikTok Events API**. Pick your platform below.</Note>
+<Note>The setup flow is nearly identical for **Meta CAPI**, **Google Ads CAPI**, **TikTok Events API**, and the **Whop Conversions API**. Pick your platform below.</Note>
 
 <AccordionGroup>
 
@@ -140,6 +141,39 @@ Once your conversion actions exist, click **Manage** to map them:
 3. Once you see events landing, you're live.
 
 <Warning>New Google conversion actions often show **"Inactive"** or **"No recent conversions"** until the first events arrive and Google verifies the source. Give it a little time before assuming something's broken—then check the **Monitoring** tab.</Warning>
+
+</Accordion>
+
+<Accordion title="Whop Conversions API" icon="bolt">
+
+Whop works the same way as Meta and Google: you send validated conversions back so the algorithm optimizes toward real buyers. The one difference is that Whop Ads are **Meta ads run through Whop**, so the conversions go back to **Whop**, and Whop passes the signal on to the underlying Meta campaign. Cortana attaches the Whop ad, ad group, and campaign IDs (`waid`, `wasid`, `wacid`) it captured on the click, so Whop can match each conversion to the right ad.
+
+<Note>Connect **Whop Ads** first. If you have not done that yet, follow the **Whop Ads** section in the [URL Parameters guide](/5). The Conversions API reuses the same API key, so there is nothing new to paste here.</Note>
+
+### Step 1: Connect Whop Conversions API
+
+Head to the **AI Ad Optimization** page and select **Connect Whop CAPI**.
+
+1. **Whop Company:** Choose the Whop company you connected under Whop Ads. There is no pixel ID or access token to enter, because the Conversions API reuses the API key already on that connection.
+2. **Permission check:** Make sure that API key has the `event:create` permission. Without it, Whop will reject the conversions.
+
+### Step 2: Turn It On
+
+Toggle the card **on** so it shows **Active**. While it is off, no conversions are sent to Whop.
+
+### Step 3: Map Events
+
+Click **Manage** to map your conversion events to Whop's event types.
+
+1. Toggle on the events you want to send back (for example, Lead or Appointment Booked).
+2. **Event Type:** Choose the closest match from Whop's list. For example, a booked call maps to **Schedule**, and a sign up maps to **Complete Registration**. Anything without a direct match is sent as a **Custom** event with a readable name.
+
+### Step 4: Confirm & Test
+
+1. Click **Send test event** to confirm Whop is accepting your events.
+2. Open the **Monitoring** tab to watch real conversions flow through, with sent and failed counts.
+
+<Note>Whop conversions are matched on the buyer's real details (email, phone, and name) in plain text, so there is no field mapping to set up. Each conversion is sent only once and de-duplicated on Whop's side, so re-syncing never double counts.</Note>
 
 </Accordion>
 
