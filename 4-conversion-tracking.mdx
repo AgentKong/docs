@@ -1,190 +1,1473 @@
 ---
 title: "4.2) Conversion Sources"
+description: "Add conversion sources to track sales and leads in Cortana. Connect Stripe, Shopify, GoHighLevel, Meta Ads, Calendly, webhooks, pixels, CSV and 14 other source types to any conversion."
 ---
 
 ## <u>Conversion Sources</u>
 
-<AccordionGroup>
-  <Accordion title="Meta Lead Forms">
-    <div style={{position: "relative", paddingBottom: "57.903879559930516%", height: 0}}>
-  <iframe src="https://www.loom.com/embed/9c28beb09b1a413e9e0fecaf851e6c42" frameBorder="0" webkitallowfullscreen mozallowfullscreen allowFullScreen style={{position: "absolute", top: 0, left: 0, width: "100%", height: "100%"}} />
-</div>
+A **conversion source** is the thing that tells Cortana "this event just happened". A conversion (like *Lead*, *Booked Call*, or *Purchase*) is the bucket; a source is the pipe that fills it.
 
-    <Expandable title=" ">
-      Alright, so we're going to walk through how to set up Meta Lead Forms as a conversion source. It's a bit more, quote-unquote, complicated, and just because of the permissions behind Meta and how everything works. So, Meta Lead Forms are going to have its own tab that need a setup first. So you're going to come over here, under Conversion Setup, you're going to see there's a Meta Lead Forms tab. You're going to go ahead and you're going to click on it. Now, right out the gate, you probably don't have anything turned on, so you might say, you might see a little error message saying, click this page button so you can select your pages. Then you're going to click on the pages and you'll see access to all the different pages you have access to. Now, the ones that you want to turn on so we can track the forms, you're simply going to go ahead and you're going to turn them on. Then you're going to have what's called Connected Pages. So again, all pages are the ones that you all have access to inside of your Business Manager, you as a user, and then Connected Pages are basically going to be anything turned on that you want us to track. Now, once we're in here, you will then start seeing a bunch of different fields. And by default, most of them are going to be turned on. And then you can also come here and you can start mapping the field. So if I click map fields, you're going to see that right out the gate, we're automatically going to map email name and phone number for you. So that way, you don't have to come in and map all of them that you want right out the gate. The basic default, which is going to be name, email, and phone number is going to work for any of these, right? Like I can come in here, uh, email. I think this is just a lot of hiring to be honest. I don't even know what this is, but anyways, uh, you're going to see that any of the contact information like email name and phone number, we'll just, I can click here. They're going to automatically be mapped right now. If you, however, want to map more information, and this is particularly going to be useful if you have a, um, if you use AI agents and you want to pass the information to the AI agents, you can go ahead and you can map the fields to one of our contact custom fields. If you haven't watched the contact custom fields training video, go ahead and check it out. You'll understand how it is. If you're familiar with GoHighLevel or HubSpot, same concept. Inside of their CRM, you have contacts. The contacts can have custom fields. We have the same thing as well, and you can also add custom fields in here if you don't have one that you like, but this way you can actually map the data, and if you want an AI agent to have access to this information from the custom field, this is basically why we have this set up here. Now, asides from that, that's pretty much it. Once you set up the forms, sorry, once you set up the page and you have the forms turned on that you want to track, then we're going to track all the forms in here. If a form is turned off, then we're not going to track it. So that way, if you're like, hey, I don't want to track leads from here, bang, that's fine. Just come in and turn them off. By default, all of them are going to be on though, and yeah, once that is done, you can then head back over to conversion events. Now, let's say I want to track lead, then I'm going to set up a meta ads, lead form submissions, select the ad account that we have toggled on, and then we're going to go ahead and hit submit. Then every single time one of those leads fire off in that lead form, right? So we have this page. Every single time we get a lead that fires off at any of these, we're simply going to get them. Now, one caveat is meta is extremely, extremely terrible with the permissions here. It's super frustrating, super annoying. So what I would do is as a mandatory check, anytime you set this up, where you're going to go is you're going to search business.facebook.com forward slash settings. Okay. So that's business.facebook.com forward slash settings. Then you're going to hit enter. And then on the left-hand side, you're going to see integrations and you're going to see leads access. Okay. Please, go on the pages that I've you have turned on inside of Cortana that you want us to track the leads for you. Click on it. And then you're going to come in here and click on CRMs. Now, if you don't see Cortana AI, which would look something like this. So if you don't see it, you're like, what the hell? I don't see it. That's fine. You're going to come, you're going to hit assign CRM. You should see Cortana AI there. I'm just going to search as well, just to make sure that, all right, cool. Cortana AI. Then you're going to hit enter. You're going to hit confirm. And then after you have given us access to this, it'll work. Now, most of the time, this should just work by default. However, Meta is extremely weird. They have some really intense, I don't know, backend permissions and weird security restrictions that go on. And you might not have Cortana AI inside of there. So if that is the case, Please come in, verify always. Whenever you set up meta-lead forms. Come in here, business.facebook.com forward slash settings, integrations, lead access. Choose the pages that you have turned on. Come click on CRMs. And then make sure that Cortana AI is here. If not, you can go ahead and you can assign a CRM. And that is going to be how you set things up. Now, asides from that, if you do have Cortana AI in there. And you've gone ahead, you've turned on the Facebook page. Which again, in here that you want to track. And you have all the forms on. And if you want to go above and beyond and map some of the extra fields. So that way it can save inside of your CRM in here. And you save that data by the contacts. All that's good. And then again, lasting. Once you have all that set up, you're going to come, you're going to click the lead. You're going to add a new conversion source. You're going to select meta ads. You're going to do the lead form submissions. Select the ad account. Hit submit. And then every time, a lead form fires, it will send off to our system and it will come inside of here. Hopefully that makes sense. If you have any questions, please feel free to reach out to the support team. We're more than happy to assist you in any way we can.
-    </Expandable>
+One conversion can have **many sources**. That is the normal setup, not an edge case. A single *Purchase* conversion might be fed by Stripe, Shopify, and a CSV import of historical orders all at once. Every source you add writes into the same conversion, and everything that lands there shows up in the Attribution Table against the ad, campaign, or channel that earned it.
 
-    # Meta Lead Form Setup
+Sources live at **Tracking → Conversion Setup**. You open (or create) a conversion, then click **Add Source** in the **Sources** section of that conversion.
 
-    Alright, so we're going to walk through how to set up Meta Lead Forms as a conversion source. It's a bit more "complicated" than other sources, but that's really just because of how Meta handles permissions. Once you get the handshake right, it works like a charm.
+### Available vs locked sources
 
-    ## 1. Connect Your Meta Pages
+The **Integration** dropdown lists all 22 source types. Four are always available because they do not depend on an outside tool:
 
-    Meta Lead Forms have their own dedicated tab because there are a few extra steps to get them synced up.
+**Forms / Appointments** · **Webhook** · **CSV Upload** · **Pixel**
 
-    ## 2. Map Your Fields
+The other 18 require their integration to be connected to this business first. Until it is connected, the entry is greyed out with a **padlock icon** and sorts to the bottom of the list. Clicking a locked entry does not select it. It shows an error toast such as `Please connect Stripe first. Go to Settings → Integrations to connect.`
 
-    By default, we automatically map the basics for you: **Email**, **Full Name**, and **Phone Number**. You don't have to lift a finger for those.
+The dropdown sorts **available sources A–Z first, then locked sources A–Z**. So on a business with everything connected, the whole list is simply A–Z. The accordions below follow that same A–Z order.
 
-    <Tip>
-      If you want to track extra data—like custom questions about their industry or budget—you can click **Map Fields**. You can map these to our **Contact Custom Fields**, which is especially useful if you're using AI Agents that need that context to handle follow-ups.
-    </Tip>
+<Note>
+  **Before you start**, make sure you have completed:
 
-    ## 3. The Meta "Handshake" (Important!)
+  - [**1) Connect Integrations**](/1-connect-integrations), connect the tool you want to pull conversions from. A source stays locked until its integration is connected.
+  - [**2) Setup Pixel**](/2-setup-pixel), required for the **Pixel** source and strongly recommended for everything else, because the pixel is what ties a conversion back to the ad that caused it.
+  - [**4.1) Conversion Set Up**](/4-conversion-setup), you need a conversion to attach the source to.
+</Note>
 
-    Meta is notoriously picky with permissions. Even if everything looks right in our dashboard, you **must** verify the lead access permissions inside your Facebook Business Suite.
+## Adding a source (works the same for every source)
 
-    1. Go to [**business.facebook.com/settings**](https://www.google.com/url?sa=E&q=https%3A%2F%2Fbusiness.facebook.com%2Fsettings).
-    2. On the left-hand sidebar, go to **Integrations** \> **Lead Access**.
-    3. Click on the page you're tracking.
-    4. Click on the **CRMs** tab.
-    5. If you don't see **Cortana AI** listed, click **Assign CRM**, search for it, and hit **Confirm**.
+<Note>
+  The screenshots on this page are taken from real accounts, so account names, conversion names, form names and email addresses are deliberately blurred out. Everything blurred is example data. The labels, dropdowns and buttons you need to follow along are all left readable.
+</Note>
+
+Every source is added the same way. Follow these six steps, then open your source in the catalog below for the fields that are specific to it.
+
+<Steps>
+  <Step title="Open Tracking for your business">
+    From the dashboard, open the business you are working on and go to **Tracking**.
+  </Step>
+
+  <Step title="Go to the Conversion Setup tab">
+    Click the **Conversion Setup** tab, then stay on its **Conversion Events** sub-tab (the other sub-tabs are **Conversions Dashboard**, **Meta Lead Forms**, and **Deleted Audit Log**).
+
+    You now see a table of your conversions with the columns **Status**, **Conversion Name**, **Event Activity**, **Last Event**, **Sources**, **Column Presets**, and **Actions**.
+
+    <Frame caption="Tracking → Conversion Setup → Conversion Events. Each row is a conversion; the Sources column shows how many sources feed it.">
+      <img
+        src="/images/ad-tracking/conversion-sources/shared/01-conversion-setup-tab.png"
+        alt="The Conversion Setup tab on the Conversion Events sub-tab, listing conversions in a table with Status, Conversion Name, Event Activity, Last Event, Sources, Column Presets, and Actions columns, and a gear, duplicate, and trash icon in each row's Actions cell."
+      />
+    </Frame>
+  </Step>
+
+  <Step title="Open the conversion you want to feed">
+    In the **Actions** column at the right of that conversion's row there are three icons: a **gear**, a **duplicate**, and a **trash** can. Click the **gear**.
+
+    Clicking the row itself does nothing, and the small pencil that appears beside a conversion name on hover only renames it.
+
+    The **Edit Conversion** dialog opens. If you do not have a conversion yet, create one first using [**4.1) Conversion Set Up**](/4-conversion-setup).
+  </Step>
+
+  <Step title="Click Add Source">
+    Scroll down inside the **Edit Conversion** dialog to the **Sources** section and click the **Add Source** button (it sits next to a **Refresh** button).
+
+    If this conversion has no sources yet, the section reads **"No sources created yet"** with the hint **"Click "Add Conversion Source" to create your first source"**. The button itself is labelled **Add Source**.
+
+    <Frame caption="The Sources section of the Edit Conversion dialog. Add Source sits to the right, next to Refresh.">
+      <img
+        src="/images/ad-tracking/conversion-sources/shared/02-edit-conversion-add-source.png"
+        alt="The Edit Conversion dialog scrolled to its Sources section, showing the existing sources table and the Add Source button beside a Refresh button."
+      />
+    </Frame>
+  </Step>
+
+  <Step title="Pick your source from the Integration dropdown">
+    The **Create Conversion Source** dialog opens with an **Integration** dropdown at the top.
 
     <Warning>
-      If Cortana AI isn't assigned as the CRM for Lead Access inside Facebook, Meta will block us from pulling your leads. Always double-check this step!
+      The **Integration** dropdown is pre-set to **Webhook**, it is not blank. If you want a different source you must change it, otherwise you will create a webhook by mistake.
     </Warning>
 
-    ## 4. Finalize the Conversion Source
+    Open the dropdown and pick your source. Available sources are listed A–Z first, then locked ones A–Z with a padlock. The form redraws to show the fields for whichever source you picked. Find that source in the catalog below for the rest of the setup.
 
-    Now that the plumbing is set up, we just need to tell the system which "bucket" to put these leads in.
+    <Frame caption="The Integration dropdown. Connected sources sort A–Z at the top; locked ones sort A–Z below with a padlock.">
+      <img
+        src="/images/ad-tracking/conversion-sources/shared/03-integration-picker.png"
+        alt="The open Integration dropdown in the Create Conversion Source dialog, listing all 22 conversion sources with the connected ones alphabetically first and the not-yet-connected ones greyed out with a padlock icon below them."
+      />
+    </Frame>
+  </Step>
 
-    1. Go back to the **Conversion Events** tab.
-    2. Find your **Lead** event (or whichever event you use for new leads) and click the edit icon.
-    3. Click **Add Source**.
-    4. Select **Meta Ads** as the integration and **Lead Form Submissions** as the source.
-    5. Select your Ad Account and hit **Submit**.
+  <Step title="Save">
+    Fill in the fields documented for your source, then click **Submit**. **Cancel** discards it.
 
-    That's it! Now, every time a lead form fires on Facebook or Instagram, that data will flow right into our system and be attributed to the correct campaign. If you run into any permission snags, just reach out to the support team in the bottom right.
-  </Accordion>
+    The new source appears in the **Sources** table of the conversion. You do not need to click **Save Changes** on the **Edit Conversion** dialog for the source itself to be created.
+  </Step>
+</Steps>
 
-  <Accordion title="Webhooks">
-    <div style={{position: "relative", paddingBottom: "57.903879559930516%", height: 0}}>
-  <iframe src="https://www.loom.com/embed/0dde051aba1b41fca4b468634045f96b" frameBorder="0" webkitallowfullscreen mozallowfullscreen allowFullScreen style={{position: "absolute", top: 0, left: 0, width: "100%", height: "100%"}} />
-</div>
+<Tip>
+  You only see the **Add Source** button if your user has permission to manage tracking. If the button is missing entirely (rather than greyed out), ask an admin on the account to grant you tracking permissions.
+</Tip>
 
-    <Expandable title=" ">
-      Alright, so to setup a conversion event via a webhook source, we're going to come here, we're going to click this add source button, we're then going to select webhook. Now, I always like to name it where it's coming from, and then, like, what's actually coming. So, typically it's going be the name of the automation. That way, it's just easier to go back and backtrack if you ever need to see, hey, is the automation, like, something we need to change, maybe we changed something in the booking, or whatever it is, right? So, the platform name, as well as the name of the automation is usually a good naming convention. And we're going to go ahead and we're going to hit submit. And you're going to see this beautiful blue button here called setup webhook, and then it's going to come in, you're going to be able to grab your webhook URL, and I'm going to go ahead and I'm going to paste this in GoHighLevel, so I'll be back in just a second. So I'm going to paste this inside of GoHighLevel, you can paste this webhook literally anywhere, Zapier, Make.com, N8N, ClickFunnels, I know you can paste webhooks directly inside of ClickFunnels, like, there's a lot of different spots where you can go ahead and add a webhook. So, I'm just going to use HighLevel for this example, then we're going to paste the webhook in there, and that's pretty much it, we don't need to really send anything else, you can go ahead and hit save action, and I'm going to just test this flow, alright, and once that webhook hits our system, then this is automatically going to pop up, so nothing you have to do, we're just waiting for that webhook to hit, once the webhook sends, this pops up in here, and now you can start going ahead and mapping your different fields, all that really matters, especially if you're using a pixel, is going to be, like, the name, the email, the phone number, uh, revenue, obviously, if it's a purchase event, attribution is going to be a bit more of a advanced thing, we'll get to that in just a quick second here, but let's go ahead and just show you kind of how this works, let's go to name, so I'm just going to drag the name over in here, uh, it's a lot easier to search rather than sitting here and scrolling, you're just going to lose your mind doing that, so we'll go email, we'll grab this guy's email here, Thank you. Thank you. We'll go phone, let's grab the phone number here, we're not going to do any revenue because it's a test here, now if this was a webhook that I wanted to send and I didn't have a pixel, we are able to actually add the attribution via a webhook, now this, again, is going to be a more advanced setup, typically you should just have a pixel on the page and you don't have to worry about sending attributions through the automation, again, this is more advanced if you know what you're looking at here, and you get it, then this is where you can take advantage of it, if you don't know what you're looking at, then just go add the pixel, and like we said in the other videos, and you're going to be all clear, but let's say we wanted to go ahead and map attribution in this webhook, because for whatever reason, maybe we can't add a pixel on the page, or something's happening, and we only want to pass the attribution through the webhook, I know HighLevel does attribution, cool, so attribution source. All right, so here you guys see the campaign. Um, the medium, there's the medium ID, although that's not really the one I'm looking for, there we go, the UTM source, uh, ad ID, there's no ad ID, typically ad ID would be the best, if you can get the ad ID, and map the ad ID, because that's the most unique thing, we've had a lot of people send in UTM ads, but it's the same ad, uh, they have like literally the same name of the ad across three or four different campaigns, and when you just send us, you know, the name of the ad, uh, and we're not able to actually figure anything else out, like, hey, which medium does this belong to, which campaign does this belong to, then unfortunately there will be some category misattribution, where we're just gonna find the right ad, and if you have four with the right ad name, then we're just gonna put it at the first one that we find, so ad ID is always a unique one of one, if you can add the ad ID, that's going to be the best, I'm gonna try to see if I can do ad ID, you know, let's go content ID, uhm, no, okay, cool, they're not gonna, I don't think they have it in this one, but if you did have the ad ID, you can go ahead, I see the UTM content, so I can go drop that inside of the ad, if I do the medium , we would have this right here, right here, attribution source medium, we could do campaign as well, and I think You guys started, okay, so there's a campaign ID. Yeah, high level kinda sucks for this content ID, you know, uhm, alright, the campaign, and then the source, you don't really have to do it, if we had a, if we find a matching ad against your meta ads, we'll just automatically name it as UTM source meta ads, so no worries there, you can also add the FBCL ID, this is gonna be pretty important when you're sending data back to meta, or if this is Google, again, you can do Thank you. The Google click ID, uh, which I would drag in there, one other thing to mention, if you are adding attribution, sometimes the CRM is gonna, as you see right here, they're gonna give you last attribution and attribution source, so just pay attention to what you're mapping, cause if you're matching, mapping attribution source, and then there's a last attribution, this one might be off, this one might be like first click, again, depends on the system, how they categorize attribution, so you I'm just saying it for you guys to pay attention, like, what you're actually mapping, when you're going ahead and mapping data in there. Now, I'm not actually gonna go ahead and save that this way, because we do have a pixel, and the pixel is tracking our attribution for us, so again, this is just more of an advanced thing, if you know how attribution works and how payload data works. From there, you can also add custom fields, or contact fields, so you can update the company name, the address, the city, now, why this might be helpful, the important is, if you have the AI agent's feature as well, and you wanna map this data in, so that the AI agent also knows the customer data, maybe this is not important, right, company, maybe company, but like, address, city, unless it's, you know, a B2C construction company, they're like, hey, I just wanna make sure, the agent's like, hey, I just wanna make sure you live at, you know, so and so address with this city, then we would pass that data on, there's also going to be custom fields, We're gonna have any custom fields in this account, you can always go ahead, add a custom field similar to how you would in high level or HubSpot, but we're just going to ignore that for now, just showing you guys that you can also map data inside of the contact fields, and then there's also one last thing here, that someone asked us to do, so this was the home that we found for it, was lead expense, he's like, hey, I buy leads, and every time we get a lead, it's cost me like 50 bucks on the spot, is there any way that I can add an expense to that? Lead, so we're like, alright, cool, let's just add it inside of the webhook, so let's say you wanted to add a lead expense, you just go ahead, you'd add it in here, and then it would show up in the attribution table as spend, so if you send, let's say, 10 leads, and each lead has an expense of 50 bucks , that means that you would have 500 dollars in spend for these leads, so that is just, again, an additional thing, chances are you probably don't want to use that, uh, we've just had to make our platform a little fairly customizable in what we're able to do, and give everything a home, so that's gonna be it, again, most of the time, all you guys really care about, name, email, phone number, I just walked you through the rest of the settings as well, in case you do need to use them, then when you're done, you're gonna go ahead, you're gonna hit save mapping, and away we go, now, someone also asked us, hey, I had like a real event, uh, can I count this. So if you do want to take this and push it over. You can click that button that I just showed you, and in here, you'll be able to see all the tests, the failed, and the success ones, and if you want to swap this over from test to success, you can go ahead, you can hit successful, another thing that's pretty important, actually, to mention, is if you want to re-edit the mapping, cause maybe you messed something up, you can go ahead, you can hit edit, we always save this payload data, so if you want to re-edit, let's say, like, the email, you're like, oh, snap, I used the wrong one, I need to, you know, Thank you. Change the email out, you can always come back, and just go ahead and change out the email there, and away you go, so that is also something that you can do, you can remap based off of the webhook data inside of there, and you can always view the data too, right? What's the actual payload, like, what are we getting from high level, there's a lot of data in here, so that's always important. If you know what you're looking at, you want to, like, debug or look into something, we always show you the full payload data as well, just, again, another little thing to mention, but let's just show you, we're going to go ahead, we're going to update that to successful, and then, boom, it's going to go ahead, and now it's going to show here, under the successful tab, so that is pretty much it when it comes to webhooks, again, you're going to have your requests that you can always dig into, see the tests, if anything's failed, we'll show you why it failed, we'll give you an error message, typically it's going to be like there's no email and phone number attached, sometimes certain platforms have bugs, and they send us just empty data, they're shooting blank data, so obviously we can't map it, there's no name, email, phone number, so we don't know who this person is, so that's going to show up as failed, but again, always you will see the message inside of there, and that's pretty much it when it comes to setting up a webhook, I walked you through end to end, if you do have any questions, please feel free to reach out to the support, and someone will be more than happy to help you. you
-    </Expandable>
+## Source catalog
 
-    # Webhook Conversion Sources
+<AccordionGroup>
+  <Accordion title="Cal.com">
+    **What it tracks:** appointments booked, cancelled, and rescheduled on your Cal.com meeting links.
 
-    Alright, to set up a conversion event via a Webhook source, we're going to dive into the event settings and get that data flowing from your external platforms.
+    **Prerequisite integration:** Cal.com. If it is not connected the entry is locked and the form shows `Cal.com is not connected. Go to Settings → Integrations to connect.`
 
-    ## 1. Create the Webhook Source
-
-    First, find the event you want to track and click the edit icon.
-
-    ## 2. Map Your Fields
-
-    Once your external platform starts sending data, you'll need to tell our system how to connect the dots.
-
-    ## 3. Test Your Webhook
-
-    Before going live, it's a good idea to fire a test event.
-
-    ### AI Agent Data
-
-    If you're using our AI Agents, you'll want to map fields like **Company**, **City**, or **Address**. This gives the agent the context it needs to have meaningful conversations with your leads.
-
-    ## 4. Managing Webhook Logs
-
-    If something isn't looking right, or you just want to verify the data, check the **Requests** column in your conversion source list.
-
-    Once your mappings are saved, hit **Save Changes** and away you go! Your webhooks are now powering your conversion tracking.
-  </Accordion>
-
-  <Accordion title="Pixel">
-    <div style={{position: 'relative', paddingBottom: '57.9617834394904%', height: 0}}>
-  <iframe src="https://www.loom.com/embed/320dda9a65e84d83a4bd69bca3f167a1" frameBorder="0" webkitallowfullscreen mozallowfullscreen allowFullScreen style={{position: 'absolute', top: 0, left: 0, width: '100%', height: '100%'}} />
-</div>
-
-    <Expandable title=" ">
-      Alright, so the next conversion source that we're going to be looking at is the pixel conversion source, meaning you're going to put our pixel on your website, and then we're going to have two ways to fire the conversion source. Number one is going to be a URL parameter, so basically there's going to be something that you will add inside of your URL, and then whenever that URL with our pixel is visited, we will trigger it, we'll find the contact, and we'll count it as a conversion source. The other way we can do it is the body tracking. Snippet, and this is going to be basically if you're familiar with how the Metapixel works, where you can go ahead, you can actually grab, you know, it's going to say something like FBQ, uh, lead, schedule, add to cart, whatever it is, and then you copy it and you paste it inside of the body tag of the page, again, not the header, that's going to be specifically the body of a page, then we can do the exact same thing. So they're both very functional, it's just one is going to be inside the body, and one is going to be as it the URL parameter. URL parameters are typically going to be used for redirects. So if you have, let's say, a lead form and you redirect the lead form to a certain page, only if they're qualified and you're like, hey, I just want to use a pixel to count that as qualified, then you'd come in here, you'd set up the pixel URL parameter, we could say qualified Lead, lead, and then we have what's called a delay. Dedupe window. So a dedupe window is what happens if someone refreshes, right? Like how long do we not want to count a new conversion? So we give you right out the gate the ability to modify it. For something like Qualified Lead, to be honest, I would probably have a dedupe of at least, like, at least, you know, two days, one, two days, meaning if I have a URL parameter and someone goes to that website and they click on it, we're gonna count one conversion. Now, if they refresh that website 7,000 times within two days, we're not gonna count that conversion at all. We're just gonna count the original first one and we're gonna ignore the 6,999. Now, if on day three, he visits it one more time, then we will count it again. So again, it just gives you the ability to find grain and control how long you want the dedupe window to be. Again, I would typically set up at least two days. That way, if someone accidentally has that page open and they refresh it for whatever reason, we don't want to count it. We don't want to skew the data. So this is always something that you can do. Now, after that, we're gonna go ahead. We're going to hit submit. Then you're gonna see down here. It's going. You can go ahead. You can copy that URL parameter. Then we're going to go ahead. Let's if it's a redirect URL again, just copy and paste this inside the redirect. I'm just gonna show you how this works in real time so you can see. But we basically just have this inside the redirect URL. Make sure that you copy and paste what we've given you to copy and paste. And then whenever this fires, it will go ahead. It will load just loading a blank white screen for testing. And then if I come back here, you'll see we have one qualified lead because of that fire. Now, if I come back here and I refresh it, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, I'm just going to be an idiot and keep refreshing it just to show you again the de-dupe how it works. If I come back here and I refresh it, it's only going to show one. So we're not counting every other page view. It's going to take at least two days for me to be able to re-trigger this using the URL parameter. So that is how it works for URL parameters. Again, same concept for like the body tracking snippet. You're going I'm going go ahead and start. Add your de-dupe window. This is the body snippet. So we can go ahead and copy the pixel snippet. And then if I go back to high level, you'll see here, I'm going to go ahead. I'm going to hit edit in high level, and then I'm going to find the body code, which should be somewhere up here, this tracking code. And then we are going to go ahead. We're going to put this in here and then we're going to go ahead and hit save. Then we go to go, we'd hit publish. Again, same concept. We would load this page. When we load this page, you obviously wouldn't need the URL parameter there because we added it inside the body. It's hidden, so no one can see it. But when you would load this page, that script would fire off in the background, send it off to our server, and our server would pick it up as a conversion. Again, this is going to be a bit more on the technical side. You have to understand URL parameters. You know how pixel tracking codes work. If you have or need any help, and you think, you know, you want to use this, then please do reach out to our support team. We're more than happy to help.
-    </Expandable>
-
-    # Pixel Conversion Sources
-
-    Alright, the next conversion source we’re going to look at is the **Pixel** source. This is for when you already have our pixel installed on your website and you want to trigger a specific conversion event when a user takes an action or lands on a specific page.
-
-    We have two ways to fire these conversions: **URL Parameters** and **Body Tracking Snippets**.
-
-    ## 1. URL Parameters
-
-    This method is perfect for redirects. If you redirect a lead to a specific "Thank You" page only after they qualify, you can use a URL parameter to count them as a "Qualified Lead."
+    <Frame caption="The Cal.com source form: pick when to track, then which meeting links count.">
+      <img src="/images/ad-tracking/conversion-sources/cal-com/01-cal-com-form.png" alt="Create Conversion Source dialog with Integration set to Cal.com, showing the When to track dropdown and the note that bookings are synced every 15 minutes by polling." />
+    </Frame>
 
     <Steps>
-      <Step title="Select Pixel Type">
-        Inside your event settings, click **Add Source**, select **Pixel**, and choose **URL Parameter**.
+      <Step title="Pick Cal.com in the Integration dropdown">
+        The form loads your Cal.com account. While it checks you will see **"Checking Cal.com status..."**.
       </Step>
-      <Step title="Configure & Set De-dup">
-        Give your source a name and set your **Deduplication (De-dup) Window**.
 
-        **What is a De-dup window?** This prevents us from double-counting conversions if someone refreshes the page. For something like a lead, I'd typically set this to at least **2 days**. This means if they refresh 7,000 times in 48 hours, we still only count it once.
+      <Step title="Set When to track">
+        Choose one event. The dropdown placeholder is **"Select when to count a conversion"**. Options:
+
+        | Option | Fires when |
+        | --- | --- |
+        | **Booking Created** | Someone books a slot on one of your meeting links |
+        | **Booking Cancelled** | A booked meeting is cancelled |
+        | **Booking Rescheduled** | A booked meeting is moved to a new time |
+
+        Each option has a hover tooltip explaining it. Most people want **Booking Created** for a "Booked Call" conversion.
       </Step>
-      <Step title="Copy and Append">
-        Click **Submit**, then copy the generated parameter. You'll simply append this to the end of your success URL (e.g., `yourwebsite.com/thanks?conv=12345`).
+
+      <Step title="Choose your Meeting Links">
+        After you pick an event, a **Meeting Links** checkbox list appears listing your Cal.com event types, each with its length in minutes. Tick the ones that should count. A counter below reads **"X meetings selected"**.
+
+        If nothing loads you will see **"No event types found. Create an event type in Cal.com first."** If the list fails you will see **"Failed to load meeting links. Try reconnecting Cal.com in Settings."**
+      </Step>
+
+      <Step title="Save">
+        Click **Submit**. The dialog closes and the source appears in the conversion's **Sources** table.
       </Step>
     </Steps>
 
-    ## 2. Body Tracking Snippets
+    <Note>
+      Cal.com bookings are pulled by polling, not by instant webhook. The form states: **"Bookings are synced every 15 minutes via polling."** Allow up to 15 minutes before a test booking appears.
+    </Note>
+  </Accordion>
 
-    If you’re familiar with how the Meta (Facebook) pixel fires standard events, this will feel very natural. This is a small script you paste into the body of a specific page.
+  <Accordion title="Calendly">
+    **What it tracks:** meetings scheduled and cancelled through your Calendly scheduling links.
+
+    **Prerequisite integration:** Calendly. When not connected the form shows `Calendly is not connected. Go to Settings → Integrations to connect.`
+
+    <Frame caption="The Calendly source form: choose the event, then tick the calendars that count.">
+      <img src="/images/ad-tracking/conversion-sources/calendly/01-calendly-form.png" alt="Create Conversion Source dialog with Integration set to Calendly, showing the When to track dropdown for choosing Meeting Scheduled or Meeting Canceled." />
+    </Frame>
 
     <Steps>
-      <Step title="Select Snippet Type">
-        Choose **Body Tracking Snippet** from the Pixel Type dropdown.
+      <Step title="Pick Calendly in the Integration dropdown">
+        While the connection is verified you will see **"Checking Calendly status..."**.
       </Step>
-      <Step title="Copy the Snippet">
-        Once you hit submit, copy the generated code. It'll look like a small script tag starting with `corq('track', ...)`.
-      </Step>
-      <Step title="Install on Your Page">
-        Go to your website builder (like GoHighLevel, as shown in the video) and find the **Tracking Code** or **Custom JS** section for that specific page.
 
-        Paste the snippet into the **Body/Footer Tracking** area—not the header. Hit **Save** and **Publish**.
+      <Step title="Set When to track">
+        Placeholder: **"Select when to count a conversion"**. Options:
+
+        | Option | Fires when |
+        | --- | --- |
+        | **Meeting Scheduled** | An invitee books a time |
+        | **Meeting Canceled** | A booked meeting is cancelled |
+
+        Use **Meeting Scheduled** for a booked-call conversion.
+      </Step>
+
+      <Step title="Choose your Calendars">
+        A **Calendars** checkbox list appears showing your Calendly event types with their duration in minutes. Only **active** event types are listed, archived or disabled ones are hidden. Tick the ones that count. A counter reads **"X calendars selected"**.
+
+        Empty state: **"No event types found. Create a scheduling link in Calendly first."** Load failure: **"Failed to load calendars. Go to Settings → Integrations to reconnect Calendly."**
+      </Step>
+
+      <Step title="Confirm the connected account and save">
+        Below the list the form shows **"Connected: your@email.com"** so you can confirm you are pulling from the right Calendly account. Click **Submit**.
       </Step>
     </Steps>
 
-    ## Testing Your Setup
+    <Warning>
+      Calendly refresh tokens are single-use and expire. If bookings suddenly stop arriving, reconnect Calendly at **Settings → Integrations** and check this source still lists your calendars.
+    </Warning>
+  </Accordion>
 
-    Once you’ve added your parameter or snippet, load the page in your browser.
+  <Accordion title="ClickFunnels">
+    **What it tracks:** form submissions, appointments, CRM opportunities, one-time orders, subscriptions, and invoices from a ClickFunnels workspace. Purchase events carry revenue.
+
+    **Prerequisite integration:** ClickFunnels. When not connected: `Connect ClickFunnels in Dashboard → Integrations first.`
+
+    <Frame caption="The ClickFunnels source form starts with the workspace picker.">
+      <img src="/images/ad-tracking/conversion-sources/clickfunnels/01-clickfunnels-form.png" alt="Create Conversion Source dialog with Integration set to ClickFunnels, showing the required ClickFunnels Workspace dropdown before any event can be chosen." />
+    </Frame>
+
+    <Steps>
+      <Step title="Pick ClickFunnels, then choose a Workspace">
+        **ClickFunnels Workspace** (required), placeholder **"Select a workspace"**. Pick which connected workspace this source listens to. Changing the workspace clears every selection below it.
+      </Step>
+
+      <Step title="Pick the ClickFunnels Event">
+        **ClickFunnels Event** (required), placeholder **"Select an event to track"**. Events are grouped by category:
+
+        | Category | Events |
+        | --- | --- |
+        | **Forms** | Form Submission |
+        | **Appointments** | Appointment Booked |
+        | **Sales (CRM)** | Opportunity Moved to Stage · Opportunity Won |
+        | **Orders** | One-time Order Completed · One-time Order Invoice Paid |
+        | **Subscriptions** | Subscription First Payment · Subscription Activated · Subscription Trial Started · Trial Converted to Paid · Subscription Invoice Paid |
+        | **Invoices** | Any Invoice Paid (LTV catch-all) |
+
+        A description of the selected event appears under the dropdown.
+      </Step>
+
+      <Step title="Apply optional filters (depends on the event)">
+        Only the filters that apply to your event appear:
+
+        - **Filter to specific funnels (optional)**: shown for **Form Submission**. Search box, **Select All** / **Deselect All**, and a counter reading **"X of Y selected"**. If every funnel is selected the form notes: *"All funnels selected — equivalent to no filter. New funnels created in ClickFunnels will also be accepted automatically."*
+        - **Filter to specific products (optional)**: shown for order and subscription events. If none exist: *"No products found. Leave empty to track all products."* Leaving it empty tracks all products.
+        - **Pipeline (optional)**: shown for **Opportunity Won**. Defaults to **All pipelines**. Scope it to one pipeline to exclude, say, a Test pipeline.
+      </Step>
+
+      <Step title="For Opportunity Moved to Stage, pick pipeline and stages">
+        **Select Pipeline** (required), then **Select Stages to Track** (required) with **Select All** / **Deselect All**.
+
+        If no pipelines exist: *"No pipelines found in your ClickFunnels workspace. Install the Opportunities app and create at least one pipeline first."*
+      </Step>
+
+      <Step title="Save">
+        Click **Submit**. Any error from ClickFunnels is shown in a red alert inside the dialog.
+      </Step>
+    </Steps>
 
     <Tip>
-      You don't need the URL parameter visible in the address bar if you used the Body Snippet; the script fires silently in the background.
+      **Any Invoice Paid (LTV catch-all)** is the right choice when you want total lifetime revenue per customer rather than a single purchase moment. Use the more specific order and subscription events when you want to separate first purchases from renewals.
     </Tip>
-
-    Go back to your Conversion Setup dashboard and refresh the view. You should see a "1" appear in the **Success** column, confirming the pixel is communicating perfectly with our server.
-
-    This is a bit more on the technical side, so if you're feeling stuck with URL parameters or code snippets, just reach out to the support team and we’ll help you get it sorted!
   </Accordion>
 
-  <Accordion title="CSV">
+  <Accordion title="Close.io">
+    **What it tracks:** form submissions, opportunities won and moved, meetings, calls, and contact activity in Close. Opportunity events can carry revenue.
+
+    **Prerequisite integration:** Close.io. When not connected: `Close.io is not connected. Go to Settings → Integrations to connect.`
+
+    <Frame caption="The Close.io source form: choose when to count a conversion.">
+      <img src="/images/ad-tracking/conversion-sources/close-io/01-close-io-form.png" alt="Create Conversion Source dialog with Integration set to Close.io, showing the When to track dropdown used to pick the Close event type." />
+    </Frame>
+
+    <Steps>
+      <Step title="Pick Close.io, then set When to track">
+        Placeholder: **"Select when to count a conversion"**. Options, each with a hover tooltip:
+
+        **Form Submitted** · **Opportunity Won** · **Opportunity Stage Changed** · **Meeting Scheduled** · **Meeting Completed** · **Call Completed** · **Contact Created** · **Contact Updated** · **Custom Activity**
+      </Step>
+
+      <Step title="For Form Submitted, pick the form">
+        A **Close.io form** dropdown appears, placeholder **"Select which form to track"**.
+
+        If you have none: *"No forms found. Create a form in Close → Settings → Customization → Forms first."*
+      </Step>
+
+      <Step title="For Opportunity Won or Opportunity Stage Changed, pick pipeline and statuses">
+        **Pipeline** (placeholder **"Select a pipeline"**). If none: *"No pipelines found. Create at least one pipeline + statuses in Close first."*
+
+        Then a status checklist, labelled by event:
+
+        - **Opportunity Won** → **"Won statuses to count"**. Only statuses whose type is *won* are selectable. If the pipeline has none: *"This pipeline has no Won statuses. Pick a different pipeline or use OpportunityStageChange to track any status."*
+        - **Opportunity Stage Changed** → **"Statuses to track"**. Every status is selectable. Each row shows its status type on the right.
+      </Step>
+
+      <Step title="Decide on revenue (opportunity events only)">
+        **Track revenue from opportunity**, a checkbox. When on, the opportunity's `value` is captured as one-time cash collected. Uncheck to record the stage change with no revenue attached.
+
+        The form notes that for recurring revenue you should connect Stripe or Whop instead.
+      </Step>
+
+      <Step title="Save">
+        For **Meeting Scheduled**, **Meeting Completed**, **Call Completed**, **Contact Created**, and **Custom Activity** there is nothing else to configure. The form states: *"No additional configuration required. The source will match every &lt;event&gt; event for this Close organization."* Click **Submit**.
+      </Step>
+    </Steps>
+
+    <Note>
+      **Verified live:** on a business with Close connected, the form renders the **When to track** picker as described, so Close.io is fully configurable from this dialog.
+
+      `TODO: verify live`, two details still need a pass on a Close account with pipelines and forms set up: that all nine event types behave as documented, and what **Contact Updated** does. **Contact Updated** is the one event that shows neither extra configuration nor the "no additional configuration required" helper text, so it is unclear from the UI alone whether it needs scoping.
+
+      If Close.io is connected but the form says *"Close.io is not connected"*, the integration has been disconnected on that business even though old Close sources still exist. Reconnect it at **Settings → Integrations**.
+    </Note>
+  </Accordion>
+
+  <Accordion title="CSV Upload">
+    **What it tracks:** historical leads and sales imported from a file. This is how you backfill data from a previous platform, or import conversions that never touched your website.
+
+    **Prerequisite integration:** none. Always available.
+
     <div style={{position: 'relative', paddingBottom: '57.84597563803706%', height: 0}}>
   <iframe src="https://www.loom.com/embed/ea33cd1f07de4ecea8a00d40c348859c" frameBorder="0" webkitallowfullscreen mozallowfullscreen allowFullScreen style={{position: 'absolute', top: 0, left: 0, width: '100%', height: '100%'}} />
 </div>
 
-    <Expandable title=" ">
+    <Expandable title="Video transcript">
       Alright, so the next one we're going to go over is the CSV upload. This is if you want to upload leads or if you want to upload something from another provider or platform. Uhm, so, I am going to call this one, We do have a HiROS one-click export, so I'm not doing this because this is exactly how we do it. I'm just going to say this is probably, you know, maybe what once was, but I don't have any other examples live right now that I could do. So, first thing I'm going to do is I'm going to go ahead and hit continue, then it's going to ask me to draw my CSV, which I'm going to do right now. So, after you've gone ahead and you've added your CSV, then it's going to ask you to go ahead and match the field. So, this is our system field, right? Contact email, contact phone, those are very important. So, you're going to go ahead, you're going to map email, well, it's going to probably pre-map as you see this one pre-mapped for on your email phone, then you can go ahead and you can map the name first. Last, if there's a conversion value that you want to add in here as well, because maybe it's a purchase, you can go ahead, you can map the column that had the revenue, the currency, I think you can just choose a standard currency as well, or you can use the columns if you have it in the column, so there's two ways of doing it. There's also the conversion date, so make sure that you have the right date associated as well. Then, if you want to add ads, right, last touch and first touch, you can go ahead and you can add the ad, well, this one actually does have an ad, cool, uh, if you don't have first touch, that's fine, just a last touch there, then you'd go ahead, you'd hit continue, you can remove duplicates, so that way it would only count the first one, so this is like, I don't know, you pulled in a bunch of leads or something and you don't want duplicates firing off in here, if you want every single one, then just leave that as is, I'm just gonna, actually, whatever, leave it like that, then you're gonna go ahead and hit preview import, we would then show you all the data, the ad match rate, I don't have any ads or any ad providers connected, this is just a test account, so that's why it's showing zero, but if you did have ads matched and you, again, you provided when you're mapping the actual name of the ad, then we would try to find a name of the ad matching against your CSV import and we would go ahead and we'd match it and show you where it all match, as well as like the. the ads, etc, etc. Uhm, alright, cool, nice, 400 rows will be skipped because it's missing email and phone, so that's also done. Then you'd go ahead, you'd hit start import, and then that's it, it would just basically start importing in. Now, one thing that I would recommend doing is making sure that you have the AI ad optimization turned on and set up before you do this, so that's going to be in a later video. If you have to update and upload a CSV, just pause, wait, go through the onboarding, do the AI ad optimization first, then come back and do this, because if this is Map, let's say Lead, and you're sending it back to Meta as Lead, or Sale, and you're sending it back to Meta as Sale, all of these 6,930 will send back to Meta, and it will train your pixel, so it's just a nice little hack where you can blast a bunch of data off to your pixel, and that's pretty much it when it comes to a CSV upload. Again, if you do have any questions, Please. Please feel free to reach out to our support, we're more than happy to assist.
     </Expandable>
 
-    CSV Lead & Conversion Imports If you need to upload leads or conversion data from another platform, the CSV upload is your go-to tool. Here is how to get your data synced and mapped correctly.
+    <Frame caption="Naming a CSV source before the import wizard opens.">
+      <img src="/images/ad-tracking/conversion-sources/csv-upload/01-csv-upload-form.png" alt="Create CSV Source dialog showing the Source Name field with the placeholder e.g., Historical Leads Import, before the upload wizard starts." />
+    </Frame>
 
-    <Note>
-      **Pro Tip:** Before you start your import, make sure you have **AI Ad Optimization** turned on and set up. When you upload your CSV, the system can send that data back to your Meta pixel to help train it, giving you a major leg up on your ad performance.
-    </Note>
+    <Steps>
+      <Step title="Pick CSV Upload and name the source">
+        A **Create CSV Source** dialog opens with a single **Source Name** field, placeholder **"e.g., Historical Leads Import"**. Name it after what you are importing so you can find it later. Click **Continue**.
+      </Step>
 
-    Step 1: Create the Source Select CSV Upload from the integration menu. Give your source a clear name (e.g., "Historical Leads Import"). Click Continue.
+      <Step title="Upload: drag in your file">
+        Drag and drop your CSV, or click to browse. The maximum file size is **100 MB**. Larger files are rejected with **"File is too large. Max 100MB."**
 
-    Step 2: Upload and Map Your Data Drag and drop your CSV file into the uploader. Once uploaded, you’ll need to map your file’s columns to the system fields: Required Fields: Ensure Contact Email and Contact Phone are mapped correctly, as these are vital for identifying your leads. Identity Fields: Map First Name and Last Name. Value Fields: If you’re importing sales, map the Conversion Value and Currency columns. Time & Attribution: Map the Conversion Date. You can also map Ad Name (Last Touch) or Ad Name (First Touch) if you want the system to try and match the data against your existing ad campaigns.
+        When parsing finishes you see **"Parsed N rows from CSV"** and the wizard advances.
+      </Step>
 
-    Step 3: Data Cleaning You have the option to Remove Duplicates. Enabled: The system will only count the first conversion it finds for a specific contact. Disabled: Every row in your CSV will be imported as a unique conversion event.
+      <Step title="Map: match your columns to Cortana fields">
+        The wizard pre-fills the mappings it can guess. The available target fields are:
 
-    Step 4: Preview and Import Before finalizing, the system will show you an Attribution Breakdown: Ad Match Rate: See how many leads successfully matched to your existing ad data. Total Revenue: Verify the total value of the import. Invalid Rows: Review any rows that will be skipped (usually due to missing email or phone data). Once everything looks good, hit Start Import. Your data will begin syncing immediately, and you’ll see the progress update in real-time on your dashboard.
+        | Field | Category | Required |
+        | --- | --- | --- |
+        | **Contact Email** | Contact | Email **or** phone required |
+        | **Contact Phone** | Contact | Email **or** phone required |
+        | **First Name** | Contact | Optional |
+        | **Last Name** | Contact | Optional |
+        | **Conversion Value ($)** | Conversion | Optional |
+        | **Currency** | Conversion | Optional |
+        | **Conversion Date** | Conversion | Required |
+        | **Ad Name (Last Touch)** | Attribution | Optional |
+        | **Ad Name (First Touch)** | Attribution | Optional |
+
+        For **Currency** you can either map a column from your file or pick a fixed standard currency (USD, EUR, GBP, CAD, AUD, JPY, CHF, INR, BRL and more) that applies to every row.
+
+        If you are re-uploading to an existing CSV source, your previous mappings are pre-filled and a banner explains you can change them if your file structure changed.
+      </Step>
+
+      <Step title="Clean: decide on duplicates">
+        Choose whether to **remove duplicates**. Enabled, only the first conversion found for a given contact is counted. Disabled, every row imports as its own conversion.
+      </Step>
+
+      <Step title="Preview: check the numbers before committing">
+        The preview shows the **ad match rate** (how many rows matched to existing ad data), the **total revenue** being imported, and the count of **invalid rows** that will be skipped. Rows are skipped when they have neither an email nor a phone number.
+      </Step>
+
+      <Step title="Start Import">
+        Click to import. Progress updates in real time, and the rows land in your conversion when it completes.
+      </Step>
+    </Steps>
+
+    <Warning>
+      Set up **AI Ad Optimization** *before* you run a large CSV import. If the conversion is wired to send events back to Meta, every imported row will be sent to your pixel. Doing it in the right order trains your pixel with the whole history in one pass; doing it after means the import is never sent.
+    </Warning>
 
     <Tip>
-      If you see rows being skipped under "Invalid Rows," double-check your CSV to ensure every contact has at least an email or a phone number before re-uploading.
+      Every contact needs at least an email or a phone number. If the preview shows a large number of skipped rows, that is almost always the cause. Fix the file and re-upload rather than importing a partial file.
     </Tip>
   </Accordion>
 
-  <Accordion title="WHOP">
+  <Accordion title="Fanbasis">
+    **What it tracks:** payments, refunds, subscriptions, and disputes from a Fanbasis account. Payment events carry revenue.
+
+    **Prerequisite integration:** Fanbasis. If it is not connected you get `Please connect Fanbasis first. Go to Settings → Integrations to connect.`
+
+    <Note>
+      Fanbasis has its own dedicated dialog. Selecting **Fanbasis** in the **Integration** dropdown immediately opens **"Add Fanbasis conversion source"** rather than redrawing the shared form.
+    </Note>
+
+    <Frame caption="Fanbasis opens its own dialog with account, event, and payment filters.">
+      <img src="/images/ad-tracking/conversion-sources/fanbasis/01-fanbasis-form.png" alt="Add Fanbasis conversion source dialog showing the Fanbasis account picker, the Event dropdown, and the Payment Filters section with its Enable Payment Filter toggle." />
+    </Frame>
+
+    <Steps>
+      <Step title="Pick the Fanbasis account">
+        **Fanbasis account**, placeholder **"Pick an account"**. Only accounts whose status is *connected* are listed. The primary account is marked with a star, and sandbox accounts carry an amber **Sandbox** badge so you do not accidentally track test money.
+
+        If none are connected: *"No connected Fanbasis accounts found. Connect one in Integrations first."*
+      </Step>
+
+      <Step title="Pick the Event">
+        **Event**, placeholder **"Pick an event"** (or **"Select an account first"** until you choose an account). Each option shows a category badge and a tooltip with the raw event name. The events eligible to feed a conversion are:
+
+        | Event | Category |
+        | --- | --- |
+        | **Payment Succeeded** | payments |
+        | **First Fanbasis Purchase** | payments |
+        | **Payment Refunded** | refunds |
+        | **Payment Dispute Opened** | refunds |
+        | **Subscription Created** | subscriptions |
+        | **Subscription Renewed** | subscriptions |
+        | **Subscription Canceled** | subscriptions |
+      </Step>
+
+      <Step title="Set the Product filter">
+        Shown only for events that carry product context. **An empty selection means all current and future products feed this source.** Select specific products to scope the conversion to just those.
+
+        For events with no product context the form says: *"&lt;Event&gt; does not include product context — every event will feed this source."*
+      </Step>
+
+      <Step title="Add Payment Filters if you need them">
+        Optional qualification rules, for example a minimum payment amount. See **Payment Filters** in the settings reference below.
+      </Step>
+
+      <Step title="Save">
+        Click **Add source**.
+      </Step>
+    </Steps>
+
+    <Tip>
+      Use **First Fanbasis Purchase** for a "New Customer" conversion and **Payment Succeeded** for total revenue. Putting both on the same conversion will double-count your money.
+    </Tip>
+  </Accordion>
+
+  <Accordion title="Fathom">
+    **What it tracks:** Fathom call recordings, once the recording, transcript, and summary are ready.
+
+    **Prerequisite integration:** Fathom. When not connected: `Fathom is not connected. Go to Settings → Integrations to connect.`
+
+    <Frame caption="The Fathom source form offers a single event.">
+      <img src="/images/ad-tracking/conversion-sources/fathom/01-fathom-form.png" alt="Create Conversion Source dialog with Integration set to Fathom, showing the When to track dropdown whose only option is Meeting Recorded." />
+    </Frame>
+
+    <Steps>
+      <Step title="Pick Fathom in the Integration dropdown">
+        While the connection is checked you will see **"Checking Fathom status..."**.
+      </Step>
+
+      <Step title="Set When to track">
+        Placeholder: **"Select when to count a conversion"**. Fathom currently exposes a single event:
+
+        | Option | Fires when |
+        | --- | --- |
+        | **Meeting Recorded** | A Fathom call recording is ready with transcript and summary |
+      </Step>
+
+      <Step title="Save">
+        Click **Submit**. There is nothing else to configure.
+      </Step>
+    </Steps>
+
+    <Note>
+      Because the event fires when the recording is *processed* rather than when the call happened, expect a delay between the meeting ending and the conversion appearing.
+    </Note>
+  </Accordion>
+
+  <Accordion title="Forms / Appointments">
+    **What it tracks:** submissions and bookings on Cortana's own native booking forms. This is the source to use when you built the form inside Cortana rather than in an outside tool.
+
+    **Prerequisite integration:** none. Always available. You do need at least one booking form (event type) to already exist.
+
+    <Frame caption="The native Forms / Appointments source: pick one event, then the forms.">
+      <img src="/images/ad-tracking/conversion-sources/forms-appointments/01-forms-appointments-form.png" alt="Create Conversion Source dialog with Integration set to Forms / Appointments, showing the required Event dropdown for Partial Submission, Form Submission, or Appointment Booked." />
+    </Frame>
+
+    <Steps>
+      <Step title="Pick Forms / Appointments, then choose the Event">
+        **Event** (required), placeholder **"Select an event to track"**. Three options:
+
+        | Option | Meaning |
+        | --- | --- |
+        | **Partial Submission** | Started the form, did not submit |
+        | **Form Submission** | Completed the form |
+        | **Appointment Booked** | Booked a time |
+
+        The form notes: *"Each source tracks one event. Create a separate conversion for each stage you want to count and map independently."*
+      </Step>
+
+      <Step title="Choose which forms to track">
+        Once an event is picked, a **"Which forms to track?"** checkbox list appears with the note *"Only the selected booking forms count toward this event."* Tick the forms that should feed this conversion.
+
+        If you have not built one yet: **"No booking forms yet. Create an event type first."**
+      </Step>
+
+      <Step title="Save">
+        Click **Submit**.
+      </Step>
+    </Steps>
+
+    <Tip>
+      **Partial Submission** is genuinely useful for diagnosing a leaky form. Put it on its own conversion, then compare its volume against **Form Submission** to see how many people start and abandon.
+    </Tip>
+  </Accordion>
+
+  <Accordion title="GoHighLevel">
+    **What it tracks:** form and survey submissions, appointments, and pipeline opportunities from a GoHighLevel sub-account. Opportunity events can carry revenue.
+
+    **Prerequisite integration:** GoHighLevel. When not connected: `Please connect GoHighLevel in Settings → Integrations first.`
+
+    <Frame caption="The GoHighLevel source form: account first, then event type.">
+      <img src="/images/ad-tracking/conversion-sources/gohighlevel/01-gohighlevel-form.png" alt="Create Conversion Source dialog with Integration set to GoHighLevel, showing the GoHighLevel account selector and the required Event Type dropdown." />
+    </Frame>
+
+    <Steps>
+      <Step title="Pick the GoHighLevel account">
+        **GoHighLevel account**, if you have only one sub-account connected it is shown and locked. With several, pick one; the primary is marked **(Primary)**. The note reads *"This source tracks conversions from the selected account only."*
+
+        Switching account clears every selection below it.
+      </Step>
+
+      <Step title="Pick the Event Type">
+        **Event Type** (required), placeholder **"Select an event type"**. Six events, each with a tooltip:
+
+        **Form Submission** · **Survey Submission** · **Appointment Booked** · **Appointment Status Changed** · **Opportunity Stage Changed** · **Opportunity Status Changed**
+      </Step>
+
+      <Step title="Form Submission: select your forms">
+        **Select Forms** (required). Search box, **Select All** / **Deselect All**, and a running count of selected forms. Forms already attached to this conversion are hidden.
+
+        Empty states: *"No forms found in your GoHighLevel account."* or *"All available forms have already been added to this conversion."*
+
+        Each selected form gets its own **Lead Filter** card so you can require, for example, a particular answer before it counts. A blue banner confirms: **"Entries will be synced automatically every 5 minutes."**
+      </Step>
+
+      <Step title="Survey Submission: select your surveys">
+        **Select Surveys** (required). Works exactly like forms: search, Select All / Deselect All, per-survey Lead Filter cards, and the same 5-minute sync banner.
+      </Step>
+
+      <Step title="Appointment Booked: select calendars">
+        **Select Calendars** (required), with a search box, **Select All** / **Deselect All**, and Prev / Next pagination when you have a lot of calendars. A Lead Filter card for **Appointment Booked** appears once at least one calendar is selected.
+
+        Empty state: *"No calendars found in your GoHighLevel account."*
+      </Step>
+
+      <Step title="Appointment Status Changed: calendars plus statuses">
+        **Select Calendars** (required), then **Track Status Changes** (required) as clickable chips with Select All / Deselect All:
+
+        **New** · **Confirmed** · **Showed** · **No Show** · **Cancelled** · **Invalid**
+
+        Pick **Showed** to track attendance rather than bookings.
+      </Step>
+
+      <Step title="Opportunity Stage Changed: revenue, dedup, pipeline, stages">
+        - **Track revenue from opportunity**, checkbox. When ticked, a currency picker appears (defaults to **USD**).
+        - **Only one entry per stage, per contact**, checkbox. When on, a contact moved into the same stage more than once is recorded once. Leave off to log every stage entry separately.
+        - **Select Pipeline** (required), then **Select Stages to Track** (required) with Select All / Deselect All.
+      </Step>
+
+      <Step title="Opportunity Status Changed: revenue, pipeline, statuses">
+        - **Track revenue from opportunity**, checkbox, with the same currency picker.
+        - **Select Pipeline** (required).
+        - **Track Status Changes** (required) as chips: **Open** · **Won** · **Lost** · **Abandoned**. Pick **Won** for closed deals.
+      </Step>
+
+      <Step title="Save">
+        Click **Submit**.
+      </Step>
+    </Steps>
+
+    <Warning>
+      There is no **Contact Tag Added** event in the picker. Tag tracking is deliberately disabled because GoHighLevel's webhook sends the contact's *entire* tag list rather than the tag that was just added, which caused phantom conversions whenever any unrelated tag was touched. To convert on a tag, use a **Webhook** source fired from a GoHighLevel workflow instead.
+    </Warning>
+
+    <Tip>
+      Turn on **Only one entry per stage, per contact** unless you specifically want to count re-entries. Deals that bounce between stages are the most common cause of inflated pipeline conversion counts.
+    </Tip>
+  </Accordion>
+
+  <Accordion title="HubSpot">
+    **What it tracks:** form submissions, meetings, deal stage changes, and contact property changes in HubSpot. Deal events can carry revenue.
+
+    **Prerequisite integration:** HubSpot. When not connected: `HubSpot is not connected. Go to Settings → Integrations to connect.`
+
+    <Frame caption="The HubSpot source form: choose when to count a conversion.">
+      <img src="/images/ad-tracking/conversion-sources/hubspot/01-hubspot-form.png" alt="Create Conversion Source dialog with Integration set to HubSpot, showing the When to track dropdown used to pick the HubSpot event type." />
+    </Frame>
+
+    <Steps>
+      <Step title="Pick HubSpot, then set When to track">
+        Placeholder: **"Select when to count a conversion"**. Options:
+
+        **Form Submitted** · **Meeting Booked** · **Meeting Updated** · **Deal Stage Changed** · **Custom Field Updated**
+      </Step>
+
+      <Step title="Form Submitted: pick the form">
+        **Form**, placeholder **"Select which form to track"**. If you have none: *"No forms found. Create a form in HubSpot Marketing → Forms first."*
+
+        Once selected, a **Lead Filter** card appears so you can require specific field answers before a submission counts.
+      </Step>
+
+      <Step title="Meeting Booked / Meeting Updated: pick meeting links">
+        A meeting-link selector appears. Choose which HubSpot meeting links should feed this conversion.
+      </Step>
+
+      <Step title="Deal Stage Changed: revenue, pipeline, stages">
+        - **Track revenue from deal**, checkbox.
+        - **Pipeline**, placeholder **"Select pipeline"**. If none: *"No deal pipelines found. Create a pipeline in HubSpot CRM first."*
+        - **Stages** (required), checkbox list of that pipeline's stages.
+      </Step>
+
+      <Step title="Custom Field Updated: pick the property and its values">
+        - **Contact property** (required), a searchable combobox, placeholder **"Select the property to watch"**. If none: *"No editable properties found on this HubSpot portal."*
+        - **Fire on any change (no value filter)**, checkbox. Tick it to convert on any change to that property.
+        - **Target values** (required when the checkbox is off), if the property has predefined options you get a checkbox list showing each label and its internal value. If it does not, you get a free-text box: type a value and press Enter (or click **Add**) to add it as a chip. The form warns these are matched **case-sensitively**.
+      </Step>
+
+      <Step title="Save">
+        Click **Submit**.
+      </Step>
+    </Steps>
+
+    <Warning>
+      **Custom Field Updated** depends on a webhook subscription on Cortana's HubSpot app. The form states it directly: the chosen property must be subscribed under the app's `contact.propertyChange` events, and if events do not fire after saving you need to contact support to add the subscription. Setting this up correctly in HubSpot is not enough on its own.
+    </Warning>
+  </Accordion>
+
+  <Accordion title="iClosed">
+    **What it tracks:** the full iClosed funnel, from a partial form entry through to the outcome the closer logs on the call.
+
+    **Prerequisite integration:** iClosed. When not connected: `iClosed is not connected. Go to Settings → Integrations to connect.`
+
+    <Frame caption="The iClosed source form covers the whole funnel from partial form to call outcome.">
+      <img src="/images/ad-tracking/conversion-sources/iclosed/01-iclosed-form.png" alt="Create Conversion Source dialog with Integration set to iClosed, showing the When to track dropdown with the placeholder Select an iClosed event." />
+    </Frame>
+
+    <Steps>
+      <Step title="Pick iClosed, then set When to track">
+        Placeholder: **"Select an iClosed event"**. Seven options, each with a detailed tooltip:
+
+        | Option | Fires when |
+        | --- | --- |
+        | **Form Submitted** | A visitor types an email or phone into your iClosed form, even if they never finish. Noisy but maximum coverage |
+        | **Lead Generated** | A visitor completes the form and clicks Continue, so iClosed marks them *Qualified*. Fires before they pick a slot, so it catches warm leads who did not book. Your core lead metric |
+        | **Lead Disqualified** | A visitor completes the form but fails the disqualification rules you set in iClosed |
+        | **Appointment Booked** | A lead picks a time slot after completing the form. Your main appointment metric |
+        | **Appointment Cancelled** | A booked call is cancelled by the lead or the closer |
+        | **Appointment Rescheduled** | A booked call is moved. One entry per reschedule |
+        | **Call Outcome** | The closer logs the outcome of a call |
+      </Step>
+
+      <Step title="Appointment Booked: optionally restrict to calendars">
+        A **Calendars** list appears with the note *"Only count bookings on the calendars you pick. Leave all unchecked to capture every calendar."*
+
+        If none load: *"No calendars found in iClosed. This source will capture bookings from every calendar."*
+      </Step>
+
+      <Step title="Call Outcome: optionally restrict to outcomes">
+        An **Outcomes** list appears: *"Only count calls with the outcomes you pick. Leave all unchecked to capture every outcome."* The trackable outcomes are:
+
+        **Sale** · **No Sale** · **Qualified** · **Unqualified** · **Approved** · **Rejected**
+      </Step>
+
+      <Step title="Review the summary and save">
+        The form shows an **Example** of the chosen event and a **How this works** panel explaining: *"We poll the iClosed API every 5 minutes and pull the latest &lt;event&gt; events into this source. No webhook setup needed."* Click **Submit** and ingestion starts on the next poll cycle.
+      </Step>
+    </Steps>
+
+    <Tip>
+      **Form Submitted** captures partial entries and includes bounces, so it will always be much higher than **Lead Generated**. Use **Lead Generated** as your lead metric and keep **Form Submitted** on a separate conversion if you want top-of-funnel volume.
+    </Tip>
+  </Accordion>
+
+  <Accordion title="Meta Ads">
+    **What it tracks:** lead form submissions from Facebook and Instagram lead ads. This is the source previously called *Meta Lead Forms*.
+
+    **Prerequisite integration:** Meta. When not connected: `Please connect Meta first. Go to Settings → Integrations to connect.` You must also enable the pages and forms you want to track in the **Meta Lead Form** tab first.
+
+    <div style={{position: "relative", paddingBottom: "57.903879559930516%", height: 0}}>
+  <iframe src="https://www.loom.com/embed/9c28beb09b1a413e9e0fecaf851e6c42" frameBorder="0" webkitallowfullscreen mozallowfullscreen allowFullScreen style={{position: "absolute", top: 0, left: 0, width: "100%", height: "100%"}} />
+</div>
+
+    <Expandable title="Video transcript">
+      Alright, so we're going to walk through how to set up Meta Lead Forms as a conversion source. It's a bit more, quote-unquote, complicated, and just because of the permissions behind Meta and how everything works. So, Meta Lead Forms are going to have its own tab that need a setup first. So you're going to come over here, under Conversion Setup, you're going to see there's a Meta Lead Forms tab. You're going to go ahead and you're going to click on it. Now, right out the gate, you probably don't have anything turned on, so you might say, you might see a little error message saying, click this page button so you can select your pages. Then you're going to click on the pages and you'll see access to all the different pages you have access to. Now, the ones that you want to turn on so we can track the forms, you're simply going to go ahead and you're going to turn them on. Then you're going to have what's called Connected Pages. So again, all pages are the ones that you all have access to inside of your Business Manager, you as a user, and then Connected Pages are basically going to be anything turned on that you want us to track. Now, once we're in here, you will then start seeing a bunch of different fields. And by default, most of them are going to be turned on. And then you can also come here and you can start mapping the field. So if I click map fields, you're going to see that right out the gate, we're automatically going to map email name and phone number for you. So that way, you don't have to come in and map all of them that you want right out the gate. The basic default, which is going to be name, email, and phone number is going to work for any of these, right? Like I can come in here, uh, email. I think this is just a lot of hiring to be honest. I don't even know what this is, but anyways, uh, you're going to see that any of the contact information like email name and phone number, we'll just, I can click here. They're going to automatically be mapped right now. If you, however, want to map more information, and this is particularly going to be useful if you have a, um, if you use AI agents and you want to pass the information to the AI agents, you can go ahead and you can map the fields to one of our contact custom fields. If you haven't watched the contact custom fields training video, go ahead and check it out. You'll understand how it is. If you're familiar with GoHighLevel or HubSpot, same concept. Inside of their CRM, you have contacts. The contacts can have custom fields. We have the same thing as well, and you can also add custom fields in here if you don't have one that you like, but this way you can actually map the data, and if you want an AI agent to have access to this information from the custom field, this is basically why we have this set up here. Now, asides from that, that's pretty much it. Once you set up the forms, sorry, once you set up the page and you have the forms turned on that you want to track, then we're going to track all the forms in here. If a form is turned off, then we're not going to track it. So that way, if you're like, hey, I don't want to track leads from here, bang, that's fine. Just come in and turn them off. By default, all of them are going to be on though, and yeah, once that is done, you can then head back over to conversion events. Now, let's say I want to track lead, then I'm going to set up a meta ads, lead form submissions, select the ad account that we have toggled on, and then we're going to go ahead and hit submit. Then every single time one of those leads fire off in that lead form, right? So we have this page. Every single time we get a lead that fires off at any of these, we're simply going to get them. Now, one caveat is meta is extremely, extremely terrible with the permissions here. It's super frustrating, super annoying. So what I would do is as a mandatory check, anytime you set this up, where you're going to go is you're going to search business.facebook.com forward slash settings. Okay. So that's business.facebook.com forward slash settings. Then you're going to hit enter. And then on the left-hand side, you're going to see integrations and you're going to see leads access. Okay. Please, go on the pages that I've you have turned on inside of Cortana that you want us to track the leads for you. Click on it. And then you're going to come in here and click on CRMs. Now, if you don't see Cortana AI, which would look something like this. So if you don't see it, you're like, what the hell? I don't see it. That's fine. You're going to come, you're going to hit assign CRM. You should see Cortana AI there. I'm just going to search as well, just to make sure that, all right, cool. Cortana AI. Then you're going to hit enter. You're going to hit confirm. And then after you have given us access to this, it'll work. Now, most of the time, this should just work by default. However, Meta is extremely weird. They have some really intense, I don't know, backend permissions and weird security restrictions that go on. And you might not have Cortana AI inside of there. So if that is the case, Please come in, verify always. Whenever you set up meta-lead forms. Come in here, business.facebook.com forward slash settings, integrations, lead access. Choose the pages that you have turned on. Come click on CRMs. And then make sure that Cortana AI is here. If not, you can go ahead and you can assign a CRM. And that is going to be how you set things up. Now, asides from that, if you do have Cortana AI in there. And you've gone ahead, you've turned on the Facebook page. Which again, in here that you want to track. And you have all the forms on. And if you want to go above and beyond and map some of the extra fields. So that way it can save inside of your CRM in here. And you save that data by the contacts. All that's good. And then again, lasting. Once you have all that set up, you're going to come, you're going to click the lead. You're going to add a new conversion source. You're going to select meta ads. You're going to do the lead form submissions. Select the ad account. Hit submit. And then every time, a lead form fires, it will send off to our system and it will come inside of here. Hopefully that makes sense. If you have any questions, please feel free to reach out to the support team. We're more than happy to assist you in any way we can.
+    </Expandable>
+
+    <Frame caption="The Meta Ads source form, with Track all forms on by default.">
+      <img src="/images/ad-tracking/conversion-sources/meta-ads/01-meta-ads-form.png" alt="Create Conversion Source dialog with Integration set to Meta Ads, showing Source set to Lead Form Submissions, the Ad Accounts dropdown, and the Track all forms toggle switched on with a Default badge." />
+    </Frame>
+
+    <Steps>
+      <Step title="Enable your pages and forms first">
+        Go to the **Meta Lead Form** tab inside **Conversion Setup**. Click the pages button and turn on the Facebook pages you want tracked. Enabled pages become **Connected Pages**, and their forms appear underneath.
+
+        By default all forms on a connected page are on. Turn off any form you do not want counted.
+      </Step>
+
+      <Step title="Map fields (optional)">
+        Click **Map Fields** on a form. Email, full name, and phone number are mapped automatically. Map additional questions to Contact Custom Fields if you want that data available to AI Agents or in the contact record.
+      </Step>
+
+      <Step title="Verify Lead Access in Facebook (do not skip)">
+        Meta will silently block lead delivery if Cortana is not assigned as a CRM:
+
+        1. Go to [**business.facebook.com/settings**](https://business.facebook.com/settings).
+        2. In the left sidebar open **Integrations → Lead Access**.
+        3. Click the page you are tracking.
+        4. Open the **CRMs** tab.
+        5. If **Cortana AI** is not listed, click **Assign CRM**, search for it, and hit **Confirm**.
+      </Step>
+
+      <Step title="Add the source and pick the Source and Ad Account">
+        Back in your conversion, click **Add Source** and pick **Meta Ads**.
+
+        - **Source**, the only option is **Lead Form Submissions**.
+        - **Ad Accounts**, placeholder **"Select ad account"**. Only active ad accounts are listed. If Meta is connected but nothing appears you will see **"No ad accounts found"**.
+      </Step>
+
+      <Step title="Choose Track all forms, or pick specific forms">
+        A **Track all forms** panel appears, carrying a **Default** badge, with the toggle **on**. Its description reads: *"All current and future lead forms are tracked. New forms you build in Meta count automatically."*
+
+        Toggle it off to pick individual forms. Forms already claimed by another source are disabled, and if another source already holds the catch-all, **Track all forms** is locked off and you must narrow to specific forms.
+
+        Saving with the toggle off and nothing selected fails with: `Pick at least one form, or turn "Track all forms" back on`.
+      </Step>
+
+      <Step title="Save">
+        Click **Submit**. Every lead on the selected forms now flows into this conversion.
+      </Step>
+    </Steps>
+
+    <Warning>
+      The **Lead Access → CRMs** check in Facebook is the single most common reason Meta lead forms produce zero conversions. Everything can look correct inside Cortana while Meta refuses to hand over the leads. Verify it every time you add a page.
+    </Warning>
+  </Accordion>
+
+  <Accordion title="Pixel">
+    **What it tracks:** a conversion fired directly from a page on your own website. Use it when there is no integration to connect, for example a custom thank-you page or a qualified-lead redirect.
+
+    **Prerequisite integration:** none, but your Cortana tracking script must already be installed on the page. See [**2) Setup Pixel**](/2-setup-pixel).
+
+    **Pixel** is a single entry in the picker with a **Pixel Type** dropdown inside the form offering two sub-types. Both are documented here.
+
+    <div style={{position: 'relative', paddingBottom: '57.9617834394904%', height: 0}}>
+  <iframe src="https://www.loom.com/embed/320dda9a65e84d83a4bd69bca3f167a1" frameBorder="0" webkitallowfullscreen mozallowfullscreen allowFullScreen style={{position: 'absolute', top: 0, left: 0, width: '100%', height: '100%'}} />
+</div>
+
+    <Expandable title="Video transcript">
+      Alright, so the next conversion source that we're going to be looking at is the pixel conversion source, meaning you're going to put our pixel on your website, and then we're going to have two ways to fire the conversion source. Number one is going to be a URL parameter, so basically there's going to be something that you will add inside of your URL, and then whenever that URL with our pixel is visited, we will trigger it, we'll find the contact, and we'll count it as a conversion source. The other way we can do it is the body tracking. Snippet, and this is going to be basically if you're familiar with how the Metapixel works, where you can go ahead, you can actually grab, you know, it's going to say something like FBQ, uh, lead, schedule, add to cart, whatever it is, and then you copy it and you paste it inside of the body tag of the page, again, not the header, that's going to be specifically the body of a page, then we can do the exact same thing. So they're both very functional, it's just one is going to be inside the body, and one is going to be as it the URL parameter. URL parameters are typically going to be used for redirects. So if you have, let's say, a lead form and you redirect the lead form to a certain page, only if they're qualified and you're like, hey, I just want to use a pixel to count that as qualified, then you'd come in here, you'd set up the pixel URL parameter, we could say qualified Lead, lead, and then we have what's called a delay. Dedupe window. So a dedupe window is what happens if someone refreshes, right? Like how long do we not want to count a new conversion? So we give you right out the gate the ability to modify it. For something like Qualified Lead, to be honest, I would probably have a dedupe of at least, like, at least, you know, two days, one, two days, meaning if I have a URL parameter and someone goes to that website and they click on it, we're gonna count one conversion. Now, if they refresh that website 7,000 times within two days, we're not gonna count that conversion at all. We're just gonna count the original first one and we're gonna ignore the 6,999. Now, if on day three, he visits it one more time, then we will count it again. So again, it just gives you the ability to find grain and control how long you want the dedupe window to be. Again, I would typically set up at least two days. That way, if someone accidentally has that page open and they refresh it for whatever reason, we don't want to count it. We don't want to skew the data. So this is always something that you can do. Now, after that, we're gonna go ahead. We're going to hit submit. Then you're gonna see down here. It's going. You can go ahead. You can copy that URL parameter. Then we're going to go ahead. Let's if it's a redirect URL again, just copy and paste this inside the redirect. I'm just gonna show you how this works in real time so you can see. But we basically just have this inside the redirect URL. Make sure that you copy and paste what we've given you to copy and paste. And then whenever this fires, it will go ahead. It will load just loading a blank white screen for testing. And then if I come back here, you'll see we have one qualified lead because of that fire. Now, if I come back here and I refresh it, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, I'm just going to be an idiot and keep refreshing it just to show you again the de-dupe how it works. If I come back here and I refresh it, it's only going to show one. So we're not counting every other page view. It's going to take at least two days for me to be able to re-trigger this using the URL parameter. So that is how it works for URL parameters. Again, same concept for like the body tracking snippet. You're going I'm going go ahead and start. Add your de-dupe window. This is the body snippet. So we can go ahead and copy the pixel snippet. And then if I go back to high level, you'll see here, I'm going to go ahead. I'm going to hit edit in high level, and then I'm going to find the body code, which should be somewhere up here, this tracking code. And then we are going to go ahead. We're going to put this in here and then we're going to go ahead and hit save. Then we go to go, we'd hit publish. Again, same concept. We would load this page. When we load this page, you obviously wouldn't need the URL parameter there because we added it inside the body. It's hidden, so no one can see it. But when you would load this page, that script would fire off in the background, send it off to our server, and our server would pick it up as a conversion. Again, this is going to be a bit more on the technical side. You have to understand URL parameters. You know how pixel tracking codes work. If you have or need any help, and you think, you know, you want to use this, then please do reach out to our support team. We're more than happy to help.
+    </Expandable>
+
+    <Frame caption="The Pixel source form: one entry, two sub-types in the Pixel Type dropdown.">
+      <img src="/images/ad-tracking/conversion-sources/pixel/01-pixel-form.png" alt="Create Conversion Source dialog with Integration set to Pixel, showing the Pixel Type dropdown where you choose URL Parameter or Body Tracking Snippet." />
+    </Frame>
+
+    <Steps>
+      <Step title="Pick Pixel, then choose the Pixel Type">
+        **Pixel Type**, placeholder **"Choose how the pixel fires"**. Two options:
+
+        | Sub-type | Use it when |
+        | --- | --- |
+        | **URL Parameter** | You control the destination URL, typically a redirect after a form or a qualification step |
+        | **Body Tracking Snippet** | You can edit the page's body code, and want the conversion to fire silently on page load |
+
+        Saving without choosing fails with: `Please choose URL Parameter or Body Tracking Snippet`.
+      </Step>
+
+      <Step title="Name the source">
+        **Source Name**, placeholder **"Ex: Thank you page, Webinar signup, etc."** for URL Parameter, or **"Ex: Checkout success pixel, Lead form pixel, etc."** for the body snippet.
+
+        Leave it blank and the source is named **URL Parameter** or **Body Pixel** by default. Name it properly instead; you will not remember which page it belongs to later.
+      </Step>
+
+      <Step title="Set the Dedup window">
+        **Dedup window**, a number plus a unit dropdown (**Seconds**, **Minutes**, **Hours**, **Days**).
+
+        This is how long the same contact is prevented from converting twice. Identity is matched by cookie, form data, and device fingerprint, the same logic that powers attribution.
+
+        The minimum is **30 seconds**. Enter less and the form warns *"Minimum is 30 seconds. Values below that will be clamped on save."* and clamps it server-side.
+      </Step>
+
+      <Step title="Body Tracking Snippet only: decide on revenue">
+        **Track revenue (capture order value & currency)**, checkbox.
+
+        Turn it on for purchase and checkout pixels. Order value and currency are auto-detected from your store's purchase data (Shopify, WooCommerce, GA4 / GTM), or you can pass them manually in the snippet. Leave it off for leads or add-to-cart so no revenue is attached.
+      </Step>
+
+      <Step title="Save, then install what you are given">
+        Click **Submit**, then collect the generated code from the source row:
+
+        - **URL Parameter**, you get a short parameter such as `?cor-conv=abc12345`. Append it to any URL where your tracking script is installed. The conversion fires when that page loads. This is what you paste into a form's redirect URL.
+        - **Body Tracking Snippet**, you get a small HTML snippet. Paste it into the `<body>` of the page, not the header. In most site builders this is the **Tracking Code** or **Custom JS** section, body or footer area. Save and publish the page.
+      </Step>
+
+      <Step title="Confirm it fired">
+        Load the page in your browser, then go back to the conversion and click **Refresh** above the Sources table. The source's counters should increase.
+      </Step>
+    </Steps>
+
+    <Tip>
+      Set the dedup window to at least **2 days** for a lead or qualified-lead pixel. Without it, a single person refreshing your thank-you page inflates the conversion count and skews every cost-per-lead number downstream.
+    </Tip>
+  </Accordion>
+
+  <Accordion title="Salesforce">
+    **What it tracks:** opportunity and lead progression, campaign responses, and arbitrary field changes on Contacts and Leads. Opportunity events can carry revenue.
+
+    **Prerequisite integration:** Salesforce. When not connected: `Please connect Salesforce first. Go to Settings → Integrations to connect.`
+
+    <Frame caption="The Salesforce source form: choose which Salesforce change counts.">
+      <img src="/images/ad-tracking/conversion-sources/salesforce/01-salesforce-form.png" alt="Create Conversion Source dialog with Integration set to Salesforce, showing the When to track dropdown for choosing between opportunity, lead, campaign, and field-change events." />
+    </Frame>
+
+    <Steps>
+      <Step title="Pick Salesforce, then set When to track">
+        Placeholder: **"Select when to count a conversion"**. Five options:
+
+        **Opportunity Stage Change** · **Lead Stage Change** · **Lead Conversion** · **Campaign Member Responded** · **Contact/Lead Field Change**
+
+        Changing this resets every field below it.
+      </Step>
+
+      <Step title="Opportunity Stage Change: pipeline, revenue, stages">
+        - **Pipeline**, placeholder **"Select pipeline"**. If none: *"No pipelines found. Make sure Salesforce has Opportunity stages configured."*
+        - **Revenue configuration**, choose which Salesforce field supplies the conversion value, or disable revenue capture entirely.
+        - **Stages** (required), checkbox list. Stages are annotated **(Won)** in green or **(Closed)** where applicable, so you can pick closed-won precisely.
+      </Step>
+
+      <Step title="Lead Stage Change: enable history tracking, then pick statuses">
+        This event needs Salesforce-side history tracking on the Lead Status field. The form gates on this and walks you through it, then lets you select which lead statuses count.
+      </Step>
+
+      <Step title="Lead Conversion: revenue only">
+        The form explains: *"A conversion will be tracked when a Salesforce Lead is converted to a Contact + Account + Opportunity. If an Opportunity is created, its value will be captured as the conversion value."*
+
+        Set the revenue field configuration and you are done.
+      </Step>
+
+      <Step title="Campaign Member Responded: nothing to configure">
+        The form explains: *"A conversion will be tracked when a Campaign Member's status changes to "Responded" in Salesforce."*
+      </Step>
+
+      <Step title="Contact/Lead Field Change: object, field, value">
+        - **Object Type**, **Contact** or **Lead**.
+        - **Field Name (API Name)** (required), placeholder **"e.g. Status__c or Lead_Score__c"**. The hint reads *"Use the Salesforce API name (custom fields end in \_\_c)"*.
+        - **Field Value (optional)**: placeholder **"e.g. Qualified (leave empty for any change)"**. Leave blank to convert on any change to that field.
+      </Step>
+
+      <Step title="Save">
+        Click **Submit**. The form confirms: **"Salesforce is polled every 5 minutes for new conversions."**
+      </Step>
+    </Steps>
+
+    <Note>
+      Unlike Opportunity history, **Lead** history tracking is opt-in on the Salesforce side. If **Lead Stage Change** produces nothing, history tracking on the Lead Status field is the first thing to check.
+    </Note>
+  </Accordion>
+
+  <Accordion title="Shopier">
+    **What it tracks:** paid Shopier orders, with revenue.
+
+    **Prerequisite integration:** Shopier. If it is not connected: `Please connect Shopier first. Go to Settings → Integrations to connect.`
+
+    <Note>
+      Like Fanbasis, Shopier opens its own dialog. Selecting **Shopier** in the **Integration** dropdown immediately opens **"Add Shopier conversion source"**.
+    </Note>
+
+    <Frame caption="Shopier opens its own dialog with a single choice.">
+      <img src="/images/ad-tracking/conversion-sources/shopier/01-shopier-form.png" alt="Add Shopier conversion source dialog showing the Payments to track dropdown for choosing All payments or First payment only." />
+    </Frame>
+
+    <Steps>
+      <Step title="Choose which payments to track">
+        **Payments to track**, placeholder **"Pick which payments to track"**. Two options:
+
+        | Option | Meaning |
+        | --- | --- |
+        | **All payments** | Every paid Shopier order is recorded (lifetime value) |
+        | **First payment only** | Only a contact's first payment is recorded (new deals closed). Repeat orders are skipped |
+
+        The description of whichever option you pick is shown underneath the dropdown.
+      </Step>
+
+      <Step title="Save">
+        Click **Add source**. The dialog confirms: **"Shopier is polled every few minutes. Only paid orders are recorded, with full attribution."**
+      </Step>
+    </Steps>
+
+    <Tip>
+      Use **First payment only** for a "New Customers" conversion and **All payments** for total revenue. Do not put both on the same conversion or your revenue will be counted twice.
+    </Tip>
+  </Accordion>
+
+  <Accordion title="Shopify">
+    **What it tracks:** the whole Shopify funnel, from viewing a product through checkout, paid orders, fulfilment, cancellations, and refunds. Order events carry revenue.
+
+    **Prerequisite integration:** Shopify. When not connected: `Please connect Shopify first. Go to Settings → Integrations to connect.`
+
+    <Frame caption="The Shopify source form: pick the event in customer-journey order.">
+      <img src="/images/ad-tracking/conversion-sources/shopify/01-shopify-form.png" alt="Create Conversion Source dialog with Integration set to Shopify, showing the Shopify Event dropdown listing events from View Product through Purchase (Paid) to Refund." />
+    </Frame>
+
+    <Steps>
+      <Step title="Pick Shopify, then choose the Shopify Event">
+        Placeholder: **"Select Shopify event"**. Events are listed in the order a real customer experiences them. Each shows a description on the right and an **Example** in a hover tooltip.
+
+        | Event | Type | Notes |
+        | --- | --- | --- |
+        | **View Product** | Pixel | |
+        | **Add Product To Cart** | Pixel | |
+        | **Cart Created (Shopify Plus)** | Webhook | Plus only |
+        | **Cart Updated (Shopify Plus)** | Webhook | Plus only |
+        | **Initiate Checkout** | Webhook | |
+        | **Checkout Updated** | Webhook | |
+        | **Abandoned Cart** | Webhook | |
+        | **Order Created** | Webhook | Fires before payment confirms |
+        | **Purchase (Paid)** | Webhook | The usual choice for a revenue conversion |
+        | **Order Fulfilled** | Webhook | |
+        | **Order Cancelled** | Webhook | |
+        | **Refund** | Webhook | |
+
+        Events marked **Plus** are hidden unless your store is on Shopify Plus. Events already used are disabled and show why, either *"Already added to this conversion"* or *"Already added to conversion: &lt;name&gt;"*.
+
+        If every event is taken: *"All available Shopify events have already been added to this conversion. Create a new conversion to track additional events."*
+      </Step>
+
+      <Step title="Follow whichever setup panel appears">
+        What happens next depends on the event type and how your store is connected:
+
+        - **Pixel events** (View Product, Add Product To Cart), a green panel confirms *"No setup needed — your Custom Pixel already streams this event to Cortana. Just click Save and conversions will start counting."*
+        - **Webhook events, OAuth-connected store**, a green panel confirms *"Cortana will install this webhook in your Shopify admin automatically when you click Save."*
+        - **Webhook events, manually-connected store**, a three-step setup card appears with the webhook URL and secret to copy into your Shopify admin. It then listens for a test event, and **Save** stays gated until one arrives.
+      </Step>
+
+      <Step title="Save">
+        Click **Submit**.
+      </Step>
+    </Steps>
+
+    <Warning>
+      **Order Created** fires before payment is confirmed, **Purchase (Paid)** fires after. Putting both on one revenue conversion double-counts every order. Pick one, and pick **Purchase (Paid)** unless you have a specific reason not to.
+    </Warning>
+  </Accordion>
+
+  <Accordion title="Stripe">
+    **What it tracks:** payments, checkouts, subscriptions, refunds, and recovery events from a Stripe account. Payment events carry revenue.
+
+    **Prerequisite integration:** Stripe. If no Stripe account is connected: `Please connect Stripe first. Go to Settings → Integrations to connect.`
+
+    <Frame caption="The Stripe source form: account first, then event.">
+      <img src="/images/ad-tracking/conversion-sources/stripe/01-stripe-form.png" alt="Create Conversion Source dialog with Integration set to Stripe, showing the required Stripe Account dropdown that must be chosen before the Stripe Event list appears." />
+    </Frame>
+
+    <Steps>
+      <Step title="Pick the Stripe Account">
+        **Stripe Account** (required), placeholder **"Select a Stripe account"**. Each entry shows the account name, email, or ID. Accounts not in live mode carry a **Test** badge.
+
+        Changing the account clears the product selection below.
+      </Step>
+
+      <Step title="Pick the Stripe Event">
+        **Stripe Event** (required), placeholder **"Select Stripe event"**. Each option shows a category badge and a tooltip describing it.
+
+        | Category | Events |
+        | --- | --- |
+        | **payments** | Payment Succeeded · First Stripe Purchase · Payment Failed |
+        | **checkout** | Checkout Completed · Checkout Abandoned |
+        | **subscriptions** | Subscription Started (Trials) · Subscription Started (Paid) · Subscription Started (All) · Subscription Payment · Subscription Canceled |
+        | **refunds** | Refund Issued |
+        | **outreach** | Payment Recovery Outreach · Subscription Canceled Outreach · Trial Ending Outreach · Chargeback Outreach · Subscription Paused Outreach · Checkout Abandoned Outreach · Refund Follow-up Outreach |
+
+        Once picked, a summary panel shows the raw event name and its description.
+      </Step>
+
+      <Step title="Filter to specific products (optional)">
+        Shown only for events that carry product information. Leave it empty to track all products.
+      </Step>
+
+      <Step title="Add Payment Filters if you need them">
+        Optional qualification rules, for example only counting payments over a minimum amount. See **Payment Filters** in the settings reference below.
+      </Step>
+
+      <Step title="Save">
+        Click **Submit**.
+      </Step>
+    </Steps>
+
+    <Warning>
+      Do not put **Payment Succeeded** and **First Stripe Purchase** on the same conversion. The first is every payment, the second is only a customer's first, and together they double-count new customers. Use **First Stripe Purchase** for a "New Customers" conversion and **Payment Succeeded** for total revenue.
+    </Warning>
+
+    <Tip>
+      **Subscription Started (All)** is the union of the trial and paid variants. Pick the specific one when you care about the difference between a trial signup and a paid signup, which is usually the case for reporting cost per paying customer.
+    </Tip>
+  </Accordion>
+
+  <Accordion title="Tally Forms">
+    **What it tracks:** form submissions from your Tally account.
+
+    **Prerequisite integration:** Tally. When not connected: `Please connect Tally first. Go to Settings → Integrations to connect.`
+
+    <Frame caption="The Tally Forms source form: a searchable multi-select of your forms.">
+      <img src="/images/ad-tracking/conversion-sources/tally-forms/01-tally-forms-form.png" alt="Create Conversion Source dialog with Integration set to Tally Forms, showing the searchable Tally Forms list where you tick which forms count as this conversion." />
+    </Frame>
+
+    <Steps>
+      <Step title="Pick Tally Forms, then select which forms to track">
+        **Tally Forms**, a searchable multi-select list (search box placeholder **"Search forms..."**). Tick every form that should count as this conversion. A sticky header shows **"X forms selected"**.
+
+        Empty state: *"No forms found in your Tally account. Create a form in Tally first."* If your search matches nothing: *"No forms found matching your search"*.
+
+        The hint under the list reads *"Select which Tally forms should count as this conversion"*.
+      </Step>
+
+      <Step title="Map fields per form (optional)">
+        Hover a form row and click the **gear icon** to open **Field Mapping** for that form. Use it to tell Cortana which Tally question holds the email, phone, name, and any other field you want on the contact.
+      </Step>
+
+      <Step title="Add Lead Filters per form (optional)">
+        Each selected form gets its own **Lead Filter** card. Use it to require particular answers before a submission counts, for example only counting people who selected a certain budget.
+      </Step>
+
+      <Step title="Save">
+        Click **Submit**.
+      </Step>
+    </Steps>
+
+    <Tip>
+      Map the email and phone fields even when they look obvious. Submissions that arrive with neither cannot be tied to a person, so they cannot be attributed to an ad.
+    </Tip>
+  </Accordion>
+
+  <Accordion title="Typeform">
+    **What it tracks:** form submissions from your Typeform account.
+
+    **Prerequisite integration:** Typeform. When not connected: `Please connect Typeform first. Go to Settings → Integrations to connect.`
+
+    <Frame caption="The Typeform source form: a searchable multi-select of your forms.">
+      <img src="/images/ad-tracking/conversion-sources/typeform/01-typeform-form.png" alt="Create Conversion Source dialog with Integration set to Typeform, showing the searchable Typeform Forms list where you tick which forms count as this conversion." />
+    </Frame>
+
+    <Steps>
+      <Step title="Pick Typeform, then select which forms to track">
+        **Typeform Forms**, a searchable multi-select list (search box placeholder **"Search forms..."**). Tick each form that should count. A sticky header shows **"X forms selected"**.
+
+        Empty state: *"No forms found in your Typeform account. Create a form in Typeform first."*
+
+        The hint under the list reads *"Select which Typeform forms should count as this conversion"*.
+      </Step>
+
+      <Step title="Map fields per form (optional)">
+        Hover a form row and click the **gear icon** to open **Field Mapping** for that form, then map the Typeform questions that hold email, phone, and name.
+      </Step>
+
+      <Step title="Add Lead Filters per form (optional)">
+        Each selected form gets its own **Lead Filter** card for qualification rules.
+      </Step>
+
+      <Step title="Save">
+        Click **Submit**.
+      </Step>
+    </Steps>
+  </Accordion>
+
+  <Accordion title="Webhook">
+    **What it tracks:** anything at all. A webhook is the universal fallback: any platform that can send an HTTP request can feed a conversion, including Zapier, Make.com, n8n, GoHighLevel workflows, and ClickFunnels.
+
+    **Prerequisite integration:** none. Always available.
+
+    <div style={{position: "relative", paddingBottom: "57.903879559930516%", height: 0}}>
+  <iframe src="https://www.loom.com/embed/0dde051aba1b41fca4b468634045f96b" frameBorder="0" webkitallowfullscreen mozallowfullscreen allowFullScreen style={{position: "absolute", top: 0, left: 0, width: "100%", height: "100%"}} />
+</div>
+
+    <Expandable title="Video transcript">
+      Alright, so to setup a conversion event via a webhook source, we're going to come here, we're going to click this add source button, we're then going to select webhook. Now, I always like to name it where it's coming from, and then, like, what's actually coming. So, typically it's going be the name of the automation. That way, it's just easier to go back and backtrack if you ever need to see, hey, is the automation, like, something we need to change, maybe we changed something in the booking, or whatever it is, right? So, the platform name, as well as the name of the automation is usually a good naming convention. And we're going to go ahead and we're going to hit submit. And you're going to see this beautiful blue button here called setup webhook, and then it's going to come in, you're going to be able to grab your webhook URL, and I'm going to go ahead and I'm going to paste this in GoHighLevel, so I'll be back in just a second. So I'm going to paste this inside of GoHighLevel, you can paste this webhook literally anywhere, Zapier, Make.com, N8N, ClickFunnels, I know you can paste webhooks directly inside of ClickFunnels, like, there's a lot of different spots where you can go ahead and add a webhook. So, I'm just going to use HighLevel for this example, then we're going to paste the webhook in there, and that's pretty much it, we don't need to really send anything else, you can go ahead and hit save action, and I'm going to just test this flow, alright, and once that webhook hits our system, then this is automatically going to pop up, so nothing you have to do, we're just waiting for that webhook to hit, once the webhook sends, this pops up in here, and now you can start going ahead and mapping your different fields, all that really matters, especially if you're using a pixel, is going to be, like, the name, the email, the phone number, uh, revenue, obviously, if it's a purchase event, attribution is going to be a bit more of a advanced thing, we'll get to that in just a quick second here, but let's go ahead and just show you kind of how this works, let's go to name, so I'm just going to drag the name over in here, uh, it's a lot easier to search rather than sitting here and scrolling, you're just going to lose your mind doing that, so we'll go email, we'll grab this guy's email here, Thank you. Thank you. We'll go phone, let's grab the phone number here, we're not going to do any revenue because it's a test here, now if this was a webhook that I wanted to send and I didn't have a pixel, we are able to actually add the attribution via a webhook, now this, again, is going to be a more advanced setup, typically you should just have a pixel on the page and you don't have to worry about sending attributions through the automation, again, this is more advanced if you know what you're looking at here, and you get it, then this is where you can take advantage of it, if you don't know what you're looking at, then just go add the pixel, and like we said in the other videos, and you're going to be all clear, but let's say we wanted to go ahead and map attribution in this webhook, because for whatever reason, maybe we can't add a pixel on the page, or something's happening, and we only want to pass the attribution through the webhook, I know HighLevel does attribution, cool, so attribution source. All right, so here you guys see the campaign. Um, the medium, there's the medium ID, although that's not really the one I'm looking for, there we go, the UTM source, uh, ad ID, there's no ad ID, typically ad ID would be the best, if you can get the ad ID, and map the ad ID, because that's the most unique thing, we've had a lot of people send in UTM ads, but it's the same ad, uh, they have like literally the same name of the ad across three or four different campaigns, and when you just send us, you know, the name of the ad, uh, and we're not able to actually figure anything else out, like, hey, which medium does this belong to, which campaign does this belong to, then unfortunately there will be some category misattribution, where we're just gonna find the right ad, and if you have four with the right ad name, then we're just gonna put it at the first one that we find, so ad ID is always a unique one of one, if you can add the ad ID, that's going to be the best, I'm gonna try to see if I can do ad ID, you know, let's go content ID, uhm, no, okay, cool, they're not gonna, I don't think they have it in this one, but if you did have the ad ID, you can go ahead, I see the UTM content, so I can go drop that inside of the ad, if I do the medium , we would have this right here, right here, attribution source medium, we could do campaign as well, and I think You guys started, okay, so there's a campaign ID. Yeah, high level kinda sucks for this content ID, you know, uhm, alright, the campaign, and then the source, you don't really have to do it, if we had a, if we find a matching ad against your meta ads, we'll just automatically name it as UTM source meta ads, so no worries there, you can also add the FBCL ID, this is gonna be pretty important when you're sending data back to meta, or if this is Google, again, you can do Thank you. The Google click ID, uh, which I would drag in there, one other thing to mention, if you are adding attribution, sometimes the CRM is gonna, as you see right here, they're gonna give you last attribution and attribution source, so just pay attention to what you're mapping, cause if you're matching, mapping attribution source, and then there's a last attribution, this one might be off, this one might be like first click, again, depends on the system, how they categorize attribution, so you I'm just saying it for you guys to pay attention, like, what you're actually mapping, when you're going ahead and mapping data in there. Now, I'm not actually gonna go ahead and save that this way, because we do have a pixel, and the pixel is tracking our attribution for us, so again, this is just more of an advanced thing, if you know how attribution works and how payload data works. From there, you can also add custom fields, or contact fields, so you can update the company name, the address, the city, now, why this might be helpful, the important is, if you have the AI agent's feature as well, and you wanna map this data in, so that the AI agent also knows the customer data, maybe this is not important, right, company, maybe company, but like, address, city, unless it's, you know, a B2C construction company, they're like, hey, I just wanna make sure, the agent's like, hey, I just wanna make sure you live at, you know, so and so address with this city, then we would pass that data on, there's also going to be custom fields, We're gonna have any custom fields in this account, you can always go ahead, add a custom field similar to how you would in high level or HubSpot, but we're just going to ignore that for now, just showing you guys that you can also map data inside of the contact fields, and then there's also one last thing here, that someone asked us to do, so this was the home that we found for it, was lead expense, he's like, hey, I buy leads, and every time we get a lead, it's cost me like 50 bucks on the spot, is there any way that I can add an expense to that? Lead, so we're like, alright, cool, let's just add it inside of the webhook, so let's say you wanted to add a lead expense, you just go ahead, you'd add it in here, and then it would show up in the attribution table as spend, so if you send, let's say, 10 leads, and each lead has an expense of 50 bucks , that means that you would have 500 dollars in spend for these leads, so that is just, again, an additional thing, chances are you probably don't want to use that, uh, we've just had to make our platform a little fairly customizable in what we're able to do, and give everything a home, so that's gonna be it, again, most of the time, all you guys really care about, name, email, phone number, I just walked you through the rest of the settings as well, in case you do need to use them, then when you're done, you're gonna go ahead, you're gonna hit save mapping, and away we go, now, someone also asked us, hey, I had like a real event, uh, can I count this. So if you do want to take this and push it over. You can click that button that I just showed you, and in here, you'll be able to see all the tests, the failed, and the success ones, and if you want to swap this over from test to success, you can go ahead, you can hit successful, another thing that's pretty important, actually, to mention, is if you want to re-edit the mapping, cause maybe you messed something up, you can go ahead, you can hit edit, we always save this payload data, so if you want to re-edit, let's say, like, the email, you're like, oh, snap, I used the wrong one, I need to, you know, Thank you. Change the email out, you can always come back, and just go ahead and change out the email there, and away you go, so that is also something that you can do, you can remap based off of the webhook data inside of there, and you can always view the data too, right? What's the actual payload, like, what are we getting from high level, there's a lot of data in here, so that's always important. If you know what you're looking at, you want to, like, debug or look into something, we always show you the full payload data as well, just, again, another little thing to mention, but let's just show you, we're going to go ahead, we're going to update that to successful, and then, boom, it's going to go ahead, and now it's going to show here, under the successful tab, so that is pretty much it when it comes to webhooks, again, you're going to have your requests that you can always dig into, see the tests, if anything's failed, we'll show you why it failed, we'll give you an error message, typically it's going to be like there's no email and phone number attached, sometimes certain platforms have bugs, and they send us just empty data, they're shooting blank data, so obviously we can't map it, there's no name, email, phone number, so we don't know who this person is, so that's going to show up as failed, but again, always you will see the message inside of there, and that's pretty much it when it comes to setting up a webhook, I walked you through end to end, if you do have any questions, please feel free to reach out to the support, and someone will be more than happy to help you. you
+    </Expandable>
+
+    <Frame caption="The Webhook source form: just give it a descriptive name.">
+      <img src="/images/ad-tracking/conversion-sources/webhook/01-webhook-form.png" alt="Create Conversion Source dialog with Integration set to Webhook, showing the Webhook Name field with the placeholder Ex: Typeform, Stripe, Calendly, etc." />
+    </Frame>
+
+    <Steps>
+      <Step title="Pick Webhook and name it">
+        **Webhook Name**, placeholder **"Ex: Typeform, Stripe, Calendly, etc."** The hint reads *"Give your webhook a descriptive name to identify where the data is coming from"*.
+
+        A good convention is platform plus automation name, for example *GoHighLevel – Booked Call Workflow*. When something breaks months later, that name is what tells you which automation to open.
+      </Step>
+
+      <Step title="Save, then copy the webhook URL">
+        Click **Submit**. A blue **Setup Webhook** button appears on the source row. Click it and copy your unique webhook URL.
+      </Step>
+
+      <Step title="Paste the URL into your sending platform">
+        Add the URL as a webhook action in whichever tool is sending the data, then save and publish that automation.
+      </Step>
+
+      <Step title="Fire a test so we can see the payload">
+        Trigger the automation once. As soon as the request reaches Cortana, the field-mapping screen appears automatically. You cannot map fields before a payload arrives, because the mapper builds itself from your actual data.
+      </Step>
+
+      <Step title="Map your fields">
+        Drag the incoming fields onto Cortana's fields. Use the search box rather than scrolling.
+
+        - **Contact fields**, name, email, phone. Email or phone is what identifies the person; without one of them the request fails.
+        - **Revenue**, map it for purchase events.
+        - **Attribution** (advanced), if the page has no pixel you can pass attribution through the webhook: ad ID, campaign, medium, UTM source, `fbclid`, `gclid`. Prefer **ad ID**, since it is unique. Ad *names* are frequently duplicated across campaigns, and when several ads share a name we can only match the first one we find, which misattributes the rest.
+        - **Contact custom fields**, company, address, city, and your own custom fields. Worth mapping if you use AI Agents and want the agent to know this context.
+        - **Lead expense**, an optional per-lead cost. It shows in the Attribution Table as spend, so 10 leads at 50 each shows as 500 in spend.
+
+        Click **Save Mapping** when done.
+      </Step>
+
+      <Step title="Check the logs">
+        The **Requests** column on the source row opens the webhook logs, split into test, failed, and successful requests. You can:
+
+        - View the full raw payload of any request.
+        - Re-edit the mapping later and re-map against a stored payload if you mapped the wrong field.
+        - Promote a test request to successful so it counts.
+
+        Failures show the reason. The most common is a payload with no name, email, or phone, which means there is no way to identify the person.
+      </Step>
+    </Steps>
+
+    <Tip>
+      If the page can take a pixel, use a pixel and let attribution work automatically. Passing attribution manually through webhook fields is an advanced setup and is easy to get subtly wrong. Watch out for CRMs that expose both *attribution source* and *last attribution*: they can mean first-click and last-click respectively, so check what you are actually mapping.
+    </Tip>
+  </Accordion>
+
+  <Accordion title="Whop">
+    **What it tracks:** payments and membership lifecycle events from a Whop company. Payment events carry revenue.
+
+    **Prerequisite integration:** Whop. When not connected: `Please connect Whop first. Go to Dashboard → Integrations to connect.`
+
+    <Frame caption="The Whop source form: company first, then event.">
+      <img src="/images/ad-tracking/conversion-sources/whop/01-whop-form.png" alt="Create Conversion Source dialog with Integration set to Whop, showing the required Whop Company dropdown that must be chosen before the Whop Event list appears." />
+    </Frame>
+
+    <Steps>
+      <Step title="Pick the Whop Company">
+        **Whop Company** (required), placeholder **"Select a Whop company"**. Lists each connected Whop company by name.
+
+        Changing the company resets the event and product selections.
+      </Step>
+
+      <Step title="Pick the Whop Event">
+        **Whop Event** (required), placeholder **"Select an event to track"**. Each option has a tooltip.
+
+        | Event | Tracks |
+        | --- | --- |
+        | **Payment Succeeded** | Every successful payment (lifetime value) |
+        | **First Whop Purchase** | Only a customer's first payment (new customers) |
+        | **Membership Activated** | A membership becomes valid |
+        | **Membership Expired** | A membership becomes invalid |
+        | **Membership Updated** | A membership changes |
+
+        Once picked, a summary panel shows the raw event name and description.
+      </Step>
+
+      <Step title="Filter to specific products (optional)">
+        Shown for payment events. Leave empty to track all products.
+      </Step>
+
+      <Step title="Add Payment Filters if you need them">
+        Optional qualification rules such as a minimum amount. See **Payment Filters** below.
+      </Step>
+
+      <Step title="Save">
+        Click **Submit**.
+      </Step>
+    </Steps>
+
+    <Warning>
+      As with Stripe, do not combine **Payment Succeeded** and **First Whop Purchase** on the same conversion. They overlap on every new customer's first payment.
+    </Warning>
+  </Accordion>
+
+  <Accordion title="WooCommerce">
+    **What it tracks:** the WooCommerce order lifecycle plus client-side cart and checkout signals. Order events carry revenue.
+
+    **Prerequisite integration:** WooCommerce. When not connected: `Please connect WooCommerce first. Go to Settings → Integrations to connect.`
+
+    <Frame caption="The WooCommerce source form: store, event, then order statuses.">
+      <img src="/images/ad-tracking/conversion-sources/woocommerce/01-woocommerce-form.png" alt="Create Conversion Source dialog with Integration set to WooCommerce, showing the required WooCommerce Store dropdown and the WooCommerce Event dropdown, with the note that only orders from the selected store create conversions." />
+    </Frame>
+
+    <Steps>
+      <Step title="Pick the WooCommerce Store">
+        **WooCommerce Store** (required), placeholder **"Select which store this source listens to"**. Stores are listed by name or URL.
+
+        The hint is important: *"Only orders from this store will create conversions for this source."* If you sell from several stores you need one source per store.
+      </Step>
+
+      <Step title="Pick the WooCommerce Event">
+        **WooCommerce Event** (required), placeholder **"Select WooCommerce event"**. Stays disabled until a store is chosen. Two groups:
+
+        | Type | Events |
+        | --- | --- |
+        | **Webhook** (server-side, order lifecycle) | Order Created · Order Updated |
+        | **Pixel** (client-side, cart and checkout) | View Product · Cart Created · Add to Cart · Cart Emptied · Checkout Initiated · Purchase Confirmed |
+
+        Pixel events are marked with a **Pixel** badge.
+      </Step>
+
+      <Step title="Choose which order statuses count (webhook events only)">
+        **Count orders with status** (required), a checklist. Recommended statuses carry a **Recommended** badge:
+
+        | Status | Recommended |
+        | --- | --- |
+        | **Processing** | Yes |
+        | **Completed** | Yes |
+        | **On hold** | Yes |
+        | **Pending payment** | No |
+        | **Cancelled** | No |
+        | **Refunded** | No |
+        | **Failed** | No |
+        | **Checkout draft** | No |
+        | **Trashed** | No |
+
+        The hint explains: *"Only orders in the selected statuses create conversions. Unpaid statuses (like Pending payment) are off by default so abandoned or auto-cancelled checkouts are not counted."*
+
+        This filter does not apply to pixel events, which fire client-side before an order status exists.
+      </Step>
+
+      <Step title="Save">
+        Click **Submit**. A summary panel shows the raw event name and description.
+      </Step>
+    </Steps>
+
+    <Warning>
+      The status filter is the single biggest source of missing WooCommerce revenue. If your gateway parks orders in a status you did not tick, those orders silently never convert. If your WooCommerce numbers look far too low, check this list first and confirm it matches the statuses your payment gateway actually uses.
+    </Warning>
   </Accordion>
 </AccordionGroup>
+
+## Settings reference
+
+These settings appear on more than one source. Where a source uses one, its accordion above says so.
+
+### Source name
+
+- **What it does:** labels the source in the conversion's **Sources** table and in logs.
+- **Default:** most sources generate a name from the integration and event. Pixel sources fall back to **URL Parameter** or **Body Pixel** if you leave the field blank.
+- **Recommendation:** name it after the real-world thing it tracks, including the platform, for example *Stripe – First Purchase (Main Account)*.
+- **Caveat:** a vague name is the reason nobody can work out what a source does six months later.
+
+### Event / When to track
+
+- **What it does:** selects the single event that causes this source to fire.
+- **Default:** none. Every source requires you to choose.
+- **Recommendation:** one source tracks one event. To count several events, add several sources, or several conversions if you want to report on them separately.
+- **Caveat:** picking two overlapping events on one conversion (like *Order Created* plus *Purchase (Paid)*, or *Payment Succeeded* plus *First Purchase*) double-counts. This is the most common configuration mistake.
+
+### Account / workspace / store picker
+
+- **What it does:** scopes the source to one connected account, sub-account, workspace, company, or store.
+- **Default:** where only one is connected it is preselected and locked. GoHighLevel defaults to the primary sub-account.
+- **Recommendation:** check it when you have several connected. Changing it clears every selection below.
+- **Caveat:** the source only ever listens to the selected account. Activity in your other accounts silently produces nothing.
+
+### Revenue tracking
+
+- **What it does:** attaches money to the conversion. Appears as **Track revenue from opportunity** (GoHighLevel, Close.io), **Track revenue from deal** (HubSpot), **Track revenue (capture order value & currency)** (body pixel), or a revenue field picker (Salesforce).
+- **Default:** off for GoHighLevel, Close.io, HubSpot, and the body pixel. Payment sources like Stripe, Whop, Shopify, WooCommerce, Shopier, and Fanbasis always carry revenue.
+- **Recommendation:** on for anything that represents money changing hands, off for leads and bookings.
+- **Caveat:** CRM opportunity values are one-time cash collected, not recurring revenue. For subscription revenue use Stripe or Whop as the source of truth.
+
+### Currency
+
+- **What it does:** sets which currency a source's revenue is recorded in when the source does not supply one itself.
+- **Default:** **USD**.
+- **Recommendation:** set it to the currency the underlying records are actually in. For GoHighLevel invoices it is only used when an invoice does not specify its own.
+- **Caveat:** getting this wrong does not error, it silently misstates revenue. The display currency in the Attribution Table is a separate per-business preference.
+
+### Product filter
+
+- **What it does:** restricts a payment source to specific products.
+- **Default:** empty, which means **all products, including ones you create later**.
+- **Recommendation:** leave it empty unless you genuinely need to isolate a product. An empty filter is future-proof.
+- **Caveat:** once you select specific products, new products are **not** picked up automatically. You have to come back and add them.
+
+### Payment Filters (qualification rules)
+
+- **What it does:** only counts a payment when it matches your rules. Available on Stripe, Whop, and Fanbasis. The section explains itself in the dialog: *"Only count payments matching these rules, e.g. only payments of $100 or more. Filtered payments are still recorded and count toward LTV, but won't create this conversion event or be sent to ad platforms."*
+- **Fields you can build rules on:** **Payment Amount** (number), **Currency**, **Customer Email**, **Product Name**, and **Billing Reason**.
+- **Options:** an **Enable Payment Filter** toggle (*"Only matching payments will create conversions"*), and a **Payment must match** selector offering **ALL rules** (AND) or **ANY rule** (OR).
+- **Default:** disabled.
+- **Recommendation:** the most useful rule by far is a minimum **Payment Amount**, to exclude small test charges or trial authorisations from a revenue conversion.
+- **Caveat:** a filtered-out payment is not deleted. It still counts toward lifetime value, it just does not fire this conversion or get sent to Meta, Google, or TikTok. Rules are also evaluated when the payment arrives, so turning them on does not retroactively remove conversions that already counted.
+
+### Lead Filters (form qualification rules)
+
+- **What it does:** only counts a form or survey submission when the answers match your rules. Available per form on Typeform, Tally Forms, HubSpot forms, and GoHighLevel forms, surveys, and appointments.
+- **Default:** none, so every submission counts.
+- **Recommendation:** use it to build a *Qualified Lead* conversion separate from raw *Lead* volume, for example only counting people who picked a budget above a threshold.
+- **Caveat:** rules run against the field catalog of that specific form. If you change the form's questions, revisit the rules.
+
+### Dedup window
+
+- **What it does:** stops the same contact converting twice within a set period. Used by the **URL Parameter** and **Body Tracking Snippet** pixel sub-types.
+- **Options:** a number plus **Seconds**, **Minutes**, **Hours**, or **Days**.
+- **Default:** shown in the picker when you open it; the enforced minimum is **30 seconds**.
+- **Recommendation:** at least **2 days** for lead and qualified-lead pixels.
+- **Caveat:** values under 30 seconds are clamped on save. Identity is matched by cookie, form data, and device fingerprint, so a genuinely different person on the same device may be treated as a repeat.
+
+### One entry per stage, per contact
+
+- **What it does:** on GoHighLevel **Opportunity Stage Changed**, records a contact only once per stage.
+- **Default:** off.
+- **Recommendation:** turn it on unless you specifically want to count re-entries.
+- **Caveat:** with it off, a deal moved back and forth between stages logs an entry every time.
+
+### Track all forms (Meta Ads)
+
+- **What it does:** makes the source a catch-all for every enabled lead form, including forms you create later.
+- **Default:** on.
+- **Recommendation:** leave it on. It is the only setting that picks up new forms without you revisiting this screen.
+- **Caveat:** only one source can hold the catch-all. If another source already has it, the toggle is locked off and you must select specific forms.
+
+## Tips and caveats
+
+<Tip>
+  **One conversion, many sources is normal.** A *Purchase* conversion fed by Stripe, Shopify, and a historical CSV import is a perfectly standard setup. Add as many sources as you need.
+</Tip>
+
+<Warning>
+  **A greyed-out source with a padlock is not a bug.** It means that integration is not connected to this business. Connect it at **Settings → Integrations** (see [**1) Connect Integrations**](/1-connect-integrations)) and come back. The picker sorts locked sources to the bottom, so if a source you expected is missing, scroll down.
+</Warning>
+
+<Note>
+  **Some sources are instant, some are polled.** Webhook-driven sources (Shopify, Stripe, Whop, WooCommerce, HubSpot, GoHighLevel webhooks) arrive within seconds. Polled sources arrive on a schedule:
+
+  | Source | Frequency |
+  | --- | --- |
+  | GoHighLevel forms and surveys | Every 5 minutes |
+  | iClosed | Every 5 minutes |
+  | Salesforce | Every 5 minutes |
+  | Cal.com | Every 15 minutes |
+  | Shopier | Every few minutes |
+
+  Do not conclude a source is broken until at least one full poll cycle has passed.
+</Note>
+
+<Warning>
+  **Watch for double counting.** The overlapping pairs that catch people out most often are *Payment Succeeded* with *First Purchase* (Stripe, Whop, Fanbasis, Shopier), and *Order Created* with *Purchase (Paid)* (Shopify). Put each of a pair on its own conversion, never both on one.
+</Warning>
+
+<Tip>
+  **CSV files need an email or a phone number on every row.** Rows with neither are skipped, because there is no way to identify the person or attribute them to an ad. The preview step tells you how many rows will be skipped before you commit.
+</Tip>
+
+## Troubleshooting
+
+<AccordionGroup>
+  <Accordion title="A source is greyed out with a padlock and I cannot select it">
+    That integration is not connected to this business. Clicking it shows an error toast naming the integration, for example `Please connect Stripe first. Go to Settings → Integrations to connect.`
+
+    **Fix:** go to **Settings → Integrations**, connect the tool, then reopen the Add Source dialog. See [**1) Connect Integrations**](/1-connect-integrations).
+
+    Two integrations point elsewhere in their message: **Whop** and **ClickFunnels** say *Dashboard → Integrations*. It is the same Integrations screen.
+
+    Note that the padlock only appears once Cortana has confirmed the integration is disconnected. For a second after opening the dropdown, entries may look unlocked while their status is still loading.
+  </Accordion>
+
+  <Accordion title="I picked a source but its dropdown is empty">
+    The source is connected but has nothing to offer yet. Each empty state names the fix:
+
+    - **Calendly**: *"No event types found. Create a scheduling link in Calendly first."*
+    - **Cal.com**: *"No event types found. Create an event type in Cal.com first."*
+    - **HubSpot forms**: *"No forms found. Create a form in HubSpot Marketing → Forms first."*
+    - **HubSpot pipelines**: *"No deal pipelines found. Create a pipeline in HubSpot CRM first."*
+    - **Close.io forms**: *"No forms found. Create a form in Close → Settings → Customization → Forms first."*
+    - **Close.io pipelines**: *"No pipelines found. Create at least one pipeline + statuses in Close first."*
+    - **Salesforce**: *"No pipelines found. Make sure Salesforce has Opportunity stages configured."*
+    - **ClickFunnels pipelines**: *"No pipelines found in your ClickFunnels workspace. Install the Opportunities app and create at least one pipeline first."*
+    - **Typeform / Tally**: *"No forms found in your \<platform\> account. Create a form in \<platform\> first."*
+    - **GoHighLevel**: *"No forms found in your GoHighLevel account."* and equivalents for surveys, calendars, pipelines.
+    - **Forms / Appointments**: *"No booking forms yet. Create an event type first."*
+
+    Create the missing object in the source platform, then reopen the dialog. If it still does not appear, reconnect the integration: a token that has partially expired can return an empty list rather than an error.
+  </Accordion>
+
+  <Accordion title="Everything says All available events have already been added">
+    Some sources will not let two sources in the same conversion listen to the same event. Shopify says *"All available Shopify events have already been added to this conversion. Create a new conversion to track additional events."*, and GoHighLevel and Tally hide forms already attached.
+
+    **Fix:** either edit the existing source instead of adding a new one, or create a separate conversion for the additional event.
+  </Accordion>
+
+  <Accordion title="I connected the integration but no events are arriving">
+    Work through these in order:
+
+    1. **Wait for the poll cycle.** Polled sources take up to 5 or 15 minutes. See the frequency table above.
+    2. **Click Refresh.** The **Sources** table has a **Refresh** button that re-reads counts.
+    3. **Check the Requests column** on the source row. For webhook sources this opens the logs showing test, failed, and successful requests, with a reason on each failure. The most common failure is a payload carrying no name, email, or phone, which makes the person unidentifiable.
+    4. **Meta Ads specifically**: verify Lead Access. Go to **business.facebook.com/settings → Integrations → Lead Access**, click your page, open **CRMs**, and confirm **Cortana AI** is assigned. Meta blocks lead delivery silently when it is not, and nothing inside Cortana will indicate this.
+    5. **WooCommerce specifically**: check your **Count orders with status** selection actually includes the status your gateway uses.
+    6. **HubSpot Custom Field Updated specifically**: this needs the property subscribed to Cortana's HubSpot app `contact.propertyChange` events. Contact support to add the subscription.
+    7. **Manually-connected Shopify**, the webhook must be created in your Shopify admin using the URL and secret shown in the setup card. Save stays gated until a test event arrives.
+    8. **Reconnect the integration.** Expired tokens frequently fail quietly. Calendly refresh tokens in particular are single-use.
+  </Accordion>
+
+  <Accordion title="I am seeing duplicate or inflated conversions">
+    Usual causes, most common first:
+
+    1. **Two overlapping events on one conversion.** *Payment Succeeded* plus *First Purchase*, or *Order Created* plus *Purchase (Paid)*. Split them onto separate conversions.
+    2. **Pixel dedup window too short.** Someone refreshing your thank-you page counts every time. Raise the dedup window to at least 2 days.
+    3. **GoHighLevel stage re-entries.** Turn on **Only one entry per stage, per contact**.
+    4. **The same event arriving through two routes**, for example a Shopify order counted by both the Shopify source and a webhook you built yourself. Keep one route.
+    5. **A CSV import re-run.** Use the **Remove duplicates** option in the Clean step.
+  </Accordion>
+
+  <Accordion title="Revenue is missing or wrong">
+    - **Revenue is zero on a CRM source**, the **Track revenue** checkbox is off. It is off by default on GoHighLevel, Close.io, and HubSpot.
+    - **Revenue is zero on a body pixel**, **Track revenue (capture order value & currency)** is off, or your page does not expose purchase data for auto-detection. Pass value and currency manually in the snippet.
+    - **Revenue is in the wrong currency**, check the source's currency setting, which defaults to **USD**. This is separate from the Attribution Table's display currency.
+    - **WooCommerce revenue far too low**, your **Count orders with status** list is missing the status your gateway parks orders in.
+    - **Salesforce revenue is zero**, check which field is configured as the revenue field, and that revenue is not disabled on the source.
+  </Accordion>
+
+  <Accordion title="The Add Source button is not there">
+    The button only renders for users with permission to manage tracking. If you can see the conversion but not the **Add Source** button, ask an account admin to grant you tracking permissions.
+  </Accordion>
+</AccordionGroup>
+
+## FAQ
+
+<AccordionGroup>
+  <Accordion title="How do I track Stripe payments?">
+    Connect Stripe at **Settings → Integrations**, then open your revenue conversion, click **Add Source**, pick **Stripe**, choose your **Stripe Account**, and pick a **Stripe Event**. For total revenue use **Payment Succeeded**; for new customers only use **First Stripe Purchase**. Optionally filter to specific products or add a minimum amount under **Payment Filters**, then click **Submit**.
+  </Accordion>
+
+  <Accordion title="Why is Whop locked?">
+    Whop, like the other 17 integration-backed sources, stays greyed out with a padlock until Whop is connected to this business. Connect it at **Dashboard → Integrations** and the entry unlocks and moves up into the A–Z list. This is the same reason any source shows a padlock.
+  </Accordion>
+
+  <Accordion title="Can one conversion have two sources?">
+    Yes, and it is the normal setup. A *Purchase* conversion is often fed by Stripe, Shopify, and a CSV import at the same time. Everything written by any of those sources lands in the same conversion.
+
+    The one thing to avoid is two sources tracking the **same** event, which double-counts. Overlapping events (like *Payment Succeeded* and *First Purchase*) belong on separate conversions.
+  </Accordion>
+
+  <Accordion title="What is the difference between URL Parameter and Body Tracking Snippet?">
+    Both are the **Pixel** source, chosen from the **Pixel Type** dropdown.
+
+    **URL Parameter** gives you a short parameter such as `?cor-conv=abc12345` that you append to a URL. The conversion fires when that page loads. Use it when you control a redirect, for example sending qualified leads to a specific thank-you page.
+
+    **Body Tracking Snippet** gives you an HTML snippet you paste into the `<body>` of a page. It fires silently on page load with nothing visible in the address bar. Use it when you can edit the page's code. Only the body snippet can capture order value and currency.
+
+    Both require your Cortana tracking script to already be on the page.
+  </Accordion>
+
+  <Accordion title="My source is not in the list. Where is it?">
+    Locked sources sort to the bottom of the dropdown, below every available one, so scroll down. If it is there with a padlock, its integration is not connected yet.
+
+    If the platform you use is not one of the 22 at all, use a **Webhook** source. Any tool that can send an HTTP request, including Zapier, Make.com, and n8n, can feed a conversion that way.
+  </Accordion>
+
+  <Accordion title="How do I import historical leads or sales?">
+    Use **CSV Upload**, which is always available. Name the source, upload a file up to 100 MB, map your columns (every row needs an email or a phone number, plus a conversion date), choose whether to remove duplicates, review the preview, and start the import.
+
+    Set up **AI Ad Optimization** first if you want the imported history sent back to your Meta pixel to train it.
+  </Accordion>
+
+  <Accordion title="How do I know a source is actually working?">
+    Open the conversion and look at its **Sources** table, which shows each source's **Status**, **Requests**, and **Data**. Click **Refresh** to re-read the counts. For webhook sources, the **Requests** column opens the full logs with test, failed, and successful requests, including the raw payload and a reason for any failure.
+
+    Then fire a real test: submit the form, book the meeting, or make a small payment, and watch the count change. Remember polled sources can take up to 15 minutes.
+  </Accordion>
+
+  <Accordion title="Do I still need the pixel if I use an integration?">
+    Yes. The integration tells us *that* a conversion happened; the pixel is what ties it back to the ad, campaign, and click that caused it. Without the pixel, conversions still count but attribution is much weaker. See [**2) Setup Pixel**](/2-setup-pixel) and [**5) URL Parameters (CRITICAL)**](/5).
+  </Accordion>
+</AccordionGroup>
+
+## Next steps
+
+<CardGroup cols={3}>
+  <Card title="4.1) Conversion Set Up" icon="arrow-left" href="/4-conversion-setup">
+    Previous step. Create the conversions that these sources feed.
+  </Card>
+
+  <Card title="5) URL Parameters (CRITICAL)" icon="arrow-right" href="/5">
+    Next step. Make sure your ads carry the parameters attribution depends on.
+  </Card>
+
+  <Card title="1) Connect Integrations" icon="plug" href="/1-connect-integrations">
+    Related. Connect an integration to unlock its locked source.
+  </Card>
+</CardGroup>
