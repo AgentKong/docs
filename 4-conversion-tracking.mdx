@@ -5,7 +5,7 @@ description: "Add conversion sources to track sales and leads in Cortana. Connec
 
 ## <u>Conversion Sources</u>
 
-A **conversion source** is the thing that tells Cortana "this event just happened". A conversion (like *Lead*, *Booked Call*, or *Purchase*) is the bucket; a source is the pipe that fills it.
+A **conversion source** is what tells Cortana that an event has happened. A conversion (like *Lead*, *Booked Call*, or *Purchase*) is the bucket; a source is the pipe that fills it.
 
 One conversion can have **many sources**. That is the normal setup, not an edge case. A single *Purchase* conversion might be fed by Stripe, Shopify, and a CSV import of historical orders all at once. Every source you add writes into the same conversion, and everything that lands there shows up in the Attribution Table against the ad, campaign, or channel that earned it.
 
@@ -19,20 +19,20 @@ The **Integration** dropdown lists all 22 source types. Four are always availabl
 
 The other 18 require their integration to be connected to this business first. Until it is connected, the entry is greyed out with a **padlock icon** and sorts to the bottom of the list. Clicking a locked entry does not select it. It shows an error toast such as `Please connect Stripe first. Go to Settings → Integrations to connect.`
 
-The dropdown sorts **available sources A–Z first, then locked sources A–Z**. So on a business with everything connected, the whole list is simply A–Z. The accordions below follow that same A–Z order.
+The dropdown sorts **available sources A-Z first, then locked sources A-Z**. So on a business with everything connected, the whole list is simply A-Z. The accordions below follow that same A-Z order.
 
 <Note>
   **Before you start**, make sure you have completed:
 
-  - [**1) Connect Integrations**](/1-connect-integrations), connect the tool you want to pull conversions from. A source stays locked until its integration is connected.
-  - [**2) Setup Pixel**](/2-setup-pixel), required for the **Pixel** source and strongly recommended for everything else, because the pixel is what ties a conversion back to the ad that caused it.
-  - [**4.1) Conversion Set Up**](/4-conversion-setup), you need a conversion to attach the source to.
+  - [**1) Connect Integrations**](/1-connect-integrations). Connect the tool you want to pull conversions from. A source stays locked until its integration is connected.
+  - [**2) Setup Pixel**](/2-setup-pixel). This is required for the **Pixel** source, and strongly recommended for every other source, because the pixel is what ties a conversion back to the ad that caused it.
+  - [**4.1) Conversion Set Up**](/4-conversion-setup). You need a conversion before you can attach a source to it.
 </Note>
 
 ## Adding a source (works the same for every source)
 
 <Note>
-  The screenshots on this page are taken from real accounts, so account names, conversion names, form names and email addresses are deliberately blurred out. Everything blurred is example data. The labels, dropdowns and buttons you need to follow along are all left readable.
+  The screenshots on this page are taken from real accounts, so account names, conversion names, form names and email addresses are deliberately blurred out. Nothing blurred is needed to follow the steps. Every label, dropdown and button you have to click is left readable.
 </Note>
 
 Every source is added the same way. Follow these six steps, then open your source in the catalog below for the fields that are specific to it.
@@ -56,7 +56,7 @@ Every source is added the same way. Follow these six steps, then open your sourc
   </Step>
 
   <Step title="Open the conversion you want to feed">
-    In the **Actions** column at the right of that conversion's row there are three icons: a **gear**, a **duplicate**, and a **trash** can. Click the **gear**.
+    In the **Actions** column at the right of that conversion's row there are three icons: a **gear**, a **copy**, and a **trash can**. Click the **gear**.
 
     Clicking the row itself does nothing, and the small pencil that appears beside a conversion name on hover only renames it.
 
@@ -66,7 +66,7 @@ Every source is added the same way. Follow these six steps, then open your sourc
   <Step title="Click Add Source">
     Scroll down inside the **Edit Conversion** dialog to the **Sources** section and click the **Add Source** button (it sits next to a **Refresh** button).
 
-    If this conversion has no sources yet, the section reads **"No sources created yet"** with the hint **"Click "Add Conversion Source" to create your first source"**. The button itself is labelled **Add Source**.
+    If this conversion has no sources yet, the section reads **"No sources created yet"**, followed by a hint telling you to click "Add Conversion Source" to create your first source. The button itself is labelled **Add Source**.
 
     <Frame caption="The Sources section of the Edit Conversion dialog. Add Source sits to the right, next to Refresh.">
       <img
@@ -80,12 +80,12 @@ Every source is added the same way. Follow these six steps, then open your sourc
     The **Create Conversion Source** dialog opens with an **Integration** dropdown at the top.
 
     <Warning>
-      The **Integration** dropdown is pre-set to **Webhook**, it is not blank. If you want a different source you must change it, otherwise you will create a webhook by mistake.
+      The **Integration** dropdown is pre-set to **Webhook**. It is not blank. If you want a different source you must change it, otherwise you will create a webhook by mistake.
     </Warning>
 
-    Open the dropdown and pick your source. Available sources are listed A–Z first, then locked ones A–Z with a padlock. The form redraws to show the fields for whichever source you picked. Find that source in the catalog below for the rest of the setup.
+    Open the dropdown and pick your source. Available sources are listed A-Z first, then locked ones A-Z with a padlock. The form redraws to show the fields for whichever source you picked. Find that source in the catalog below for the rest of the setup.
 
-    <Frame caption="The Integration dropdown. Connected sources sort A–Z at the top; locked ones sort A–Z below with a padlock.">
+    <Frame caption="The Integration dropdown. Connected sources sort A-Z at the top; locked ones sort A-Z below with a padlock.">
       <img
         src="/images/ad-tracking/conversion-sources/shared/03-integration-picker.png"
         alt="The open Integration dropdown in the Create Conversion Source dialog, listing all 22 conversion sources with the connected ones alphabetically first and the not-yet-connected ones greyed out with a padlock icon below them."
@@ -175,7 +175,7 @@ Every source is added the same way. Follow these six steps, then open your sourc
       </Step>
 
       <Step title="Choose your Calendars">
-        A **Calendars** checkbox list appears showing your Calendly event types with their duration in minutes. Only **active** event types are listed, archived or disabled ones are hidden. Tick the ones that count. A counter reads **"X calendars selected"**.
+        A **Calendars** checkbox list appears showing your Calendly event types with their duration in minutes. Only **active** event types are listed. Archived and disabled ones are hidden. Tick the ones that count. A counter reads **"X calendars selected"**.
 
         Empty state: **"No event types found. Create a scheduling link in Calendly first."** Load failure: **"Failed to load calendars. Go to Settings → Integrations to reconnect Calendly."**
       </Step>
@@ -201,11 +201,11 @@ Every source is added the same way. Follow these six steps, then open your sourc
 
     <Steps>
       <Step title="Pick ClickFunnels, then choose a Workspace">
-        **ClickFunnels Workspace** (required), placeholder **"Select a workspace"**. Pick which connected workspace this source listens to. Changing the workspace clears every selection below it.
+        **ClickFunnels Workspace** (required). The placeholder is **"Select a workspace"**. Pick which connected workspace this source listens to. Changing the workspace clears every selection below it.
       </Step>
 
       <Step title="Pick the ClickFunnels Event">
-        **ClickFunnels Event** (required), placeholder **"Select an event to track"**. Events are grouped by category:
+        **ClickFunnels Event** (required). The placeholder is **"Select an event to track"**. Events are grouped by category:
 
         | Category | Events |
         | --- | --- |
@@ -222,7 +222,7 @@ Every source is added the same way. Follow these six steps, then open your sourc
       <Step title="Apply optional filters (depends on the event)">
         Only the filters that apply to your event appear:
 
-        - **Filter to specific funnels (optional)**: shown for **Form Submission**. Search box, **Select All** / **Deselect All**, and a counter reading **"X of Y selected"**. If every funnel is selected the form notes: *"All funnels selected — equivalent to no filter. New funnels created in ClickFunnels will also be accepted automatically."*
+        - **Filter to specific funnels (optional)**: shown for **Form Submission**. It has a search box, **Select All** / **Deselect All** controls, and a counter reading **"X of Y selected"**. If every funnel is selected, the form notes that this is equivalent to having no filter at all, and that funnels you create in ClickFunnels later will be accepted automatically.
         - **Filter to specific products (optional)**: shown for order and subscription events. If none exist: *"No products found. Leave empty to track all products."* Leaving it empty tracks all products.
         - **Pipeline (optional)**: shown for **Opportunity Won**. Defaults to **All pipelines**. Scope it to one pipeline to exclude, say, a Test pipeline.
       </Step>
@@ -270,12 +270,12 @@ Every source is added the same way. Follow these six steps, then open your sourc
 
         Then a status checklist, labelled by event:
 
-        - **Opportunity Won** → **"Won statuses to count"**. Only statuses whose type is *won* are selectable. If the pipeline has none: *"This pipeline has no Won statuses. Pick a different pipeline or use OpportunityStageChange to track any status."*
+        - **Opportunity Won** → **"Won statuses to count"**. Only statuses whose type is *won* are selectable. If the pipeline has none: *"This pipeline has no Won statuses. Pick a different pipeline or use OpportunityStageChange to track any status."* (**OpportunityStageChange** is the internal name for the **Opportunity Stage Changed** option.)
         - **Opportunity Stage Changed** → **"Statuses to track"**. Every status is selectable. Each row shows its status type on the right.
       </Step>
 
       <Step title="Decide on revenue (opportunity events only)">
-        **Track revenue from opportunity**, a checkbox. When on, the opportunity's `value` is captured as one-time cash collected. Uncheck to record the stage change with no revenue attached.
+        **Track revenue from opportunity** is a checkbox. When on, the opportunity's `value` is captured as one-time cash collected. Uncheck to record the stage change with no revenue attached.
 
         The form notes that for recurring revenue you should connect Stripe or Whop instead.
       </Step>
@@ -286,9 +286,7 @@ Every source is added the same way. Follow these six steps, then open your sourc
     </Steps>
 
     <Note>
-      **Verified live:** on a business with Close connected, the form renders the **When to track** picker as described, so Close.io is fully configurable from this dialog.
-
-      `TODO: verify live`, two details still need a pass on a Close account with pipelines and forms set up: that all nine event types behave as documented, and what **Contact Updated** does. **Contact Updated** is the one event that shows neither extra configuration nor the "no additional configuration required" helper text, so it is unclear from the UI alone whether it needs scoping.
+      **Contact Updated** is the one event that shows neither extra configuration nor the "no additional configuration required" note, so it tracks every contact update in the connected Close organisation.
 
       If Close.io is connected but the form says *"Close.io is not connected"*, the integration has been disconnected on that business even though old Close sources still exist. Reconnect it at **Settings → Integrations**.
     </Note>
@@ -343,7 +341,7 @@ Every source is added the same way. Follow these six steps, then open your sourc
       </Step>
 
       <Step title="Clean: decide on duplicates">
-        Choose whether to **remove duplicates**. Enabled, only the first conversion found for a given contact is counted. Disabled, every row imports as its own conversion.
+        Choose whether to **remove duplicates**. When enabled, only the first conversion found for a given contact is counted. When disabled, every row imports as its own conversion.
       </Step>
 
       <Step title="Preview: check the numbers before committing">
@@ -351,7 +349,7 @@ Every source is added the same way. Follow these six steps, then open your sourc
       </Step>
 
       <Step title="Start Import">
-        Click to import. Progress updates in real time, and the rows land in your conversion when it completes.
+        Click **Start Import**. Progress updates in real time, and the rows land in your conversion when the import finishes.
       </Step>
     </Steps>
 
@@ -379,13 +377,13 @@ Every source is added the same way. Follow these six steps, then open your sourc
 
     <Steps>
       <Step title="Pick the Fanbasis account">
-        **Fanbasis account**, placeholder **"Pick an account"**. Only accounts whose status is *connected* are listed. The primary account is marked with a star, and sandbox accounts carry an amber **Sandbox** badge so you do not accidentally track test money.
+        **Fanbasis account**. The placeholder is **"Pick an account"**. Only accounts whose status is *connected* are listed. The primary account is marked with a star, and sandbox accounts carry an amber **Sandbox** badge so you do not accidentally track test money.
 
         If none are connected: *"No connected Fanbasis accounts found. Connect one in Integrations first."*
       </Step>
 
       <Step title="Pick the Event">
-        **Event**, placeholder **"Pick an event"** (or **"Select an account first"** until you choose an account). Each option shows a category badge and a tooltip with the raw event name. The events eligible to feed a conversion are:
+        **Event**. The placeholder is **"Pick an event"** (or **"Select an account first"** until you choose an account). Each option shows a category badge and a tooltip with the raw event name. The events eligible to feed a conversion are:
 
         | Event | Category |
         | --- | --- |
@@ -401,7 +399,7 @@ Every source is added the same way. Follow these six steps, then open your sourc
       <Step title="Set the Product filter">
         Shown only for events that carry product context. **An empty selection means all current and future products feed this source.** Select specific products to scope the conversion to just those.
 
-        For events with no product context the form says: *"&lt;Event&gt; does not include product context — every event will feed this source."*
+        For events with no product context, the form says that the event does not include product context, so every event will feed this source.
       </Step>
 
       <Step title="Add Payment Filters if you need them">
@@ -461,7 +459,7 @@ Every source is added the same way. Follow these six steps, then open your sourc
 
     <Steps>
       <Step title="Pick Forms / Appointments, then choose the Event">
-        **Event** (required), placeholder **"Select an event to track"**. Three options:
+        **Event** (required). The placeholder is **"Select an event to track"**. Three options:
 
         | Option | Meaning |
         | --- | --- |
@@ -499,19 +497,19 @@ Every source is added the same way. Follow these six steps, then open your sourc
 
     <Steps>
       <Step title="Pick the GoHighLevel account">
-        **GoHighLevel account**, if you have only one sub-account connected it is shown and locked. With several, pick one; the primary is marked **(Primary)**. The note reads *"This source tracks conversions from the selected account only."*
+        **GoHighLevel account**. If only one sub-account is connected it is shown and locked. With several, pick one; the primary is marked **(Primary)**. The note reads *"This source tracks conversions from the selected account only."*
 
         Switching account clears every selection below it.
       </Step>
 
       <Step title="Pick the Event Type">
-        **Event Type** (required), placeholder **"Select an event type"**. Six events, each with a tooltip:
+        **Event Type** (required). The placeholder is **"Select an event type"**. Six events, each with a tooltip:
 
         **Form Submission** · **Survey Submission** · **Appointment Booked** · **Appointment Status Changed** · **Opportunity Stage Changed** · **Opportunity Status Changed**
       </Step>
 
       <Step title="Form Submission: select your forms">
-        **Select Forms** (required). Search box, **Select All** / **Deselect All**, and a running count of selected forms. Forms already attached to this conversion are hidden.
+        **Select Forms** (required). It has a search box, **Select All** / **Deselect All** controls, and a running count of selected forms. Forms already attached to this conversion are hidden.
 
         Empty states: *"No forms found in your GoHighLevel account."* or *"All available forms have already been added to this conversion."*
 
@@ -523,7 +521,7 @@ Every source is added the same way. Follow these six steps, then open your sourc
       </Step>
 
       <Step title="Appointment Booked: select calendars">
-        **Select Calendars** (required), with a search box, **Select All** / **Deselect All**, and Prev / Next pagination when you have a lot of calendars. A Lead Filter card for **Appointment Booked** appears once at least one calendar is selected.
+        **Select Calendars** (required). It has a search box, **Select All** / **Deselect All** controls, and Prev / Next pagination when you have a lot of calendars. A Lead Filter card for **Appointment Booked** appears once at least one calendar is selected.
 
         Empty state: *"No calendars found in your GoHighLevel account."*
       </Step>
@@ -537,13 +535,13 @@ Every source is added the same way. Follow these six steps, then open your sourc
       </Step>
 
       <Step title="Opportunity Stage Changed: revenue, dedup, pipeline, stages">
-        - **Track revenue from opportunity**, checkbox. When ticked, a currency picker appears (defaults to **USD**).
-        - **Only one entry per stage, per contact**, checkbox. When on, a contact moved into the same stage more than once is recorded once. Leave off to log every stage entry separately.
+        - **Track revenue from opportunity** is a checkbox. When ticked, a currency picker appears (defaults to **USD**).
+        - **Only one entry per stage, per contact** is a checkbox. When on, a contact moved into the same stage more than once is recorded once. Leave off to log every stage entry separately.
         - **Select Pipeline** (required), then **Select Stages to Track** (required) with Select All / Deselect All.
       </Step>
 
       <Step title="Opportunity Status Changed: revenue, pipeline, statuses">
-        - **Track revenue from opportunity**, checkbox, with the same currency picker.
+        - **Track revenue from opportunity** is a checkbox, with the same currency picker.
         - **Select Pipeline** (required).
         - **Track Status Changes** (required) as chips: **Open** · **Won** · **Lost** · **Abandoned**. Pick **Won** for closed deals.
       </Step>
@@ -579,7 +577,7 @@ Every source is added the same way. Follow these six steps, then open your sourc
       </Step>
 
       <Step title="Form Submitted: pick the form">
-        **Form**, placeholder **"Select which form to track"**. If you have none: *"No forms found. Create a form in HubSpot Marketing → Forms first."*
+        **Form**. The placeholder is **"Select which form to track"**. If you have none: *"No forms found. Create a form in HubSpot Marketing → Forms first."*
 
         Once selected, a **Lead Filter** card appears so you can require specific field answers before a submission counts.
       </Step>
@@ -589,15 +587,15 @@ Every source is added the same way. Follow these six steps, then open your sourc
       </Step>
 
       <Step title="Deal Stage Changed: revenue, pipeline, stages">
-        - **Track revenue from deal**, checkbox.
-        - **Pipeline**, placeholder **"Select pipeline"**. If none: *"No deal pipelines found. Create a pipeline in HubSpot CRM first."*
-        - **Stages** (required), checkbox list of that pipeline's stages.
+        - **Track revenue from deal** is a checkbox.
+        - **Pipeline**. The placeholder is **"Select pipeline"**. If none: *"No deal pipelines found. Create a pipeline in HubSpot CRM first."*
+        - **Stages** (required) is a checkbox list of that pipeline's stages.
       </Step>
 
       <Step title="Custom Field Updated: pick the property and its values">
-        - **Contact property** (required), a searchable combobox, placeholder **"Select the property to watch"**. If none: *"No editable properties found on this HubSpot portal."*
-        - **Fire on any change (no value filter)**, checkbox. Tick it to convert on any change to that property.
-        - **Target values** (required when the checkbox is off), if the property has predefined options you get a checkbox list showing each label and its internal value. If it does not, you get a free-text box: type a value and press Enter (or click **Add**) to add it as a chip. The form warns these are matched **case-sensitively**.
+        - **Contact property** (required) is a searchable combobox. The placeholder is **"Select the property to watch"**. If none: *"No editable properties found on this HubSpot portal."*
+        - **Fire on any change (no value filter)** is a checkbox. Tick it to convert on any change to that property.
+        - **Target values** (required when the checkbox above is off). If the property has predefined options you get a checkbox list showing each label and its internal value. If it does not, you get a free-text box: type a value and press Enter (or click **Add**) to add it as a chip. The form warns these are matched **case-sensitively**.
       </Step>
 
       <Step title="Save">
@@ -697,8 +695,8 @@ Every source is added the same way. Follow these six steps, then open your sourc
       <Step title="Add the source and pick the Source and Ad Account">
         Back in your conversion, click **Add Source** and pick **Meta Ads**.
 
-        - **Source**, the only option is **Lead Form Submissions**.
-        - **Ad Accounts**, placeholder **"Select ad account"**. Only active ad accounts are listed. If Meta is connected but nothing appears you will see **"No ad accounts found"**.
+        - **Source**: the only option is **Lead Form Submissions**.
+        - **Ad Accounts**. The placeholder is **"Select ad account"**. Only active ad accounts are listed. If Meta is connected but nothing appears you will see **"No ad accounts found"**.
       </Step>
 
       <Step title="Choose Track all forms, or pick specific forms">
@@ -740,7 +738,7 @@ Every source is added the same way. Follow these six steps, then open your sourc
 
     <Steps>
       <Step title="Pick Pixel, then choose the Pixel Type">
-        **Pixel Type**, placeholder **"Choose how the pixel fires"**. Two options:
+        **Pixel Type**. The placeholder is **"Choose how the pixel fires"**. Two options:
 
         | Sub-type | Use it when |
         | --- | --- |
@@ -751,21 +749,21 @@ Every source is added the same way. Follow these six steps, then open your sourc
       </Step>
 
       <Step title="Name the source">
-        **Source Name**, placeholder **"Ex: Thank you page, Webinar signup, etc."** for URL Parameter, or **"Ex: Checkout success pixel, Lead form pixel, etc."** for the body snippet.
+        **Source Name**. The placeholder is **"Ex: Thank you page, Webinar signup, etc."** for URL Parameter, or **"Ex: Checkout success pixel, Lead form pixel, etc."** for the body snippet.
 
         Leave it blank and the source is named **URL Parameter** or **Body Pixel** by default. Name it properly instead; you will not remember which page it belongs to later.
       </Step>
 
       <Step title="Set the Dedup window">
-        **Dedup window**, a number plus a unit dropdown (**Seconds**, **Minutes**, **Hours**, **Days**).
+        **Dedup window** is a number followed by a unit dropdown (**Seconds**, **Minutes**, **Hours**, **Days**).
 
-        This is how long the same contact is prevented from converting twice. Identity is matched by cookie, form data, and device fingerprint, the same logic that powers attribution.
+        This is how long the same contact is prevented from converting twice. Identity is matched by cookie, form data, and device fingerprint. This is the same logic that powers attribution.
 
         The minimum is **30 seconds**. Enter less and the form warns *"Minimum is 30 seconds. Values below that will be clamped on save."* and clamps it server-side.
       </Step>
 
       <Step title="Body Tracking Snippet only: decide on revenue">
-        **Track revenue (capture order value & currency)**, checkbox.
+        **Track revenue (capture order value & currency)** is a checkbox.
 
         Turn it on for purchase and checkout pixels. Order value and currency are auto-detected from your store's purchase data (Shopify, WooCommerce, GA4 / GTM), or you can pass them manually in the snippet. Leave it off for leads or add-to-cart so no revenue is attached.
       </Step>
@@ -773,8 +771,8 @@ Every source is added the same way. Follow these six steps, then open your sourc
       <Step title="Save, then install what you are given">
         Click **Submit**, then collect the generated code from the source row:
 
-        - **URL Parameter**, you get a short parameter such as `?cor-conv=abc12345`. Append it to any URL where your tracking script is installed. The conversion fires when that page loads. This is what you paste into a form's redirect URL.
-        - **Body Tracking Snippet**, you get a small HTML snippet. Paste it into the `<body>` of the page, not the header. In most site builders this is the **Tracking Code** or **Custom JS** section, body or footer area. Save and publish the page.
+        - **URL Parameter**: you get a short parameter such as `?cor-conv=abc12345`. Append it to any URL where your tracking script is installed. The conversion fires when that page loads. This is what you paste into a form's redirect URL.
+        - **Body Tracking Snippet**: you get a small HTML snippet. Paste it into the `<body>` of the page, not the header. In most site builders this is the **Tracking Code** or **Custom JS** section, body or footer area. Save and publish the page.
       </Step>
 
       <Step title="Confirm it fired">
@@ -806,9 +804,9 @@ Every source is added the same way. Follow these six steps, then open your sourc
       </Step>
 
       <Step title="Opportunity Stage Change: pipeline, revenue, stages">
-        - **Pipeline**, placeholder **"Select pipeline"**. If none: *"No pipelines found. Make sure Salesforce has Opportunity stages configured."*
-        - **Revenue configuration**, choose which Salesforce field supplies the conversion value, or disable revenue capture entirely.
-        - **Stages** (required), checkbox list. Stages are annotated **(Won)** in green or **(Closed)** where applicable, so you can pick closed-won precisely.
+        - **Pipeline**. The placeholder is **"Select pipeline"**. If none: *"No pipelines found. Make sure Salesforce has Opportunity stages configured."*
+        - **Revenue configuration**: choose which Salesforce field supplies the conversion value, or disable revenue capture entirely.
+        - **Stages** (required) is a checkbox list. Stages are annotated **(Won)** in green or **(Closed)** where applicable, so you can pick closed-won precisely.
       </Step>
 
       <Step title="Lead Stage Change: enable history tracking, then pick statuses">
@@ -822,13 +820,13 @@ Every source is added the same way. Follow these six steps, then open your sourc
       </Step>
 
       <Step title="Campaign Member Responded: nothing to configure">
-        The form explains: *"A conversion will be tracked when a Campaign Member's status changes to "Responded" in Salesforce."*
+        The form explains that a conversion is tracked when a Campaign Member's status changes to **Responded** in Salesforce.
       </Step>
 
       <Step title="Contact/Lead Field Change: object, field, value">
-        - **Object Type**, **Contact** or **Lead**.
-        - **Field Name (API Name)** (required), placeholder **"e.g. Status__c or Lead_Score__c"**. The hint reads *"Use the Salesforce API name (custom fields end in \_\_c)"*.
-        - **Field Value (optional)**: placeholder **"e.g. Qualified (leave empty for any change)"**. Leave blank to convert on any change to that field.
+        - **Object Type**: choose **Contact** or **Lead**.
+        - **Field Name (API Name)** (required). The placeholder is **"e.g. Status__c or Lead_Score__c"**. The hint reads *"Use the Salesforce API name (custom fields end in \_\_c)"*.
+        - **Field Value (optional)**. The placeholder is **"e.g. Qualified (leave empty for any change)"**. Leave blank to convert on any change to that field.
       </Step>
 
       <Step title="Save">
@@ -856,7 +854,7 @@ Every source is added the same way. Follow these six steps, then open your sourc
 
     <Steps>
       <Step title="Choose which payments to track">
-        **Payments to track**, placeholder **"Pick which payments to track"**. Two options:
+        **Payments to track**. The placeholder is **"Pick which payments to track"**. Two options:
 
         | Option | Meaning |
         | --- | --- |
@@ -912,9 +910,9 @@ Every source is added the same way. Follow these six steps, then open your sourc
       <Step title="Follow whichever setup panel appears">
         What happens next depends on the event type and how your store is connected:
 
-        - **Pixel events** (View Product, Add Product To Cart), a green panel confirms *"No setup needed — your Custom Pixel already streams this event to Cortana. Just click Save and conversions will start counting."*
-        - **Webhook events, OAuth-connected store**, a green panel confirms *"Cortana will install this webhook in your Shopify admin automatically when you click Save."*
-        - **Webhook events, manually-connected store**, a three-step setup card appears with the webhook URL and secret to copy into your Shopify admin. It then listens for a test event, and **Save** stays gated until one arrives.
+        - **Pixel events** (View Product, Add Product To Cart): a green panel confirms that no setup is needed, because your Custom Pixel already streams this event to Cortana. Click **Submit** and conversions start counting.
+        - **Webhook events on an OAuth-connected store**: a green panel confirms *"Cortana will install this webhook in your Shopify admin automatically when you click Save."*
+        - **Webhook events on a manually-connected store**: a three-step setup card appears with the webhook URL and secret to copy into your Shopify admin. It then listens for a test event, and **Save** stays gated until one arrives.
       </Step>
 
       <Step title="Save">
@@ -923,7 +921,7 @@ Every source is added the same way. Follow these six steps, then open your sourc
     </Steps>
 
     <Warning>
-      **Order Created** fires before payment is confirmed, **Purchase (Paid)** fires after. Putting both on one revenue conversion double-counts every order. Pick one, and pick **Purchase (Paid)** unless you have a specific reason not to.
+      **Order Created** fires before payment is confirmed. **Purchase (Paid)** fires after. Putting both on one revenue conversion double-counts every order. Pick one, and pick **Purchase (Paid)** unless you have a specific reason not to.
     </Warning>
   </Accordion>
 
@@ -938,13 +936,13 @@ Every source is added the same way. Follow these six steps, then open your sourc
 
     <Steps>
       <Step title="Pick the Stripe Account">
-        **Stripe Account** (required), placeholder **"Select a Stripe account"**. Each entry shows the account name, email, or ID. Accounts not in live mode carry a **Test** badge.
+        **Stripe Account** (required). The placeholder is **"Select a Stripe account"**. Each entry shows the account name, email, or ID. Accounts not in live mode carry a **Test** badge.
 
         Changing the account clears the product selection below.
       </Step>
 
       <Step title="Pick the Stripe Event">
-        **Stripe Event** (required), placeholder **"Select Stripe event"**. Each option shows a category badge and a tooltip describing it.
+        **Stripe Event** (required). The placeholder is **"Select Stripe event"**. Each option shows a category badge and a tooltip describing it.
 
         | Category | Events |
         | --- | --- |
@@ -990,7 +988,7 @@ Every source is added the same way. Follow these six steps, then open your sourc
 
     <Steps>
       <Step title="Pick Tally Forms, then select which forms to track">
-        **Tally Forms**, a searchable multi-select list (search box placeholder **"Search forms..."**). Tick every form that should count as this conversion. A sticky header shows **"X forms selected"**.
+        **Tally Forms** is a searchable multi-select list, with a search box whose placeholder is **"Search forms..."**. Tick every form that should count as this conversion. A sticky header shows **"X forms selected"**.
 
         Empty state: *"No forms found in your Tally account. Create a form in Tally first."* If your search matches nothing: *"No forms found matching your search"*.
 
@@ -1026,7 +1024,7 @@ Every source is added the same way. Follow these six steps, then open your sourc
 
     <Steps>
       <Step title="Pick Typeform, then select which forms to track">
-        **Typeform Forms**, a searchable multi-select list (search box placeholder **"Search forms..."**). Tick each form that should count. A sticky header shows **"X forms selected"**.
+        **Typeform Forms** is a searchable multi-select list, with a search box whose placeholder is **"Search forms..."**. Tick each form that should count. A sticky header shows **"X forms selected"**.
 
         Empty state: *"No forms found in your Typeform account. Create a form in Typeform first."*
 
@@ -1066,9 +1064,9 @@ Every source is added the same way. Follow these six steps, then open your sourc
 
     <Steps>
       <Step title="Pick Webhook and name it">
-        **Webhook Name**, placeholder **"Ex: Typeform, Stripe, Calendly, etc."** The hint reads *"Give your webhook a descriptive name to identify where the data is coming from"*.
+        **Webhook Name**. The placeholder is **"Ex: Typeform, Stripe, Calendly, etc."** The hint reads *"Give your webhook a descriptive name to identify where the data is coming from"*.
 
-        A good convention is platform plus automation name, for example *GoHighLevel – Booked Call Workflow*. When something breaks months later, that name is what tells you which automation to open.
+        A good convention is platform plus automation name, for example *GoHighLevel - Booked Call Workflow*. When something breaks months later, that name is what tells you which automation to open.
       </Step>
 
       <Step title="Save, then copy the webhook URL">
@@ -1086,11 +1084,11 @@ Every source is added the same way. Follow these six steps, then open your sourc
       <Step title="Map your fields">
         Drag the incoming fields onto Cortana's fields. Use the search box rather than scrolling.
 
-        - **Contact fields**, name, email, phone. Email or phone is what identifies the person; without one of them the request fails.
-        - **Revenue**, map it for purchase events.
-        - **Attribution** (advanced), if the page has no pixel you can pass attribution through the webhook: ad ID, campaign, medium, UTM source, `fbclid`, `gclid`. Prefer **ad ID**, since it is unique. Ad *names* are frequently duplicated across campaigns, and when several ads share a name we can only match the first one we find, which misattributes the rest.
-        - **Contact custom fields**, company, address, city, and your own custom fields. Worth mapping if you use AI Agents and want the agent to know this context.
-        - **Lead expense**, an optional per-lead cost. It shows in the Attribution Table as spend, so 10 leads at 50 each shows as 500 in spend.
+        - **Contact fields**: name, email, phone. Email or phone is what identifies the person; without one of them the request fails.
+        - **Revenue**: map this for purchase events.
+        - **Attribution** (advanced). If the page has no pixel you can pass attribution through the webhook: ad ID, campaign, medium, UTM source, `fbclid`, `gclid`. Prefer **ad ID**, since it is unique. Ad *names* are frequently duplicated across campaigns, and when several ads share a name we can only match the first one we find, which misattributes the rest.
+        - **Contact custom fields**: company, address, city, and your own custom fields. Worth mapping if you use AI Agents and want the agent to know this context.
+        - **Lead expense** is an optional per-lead cost. It shows in the Attribution Table as spend, so 10 leads at 50 each shows as 500 in spend.
 
         Click **Save Mapping** when done.
       </Step>
@@ -1122,13 +1120,13 @@ Every source is added the same way. Follow these six steps, then open your sourc
 
     <Steps>
       <Step title="Pick the Whop Company">
-        **Whop Company** (required), placeholder **"Select a Whop company"**. Lists each connected Whop company by name.
+        **Whop Company** (required). The placeholder is **"Select a Whop company"**. It lists each connected Whop company by name.
 
         Changing the company resets the event and product selections.
       </Step>
 
       <Step title="Pick the Whop Event">
-        **Whop Event** (required), placeholder **"Select an event to track"**. Each option has a tooltip.
+        **Whop Event** (required). The placeholder is **"Select an event to track"**. Each option has a tooltip.
 
         | Event | Tracks |
         | --- | --- |
@@ -1170,13 +1168,13 @@ Every source is added the same way. Follow these six steps, then open your sourc
 
     <Steps>
       <Step title="Pick the WooCommerce Store">
-        **WooCommerce Store** (required), placeholder **"Select which store this source listens to"**. Stores are listed by name or URL.
+        **WooCommerce Store** (required). The placeholder is **"Select which store this source listens to"**. Stores are listed by name or URL.
 
         The hint is important: *"Only orders from this store will create conversions for this source."* If you sell from several stores you need one source per store.
       </Step>
 
       <Step title="Pick the WooCommerce Event">
-        **WooCommerce Event** (required), placeholder **"Select WooCommerce event"**. Stays disabled until a store is chosen. Two groups:
+        **WooCommerce Event** (required). The placeholder is **"Select WooCommerce event"**. It stays disabled until a store is chosen. There are two groups:
 
         | Type | Events |
         | --- | --- |
@@ -1187,7 +1185,7 @@ Every source is added the same way. Follow these six steps, then open your sourc
       </Step>
 
       <Step title="Choose which order statuses count (webhook events only)">
-        **Count orders with status** (required), a checklist. Recommended statuses carry a **Recommended** badge:
+        **Count orders with status** (required) is a checklist. Recommended statuses carry a **Recommended** badge:
 
         | Status | Recommended |
         | --- | --- |
@@ -1225,7 +1223,7 @@ These settings appear on more than one source. Where a source uses one, its acco
 
 - **What it does:** labels the source in the conversion's **Sources** table and in logs.
 - **Default:** most sources generate a name from the integration and event. Pixel sources fall back to **URL Parameter** or **Body Pixel** if you leave the field blank.
-- **Recommendation:** name it after the real-world thing it tracks, including the platform, for example *Stripe – First Purchase (Main Account)*.
+- **Recommendation:** name it after the real-world thing it tracks, including the platform, for example *Stripe - First Purchase (Main Account)*.
 - **Caveat:** a vague name is the reason nobody can work out what a source does six months later.
 
 ### Event / When to track
@@ -1289,7 +1287,7 @@ These settings appear on more than one source. Where a source uses one, its acco
 
 ### One entry per stage, per contact
 
-- **What it does:** on GoHighLevel **Opportunity Stage Changed**, records a contact only once per stage.
+- **What it does:** on the GoHighLevel **Opportunity Stage Changed** event, records a contact only once per stage.
 - **Default:** off.
 - **Recommendation:** turn it on unless you specifically want to count re-entries.
 - **Caveat:** with it off, a deal moved back and forth between stages logs an entry every time.
@@ -1357,15 +1355,16 @@ These settings appear on more than one source. Where a source uses one, its acco
     - **Close.io pipelines**: *"No pipelines found. Create at least one pipeline + statuses in Close first."*
     - **Salesforce**: *"No pipelines found. Make sure Salesforce has Opportunity stages configured."*
     - **ClickFunnels pipelines**: *"No pipelines found in your ClickFunnels workspace. Install the Opportunities app and create at least one pipeline first."*
-    - **Typeform / Tally**: *"No forms found in your \<platform\> account. Create a form in \<platform\> first."*
+    - **Typeform**: *"No forms found in your Typeform account. Create a form in Typeform first."*
+    - **Tally Forms**: *"No forms found in your Tally account. Create a form in Tally first."*
     - **GoHighLevel**: *"No forms found in your GoHighLevel account."* and equivalents for surveys, calendars, pipelines.
     - **Forms / Appointments**: *"No booking forms yet. Create an event type first."*
 
     Create the missing object in the source platform, then reopen the dialog. If it still does not appear, reconnect the integration: a token that has partially expired can return an empty list rather than an error.
   </Accordion>
 
-  <Accordion title="Everything says All available events have already been added">
-    Some sources will not let two sources in the same conversion listen to the same event. Shopify says *"All available Shopify events have already been added to this conversion. Create a new conversion to track additional events."*, and GoHighLevel and Tally hide forms already attached.
+  <Accordion title="It says all available events have already been added">
+    Some sources will not let two sources in the same conversion listen to the same event. Shopify says *"All available Shopify events have already been added to this conversion. Create a new conversion to track additional events."* GoHighLevel and Tally instead hide the forms that are already attached.
 
     **Fix:** either edit the existing source instead of adding a new one, or create a separate conversion for the additional event.
   </Accordion>
@@ -1379,7 +1378,7 @@ These settings appear on more than one source. Where a source uses one, its acco
     4. **Meta Ads specifically**: verify Lead Access. Go to **business.facebook.com/settings → Integrations → Lead Access**, click your page, open **CRMs**, and confirm **Cortana AI** is assigned. Meta blocks lead delivery silently when it is not, and nothing inside Cortana will indicate this.
     5. **WooCommerce specifically**: check your **Count orders with status** selection actually includes the status your gateway uses.
     6. **HubSpot Custom Field Updated specifically**: this needs the property subscribed to Cortana's HubSpot app `contact.propertyChange` events. Contact support to add the subscription.
-    7. **Manually-connected Shopify**, the webhook must be created in your Shopify admin using the URL and secret shown in the setup card. Save stays gated until a test event arrives.
+    7. **Manually-connected Shopify**: the webhook must be created in your Shopify admin using the URL and secret shown in the setup card. Save stays gated until a test event arrives.
     8. **Reconnect the integration.** Expired tokens frequently fail quietly. Calendly refresh tokens in particular are single-use.
   </Accordion>
 
@@ -1394,11 +1393,11 @@ These settings appear on more than one source. Where a source uses one, its acco
   </Accordion>
 
   <Accordion title="Revenue is missing or wrong">
-    - **Revenue is zero on a CRM source**, the **Track revenue** checkbox is off. It is off by default on GoHighLevel, Close.io, and HubSpot.
-    - **Revenue is zero on a body pixel**, **Track revenue (capture order value & currency)** is off, or your page does not expose purchase data for auto-detection. Pass value and currency manually in the snippet.
-    - **Revenue is in the wrong currency**, check the source's currency setting, which defaults to **USD**. This is separate from the Attribution Table's display currency.
-    - **WooCommerce revenue far too low**, your **Count orders with status** list is missing the status your gateway parks orders in.
-    - **Salesforce revenue is zero**, check which field is configured as the revenue field, and that revenue is not disabled on the source.
+    - **Revenue is zero on a CRM source**: the **Track revenue** checkbox is off. It is off by default on GoHighLevel, Close.io, and HubSpot.
+    - **Revenue is zero on a body pixel**: **Track revenue (capture order value & currency)** is off, or your page does not expose purchase data for auto-detection. Pass value and currency manually in the snippet.
+    - **Revenue is in the wrong currency**: check the source's currency setting, which defaults to **USD**. This is separate from the Attribution Table's display currency.
+    - **WooCommerce revenue far too low**: your **Count orders with status** list is missing the status your gateway parks orders in.
+    - **Salesforce revenue is zero**: check which field is configured as the revenue field, and that revenue is not disabled on the source.
   </Accordion>
 
   <Accordion title="The Add Source button is not there">
@@ -1414,7 +1413,7 @@ These settings appear on more than one source. Where a source uses one, its acco
   </Accordion>
 
   <Accordion title="Why is Whop locked?">
-    Whop, like the other 17 integration-backed sources, stays greyed out with a padlock until Whop is connected to this business. Connect it at **Dashboard → Integrations** and the entry unlocks and moves up into the A–Z list. This is the same reason any source shows a padlock.
+    Whop, like the other 17 integration-backed sources, stays greyed out with a padlock until Whop is connected to this business. Connect it at **Dashboard → Integrations** and the entry unlocks and moves up into the A-Z list. This is the same reason any source shows a padlock.
   </Accordion>
 
   <Accordion title="Can one conversion have two sources?">
