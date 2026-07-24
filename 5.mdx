@@ -141,6 +141,68 @@ You can add URL parameters to your ads (videos below) or custom URL parameters i
   </Accordion>
 
   <Accordion title="TikTok Ads">
+    # Adding URL Parameters for TikTok Ads
+
+    TikTok lets you add tracking parameters directly to each ad. You paste one template, and TikTok fills in the campaign, ad group, and ad details automatically every time someone clicks. Here is how to get it set up and confirmed.
+
+    ### 1. Adding Parameters to a Single Ad
+
+    URL parameters live at the **Ad** level in TikTok Ads Manager.
+
+    1. Open the ad you want to track and find the **Destination** (or **Tracking**) section.
+    2. Locate the **URL parameters** field.
+    3. Copy the template from your dashboard and paste it directly into this box.
+    4. Save the ad.
+
+    <Tip>
+      Paste the template **exactly** as it appears in your dashboard. The `__CAMPAIGN_ID__`, `__AID__`, and `__CID__` parts are placeholders that TikTok replaces with real values at the moment of the click. If you paste them into a normal browser, they will not fill in — that is expected.
+    </Tip>
+
+    ### 2. Bulk Editing Multiple Ads
+
+    If you have several ads to update, you do not need to edit them one at a time.
+
+    1. Select all the ads you want to track from the ad list.
+    2. Choose **Edit** (bulk edit).
+    3. Paste your URL parameters into the **URL parameters** field.
+    4. Save your changes.
+
+    ### 3. Verifying Your Setup
+
+    Inside your tracking table, look for the **URL Params** column, exactly like Meta, Google, and Bing:
+
+    - **Green Checkmark:** Configured correctly.
+    - **Red Triangle:** There is an error in the string.
+    - **Red X:** Parameters are missing.
+    - **Grey Dash ("Not applicable"):** This ad type cannot have URL parameters — see the Smart+ note below. This is not an error, and nothing needs fixing.
+
+    <Tip>
+      Click the icon on any ad to see exactly what is missing or misconfigured, and to copy the correct template.
+    </Tip>
+
+    ## URL Template: TikTok Ads
+
+    <Note>
+      ```text wrap
+      utm_source=TikTok+Ads&utm_medium=__AID_NAME__&utm_campaign=__CAMPAIGN_NAME__&utm_content=__CID_NAME__&campaign_id=__CAMPAIGN_ID__&medium_id=__AID__&content_id=__CID__
+      ```
+    </Note>
+
+    <Warning>
+      **TikTok's placeholder names are the opposite of what you would expect.** `__AID__` is the **ad group** ID (not the ad), and `__CID__` is the **ad** ID. The template above already maps them the right way, so paste it as-is and do not rearrange the pieces.
+    </Warning>
+
+    <Warning>
+      **Do not add `ttclid` yourself.** TikTok appends its own click identifier (`ttclid`) to every ad click automatically. It is how Cortana recognises a paid TikTok click, and it is **required for TikTok Events (CAPI)** to send conversions back to TikTok. Adding it by hand can break the click.
+    </Warning>
+
+    ### A note on Smart+ campaigns
+
+    TikTok's **Smart+** campaigns generate their creative and destination automatically, and TikTok does **not** share a landing page URL for them through the API. Because there is no URL to read, there are no parameters to check — so these ads show a grey **"Not applicable"** dash in the URL Params column instead of a red error.
+
+    <Note>
+      This is expected behaviour, not a problem to fix. Standard (non‑Smart+) TikTok campaigns support the full template above and will show a green checkmark once tagged correctly.
+    </Note>
   </Accordion>
 
   <Accordion title="Bing Ads">
@@ -203,6 +265,104 @@ You can add URL parameters to your ads (videos below) or custom URL parameters i
     </Warning>
 
     > **Coming from Hyros?** Leave your existing Microsoft Ads templates exactly as they are — Cortana reads the Hyros Bing parameters (`h_campaign_id`, `bng_id`, `h_ad_id`) natively, so your attribution keeps working without touching a thing. If you'd like cleaner data going forward, you can migrate to the Cortana templates above, but it is not required.
+  </Accordion>
+
+  <Accordion title="Whop Ads">
+    # Setting Up Whop Ads
+
+    Whop Ads lets you run **Meta (Facebook and Instagram) ads through Whop's ad manager**. Because the ads are built and served inside Whop, the setup is different from Meta, Google, TikTok, and Bing in two important ways:
+
+    - You connect Whop with an **API key**, not a login.
+    - Whop adds its own tracking parameters to every ad link **automatically**. There is no template for you to paste.
+
+    Your only job is to connect the account and make sure the [Cortana pixel](/2-setup-pixel) is on the page your ads point to. Cortana handles the rest.
+
+    ### 1. Connecting Whop Ads
+
+    You connect Whop Ads with your **Company ID** and a **Company API key**.
+
+    1. In Cortana, go to **Settings** and open the **Integrations** tab.
+    2. Find the **Whop Ads** card and click **Connect**.
+    3. Enter your **Company ID**. You will find this in your Whop dashboard URL. For example, in `dash.whop.com/biz_abc123xyz`, your Company ID is `biz_abc123xyz`.
+    4. Enter your **API key**. You create or edit an API key in your Whop dashboard, using the permissions listed below.
+    5. Choose how much past spend to **backfill**, then click **Connect**.
+
+    <Note>
+      Already using Whop for conversion tracking? Use the **same** API key and simply add the ad permissions to it. One key covers both the ads side and the conversions side.
+    </Note>
+
+    **Required permissions on your Whop API key:**
+
+    | Permission | What it is for |
+    | --- | --- |
+    | `ad_campaign:read` | Read your campaigns, ad groups, and ads |
+    | `ad_campaign:stats:read` | Read spend and performance stats |
+    | `event:create` | Send conversions back to Whop (see step 5) |
+    | `ad_campaign:update` | Optional. Only needed to pause campaigns or edit budgets from inside Cortana |
+
+    ### 2. What Gets Synced
+
+    Once connected, Cortana pulls your Whop ad account into the same views as your other ad platforms:
+
+    - Your **campaigns, ad groups, and ads**, with their status and budgets.
+    - **Daily spend and performance** (impressions, clicks, reach, results, and ROAS).
+
+    Whop then appears as its own source, **Whop Ads**, in your attribution table, right next to Meta, Google, TikTok, and Bing. Syncing runs automatically every hour.
+
+    <Note>
+      Whop does not share ad creative images through its API, so image previews will not appear for Whop ads. All of your spend and performance numbers still sync normally.
+    </Note>
+
+    ### 3. Tracking Parameters (Added Automatically)
+
+    This is the key difference from the other platforms. **You do not paste a URL template for Whop Ads.** Whop adds its own tracking parameters to the ad link at the moment someone clicks, and the Cortana pixel reads them on your landing page.
+
+    Whop adds these parameters:
+
+    | Parameter | What it identifies |
+    | --- | --- |
+    | `waid` | The Whop **ad** |
+    | `wasid` | The Whop **ad group** (ad set) |
+    | `wacid` | The Whop **campaign** |
+    | `utm_whop` | Marks the click as Whop traffic |
+
+    When someone clicks a Whop ad and lands on your page, the link looks like the example below. Whop fills in the real IDs for you, so this is only to show you what to expect:
+
+    <Note>
+      ```text wrap
+      yourlandingpage.com/vsl?utm_whop=true&waid=WHOP_AD_ID&wasid=WHOP_AD_GROUP_ID&wacid=WHOP_CAMPAIGN_ID
+      ```
+    </Note>
+
+    Because these are Meta ads underneath, the link also carries the normal Meta identifiers. Cortana treats **Whop as the owner** of the click, so the traffic groups cleanly under **Whop Ads** instead of splitting off under Meta.
+
+    <Warning>
+      **Do not add `waid`, `wasid`, or `wacid` yourself.** Whop appends them automatically, and adding them by hand can break the link. Your only responsibility is to make sure the **Cortana pixel is installed** on the page your Whop ads point to. Without the pixel, there is nothing to read these parameters.
+    </Warning>
+
+    ### 4. Verifying Your Setup
+
+    1. On the **Whop Ads** settings page, confirm the account shows as **Connected** with a recent **Last synced** time.
+    2. Open your **attribution table** and look for the **Whop Ads** source. Your campaigns, spend, and results should appear there.
+
+    <Tip>
+      If your spend has not shown up yet, give it up to an hour for the first sync, or click **Refresh** on the Whop Ads settings page.
+    </Tip>
+
+    ### 5. Sending Conversions Back to Whop (CAPI)
+
+    Whop Ads can also send your conversions **back to Whop**, the same idea as Meta CAPI. When a tracked visitor converts, Cortana tells Whop, so Whop's ad algorithm learns who your real buyers are and finds more people like them.
+
+    You set this up on the [AI Ad Optimization](/6) page:
+
+    1. Find the **Whop Conversions API** card and connect it. It reuses the same API key, so there is no pixel or token to paste.
+    2. Turn the toggle **on** so the card shows **Active**.
+    3. Click **Manage** to map your conversion events to Whop's event types. For example, a booked call maps to **Schedule**, and a sign up maps to **Complete Registration**. Anything without a direct match is sent as a **Custom** event.
+    4. Use **Send test event** to confirm Whop is accepting your events.
+
+    <Note>
+      Conversions are matched to Whop on the buyer's real details (email, phone, and name), and each one is sent only once, so re-syncing never double counts. This requires the `event:create` permission on your API key.
+    </Note>
   </Accordion>
 
   <Accordion title="Organic Attribution (YouTube, Email, IG Organic, etc)">
