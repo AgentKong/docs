@@ -340,12 +340,20 @@ Every source is added the same way. Follow these six steps, then open your sourc
         If you are re-uploading to an existing CSV source, your previous mappings are pre-filled and a banner explains you can change them if your file structure changed.
       </Step>
 
-      <Step title="Clean: decide on duplicates">
+      <Step title="Clean: duplicates and refunds">
         Choose whether to **remove duplicates**. When enabled, only the first conversion found for a given contact is counted. When disabled, every row imports as its own conversion.
+
+        Then decide on **These are refunds**. Off by default. Turn it on and every row in the file is recorded as money going out, so it subtracts from your revenue instead of adding to it. See [**Importing refunds**](#importing-refunds) below.
       </Step>
 
       <Step title="Preview: check the numbers before committing">
         The preview shows the **ad match rate** (how many rows matched to existing ad data), the **total revenue** being imported, and the count of **invalid rows** that will be skipped. Rows are skipped when they have neither an email nor a phone number.
+
+        The total counts every non-zero amount, so it shows as a negative when you are importing refunds.
+
+        <Check>
+          Check the sign on that total before you confirm. Importing refunds, it should be negative. If it is positive, **These are refunds** is probably still off.
+        </Check>
       </Step>
 
       <Step title="Start Import">
@@ -360,6 +368,36 @@ Every source is added the same way. Follow these six steps, then open your sourc
     <Tip>
       Every contact needs at least an email or a phone number. If the preview shows a large number of skipped rows, that is almost always the cause. Fix the file and re-upload rather than importing a partial file.
     </Tip>
+
+    #### Importing refunds
+
+    Turn **These are refunds** on when your export lists refund amounts as **positive numbers**. That is how most platforms export refunds. Hyros, for example, reports a refund as its own row with a positive amount, because it tracks refunds as a separate figure rather than as a negative sale. Uploaded as-is, those rows would add to your revenue.
+
+    Leave it **off** when your file already uses minus signs, like `-49.00`. We read the minus sign automatically, so no toggle is needed.
+
+    <Warning>
+      **Export your refunds separately from your sales.** A CSV upload feeds one conversion at a time, and the refund option applies to **every row in the file**. Upload the sales file to your purchase conversion with the option off, and the refunds file to your refund conversion with the option on. If a single file mixes sales and refunds with no minus signs, there is no way to tell them apart. Split the export.
+    </Warning>
+
+    Turning it on twice is safe. The option makes values negative, it does not flip the sign back and forth. A file that already uses minus signs stays negative, and re-importing the same file will not turn refunds back into revenue.
+
+    #### Number formats we accept
+
+    You do not need to clean up your value column before uploading. All of these are read correctly:
+
+    | What is in your file | What we record |
+    | --- | --- |
+    | `49.00` | 49.00 |
+    | `1,234.56` | 1,234.56 |
+    | `1.234,56` (European) | 1,234.56 |
+    | `1 234,56` (French) | 1,234.56 |
+    | `$1,234.56` | 1,234.56 |
+    | `€1.234,56` | 1,234.56 |
+    | `-49.00` | −49.00 |
+    | `49.00-` (trailing minus, common in Excel exports) | −49.00 |
+    | `(49.00)` (accounting style) | −49.00 |
+
+    Currency symbols, thousands separators, and spaces are all handled. If a cell cannot be read as a number at all, that conversion's value is left blank rather than guessed.
   </Accordion>
 
   <Accordion title="Fanbasis">
@@ -1442,6 +1480,22 @@ These settings appear on more than one source. Where a source uses one, its acco
     Use **CSV Upload**, which is always available. Name the source, upload a file up to 100 MB, map your columns (every row needs an email or a phone number, plus a conversion date), choose whether to remove duplicates, review the preview, and start the import.
 
     Set up **AI Ad Optimization** first if you want the imported history sent back to your Meta pixel to train it.
+  </Accordion>
+
+  <Accordion title="I imported refunds and my revenue went up instead of down.">
+    Your file listed the refunds as positive numbers and the **These are refunds** option was off. Re-import the file with the option on. If the wrong rows are already in your account, contact support and we will correct them.
+  </Accordion>
+
+  <Accordion title="Do I need to add minus signs to my CSV before uploading?">
+    No. Either use the **These are refunds** option, or leave the minus signs your export already has. Both work.
+  </Accordion>
+
+  <Accordion title="Can I put sales and refunds in the same file?">
+    Only if the refunds already carry minus signs. Otherwise export them separately. The refund option applies to every row in the file, so a mixed file without minus signs cannot work.
+  </Accordion>
+
+  <Accordion title="My totals looked wrong on a past import.">
+    Older imports could misread values containing commas or unusual minus signs. Re-importing the file now will read them correctly. Reach out if you need help checking a past import.
   </Accordion>
 
   <Accordion title="How do I know a source is actually working?">
