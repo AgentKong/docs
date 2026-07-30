@@ -1,0 +1,42 @@
+---
+title: "Connecting Tools to Your Agents"
+description: "Give Claw agents new capabilities with MCP tool connectors — shared across your business or private to one agent."
+---
+
+## Built-in Cortana tools
+
+Every Claw agent already has your Cortana data, no setup needed:
+
+- **Attribution**: performance by source, campaign, or ad — revenue, ROAS, CPA — plus UTMs and your saved presets.
+- **Revenue**: Stripe payments, subscriptions, and customers; Shopify orders and analytics; Whop payments and memberships.
+- **Customers**: contacts, conversation history, conversion events, form submissions.
+- **Calls and meetings**: call recordings with transcripts, and Fathom meeting summaries.
+- **YouTube**: channel and video analytics, retention, transcripts, and search.
+- **Scheduling**: the agent can create and manage its own recurring tasks (with your limits enforced).
+
+## Adding external tools
+
+Claw supports the open **MCP** (Model Context Protocol) standard, so you can connect almost any remote tool server:
+
+1. Open your agent's connectors panel in the workspace.
+2. Enter the server URL (must be `https://`).
+3. Pick how it authenticates: no auth, a bearer token, a custom header, or OAuth sign-in. Cortana probes the server and walks you through whichever it needs.
+
+Once connected, agents see the server in their tool catalog and load its tools on demand during a run.
+
+## Shared vs. private connectors
+
+- **Business-wide (default)**: the connector is available to every agent in the business. Connect a tool once, and your whole agent team can use it.
+- **Agent-private**: scoped to a single agent. If a private connector has the same name as a business-wide one, the private one wins for that agent.
+
+## Credential safety
+
+Tokens and OAuth credentials are stored in Cortana's encrypted vault and injected server-side when a tool is called. The agent never sees your credentials, they never appear in the run transcript, and they can never be exported (for example, recipes you publish never contain secrets).
+
+## Letting the agent connect tools itself
+
+During an attended run (in the app or on desktop — never from Slack, never unattended), an agent that needs a capability can propose connecting a tool server itself. You see exactly what it wants to connect and approve or deny it. If the server needs sign-in, you complete the authentication — the agent cannot.
+
+## When a tool still needs sign-in
+
+If a connector was added but not yet authenticated (for example after applying a recipe), a **connect card** appears in the workspace prompting you to finish sign-in. The tool stays disabled until you do.

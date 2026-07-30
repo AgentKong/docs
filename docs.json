@@ -51,6 +51,46 @@
         ]
       },
       {
+        "tab": "Cortana Claw",
+        "icon": "user-robot",
+        "groups": [
+          {
+            "group": "Getting Started",
+            "icon": "rocket",
+            "pages": [
+              "claw/overview",
+              "claw/getting-started",
+              "claw/desktop-cloud-extension"
+            ]
+          },
+          {
+            "group": "Capabilities",
+            "icon": "toolbox",
+            "pages": [
+              "claw/connectors",
+              "claw/skills",
+              "claw/memory"
+            ]
+          },
+          {
+            "group": "Working Autonomously",
+            "icon": "arrows-rotate",
+            "pages": [
+              "claw/automations",
+              "claw/recipes"
+            ]
+          },
+          {
+            "group": "Channels & Control",
+            "icon": "shield-check",
+            "pages": [
+              "claw/slack",
+              "claw/approvals-and-billing"
+            ]
+          }
+        ]
+      },
+      {
         "tab": "AI Agents Feature",
         "icon": "robot",
         "groups": [

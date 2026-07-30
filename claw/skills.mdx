@@ -1,0 +1,30 @@
+---
+title: "Skills: Teach Your Agent Procedures"
+description: "Save step-by-step playbooks your agent can repeat reliably — write them, let the agent save them, or teach by demonstration."
+---
+
+## What is a skill?
+
+A skill is a saved, step-by-step playbook: a name, a goal, and the exact steps to follow, including which tools to use. When a task matches a skill, the agent pulls it up and follows the proven procedure instead of figuring everything out from scratch. Skills make agents faster, cheaper, and far more consistent.
+
+## Ways to create a skill
+
+**Write one yourself.** Open the **Skills** view from the Run console and create a skill with a name, a one-line goal, and numbered steps.
+
+**Let the agent save one.** After an agent completes a task well during an attended run, it can propose saving the procedure as a skill. You review and approve before anything is saved.
+
+**Teach by demonstration (desktop app).** Use the **Record a skill** card in the Skills view:
+
+1. Choose a title and whether you are demonstrating in the browser or across your whole desktop.
+2. Perform the task yourself once. Cortana captures your actions (screenshots and clicks — desktop recording does not capture your keystrokes).
+3. The agent distills your demonstration into a written playbook you can review and edit.
+
+**Goal automations.** While an agent is looping toward a goal, it records what worked as a playbook automatically, so later iterations get better. See [Automations](/claw/automations).
+
+## Using skills
+
+Nothing to trigger manually — agents check their skill library when a task matches. You can also reference a skill by name in your instructions ("use the weekly-report skill").
+
+## Skills in recipes
+
+Skills travel inside [recipes](/claw/recipes): when you package your setup as a recipe or apply one from the marketplace, its skills are copied into the target agent as text playbooks.

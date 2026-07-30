@@ -1,0 +1,51 @@
+---
+title: "Getting Started with Cortana Claw"
+description: "Create your first Claw agent, run your first task, and let the guided onboarding connect your first tool."
+---
+
+## Open the agent workspace
+
+Select your business in Cortana and open the **Agent** section. This is the Claw workspace: a Run console where you talk to your agent, a chat sessions list on the left, and quick access to Automations, Recipes, and settings.
+
+You can start entirely in the browser — no download needed. Install the Cortana desktop app later if you want the agent to operate a browser or your computer.
+
+## Your first conversation
+
+The first time you talk to a new agent, it runs a short guided setup:
+
+1. **It researches your business** using your Cortana business info, your products, and the web.
+2. **It offers concrete things it can do** for your specific business — not generic examples.
+3. **It helps you connect one tool** (for example Stripe) so it has real data to work with.
+4. **It proves the connection works** by running a real query and showing you the result.
+
+You can skip this at any time and just give it a task.
+
+## Create and manage agents
+
+From the Run console, open the **Agents** view:
+
+1. Click to create a new agent.
+2. Give it a **name**, an optional **persona prompt** (how it should think and communicate), and optionally a **model** override.
+3. Attach it to one or more of your businesses. One agent per business can be marked the **default agent**, which is the one Slack and integrations use when no agent is specified.
+
+You can create multiple agents with different personas and tool sets — a research agent, a reporting agent, an operations agent — and they all share your business-wide tool connections.
+
+## Run a task
+
+Type what you want done in the Run console and send it. You will see the agent's steps live: what it is reading, which tools it calls, and what it found. When it needs to do something sensitive (submit a form, run a command, save a memory), it pauses and asks you to approve.
+
+Use the **Cloud** toggle to choose where the task runs:
+
+- **Cloud** — data analysis, research, reporting, anything using your connected tools. Works from any browser.
+- **Desktop** — browsing, clicking through websites, working with files or apps on your machine. Requires the desktop app.
+
+## Conversation sessions
+
+Every conversation is a persistent **session**. Pick up an earlier session from the sidebar and the agent continues with full context — across the web app, the desktop app, and Slack. If you send a new message while the agent is still working, it queues and runs when the agent is idle.
+
+## Next steps
+
+- [Connect your tools](/claw/connectors)
+- [Teach your agent skills](/claw/skills)
+- [Set up recurring automations](/claw/automations)
+- [Use Claw from Slack](/claw/slack)

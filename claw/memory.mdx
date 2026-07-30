@@ -1,0 +1,27 @@
+---
+title: "Agent Memory"
+description: "Claw agents recall their past work, save durable facts with your approval, and can use semantic memory."
+---
+
+## Recall: the agent remembers its work
+
+Every run an agent performs is recorded — the steps it took, the tools it used, and what it found. The agent can look back over its own history to answer questions like "what did you find last week?" or to avoid repeating work. Recall is read-only and never needs approval.
+
+## Durable facts
+
+When an agent learns something worth keeping — "the monthly report goes to #revenue-updates", "this client's fiscal year starts in February" — it can propose saving it as a durable memory. You approve or deny each save. Saved facts are keyed by topic, so updating a topic overwrites the old value instead of piling up duplicates.
+
+## Semantic memory (mem0)
+
+For richer long-term memory, you can enable **semantic memory** per agent:
+
+1. Add your mem0 API key under **Settings → Integrations** for the agent's home business.
+2. Toggle **semantic memory** on in the agent's settings.
+
+With it enabled, the agent's saved facts are also mirrored into a private mem0 namespace for that agent, giving it meaning-based lookup across everything it has learned.
+
+## Privacy and scope
+
+- Memory is per-agent. One agent cannot read another agent's memories.
+- You can review what an agent has done in its run history at any time.
+- Writing a memory always requires your approval; reading never does.

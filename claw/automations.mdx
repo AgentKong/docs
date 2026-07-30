@@ -1,0 +1,53 @@
+---
+title: "Automations: Schedules and Goals"
+description: "Run agent tasks on a recurring schedule, or set a standing goal the agent loops toward until it succeeds."
+---
+
+## The Automations view
+
+Open **Automations** in the agent workspace to see everything your agents do on their own — recurring schedules and standing goals in one list, sorted by what's running now, what's due next, and what's idle.
+
+## Scheduled tasks
+
+A schedule fires an agent task on a recurring cadence.
+
+**Create one from:**
+
+- The **Automations** view (**New automation**).
+- Slack: `/schedule` (or `/cortana schedule`) opens the scheduling form.
+- The agent itself — you can just ask it to "check this every morning at 8" and approve its proposal.
+- A [recipe](/claw/recipes) — recipe schedules arrive **paused** so nothing runs until you turn it on.
+
+You describe the timing in plain language ("every weekday at 9am", "every 2 hours") and Cortana converts it to a precise schedule in your timezone.
+
+**How schedules behave:**
+
+- Each schedule runs a specific agent with your task text, on the cloud by default, or pinned to your desktop.
+- If the previous run is still going, the next one waits — runs never overlap.
+- A schedule that fails 5 times in a row pauses itself so it can't burn credit in a broken loop.
+
+**Limits:**
+
+- Minimum cadence: **15 minutes**.
+- Up to **50 active schedules** per business (paused schedules don't count; the cap is re-checked when you re-enable one).
+
+## Goals
+
+A goal is a standing objective with success criteria — "get our help-center articles updated for the new pricing", "find and fix broken UTM links". Instead of firing once, the agent:
+
+1. Works an iteration toward the goal.
+2. Judges its own progress against your success criteria.
+3. Keeps notes on what it tried and what's next.
+4. Loops on the cadence you set until the goal is **achieved**, it runs out of attempts, or you stop it.
+
+While iterating, the agent records procedures that worked as [skills](/claw/skills), so progress compounds.
+
+**Controls and limits:**
+
+- You set the cadence, the max number of attempts, and whether iterations run gated (approvals) or unattended.
+- Up to **20 active goals** per business.
+- Pause, resume, or stop a goal any time from the Automations view.
+
+## Billing note
+
+Every scheduled run and goal iteration is a normal agent run and bills like one. The cadence floor and the caps above exist to protect your wallet — see [Approvals and billing](/claw/approvals-and-billing).

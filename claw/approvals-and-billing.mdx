@@ -1,0 +1,40 @@
+---
+title: "Approvals, Safety, and Billing"
+description: "How Claw keeps you in control of what agents do, and how agent usage is billed."
+---
+
+## The approval model
+
+Claw is approval-first. The server — not the agent — decides which actions need your sign-off, so an agent can never talk its way around the policy.
+
+**Always asks first:**
+
+- Navigating, clicking, uploading files, or submitting forms in a browser.
+- Any whole-screen control (clicks, typing, keyboard shortcuts) and native-app actions.
+- Running scripts or shell commands.
+- Saving a memory.
+- Connecting a new tool, creating an agent, or saving a skill on its own initiative.
+
+**Never needs approval:** reading pages, taking screenshots, searching the web, querying your connected data, and recalling its own past work.
+
+## Attended vs. unattended
+
+By default runs are **gated**: the agent pauses at each sensitive action and waits for you (in the app, or as approval buttons in Slack — unanswered Slack approvals deny after about 5 minutes).
+
+**Unattended** mode (`--auto` in Slack, or the auto setting on schedules and goals) auto-approves those actions. Powerful capabilities stay attended-only regardless: an agent can never provision new tools, create agents, or save skills from Slack or from an unattended run.
+
+## Spending guardrails
+
+- Schedules have a 15-minute minimum cadence, a cap of 50 active schedules per business, and auto-pause after 5 consecutive failures.
+- Goals are capped at 20 active per business, each with a max-attempts budget you set.
+- Recurring runs never overlap — a schedule waits for its previous run to finish.
+
+## How billing works
+
+Agent runs are billed by token usage at your account's rates, recorded per run — you can see usage on each run in the history.
+
+**Bring your own key:** add your own Anthropic API key for the business and agent runs use it directly — Cortana bills $0 for those runs.
+
+**Local models:** runs on a local model via the desktop app's Ollama runtime cost $0 in Cortana usage.
+
+Scheduled runs, goal iterations, and Slack tasks bill the same way as manual runs — that's what the guardrails above protect.

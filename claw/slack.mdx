@@ -1,0 +1,54 @@
+---
+title: "Using Claw from Slack"
+description: "Run agent tasks, approve actions, and schedule automations without leaving Slack."
+---
+
+## Connect Slack
+
+Connect your Slack workspace under **Settings → Integrations → Slack** for the business. Once connected, the Cortana slash commands are available in that workspace, and agents can post progress, results, and screenshots into your channels.
+
+## Run a task: /cortana
+
+```
+/cortana <what you want done>
+```
+
+Cortana queues the task and posts progress in a thread. Two optional flags, in any order before the task:
+
+- `--cloud` — force the task to run on the cloud (instead of a connected desktop).
+- `--auto` — run unattended: actions that would normally ask for approval are auto-approved. Use this only for tasks you fully trust.
+
+Examples:
+
+```
+/cortana pull yesterday's ad performance and summarize the top 3 campaigns
+/cortana --cloud --auto refresh the weekly KPI summary
+```
+
+## Pick who runs it
+
+If the channel has no default agent yet, Cortana shows a picker: choose the agent and where it runs (desktop or cloud), then hit Continue.
+
+Set it once per channel with:
+
+```
+/cortana defaults
+```
+
+After that, `/cortana` tasks in the channel run immediately with the saved agent and surface.
+
+## Approvals in Slack
+
+When a gated run hits a sensitive action, Cortana posts an approval card in the thread with the exact action it wants to take. Click to approve or deny. If nobody responds within about 5 minutes, the action is denied and the agent continues accordingly.
+
+## Schedule from Slack
+
+```
+/schedule
+```
+
+(or `/cortana schedule`) opens a form to create a recurring agent task: describe the timing in plain language, write the task, pick the agent. The same limits apply as in the app — see [Automations](/claw/automations).
+
+## How routing works
+
+Cortana never guesses which agent should answer. It uses, in order: the agent you explicitly picked, the agent bound to the thread, then the channel's default. If none is set, it asks.

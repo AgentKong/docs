@@ -1,0 +1,48 @@
+---
+title: "Desktop, Cloud, and Chrome Extension"
+description: "The three places a Claw agent can run, what each one can do, and how to choose."
+---
+
+## Choosing where a task runs
+
+Every Claw run happens on one of three surfaces. The Run console has a **Cloud** toggle; Slack has a `--cloud` flag and per-channel defaults; schedules can be pinned to your desktop or run on the cloud.
+
+| Capability | Desktop app | Cloud | Chrome extension |
+|---|---|---|---|
+| Browse and operate websites | Yes | No | Yes |
+| Control the whole screen / native apps | Yes | No | No |
+| Run scripts and shell commands | Yes (approval required) | No | No |
+| Use your Cortana data + connected tools | Yes | Yes | No |
+| Web search and page fetching | Yes | Yes | No |
+| Skills and memory | Yes | Yes | Memory only |
+| Works without any install | No | Yes | No |
+| Run on a local model (Ollama) | Yes | No | No |
+
+## The desktop app
+
+With the Cortana desktop app, the agent gets a real browser it can navigate, read, click, and type in — plus, when you arm it, control of your screen for anything outside the browser. On macOS it can also read native apps through the system accessibility tree, which is more reliable than screenshots.
+
+Desktop agents can also execute code: Node scripts run out of the box, Python if you have it installed, and shell commands — every execution is approval-gated, and scripts run in a dedicated `CortanaWorkspace` folder.
+
+## The cloud
+
+Cloud runs happen on Cortana's servers. They have no browser and cannot touch your machine — they are pure data-and-reasoning runs with access to:
+
+- The built-in Cortana toolset: attribution, revenue (Stripe, Shopify, Whop), contacts, conversations, calls and meetings, form submissions, YouTube.
+- Any tool servers you have connected.
+- Web search and web page reading.
+- The agent's skills and memory.
+
+Cloud is the right choice for reports, analysis, monitoring, and research — and it is what Slack tasks and most automations use.
+
+## The Chrome extension
+
+The Cortana Chrome extension turns a specific Chrome profile into an agent body. This matters when a task needs *your* logged-in sessions — an ad platform, a CRM, a members area.
+
+- Connected browsers appear in the **Chrome profiles** view of the agent workspace, with live online/offline status.
+- You can **pin** a conversation to a specific browser profile so its tasks always run there.
+- The extension can capture screenshots and post them to your Slack thread as it works.
+
+## Local models (desktop only)
+
+In the **Local LLM** view of the workspace (desktop app only), you can run an agent on a local model through a bundled Ollama runtime instead of a cloud model. Local runs keep inference on your machine and cost $0 in Cortana usage. Local-model agents run only on your desktop — the cloud will decline them.
