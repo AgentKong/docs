@@ -1,40 +1,137 @@
 ---
-title: "Cortana Claw Overview"
-description: "Cortana Claw gives your business AI agents that do real work — in your browser, on your computer, on the cloud, and in Slack."
+title: "Cortana Claw overview"
+description: "What Cortana Claw is, how it differs from AI Agents, where agents run, and everything they can do for your business."
 ---
+
+{/* TODO: verify — no Loom walkthrough was supplied for this page. When one is recorded, embed it
+    here with a verbatim transcript inside an <Accordion title="Video transcript"> for the KB. */}
 
 ## What is Cortana Claw?
 
-Cortana Claw is Cortana's AI agent workforce. You create agents for your business, and those agents complete real tasks for you: researching, pulling your attribution and revenue data, operating a browser, running on schedules, working toward goals, and reporting back in the app or in Slack.
+**Cortana Claw** is Cortana's AI agent workforce. You create agents for your business, and those agents complete real tasks for you — researching, pulling your attribution and revenue data, operating a browser, running on a schedule, working toward goals, and reporting back in the app or in Slack.
 
-Claw agents are different from the conversational **AI Agents** feature (which chats with your leads and books appointments). A Claw agent works *for you*, the operator: think of it as a teammate that can use your tools, remember what it learns, and repeat procedures reliably.
+Think of a Claw agent as a teammate that can use your tools, remember what it learns, and repeat procedures reliably.
+
+<Note>
+  **Claw agents are not the same as the AI Agents feature.** The conversational **AI Agents** product chats with *your leads* and books appointments. A **Claw** agent works for *you*, the operator. Different products, different jobs.
+</Note>
+
+## Where it lives
+
+Open your business in Cortana and click **CortanaClaw** in the left sidebar. The workspace opens on the **Threads** console. A narrow rail gives you four sections, with your saved **Conversations** listed underneath:
+
+<Frame caption="The CortanaClaw workspace rail: Threads, Loops, Recipes, and Tools, with Conversations below.">
+  <img src="/images/claw/overview/01-workspace-rail.png" alt="The left rail of the CortanaClaw workspace with four highlighted, numbered sections — 1 Threads, 2 Loops, 3 Recipes, 4 Tools — followed by a Conversations heading, a New chat button, and a Search conversations box." />
+</Frame>
+
+<CardGroup cols={2}>
+  <Card title="1 · Threads" icon="comments">
+    The run console. Give an agent a task and watch it work step by step. Every conversation is saved and resumable.
+  </Card>
+  <Card title="2 · Loops" icon="clock-rotate-left">
+    Recurring **schedules** and standing **goals** the agent loops toward on its own. See [Automations](/claw/automations).
+  </Card>
+  <Card title="3 · Recipes" icon="book">
+    Reusable bundles of skills, tools, and schedules — build your own or install one from the marketplace. See [Recipes](/claw/recipes).
+  </Card>
+  <Card title="4 · Tools" icon="plug">
+    Business-wide tool connections (MCP servers) shared across your agents. See [Connectors](/claw/connectors).
+  </Card>
+</CardGroup>
+
+On the desktop app, two more sections pin to the bottom of the rail: **Chrome profiles** and **Local LLM**.
 
 ## Where agents can run
 
-A Claw agent has three possible "bodies":
+A Claw agent has three possible "bodies". You pick where a task runs when you send it.
 
-- **Your desktop** — with the Cortana desktop app installed, agents can browse the web in a real browser, control your screen, work with native apps, and run scripts on your machine. Every sensitive action asks for your approval first.
-- **The cloud** — agents run on Cortana's servers with full access to your connected data (attribution, Stripe, Shopify, contacts, calls, YouTube, and any tools you connect) plus web search. No desktop app needed, and cloud runs work from any browser and from Slack.
-- **Your Chrome browser** — the Cortana Chrome extension lets agents drive a specific Chrome profile, which is useful when a task needs your logged-in browser sessions.
+<AccordionGroup>
+  <Accordion title="Cloud — the default, works in any browser" icon="cloud">
+    Agents run on Cortana's servers with full access to your connected data (attribution, Stripe, Shopify, contacts, calls, YouTube, and any tools you connect) plus web search. No desktop app needed, and cloud runs work from any browser and from Slack. Cloud runs **cannot** drive a browser or control your computer.
+  </Accordion>
+
+  <Accordion title="Desktop — browser and computer control" icon="laptop">
+    With the Cortana desktop app installed, agents can browse the web in a real browser, control your screen, work with native apps, and run scripts on your machine. Every sensitive action asks for your approval first.
+  </Accordion>
+
+  <Accordion title="Chrome extension — your logged-in browser" icon="chrome">
+    The Cortana Chrome extension lets an agent drive a specific Chrome profile — useful when a task needs your existing logged-in browser sessions.
+  </Accordion>
+</AccordionGroup>
+
+See [Desktop, cloud & extension](/claw/desktop-cloud-extension) for the full comparison.
 
 ## What agents can use
 
-- **Your Cortana data**: attribution, UTMs, Stripe/Shopify/Whop revenue, contacts, conversations, call recordings and meeting transcripts, form submissions, and YouTube analytics.
-- **Connected tools**: add almost any remote MCP tool server, shared across all your agents or private to one agent. See [Connecting tools](/claw/connectors).
-- **Skills**: reusable step-by-step playbooks the agent follows. You can even teach a skill by demonstrating it once. See [Skills](/claw/skills).
-- **Memory**: agents recall their past work and can save durable facts with your approval. See [Agent memory](/claw/memory).
+<CardGroup cols={2}>
+  <Card title="Your Cortana data" icon="database">
+    Attribution, UTMs, Stripe/Shopify/Whop revenue, contacts, conversations, call recordings and meeting transcripts, form submissions, and YouTube analytics — through the built-in tools, no setup.
+  </Card>
+  <Card title="Connected tools" icon="plug" href="/claw/connectors">
+    Add almost any remote MCP tool server, shared across all your agents or private to one agent.
+  </Card>
+  <Card title="Skills" icon="wand-magic-sparkles" href="/claw/skills">
+    Reusable step-by-step playbooks the agent follows. You can teach a skill by demonstrating it once.
+  </Card>
+  <Card title="Memory" icon="brain" href="/claw/memory">
+    Agents recall their past work and can save durable facts (with your approval) to reuse later.
+  </Card>
+</CardGroup>
 
 ## Ways to put agents to work
 
-- **Run console** — chat with an agent and watch it work step by step, with persistent conversation sessions.
-- **Automations** — recurring scheduled tasks and standing goals the agent loops toward. See [Automations](/claw/automations).
-- **Recipes** — bundle skills, tools, and schedules into a reusable setup, or install one from the marketplace. See [Recipes](/claw/recipes).
-- **Slack** — type `/cortana <task>` in a connected Slack workspace and get progress, approvals, and results in the thread. See [Using Claw from Slack](/claw/slack).
+| Surface | What it is | Where |
+|---|---|---|
+| **Threads console** | Chat with an agent and watch it work, with persistent sessions. | The workspace home. See [Getting started](/claw/getting-started). |
+| **Loops** | Recurring scheduled tasks and standing goals the agent loops toward. | Loops tab. See [Automations](/claw/automations). |
+| **Recipes** | Bundle skills, tools, and schedules into a reusable setup, or install one. | Recipes tab. See [Recipes](/claw/recipes). |
+| **Slack** | Type `/cortana <task>` in a connected workspace; get progress and results in the thread. | Any connected Slack channel. See [Slack](/claw/slack). |
 
-## Where to find it
+## The safety model
 
-Open your business in Cortana and go to the **Agent** section. The Run console is the home view; the left rail gives you **Automations**, **Recipes**, and (on the desktop app) **Chrome profiles** and **Local LLM**. Agents and Skills are managed from the console.
+Claw is built **approval-first**. Actions that touch the outside world — clicking, submitting forms, running commands, saving memories, connecting tools — pause and ask you before they happen. Read-only actions (reading pages, searching, recalling past work) never need approval. Unattended runs are opt-in per task.
 
-## Safety model
+<Warning>
+  Nothing sensitive happens silently. If an agent is about to do something that changes data or reaches outside Cortana, it stops and asks — unless you explicitly turned on **Unattended** for that run. See [Approvals & billing](/claw/approvals-and-billing).
+</Warning>
 
-Claw is built approval-first. Actions that touch the outside world — clicking, submitting forms, running commands, saving memories, connecting tools — pause and ask you before they happen. Read-only actions (reading pages, searching, recalling past work) never need approval. Unattended runs are opt-in per task. See [Approvals and billing](/claw/approvals-and-billing).
+## FAQ
+
+<AccordionGroup>
+  <Accordion title="Is Cortana Claw the same as the AI Agents that talk to my leads?">
+    No. **AI Agents** are customer-facing (they chat with leads and book appointments). **Claw** agents work for you — they use your tools, pull your data, and run tasks. Two separate products.
+  </Accordion>
+
+  <Accordion title="Do I need to install anything?">
+    No — cloud runs (data, research, reporting) work in any browser. Install the desktop app only for browser or computer-control tasks, or the Chrome extension to use your logged-in browser.
+  </Accordion>
+
+  <Accordion title="Can one agent work across several of my businesses?">
+    Yes. An agent is business-owned but can be attached to more than one business, and agency admins can share a single agent across businesses. Each business can mark one agent as its **default**.
+  </Accordion>
+
+  <Accordion title="Will an agent do something without asking me?">
+    Only if you turn on **Unattended** for that run. By default every sensitive action waits for your approval, and you can press **Stop** at any time.
+  </Accordion>
+
+  <Accordion title="What does it cost to run an agent?">
+    Runs are billed per token against your Cortana credit, or **$0** if your business supplies its own Anthropic (Claude) API key. See [Approvals & billing](/claw/approvals-and-billing).
+  </Accordion>
+</AccordionGroup>
+
+## Next steps
+
+<CardGroup cols={2}>
+  <Card title="Get started" icon="rocket" href="/claw/getting-started">
+    Create your first agent and run a task, start to finish.
+  </Card>
+  <Card title="Desktop, cloud & extension" icon="laptop" href="/claw/desktop-cloud-extension">
+    Choose where your agents run and what each surface unlocks.
+  </Card>
+  <Card title="Connect your tools" icon="plug" href="/claw/connectors">
+    Add MCP tool servers your agents can use.
+  </Card>
+  <Card title="Automate with Loops" icon="clock-rotate-left" href="/claw/automations">
+    Put agents on a schedule or set a standing goal.
+  </Card>
+</CardGroup>

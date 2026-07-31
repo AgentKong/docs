@@ -1,42 +1,171 @@
 ---
-title: "Connecting Tools to Your Agents"
-description: "Give Claw agents new capabilities with MCP tool connectors — shared across your business or private to one agent."
+title: "Connecting tools to your agents"
+description: "Give Cortana Claw agents new capabilities with MCP tool connectors on the Tools page — shared business-wide or scoped to one agent, with credentials kept in an encrypted vault."
 ---
 
-## Built-in Cortana tools
+{/* TODO: verify — no Loom walkthrough was supplied. Add the embed + verbatim transcript inside an
+    <Accordion title="Video transcript"> for the KB once recorded. */}
 
-Every Claw agent already has your Cortana data, no setup needed:
+## Overview
 
-- **Attribution**: performance by source, campaign, or ad — revenue, ROAS, CPA — plus UTMs and your saved presets.
-- **Revenue**: Stripe payments, subscriptions, and customers; Shopify orders and analytics; Whop payments and memberships.
-- **Customers**: contacts, conversation history, conversion events, form submissions.
-- **Calls and meetings**: call recordings with transcripts, and Fathom meeting summaries.
-- **YouTube**: channel and video analytics, retention, transcripts, and search.
-- **Scheduling**: the agent can create and manage its own recurring tasks (with your limits enforced).
+Claw agents come with your Cortana data built in. **Tools** are how you give them *more* — connect an outside service (through the open **MCP** standard) and your agents can use it during a run.
 
-## Adding external tools
+Tool connections live on the **Tools** tab of the CortanaClaw workspace. Anything you connect there is shared with every agent in the business by default.
 
-Claw supports the open **MCP** (Model Context Protocol) standard, so you can connect almost any remote tool server:
+<Note>
+  **Prerequisites** — you need at least one agent in the business before you can add tools (tools connect through an agent). If you haven't made one yet, see [Getting started](/claw/getting-started).
+</Note>
 
-1. Open your agent's connectors panel in the workspace.
-2. Enter the server URL (must be `https://`).
-3. Pick how it authenticates: no auth, a bearer token, a custom header, or OAuth sign-in. Cortana probes the server and walks you through whichever it needs.
+## What's already built in
 
-Once connected, agents see the server in their tool catalog and load its tools on demand during a run.
+Every agent has these Cortana tools with **no setup**:
 
-## Shared vs. private connectors
+| Category | What the agent can pull |
+|---|---|
+| **Attribution** | Performance by source, campaign, or ad — revenue, ROAS, CPA — plus UTMs and your saved presets. |
+| **Revenue** | Stripe payments, subscriptions and customers; Shopify orders and analytics; Whop payments and memberships. |
+| **Customers** | Contacts, conversation history, conversion events, form submissions. |
+| **Calls & meetings** | Call recordings with transcripts, and Fathom meeting summaries. |
+| **YouTube** | Channel and video analytics, retention, transcripts, and search. |
+| **Scheduling** | The agent can create and manage its own recurring tasks (within your limits). |
 
-- **Business-wide (default)**: the connector is available to every agent in the business. Connect a tool once, and your whole agent team can use it.
-- **Agent-private**: scoped to a single agent. If a private connector has the same name as a business-wide one, the private one wins for that agent.
+Everything below is about connecting **external** tools on top of these.
 
-## Credential safety
+## Connect an external tool
 
-Tokens and OAuth credentials are stored in Cortana's encrypted vault and injected server-side when a tool is called. The agent never sees your credentials, they never appear in the run transcript, and they can never be exported (for example, recipes you publish never contain secrets).
+<Steps>
+  <Step title="Open the Tools tab">
+    In the CortanaClaw workspace rail, click **Tools**. You'll see every connected tool as a row with its health (**Healthy** or **Unreachable**), how many tools it exposes, when it was last checked, its scope, and its address. Click **Connect a tool** at the top right.
 
-## Letting the agent connect tools itself
+    <Frame caption="The Tools tab lists every connection. Connect a tool adds a new one.">
+      <img src="/images/claw/connectors/01-tools-tab.png" alt="The Tools tab showing connected MCP servers — coingecko, context7, deepwiki, githubcopilot, gitmcp and linear — each row with a Healthy or Unreachable badge, a tool count, a last-checked time, a scope dropdown, and a URL. The Connect a tool button at the top right is highlighted." />
+    </Frame>
+  </Step>
 
-During an attended run (in the app or on desktop — never from Slack, never unattended), an agent that needs a capability can propose connecting a tool server itself. You see exactly what it wants to connect and approve or deny it. If the server needs sign-in, you complete the authentication — the agent cannot.
+  <Step title="Paste the tool link and name it">
+    A **Connect a tool** form opens. Fill in:
 
-## When a tool still needs sign-in
+    - **Tool link** — the server's web address from your provider. It must start with `https://`.
+    - **Name (so you can recognize it)** — a short label like `stripe`. Names are lowercased and limited to letters, numbers, `-` and `_`.
 
-If a connector was added but not yet authenticated (for example after applying a recipe), a **connect card** appears in the workspace prompting you to finish sign-in. The tool stays disabled until you do.
+    <Frame caption="The Connect a tool form. Paste the provider's https link and give it a name.">
+      <img src="/images/claw/connectors/02-connect-form.png" alt="The Connect a tool form with a Tool link field filled in as 'https://mcp.stripe.com/' and a 'Name (so you can recognize it)' field filled in as 'stripe', both highlighted, plus Cancel and a highlighted Connect button." />
+    </Frame>
+  </Step>
+
+  <Step title="Connect, and sign in if asked">
+    Click **Connect**. Cortana probes the server and connects it if it's open. If the server needs permission, a **This tool needs permission to connect** step appears with two choices:
+
+    - **Sign in** — opens the provider's login in a popup (OAuth). *"You'll sign in to the provider in a popup window. We never see your password."*
+    - **Use an access key** — paste the API key / token your provider gave you. Under **Advanced**, you can set a custom **Header name** (for example `X-API-Key`) if your provider requires one.
+
+    On success you'll see how many tools it added. Cortana supports four auth styles automatically: **none**, **bearer token**, **custom header**, and **OAuth**.
+  </Step>
+
+  <Step title="Choose who can use it">
+    Tools you add on the Tools page are **Business-wide** — every agent can use them. To limit a tool to one agent, use the **scope dropdown** on its row and pick that agent instead.
+
+    <Frame caption="Each row's scope dropdown sets who can use the tool: business-wide, or one named agent.">
+      <img src="/images/claw/connectors/03-scope.png" alt="A single connector row for 'coingecko' showing a Healthy badge, '2 tools · checked 16h ago', and a scope dropdown reading 'Business-wide' that is highlighted, with a delete icon on the right." />
+    </Frame>
+  </Step>
+</Steps>
+
+<Check>
+  Once connected and **Healthy**, the server appears in your agents' tool catalog. Agents load a server's tools **on demand** during a run (up to 128 tools per run), so connecting many servers doesn't slow anything down.
+</Check>
+
+## Shared vs. private tools
+
+<AccordionGroup>
+  <Accordion title="Business-wide (the default)" icon="users">
+    The tool is available to every agent in the business. Connect it once and your whole agent team can use it. New tools added on the Tools page start here.
+  </Accordion>
+
+  <Accordion title="Agent-private" icon="user-lock">
+    Scoped to a single agent using the row's scope dropdown (or added from that agent's own tools). If a private connector has the **same name** as a business-wide one, the private one wins for that agent — handy for giving one agent its own credentials for the same service.
+  </Accordion>
+</AccordionGroup>
+
+## Advanced
+
+<AccordionGroup>
+  <Accordion title="Let an agent connect a tool itself" icon="robot">
+    During an **attended** run (in the app or on desktop — never from Slack, never unattended), an agent that needs a capability can propose connecting a tool server itself. You see exactly what it wants to connect and approve or deny it. If the server needs sign-in, **you** complete the authentication — the agent cannot. New connections use clobber-safe names, so they never overwrite an existing tool.
+  </Accordion>
+
+  <Accordion title="When a tool still needs sign-in" icon="key">
+    If a connector was added but not yet authenticated (for example, after applying a [recipe](/claw/recipes)), a **connect card** appears in the workspace prompting you to finish sign-in. The tool stays disabled until you do.
+  </Accordion>
+
+  <Accordion title="How credentials are kept safe" icon="lock">
+    Tokens and OAuth credentials are stored in Cortana's **encrypted vault** and injected server-side only when a tool is called. The agent never sees your credentials, they never appear in the run transcript, and they can never be exported — recipes you publish never contain secrets, by construction.
+  </Accordion>
+</AccordionGroup>
+
+## Settings reference
+
+| Setting | Where | What it does | Default |
+|---|---|---|---|
+| **Tool link** | Connect a tool form | The MCP server's `https://` address. Required. | — |
+| **Name** | Connect a tool form | Label you'll recognize; lowercased, `a–z 0–9 - _`. | Suggested from the link |
+| **Sign in / Use an access key** | Permission step | How the tool authenticates (OAuth vs bearer/header key). | Shown only if the server needs it |
+| **Header name** (Advanced) | Access-key path | Custom header for the key, e.g. `X-API-Key`. | Bearer (no custom header) |
+| **Scope** | Each tool's row | Business-wide (all agents) or one named agent. | Business-wide |
+
+## Troubleshooting
+
+<AccordionGroup>
+  <Accordion title="A tool shows as Unreachable">
+    The server didn't respond at its last health check. Confirm the URL is correct and the server is up. If it needs auth, make sure sign-in was completed — an unauthenticated server often reads as unreachable.
+  </Accordion>
+
+  <Accordion title="'That key didn't work'">
+    The access key was rejected. Double-check you pasted the whole key. If your provider uses a custom header rather than a bearer token, open **Advanced** and set the **Header name** they gave you (for example `X-API-Key`).
+  </Accordion>
+
+  <Accordion title="I can't set a tool to a specific agent">
+    New tools on the Tools page are business-wide by design. Change the **scope dropdown** on the tool's row to a named agent, or add the tool from that agent's own tools panel.
+  </Accordion>
+
+  <Accordion title="The agent says it has too many tools">
+    A single run loads at most 128 tools. Agents activate a server's tools on demand, so this is rare — but if you've connected many large servers, scope some to specific agents so each run pulls in fewer.
+  </Accordion>
+</AccordionGroup>
+
+## FAQ
+
+<AccordionGroup>
+  <Accordion title="What is MCP?">
+    MCP (Model Context Protocol) is an open standard for tool servers. Because Claw speaks MCP, you can connect almost any MCP-compatible service by pasting its `https://` link.
+  </Accordion>
+
+  <Accordion title="Do I need to connect Stripe or Shopify as a tool?">
+    No — revenue from Stripe, Shopify and Whop is part of the built-in Cortana toolset once those integrations are connected under **Settings → Integrations**. The Tools page is for *additional* MCP servers.
+  </Accordion>
+
+  <Accordion title="Can two agents use the same service with different logins?">
+    Yes. Give each agent an agent-private connector with the same name but its own credentials; each agent uses its own.
+  </Accordion>
+
+  <Accordion title="Are my API keys ever visible to the agent or in logs?">
+    No. Keys live in the encrypted vault, are injected only at call time on the server, and never appear in the transcript or in exported recipes.
+  </Accordion>
+</AccordionGroup>
+
+## Next steps
+
+<CardGroup cols={2}>
+  <Card title="Teach your agent skills" icon="wand-magic-sparkles" href="/claw/skills">
+    Turn a repeatable process that uses your tools into a saved playbook.
+  </Card>
+  <Card title="Automate with Loops" icon="clock-rotate-left" href="/claw/automations">
+    Run tool-powered tasks on a schedule or toward a goal.
+  </Card>
+  <Card title="Bundle it into a recipe" icon="book" href="/claw/recipes">
+    Package tools, skills and schedules into a reusable setup.
+  </Card>
+  <Card title="Approvals & billing" icon="shield-check" href="/claw/approvals-and-billing">
+    How connecting tools is approved, and how runs are billed.
+  </Card>
+</CardGroup>
