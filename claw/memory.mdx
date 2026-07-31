@@ -1,27 +1,117 @@
 ---
-title: "Agent Memory"
-description: "Claw agents recall their past work, save durable facts with your approval, and can use semantic memory."
+title: "Agent memory"
+description: "How Cortana Claw agents recall their past work, save durable facts with your approval, and use semantic memory (mem0) for meaning-based long-term recall."
 ---
 
-## Recall: the agent remembers its work
+{/* TODO: verify — memory is runtime behaviour with no dedicated screen in the Claw workspace, so
+    no annotated screenshot is included yet. Consider capturing (a) a 'remember' approval prompt
+    during a live run, and (b) the mem0 card under Settings → Integrations, and adding them here.
+    Also add a Loom + transcript accordion once recorded. */}
 
-Every run an agent performs is recorded — the steps it took, the tools it used, and what it found. The agent can look back over its own history to answer questions like "what did you find last week?" or to avoid repeating work. Recall is read-only and never needs approval.
+## Overview
 
-## Durable facts
+Memory is what lets a Claw agent get better over time instead of starting from zero on every task. It has three layers:
 
-When an agent learns something worth keeping — "the monthly report goes to #revenue-updates", "this client's fiscal year starts in February" — it can propose saving it as a durable memory. You approve or deny each save. Saved facts are keyed by topic, so updating a topic overwrites the old value instead of piling up duplicates.
+- **Recall** — the agent reads back its own past runs. Always on, never needs approval.
+- **Durable facts** — the agent saves specific facts you approve, and reuses them later.
+- **Semantic memory (mem0)** — optional, meaning-based long-term memory across everything an agent has learned.
+
+Memory is **per-agent**: one agent can't read another's memories.
+
+<Note>
+  There's no separate "Memory" screen in the Claw workspace — memory happens **during runs**. You review what an agent has done in its conversation history, and you approve every fact it wants to keep.
+</Note>
+
+## Recall — the agent remembers its own work
+
+Every run is recorded: the steps taken, the tools called, and what was found. The agent can look back over its own history to answer questions like *"what did you find last week?"* or to avoid repeating work.
+
+Recall is **read-only** and **never** needs approval — it's just the agent reading its own past.
+
+## Durable facts — saved with your approval
+
+When an agent learns something worth keeping — *"the monthly report goes to #revenue-updates"*, *"this client's fiscal year starts in February"* — it can propose saving it as a durable memory.
+
+<Warning>
+  **Saving a fact always asks for your approval.** Writing to memory is a sensitive action, so the agent pauses and shows you exactly what it wants to remember before it saves. See [Approvals & billing](/claw/approvals-and-billing).
+</Warning>
+
+Facts are keyed by topic, so updating a topic **overwrites** the old value instead of piling up duplicates.
 
 ## Semantic memory (mem0)
 
-For richer long-term memory, you can enable **semantic memory** per agent:
+For richer, meaning-based long-term memory, connect **mem0** at the business level:
 
-1. Add your mem0 API key under **Settings → Integrations** for the agent's home business.
-2. Toggle **semantic memory** on in the agent's settings.
+<Steps>
+  <Step title="Add mem0 to the business">
+    Go to **Settings → Integrations** for the agent's home business and connect **mem0** with your mem0 API key. The key is stored in Cortana's encrypted vault.
+  </Step>
+  <Step title="Agents gain semantic recall">
+    Once the business has mem0 connected, an agent's saved facts are mirrored into a **private mem0 namespace** for that agent — giving it meaning-based lookup across everything it has learned, not just exact-topic matches.
+  </Step>
+</Steps>
 
-With it enabled, the agent's saved facts are also mirrored into a private mem0 namespace for that agent, giving it meaning-based lookup across everything it has learned.
+<Note>
+  mem0 is configured on the business through the Integrations tab — not inside the individual agent editor. The API key lives on the agent's home business and is never exposed to the agent.
+</Note>
 
-## Privacy and scope
+## Settings reference
 
-- Memory is per-agent. One agent cannot read another agent's memories.
-- You can review what an agent has done in its run history at any time.
-- Writing a memory always requires your approval; reading never does.
+| Layer | Where it's controlled | Approval to write? | Scope |
+|---|---|---|---|
+| **Recall** | Automatic — no setup | Never (read-only) | The agent's own past runs |
+| **Durable facts** | Proposed by the agent during a run | Yes, every save | Per-agent, keyed by topic |
+| **Semantic memory (mem0)** | Settings → Integrations (business) | Same as durable facts | Private mem0 namespace per agent |
+
+## Troubleshooting
+
+<AccordionGroup>
+  <Accordion title="The agent doesn't remember something from a past chat">
+    Recall reads the agent's **own** runs. If the earlier work was done by a different agent, this agent can't see it — memory is per-agent. Reopen the original conversation, or ask the agent that did the work.
+  </Accordion>
+
+  <Accordion title="It keeps asking me to approve saving a memory">
+    That's by design — every write to durable memory needs approval. Approve the ones worth keeping; deny the rest. There's no way to make memory writes silent except by running unattended.
+  </Accordion>
+
+  <Accordion title="Semantic memory isn't working">
+    Confirm **mem0** is connected under **Settings → Integrations** for the agent's home business and that the API key is valid. Without a connected mem0 integration, agents fall back to recall and durable facts only.
+  </Accordion>
+</AccordionGroup>
+
+## FAQ
+
+<AccordionGroup>
+  <Accordion title="Can one agent read another agent's memory?">
+    No. Memory is scoped per-agent. To share knowledge, put it in a [skill](/claw/skills) or a [recipe](/claw/recipes), which do travel between agents.
+  </Accordion>
+
+  <Accordion title="Where can I see what an agent remembers?">
+    Recall is visible in the agent's conversation history — reopen past conversations to see what it did. Durable facts are the ones you approved during runs.
+  </Accordion>
+
+  <Accordion title="Is my mem0 API key visible to the agent?">
+    No. It's stored in the encrypted vault on the business and injected server-side; it never appears in the agent's context or the run transcript.
+  </Accordion>
+
+  <Accordion title="Do I need mem0 to use memory?">
+    No. Recall and durable facts work with no setup. mem0 only adds meaning-based semantic lookup on top.
+  </Accordion>
+</AccordionGroup>
+
+## Next steps
+
+<CardGroup cols={2}>
+  <Card title="Teach your agent skills" icon="wand-magic-sparkles" href="/claw/skills">
+    Turn repeated procedures into playbooks that travel between agents.
+  </Card>
+  <Card title="Approvals & billing" icon="shield-check" href="/claw/approvals-and-billing">
+    Why saving a memory asks for approval, and how runs are billed.
+  </Card>
+  <Card title="Automate with Loops" icon="clock-rotate-left" href="/claw/automations">
+    Let a goal loop learn and improve across runs.
+  </Card>
+  <Card title="Bundle it into a recipe" icon="book" href="/claw/recipes">
+    Package skills and tools into a reusable setup.
+  </Card>
+</CardGroup>
