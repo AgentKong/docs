@@ -193,6 +193,8 @@ Every source is added the same way. Follow these six steps, then open your sourc
   <Accordion title="ClickFunnels">
     **What it tracks:** form submissions, appointments, CRM opportunities, one-time orders, subscriptions, and invoices from a ClickFunnels workspace. Purchase events carry revenue.
 
+    **Refunds:** not tracked automatically. A refund in ClickFunnels does not reach Cortana. Record them with a CSV import using the **These are refunds** option, or by sending a negative value. See [Refunds](#refunds).
+
     **Prerequisite integration:** ClickFunnels. When not connected: `Connect ClickFunnels in Dashboard → Integrations first.`
 
     <Frame caption="The ClickFunnels source form starts with the workspace picker.">
@@ -403,6 +405,8 @@ Every source is added the same way. Follow these six steps, then open your sourc
   <Accordion title="Fanbasis">
     **What it tracks:** payments, refunds, subscriptions, and disputes from a Fanbasis account. Payment events carry revenue.
 
+    **Refunds:** tracked automatically. Covers both refunds and opened disputes. You do not add a refund source — Cortana matches the refund to the original sale and files it in a companion refunds conversion named after it. See [Refunds](#refunds).
+
     **Prerequisite integration:** Fanbasis. If it is not connected you get `Please connect Fanbasis first. Go to Settings → Integrations to connect.`
 
     <Note>
@@ -526,6 +530,8 @@ Every source is added the same way. Follow these six steps, then open your sourc
 
   <Accordion title="GoHighLevel">
     **What it tracks:** form and survey submissions, appointments, and pipeline opportunities from a GoHighLevel sub-account. Opportunity events can carry revenue.
+
+    **Refunds:** not tracked automatically. A refund in GoHighLevel does not reach Cortana. Record them with a CSV import using the **These are refunds** option, or by sending a negative value. See [Refunds](#refunds).
 
     **Prerequisite integration:** GoHighLevel. When not connected: `Please connect GoHighLevel in Settings → Integrations first.`
 
@@ -880,6 +886,8 @@ Every source is added the same way. Follow these six steps, then open your sourc
   <Accordion title="Shopier">
     **What it tracks:** paid Shopier orders, with revenue.
 
+    **Refunds:** tracked automatically. Picked up by the regular sync, plus a daily sweep that catches refunds issued long after the order. You do not add a refund source — Cortana matches the refund to the original sale and files it in a companion refunds conversion named after it. See [Refunds](#refunds).
+
     **Prerequisite integration:** Shopier. If it is not connected: `Please connect Shopier first. Go to Settings → Integrations to connect.`
 
     <Note>
@@ -914,6 +922,8 @@ Every source is added the same way. Follow these six steps, then open your sourc
 
   <Accordion title="Shopify">
     **What it tracks:** the whole Shopify funnel, from viewing a product through checkout, paid orders, fulfilment, cancellations, and refunds. Order events carry revenue.
+
+    **Refunds:** tracked automatically. Full and partial refunds are both picked up. You do not add a refund source — Cortana matches the refund to the original sale and files it in a companion refunds conversion named after it. See [Refunds](#refunds).
 
     **Prerequisite integration:** Shopify. When not connected: `Please connect Shopify first. Go to Settings → Integrations to connect.`
 
@@ -965,6 +975,8 @@ Every source is added the same way. Follow these six steps, then open your sourc
 
   <Accordion title="Stripe">
     **What it tracks:** payments, checkouts, subscriptions, refunds, and recovery events from a Stripe account. Payment events carry revenue.
+
+    **Refunds:** tracked automatically. Works on any charge, including subscription payments, and works even if you have not added a separate refund event as a source. You do not add a refund source — Cortana matches the refund to the original sale and files it in a companion refunds conversion named after it. See [Refunds](#refunds).
 
     **Prerequisite integration:** Stripe. If no Stripe account is connected: `Please connect Stripe first. Go to Settings → Integrations to connect.`
 
@@ -1150,6 +1162,8 @@ Every source is added the same way. Follow these six steps, then open your sourc
   <Accordion title="Whop">
     **What it tracks:** payments and membership lifecycle events from a Whop company. Payment events carry revenue.
 
+    **Refunds:** tracked automatically. Only refunds Whop reports as completed are booked. You do not add a refund source — Cortana matches the refund to the original sale and files it in a companion refunds conversion named after it. See [Refunds](#refunds).
+
     **Prerequisite integration:** Whop. When not connected: `Please connect Whop first. Go to Dashboard → Integrations to connect.`
 
     <Frame caption="The Whop source form: company first, then event.">
@@ -1197,6 +1211,8 @@ Every source is added the same way. Follow these six steps, then open your sourc
 
   <Accordion title="WooCommerce">
     **What it tracks:** the WooCommerce order lifecycle plus client-side cart and checkout signals. Order events carry revenue.
+
+    **Refunds:** tracked automatically. Refunds recorded against an order are picked up, including partial ones. You do not add a refund source — Cortana matches the refund to the original sale and files it in a companion refunds conversion named after it. See [Refunds](#refunds).
 
     **Prerequisite integration:** WooCommerce. When not connected: `Please connect WooCommerce first. Go to Settings → Integrations to connect.`
 
@@ -1252,6 +1268,79 @@ Every source is added the same way. Follow these six steps, then open your sourc
     </Warning>
   </Accordion>
 </AccordionGroup>
+
+## Refunds
+
+When a customer gets refunded, Cortana records it automatically. There is nothing to switch on and no source to add.
+
+### What happens
+
+The first time a refund comes back through a connected payment source, Cortana creates a companion conversion named after the original, like **Purchase Refunds** or **New Deal Closed Refunds**. You will see it appear in **Tracking → Conversion Setup** next to the conversion it belongs to. You did not create it and you cannot delete it on its own.
+
+Every refund from then on lands in that companion conversion as a negative amount.
+
+### What it does to your numbers
+
+Two things happen, and the difference matters.
+
+**Your revenue goes down.** A \$470 sale followed by a \$470 refund nets to zero. Revenue, ROAS, and ROI all reflect what you actually kept, not what you invoiced.
+
+**Your conversion count does not change.** A refund never counts as a conversion. Your cost per lead, cost per booked call, and cost per sale stay based on real conversions only.
+
+<Note>
+  That combination is deliberate. A refund is money leaving, not a conversion happening. If refunds counted as conversions, your cost per acquisition would look better every time a customer left.
+</Note>
+
+### Which sources track refunds automatically
+
+<table>
+  <thead>
+    <tr><th>Source</th><th>Automatic refunds</th><th>What triggers it</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>**Stripe**</td><td>Yes</td><td>A refund on any charge, including subscriptions</td></tr>
+    <tr><td>**Shopify**</td><td>Yes</td><td>A refund on an order, full or partial</td></tr>
+    <tr><td>**WooCommerce**</td><td>Yes</td><td>A refund recorded against an order</td></tr>
+    <tr><td>**Whop**</td><td>Yes</td><td>A completed refund on a payment</td></tr>
+    <tr><td>**Shopier**</td><td>Yes</td><td>A refunded order picked up by the sync</td></tr>
+    <tr><td>**Fanbasis**</td><td>Yes</td><td>A refund or an opened dispute</td></tr>
+    <tr><td>ClickFunnels</td><td>No</td><td>Record refunds by CSV, see below</td></tr>
+    <tr><td>GoHighLevel</td><td>No</td><td>Record refunds by CSV, see below</td></tr>
+    <tr><td>Webhook, Pixel, CRMs, forms</td><td>No</td><td>Send a negative value, or use CSV</td></tr>
+  </tbody>
+</table>
+
+For the six that say yes, you do not need a separate refund source. Cortana matches the refund to the original sale and files it against whatever conversion that sale landed in.
+
+### Sources that do not track refunds automatically
+
+You have two options.
+
+**Upload a CSV.** Export your refunds and import them with the **These are refunds** option turned on. See the CSV Upload source above.
+
+**Send a negative value.** If you push conversions in by webhook or API, send the amount as a negative number. Cortana treats any negative as a refund and files it in the companion conversion for you.
+
+### Seeing refunds in your reports
+
+Refund columns are hidden by default so nothing about your existing view changes. To turn them on, open the Attribution Table, click **Columns**, and look under **Revenue**:
+
+| Column | Shows |
+| --- | --- |
+| **Gross Revenue** | What you billed, before refunds |
+| **Refunds** | What came back, as a negative |
+| **Refund Rate** | Refunds as a percentage of gross |
+
+Your existing **New Revenue** column is already net of refunds, with or without these turned on.
+
+There is also a **Refunds** conversion column and a **Refund Rate** card you can add to your dashboard the same way you add any other.
+
+<Warning>
+  Turning refund tracking on for the first time changes historical numbers. Revenue and ROAS will drop for any period that contained refunds, because those periods were previously showing gross. Nothing is broken, the figures are now net. Tell your clients before they notice it themselves.
+</Warning>
+
+### Deleting a conversion that has refunds
+
+Deleting a sale conversion also deletes its companion refunds conversion. Cortana warns you first and only when refunds actually exist. The same applies to a single payment: delete a payment that has a refund attached and the refund goes with it, so your balance stays true.
 
 ## Settings reference
 
