@@ -40,6 +40,55 @@ When an event involves money, you need to decide how that revenue is categorized
 <CardGroup cols={2}>
 </CardGroup>
 
+## Mirror Attribution
+
+Some conversions aren't a new visit at all. They're an update to something that already happened.
+
+Picture it. A lead clicks your ad, lands on your page, and books a call. Cortana credits that booking to the ad that earned it. That night the same person scrolls, sees a retargeting ad, clicks it, and does nothing. The next morning your team reviews the call and marks it **Qualified**.
+
+Cortana looks at that qualified call and asks the normal question: what did this contact click most recently? The answer is the retargeting ad. So the qualified call credits the wrong ad, and your retargeting campaign quietly takes credit for a call your prospecting campaign produced.
+
+**Mirror Attribution** fixes that. When you switch it on for a conversion, that conversion stops working out its own ad and credits the same ad as an earlier step in your funnel.
+
+<Frame caption="Mirror Attribution sits beside Column Presets in the Edit Conversion dialog. 'None' is the default for every conversion.">
+  <img src="/images/ad-tracking/mirror-attribution/01-mirror-attribution-setting.png" alt="Edit Conversion dialog showing the Mirror Attribution dropdown set to 'None (uses its own attribution)', beside the Column Presets picker." />
+</Frame>
+
+### Turning it on
+
+Open any conversion and find **Mirror Attribution** on the right. The dropdown lists your other active conversions.
+
+<Frame caption="Open the dropdown to pick which conversion to mirror. Your own conversions are listed, and you can search if you have a lot of them.">
+  <img src="/images/ad-tracking/mirror-attribution/02-mirror-attribution-dropdown.png" alt="The Mirror Attribution dropdown expanded, showing a search box, the checked 'None (uses its own attribution)' option, and the account's other conversions listed below it." />
+</Frame>
+
+- **None (uses its own attribution)** is the default, and it's how every conversion behaves until you change it. The conversion works out its own ad from the contact's clicks.
+- **Pick a conversion**, and this one credits the same ad as that contact's most recent one of those.
+
+A typical setup: set **Qualified Call** to mirror **Booked Call**. Now every qualified call credits the ad that produced the booking, no matter what the lead clicked in between.
+
+<Tip>
+  The line under the dropdown tells you exactly what will happen in plain English, using your own conversion names. Read it before you save.
+</Tip>
+
+### What it does and doesn't change
+
+It copies the **whole** attribution picture from the earlier conversion, not just the campaign. Source, campaign, ad set, ad, and every attribution model. So the numbers stay consistent whichever model you're viewing your table in.
+
+It does **not** touch dates. A qualified call still counts on the day it happened. Only the credited ad changes.
+
+It never makes attribution worse. If the earlier conversion has nothing useful on it — no ad, no session, just "Direct/Organic" — Cortana leaves the conversion alone rather than overwrite something real with a blank.
+
+<Note>
+  Mirror Attribution applies to **new conversions from the moment you switch it on**. Your existing conversions keep the attribution they already have. If you want your history corrected too, reach out to support.
+</Note>
+
+### Seeing why a conversion credits the ad it does
+
+Open any contact's **Customer Journey**. A conversion that mirrored will show a line underneath it reading *"Ad credited from Booked Call"* with the date.
+
+The lead's other page views stay in the timeline exactly as they were. Nothing is hidden — that overnight ad click still happened, it just stops taking credit for a call it had nothing to do with.
+
 ## Adding Conversion Sources
 
 A conversion event is just a bucket; you need to tell it where the data is coming from. These are your **Conversion Sources**.
