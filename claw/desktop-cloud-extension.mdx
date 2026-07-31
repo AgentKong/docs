@@ -1,0 +1,176 @@
+---
+title: "Desktop, cloud, and Chrome extension"
+description: "The three places a Cortana Claw agent can run — cloud, desktop app, and Chrome extension — what each can do, and how to choose where a task runs."
+---
+
+{/* TODO: verify — no Loom walkthrough was supplied. Add the embed + a verbatim transcript inside
+    an <Accordion title="Video transcript"> for the KB once recorded. */}
+
+## Overview
+
+Every Claw run happens on one of three **execution surfaces** — a "body" the agent uses to do the work:
+
+- **Cloud** — runs on Cortana's servers. The default, works in any browser.
+- **Desktop app** — runs on your computer, with a real browser and screen control.
+- **Chrome extension** — lends the agent a specific Chrome profile with your logged-in sessions.
+
+You choose the surface when you start a task. This page explains what each one can do and when to use it.
+
+<Note>
+  **Prerequisites** — you can use the **cloud** with nothing installed. The **desktop app** and the **Chrome extension** are separate downloads you install once. New to Claw? Start with [Getting started](/claw/getting-started).
+</Note>
+
+## Which surface can do what
+
+<Frame caption="Compare the three surfaces at a glance.">
+| Capability | Cloud | Desktop app | Chrome extension |
+|---|:---:|:---:|:---:|
+| Works with no install | ✅ | ❌ | ❌ |
+| Use your Cortana data + connected tools | ✅ | ✅ | ❌ |
+| Web search and page fetching | ✅ | ✅ | ❌ |
+| Skills and memory | ✅ | ✅ | Memory only |
+| Browse and operate websites | ❌ | ✅ | ✅ |
+| Control the whole screen / native apps | ❌ | ✅ | ❌ |
+| Run scripts and shell commands | ❌ | ✅ (approval) | ❌ |
+| Run on a local model (Ollama) | ❌ | ✅ | ❌ |
+</Frame>
+
+<Tip>
+  Rule of thumb: **data, analysis, research and reporting → cloud.** **Anything that needs a browser, files, or your screen → desktop or the extension.**
+</Tip>
+
+## Choose where a task runs
+
+<Steps>
+  <Step title="Open Run settings">
+    In the **Threads** console, click the **gear** icon (labelled *Run settings*) at the right of the task box.
+  </Step>
+
+  <Step title="Set Cloud execution">
+    Toggle **Cloud execution** on for a cloud run, or off to run on this computer through the desktop app.
+
+    In a plain browser this toggle is **on and locked** — the cloud is the only surface available until you install the desktop app.
+
+    <Frame caption="Cloud execution in Run settings. On = cloud; off = this computer (desktop app).">
+      <img src="/images/claw/desktop-cloud-extension/01-cloud-execution.png" alt="The Run settings popover with a 'Cloud execution' toggle switched on and locked, and an 'Unattended' toggle switched off, each with an info icon." />
+    </Frame>
+  </Step>
+
+  <Step title="(Optional) attach a browser to a cloud run">
+    A cloud run can borrow a real Chrome browser through the extension. Click the **Browser off** pill under the task box to see connected browsers, their job capacity, and their online status. With none connected it reads *"No browsers connected. Open Chrome with the Cortana extension to run browser tasks."*
+
+    <Frame caption="The browser pill popover. Each connected Chrome shows its job slots and online status.">
+      <img src="/images/claw/desktop-cloud-extension/02-browser-popover.png" alt="The 'Run browser tasks on (optional)' popover showing a browser named 'Umer's Chrome' with '0/5 jobs' and an 'offline' label, and an amber note explaining that if all browsers are busy or offline, a browser task will queue and start automatically when a slot frees up." />
+    </Frame>
+  </Step>
+</Steps>
+
+<Note>
+  Slack and automations pick a surface too: Slack tasks default to the channel's configured surface (or add `--cloud`), and each schedule is either **cloud** or **pinned to a desktop**. See [Slack](/claw/slack) and [Automations](/claw/automations).
+</Note>
+
+## The three surfaces in detail
+
+<AccordionGroup>
+  <Accordion title="Cloud — data and reasoning, anywhere" icon="cloud">
+    Cloud runs happen on Cortana's servers. They have **no browser and cannot touch your machine** — they are pure data-and-reasoning runs with access to:
+
+    - The built-in Cortana toolset: attribution, revenue (Stripe, Shopify, Whop), contacts, conversations, calls and meetings, form submissions, YouTube.
+    - Any tool servers you've connected on the [Tools](/claw/connectors) page.
+    - Web search and web page reading.
+    - The agent's [skills](/claw/skills) and [memory](/claw/memory).
+
+    Cloud is what Slack tasks and most automations use, and it's the right choice for reports, analysis, monitoring, and research.
+  </Accordion>
+
+  <Accordion title="Desktop app — browser, screen, and code" icon="laptop">
+    With the Cortana desktop app, the agent gets a real browser it can navigate, read, click, and type in — plus, when you **arm** it, control of your screen for anything outside the browser. On macOS it can also read native apps through the system accessibility tree, which is more reliable than screenshots.
+
+    Desktop agents can also **execute code**: Node scripts run out of the box, Python if you have it installed, and shell commands. Every execution is approval-gated and runs in a dedicated `CortanaWorkspace` folder, with a runtime limit of 5 minutes per script.
+
+    The desktop app also unlocks **record mode** (teach a skill by demonstrating it — see [Skills](/claw/skills)) and **local models** (below).
+  </Accordion>
+
+  <Accordion title="Chrome extension — your logged-in sessions" icon="chrome">
+    The Cortana Chrome extension turns a specific Chrome profile into an agent body. This matters when a task needs *your* logged-in sessions — an ad platform, a CRM, a members area.
+
+    - Connected browsers appear in the **Chrome profiles** view of the workspace (desktop app), with live online/offline status. A browser reports in about every minute and is considered online for roughly 2.5 minutes after its last check-in.
+    - Each browser has a limited number of concurrent job slots (shown in the browser pill, e.g. *5 jobs / browser*).
+    - You can **pin** a conversation to a specific browser profile so its tasks always run there.
+    - The extension can capture screenshots and post them to your Slack thread as it works.
+  </Accordion>
+
+  <Accordion title="Local models (desktop only)" icon="microchip">
+    In the **Local LLM** view of the workspace (desktop app only), you can run an agent on a local model through a bundled Ollama runtime instead of a cloud model. Local runs keep inference on your machine and cost **$0** in Cortana usage. Local-model agents run only on your desktop — the cloud declines them, and a text-only local model can't control the screen.
+  </Accordion>
+</AccordionGroup>
+
+{/* TODO: verify — Chrome profiles and Local LLM are desktop-only views not visible in a browser.
+    Capture annotated screenshots of both from the desktop app and add them to the two accordions above. */}
+
+## Settings reference
+
+| Setting | Where | What it does | Default |
+|---|---|---|---|
+| **Cloud execution** | Run settings (gear) | On = cloud; off = desktop app on this computer. | **On** (locked on in a browser) |
+| **Browser** | **Browser off** pill | Attach a connected Chrome to a cloud browser task. | Off (no browser) |
+| **Browser autonomy** | Browser pill (once a browser is picked) | How much a browser task can do without asking. | Supervised |
+| **Pin browser** | Chrome profiles view (desktop) | Always run this conversation's tasks on one profile. | Not pinned |
+| **Model** | Agent editor | Cloud model, or a `local:` model (desktop only). | Default model |
+
+## Troubleshooting
+
+<AccordionGroup>
+  <Accordion title="Cloud execution won't turn off">
+    You're in a plain browser, where the cloud is the only surface. Install the Cortana desktop app to unlock Desktop runs, then the toggle becomes available.
+  </Accordion>
+
+  <Accordion title="My browser shows as offline in the pill">
+    The Chrome profile hasn't checked in recently. Open Chrome with the Cortana extension installed and signed in; it comes back online within a minute or two. A browser task sent to an offline browser queues and starts automatically once it's back.
+  </Accordion>
+
+  <Accordion title="The agent says it can't browse or open a file">
+    You're on a cloud run, which has no browser or file access. Switch **Cloud execution** off (desktop app) or attach a browser via the extension, depending on what the task needs.
+  </Accordion>
+
+  <Accordion title="My local-model agent won't run in the cloud or Slack">
+    Local models run only on your desktop by design. Use that agent from the desktop app, or switch it to a cloud model in the agent editor for cloud and Slack runs.
+  </Accordion>
+</AccordionGroup>
+
+## FAQ
+
+<AccordionGroup>
+  <Accordion title="Which surface should I use?">
+    Cloud for anything data-driven (reports, analysis, research) — it needs no install and works from Slack. Desktop or the Chrome extension when the task must operate a browser, your screen, or your files.
+  </Accordion>
+
+  <Accordion title="Do cloud runs use my connected tools?">
+    Yes. Cloud runs have full access to your built-in Cortana data and every MCP tool you've connected — they just can't drive a browser or your computer.
+  </Accordion>
+
+  <Accordion title="What's the difference between the desktop browser and the Chrome extension?">
+    The desktop app runs its own controlled browser. The Chrome extension drives *your* everyday Chrome profile, so the agent inherits sessions you're already logged into.
+  </Accordion>
+
+  <Accordion title="Are local-model runs really free?">
+    Yes — local `Ollama` runs keep inference on your machine and cost $0 in Cortana usage. They're desktop-only.
+  </Accordion>
+</AccordionGroup>
+
+## Next steps
+
+<CardGroup cols={2}>
+  <Card title="Connect your tools" icon="plug" href="/claw/connectors">
+    Cloud runs are only as capable as the tools you connect — add MCP servers here.
+  </Card>
+  <Card title="Automate with Loops" icon="clock-rotate-left" href="/claw/automations">
+    Schedule cloud tasks or pin them to your desktop.
+  </Card>
+  <Card title="Approvals & billing" icon="shield-check" href="/claw/approvals-and-billing">
+    How approvals work per surface, and what runs cost.
+  </Card>
+  <Card title="Use Claw from Slack" icon="slack" href="/claw/slack">
+    Run cloud tasks with `/cortana` right from a channel.
+  </Card>
+</CardGroup>

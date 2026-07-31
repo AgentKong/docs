@@ -1,0 +1,180 @@
+---
+title: "Automations: schedules and goals"
+description: "Run Cortana Claw agent tasks on a recurring schedule, or set a standing goal the agent loops toward until it succeeds — all from the Loops tab."
+---
+
+{/* TODO: verify — no Loom walkthrough was supplied. Add the embed + verbatim transcript inside an
+    <Accordion title="Video transcript"> for the KB once recorded. The goal form is described from
+    source; consider adding an annotated screenshot of it. */}
+
+## Overview
+
+The **Loops** tab is where your agents work on their own. It holds two kinds of automation in one list:
+
+- **Schedules** — run a task on a repeating cadence (every morning, every hour…).
+- **Goals** — give the agent a standing objective and let it loop toward it until it's met.
+
+Filter the list by **All**, **Schedules**, or **Goals**. Each row shows the task, its type, where it runs, its next run, and its status.
+
+<Note>
+  **Prerequisites** — you need at least one agent to automate. See [Getting started](/claw/getting-started). Every scheduled run and goal iteration is a normal agent run and is billed like one — see [Approvals & billing](/claw/approvals-and-billing).
+</Note>
+
+## Create an automation
+
+<Steps>
+  <Step title="Open the Loops tab">
+    In the CortanaClaw workspace rail, click **Loops**. Use the **All / Schedules / Goals** filters to switch what you're looking at.
+
+    <Frame caption="The Loops tab. Filter by All, Schedules, or Goals; New loop creates one.">
+      <img src="/images/claw/automations/01-loops-list.png" alt="The Loops tab showing All, Schedules and Goals filter buttons (highlighted), a Refresh button, and a highlighted New loop button. Below, a table with columns Task, Type, Run on, Next run, Status and Actions lists one goal named 'UI review smoke goal (safe to stop)' of type 'Until done', run on cloud, status Stopped." />
+    </Frame>
+  </Step>
+
+  <Step title="Click New loop and pick a type">
+    Click **New loop** and choose:
+
+    - **Repeat a task on a schedule…** — a recurring task.
+    - **Loop until a goal is met…** — a standing goal.
+
+    <Frame caption="New loop offers a recurring schedule or a goal that loops until met.">
+      <img src="/images/claw/automations/02-new-loop-menu.png" alt="The New loop dropdown menu open, showing two highlighted options: 'Repeat a task on a schedule…' and 'Loop until a goal is met…'." />
+    </Frame>
+  </Step>
+
+  <Step title="Fill in the schedule and create it">
+    For a schedule, set:
+
+    - **Agent** — who runs it.
+    - **Task** — what to do each time, in plain English.
+    - **When** — **Preset** (Every hour, Every day, Weekdays, Weekly, Every N hours) with a time, or **Describe** it in words ("every weekday at 8am"). Cortana converts it to a precise schedule. *Runs at most every 15 minutes, using your current timezone.*
+    - **Run on** — **Cloud (always on)** or pinned to your desktop.
+    - **Max runs** — leave **Unlimited**, or cap it to a finite number of runs.
+    - **Auto-approve** — off means each run stops for approvals; on means it runs unattended.
+
+    Click **Create schedule**.
+
+    <Frame caption="The New schedule form. When accepts a preset or a plain-language cadence.">
+      <img src="/images/claw/automations/03-schedule-form.png" alt="The New schedule form with an Agent dropdown set to 'stock', a Task field reading 'Summarize yesterday's sales calls and post the top objections.', a When section (highlighted) set to 'Every day' at '09:00 AM' with a note 'Runs at most every 15 minutes. Times use your current timezone.', a Run on dropdown set to 'Cloud (always on)', a Max runs field showing 'Unlimited', an Auto-approve 'Run unattended' toggle switched on, and a highlighted Create schedule button." />
+    </Frame>
+  </Step>
+</Steps>
+
+<Check>
+  Your new schedule appears in the Loops list with its next run time. Use the row's actions to run it now, pause, edit, or delete it.
+</Check>
+
+## Goals — loop until it's done
+
+A **goal** is a standing objective with success criteria — *"get our help-center articles updated for the new pricing"*, *"find and fix broken UTM links"*. Instead of firing once, the agent:
+
+1. Works an iteration toward the goal.
+2. Judges its own progress against your success criteria.
+3. Keeps notes on what it tried and what's next.
+4. Loops on the cadence you set until the goal is **achieved**, it runs out of attempts, or you stop it.
+
+Choose **Loop until a goal is met…** from **New loop**, then set the **Agent**, describe **what the agent should do each iteration**, choose a **cadence** (run immediately in sequence, or on an interval), and a **max attempts** limit (default **5**). While iterating, the agent records procedures that worked as [skills](/claw/skills), so progress compounds.
+
+<Tip>
+  When a goal is running, a live banner shows *"iteration N of M running now"* — click **Watch →** to follow the agent's working notes as they grow. Pause, resume, or stop a goal any time from its row.
+</Tip>
+
+## Other ways to create automations
+
+<AccordionGroup>
+  <Accordion title="From Slack" icon="slack">
+    Use `/schedule` (or `/cortana schedule`) in a connected Slack channel to open the scheduling form without leaving Slack. See [Slack](/claw/slack).
+  </Accordion>
+
+  <Accordion title="Ask the agent to schedule it" icon="robot">
+    Tell an agent "check this every morning at 8" and it can propose a schedule itself (approval-gated). You confirm before it's created.
+  </Accordion>
+
+  <Accordion title="From a recipe" icon="book">
+    Applying a [recipe](/claw/recipes) can create schedules for you — recipe schedules always arrive **paused**, so nothing runs until you turn it on.
+  </Accordion>
+</AccordionGroup>
+
+## Settings reference
+
+| Setting | Applies to | What it does | Default |
+|---|---|---|---|
+| **Agent** | Both | Which agent runs the automation. | — |
+| **Task** | Schedule | What to do on each run. | — |
+| **When** | Schedule | Cadence: a preset + time, or a plain-language description. | — (min 15 minutes) |
+| **Run on** | Both | Cloud (always on) or a pinned desktop. | Cloud |
+| **Max runs** | Schedule | Cap the total number of runs, or leave unlimited. | Unlimited |
+| **Auto-approve** | Both | Run unattended (skip approval prompts) or stop for each. | Off |
+| **Cadence** | Goal | Run iterations immediately in sequence, or on an interval. | Immediate |
+| **Max attempts** | Goal | How many iterations before it gives up. | 5 |
+
+## Limits and safeguards
+
+| Limit | Value |
+|---|---|
+| Minimum schedule cadence | **15 minutes** |
+| Active schedules per business | **50** (paused ones don't count) |
+| Consecutive failures before a schedule auto-pauses | **5** |
+| Active goals per business | **20** |
+| Overlap | A schedule won't fire while its previous run is still going |
+
+<Warning>
+  These caps and the 15-minute floor exist to protect your wallet — every run bills. A schedule that fails 5 times in a row pauses itself so it can't burn credit in a broken loop.
+</Warning>
+
+## Troubleshooting
+
+<AccordionGroup>
+  <Accordion title="My schedule paused itself">
+    It failed 5 runs in a row and auto-paused to stop wasting credit. Fix the underlying task (a broken tool, a bad instruction), then re-enable it — the 50-schedule cap is re-checked when you turn one back on.
+  </Accordion>
+
+  <Accordion title="A recipe's schedule isn't running">
+    Schedules from recipes arrive **paused** on purpose. Open the Loops tab and turn it on.
+  </Accordion>
+
+  <Accordion title="I set 'every 5 minutes' but it runs every 15">
+    15 minutes is the minimum cadence. Anything faster is clamped to the floor.
+  </Accordion>
+
+  <Accordion title="A goal stopped before finishing">
+    It either hit its **max attempts** (status *Out of attempts*) or was stopped. Raise the attempts limit or start it again from the Loops tab.
+  </Accordion>
+</AccordionGroup>
+
+## FAQ
+
+<AccordionGroup>
+  <Accordion title="What's the difference between a schedule and a goal?">
+    A **schedule** repeats the same task on a cadence forever (or until its max runs). A **goal** works toward an outcome and stops once it's achieved. Use a schedule for routine reports; use a goal for "get this done."
+  </Accordion>
+
+  <Accordion title="Do automations run without the desktop app?">
+    Yes — they default to the cloud. Pin a schedule to your desktop only if it needs a browser or your computer.
+  </Accordion>
+
+  <Accordion title="Will automations act without asking me?">
+    Only if **Auto-approve** (unattended) is on. Otherwise each run pauses for approvals like a normal run.
+  </Accordion>
+
+  <Accordion title="How much do automations cost?">
+    Each run bills like a normal agent run. The cadence floor and caps limit how often they can fire. See [Approvals & billing](/claw/approvals-and-billing).
+  </Accordion>
+</AccordionGroup>
+
+## Next steps
+
+<CardGroup cols={2}>
+  <Card title="Bundle it into a recipe" icon="book" href="/claw/recipes">
+    Package schedules, skills and tools into a reusable setup.
+  </Card>
+  <Card title="Use Claw from Slack" icon="slack" href="/claw/slack">
+    Create schedules and run tasks with `/schedule` and `/cortana`.
+  </Card>
+  <Card title="Approvals & billing" icon="shield-check" href="/claw/approvals-and-billing">
+    How unattended runs are approved and billed.
+  </Card>
+  <Card title="Teach your agent skills" icon="wand-magic-sparkles" href="/claw/skills">
+    Goals record what works as skills — build a library.
+  </Card>
+</CardGroup>

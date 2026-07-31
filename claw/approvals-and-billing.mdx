@@ -1,0 +1,159 @@
+---
+title: "Approvals, safety, and billing"
+description: "How Cortana Claw keeps you in control of what agents do — the approval-first model, attended vs unattended runs — and how agent usage is billed."
+---
+
+{/* TODO: verify — no Loom walkthrough was supplied. Add the embed + verbatim transcript inside an
+    <Accordion title="Video transcript"> for the KB once recorded. Consider adding a screenshot of a
+    live approval prompt (in-app and the Slack Approve/Deny card). */}
+
+## Overview
+
+Claw is **approval-first**. The **server** — not the agent — decides which actions need your sign-off, so an agent can never talk its way around the policy. This page covers what's gated, how to run attended vs unattended, and how runs are billed.
+
+## What needs approval
+
+<AccordionGroup>
+  <Accordion title="Always asks first" icon="hand">
+    - Navigating, clicking, uploading files, or submitting forms in a browser.
+    - Any whole-screen control (clicks, typing, keyboard shortcuts) and native-app actions.
+    - Running scripts or shell commands.
+    - Saving a memory.
+    - Connecting a new tool, creating an agent, or saving a skill on its own initiative.
+  </Accordion>
+
+  <Accordion title="Never needs approval" icon="eye">
+    Reading pages, taking screenshots, searching the web, querying your connected data, and recalling its own past work. Read-only actions run freely.
+  </Accordion>
+</AccordionGroup>
+
+<Note>
+  Because the policy lives on the server, the same rules apply everywhere a run happens — the app, the desktop, and Slack. The body only renders the approval UI; it doesn't decide what's safe.
+</Note>
+
+## Attended vs. unattended
+
+By default, runs are **gated** (attended): the agent pauses at each sensitive action and waits for you — in the app, or as **Approve / Deny** buttons in a Slack thread.
+
+<Warning>
+  Unanswered **Slack** approvals **deny** automatically after about **5 minutes**, and the agent continues accordingly.
+</Warning>
+
+**Unattended** mode auto-approves those actions. You can turn it on:
+
+- In the app — the **Unattended** toggle in **Run settings**.
+- In Slack — the `--auto` flag.
+- On automations — the auto-approve setting on a schedule or goal.
+
+<Frame caption="The Unattended toggle in Run settings. Off (default) = approve each sensitive step.">
+  <img src="/images/claw/approvals-and-billing/01-unattended.png" alt="The Run settings popover showing a 'Cloud execution' toggle on and an 'Unattended' toggle off, each with an info icon." />
+</Frame>
+
+<Warning>
+  Powerful capabilities stay **attended-only** no matter what: an agent can never provision new tools, create agents, or save skills from Slack or from an unattended run — those always require a human in an interactive session.
+</Warning>
+
+### Browser autonomy levels
+
+For cloud browser tasks, you can tune how much a task does without asking, in the browser pill's **Browser autonomy** setting:
+
+| Level | Behavior |
+|---|---|
+| **Supervised** | Approve sensitive actions (the default). |
+| **Trusted sites** | Auto-approve on allowlisted sites only. |
+| **Autopilot** | Auto-approve everything except logins and payments. |
+
+## Spending guardrails
+
+The same limits that keep automations sane also protect your wallet:
+
+- Schedules: **15-minute** minimum cadence, **50** active per business, auto-pause after **5** consecutive failures.
+- Goals: **20** active per business, each with a **max-attempts** budget you set.
+- Recurring runs never overlap — a schedule waits for its previous run to finish.
+
+See [Automations](/claw/automations) for the full list.
+
+## How billing works
+
+Agent runs are billed by **token usage** at your account's rates, recorded per run.
+
+<AccordionGroup>
+  <Accordion title="Standard (per-token) billing" icon="coins">
+    Runs deduct from your Cortana credit based on tokens used. Every run that reaches a terminal state is billed exactly once — scheduled runs, goal iterations, and Slack tasks all bill the same way as a manual run. Persistent chat **sessions** bill **per turn**.
+  </Accordion>
+
+  <Accordion title="Bring your own key (BYOK) — $0" icon="key">
+    Add your own Anthropic (Claude) API key for the business, and agent runs use it directly — Cortana bills **$0** for those runs. The key is stored in the encrypted vault.
+  </Accordion>
+
+  <Accordion title="Local models — $0" icon="microchip">
+    Runs on a local model via the desktop app's Ollama runtime keep inference on your machine and cost **$0** in Cortana usage. See [Desktop, cloud & extension](/claw/desktop-cloud-extension).
+  </Accordion>
+</AccordionGroup>
+
+## Settings reference
+
+| Setting | Where | What it does | Default |
+|---|---|---|---|
+| **Unattended** | Run settings (gear) | Auto-approve sensitive actions for this run. | Off |
+| `--auto` | Slack command | Same as Unattended, per Slack task. | Off |
+| **Auto-approve** | Schedule / goal form | Run automation iterations unattended. | Off |
+| **Browser autonomy** | Browser pill | Supervised / Trusted sites / Autopilot for browser tasks. | Supervised |
+| **Bring your own key** | Settings → Integrations | Use your own Anthropic key; runs bill $0. | Off (per-token) |
+
+## Troubleshooting
+
+<AccordionGroup>
+  <Accordion title="The agent keeps stopping to ask me">
+    That's attended mode working as intended. Turn on **Unattended** (or `--auto` in Slack) for tasks you trust, or use **Browser autonomy** levels for finer control on browser tasks.
+  </Accordion>
+
+  <Accordion title="A Slack action was denied on its own">
+    Approval cards time out to **deny** after ~5 minutes. Re-run and approve promptly, or add `--auto`.
+  </Accordion>
+
+  <Accordion title="An agent won't connect a tool or create a skill from Slack">
+    By design — provisioning tools, creating agents, and saving skills are **attended-only** and can't happen from Slack or an unattended run. Do it from the app or desktop.
+  </Accordion>
+
+  <Accordion title="A run cost more than I expected">
+    Longer, multi-step tasks use more tokens. Check the per-run usage, consider a faster model (Haiku) for routine work, or bring your own key for $0 runs.
+  </Accordion>
+</AccordionGroup>
+
+## FAQ
+
+<AccordionGroup>
+  <Accordion title="Can an agent do something irreversible without asking?">
+    Not in attended mode — every action that changes data or reaches outside Cortana is gated. Only turn on Unattended / `--auto` when you accept that trade-off, and you can press **Stop** anytime.
+  </Accordion>
+
+  <Accordion title="Does reading my data cost approval?">
+    No. Reading your connected data, searching, and recalling past work are read-only and never gated.
+  </Accordion>
+
+  <Accordion title="How do I make runs free?">
+    Bring your own Anthropic key (runs bill $0 and use your key), or run on a local model via the desktop app.
+  </Accordion>
+
+  <Accordion title="Do scheduled and Slack runs bill differently?">
+    No — they bill the same per-token way as manual runs. The guardrails (cadence floor, caps) exist to keep that spend predictable.
+  </Accordion>
+</AccordionGroup>
+
+## Next steps
+
+<CardGroup cols={2}>
+  <Card title="Get started" icon="rocket" href="/claw/getting-started">
+    Run your first task and see approvals in action.
+  </Card>
+  <Card title="Automate with Loops" icon="clock-rotate-left" href="/claw/automations">
+    Set cadence caps and auto-approve for recurring work.
+  </Card>
+  <Card title="Use Claw from Slack" icon="slack" href="/claw/slack">
+    Approve actions in-thread and use `--auto`.
+  </Card>
+  <Card title="Desktop, cloud & extension" icon="laptop" href="/claw/desktop-cloud-extension">
+    Where runs happen and what each surface can do.
+  </Card>
+</CardGroup>

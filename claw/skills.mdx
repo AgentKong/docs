@@ -1,0 +1,133 @@
+---
+title: "Skills: teach your agent procedures"
+description: "Save reusable step-by-step playbooks a Cortana Claw agent follows on matching tasks — created from a successful run, taught by demonstration, or proposed by the agent."
+---
+
+{/* TODO: verify — no Loom walkthrough was supplied. Add the embed + verbatim transcript inside an
+    <Accordion title="Video transcript"> for the KB once recorded. */}
+
+## Overview
+
+A **skill** is a saved playbook: a **name**, a one-line **goal**, and a step-by-step **procedure (SOP)** — including which tools to use. When a task matches a skill, the agent pulls it up and follows the proven procedure instead of working everything out from scratch. Skills make agents faster, cheaper, and far more consistent.
+
+Skills belong to a **specific agent**. You manage them in the **Skills** view of the CortanaClaw workspace.
+
+<Note>
+  **Prerequisites** — you need an agent before you can save skills to it. Most skills are born from a real run, so it helps to have run at least one multi-step task first. See [Getting started](/claw/getting-started).
+</Note>
+
+## See an agent's skills
+
+<Steps>
+  <Step title="Open the Skills view and pick the agent">
+    In the **Threads** console, open the **skill picker** (the *Auto (match task)* pill under the task box) and choose **Add or configure skills**. Then use the **Agent** dropdown at the top to choose whose skills you want to see — skills are per-agent.
+
+    Each skill shows its **name**, its **goal**, a **View playbook** toggle, and pencil (edit) and trash (delete) icons.
+
+    <Frame caption="The Skills view. Pick an agent to see its skills; edit or delete each one.">
+      <img src="/images/claw/skills/01-skills-list.png" alt="The Skills view with an Agent dropdown set to 'claudia' (highlighted) and two saved skills — 'generate-images-with-chatgpt' and 'Query DeepWiki for Next.js Repo Summary' — each with a goal line. The edit and delete icons on the first skill are highlighted." />
+    </Frame>
+  </Step>
+
+  <Step title="Open a playbook to read or edit the steps">
+    Click **View playbook** to expand the full procedure. The playbook is written in plain steps the agent follows in order. Use the pencil icon to edit a skill's **Name**, **Goal**, or **Playbook (SOP)**; the trash icon deletes it.
+
+    <Frame caption="An expanded playbook — a numbered procedure the agent follows step by step.">
+      <img src="/images/claw/skills/02-playbook.png" alt="The expanded 'Query DeepWiki for Next.js Repo Summary' skill showing a Procedure with numbered steps: access the DeepWiki tool with the repository context, formulate a broad question, submit it to the deepwiki ask-question endpoint with a repoName and question, and review the response." />
+    </Frame>
+  </Step>
+</Steps>
+
+## Ways to create a skill
+
+You don't write skills from a blank page — Cortana builds them from real work, then lets you refine them.
+
+<AccordionGroup>
+  <Accordion title="Save one from a successful run" icon="floppy-disk">
+    After an agent completes a multi-step task well, open the run and click **Save as skill**. Cortana distills the run into an SOP; you then pick **Save to agent**, tweak the **Name** and **Goal** (a one-line intent), review the steps, and save. This is the most common way to create a skill.
+  </Accordion>
+
+  <Accordion title="Let the agent propose one" icon="robot">
+    During an **attended** run (in the app or on desktop — not from Slack, not unattended), an agent can propose saving the procedure it just used as a skill. You review and approve before anything is saved.
+  </Accordion>
+
+  <Accordion title="Teach by demonstration (desktop app)" icon="video">
+    In the desktop app, the **Teach a skill (record)** card lets you demonstrate a task once:
+
+    1. Choose a title and whether you're demonstrating in the **browser** or across your **whole desktop**.
+    2. Perform the task yourself. Cortana captures your actions — clicks and screenshots. (Whole-desktop recording does **not** capture your keystrokes.)
+    3. Cortana distills your demonstration into a written playbook you can review and edit.
+
+    Recording is desktop-only; it doesn't appear in a plain browser.
+  </Accordion>
+
+  <Accordion title="Automatic capture during goal loops" icon="repeat">
+    While an agent is looping toward a goal, it records what worked as a playbook automatically, so later iterations get better. See [Automations](/claw/automations).
+  </Accordion>
+</AccordionGroup>
+
+## Using skills
+
+There's usually nothing to trigger manually — agents check their skill library and use a matching skill on their own. You can also:
+
+- **Reference a skill by name** in your instructions ("use the weekly-report skill").
+- **Force a skill** by selecting it in the skill picker under the task box instead of leaving it on **Auto (match task)**.
+
+## Settings reference
+
+| Field | Where | What it is | Notes |
+|---|---|---|---|
+| **Agent** | Skills view | Whose skills you're viewing/editing. | Skills are per-agent. |
+| **Name** | Skill editor / Save dialog | The skill's identifier. | Reference it by this name in a task. |
+| **Goal** | Skill editor / Save dialog | One-line intent that decides when the skill matches. | Keep it specific. |
+| **Playbook (SOP)** | Skill editor | The step-by-step procedure the agent follows. | Editable markdown. |
+| **Save to agent** | Save-as-skill dialog | Which agent the new skill is saved to. | Defaults to the run's agent. |
+
+## Troubleshooting
+
+<AccordionGroup>
+  <Accordion title="This agent has no skills">
+    Skills are per-agent, and new agents start empty — the view reads *"No skills yet. Run a multi-step task with this agent, then Save as skill from the run history."* Run a task first, then save it.
+  </Accordion>
+
+  <Accordion title="The agent isn't using a skill I expected">
+    Matching is based on the skill's **goal**. Make the goal specific to the trigger, or force the skill via the skill picker. Also confirm you saved it to the agent that's running the task.
+  </Accordion>
+
+  <Accordion title="I don't see the Record card">
+    Teaching by demonstration is desktop-only. Open the workspace in the Cortana desktop app to record a skill.
+  </Accordion>
+</AccordionGroup>
+
+## FAQ
+
+<AccordionGroup>
+  <Accordion title="Can I share a skill between agents?">
+    Skills live on one agent, but they travel inside [recipes](/claw/recipes) — package a recipe (or apply one) and its skills are copied into the target agent as text playbooks.
+  </Accordion>
+
+  <Accordion title="Can I edit a skill after saving it?">
+    Yes. In the Skills view, click the pencil icon on any skill to edit its name, goal, or playbook, or the trash icon to delete it.
+  </Accordion>
+
+  <Accordion title="Do skills work on cloud runs?">
+    Yes — skills and memory are available on both cloud and desktop runs. (Recording a new skill by demonstration is desktop-only.)
+  </Accordion>
+</AccordionGroup>
+
+## Next steps
+
+<CardGroup cols={2}>
+  <Card title="Give your agent memory" icon="brain" href="/claw/memory">
+    Let agents recall past work and save durable facts to reuse.
+  </Card>
+  <Card title="Automate with Loops" icon="clock-rotate-left" href="/claw/automations">
+    Put a skill on a schedule, or let a goal loop refine one automatically.
+  </Card>
+  <Card title="Bundle it into a recipe" icon="book" href="/claw/recipes">
+    Package skills, tools and schedules into a reusable setup.
+  </Card>
+  <Card title="Connect more tools" icon="plug" href="/claw/connectors">
+    Skills are only as capable as the tools they call.
+  </Card>
+</CardGroup>

@@ -1,0 +1,150 @@
+---
+title: "Recipes and the marketplace"
+description: "Package a Cortana Claw agent setup — skills, tools, and loops — as a recipe, apply it in one click, or install a Verified or Community recipe from the marketplace."
+---
+
+{/* TODO: verify — no Loom walkthrough was supplied. Add the embed + verbatim transcript inside an
+    <Accordion title="Video transcript"> for the KB once recorded. */}
+
+## Overview
+
+A **recipe** bundles skills, tools, and loops so a whole job can be set up in one click — on one of your agents, or on a brand-new one. The **Recipes** tab has two parts:
+
+- **My recipes** — recipes you've built, ready to apply or publish.
+- **Recipe marketplace** — ready-made setups shared across Cortana. **Verified** recipes are published by Cortana; **Community** recipes come from other businesses (always anonymous, reviewed before going live).
+
+<Note>
+  **Prerequisites** — to build a recipe you need something to bundle: at least one [skill](/claw/skills), [tool](/claw/connectors), or [loop](/claw/automations). To apply one, you need an agent to apply it to (or let it create one).
+</Note>
+
+## Apply a recipe
+
+<Steps>
+  <Step title="Open the Recipes tab">
+    In the CortanaClaw workspace rail, click **Recipes**. Your own recipes are under **My recipes**; shared ones are under **Recipe marketplace**.
+
+    <Frame caption="The Recipes tab: your recipes up top, the shared marketplace below.">
+      <img src="/images/claw/recipes/01-recipes-tab.png" alt="The Recipes tab. A 'My recipes' section with a highlighted 'New recipe' button and a recipe named 'stock — 1 tool — check stock market' with a highlighted 'Use' button and a menu. Below, a highlighted 'Recipe marketplace' heading explains that Verified recipes are published by Cortana and Community recipes come from other businesses, reviewed before going live." />
+    </Frame>
+  </Step>
+
+  <Step title="Click Use and choose where it goes">
+    Click **Use** on any recipe. You can either **attach** it to an existing agent, or **hatch** a brand-new agent whose persona and model come from the recipe.
+
+    When you apply a recipe: its **skills are copied** into the target agent; its **tools are provisioned business-wide**; and its **schedules are created paused**, so nothing runs until you turn it on.
+  </Step>
+
+  <Step title="Finish any sign-ins">
+    If a recipe includes a tool that needs authentication, a **connect card** appears after applying — finish the sign-in there and the tool goes live. Tools that need no auth are live immediately. See [Connectors](/claw/connectors).
+  </Step>
+</Steps>
+
+<Warning>
+  Recipe **schedules always arrive paused**. Open the [Loops](/claw/automations) tab and turn one on when you're ready — this prevents a shared recipe from silently spending your credit.
+</Warning>
+
+## Build your own recipe
+
+<Steps>
+  <Step title="Click New recipe">
+    In **My recipes**, click **New recipe** to open the composer.
+  </Step>
+
+  <Step title="Compose it from what you already have">
+    Give the recipe a **Recipe name** and a **Description**, and optionally a **Persona for new agents** (used when someone hatches a new agent from it). Then tick the **Skills**, **Tools (MCPs)**, and **Loops** you want to include — recipes are composed **from existing** items. Use **Create a skill**, **Connect a tool**, or **Create a loop** to add something new first. You must pick at least one skill, tool, or loop.
+
+    Click **Save recipe**.
+
+    <Frame caption="The recipe composer. Tick existing skills and tools to bundle them.">
+      <img src="/images/claw/recipes/02-recipe-composer.png" alt="The New recipe composer with a Recipe name field, a Description field, an optional 'Persona for new agents' box, a highlighted Skills and Tools (MCPs) area with checkboxes for each existing skill and connected tool (coingecko, context7, deepwiki, githubcopilot, gitmcp, linear and others), a Loops section reading 'No loops yet', and a highlighted 'Save recipe' button with the hint 'Pick at least one skill, tool or loop.'" />
+    </Frame>
+  </Step>
+</Steps>
+
+<Note>
+  **No secrets ever travel in a recipe.** Tool credentials live in the encrypted vault and are never included in a recipe by design — a shared recipe carries the tool's address and how it authenticates, not your keys.
+</Note>
+
+## Publish to the marketplace
+
+<AccordionGroup>
+  <Accordion title="How publishing works" icon="upload">
+    From a recipe's **…** menu, publish it. A recipe moves **private → pending → published**. Recipes published by Cortana go live instantly as **Verified**; recipes you publish require **superuser approval** before they appear under **Community**. Any edit to a pending or published recipe reverts it to private, so you re-publish after changes.
+  </Accordion>
+
+  <Accordion title="Anonymity and review" icon="user-secret">
+    Marketplace listings are **anonymous** — your business identity is stripped from a published recipe. Community submissions are reviewed before going live.
+  </Accordion>
+
+  <Accordion title="Safety of installing shared recipes" icon="shield-check">
+    Every applied recipe is re-validated before it runs: only `https://` tool URLs are allowed, and a recipe can carry at most 20 skills, 10 tools, and 10 schedules. Because secrets can never be part of a recipe, installing one never exposes another business's credentials — or yours.
+  </Accordion>
+</AccordionGroup>
+
+## Settings reference
+
+| Field | Where | What it does |
+|---|---|---|
+| **Recipe name** | Composer | The recipe's title. |
+| **Description** | Composer | What the recipe sets up, and for whom. |
+| **Persona for new agents** | Composer | Persona applied when someone hatches a new agent from the recipe (optional). |
+| **Skills / Tools (MCPs) / Loops** | Composer | The existing items to bundle. At least one required. |
+| **Use** | Recipe row | Apply the recipe — attach to an existing agent or hatch a new one. |
+| **… menu** | Recipe row | Edit, publish, or manage the recipe. |
+
+## Troubleshooting
+
+<AccordionGroup>
+  <Accordion title="A tool from a recipe isn't working">
+    It probably needs sign-in. Look for the connect card that appears after applying, and complete authentication. Until then the tool stays disabled. See [Connectors](/claw/connectors).
+  </Accordion>
+
+  <Accordion title="The recipe's schedule didn't run">
+    Recipe schedules are created **paused**. Turn it on from the [Loops](/claw/automations) tab.
+  </Accordion>
+
+  <Accordion title="My published recipe went back to private">
+    Editing a pending or published recipe reverts it to private. Re-publish it from the **…** menu after your changes.
+  </Accordion>
+
+  <Accordion title="I can't save my recipe">
+    A recipe must include at least one skill, tool, or loop — the composer shows *"Pick at least one skill, tool or loop."* Tick something first.
+  </Accordion>
+</AccordionGroup>
+
+## FAQ
+
+<AccordionGroup>
+  <Accordion title="What's the difference between Verified and Community recipes?">
+    **Verified** recipes are published by Cortana and go live instantly. **Community** recipes are submitted by other businesses, published anonymously, and reviewed before appearing.
+  </Accordion>
+
+  <Accordion title="Does applying a recipe overwrite my agent?">
+    No. It **adds** the recipe's skills and tools, and creates its schedules paused. Choose to attach to an existing agent or hatch a new one.
+  </Accordion>
+
+  <Accordion title="Will installing a Community recipe expose my data or theirs?">
+    No. Recipes never contain secrets, listings are anonymous, and every applied recipe is re-validated (https-only tools, size caps) before it runs.
+  </Accordion>
+
+  <Accordion title="Can I change a recipe after publishing?">
+    Yes — edit it, which returns it to private, then re-publish.
+  </Accordion>
+</AccordionGroup>
+
+## Next steps
+
+<CardGroup cols={2}>
+  <Card title="Connect your tools" icon="plug" href="/claw/connectors">
+    Add the MCP tools your recipes bundle.
+  </Card>
+  <Card title="Teach your agent skills" icon="wand-magic-sparkles" href="/claw/skills">
+    Build the playbooks a recipe packages up.
+  </Card>
+  <Card title="Automate with Loops" icon="clock-rotate-left" href="/claw/automations">
+    Add the schedules and goals a recipe can carry.
+  </Card>
+  <Card title="Approvals & billing" icon="shield-check" href="/claw/approvals-and-billing">
+    How applied tools are approved and how runs bill.
+  </Card>
+</CardGroup>

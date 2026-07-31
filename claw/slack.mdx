@@ -1,0 +1,161 @@
+---
+title: "Using Claw from Slack"
+description: "Connect Slack to run Cortana Claw agent tasks, approve sensitive actions, and schedule automations with /cortana and /schedule — without leaving your channels."
+---
+
+{/* TODO: verify — Slack itself can't be driven from the docs preview, so the in-Slack screenshots
+    (a /cortana progress thread, an approval card with Approve/Deny buttons, the /schedule modal,
+    the /cortana defaults picker) are not captured yet. Add them from a real Slack workspace, plus a
+    Loom + transcript accordion. */}
+
+## Overview
+
+Connect Slack and your team can delegate work to Cortana agents from any channel — `@mention` the app or use `/cortana`, and progress, approvals, and results stream back into the thread.
+
+<Note>
+  **Prerequisites** — you need a Cortana agent set up (see [Getting started](/claw/getting-started)) and permission to add an app to your Slack workspace.
+</Note>
+
+## Connect Slack
+
+<Steps>
+  <Step title="Open the Slack integration">
+    Go to **Settings → Integrations** for the business and find **Slack**. The card reads *"Connect Slack to delegate tasks to your Cortana agent — @mention it or use /cortana, with progress and approvals in-thread."*
+
+    <Frame caption="The Slack card under Settings → Integrations.">
+      <img src="/images/claw/slack/01-connect-slack.png" alt="The Slack integration card in Settings → Integrations, titled 'Slack', with the description 'Connect Slack to delegate tasks to your Cortana agent — @mention it or use /cortana, with progress and approvals in-thread.' and connect/disconnect buttons. The card is highlighted." />
+    </Frame>
+  </Step>
+
+  <Step title="Authorize the workspace">
+    Connect and authorize Cortana in your Slack workspace. Once connected, the slash commands become available and agents can post progress, results, and screenshots into your channels.
+  </Step>
+</Steps>
+
+<Tip>
+  For agents to post **images and screenshots** into Slack, the app needs the `files:write` scope. If screenshots aren't appearing but text is, reinstall/re-authorize the Slack app so it picks up that scope.
+</Tip>
+
+## Run a task with /cortana
+
+```
+/cortana <what you want done>
+```
+
+Cortana queues the task and posts progress in a thread. Two optional flags can go in any order **before** the task:
+
+| Flag | What it does |
+|---|---|
+| `--cloud` | Force the task to run on the cloud instead of a connected desktop. |
+| `--auto` | Run **unattended** — actions that would normally ask for approval are auto-approved. Use only for tasks you fully trust. |
+
+```
+/cortana pull yesterday's ad performance and summarize the top 3 campaigns
+/cortana --cloud --auto refresh the weekly KPI summary
+```
+
+You can also just **@mention** the Cortana app in a message instead of using `/cortana`.
+
+## Pick who runs it
+
+If the channel has no default agent yet, Cortana shows a picker: choose the **agent** and **where it runs** (desktop or cloud), then continue. Set it once per channel with:
+
+```
+/cortana defaults
+```
+
+After that, `/cortana` tasks in the channel run immediately with the saved agent and surface — no picker.
+
+## Approvals in Slack
+
+When a gated run hits a sensitive action, Cortana posts an **approval card** in the thread with the exact action it wants to take. Click to **approve** or **deny**.
+
+<Warning>
+  If nobody responds within about **5 minutes**, the action is **denied** automatically and the agent continues accordingly. Use `--auto` only when you want to skip these prompts entirely.
+</Warning>
+
+## Schedule from Slack
+
+```
+/schedule
+```
+
+(or `/cortana schedule`) opens a form to create a recurring agent task: describe the timing in plain language, write the task, and pick the agent. The same limits apply as in the app — see [Automations](/claw/automations).
+
+## How routing works
+
+Cortana never guesses which agent should answer. It resolves, in order:
+
+1. The agent you **explicitly** picked in the command.
+2. The agent **bound to the thread**.
+3. The channel's **default** agent (`/cortana defaults`).
+
+If none is set, it asks — there's no silent fallback.
+
+## Settings reference
+
+| Command / flag | What it does |
+|---|---|
+| `/cortana <task>` | Run a task; progress posts in a thread. |
+| `@Cortana <task>` | Same as `/cortana` via mention. |
+| `--cloud` | Force a cloud run. |
+| `--auto` | Run unattended (auto-approve sensitive actions). |
+| `/cortana defaults` | Set the channel's default agent + execution surface. |
+| `/schedule` / `/cortana schedule` | Open the recurring-task form. |
+
+## Troubleshooting
+
+<AccordionGroup>
+  <Accordion title="Slash commands don't appear">
+    The workspace isn't connected (or was disconnected). Reconnect under **Settings → Integrations → Slack**.
+  </Accordion>
+
+  <Accordion title="Screenshots aren't posting, but text is">
+    The Slack app is missing the `files:write` scope. Reinstall/re-authorize the app so it can upload images.
+  </Accordion>
+
+  <Accordion title="An approval expired before I could click it">
+    Approval cards time out to **deny** after about 5 minutes. Re-run the task, and either stay to approve or add `--auto` if you trust it.
+  </Accordion>
+
+  <Accordion title="It keeps asking me which agent to use">
+    The channel has no default. Run `/cortana defaults` to set the agent and surface once.
+  </Accordion>
+</AccordionGroup>
+
+## FAQ
+
+<AccordionGroup>
+  <Accordion title="Do Slack tasks run on my computer or the cloud?">
+    They run wherever the channel's default surface says — or add `--cloud` to force the cloud. Desktop runs need a connected Cortana desktop app.
+  </Accordion>
+
+  <Accordion title="Can different channels use different agents?">
+    Yes. Each channel can have its own default agent via `/cortana defaults`, and a specific agent can be bound to a thread.
+  </Accordion>
+
+  <Accordion title="Is --auto safe?">
+    It skips approval prompts, so use it only for tasks you fully trust (routine, read-mostly reports). For anything that changes data, leave it off and approve in-thread.
+  </Accordion>
+
+  <Accordion title="Where do Slack tasks show up in the app?">
+    As conversations in the CortanaClaw workspace — Slack-originated threads appear in your Conversations list.
+  </Accordion>
+</AccordionGroup>
+
+## Next steps
+
+<CardGroup cols={2}>
+  <Card title="Approvals & billing" icon="shield-check" href="/claw/approvals-and-billing">
+    What needs approval, how `--auto` changes it, and what runs cost.
+  </Card>
+  <Card title="Automate with Loops" icon="clock-rotate-left" href="/claw/automations">
+    Schedule recurring tasks from Slack or the app.
+  </Card>
+  <Card title="Get started" icon="rocket" href="/claw/getting-started">
+    Set up the agent your channels will use.
+  </Card>
+  <Card title="Desktop, cloud & extension" icon="laptop" href="/claw/desktop-cloud-extension">
+    Choose where Slack tasks run.
+  </Card>
+</CardGroup>

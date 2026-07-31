@@ -1,0 +1,250 @@
+---
+title: "Getting started with Cortana Claw"
+description: "Open the CortanaClaw workspace, create your first agent, and run your first cloud task start to finish — no download required."
+---
+
+{/* TODO: verify — no Loom walkthrough was supplied for this page. When one is recorded, embed it
+    here and paste the verbatim transcript inside an <Accordion title="Video transcript"> (KB
+    training data), matching the pattern used on frequently-asked-questions.mdx. */}
+
+## Overview
+
+**Cortana Claw** is your business's AI agent workforce. You create agents, give them a task in plain English, and watch them do the work — pulling your revenue and attribution data, researching on the web, and reporting back.
+
+This page takes you from nothing to your first completed task. You will:
+
+1. Open the **CortanaClaw** workspace.
+2. Create an agent.
+3. Run a task on the cloud and read the result.
+
+You can do all of this **in your browser — no download needed**. The Cortana desktop app is only required later, if you want an agent to drive a real browser or control your computer. See [Desktop, cloud & extension](/claw/desktop-cloud-extension).
+
+<Note>
+  **Before you start**
+
+  - You must be signed in to Cortana and have a business selected.
+  - For your agent to return useful answers, connect at least one data source first (for example Stripe or Shopify) under **Settings → Integrations**. Claw reads whatever your business already has connected.
+  - Nothing here charges you until an agent actually runs. Runs are billed per token, or **$0** if your business supplies its own Anthropic (Claude) API key. See [Approvals & billing](/claw/approvals-and-billing).
+</Note>
+
+---
+
+## Set up your first agent and run
+
+<Steps>
+  <Step title="Open the CortanaClaw workspace">
+    In your business's left sidebar, click **CortanaClaw**.
+
+    This opens the agent workspace. The home view is **Threads** — a chat console where you give tasks and watch agents work. The narrow rail beside it holds four sections — **Threads**, **Loops**, **Recipes**, and **Tools** — with your past **Conversations** listed underneath.
+
+    <Frame caption="CortanaClaw sits in the business left sidebar. It opens on the Threads console.">
+      <img src="/images/claw/getting-started/01-where-it-lives.png" alt="The Cortana business dashboard with the left sidebar expanded. The CortanaClaw navigation item is highlighted. To its right is the agent workspace showing the Threads, Loops, Recipes and Tools rail, a Conversations list, and an empty console reading 'Give Cortana a task below to start the conversation.'" />
+    </Frame>
+  </Step>
+
+  <Step title="Choose who will run the task">
+    At the bottom of the console is the task box. Below it, the first pill is the **agent picker**, which starts on **Default agent**.
+
+    On the web, every run happens **in the cloud**, and a cloud run needs a specific agent. So this is your first decision: which agent runs the task. If you already have agents, pick one here. If you don't, the next step creates one.
+
+    <Warning>
+      The generic **Default agent** option cannot start a cloud run — the **Send** button stays greyed out, and a hint reads *"Cloud runs use this business's data connectors + memory — pick an agent above (not the Default agent) to run on the cloud."* You must pick an agent **by name**, even if that agent happens to be your default.
+    </Warning>
+
+    <Frame caption="The agent picker under the task box. It opens on 'Default agent', which can't run on the cloud on its own.">
+      <img src="/images/claw/getting-started/02-agent-picker.png" alt="Close-up of the console composer. The task box holds an example task. Below it are three pills — the agent picker reading 'Default agent' (highlighted), a skill picker reading 'Auto (match task)', and a 'Browser off' pill. A hint below reads that cloud runs need an agent picked, not the Default agent." />
+    </Frame>
+  </Step>
+
+  <Step title="Open the agent list">
+    Click the agent picker to open it. It lists every active agent, then a **Add or configure agents** row at the bottom. Click **Add or configure agents**.
+
+    <Frame caption="The agent dropdown. 'Add or configure agents' at the bottom opens the Agents area.">
+      <img src="/images/claw/getting-started/03-add-agent.png" alt="The open agent picker dropdown showing existing agents such as Default agent, stock, Local Agent and claudia, with an 'Add or configure agents' row highlighted at the bottom." />
+    </Frame>
+  </Step>
+
+  <Step title="Start a new agent">
+    You are now in the **Agents** area (the breadcrumb reads *Runs / Agents*). Each existing agent shows as a card with its model, its persona, and how many tools it has connected. The starred card marked **DEFAULT** is the one Slack and integrations use when no agent is named.
+
+    Click **New agent** at the top right.
+
+    <Frame caption="The Agents area. Each card is one agent. New agent (top right) creates one.">
+      <img src="/images/claw/getting-started/04-agents-list.png" alt="The Agents management view with a grid of agent cards, each showing a name, the model Claude Opus 4.8, a persona line, and 'Tools · N connected'. One card named claudia carries a DEFAULT badge. The blue New agent button at the top right is highlighted." />
+    </Frame>
+  </Step>
+
+  <Step title="Name your agent and create it">
+    The **New agent** form has three fields:
+
+    - **Name** — required. What you'll call the agent, for example `Research Cortana`.
+    - **Persona / standing instructions** — optional. How the agent should behave on every task (tone, rules, what to always include). This becomes part of its system prompt.
+    - **Model** — leave on **Default model (recommended)**, or pick a specific model (Claude Opus 4.8, Sonnet 4.6, Haiku 4.5, and others).
+
+    Fill in at least a name, then click **Create agent**. Your new agent is now attached to this business and appears in the agent picker.
+
+    <Frame caption="The New agent form. Only Name is required; persona and model are optional.">
+      <img src="/images/claw/getting-started/05-new-agent.png" alt="The New agent form with a Name field filled in as 'Research Cortana' (highlighted), a Persona / standing instructions text area marked Optional, a Model dropdown set to 'Default model (recommended)', and Cancel and Create agent buttons. The Name field and the Create agent button are highlighted." />
+    </Frame>
+  </Step>
+
+  <Step title="Type your task and send it">
+    Back in the **Threads** console, make sure your new agent is selected in the agent picker. Type what you want done in the task box — plain English, one clear instruction. For example: *"What were our top 5 traffic sources by revenue last month? Pull it from our attribution data."*
+
+    With an agent picked, the **Send** button turns active. Click it (or press **Enter**).
+
+    <Tip>
+      Type **/** in the task box to open the slash-command menu (for example to start a scheduled loop). See [Automations](/claw/automations).
+    </Tip>
+
+    <Frame caption="A task typed with an agent selected. Send is now active.">
+      <img src="/images/claw/getting-started/06-run-task.png" alt="The console composer with a task typed reading 'What were our top 5 traffic sources by revenue last month? Pull it from our attribution data.' The task box and the Send arrow button are highlighted. Below, the agent picker shows the selected agent 'claudia', a skill picker reads 'Auto (match task)', and a 'Browser off' pill is present." />
+    </Frame>
+  </Step>
+
+  <Step title="Watch it work and read the result">
+    The agent's reply streams into the middle of the console. On the right, the **Run activity** panel shows every turn and every step it took — which tools it called and what it found — so you can see exactly how it reached the answer.
+
+    If the task needs something sensitive (submitting a form, running a command, saving a memory), the agent **pauses and asks you to approve** before it acts. Read-only work (reading data, searching, recalling past runs) never asks. See [Approvals & billing](/claw/approvals-and-billing).
+
+    <Frame caption="A finished run. The answer is in the middle; the Run activity panel on the right lists every step.">
+      <img src="/images/claw/getting-started/07-run-activity.png" alt="A conversation transcript. The user's question appears in a purple bubble; the agent's answer below explains which connectors it checked (cortana, coingecko, and others) and what data it can and cannot pull. On the right, a Run activity panel is highlighted, listing Turn 1 through Turn 7 with the number of steps in each and a live 'Task Picked Up — Running on the cloud' status." />
+    </Frame>
+  </Step>
+</Steps>
+
+<Check>
+  You've created an agent and run your first cloud task. The conversation is saved in the **Conversations** list on the left — reopen it any time and the agent picks up with full context.
+</Check>
+
+---
+
+## Adjust how a task runs
+
+Two controls next to the task box change how a run behaves. Open them before you click **Send**.
+
+<AccordionGroup>
+  <Accordion title="Run settings — Cloud execution and Unattended" icon="gear">
+    Click the **gear** icon (labelled *Run settings*) at the far right of the composer.
+
+    - **Cloud execution** — **On** means the agent runs on Cortana's servers with your business's data connectors, memory, and reasoning. **Off** means it runs on your computer via the desktop app (where it can drive the browser and control the screen). In a plain browser this is forced **On** and can't be switched off — you need the desktop app for Desktop runs.
+    - **Unattended** — **Off** (the default) means the agent stops to ask you to approve each sensitive action. **On** lets it run those actions on its own without stopping. You can press **Stop** at any time either way.
+    - **Arm desktop** — only appears in the desktop app. Lets the agent see your screen and drive the real mouse and keyboard for native apps the browser can't reach.
+
+    <Frame caption="Run settings on the web. Cloud execution is on (and locked on); Unattended is off by default.">
+      <img src="/images/claw/getting-started/08-run-settings.png" alt="The Run settings popover showing a 'Cloud execution' toggle switched on and an 'Unattended' toggle switched off, each with an info icon, anchored to the gear button in the console composer." />
+    </Frame>
+  </Accordion>
+
+  <Accordion title="Pick a skill instead of letting the agent choose" icon="wand-magic-sparkles">
+    The second pill under the task box is the **skill picker**, which starts on **Auto (match task)** — the agent decides whether one of its saved skills fits. To force a specific skill, pick it here. The **Add or configure skills** row opens the Skills area. See [Skills](/claw/skills).
+  </Accordion>
+
+  <Accordion title="Run a browser task from the cloud" icon="chrome">
+    The **Browser off** pill lets a cloud run borrow a real Chrome browser through the Cortana Chrome extension. Open it to see *Run browser tasks on (optional)*. With no browser connected it reads *"No browsers connected. Open Chrome with the Cortana extension to run browser tasks."* Once a browser is connected you can pick it and set its **Browser autonomy**: **Supervised** (approve sensitive actions), **Trusted sites** (auto-approve allowlisted sites), or **Autopilot** (auto-approve except logins and payments). See [Desktop, cloud & extension](/claw/desktop-cloud-extension).
+  </Accordion>
+
+  <Accordion title="The guided first-run setup" icon="hand-wave">
+    The very first time you talk to a brand-new agent, it runs a short guided onboarding: it researches your business (your business info, products, and the web), offers concrete things it can do for *you*, helps you connect one tool, then proves the connection works by running a real query. You can skip it at any time and just give it a task.
+  </Accordion>
+</AccordionGroup>
+
+---
+
+## Settings reference
+
+<Note>These are the controls you'll touch when creating an agent and starting a run. Every one is optional except the agent **Name**.</Note>
+
+| Setting | Where | What it does | Default | Recommendation |
+|---|---|---|---|---|
+| **Name** | New agent form | The agent's display name. Required. | — | Name it for its job, e.g. `Research Cortana`. |
+| **Persona / standing instructions** | New agent form | Extra system prompt applied to every task this agent runs. | Empty (*No persona set*) | Add tone and rules you want on every run; leave blank to start. |
+| **Model** | New agent form | Which model the agent thinks with. | **Default model (recommended)** | Keep the default unless you have a reason. Opus = most capable, Haiku = fastest. |
+| **Agent picker** | Console composer | Which agent runs this task. | **Default agent** | On the web, pick an agent **by name** — the Default agent option can't run on the cloud. |
+| **Skill picker** | Console composer | Force a saved skill, or let the agent choose. | **Auto (match task)** | Leave on Auto unless a task must follow one skill. |
+| **Cloud execution** | Run settings (gear) | Cloud (servers + data) vs Desktop (this computer). | **On** (locked on in a browser) | Leave on for data/research tasks. Use Desktop only for browser/computer work. |
+| **Unattended** | Run settings (gear) | Skip approval prompts and run sensitive actions automatically. | **Off** | Keep off until you trust the task; you can always press **Stop**. |
+| **Browser** | Console composer (**Browser off** pill) | Attach a real Chrome browser to a cloud run. | **Off** | Only needed for browser tasks; requires the Chrome extension. |
+
+---
+
+## Tips and caveats
+
+<Tip>
+  Reopen any conversation from the **Conversations** list and the agent continues with full context — across the web app, the desktop app, and Slack. If you send a new message while it's still working, your message **queues** and runs the moment the agent is idle.
+</Tip>
+
+<Warning>
+  In a plain browser, an agent **cannot** open websites, click through pages, or control your computer — those need the desktop app or the Chrome extension. Cloud runs cover data, analysis, research, and reporting. If a task needs a browser and none is available, the agent says so rather than guessing.
+</Warning>
+
+---
+
+## Troubleshooting
+
+<AccordionGroup>
+  <Accordion title="The Send button is greyed out">
+    Two things enable **Send**: text in the task box **and** a specific agent selected. If the agent picker still says **Default agent**, open it and pick an agent by name. On the web you can't run without one.
+  </Accordion>
+
+  <Accordion title="It says I need the desktop app">
+    You tried to run a browser or computer task (or turned **Cloud execution** off). Either keep the task to data/research so it runs on the cloud, or install the Cortana desktop app for Desktop runs. See [Desktop, cloud & extension](/claw/desktop-cloud-extension).
+  </Accordion>
+
+  <Accordion title="The agent says it has no tool for what I asked">
+    Claw can only use data sources your business has connected. If it reports it has no connector for something (for example live stock prices), connect that tool first under **Settings → Integrations**, or add an MCP connector on the **Tools** page. See [Connectors](/claw/connectors).
+  </Accordion>
+
+  <Accordion title="The run stopped and is asking me to approve something">
+    That's expected. Sensitive actions pause for your approval unless **Unattended** is on. Approve to continue, or press **Stop** to end the run. See [Approvals & billing](/claw/approvals-and-billing).
+  </Accordion>
+</AccordionGroup>
+
+---
+
+## FAQ
+
+<AccordionGroup>
+  <Accordion title="Do I need to download anything to use Claw?">
+    No. Creating agents and running cloud tasks (data, research, reporting) works entirely in your browser. You only need the desktop app for tasks that drive a real browser or control your computer.
+  </Accordion>
+
+  <Accordion title="What's the difference between Claw and the AI Agents feature?">
+    **Cortana Claw** agents work for *you*, the operator — they use your tools, remember what they learn, and complete tasks. The separate **AI Agents** feature is customer-facing: it chats with your leads and books appointments. They're different products.
+  </Accordion>
+
+  <Accordion title="How many agents can I create?">
+    As many as you like. A common setup is a few specialists — a research agent, a reporting agent, an operations agent — that all share your business-wide tool connections. One agent per business can be marked the **default**, which answers Slack and integration tasks.
+  </Accordion>
+
+  <Accordion title="Why must I pick an agent by name to run on the cloud?">
+    A cloud run executes as a specific agent (its persona, model, and tools). The generic **Default agent** menu entry is a routing shortcut, not a concrete agent to run as, so the web console asks you to choose one by name. It can be the same agent that's marked default — just select it explicitly.
+  </Accordion>
+
+  <Accordion title="Does running a task cost money?">
+    Runs are billed per token against your Cortana credit — unless your business supplies its own Anthropic (Claude) API key, in which case runs are **$0** and use your key. Read-only steps and local-model runs don't add token cost the same way. See [Approvals & billing](/claw/approvals-and-billing).
+  </Accordion>
+
+  <Accordion title="Where did my conversation go?">
+    Every conversation is saved as a persistent session in the **Conversations** list on the left of the workspace. Use **Search conversations** to find one, or **New chat** to start fresh.
+  </Accordion>
+</AccordionGroup>
+
+---
+
+## Next steps
+
+<CardGroup cols={2}>
+  <Card title="Connect your tools" icon="plug" href="/claw/connectors">
+    Give agents more to work with — add MCP tool servers, shared across all agents or private to one.
+  </Card>
+  <Card title="Teach your agent skills" icon="wand-magic-sparkles" href="/claw/skills">
+    Save step-by-step playbooks your agent can follow, or teach one by demonstrating it once.
+  </Card>
+  <Card title="Set up automations" icon="clock-rotate-left" href="/claw/automations">
+    Run tasks on a schedule, or set a standing goal the agent loops toward — the **Loops** tab.
+  </Card>
+  <Card title="Desktop, cloud & extension" icon="laptop" href="/claw/desktop-cloud-extension">
+    See where agents can run and what each surface unlocks — browser, computer, and cloud.
+  </Card>
+</CardGroup>
