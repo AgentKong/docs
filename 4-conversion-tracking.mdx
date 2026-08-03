@@ -699,7 +699,7 @@ Every source is added the same way. Follow these six steps, then open your sourc
   </Accordion>
 
   <Accordion title="Kajabi">
-    **What it tracks:** purchases, subscription rebills, and form submissions from your Kajabi site. Connecting once covers **every offer you have and every offer you create later** — there is nothing to set up per offer.
+    **What it tracks:** every successful payment on your Kajabi site, including subscription rebills, as **lifetime value**. Connecting once covers **every offer you have and every offer you create later** — there is nothing to set up per offer.
 
     **Prerequisite integration:** Kajabi. When not connected the entry is locked.
 
@@ -752,7 +752,7 @@ Every source is added the same way. Follow these six steps, then open your sourc
           <img src="/images/ad-tracking/conversion-sources/kajabi/04-connect-step2-api-keys.png" alt="Connect Kajabi dialog on the API Keys step with Client ID and Client Secret fields and a panel explaining that keys are verified then stored encrypted and three site-wide webhooks are created automatically." />
         </Frame>
 
-        On save Cortana creates **three site-wide webhooks** in your Kajabi account — purchases, payments, and form submissions — and three matching conversion sources in Cortana. You never touch a per-offer setting.
+        On save Cortana creates **one site-wide payments webhook** in your Kajabi account and one matching conversion source, **Kajabi Payment**, feeding **All Payments (LTV)**. You never touch a per-offer setting.
 
         <Note>
           If the account has **more than one Kajabi site**, Cortana stops and asks which one to track rather than guessing. Picking the wrong site would mean conversions silently never arrive.
@@ -774,13 +774,17 @@ Every source is added the same way. Follow these six steps, then open your sourc
 
     | Source | Feeds the conversion | Revenue | Fires when |
     | --- | --- | --- | --- |
-    | **Kajabi Purchase** | `purchase` (New Deals Closed) | New revenue | A one-time offer is bought, a subscription starts, or a payment plan starts |
-    | **Kajabi Payment** | `all_payments` (LTV) | LTV | Every successful charge, including subscription rebills |
-    | **Kajabi Form Submission** | `lead` | — | Any Kajabi form is submitted |
+    | **Kajabi Payment** | `all_payments` (All Payments LTV) | LTV | Every successful charge, including the first one and every subscription rebill |
 
     <Warning>
-      **Only one source carries cash revenue, and that is deliberate.** Kajabi fires a `purchase` event for every offer in a cart and a separate `order_created` event for the order as a whole. Subscribing to both would count the same checkout twice and inflate your revenue. **Kajabi Purchase** already covers every offer in the cart, itemised, so nothing is missed.
+      **Connecting Kajabi never touches New Deals Closed.** What counts as a *sale* for your business is your decision — which offers count, whether a rebill counts, whether a payment plan counts. Cortana will not answer that for you by connecting an integration. This is the same rule Stripe, Whop, Fanbasis and PayPal follow: connecting wires **All Payments (LTV)** and nothing else.
+
+      Because `payment_succeeded` fires on **every** successful charge including the first, your full Kajabi revenue is captured in LTV from the moment you connect. Nothing is missed.
     </Warning>
+
+    <Note>
+      **Want Kajabi sales in New Deals Closed too?** That is a deliberate setup step, not something connecting does for you. Talk to support and we will wire the extra source to match how your business defines a new sale.
+    </Note>
 
     ### Checkout email capture (why this works when other tools miss it)
 
