@@ -1,6 +1,6 @@
 ---
 title: "4.2) Conversion Sources"
-description: "Add conversion sources to track sales and leads in Cortana. Connect Stripe, Shopify, GoHighLevel, Meta Ads, Calendly, webhooks, pixels, CSV and 14 other source types to any conversion."
+description: "Add conversion sources to track sales and leads in Cortana. Connect Stripe, Shopify, Kajabi, GoHighLevel, Meta Ads, Calendly, webhooks, pixels, CSV and 15 other source types to any conversion."
 ---
 
 ## <u>Conversion Sources</u>
@@ -13,11 +13,11 @@ Sources live at **Tracking → Conversion Setup**. You open (or create) a conver
 
 ### Available vs locked sources
 
-The **Integration** dropdown lists all 22 source types. Four are always available because they do not depend on an outside tool:
+The **Integration** dropdown lists all 23 source types. Four are always available because they do not depend on an outside tool:
 
 **Forms / Appointments** · **Webhook** · **CSV Upload** · **Pixel**
 
-The other 18 require their integration to be connected to this business first. Until it is connected, the entry is greyed out with a **padlock icon** and sorts to the bottom of the list. Clicking a locked entry does not select it. It shows an error toast such as `Please connect Stripe first. Go to Settings → Integrations to connect.`
+The other 19 require their integration to be connected to this business first. Until it is connected, the entry is greyed out with a **padlock icon** and sorts to the bottom of the list. Clicking a locked entry does not select it. It shows an error toast such as `Please connect Stripe first. Go to Settings → Integrations to connect.`
 
 The dropdown sorts **available sources A-Z first, then locked sources A-Z**. So on a business with everything connected, the whole list is simply A-Z. The accordions below follow that same A-Z order.
 
@@ -698,6 +698,106 @@ Every source is added the same way. Follow these six steps, then open your sourc
     </Tip>
   </Accordion>
 
+  <Accordion title="Kajabi">
+    **What it tracks:** purchases, subscription rebills, and form submissions from your Kajabi site. Connecting once covers **every offer you have and every offer you create later** — there is nothing to set up per offer.
+
+    **Prerequisite integration:** Kajabi. When not connected the entry is locked.
+
+    <Frame caption="The Kajabi card on Settings → Integrations. Click Connect to open the three-step setup.">
+      <img src="/images/ad-tracking/conversion-sources/kajabi/02-kajabi-card.png" alt="The Integrations grid showing the Kajabi card with its description and a Connect button, alongside HubSpot, iClosed and Fanbasis cards." />
+    </Frame>
+
+    ### Before you start
+
+    Two things gate this setup, and both live on the Kajabi side:
+
+    - You need the Kajabi account **Owner**. Only an Owner can create API keys. An admin or staff user will see the Public API page but no create button.
+    - You need the Kajabi **Pro plan** (or the paid API add-on). Webhooks also require Growth or Pro.
+
+    <Frame caption="Kajabi says it plainly: 'Only users with the Owner role can create or manage API keys.' If you see this with no Create button, you are not the Owner.">
+      <img src="/images/ad-tracking/conversion-sources/kajabi/01-kajabi-public-api.png" alt="Kajabi Settings → Public API page showing the User API Keys section and the notice that only Owner-role users can create or manage API keys." />
+    </Frame>
+
+    <Steps>
+      <Step title="Open the Kajabi card and copy the tracking script">
+        Go to **Settings → Integrations**, find **Kajabi**, and click **Connect**. Step 1 gives you one script tag and two **Copy** buttons.
+
+        <Frame caption="Step 1. The same script goes in two different Kajabi boxes. This is the step people get wrong.">
+          <img src="/images/ad-tracking/conversion-sources/kajabi/03-connect-step1-scripts.png" alt="Connect Kajabi dialog on the Scripts step, showing Paste 1 for site pages and Paste 2 for checkout pages, each with a Copy button and the exact Kajabi menu path underneath." />
+        </Frame>
+      </Step>
+
+      <Step title="Paste 1 — Kajabi site pages">
+        In Kajabi: **Settings → Site Details → Page Scripts**, into the **Header** box. Save.
+
+        This covers your website pages and landing pages. It does **not** cover checkout.
+      </Step>
+
+      <Step title="Paste 2 — Kajabi checkout pages (do not skip this)">
+        In Kajabi: **Settings → Checkout → Checkout Tracking Code**, into the **Header tracking code** box. Save.
+
+        Kajabi treats checkout as a completely separate scripting surface — Page Scripts are **not** inherited there. This second paste is also what enables checkout email capture, which is how a purchase gets matched back to the ad that caused it.
+      </Step>
+
+      <Step title="Create your Kajabi API keys">
+        In Kajabi: **Settings → Public API → Create User API Key**. Name it something like "Cortana", pick the user, and create it.
+
+        Kajabi shows the **Client Secret once**. Copy both values before you close the dialog.
+      </Step>
+
+      <Step title="Paste the keys into Cortana">
+        Back in the Connect dialog, go to **API Keys**, paste the Client ID and Client Secret, and click **Connect & Create Webhooks**.
+
+        <Frame caption="Step 2. Paste both keys. Cortana verifies them against Kajabi, stores them encrypted, and creates the webhooks for you.">
+          <img src="/images/ad-tracking/conversion-sources/kajabi/04-connect-step2-api-keys.png" alt="Connect Kajabi dialog on the API Keys step with Client ID and Client Secret fields and a panel explaining that keys are verified then stored encrypted and three site-wide webhooks are created automatically." />
+        </Frame>
+
+        On save Cortana creates **three site-wide webhooks** in your Kajabi account — purchases, payments, and form submissions — and three matching conversion sources in Cortana. You never touch a per-offer setting.
+
+        <Note>
+          If the account has **more than one Kajabi site**, Cortana stops and asks which one to track rather than guessing. Picking the wrong site would mean conversions silently never arrive.
+        </Note>
+      </Step>
+
+      <Step title="Verify">
+        The **Verify** step tells you whether the pixel has been seen on your site and whether webhooks are arriving, with a live count of what has been banked per source.
+
+        <Frame caption="Step 3. A green check on the pixel means your scripts are live. Webhooks show a warning until the first real event lands.">
+          <img src="/images/ad-tracking/conversion-sources/kajabi/05-connect-step3-verify.png" alt="Connect Kajabi dialog on the Verify step showing a green check for Pixel on your Kajabi site with a last-seen timestamp, and an amber warning for Webhooks not connected yet." />
+        </Frame>
+
+        The fastest way to confirm end to end is a test purchase using a 100%-off coupon.
+      </Step>
+    </Steps>
+
+    ### What Cortana creates for you
+
+    | Source | Feeds the conversion | Revenue | Fires when |
+    | --- | --- | --- | --- |
+    | **Kajabi Purchase** | `purchase` (New Deals Closed) | New revenue | A one-time offer is bought, a subscription starts, or a payment plan starts |
+    | **Kajabi Payment** | `all_payments` (LTV) | LTV | Every successful charge, including subscription rebills |
+    | **Kajabi Form Submission** | `lead` | — | Any Kajabi form is submitted |
+
+    <Warning>
+      **Only one source carries cash revenue, and that is deliberate.** Kajabi fires a `purchase` event for every offer in a cart and a separate `order_created` event for the order as a whole. Subscribing to both would count the same checkout twice and inflate your revenue. **Kajabi Purchase** already covers every offer in the cart, itemised, so nothing is missed.
+    </Warning>
+
+    ### Checkout email capture (why this works when other tools miss it)
+
+    Kajabi renders the email box on its checkout inside a web component, which means the real input is hidden from ordinary tracking scripts. A normal pixel scanning the page for input fields finds nothing and never learns who the buyer is.
+
+    Cortana's pixel reaches into that component and reads the email **as the buyer types it, before they pay**. That matters twice over:
+
+    - A buyer who lands straight on your checkout from an ad — with no prior opt-in — still gets matched to that ad. Tools that wait for the purchase webhook have nothing to match against and book the sale as organic.
+    - A buyer who abandons partway through an upsell sequence is still identified.
+
+    This ships inside the pixel itself. There is no extra snippet to paste and nothing to maintain — it is the reason **Paste 2** above is not optional.
+
+    ### Disconnecting
+
+    Disconnecting deletes the webhooks Cortana created in your Kajabi account and deactivates the three sources. Conversions already recorded are kept, and reconnecting later reuses the same webhook URLs.
+  </Accordion>
+
   <Accordion title="Meta Ads">
     **What it tracks:** lead form submissions from Facebook and Instagram lead ads. This is the source previously called *Meta Lead Forms*.
 
@@ -1306,6 +1406,7 @@ Two things happen, and the difference matters.
     <tr><td>**Fanbasis**</td><td>Yes</td><td>A refund or an opened dispute</td></tr>
     <tr><td>ClickFunnels</td><td>No</td><td>Record refunds by CSV, see below</td></tr>
     <tr><td>GoHighLevel</td><td>No</td><td>Record refunds by CSV, see below</td></tr>
+    <tr><td>Kajabi</td><td>No</td><td>Kajabi sends no refund webhook. Record refunds by CSV, see below</td></tr>
     <tr><td>Webhook, Pixel, CRMs, forms</td><td>No</td><td>Send a negative value, or use CSV</td></tr>
   </tbody>
 </table>
