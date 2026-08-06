@@ -36,15 +36,15 @@
             "pages": [
               "1-connect-integrations",
               "2-setup-pixel",
-              "3",
+              "3-contact-tracking",
               "4-conversion-setup",
               "4-conversion-tracking",
-              "5",
-              "6",
+              "5-url-parameters",
+              "6-ai-ad-optimization",
               "7-customizing-your-dashboard",
               "8-customer-journey-views",
               "9-how-to-set-up-shopify",
-              "10"
+              "10-chrome-extension"
             ]
           },
           "frequently-asked-questions"
@@ -411,6 +411,24 @@
     }
   },
   "openapi": "api-reference/openapi.json",
+  "redirects": [
+    {
+      "source": "/3",
+      "destination": "/3-contact-tracking"
+    },
+    {
+      "source": "/5",
+      "destination": "/5-url-parameters"
+    },
+    {
+      "source": "/6",
+      "destination": "/6-ai-ad-optimization"
+    },
+    {
+      "source": "/10",
+      "destination": "/10-chrome-extension"
+    }
+  ],
   "footerSocials": {
     "github": "https://github.com/cortana-ai",
     "website": "https://usecortana.ai"
