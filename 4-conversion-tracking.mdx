@@ -872,9 +872,13 @@ Every source is added the same way. Follow these six steps, then open your sourc
 
     **Prerequisite integration:** PayPal. If no PayPal account is connected, picking it shows the toast `Please connect PayPal first. Go to Settings → Integrations to connect.` and the form shows *"Please connect PayPal in Settings → Integrations first."*
 
+    <Frame caption="The PayPal source form: account first, then event. Hovering an event shows its description on the right.">
+      <img src="/images/ad-tracking/conversion-sources/paypal/01-paypal-form.png" alt="Create Conversion Source dialog with Integration set to PayPal, showing the required PayPal Account dropdown above the open PayPal Event list with Payment Captured, First PayPal Purchase, Subscription Payment and Payment Refunded, each carrying a category badge, and a tooltip describing Payment Captured." />
+    </Frame>
+
     <Steps>
       <Step title="Pick the PayPal Account">
-        **PayPal Account** (required). The placeholder is **"Select a PayPal account"**. Each entry shows the account name, falling back to the account email. An account that is not connected in live mode carries a **Sandbox** badge.
+        **PayPal Account** (required). The placeholder is **"Select a PayPal account"**. Each entry shows the account name, falling back to the account email, and falling back again to the words **PayPal account** when PayPal has given us neither. An account that is not connected in live mode carries a **Sandbox** badge.
 
         While the list is loading you see **"Checking PayPal connection..."**.
       </Step>
@@ -884,10 +888,10 @@ Every source is added the same way. Follow these six steps, then open your sourc
 
         | Event | Category | What it means |
         | --- | --- | --- |
-        | **Payment Captured** | payments | Money captured for a completed payment |
-        | **First PayPal Purchase** | payments | A customer's first payment we've seen (returning buyers excluded) |
-        | **Subscription Payment** | subscriptions | A recurring subscription payment was received |
-        | **Payment Refunded** | refunds | A captured payment was refunded (negative revenue) |
+        | **Payment Captured** | Payments | Money captured for a completed payment |
+        | **First PayPal Purchase** | Payments | A customer's first payment we've seen (returning buyers excluded) |
+        | **Subscription Payment** | Subscriptions | A recurring subscription payment was received |
+        | **Payment Refunded** | Refunds | A captured payment was refunded (negative revenue) |
 
         Once you pick one, a summary panel below the dropdown repeats the event label and its description.
       </Step>
@@ -900,6 +904,10 @@ Every source is added the same way. Follow these six steps, then open your sourc
         Click **Submit**.
       </Step>
     </Steps>
+
+    <Frame caption="With an event chosen, the form shows Payment Filters, a summary of the selected event, and the note about when PayPal conversions arrive.">
+      <img src="/images/ad-tracking/conversion-sources/paypal/02-paypal-event-selected.png" alt="The PayPal source form with Payment Captured selected, showing the Payment Filters section with its Enable Payment Filter toggle switched off, an event summary panel, and a note explaining that payments taken inside PayPal appear 20 minutes to 3 hours later." />
+    </Frame>
 
     <Note>
       **When these conversions appear.** Payments taken through a Cortana payment link arrive in seconds. Invoices and anything else paid inside PayPal take **20 minutes to 3 hours**. That is PayPal's own reporting delay, not a problem with your source. The conversion still imports on its own, so there is no need to re-send or reconnect.
