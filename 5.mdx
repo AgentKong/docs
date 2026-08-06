@@ -270,72 +270,108 @@ You can add URL parameters to your ads (videos below) or custom URL parameters i
   <Accordion title="LinkedIn Ads">
     # Adding URL Parameters for LinkedIn Ads
 
-    LinkedIn works differently from every other platform on this page, and it is worth understanding why before you tag anything.
+    LinkedIn gives you one thing for free and one thing you have to set up.
 
-    **Part of it is already done for you.** LinkedIn adds its own click identifier, `li_fat_id`, to ad clicks automatically. Cortana reads it, and any visitor who arrives with one is credited to **LinkedIn Ads**. You do not add it, and you should not remove it.
+    **Free:** LinkedIn adds its own click identifier, `li_fat_id`, to every ad click. Cortana reads it, so anyone arriving from a LinkedIn ad is credited to **LinkedIn Ads** with no setup at all. You never add it and you must never strip it.
 
-    **The other part is not.** LinkedIn has no dynamic placeholders like Meta's `{{ad.id}}` or Google's `{campaignid}`, so there is no template Cortana can hand you that LinkedIn fills in at click time. That means `li_fat_id` alone tells Cortana the visit came **from LinkedIn**, but not **which campaign or which creative**. To get that, you tag your destination URLs yourself.
+    **What you set up:** LinkedIn's **dynamic URL tracking parameters**. These are placeholders LinkedIn fills in at click time, the same idea as Meta's `{{ad.name}}` or Google's `{campaignid}`. They are what tell Cortana *which* campaign, ad set, and ad produced the click. Without them, every LinkedIn sale arrives under one undifferentiated **LinkedIn Ads** line and you cannot compare one creative against another.
 
-    ### What you get with no setup at all
+    <Warning>
+      **Read the next section before you copy any template.** LinkedIn is part-way through renaming its ad hierarchy, and the same token means two different things depending on which naming your account has. Copying the wrong one is the single most damaging mistake you can make here.
+    </Warning>
 
-    Connect LinkedIn Ads and leave every URL alone, and you still get:
+    ## Step 1: Check which naming your account uses
 
-    - **LinkedIn Ads** appearing as a source in your Attribution Table, with the leads, sales, and revenue that came from it.
-    - LinkedIn's spend, plus LinkedIn's own reported conversions, synced hourly.
+    LinkedIn is renaming its hierarchy from **Account → Campaign Group → Campaign → Creative** to the industry-standard **Account → Campaign → Ad Set → Ad**. LinkedIn began this in October 2025, describes it as gradual, and has published no completion date, so as of now both versions are still in the wild. Two ad accounts belonging to the same company can be on different versions at the same time.
 
-    What you do **not** get is a breakdown of that revenue by campaign or by creative. Everything arrives under LinkedIn Ads as one line. For plenty of accounts running one or two campaigns, that is genuinely enough.
+    Open **Campaign Manager** and look at what your levels are called.
 
-    ### What you get if you tag your URLs
+    | What you see | Which template to use |
+    | --- | --- |
+    | **Campaign groups** | Template A below |
+    | **Ad sets** | Template B below |
 
-    Tagging tells Cortana which campaign and which creative produced each click, so LinkedIn revenue splits out the same way Meta and Google revenue does, and you can compare creatives against each other.
+    <Warning>
+      **`{{CAMPAIGN_ID}}` appears in both naming schemes and means a different level in each.** Under the old naming it is an ad set. Under the new naming it is a campaign. This is why you have to check first rather than pick the template that looks right.
+    </Warning>
 
-    ## URL Template: LinkedIn Ads
-
-    Set this on the **destination URL** of each creative. Unlike Meta and Google, the values are typed in by hand, so paste the shape below and replace each bracketed piece with the real name or ID.
+    ## URL Template A: accounts that still show "Campaign groups"
 
     <Note>
       ```text wrap
-      utm_source=LinkedIn+Ads&utm_medium=[campaign name]&utm_campaign=[campaign group name]&utm_content=[creative name]&campaign_id=[campaign group id]&medium_id=[campaign id]&content_id=[creative id]
+      utm_source=LinkedIn&utm_campaign={{CAMPAIGN_GROUP_NAME}}&utm_medium={{CAMPAIGN_NAME}}&utm_content={{CREATIVE_NAME}}&campaign_id={{CAMPAIGN_GROUP_ID}}&medium_id={{CAMPAIGN_ID}}&content_id={{CREATIVE_ID}}
       ```
     </Note>
 
-    <Warning>
-      **LinkedIn's level names do not line up with everyone else's, so read this table before filling anything in.** LinkedIn's structure is Account → Campaign Group → Campaign → Creative. What LinkedIn calls a Campaign Group is what the rest of the industry calls a campaign, and what LinkedIn calls a Campaign is an ad set.
+    ## URL Template B: accounts that show "Ad sets"
 
-      | Cortana parameter | LinkedIn level | Same as on Meta |
-      | --- | --- | --- |
-      | `campaign_id` and `utm_campaign` | **Campaign Group** | Campaign |
-      | `medium_id` and `utm_medium` | **Campaign** | Ad set |
-      | `content_id` and `utm_content` | **Creative** | Ad |
+    <Note>
+      ```text wrap
+      utm_source=LinkedIn&utm_campaign={{CAMPAIGN_NAME}}&utm_medium={{AD_SET_NAME}}&utm_content={{AD_NAME}}&campaign_id={{CAMPAIGN_ID}}&medium_id={{AD_SET_ID}}&content_id={{AD_ID}}
+      ```
+    </Note>
 
-      Getting these the wrong way round does not error. It quietly files your ad set spend under campaigns and makes the whole report unreadable.
-    </Warning>
+    Both templates say the same thing. They send your campaign into Cortana's campaign slot, your ad set into the medium slot, and your individual ad into the content slot, so the Attribution Table can break LinkedIn down the same way it breaks down Meta and Google.
 
-    ### Where to find the IDs
+    | Cortana parameter | Holds | Old LinkedIn name | New LinkedIn name |
+    | --- | --- | --- | --- |
+    | `campaign_id` · `utm_campaign` | Your campaign | Campaign group | Campaign |
+    | `medium_id` · `utm_medium` | Your ad set | Campaign | Ad set |
+    | `content_id` · `utm_content` | Your individual ad | Creative | Ad |
 
-    The campaign group IDs are visible inside Cortana, which is the easiest place to read them. Open **Settings → Integrations → LinkedIn Ads**, find your ad account, and click the number in the **Campaigns** column. The **Select Campaigns** picker lists every campaign group with its ID underneath the name in small monospaced text. That ID is your `campaign_id`.
+    <Note>
+      `TODO: verify` before publishing. Both strings above are assembled from LinkedIn's own published token list and its rename table, and each piece is individually confirmed, but neither full string has yet been watched resolving in a live LinkedIn account. Test one migrated and one un-migrated account and confirm the landing URL carries real IDs rather than literal `{{...}}` text.
+    </Note>
 
-    Campaign and creative IDs come from LinkedIn Campaign Manager. `TODO: verify` the exact place LinkedIn surfaces campaign and creative IDs in the current Campaign Manager, and the exact name of the destination URL field on a creative, before publishing this section.
+    ## Step 2: Where to put it
 
-    ### Verifying your setup
+    Dynamic parameters are set at **account level** or **ad set level**, never on an individual ad. Setting them once at account level is the least work and covers everything underneath.
 
-    <Warning>
-      **The URL Params column does not check LinkedIn ads.** Cortana validates URL parameters for Meta, Google, Bing, and TikTok only. There is no LinkedIn template for it to compare against, so do not read the URL Params column as a verdict on your LinkedIn tagging either way. `TODO: verify` exactly what that column renders on a LinkedIn ad row.
-    </Warning>
+    - **Account level:** Campaign Manager → **Account settings** → **URL parameters**. LinkedIn describes this screen as *"Set account-level URL tracking parameters to apply for every ad set."*
+    - **Ad set level:** inside the ad set creation or edit flow, in the optional **URL tracking parameters** step, which sits just after **Select an ad format**.
 
-    Check your tagging the direct way instead:
-
-    1. Click one of your own LinkedIn ads.
-    2. Look at the address bar on the page you land on. You should see your parameters, and LinkedIn's own `li_fat_id` appended on the end.
-    3. Open **Ad Tracking** in Cortana and look for the visit under **LinkedIn Ads**, with your campaign and creative names filled in rather than blank.
-
-    <Warning>
-      **Never strip `li_fat_id`, and do not add it by hand.** LinkedIn appends it on its own. It is how Cortana recognises a paid LinkedIn click, and it is the one part of LinkedIn attribution that works whether or not you tag anything. Redirect chains are where it usually gets lost, so if you send LinkedIn traffic through a link shortener or a redirect, confirm the parameters survive to the final page.
-    </Warning>
+    Enter the template as a list of `key={{TOKEN}}` pairs. If your account gives you a single free-text box rather than one row per parameter, join them with `&` exactly as written above.
 
     <Tip>
-      **Tag the campaigns you actually want to compare, not all of them.** Because every value is typed by hand, tagging is slow and typos are silent. Start with the campaigns whose creatives you are actively testing. Everything untagged still reports correctly at the LinkedIn Ads level, so nothing is lost by leaving it for later.
+      Editing your tracking parameters does **not** send your ads back for review, so it is safe to fix tagging on live ads without interrupting delivery.
     </Tip>
+
+    ## Syntax rules that catch people out
+
+    - **The braces go around the value only**, never the key and never the whole pair. `campaign_id={{CAMPAIGN_ID}}` is right. `{{campaign_id=CAMPAIGN_ID}}` is wrong.
+    - **Two braces each side, and the token in capitals.** LinkedIn's rule is that the value must be in all capital letters with double curly brackets before and after it.
+    - **Hyphens are not allowed in a parameter key.** `campaign-id` is rejected; `campaign_id` is correct. Every key in the templates above is already valid.
+    - **Spaces in a value are written as `+`**, which is why `utm_source=LinkedIn+Ads` would be valid if you wanted a space in it.
+
+    <Warning>
+      **Remove any of these parameters that you have already hard-coded into your destination URL.** LinkedIn *adds* its parameters to whatever your URL already carries, and it does not deduplicate. If your landing page URL already ends in `?utm_source=linkedin` and you also set `utm_source` as a parameter, the served URL carries `utm_source` twice. LinkedIn's own guidance is that you must ensure your parameters are unique.
+    </Warning>
+
+    ## Limitations
+
+    - **Conversation Ads and Message Ads do not support dynamic parameters.** These are the only two formats LinkedIn documents as unsupported. LinkedIn does not publish a list of formats that *are* supported, so treat anything else as untested rather than guaranteed.
+    - **Lead Gen Form ads work differently.** A lead who fills in the form without ever reaching your site cannot carry anything in a landing page URL, because there is no page load. LinkedIn passes campaign detail on those through **hidden fields** on the form instead.
+    - **Dynamic parameters cannot be set on an individual ad**, only at account or ad set level. Plain static parameters can be set at ad level.
+
+    ## Verifying your setup
+
+    <Warning>
+      **The URL Params column does not check LinkedIn ads.** Cortana validates URL parameters for Meta, Google, Bing, and TikTok only, so do not read that column as a verdict on your LinkedIn tagging in either direction. `TODO: verify` what the column renders on a LinkedIn ad row.
+    </Warning>
+
+    Check it directly instead:
+
+    1. Click one of your own LinkedIn ads.
+    2. Look at the address bar on the page you land on. You should see real names and numbers, plus LinkedIn's own `li_fat_id` on the end. If you see the literal text `{{CAMPAIGN_ID}}` in the URL, the token is not resolving and you are almost certainly on the wrong template for your account's naming.
+    3. Open **Ad Tracking** in Cortana and confirm the visit appears under **LinkedIn Ads** with your campaign and ad names filled in rather than blank.
+
+    <Note>
+      **If you tag nothing at all, nothing breaks.** LinkedIn spend and LinkedIn's own reported conversions still sync, and clicks are still credited to **LinkedIn Ads** through `li_fat_id`. What you lose is the breakdown by campaign, ad set, and ad. An untagged ad shows up unattributed at those levels rather than being counted against the wrong campaign.
+    </Note>
+
+    <Warning>
+      **Never strip `li_fat_id`, and never add it by hand.** LinkedIn appends it itself. It is the one part of LinkedIn attribution that works whether or not you tag anything. Redirect chains and link shorteners are where it usually gets lost, so if you send LinkedIn traffic through either, confirm the parameters survive to the final page.
+    </Warning>
 
     <Note>
       Your Cortana tracking pixel must be on the landing page for any of this to work, tagged or not. See [**2) Setup Pixel**](/2-setup-pixel).
