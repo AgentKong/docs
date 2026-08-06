@@ -31,12 +31,52 @@ It’s quite simple—just find the tool you use and click the **Connect** but
 
 - **CRMs:** GoHighLevel, HubSpot, Salesforce.
 - **E-commerce & Courses:** Shopify, WooCommerce, Whop, Kajabi.
-- **Payments & Forms:** Stripe, Typeform, Tally Forms.
+- **Payments & Forms:** Stripe, PayPal, Typeform, Tally Forms.
 - **Scheduling:** Calendly, Cal.com.
 
 <Note>
   **Coming from Hyros?** We have a specific **Hyros Data Import** tool. Just click **Import** to perform a one-time transfer of all your historical data and performance history.
 </Note>
+
+### Connecting PayPal
+
+PayPal is the one payment integration that is not a single-click login. PayPal offers no self-serve login that grants permission to read your transactions, so instead you create a REST app inside your own PayPal account and paste its two keys into Cortana. It takes about three minutes.
+
+Click **Connect** on the **PayPal** card and the **Connect PayPal** dialog opens. It tells you what the keys are for: *"Paste your PayPal REST app credentials. Cortana uses them to read your transactions for revenue attribution."*
+
+<Steps>
+  <Step title="Open the PayPal Developer dashboard on Live">
+    Go to [developer.paypal.com](https://developer.paypal.com/dashboard/applications/live). Check that it says **Live**, not **Sandbox**. Credentials from a Sandbox app will connect, but they read test data and no real payment will ever appear.
+  </Step>
+
+  <Step title="Open your app, or create one">
+    Open an existing app, or click **Create App** and choose the type **Merchant**.
+  </Step>
+
+  <Step title="Tick Transaction Search, then Save">
+    In the app's list of features, tick **Transaction Search** and click **Save**. This step is required. It is the permission that lets Cortana read your transactions, and without it nothing at all imports.
+  </Step>
+
+  <Step title="Copy the Client ID and Secret into Cortana">
+    Copy the app's **Client ID** into the **Client ID** field, and its **Secret** into the **Secret** field. The secret is encrypted before it is stored and Cortana never displays it again.
+
+    Click **Connect PayPal**. On success you see **"PayPal connected"**, and importing of your payment history starts straight away.
+  </Step>
+</Steps>
+
+<Warning>
+  **If you see "PayPal connected, but a permission is missing"**, your keys are valid but **Transaction Search** is not on yet. Go back to the app, tick it, and save. PayPal can take **up to 9 hours** to activate the permission on an app that is already in use. You do not need to reconnect. The account sits in an **Enabling access** state and Cortana promotes it to **Connected** by itself once PayPal is ready.
+</Warning>
+
+<Tip>
+  **Use a read-only app if you can.** Cortana only ever reads your transactions. If the app you connect can also take payments, Cortana tells you so with *"These credentials can also take payments"*. It still works, but an app scoped to reading is the safer thing to hand over.
+</Tip>
+
+<Note>
+  **Payments taken inside PayPal are not instant.** Anything paid through a Cortana payment link appears in seconds. An invoice, a PayPal.me link, or a money request appears **20 minutes to 3 hours** later, because those never touch your REST app, and Cortana can only read them from PayPal's transaction reporting. That delay is PayPal's, and nothing is lost.
+</Note>
+
+Once PayPal is connected, wire it to a conversion in [**4.2) Conversion Sources**](/4-conversion-tracking) under **PayPal**.
 
 ## Setting Up Ad Tracking
 
@@ -46,12 +86,71 @@ Once you’ve connected your conversion sources, you’ll want to connect your m
 - **TikTok Ads**
 - **Google Ads**
 - **Bing Ads**
+- **LinkedIn Ads**
 - **Whop Ads**
 
 Connecting these allows us to send conversion data back to the platforms, helping your ads perform better at a lower cost.
 
 <Note>
   **Whop Ads** connects a little differently from the others. Instead of a login, you use a Whop **API key** and your **Company ID**. See the full setup steps in the [URL Parameters guide](/5) under the **Whop Ads** section.
+</Note>
+
+### Connecting LinkedIn Ads
+
+LinkedIn Ads connects with a normal login, but unlike Meta or Google it does not start pulling everything the moment you connect. You choose which ad accounts to sync, and optionally which campaigns inside them, before any data arrives. Nothing syncs until you save that choice.
+
+<Steps>
+  <Step title="Connect LinkedIn">
+    Click **Connect** on the **LinkedIn Ads** card. LinkedIn asks you to sign in and approve access. Cortana requests read-only access to your advertising reporting. It cannot create, edit, pause, or spend anything on your LinkedIn account.
+  </Step>
+
+  <Step title="Open the LinkedIn Ads settings">
+    After connecting, open the **LinkedIn Ads** panel from **Settings → Integrations**. It is titled **LinkedIn Ads** with the line *"Sync LinkedIn campaigns, spend & conversions for full attribution."*
+
+    You see a **LinkedIn Ads Accounts** table with the columns **Account Name**, **Account ID**, **Currency**, **Campaigns**, **Last Synced**, and **Status**. Every account starts as **Not Selected**.
+  </Step>
+
+  <Step title="Choose how far back to sync">
+    Use the dropdown at the top right of the table to pick a **Sync period**: **Last 7 days**, **Last 30 days**, **Last 3 months**, **Last 6 months**, or **Last 12 months**. The default is **Last 7 days**.
+
+    Pick the shortest range that covers the reporting you actually need. The longer ranges pull far more data from LinkedIn and can take several minutes to finish.
+  </Step>
+
+  <Step title="Tick the ad accounts you want">
+    Tick the checkbox beside each ad account to sync. Use the search box (placeholder **"Search accounts..."**) to find one by name or ID. The checkbox in the table header selects or clears only the accounts currently visible under your search, so a search does not silently deselect the rest.
+
+    An account showing a **No analytics access** badge means the LinkedIn user you connected does not have an analytics role on it. You can still tick it, but it will return no performance data.
+  </Step>
+
+  <Step title="Narrow to specific campaigns (optional)">
+    The **Campaigns** column shows how many campaigns LinkedIn holds on that account. Click that number to open the **Select Campaigns** picker, tick the ones you want, and click **Save selection**. There is a search box (**"Search campaigns..."**) plus **Select all** and **Clear** buttons.
+
+    A dash instead of a number means Cortana could not read the count from LinkedIn, not that the account has zero campaigns.
+
+    You must tick the account and save it before a campaign choice can be stored. Until you do, the picker says *"Tick this account and save it first. Then your campaign choice can be stored."*
+  </Step>
+
+  <Step title="Save Changes">
+    Click **Save Changes**. The button is greyed out until something actually changes, and reads **Saved** when there is nothing to save.
+
+    The first sync runs immediately rather than waiting for the hourly schedule. When it finishes you get a confirmation counting the campaigns, ad groups, ads, and insights that were synced. On the longer date ranges this can take several minutes, so leave the panel open.
+  </Step>
+</Steps>
+
+<Note>
+  **After the first sync, LinkedIn refreshes every hour.** There is no manual sync button. Saving your account selection is what forces an immediate refresh, so if you need fresh numbers right now, change the sync period or re-save.
+</Note>
+
+<Warning>
+  **LinkedIn connections expire and must be reconnected roughly once a year.** LinkedIn's permission lasts 365 days from when you first granted it and, unlike other platforms, it does not extend each time it renews. When it lapses the panel says **"Your LinkedIn connection has expired"** and *"LinkedIn is no longer accepting the saved connection. Reconnect LinkedIn Ads to see your accounts again. Your existing data is safe."* Reconnect and your history is untouched.
+</Warning>
+
+<Tip>
+  **An amber banner across the top of the account list means the list is not a live picture of LinkedIn.** Some accounts failed to load, or Cortana is showing the last known good copy. Click **Reload list** before saving. Saving from a stale list risks storing a selection based on accounts that are not really there.
+</Tip>
+
+<Note>
+  Connecting LinkedIn brings in spend and LinkedIn's own reported conversions. Tying LinkedIn clicks to the revenue **Cortana** tracks is a separate step, covered in [**5) URL Parameters**](/5) under **LinkedIn Ads**. Read that section before you judge your LinkedIn attribution, because the campaign and creative detail depends on it.
 </Note>
 
 ## What if my app isn't listed?
