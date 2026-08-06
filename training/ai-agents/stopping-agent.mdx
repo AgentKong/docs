@@ -34,7 +34,7 @@ There are situations where you need to stop an agent from continuing its convers
 
 ## How the Kill Command Works
 
-The kill command uses your agent's unique **Agent Trigger URL** with a simple modification. By appending "/kill" to the end of the standard trigger URL, you create a new endpoint that tells Agent Kong to stop the agent's current activities for the contact information sent in the webhook.
+The kill command uses your agent's unique **Agent Trigger URL** with a simple modification. By appending "/kill" to the end of the standard trigger URL, you create a new endpoint that tells Cortana to stop the agent's current activities for the contact information sent in the webhook.
 
 ## How to Create and Use the "Kill" Webhook
 
@@ -42,7 +42,7 @@ Follow these steps to set up an automation that can stop your agent. This exampl
 
 1. **Copy the Agent Trigger URL**: Navigate to your Agent Hub and copy the standard **Agent Trigger URL** for the agent you want to control.
 2. **Create the "Kill" URL**: Paste the URL into your automation platform's webhook action. Then, simply add "/kill" to the end of the URL.
-   - **Kill Command URL**: https://app.agentkong.ai/your-unique-agent-id**/kill**
+   - **Kill Command URL**: https://app.usecortana.ai/api/agent/your-unique-agent-id**/kill**
 3. **Set Up the Automation**: In your CRM or automation tool, create a new workflow that triggers on the event that should stop the agent.
    - **Trigger Example**: Customer Booked Appointment.
    - **Action**: Add a **Webhook** action.
@@ -52,7 +52,7 @@ Follow these steps to set up an automation that can stop your agent. This exampl
 
 ## Important Note: What the Kill Command Does
 
-When the /kill webhook is received for a specific contact, Agent Kong does the following:
+When the /kill webhook is received for a specific contact, Cortana does the following:
 
 - It immediately **stops** the agent from sending any further messages in its current workflow.
 - The command works across **all channels**, halting potential SMS, WhatsApp, and Email messages from that agent.
@@ -70,7 +70,7 @@ This functionality gives you precise control over your agent's lifecycle, ensuri
 
 ## Manually Removing an AI Agent from a Conversation
 
-While Agent Kong is designed for automation, there are times when manual intervention is necessary. Whether a lead has booked a call directly, or a situation requires a human touch, you have complete control to stop an agent's interaction with a contact. This can be done directly within the **Conversations** tab.
+While Cortana is designed for automation, there are times when manual intervention is necessary. Whether a lead has booked a call directly, or a situation requires a human touch, you have complete control to stop an agent's interaction with a contact. This can be done directly within the **Conversations** tab.
 
 ## How to Access the Agent Removal Options
 
@@ -132,11 +132,11 @@ Our system is designed to automatically push an **agent-off** tag into your sub-
 3. Click on the input field and type **agent-off**.
 4. Press **Enter** to add the tag.
 
-As soon as the tag is applied, the system will automatically turn off the AI agent for that specific contact. You can confirm this by checking the AI agent toggle at the top of the conversations page within AgentKong. It should now be in the "off" position.
+As soon as the tag is applied, the system will automatically turn off the AI agent for that specific contact. You can confirm this by checking the AI agent toggle at the top of the conversations page within Cortana. It should now be in the "off" position.
 
 ## How to Turn the AI Agent Back On
 
-To re-enable the AI agent for the contact, simply go back to the contact's profile and delete the **agent-off** tag. The system will recognize the change and reactivate the agent automatically. You can also toggle the AI Mode from within AgentKong's conversations page for that specific lead
+To re-enable the AI agent for the contact, simply go back to the contact's profile and delete the **agent-off** tag. The system will recognize the change and reactivate the agent automatically. You can also toggle the AI Mode from within Cortana's conversations page for that specific lead
 
 </Accordion>
 
