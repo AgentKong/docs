@@ -267,6 +267,81 @@ You can add URL parameters to your ads (videos below) or custom URL parameters i
     > **Coming from Hyros?** Leave your existing Microsoft Ads templates exactly as they are — Cortana reads the Hyros Bing parameters (`h_campaign_id`, `bng_id`, `h_ad_id`) natively, so your attribution keeps working without touching a thing. If you'd like cleaner data going forward, you can migrate to the Cortana templates above, but it is not required.
   </Accordion>
 
+  <Accordion title="LinkedIn Ads">
+    # Adding URL Parameters for LinkedIn Ads
+
+    LinkedIn works differently from every other platform on this page, and it is worth understanding why before you tag anything.
+
+    **Part of it is already done for you.** LinkedIn adds its own click identifier, `li_fat_id`, to ad clicks automatically. Cortana reads it, and any visitor who arrives with one is credited to **LinkedIn Ads**. You do not add it, and you should not remove it.
+
+    **The other part is not.** LinkedIn has no dynamic placeholders like Meta's `{{ad.id}}` or Google's `{campaignid}`, so there is no template Cortana can hand you that LinkedIn fills in at click time. That means `li_fat_id` alone tells Cortana the visit came **from LinkedIn**, but not **which campaign or which creative**. To get that, you tag your destination URLs yourself.
+
+    ### What you get with no setup at all
+
+    Connect LinkedIn Ads and leave every URL alone, and you still get:
+
+    - **LinkedIn Ads** appearing as a source in your Attribution Table, with the leads, sales, and revenue that came from it.
+    - LinkedIn's spend, plus LinkedIn's own reported conversions, synced hourly.
+
+    What you do **not** get is a breakdown of that revenue by campaign or by creative. Everything arrives under LinkedIn Ads as one line. For plenty of accounts running one or two campaigns, that is genuinely enough.
+
+    ### What you get if you tag your URLs
+
+    Tagging tells Cortana which campaign and which creative produced each click, so LinkedIn revenue splits out the same way Meta and Google revenue does, and you can compare creatives against each other.
+
+    ## URL Template: LinkedIn Ads
+
+    Set this on the **destination URL** of each creative. Unlike Meta and Google, the values are typed in by hand, so paste the shape below and replace each bracketed piece with the real name or ID.
+
+    <Note>
+      ```text wrap
+      utm_source=LinkedIn+Ads&utm_medium=[campaign name]&utm_campaign=[campaign group name]&utm_content=[creative name]&campaign_id=[campaign group id]&medium_id=[campaign id]&content_id=[creative id]
+      ```
+    </Note>
+
+    <Warning>
+      **LinkedIn's level names do not line up with everyone else's, so read this table before filling anything in.** LinkedIn's structure is Account → Campaign Group → Campaign → Creative. What LinkedIn calls a Campaign Group is what the rest of the industry calls a campaign, and what LinkedIn calls a Campaign is an ad set.
+
+      | Cortana parameter | LinkedIn level | Same as on Meta |
+      | --- | --- | --- |
+      | `campaign_id` and `utm_campaign` | **Campaign Group** | Campaign |
+      | `medium_id` and `utm_medium` | **Campaign** | Ad set |
+      | `content_id` and `utm_content` | **Creative** | Ad |
+
+      Getting these the wrong way round does not error. It quietly files your ad set spend under campaigns and makes the whole report unreadable.
+    </Warning>
+
+    ### Where to find the IDs
+
+    The campaign group IDs are visible inside Cortana, which is the easiest place to read them. Open **Settings → Integrations → LinkedIn Ads**, find your ad account, and click the number in the **Campaigns** column. The **Select Campaigns** picker lists every campaign group with its ID underneath the name in small monospaced text. That ID is your `campaign_id`.
+
+    Campaign and creative IDs come from LinkedIn Campaign Manager. `TODO: verify` the exact place LinkedIn surfaces campaign and creative IDs in the current Campaign Manager, and the exact name of the destination URL field on a creative, before publishing this section.
+
+    ### Verifying your setup
+
+    <Warning>
+      **The URL Params column does not check LinkedIn ads.** Cortana validates URL parameters for Meta, Google, Bing, and TikTok only. There is no LinkedIn template for it to compare against, so do not read the URL Params column as a verdict on your LinkedIn tagging either way. `TODO: verify` exactly what that column renders on a LinkedIn ad row.
+    </Warning>
+
+    Check your tagging the direct way instead:
+
+    1. Click one of your own LinkedIn ads.
+    2. Look at the address bar on the page you land on. You should see your parameters, and LinkedIn's own `li_fat_id` appended on the end.
+    3. Open **Ad Tracking** in Cortana and look for the visit under **LinkedIn Ads**, with your campaign and creative names filled in rather than blank.
+
+    <Warning>
+      **Never strip `li_fat_id`, and do not add it by hand.** LinkedIn appends it on its own. It is how Cortana recognises a paid LinkedIn click, and it is the one part of LinkedIn attribution that works whether or not you tag anything. Redirect chains are where it usually gets lost, so if you send LinkedIn traffic through a link shortener or a redirect, confirm the parameters survive to the final page.
+    </Warning>
+
+    <Tip>
+      **Tag the campaigns you actually want to compare, not all of them.** Because every value is typed by hand, tagging is slow and typos are silent. Start with the campaigns whose creatives you are actively testing. Everything untagged still reports correctly at the LinkedIn Ads level, so nothing is lost by leaving it for later.
+    </Tip>
+
+    <Note>
+      Your Cortana tracking pixel must be on the landing page for any of this to work, tagged or not. See [**2) Setup Pixel**](/2-setup-pixel).
+    </Note>
+  </Accordion>
+
   <Accordion title="Whop Ads">
     # Setting Up Whop Ads
 

@@ -1,6 +1,6 @@
 ---
 title: "4.2) Conversion Sources"
-description: "Add conversion sources to track sales and leads in Cortana. Connect Stripe, Shopify, Kajabi, GoHighLevel, Meta Ads, Calendly, webhooks, pixels, CSV and 15 other source types to any conversion."
+description: "Add conversion sources to track sales and leads in Cortana. Connect Stripe, PayPal, Shopify, Kajabi, GoHighLevel, Meta Ads, Calendly, webhooks, pixels, CSV and 14 other source types to any conversion."
 ---
 
 ## <u>Conversion Sources</u>
@@ -13,11 +13,11 @@ Sources live at **Tracking → Conversion Setup**. You open (or create) a conver
 
 ### Available vs locked sources
 
-The **Integration** dropdown lists all 23 source types. Four are always available because they do not depend on an outside tool:
+The **Integration** dropdown lists all 24 source types. Four are always available because they do not depend on an outside tool:
 
 **Forms / Appointments** · **Webhook** · **CSV Upload** · **Pixel**
 
-The other 19 require their integration to be connected to this business first. Until it is connected, the entry is greyed out with a **padlock icon** and sorts to the bottom of the list. Clicking a locked entry does not select it. It shows an error toast such as `Please connect Stripe first. Go to Settings → Integrations to connect.`
+The other 20 require their integration to be connected to this business first. Until it is connected, the entry is greyed out with a **padlock icon** and sorts to the bottom of the list. Clicking a locked entry does not select it. It shows an error toast such as `Please connect Stripe first. Go to Settings → Integrations to connect.`
 
 The dropdown sorts **available sources A-Z first, then locked sources A-Z**. So on a business with everything connected, the whole list is simply A-Z. The accordions below follow that same A-Z order.
 
@@ -88,7 +88,7 @@ Every source is added the same way. Follow these six steps, then open your sourc
     <Frame caption="The Integration dropdown. Connected sources sort A-Z at the top; locked ones sort A-Z below with a padlock.">
       <img
         src="/images/ad-tracking/conversion-sources/shared/03-integration-picker.png"
-        alt="The open Integration dropdown in the Create Conversion Source dialog, listing all 22 conversion sources with the connected ones alphabetically first and the not-yet-connected ones greyed out with a padlock icon below them."
+        alt="The open Integration dropdown in the Create Conversion Source dialog, listing the conversion sources with the connected ones alphabetically first and the not-yet-connected ones greyed out with a padlock icon below them."
       />
     </Frame>
   </Step>
@@ -865,6 +865,63 @@ Every source is added the same way. Follow these six steps, then open your sourc
     </Warning>
   </Accordion>
 
+  <Accordion title="PayPal">
+    **What it tracks:** payments, subscription payments, and refunds taken through a connected PayPal business account. Every PayPal event carries revenue.
+
+    **Refunds:** tracked automatically. You do not add a refund source. Cortana matches the refund to the original sale and files it in a companion refunds conversion named after it. See [Refunds](#refunds).
+
+    **Prerequisite integration:** PayPal. If no PayPal account is connected, picking it shows the toast `Please connect PayPal first. Go to Settings → Integrations to connect.` and the form shows *"Please connect PayPal in Settings → Integrations first."*
+
+    <Steps>
+      <Step title="Pick the PayPal Account">
+        **PayPal Account** (required). The placeholder is **"Select a PayPal account"**. Each entry shows the account name, falling back to the account email. An account that is not connected in live mode carries a **Sandbox** badge.
+
+        While the list is loading you see **"Checking PayPal connection..."**.
+      </Step>
+
+      <Step title="Pick the PayPal Event">
+        **PayPal Event** (required). The dropdown only appears once an account is selected. The placeholder is **"Select PayPal event"**. Each option shows a category badge, and hovering a row shows its description on the right.
+
+        | Event | Category | What it means |
+        | --- | --- | --- |
+        | **Payment Captured** | payments | Money captured for a completed payment |
+        | **First PayPal Purchase** | payments | A customer's first payment we've seen (returning buyers excluded) |
+        | **Subscription Payment** | subscriptions | A recurring subscription payment was received |
+        | **Payment Refunded** | refunds | A captured payment was refunded (negative revenue) |
+
+        Once you pick one, a summary panel below the dropdown repeats the event label and its description.
+      </Step>
+
+      <Step title="Add Payment Filters if you need them">
+        Optional qualification rules, for example only counting payments over a minimum amount. PayPal supports rules on **Payment Amount**, **Currency**, **Customer Email**, and **Product Name**. See **Payment Filters** in the settings reference below.
+      </Step>
+
+      <Step title="Save">
+        Click **Submit**.
+      </Step>
+    </Steps>
+
+    <Note>
+      **When these conversions appear.** Payments taken through a Cortana payment link arrive in seconds. Invoices and anything else paid inside PayPal take **20 minutes to 3 hours**. That is PayPal's own reporting delay, not a problem with your source. The conversion still imports on its own, so there is no need to re-send or reconnect.
+    </Note>
+
+    <Warning>
+      Do not put **Payment Captured** and **First PayPal Purchase** on the same conversion. The first is every payment, the second is only a customer's first, and together they double-count new customers. Use **First PayPal Purchase** for a "New Customers" conversion and **Payment Captured** for total revenue.
+    </Warning>
+
+    <Warning>
+      **First PayPal Purchase counts one too many rather than one too few.** Cortana shows a warning beside this event in the picker, and it is worth reading. PayPal does not reliably let us check a buyer's earlier purchases by email, so this event means the first payment **Cortana has seen**. Someone who bought from you before, through a different processor or before you connected PayPal, can still be counted as new. Treat it as a close approximation of new customers, not an exact count.
+    </Warning>
+
+    <Tip>
+      **One-off payments and subscription payments are two different events.** **Payment Captured** does not include recurring subscription charges, and **Subscription Payment** does not include one-off purchases. If you sell both and want one revenue figure, add both as sources on the same conversion. They cannot double-count each other, because a given PayPal payment is only ever one kind or the other.
+    </Tip>
+
+    <Tip>
+      **PayPal has no product filter.** Unlike Stripe, PayPal's events carry no product information Cortana can filter on, so there is no product picker on this form. To isolate one offer, use a **Payment Filter** on **Product Name** or **Payment Amount** instead.
+    </Tip>
+  </Accordion>
+
   <Accordion title="Pixel">
     **What it tracks:** a conversion fired directly from a page on your own website. Use it when there is no integration to connect, for example a custom thank-you page or a qualified-lead redirect.
 
@@ -1403,6 +1460,7 @@ Two things happen, and the difference matters.
   </thead>
   <tbody>
     <tr><td>**Stripe**</td><td>Yes</td><td>A refund on any charge, including subscriptions</td></tr>
+    <tr><td>**PayPal**</td><td>Yes</td><td>A refund on a captured payment, full or partial</td></tr>
     <tr><td>**Shopify**</td><td>Yes</td><td>A refund on an order, full or partial</td></tr>
     <tr><td>**WooCommerce**</td><td>Yes</td><td>A refund recorded against an order</td></tr>
     <tr><td>**Whop**</td><td>Yes</td><td>A completed refund on a payment</td></tr>
@@ -1415,7 +1473,7 @@ Two things happen, and the difference matters.
   </tbody>
 </table>
 
-For the six that say yes, you do not need a separate refund source. Cortana matches the refund to the original sale and files it against whatever conversion that sale landed in.
+For the seven that say yes, you do not need a separate refund source. Cortana matches the refund to the original sale and files it against whatever conversion that sale landed in.
 
 ### Sources that do not track refunds automatically
 
@@ -1475,7 +1533,7 @@ These settings appear on more than one source. Where a source uses one, its acco
 ### Revenue tracking
 
 - **What it does:** attaches money to the conversion. Appears as **Track revenue from opportunity** (GoHighLevel, Close.io), **Track revenue from deal** (HubSpot), **Track revenue (capture order value & currency)** (body pixel), or a revenue field picker (Salesforce).
-- **Default:** off for GoHighLevel, Close.io, HubSpot, and the body pixel. Payment sources like Stripe, Whop, Shopify, WooCommerce, Shopier, and Fanbasis always carry revenue.
+- **Default:** off for GoHighLevel, Close.io, HubSpot, and the body pixel. Payment sources like Stripe, PayPal, Whop, Shopify, WooCommerce, Shopier, and Fanbasis always carry revenue.
 - **Recommendation:** on for anything that represents money changing hands, off for leads and bookings.
 - **Caveat:** CRM opportunity values are one-time cash collected, not recurring revenue. For subscription revenue use Stripe or Whop as the source of truth.
 
@@ -1491,12 +1549,12 @@ These settings appear on more than one source. Where a source uses one, its acco
 - **What it does:** restricts a payment source to specific products.
 - **Default:** empty, which means **all products, including ones you create later**.
 - **Recommendation:** leave it empty unless you genuinely need to isolate a product. An empty filter is future-proof.
-- **Caveat:** once you select specific products, new products are **not** picked up automatically. You have to come back and add them.
+- **Caveat:** once you select specific products, new products are **not** picked up automatically. You have to come back and add them. PayPal has no product filter at all, because its events carry no product information to filter on. Use a **Payment Filter** on **Product Name** instead.
 
 ### Payment Filters (qualification rules)
 
-- **What it does:** only counts a payment when it matches your rules. Available on Stripe, Whop, and Fanbasis. The section explains itself in the dialog: *"Only count payments matching these rules, e.g. only payments of $100 or more. Filtered payments are still recorded and count toward LTV, but won't create this conversion event or be sent to ad platforms."*
-- **Fields you can build rules on:** **Payment Amount** (number), **Currency**, **Customer Email**, **Product Name**, and **Billing Reason**.
+- **What it does:** only counts a payment when it matches your rules. Available on Stripe, PayPal, Whop, and Fanbasis. The section explains itself in the dialog: *"Only count payments matching these rules, e.g. only payments of $100 or more. Filtered payments are still recorded and count toward LTV, but won't create this conversion event or be sent to ad platforms."*
+- **Fields you can build rules on:** **Payment Amount** (number), **Currency**, **Customer Email**, **Product Name**, and **Billing Reason**. PayPal offers the first four; it has no **Billing Reason** field.
 - **Options:** an **Enable Payment Filter** toggle (*"Only matching payments will create conversions"*), and a **Payment must match** selector offering **ALL rules** (AND) or **ANY rule** (OR).
 - **Default:** disabled.
 - **Recommendation:** the most useful rule by far is a minimum **Payment Amount**, to exclude small test charges or trial authorisations from a revenue conversion.
@@ -1551,8 +1609,11 @@ These settings appear on more than one source. Where a source uses one, its acco
   | Salesforce | Every 5 minutes |
   | Cal.com | Every 15 minutes |
   | Shopier | Every few minutes |
+  | PayPal, for payments taken inside PayPal | Every 5 minutes, but see the caveat below |
 
   Do not conclude a source is broken until at least one full poll cycle has passed.
+
+  **PayPal is the one that surprises people.** It is both. A payment taken through a Cortana payment link fires a webhook and lands in seconds. Anything else paid inside PayPal, such as an invoice, a PayPal.me link, or a money request, never touches the app your credentials belong to, so no webhook exists for it. Cortana can only read it from PayPal's transaction reporting, and PayPal itself publishes that record **20 minutes to 3 hours** after the payment. Cortana checks every 5 minutes, so the wait you see is PayPal's, not ours.
 </Note>
 
 <Warning>
@@ -1611,7 +1672,26 @@ These settings appear on more than one source. Where a source uses one, its acco
     5. **WooCommerce specifically**: check your **Count orders with status** selection actually includes the status your gateway uses.
     6. **HubSpot Custom Field Updated specifically**: this needs the property subscribed to Cortana's HubSpot app `contact.propertyChange` events. Contact support to add the subscription.
     7. **Manually-connected Shopify**: the webhook must be created in your Shopify admin using the URL and secret shown in the setup card. Save stays gated until a test event arrives.
-    8. **Reconnect the integration.** Expired tokens frequently fail quietly. Calendly refresh tokens in particular are single-use.
+    8. **PayPal specifically**: give it 3 hours before treating it as broken, and check the account's status badge at **Settings → Integrations → PayPal Accounts**. See the two PayPal entries below.
+    9. **Reconnect the integration.** Expired tokens frequently fail quietly. Calendly refresh tokens in particular are single-use.
+  </Accordion>
+
+  <Accordion title="My PayPal account says Enabling access, and nothing is importing">
+    Your credentials are valid, but the PayPal app they belong to does not yet grant **Transaction Search**. That is the permission Cortana reads your transactions through, so until it is on, nothing imports.
+
+    You will have seen this at connect time: *"PayPal connected, but a permission is missing"*, with the detail *"Cortana cannot read your transactions until you enable 'Transaction Search' in your PayPal app (Live). Enable it and importing starts automatically. It can take up to 9 hours to activate."*
+
+    **Fix:** open the [PayPal Developer dashboard](https://developer.paypal.com/dashboard/applications/live), make sure you are on **Live** and not **Sandbox**, open the app whose Client ID you gave Cortana, tick **Transaction Search**, and click **Save**.
+
+    **Then wait.** PayPal can take up to 9 hours to activate the permission on an app that is already in use. You do not need to reconnect or do anything else. Cortana re-checks on a schedule and promotes the account to **Connected** by itself, and importing starts from there.
+  </Accordion>
+
+  <Accordion title="My PayPal conversion took hours to appear">
+    This is expected for any payment not taken through a Cortana payment link, and nothing is lost.
+
+    Payments through a Cortana payment link run through the PayPal app your credentials belong to, so they fire a webhook and land in seconds. An invoice, a PayPal.me link, or a money request paid inside PayPal never touches that app, so no webhook exists. Cortana can only see it through PayPal's transaction reporting, and PayPal publishes that record **20 minutes to 3 hours** after the payment happens.
+
+    **Do not** re-send the payment or reconnect the account. Both make duplicates more likely and neither speeds PayPal up. The conversion imports on its own.
   </Accordion>
 
   <Accordion title="I am seeing duplicate or inflated conversions">
@@ -1644,8 +1724,20 @@ These settings appear on more than one source. Where a source uses one, its acco
     Connect Stripe at **Settings → Integrations**, then open your revenue conversion, click **Add Source**, pick **Stripe**, choose your **Stripe Account**, and pick a **Stripe Event**. For total revenue use **Payment Succeeded**; for new customers only use **First Stripe Purchase**. Optionally filter to specific products or add a minimum amount under **Payment Filters**, then click **Submit**.
   </Accordion>
 
+  <Accordion title="How do I track PayPal payments?">
+    Connect PayPal at **Settings → Integrations**, then open your revenue conversion, click **Add Source**, pick **PayPal**, choose your **PayPal Account**, and pick a **PayPal Event**. For total revenue use **Payment Captured**; for new customers only use **First PayPal Purchase**; for recurring billing use **Subscription Payment**. Optionally add a minimum amount under **Payment Filters**, then click **Submit**.
+
+    Two things differ from Stripe and are worth knowing before you start. There is **no product filter** on PayPal, so isolate an offer with a Payment Filter on **Product Name** or **Payment Amount** instead. And payments taken inside PayPal rather than through a Cortana payment link appear **20 minutes to 3 hours** later, which is PayPal's own reporting delay.
+  </Accordion>
+
+  <Accordion title="Should I use Stripe or PayPal as my revenue source?">
+    Both, if you take money through both. Add a Stripe source and a PayPal source to the same **Purchase** conversion and your revenue totals will be right.
+
+    There is no double-counting risk in doing this. Any given payment goes through one processor or the other, never both, so each sale is only ever seen once. The mistake to avoid is not connecting both, it is leaving one of them out and then wondering why your reported revenue is lower than your bank balance.
+  </Accordion>
+
   <Accordion title="Why is Whop locked?">
-    Whop, like the other 17 integration-backed sources, stays greyed out with a padlock until Whop is connected to this business. Connect it at **Dashboard → Integrations** and the entry unlocks and moves up into the A-Z list. This is the same reason any source shows a padlock.
+    Whop, like the other 19 integration-backed sources, stays greyed out with a padlock until Whop is connected to this business. Connect it at **Dashboard → Integrations** and the entry unlocks and moves up into the A-Z list. This is the same reason any source shows a padlock.
   </Accordion>
 
   <Accordion title="Can one conversion have two sources?">
