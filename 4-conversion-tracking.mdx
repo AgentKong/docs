@@ -783,7 +783,24 @@ Every source is added the same way. Follow these six steps, then open your sourc
     </Warning>
 
     <Note>
-      **Want Kajabi sales in New Deals Closed too?** That is a deliberate setup step, not something connecting does for you. Talk to support and we will wire the extra source to match how your business defines a new sale.
+      **Want Kajabi sales in New Deals Closed too?** That is a deliberate step, and you can do it yourself. Open the conversion, click **Add Source**, pick **Kajabi**, and choose **Purchase** under *When to track*. Cortana registers the extra site-wide webhook in Kajabi for you — still every offer, still nothing per offer.
+
+      <Frame caption="Kajabi in the Add Source list. It stays locked with a padlock until the integration is connected.">
+        <img src="/images/ad-tracking/conversion-sources/kajabi/06-add-source-dropdown.png" alt="Create Conversion Source dialog with the Integration dropdown open, showing Kajabi listed alphabetically between iClosed and Meta Ads with a padlock icon indicating it is not yet connected." />
+      </Frame>
+
+      The four events you can pick:
+
+      | Event | Use it for |
+      | --- | --- |
+      | **Purchase** | A one-time offer bought, a subscription starting, or a payment plan starting. This is the one for New Deals Closed |
+      | **Payment Succeeded** | Every successful charge including rebills. Already wired to All Payments (LTV) when you connected |
+      | **Order Created** | A cart order. Only add this if you are **not** also tracking Purchase on a revenue conversion |
+      | **Form Submission** | Any Kajabi form submitted. Use it for Lead |
+
+      <Warning>
+        Do not put **Purchase** and **Order Created** on revenue conversions at the same time. Kajabi fires both for a single cart checkout, so you would count that sale twice. The dialog warns you inline when you pick one of them.
+      </Warning>
     </Note>
 
     ### Checkout email capture (why this works when other tools miss it)
