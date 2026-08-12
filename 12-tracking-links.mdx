@@ -7,7 +7,7 @@ description: "Create tracking links in Cortana so a booking or purchase made on 
 
 A tracking link is a short link that knows who you sent it to.
 
-You save a destination once, for example your booking page, then drop it into any conversation. Cortana mints a **separate link for each contact**, so when someone clicks it, Cortana knows exactly which person clicked. A booking made on that page then attaches to the right contact instead of arriving as an anonymous lead, as long as the page carries your pixel.
+You save a destination once, for example your booking page, then drop it into any conversation. Cortana creates a **separate link for each contact**, so when someone clicks it, Cortana knows exactly which person clicked. A booking made on that page then attaches to the right contact instead of arriving as an anonymous lead, as long as the page carries your pixel.
 
 This solves a specific problem. An Instagram DM carries no email address and no phone number, so when that person books a call on your scheduling page, nothing connects the booking back to the DM. A tracking link supplies the missing identity.
 
@@ -33,11 +33,11 @@ You will find it in **Settings → Tracking Links**.
 
 <Steps>
   <Step title="Open Settings and go to the Tracking Links tab">
-    In your business, open **Settings** and select the **Tracking Links** tab. You can jump straight there with `?tab=tracking-links` on your settings URL.
+    In your business, open **Settings**. **Tracking Links** is the last tab along the top, just after **Tracking Domain**.
 
     The heading reads **Tracking Links**, above the line *"Save a destination once, then send it from any conversation. Every contact gets their own link, so you can see exactly who clicked, even from an Instagram DM."*
 
-    Underneath, a line tells you which host your links are served from. If it says **"Connect your own domain for better deliverability and link previews"**, you have no verified domain yet and links will use Cortana's shared shortener.
+    Underneath, a line tells you which web address your links use. If it says **"Connect your own domain for better deliverability and link previews"**, you have no verified domain yet and links will use Cortana's shared shortener.
   </Step>
 
   <Step title="Create your first tracking link">
@@ -45,9 +45,9 @@ You will find it in **Settings → Tracking Links**.
 
     Click **New tracking link**. The **New tracking link** dialog opens, described as *"Save a destination once, then drop it into any conversation. Each contact gets their own trackable link."*
 
-    <Frame caption="Settings, Tracking Links. Each preset shows how many links went out and how many were clicked.">
-      <img className="block dark:hidden" src="/images/settings/tracking-links/tl-01-tab.png" alt="The Tracking Links settings tab with the New tracking link button and the presets table highlighted. The table lists Name, Destination, Sent and Clicks columns with three saved presets." />
-      <img className="hidden dark:block" src="/images/settings/tracking-links/tl-01-tab-dark.png" alt="The Tracking Links settings tab with the New tracking link button and the presets table highlighted. The table lists Name, Destination, Sent and Clicks columns with three saved presets." />
+    <Frame caption="Settings, Tracking Links. Each row shows how many links went out and how many were clicked.">
+      <img className="block dark:hidden" src="/images/settings/tracking-links/tl-01-tab.png" alt="The Tracking Links settings tab with the New tracking link button and the links table highlighted. The table lists Name, Destination, Sent and Clicks columns with three saved links." />
+      <img className="hidden dark:block" src="/images/settings/tracking-links/tl-01-tab-dark.png" alt="The Tracking Links settings tab with the New tracking link button and the links table highlighted. The table lists Name, Destination, Sent and Clicks columns with three saved links." />
     </Frame>
 
   </Step>
@@ -59,13 +59,13 @@ You will find it in **Settings → Tracking Links**.
   </Step>
 
   <Step title="Paste the destination URL">
-    Put the real page you want people to land on into **Destination URL**, for example your scheduling page. The placeholder shows `https://calendly.com/your-team/intro`.
+    Put the page you want people to land on into **Destination URL**, for example your booking page.
 
-    It must start with `http://` or `https://`. If it does not, saving fails with **"The destination must start with http:// or https://"**.
+    Paste the full web address, the one you get by copying it out of your browser's address bar. It needs to start with `https://`. If you type just the domain on its own, saving stops with **"The destination must start with http:// or https://"**.
   </Step>
 
   <Step title="Check the link domain">
-    The **Link domain** row shows which host will serve this link. What it offers depends on how many verified tracking domains you have:
+    The **Link domain** row shows which web address your link will use. What it offers depends on how many verified tracking domains you have:
 
     | Verified domains | What you see |
     | --- | --- |
@@ -86,7 +86,7 @@ You will find it in **Settings → Tracking Links**.
   <Step title="Save it">
     Click **Create link**. A confirmation reads **"Tracking link created"** and the link appears in the table.
 
-    The table lists **Name**, **Destination**, **Sent** and **Clicks**. **Sent** counts how many individual links have been minted from this preset, and **Clicks** counts how many were clicked. Both start at zero.
+    The table lists **Name**, **Destination**, **Sent** and **Clicks**. **Sent** counts how many individual links have gone out from this row, and **Clicks** counts how many were clicked. Both start at zero.
   </Step>
 
   <Step title="Send one from a conversation">
@@ -94,11 +94,11 @@ You will find it in **Settings → Tracking Links**.
 
     A search box appears reading **Search tracking links...**, with your saved links underneath. Search matches both the name and the destination, so typing `calendly` finds a link named **Intro call**.
 
-    Click the one you want. Cortana mints a link for that specific contact and drops the real URL straight into your message box, where you can read it before you send. Add your own wording around it and send as normal.
+    Click the one you want. Cortana creates a link for that specific contact and drops the real URL straight into your message box, where you can read it before you send. Add your own wording around it and send as normal.
 
     <Frame caption="The tracking-link picker in the composer, with its search field.">
-      <img className="block dark:hidden" src="/images/integrations/instagram-messenger-dms/dm-06-composer-picker.png" alt="The message composer with the tracking link picker open, showing a highlighted search field reading Search tracking links and a list of saved presets with their destinations underneath." />
-      <img className="hidden dark:block" src="/images/integrations/instagram-messenger-dms/dm-06-composer-picker-dark.png" alt="The message composer with the tracking link picker open, showing a highlighted search field reading Search tracking links and a list of saved presets with their destinations underneath." />
+      <img className="block dark:hidden" src="/images/integrations/instagram-messenger-dms/dm-06-composer-picker.png" alt="The message composer with the tracking link picker open, showing a highlighted search field reading Search tracking links and a list of saved links with their destinations underneath." />
+      <img className="hidden dark:block" src="/images/integrations/instagram-messenger-dms/dm-06-composer-picker-dark.png" alt="The message composer with the tracking link picker open, showing a highlighted search field reading Search tracking links and a list of saved links with their destinations underneath." />
     </Frame>
   </Step>
 </Steps>
@@ -109,11 +109,11 @@ You will find it in **Settings → Tracking Links**.
 
 ## Why a branded domain matters
 
-Links inside an Instagram DM are judged harshly. A generic shortener host looks like spam to the person receiving it, and to the platform carrying it. A link on your own domain looks like you.
+Links inside an Instagram DM are judged harshly. A generic shortening address looks like spam to the person receiving it, and to the platform carrying it. A link on your own domain looks like you.
 
 That is why the tab nudges you toward connecting a domain. If you send links inside DMs, this is worth doing before you send at volume.
 
-Links already sent keep working from whatever host they were sent on. Verifying a domain later changes new links only, and never breaks one already in someone's inbox.
+Links already sent keep working from whatever address they were sent on. Verifying a domain later changes new links only, and never breaks one already in someone's inbox.
 
 ## Sub-features
 
@@ -127,27 +127,27 @@ Links already sent keep working from whatever host they were sent on. Verifying 
     </Frame>
 
     <Warning>
-      Changing the destination does **not** redirect links you already sent. Each minted link stores its own copy of the destination, so links already in someone's inbox keep going to the old address. Only links minted after the change use the new one.
+      Changing the destination does **not** redirect links you already sent. Every link you have already sent keeps the destination it had when you sent it, so anything sitting in someone's inbox still goes to the old address. Only links you send after the change use the new one.
 
-      The dialog warns you about this as soon as you edit the destination, and tells you how many links already went out from that preset. If you need everyone to land somewhere new, archive this preset and create a new one.
+      The dialog warns you about this as soon as you edit the destination, and tells you how many links have already gone out from it. If you need everyone to land somewhere new, archive this one and create a new link.
     </Warning>
   </Accordion>
 
   <Accordion title="Archiving and restoring">
-    Presets are archived, never deleted. Open the **⋮** menu and choose **Archive**, then confirm in the **Archive this tracking link?** dialog.
+    Saved links are archived, never deleted. Open the **⋮** menu and choose **Archive**, then confirm in the **Archive this tracking link?** dialog.
 
-    **Links you already sent keep working and keep counting clicks.** Archiving only removes the preset from the picker your team sees in conversations, so nobody sends it by mistake. Nothing in anybody's inbox breaks.
+    **Links you already sent keep working and keep counting clicks.** Archiving only takes it out of the picker your team sees in conversations, so nobody sends it by mistake. Nothing in anybody's inbox breaks.
 
-    To bring one back, turn on **Show archived** in the top right, find the row marked **Archived**, then **⋮ → Restore**. A restored preset goes to the **end** of the list, because its old position stopped meaning anything while it was hidden.
+    To bring one back, turn on **Show archived** in the top right, find the row marked **Archived**, then **⋮ → Restore**. A restored link goes to the **end** of the list, because its old position stopped meaning anything while it was hidden.
 
     <Frame caption="The archive confirmation. It states plainly that links already sent keep working.">
-      <img className="block dark:hidden" src="/images/settings/tracking-links/tl-04-archive-confirm.png" alt="The Archive this tracking link dialog explaining that links already sent keep working and keep counting clicks, and that archiving only removes the preset from the picker in conversations." />
-      <img className="hidden dark:block" src="/images/settings/tracking-links/tl-04-archive-confirm-dark.png" alt="The Archive this tracking link dialog explaining that links already sent keep working and keep counting clicks, and that archiving only removes the preset from the picker in conversations." />
+      <img className="block dark:hidden" src="/images/settings/tracking-links/tl-04-archive-confirm.png" alt="The Archive this tracking link dialog explaining that links already sent keep working and keep counting clicks, and that archiving only takes it out of the picker in conversations." />
+      <img className="hidden dark:block" src="/images/settings/tracking-links/tl-04-archive-confirm-dark.png" alt="The Archive this tracking link dialog explaining that links already sent keep working and keep counting clicks, and that archiving only takes it out of the picker in conversations." />
     </Frame>
 
-    <Frame caption="Show archived turned on. Archived presets carry an Archived badge.">
-      <img className="block dark:hidden" src="/images/settings/tracking-links/tl-05-show-archived.png" alt="The Tracking Links table with the Show archived toggle switched on, showing an archived preset marked with an Archived badge." />
-      <img className="hidden dark:block" src="/images/settings/tracking-links/tl-05-show-archived-dark.png" alt="The Tracking Links table with the Show archived toggle switched on, showing an archived preset marked with an Archived badge." />
+    <Frame caption="Show archived turned on. Archived links carry an Archived badge.">
+      <img className="block dark:hidden" src="/images/settings/tracking-links/tl-05-show-archived.png" alt="The Tracking Links table with the Show archived toggle switched on, showing an archived link marked with an Archived badge." />
+      <img className="hidden dark:block" src="/images/settings/tracking-links/tl-05-show-archived-dark.png" alt="The Tracking Links table with the Show archived toggle switched on, showing an archived link marked with an Archived badge." />
     </Frame>
   </Accordion>
 
@@ -177,7 +177,7 @@ Links already sent keep working from whatever host they were sent on. Verifying 
   <Accordion title="Creating a link without leaving the conversation">
     If the link you need does not exist yet, you do not have to go to Settings. In the composer picker, click **New tracking link** at the bottom.
 
-    Fill in **Name** and **Destination URL**, then click **Save and insert**. Cortana saves the preset for everyone, mints a link for the contact you are talking to, and drops it into your message in one go.
+    Fill in **Name** and **Destination URL**, then click **Save and insert**. Cortana saves the link for your whole team, creates a link for the contact you are talking to, and drops it into your message in one go.
 
     **Manage all links**, the settings icon beside it, opens the full **Tracking Links** tab.
 
@@ -202,18 +202,18 @@ Links already sent keep working from whatever host they were sent on. Verifying 
 | --- | --- | --- | --- | --- |
 | **Name** | What your team sees in the composer picker. | Empty, placeholder `Booking call` | Name it for the job, not the vendor. | Must be unique among active links. Ignores capitals. |
 | **Destination URL** | Where the person lands. | Empty, placeholder `https://calendly.com/your-team/intro` | Point it at a page carrying your pixel. | Must start with `http://` or `https://`. Editing it never changes links already sent. |
-| **Link domain** | Which verified domain serves the short link. | First verified domain | Use your own domain for links sent in DMs. | Only becomes a dropdown with two or more verified domains. Below that, Cortana picks the host and shows you what links will look like. |
-| **Show archived** | Reveals archived presets in the table. | Off | Turn on only to restore something. | Lives in the header so it stays reachable when the list is empty. |
-| Archive | Removes a preset from the composer picker. | — | Use instead of deleting. | Presets are never hard-deleted. Links already sent keep working and keep counting clicks. |
-| Restore | Returns an archived preset to the picker. | — | — | Lands at the end of the list. Fails if an active link already has that name. |
+| **Link domain** | Which verified domain serves the short link. | First verified domain | Use your own domain for links sent in DMs. | Only becomes a dropdown with two or more verified domains. Below that, Cortana picks the web address and shows you what links will look like. |
+| **Show archived** | Reveals archived links in the table. | Off | Turn on only to restore something. | Lives in the header so it stays reachable when the list is empty. |
+| Archive | Takes a saved link out of the composer picker. | — | Use instead of deleting. | Saved links are never deleted outright. Links already sent keep working and keep counting clicks. |
+| Restore | Returns an archived link to the picker. | — | — | Lands at the end of the list. Fails if an active link already has that name. |
 | Reorder | Sets the order in the composer picker. | Newest last | Put your most-sent link first. | Active links only. |
-| Composer picker | Mints a per-contact link and inserts it. | — | Read the URL before sending. | Re-inserting for the same contact and destination reuses the same link. |
+| Composer picker | Creates a link for that one contact and drops it in. | — | Read the URL before sending. | Re-inserting for the same contact and destination reuses the same link. |
 
 ## Troubleshooting
 
 <AccordionGroup>
   <Accordion title="The Link domain row has no dropdown, just a line of text">
-    That is expected unless you have **two or more** verified tracking domains. With one domain or none there is no choice to make, so Cortana picks the host and shows you what your links will look like instead.
+    That is expected unless you have **two or more** verified tracking domains. With one domain or none there is no choice to make, so Cortana picks the web address and shows you what your links will look like instead.
 
     If the line reads `lnkhop.co/t/abc1234`, you have no verified domain and links use Cortana's shared shortener. Click the **+** button beside the row, or see [Setup Pixel](/2-setup-pixel), to verify your own.
   </Accordion>
@@ -221,11 +221,11 @@ Links already sent keep working from whatever host they were sent on. Verifying 
   <Accordion title="I cannot save my link, it says the name is taken">
     Another **active** link already uses that name. The check ignores capitals, so **Booking call** clashes with **booking call**.
 
-    Either pick a different name, or turn on **Show archived** to check whether the name is on an archived preset you would rather restore than recreate.
+    Either pick a different name, or turn on **Show archived** to check whether the name is on an archived link you would rather restore than recreate.
   </Accordion>
 
   <Accordion title="I archived a link, do the ones I already sent still work?">
-    Yes. Archiving only takes the preset out of the composer picker. Every link already sent keeps resolving to its destination and keeps counting clicks. Nothing in anyone's inbox breaks.
+    Yes. Archiving only takes it out of the composer picker. Every link already sent keeps going to its destination and keeps counting clicks. Nothing in anyone's inbox breaks.
   </Accordion>
 
   <Accordion title="The Clicks count is zero but I know they clicked">
@@ -233,13 +233,13 @@ Links already sent keep working from whatever host they were sent on. Verifying 
 
     1. **Was it a real click?** Automated link scanners are filtered out on purpose.
     2. **Did they land on a pixelled page?** The click is recorded on the redirect, but matching the visit to the contact needs your pixel on the destination page.
-    3. **Are you looking at the right preset?** The count is per preset. A link minted from a pasted URL rather than this preset counts separately.
+    3. **Are you looking at the right row?** Counts are per saved link. A link you built by pasting a URL straight into the picker is counted separately.
   </Accordion>
 
   <Accordion title="I changed the destination but people still land on the old page">
-    That is by design. Links already sent keep their original destination forever, because each one stores its own copy. Only links minted after your edit use the new address.
+    That is by design. Links already sent keep their original destination forever, because each one stores its own copy. Only links created after your edit use the new address.
 
-    To move everyone, archive the old preset and create a new one, then send the new link.
+    To move everyone, archive the old one and create a new link, then send the new link.
   </Accordion>
 
   <Accordion title="The tab says Ad tracking is off">
@@ -263,7 +263,7 @@ Links already sent keep working from whatever host they were sent on. Verifying 
   </Accordion>
 
   <Accordion title="What happens if I send the same link to someone twice?">
-    They get the same short link both times, and it counts as one link in **Sent**. Cortana deliberately reuses an existing link for the same contact and destination rather than minting a new one.
+    They get the same short link both times, and it counts as one link in **Sent**. Cortana deliberately reuses an existing link for the same contact and destination rather than creating a second one.
   </Accordion>
 
   <Accordion title="Can I delete a tracking link?">

@@ -57,7 +57,7 @@ When someone sends a DM to a subscribed Page or Instagram account:
   <Step title="Open Settings and go to the Integrations tab">
     In your business, open **Settings** and select the **Integrations** tab.
 
-    Find the card named **Instagram & Messenger DMs**. You can also jump straight to it with `?tab=integrations&meta-dm=open` on your settings URL.
+    Scroll down to the card named **Instagram & Messenger DMs**. It sits near the bottom, in the communication group alongside **Email** and **WhatsApp**. If you would rather not scroll, type `dm` into the **Search integrations...** box at the top.
 
     <Frame caption="The Instagram & Messenger DMs card on the Integrations tab. One card covers both platforms.">
       <img className="block dark:hidden" src="/images/integrations/instagram-messenger-dms/dm-01-card.png" alt="The Integrations tab with the Instagram and Messenger DMs card highlighted, showing its description about capturing DM ad attribution and replying from Cortana." />
@@ -74,7 +74,7 @@ When someone sends a DM to a subscribed Page or Instagram account:
     | **Grant access** | Meta is connected, but only for ads. | Click it. This is the extra permission step. |
     | **Manage** | Messaging permission is granted. | Click it to choose Pages. |
 
-    Connecting Meta Ads does **not** grant messaging permission. Reading DMs needs two additional Meta permissions, `pages_messaging` and `instagram_manage_messages`, and Cortana deliberately does not ask for them during the plain ads connection. That is why an existing Meta Ads customer still sees **Grant access** here.
+    Connecting Meta Ads does **not** give Cortana permission to read messages. Meta treats reading your DMs as a separate thing to ask for, and Cortana does not ask for it when you connect ads, so it does not request more access than you signed up for. That is why you still see **Grant access** here even though Meta is already connected.
 
     Click **Grant access**. Meta's consent screen opens. Approve every permission it asks for.
 
@@ -87,8 +87,6 @@ When someone sends a DM to a subscribed Page or Instagram account:
     Back on the card, click **Manage**. The **Instagram & Messenger DMs** dialog opens. Its subtitle reads *"One Meta connection powers both. Choose which pages Cortana should watch for DMs."*
 
     It has two tabs, **Instagram** and **Messenger**. They are separate subscriptions. Subscribing a Page on the Messenger tab does not subscribe its Instagram account, and the reverse is also true. You must visit both tabs if you want both.
-
-    You can deep-link to either tab: `?tab=integrations&meta-dm=open&dm-tab=instagram` or `&dm-tab=facebook`.
 
     <Frame caption="The Instagram tab. The Status column shows which accounts Cortana is watching.">
       <img className="block dark:hidden" src="/images/integrations/instagram-messenger-dms/dm-02-dialog-instagram.png" alt="The Instagram and Messenger DMs dialog on the Instagram tab, with the platform tab switcher and the account table highlighted. Columns read Instagram Account, Linked Facebook Page and Status, with one account subscribed and the rest not subscribed." />
@@ -261,7 +259,7 @@ When someone sends a DM to a subscribed Page or Instagram account:
 
 | Setting | What it does | Default | Recommendation | Caveat |
 | --- | --- | --- | --- | --- |
-| Messaging permission | Adds `pages_messaging` and `instagram_manage_messages` to your existing Meta connection. | Not granted | Grant it once, before your first click-to-message campaign. | Separate from the Meta Ads connection. Connecting ads does not grant it. |
+| Messaging permission | Lets Cortana read and reply to DMs on your existing Meta connection. | Not granted | Grant it once, before your first click-to-message campaign. | Separate from the Meta Ads connection. Connecting ads does not grant it. |
 | Instagram tab selection | Chooses which Instagram accounts Cortana reads DMs from. | Nothing subscribed | Subscribe only accounts you actively monitor. | Rows showing **Not linked** cannot be selected here. |
 | Messenger tab selection | Chooses which Facebook Pages Cortana reads DMs from. | Nothing subscribed | Subscribe the Pages your ads point at. | Independent of the Instagram tab. Subscribe both if you want both. |
 | Reply window | Blocks the composer outside Meta's 24-hour window. | Always on | Reply the same day. | Meta's rule. It cannot be turned off or extended from Cortana. |
@@ -273,7 +271,7 @@ When someone sends a DM to a subscribed Page or Instagram account:
 
 <AccordionGroup>
   <Accordion title="I connected Meta Ads but the card still asks me to connect">
-    That is expected. Messaging is a separate permission grant from ad tracking. The card shows **Grant access** until you approve `pages_messaging` and `instagram_manage_messages`. Click **Grant access** on the **Instagram & Messenger DMs** card and approve everything Meta asks for.
+    That is expected. Permission to read your messages is separate from permission to read your ads. The card keeps saying **Grant access** until you give Meta the messaging one. Click **Grant access** on the **Instagram & Messenger DMs** card and approve everything Meta asks for.
   </Accordion>
 
   <Accordion title="Meta did not ask me for messaging permission">
