@@ -1,0 +1,365 @@
+---
+title: "11) Instagram & Messenger DMs"
+description: "Connect Instagram and Facebook Messenger DMs to Cortana: capture ad attribution from click-to-message ads, create contacts from DMs, reply inside the 24-hour window, and capture email and phone from the conversation."
+---
+
+# Instagram & Messenger DMs
+
+Cortana can read your Instagram and Facebook Messenger DMs, turn each new conversation into a contact, and record which ad the person came from. You reply from Cortana, in the same **Conversations** inbox you already use for SMS and email.
+
+One card covers both platforms. Instagram DMs and Messenger DMs run on a single Meta connection, so you connect once and then choose, per platform, which Pages and accounts Cortana should watch.
+
+You will find it in **Settings → Integrations**, on the card named **Instagram & Messenger DMs**. Its description reads *"Capture DM ad attribution and reply to Instagram and Messenger conversations from Cortana."*
+
+<Warning>
+  **Attribution starts the moment you connect. There is no backfill.**
+
+  Meta does not replay message history to an app that connects later. Cortana only sees DMs that arrive after you subscribe a Page. Conversations that already exist in your Instagram or Facebook inbox will not appear in Cortana, and DMs that came from an ad before you connected can never be attributed. Connect before a campaign launches, not after.
+</Warning>
+
+<Note>
+  **Before you start**
+
+  - A working **Meta Ads** connection. See [Connect Integrations](/1-connect-integrations). This page only adds messaging permission on top of that existing connection.
+  - Your Instagram account must be a **Professional** account, Business or Creator, and it must be linked to the Facebook Page you connect. A personal Instagram account cannot be connected, and it will not appear in the picker.
+  - **Admin** access on both the Facebook Page and the Instagram account, using the same Meta login you connected Cortana with.
+</Note>
+
+## What Cortana does with a DM
+
+When someone sends a DM to a subscribed Page or Instagram account:
+
+| What happens | Detail |
+| --- | --- |
+| A contact is created | Every DM creates a contact, including organic ones. The contact carries a channel badge showing whether it came from Instagram or Messenger. |
+| A conversation thread opens | It appears in **Conversations** alongside your other channels. |
+| Ad attribution is recorded | Only if the DM began from a click-to-message ad. See [Organic versus ad-driven DMs](#organic-versus-ad-driven-dms). |
+| A journey entry is added | Labelled **Instagram DM Started** or **Messenger DM Started** on the contact's customer journey. |
+| Name is filled in | From the Meta profile name attached to the conversation. |
+| Email and phone are captured | Only if the person types them into the chat. Meta never supplies them. |
+
+<Frame caption="Contacts created from DMs sit in your contact list like any other lead.">
+  <img className="block dark:hidden" src="/images/integrations/instagram-messenger-dms/dm-11-contacts-list.png" alt="The Contacts list showing contacts with name, email, phone, AI lead score and created date columns." />
+  <img className="hidden dark:block" src="/images/integrations/instagram-messenger-dms/dm-11-contacts-list-dark.png" alt="The Contacts list showing contacts with name, email, phone, AI lead score and created date columns." />
+</Frame>
+
+<Warning>
+  **Meta never gives Cortana an email address or a phone number for a DM sender.**
+
+  All Cortana receives is a display name, a handle, and a stable sender ID. Any email or phone you see on a DM contact got there because the person typed it into the conversation, because they clicked a tracking link, or because they later filled in a form.
+
+  This is the single most important thing to understand about DM leads, and it is why [Tracking Links](/12-tracking-links) exist.
+</Warning>
+
+## Set it up
+
+<Steps>
+  <Step title="Open Settings and go to the Integrations tab">
+    In your business, open **Settings** and select the **Integrations** tab.
+
+    Scroll down to the card named **Instagram & Messenger DMs**. It sits near the bottom, in the communication group alongside **Email** and **WhatsApp**. If you would rather not scroll, type `dm` into the **Search integrations...** box at the top.
+
+    <Frame caption="The Instagram & Messenger DMs card on the Integrations tab. One card covers both platforms.">
+      <img className="block dark:hidden" src="/images/integrations/instagram-messenger-dms/dm-01-card.png" alt="The Integrations tab with the Instagram and Messenger DMs card highlighted, showing its description about capturing DM ad attribution and replying from Cortana." />
+      <img className="hidden dark:block" src="/images/integrations/instagram-messenger-dms/dm-01-card-dark.png" alt="The Integrations tab with the Instagram and Messenger DMs card highlighted, showing its description about capturing DM ad attribution and replying from Cortana." />
+    </Frame>
+  </Step>
+
+  <Step title="Grant messaging permission to Meta">
+    The button on the card tells you exactly where you stand:
+
+    | Button | What it means | What to do |
+    | --- | --- | --- |
+    | **Connect** | You have no Meta connection at all. | Connect Meta Ads first, on the **Meta Ads** card. |
+    | **Grant access** | Meta is connected, but only for ads. | Click it. This is the extra permission step. |
+    | **Manage** | Messaging permission is granted. | Click it to choose Pages. |
+
+    Connecting Meta Ads does **not** give Cortana permission to read messages. Meta treats reading your DMs as a separate thing to ask for, and Cortana does not ask for it when you connect ads, so it does not request more access than you signed up for. That is why you still see **Grant access** here even though Meta is already connected.
+
+    Click **Grant access**. Meta's consent screen opens. Approve every permission it asks for.
+
+    <Warning>
+      Do not untick anything on Meta's consent screen. If you decline the messaging permissions, the card returns to **Grant access** and no DMs arrive. Cortana cannot tell you which specific box you unticked, only that the permission is missing.
+    </Warning>
+  </Step>
+
+  <Step title="Open the dialog and pick a platform tab">
+    Back on the card, click **Manage**. The **Instagram & Messenger DMs** dialog opens. Its subtitle reads *"One Meta connection powers both. Choose which pages Cortana should watch for DMs."*
+
+    It has two tabs, **Instagram** and **Messenger**. They are separate subscriptions. Subscribing a Page on the Messenger tab does not subscribe its Instagram account, and the reverse is also true. You must visit both tabs if you want both.
+
+    <Frame caption="The Instagram tab. The Status column shows which accounts Cortana is watching.">
+      <img className="block dark:hidden" src="/images/integrations/instagram-messenger-dms/dm-02-dialog-instagram.png" alt="The Instagram and Messenger DMs dialog on the Instagram tab, with the platform tab switcher and the account table highlighted. Columns read Instagram Account, Linked Facebook Page and Status, with one account subscribed and the rest not subscribed." />
+      <img className="hidden dark:block" src="/images/integrations/instagram-messenger-dms/dm-02-dialog-instagram-dark.png" alt="The Instagram and Messenger DMs dialog on the Instagram tab, with the platform tab switcher and the account table highlighted. Columns read Instagram Account, Linked Facebook Page and Status, with one account subscribed and the rest not subscribed." />
+    </Frame>
+  </Step>
+
+  <Step title="Subscribe your Instagram accounts">
+    On the **Instagram** tab, the heading reads **Instagram Accounts** and the table has three columns: **Instagram Account**, **Linked Facebook Page**, and **Status**.
+
+    Nothing is subscribed by default. Every row starts as **Not subscribed**, which means Cortana is not reading anything yet.
+
+    Tick the checkbox on each account you want, or use the checkbox in the header row to select them all. A bar appears showing **N selected**, with **Subscribe** and **Unsubscribe** buttons. Click **Subscribe**.
+
+    A row showing **Not linked** in the **Instagram Account** column has no Instagram account attached to that Facebook Page. Those rows cannot be selected on this tab, because there is no Instagram account for the action to affect. Link the account to the Page in Meta first, then click **Refresh**.
+  </Step>
+
+  <Step title="Subscribe your Facebook Pages">
+    Switch to the **Messenger** tab. The heading reads **Facebook Messenger Pages** and the columns are **Facebook Page**, **Linked Instagram**, and **Status**.
+
+    Select the Pages you want and click **Subscribe**, exactly as on the Instagram tab. Here every Page can be selected, because Messenger does not depend on a linked Instagram account.
+
+    A dash in the **Linked Instagram** column simply means that Page has no Instagram account attached. It does not stop Messenger DMs from working.
+
+    <Frame caption="The Messenger tab. Every Page can be selected here, linked Instagram account or not.">
+      <img className="block dark:hidden" src="/images/integrations/instagram-messenger-dms/dm-04-dialog-messenger.png" alt="The same dialog on the Messenger tab, with the tab switcher and the Page table highlighted. Columns read Facebook Page, Linked Instagram and Status." />
+      <img className="hidden dark:block" src="/images/integrations/instagram-messenger-dms/dm-04-dialog-messenger-dark.png" alt="The same dialog on the Messenger tab, with the tab switcher and the Page table highlighted. Columns read Facebook Page, Linked Instagram and Status." />
+    </Frame>
+  </Step>
+
+  <Step title="Confirm the status changed">
+    Each subscribed row now reads **Subscribed** in the **Status** column, and a confirmation appears reading **"Subscribed N pages"**.
+
+    If a Page or account you expected is missing from the list entirely, click **Refresh**. That re-pulls the list from Meta rather than reusing what the dialog already had. If it is still missing, click **Add Page**, which sends you back through Meta to grant access to more Pages.
+
+    Close the dialog. The card now shows **Manage**, and Cortana starts watching for DMs from this moment on.
+  </Step>
+</Steps>
+
+<Tip>
+  Subscribe only the Pages you actually run ads to or actively monitor. Every subscribed Page creates a Cortana contact for every person who DMs it, organic conversations included. Subscribing a dormant Page fills your contact list with people you will never work.
+</Tip>
+
+## Replying, and the 24-hour rule
+
+<Warning>
+  **You can only reply within 24 hours of the customer's last message.**
+
+  This is Meta's rule, not Cortana's. Meta's platform policy allows a business to send a message only inside a 24-hour window that opens each time the customer messages you. When the customer replies again, a fresh 24 hours begins.
+
+  Rather than let a send fail against Meta, Cortana disables the composer before you type. When the window has closed you see a greyed, dashed box in place of the message field reading:
+
+  > Outside the 24-hour reply window for Instagram/Messenger — Meta blocks new messages until the customer replies again.
+
+  On a thread where the customer has never messaged you on that channel, it reads:
+
+  > The reply window has not opened yet — the customer has not sent a message on this channel.
+
+  The channel selector stays available in both cases, because only that channel is blocked. If you have their phone number or email, you can switch channel and reach them there. That is another reason to capture an email or phone early.
+</Warning>
+
+<Frame caption="A closed reply window. The message box is replaced by the reason, and the channel selector stays usable.">
+  <img className="block dark:hidden" src="/images/integrations/instagram-messenger-dms/dm-08-composer-blocked.png" alt="A Messenger conversation where the message composer has been replaced by a greyed dashed box reading that the thread is outside the 24-hour reply window and Meta blocks new messages until the customer replies again. A channel selector sits to its left." />
+  <img className="hidden dark:block" src="/images/integrations/instagram-messenger-dms/dm-08-composer-blocked-dark.png" alt="A Messenger conversation where the message composer has been replaced by a greyed dashed box reading that the thread is outside the 24-hour reply window and Meta blocks new messages until the customer replies again. A channel selector sits to its left." />
+</Frame>
+
+<Frame caption="A normal thread inside the window: inbound messages, your reply, and a working composer.">
+  <img className="block dark:hidden" src="/images/integrations/instagram-messenger-dms/dm-05-thread.png" alt="A DM conversation thread in Cortana showing inbound messages from the contact and an outbound reply, with the channel shown on the thread and a usable message composer at the bottom." />
+  <img className="hidden dark:block" src="/images/integrations/instagram-messenger-dms/dm-05-thread-dark.png" alt="A DM conversation thread in Cortana showing inbound messages from the contact and an outbound reply, with the channel shown on the thread and a usable message composer at the bottom." />
+</Frame>
+
+## Sub-features
+
+<AccordionGroup>
+  <Accordion title="How ad attribution shows up">
+    When a DM starts from a click-to-message ad, Meta attaches the ad's ID to the first message. Cortana records it against the contact, and it appears in three places:
+
+    - **The contact panel**, in the conversation, showing the source ad.
+    - **The customer journey timeline**, as an **Instagram DM Started** or **Messenger DM Started** entry.
+    - **The attribution table**, where the DM counts toward that ad like any other conversion source.
+
+    Cortana never guesses. Attribution is recorded only when Meta supplies an actual ad ID. An ad is never inferred from a name or from timing, so a DM either carries real attribution or none at all.
+
+    <Frame caption="The Journey pane. A Messenger DM appears as its own timeline entry.">
+      <img className="block dark:hidden" src="/images/integrations/instagram-messenger-dms/dm-09-contact-journey.png" alt="The Customer Journey pane on a contact, showing a Messenger DM Started entry labelled Facebook Messenger with a View Data action." />
+      <img className="hidden dark:block" src="/images/integrations/instagram-messenger-dms/dm-09-contact-journey-dark.png" alt="The Customer Journey pane on a contact, showing a Messenger DM Started entry labelled Facebook Messenger with a View Data action." />
+    </Frame>
+  </Accordion>
+
+  <Accordion title="Organic versus ad-driven DMs">
+    Only DMs that began from a **click-to-message ad** carry ad data. Cortana sorts every incoming DM into one of three buckets:
+
+    | Bucket | Where the DM came from |
+    | --- | --- |
+    | Ad-attributed | A click-to-message ad. Meta supplied an ad ID. |
+    | Link-attributed | An `ig.me` or `m.me` link carrying a reference tag. |
+    | Unattributed | Organic. Someone found your profile and messaged you. |
+
+    Organic and link DMs are reported in their own organic source rows, separately from ad-driven ones. They are not missing attribution, they are correctly recorded as not coming from an ad.
+
+    <Note>
+      Even on genuine ad-click DMs, expect roughly **85 to 95 percent** to carry attribution in practice. Meta does not attach the referral to every single conversation. A small share of real ad DMs will always show no ad, and that is expected behaviour rather than a fault.
+    </Note>
+  </Accordion>
+
+  <Accordion title="Automatic email and phone capture">
+    Cortana reads each inbound DM for an email address and a phone number, and writes what it finds onto the contact. This is the only way an email or phone reaches a DM contact from the conversation itself, because Meta supplies neither.
+
+    **It only ever fills a blank field.** If the contact already has an email, a new email in the chat is ignored, and the same for phone. Nothing a rep typed is ever overwritten.
+
+    A phone number is only accepted when Cortana can validate it as a real number. A number written with a country code, like `+1 555 0100`, is recognised. A bare local number shorter than 10 digits is deliberately ignored, so an order number or a house number in a sentence is not mistaken for a phone number.
+
+    <Note>
+      Instagram does not offer a one-tap prompt for collecting an email address inside a DM, so there is no button that asks the customer for their email. They either type it, or you send them a [tracking link](/12-tracking-links).
+    </Note>
+  </Accordion>
+
+  <Accordion title="Automatic first and last name">
+    Cortana splits the Meta profile name into **First name** and **Last name**: the first word becomes the first name, everything after it becomes the last name.
+
+    If a contact was created before this filling existed, Cortana repairs it the next time that person messages, but only when **both** name fields are still empty. The moment a rep types a correction into either field, Cortana stops touching them. A manual correction is never overwritten.
+
+    <Frame caption="The Details pane, with First name and Last name filled from the Meta profile.">
+      <img className="block dark:hidden" src="/images/integrations/instagram-messenger-dms/dm-10-contact-details.png" alt="The Contact Information pane of a contact created from a DM, showing First Name, Last Name, Email and Phone Number fields." />
+      <img className="hidden dark:block" src="/images/integrations/instagram-messenger-dms/dm-10-contact-details-dark.png" alt="The Contact Information pane of a contact created from a DM, showing First Name, Last Name, Email and Phone Number fields." />
+    </Frame>
+  </Accordion>
+
+  <Accordion title="What you cannot send">
+    Replies are **text only**. There is no attachment button, and images, video, voice notes and files cannot be sent from Cortana's composer. To send an image, use the Instagram or Facebook app directly.
+
+    You can send links, including [tracking links](/12-tracking-links), because those are just text.
+  </Accordion>
+
+  <Accordion title="Running alongside GoHighLevel">
+    Cortana reads DMs natively at the same time as GoHighLevel, which keeps its own inbox and its own AI. The two do not conflict.
+
+    You may briefly see **two contacts for the same person**, one created by Cortana from the DM and one arriving from GoHighLevel. They merge automatically as soon as a shared email address or phone number appears on both.
+
+    A contact arriving **from GoHighLevel** is only created in Cortana once it carries an email or a phone number. A name-only lead from GoHighLevel is held back rather than created, and it materialises later if that person supplies an email or phone. This is deliberate: name-only records cannot be matched reliably and used to attach themselves to the wrong DM.
+
+    <Note>
+      This applies to contacts arriving through the GoHighLevel connection. DMs that Cortana ingests natively always create a contact, with or without an email.
+    </Note>
+  </Accordion>
+
+  <Accordion title="Adding or removing Pages later">
+    Reopen the card with **Manage** at any time.
+
+    To add a Page, click **Add Page** and grant Cortana access to it in Meta, then **Refresh** and subscribe it.
+
+    To stop reading a Page, select it and click **Unsubscribe**. Its status returns to **Not subscribed** and new DMs to that Page stop arriving. Contacts, threads and attribution already captured are kept.
+  </Accordion>
+
+  <Accordion title="Disconnecting messaging">
+    **Disconnect** on the card removes the two messaging permissions from your Meta connection and sets every Page back to unsubscribed. New DMs stop arriving immediately.
+
+    What it does **not** do:
+
+    - It does not delete contacts created from DMs.
+    - It does not delete conversation threads or their messages.
+    - It does not remove attribution already recorded.
+    - It does not disconnect **Meta Ads**. Your ad tracking keeps working.
+
+    Reconnecting is the same **Grant access** step as the first time, and you re-subscribe your Pages afterwards. Because there is no backfill, DMs sent while you were disconnected are lost permanently.
+  </Accordion>
+</AccordionGroup>
+
+## Settings reference
+
+| Setting | What it does | Default | Recommendation | Caveat |
+| --- | --- | --- | --- | --- |
+| Messaging permission | Lets Cortana read and reply to DMs on your existing Meta connection. | Not granted | Grant it once, before your first click-to-message campaign. | Separate from the Meta Ads connection. Connecting ads does not grant it. |
+| Instagram tab selection | Chooses which Instagram accounts Cortana reads DMs from. | Nothing subscribed | Subscribe only accounts you actively monitor. | Rows showing **Not linked** cannot be selected here. |
+| Messenger tab selection | Chooses which Facebook Pages Cortana reads DMs from. | Nothing subscribed | Subscribe the Pages your ads point at. | Independent of the Instagram tab. Subscribe both if you want both. |
+| Reply window | Blocks the composer outside Meta's 24-hour window. | Always on | Reply the same day. | Meta's rule. It cannot be turned off or extended from Cortana. |
+| Email and phone capture | Reads inbound message text and fills blank contact fields. | Always on | Ask for an email early in the conversation. | Fills blanks only. Never overwrites an existing value. |
+| Name capture | Fills **First name** and **Last name** from the Meta profile. | Always on | Leave it alone. | Repairs blank names only. A rep's correction is never overwritten. |
+| Contact creation | Creates a contact for every inbound DM. | Always on | — | Organic DMs create contacts too. Subscribing an unused Page will clutter your list. |
+
+## Troubleshooting
+
+<AccordionGroup>
+  <Accordion title="I connected Meta Ads but the card still asks me to connect">
+    That is expected. Permission to read your messages is separate from permission to read your ads. The card keeps saying **Grant access** until you give Meta the messaging one. Click **Grant access** on the **Instagram & Messenger DMs** card and approve everything Meta asks for.
+  </Accordion>
+
+  <Accordion title="Meta did not ask me for messaging permission">
+    If you are already logged in to Facebook, Meta sometimes shows a short confirmation screen and returns you without listing the permissions, leaving the card on **Grant access**.
+
+    Click **Grant access** again. If it keeps happening, log out of Facebook in that browser, or use a private window, then retry so Meta shows the full consent screen.
+  </Accordion>
+
+  <Accordion title="I cannot reply, the composer is greyed out">
+    The 24-hour reply window has closed, or the customer has never messaged you on that channel. The box in place of the composer tells you which.
+
+    You cannot override this from Cortana. Either wait for them to message again, which reopens the window, or switch to another channel using the channel selector to the left of the composer, if you have their phone number or email.
+  </Accordion>
+
+  <Accordion title="My DM lead has no ad attribution">
+    Three common causes, in order of likelihood:
+
+    1. **It was an organic DM.** They found your profile rather than clicking an ad. It will report in an organic source row.
+    2. **The DM predates your connection.** There is no backfill, so anything before you subscribed the Page can never be attributed.
+    3. **Meta did not attach the referral.** This happens on a minority of genuine ad clicks and cannot be recovered.
+  </Accordion>
+
+  <Accordion title="I see two contacts for the same person">
+    You are running GoHighLevel alongside Cortana, and each created its own record. They merge by themselves once a shared email address or phone number appears on both. Getting an email or phone into the conversation is what resolves it.
+  </Accordion>
+
+  <Accordion title="My Instagram account is not in the picker">
+    Check these in order:
+
+    1. It is a **Professional** account, Business or Creator. Personal accounts cannot be connected.
+    2. It is **linked to the Facebook Page** in Meta's settings. An unlinked account shows as **Not linked** and cannot be selected on the Instagram tab.
+    3. You have **admin** access to both, on the same Meta login you connected with.
+
+    Then click **Refresh** in the dialog, which re-pulls the list from Meta. If it is still absent, click **Add Page** to grant Cortana access to it.
+  </Accordion>
+
+  <Accordion title="DMs have stopped arriving">
+    Check, in this order:
+
+    1. Open **Manage** and confirm the Page still reads **Subscribed**. Someone may have unsubscribed it.
+    2. Check the card is not showing **Grant access**. Changing your Facebook password, or removing the app in Meta's Business Integrations settings, revokes the permission.
+    3. Confirm the Page is still connected to your Meta account and you still have admin access to it.
+
+    Re-granting access and re-subscribing fixes all three. DMs that arrived while it was broken are not recoverable.
+  </Accordion>
+</AccordionGroup>
+
+## FAQ
+
+<AccordionGroup>
+  <Accordion title="Will I see my old Instagram messages in Cortana?">
+    No. Meta does not give Cortana message history, so only DMs that arrive after you subscribe a Page appear. Your existing Instagram and Facebook inbox is untouched and stays where it is.
+  </Accordion>
+
+  <Accordion title="Why does my DM contact have no email address?">
+    Because Meta never sends one. A DM identifies someone by their handle and a sender ID, not by email. You get an email either by asking them in the chat, which Cortana then captures automatically, or by sending them a [tracking link](/12-tracking-links) so their click identifies them.
+  </Accordion>
+
+  <Accordion title="Why can't I type a reply to this person?">
+    Meta only allows a business to message someone within 24 hours of that person's last message. Once that window closes, Cortana greys out the composer instead of letting the send fail. It reopens the moment they message you again.
+  </Accordion>
+
+  <Accordion title="Can I send a photo or a file in a DM reply?">
+    No. Replies from Cortana are text only, and there is no attachment button. Use the Instagram or Facebook app to send media in that conversation.
+  </Accordion>
+
+  <Accordion title="Can my AI agent answer Instagram DMs automatically?">
+    Not yet. Treat Instagram and Messenger DMs as a channel your team replies to by hand. {/* TODO: verify with engineering before publishing — native agent sending was a follow-up sprint and the agent send path does not run through this feature's reply-window guard. */}
+  </Accordion>
+
+  <Accordion title="Do organic DMs use up my contact allowance?">
+    Every inbound DM creates a contact, whether it came from an ad or not. If you do not want contacts from a particular Page, unsubscribe that Page in the **Manage** dialog.
+  </Accordion>
+
+  <Accordion title="Do I have to connect Instagram and Messenger separately?">
+    You grant permission once, but you subscribe separately. The **Instagram** tab and the **Messenger** tab hold independent selections, so subscribe on both tabs if you want DMs from both.
+  </Accordion>
+</AccordionGroup>
+
+## Next step
+
+Meta will never hand you an email address or a phone number for someone who DMs you. If you want a booking made on your scheduling page to attach to the right person, you need to know who clicked. That is what tracking links are for.
+
+<CardGroup cols={2}>
+  <Card title="Tracking Links" icon="link" href="/12-tracking-links">
+    Send a link that identifies who clicked, so a booking made on a third-party page attaches to the right contact.
+  </Card>
+  <Card title="Connect Integrations" icon="plug" href="/1-connect-integrations">
+    The Meta Ads connection this page builds on.
+  </Card>
+</CardGroup>
