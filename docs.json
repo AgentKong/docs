@@ -26,14 +26,14 @@
         ]
       },
       {
-        "tab": "Ad Tracking Feature",
+        "tab": "Ad Tracking",
         "icon": "crosshairs",
         "pages": [
-          "Tracking-Checklist",
           {
             "group": "A-Z Setup Guide",
             "icon": "rocket",
             "pages": [
+              "Tracking-Checklist",
               "1-connect-integrations",
               "2-setup-pixel",
               "3-contact-tracking",
@@ -47,9 +47,78 @@
               "10-chrome-extension",
               "11-instagram-messenger-dms",
               "12-tracking-links"
+            ],
+            "expanded": true
+          },
+          "untitled-page",
+          "frequently-asked-questions"
+        ]
+      },
+      {
+        "tab": "SMS / Voice Agents",
+        "icon": "robot",
+        "groups": [
+          {
+            "group": "Getting Started",
+            "icon": "rocket",
+            "pages": [
+              "training/ai-agents/creating-business-and-users",
+              "training/ai-agents/connecting-integrations",
+              "training/ai-agents/creating-an-agent",
+              "training/ai-agents/train-ai-connect-channels"
             ]
           },
-          "frequently-asked-questions"
+          {
+            "group": "Building Your Agent",
+            "icon": "hammer",
+            "pages": [
+              "training/ai-agents/building-agent-intro",
+              "training/ai-agents/building-agent-how-to",
+              "training/ai-agents/building-agent-settings",
+              "training/ai-agents/building-agent-understanding"
+            ]
+          },
+          {
+            "group": "Managing Your Agent",
+            "icon": "sliders",
+            "pages": [
+              "training/ai-agents/triggering-agent",
+              "training/ai-agents/stopping-agent",
+              "training/ai-agents/troubleshoot-session-logs",
+              "training/ai-agents/editing-agent"
+            ]
+          }
+        ]
+      },
+      {
+        "tab": "Cortana Calendar",
+        "icon": "calendar",
+        "groups": [
+          {
+            "group": "Getting Started",
+            "icon": "rocket",
+            "pages": [
+              "cal-overview",
+              "cal-calendars"
+            ]
+          },
+          {
+            "group": "Configuring Your Calendar",
+            "icon": "sliders",
+            "pages": [
+              "cal-schedule",
+              "cal-calendar-sync",
+              "cal-sending-email"
+            ]
+          },
+          {
+            "group": "Managing Bookings",
+            "icon": "calendar-days",
+            "pages": [
+              "cal-business-cal",
+              "cal-events"
+            ]
+          }
         ]
       },
       {
@@ -93,74 +162,7 @@
         ]
       },
       {
-        "tab": "AI Agents Feature",
-        "icon": "robot",
-        "groups": [
-          {
-            "group": "Getting Started",
-            "icon": "rocket",
-            "pages": [
-              "training/ai-agents/creating-business-and-users",
-              "training/ai-agents/connecting-integrations",
-              "training/ai-agents/creating-an-agent",
-              "training/ai-agents/train-ai-connect-channels"
-            ]
-          },
-          {
-            "group": "Building Your Agent",
-            "icon": "hammer",
-            "pages": [
-              "training/ai-agents/building-agent-intro",
-              "training/ai-agents/building-agent-how-to",
-              "training/ai-agents/building-agent-settings",
-              "training/ai-agents/building-agent-understanding"
-            ]
-          },
-          {
-            "group": "Managing Your Agent",
-            "icon": "sliders",
-            "pages": [
-              "training/ai-agents/triggering-agent",
-              "training/ai-agents/stopping-agent",
-              "training/ai-agents/troubleshoot-session-logs",
-              "training/ai-agents/editing-agent"
-            ]
-          }
-        ]
-      },
-      {
-        "tab": "Cortana Calendar Feature",
-        "icon": "calendar",
-        "groups": [
-          {
-            "group": "Getting Started",
-            "icon": "rocket",
-            "pages": [
-              "cal-overview",
-              "cal-calendars"
-            ]
-          },
-          {
-            "group": "Configuring Your Calendar",
-            "icon": "sliders",
-            "pages": [
-              "cal-schedule",
-              "cal-calendar-sync",
-              "cal-sending-email"
-            ]
-          },
-          {
-            "group": "Managing Bookings",
-            "icon": "calendar-days",
-            "pages": [
-              "cal-business-cal",
-              "cal-events"
-            ]
-          }
-        ]
-      },
-      {
-        "tab": "Developer Docs + MCP",
+        "tab": "Dev Docs + MCP",
         "icon": "code",
         "groups": [
           {
@@ -361,8 +363,8 @@
         ]
       },
       {
-        "tab": "Platform / UI Walkthrough",
-        "icon": "book-open",
+        "tab": "Platform Walkthrough",
+        "icon": "mouse-pointer",
         "groups": [
           {
             "group": "Overview",
