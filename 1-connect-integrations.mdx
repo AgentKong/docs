@@ -33,6 +33,7 @@ It’s quite simple—just find the tool you use and click the **Connect** but
 - **E-commerce & Courses:** Shopify, WooCommerce, Whop, Kajabi.
 - **Payments & Forms:** Stripe, PayPal, Typeform, Tally Forms.
 - **Scheduling:** Calendly, Cal.com.
+- **Call tracking:** CallRail.
 
 <Note>
   **Coming from Hyros?** We have a specific **Hyros Data Import** tool. Just click **Import** to perform a one-time transfer of all your historical data and performance history.
@@ -77,6 +78,34 @@ Click **Connect** on the **PayPal** card and the **Connect PayPal** dialog opens
 </Note>
 
 Once PayPal is connected, wire it to a conversion in [**4.2) Conversion Sources**](/4-conversion-tracking) under **PayPal**.
+
+### Connecting CallRail
+
+CallRail connects with a single API key instead of a login. You paste the key once, pick which CallRail company belongs to this business, and Cortana does the rest: it installs its webhooks into CallRail for you and switches on visitor cookie capture, which is what ties each phone call back to the ad that caused it. There is no manual webhook setup on CallRail's side.
+
+<Steps>
+  <Step title="Create an API key in CallRail">
+    In CallRail, go to **Settings → Integrations → API Keys** and create a key. Keys in CallRail belong to a user, so create it under a user who can see the company you want to track.
+  </Step>
+
+  <Step title="Paste the key into Cortana">
+    Click **Connect** on the **CallRail** card. The **Connect CallRail** dialog opens with a three-step tracker: **1 · API key → 2 · Company → 3 · Done**. Paste the key and click **Continue**. The key is stored encrypted and never shown again.
+
+    If you see **"This key sees no CallRail accounts. Check it belongs to the right user."**, the key is valid but its user has no account access in CallRail.
+  </Step>
+
+  <Step title="Pick the CallRail company">
+    The dialog asks **"Which CallRail company is this business?"** and lists every account and company the key can see. Calls and forms from the company you pick will land in this business as conversions. Select it and click **Connect**.
+  </Step>
+
+  <Step title="Done">
+    The dialog confirms the company is wired up and that visitor cookie capture was installed. From here, add your triggers: open a conversion on the **Tracking** tab, click **Add Source**, choose **CallRail**, and pick **Phone Call**, **Call marked as Good Lead**, or **Form Submission**. Full walkthrough in [**4.2) Conversion Sources**](/4-conversion-tracking) under **CallRail**.
+  </Step>
+</Steps>
+
+<Note>
+  **Reconnecting or disconnecting is safe.** Disconnecting removes Cortana's webhook URLs and cookie capture from your CallRail company and keeps every conversion already tracked. New calls and forms simply stop arriving until you reconnect.
+</Note>
 
 ## Setting Up Ad Tracking
 

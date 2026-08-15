@@ -1,6 +1,6 @@
 ---
 title: "4.2) Conversion Sources"
-description: "Add conversion sources to track sales and leads in Cortana. Connect Stripe, PayPal, Shopify, Kajabi, GoHighLevel, Meta Ads, Calendly, webhooks, pixels, CSV and 14 other source types to any conversion."
+description: "Add conversion sources to track sales and leads in Cortana. Connect Stripe, PayPal, Shopify, Kajabi, GoHighLevel, Meta Ads, Calendly, CallRail, webhooks, pixels, CSV and 14 other source types to any conversion."
 ---
 
 ## <u>Conversion Sources</u>
@@ -13,11 +13,11 @@ Sources live at **Tracking → Conversion Setup**. You open (or create) a conver
 
 ### Available vs locked sources
 
-The **Integration** dropdown lists all 24 source types. Four are always available because they do not depend on an outside tool:
+The **Integration** dropdown lists all 25 source types. Four are always available because they do not depend on an outside tool:
 
 **Forms / Appointments** · **Webhook** · **CSV Upload** · **Pixel**
 
-The other 20 require their integration to be connected to this business first. Until it is connected, the entry is greyed out with a **padlock icon** and sorts to the bottom of the list. Clicking a locked entry does not select it. It shows an error toast such as `Please connect Stripe first. Go to Settings → Integrations to connect.`
+The other 21 require their integration to be connected to this business first. Until it is connected, the entry is greyed out with a **padlock icon** and sorts to the bottom of the list. Clicking a locked entry does not select it. It shows an error toast such as `Please connect Stripe first. Go to Settings → Integrations to connect.`
 
 The dropdown sorts **available sources A-Z first, then locked sources A-Z**. So on a business with everything connected, the whole list is simply A-Z. The accordions below follow that same A-Z order.
 
@@ -188,6 +188,57 @@ Every source is added the same way. Follow these six steps, then open your sourc
     <Warning>
       Calendly refresh tokens are single-use and expire. If bookings suddenly stop arriving, reconnect Calendly at **Settings → Integrations** and check this source still lists your calendars.
     </Warning>
+  </Accordion>
+
+  <Accordion title="CallRail">
+    **What it tracks:** inbound phone calls to your CallRail tracking numbers, calls marked as **Good Lead** in CallRail, and submissions of CallRail-tracked forms. Call conversions can carry revenue from the call's value field in CallRail.
+
+    **Prerequisite integration:** CallRail. When not connected the entry is locked and shows `CallRail is not connected. Go to Settings → Integrations to connect.` See [Connecting CallRail](/1-connect-integrations#connecting-callrail) for the one-time setup. While the connection is verified the form shows **"Checking CallRail status…"**.
+
+    <Steps>
+      <Step title="Pick CallRail in the Integration dropdown">
+        The form loads with a single **When to track** dropdown.
+      </Step>
+
+      <Step title="Set When to track">
+        Placeholder: **"Select when to count a conversion"**. Options:
+
+        | Option | Fires when |
+        | --- | --- |
+        | **Phone Call** | An inbound call to a CallRail tracking number completes |
+        | **Call marked as Good Lead** | A call's lead status is set to **Good Lead** in CallRail, manually or by CallRail's AI scoring. Fires once per call |
+        | **Form Submission** | A CallRail-tracked form is submitted on your website, including CallRail-hosted embed forms |
+
+        Each option has a hover tooltip explaining it. Use **Phone Call** to count every completed call, or **Call marked as Good Lead** if your team qualifies calls inside CallRail and only those should count.
+      </Step>
+
+      <Step title="Choose which calls count (Phone Call only)">
+        Picking **Phone Call** reveals a **Which calls count** panel:
+
+        - **Answered calls only**. On by default. Untick it to also count missed calls.
+        - **Include voicemails**. Off by default.
+        - **First-time callers only**. Off by default. Tick it to ignore repeat callers, so one person calling five times counts once.
+        - **Minimum duration (seconds)**. Default 0. Set it to, say, 30 to ignore hang-ups and wrong numbers.
+      </Step>
+
+      <Step title="Decide whether the call's value counts as revenue">
+        **Phone Call** and **Call marked as Good Lead** show a checkbox: **"Track revenue from the call's value in CallRail"**. It is **off by default**, so nothing is counted as revenue unless you switch it on.
+
+        When ticked, a currency picker appears with the note: *"The value their team types into CallRail is stored in this currency and converted on your dashboard."* With revenue on, Cortana also keeps the conversion up to date when someone edits the call's value in CallRail after the fact.
+      </Step>
+
+      <Step title="Save">
+        Click **Submit**. You will see **"CallRail source created — webhook installed in CallRail!"**. Cortana installs the webhook into your CallRail company for you. There is nothing to copy, paste, or map.
+      </Step>
+    </Steps>
+
+    <Note>
+      **Phone Call conversions are not instant.** CallRail sends the call after the recording attaches, which can take up to about 20 minutes after hangup. A test call that has not appeared yet is most likely still inside that window.
+    </Note>
+
+    <Note>
+      **Attribution comes from the connection, not the form.** Connecting CallRail installs visitor cookie capture into your CallRail company, which ties each call and form back to the caller's browsing session and the ad that brought them. Make sure the [Cortana pixel](/2-setup-pixel) is on the pages your tracking numbers appear on.
+    </Note>
   </Accordion>
 
   <Accordion title="ClickFunnels">
