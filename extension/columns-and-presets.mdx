@@ -1,0 +1,203 @@
+---
+title: "Columns and presets"
+description: "Choose which Cortana conversion columns appear in Meta Ads Manager, use unique counting and cost per, and save your column set as a preset."
+---
+
+{/* TODO: verify — no Loom walkthrough was supplied for this page. When one is recorded, embed it
+    here with a verbatim transcript inside an <Accordion title="Video transcript"> for the KB. */}
+
+## What this page covers
+
+A **column preset** is a saved set of Cortana conversion columns. You pick which conversion sources to show, whether each is counted once per person or every time, and whether to show a cost per conversion beside it. Then you save that set and reuse it.
+
+This page documents extension version **4.20**.
+
+<Note>
+  **Before you start**
+
+  - The extension **installed and connected**. See [Install and connect](/extension/install-and-connect).
+  - A **business selected** in the Cortana row. See [Meta Ads Manager overview](/extension/ads-manager-overview).
+</Note>
+
+## Turn the columns on and off
+
+**Columns On/Off** in the Cortana row shows or hides every Cortana column at once. Its tooltip reads **Toggle Cortana AI columns**.
+
+<Frame caption="Ads Manager with the Cortana columns switched off.">
+  <img src="/images/ad-tracking/chrome-extension-adsmanager/05-columns-off.png" alt="The Ads Manager table with the Columns switch turned off and highlighted by a numbered badge. Meta's own columns remain and every Cortana column is gone from the table." />
+</Frame>
+
+<Warning>
+  **This switch is global and it persists.** It applies to every ad account and every tab, and it survives closing Chrome. If Cortana's columns have vanished, check this switch before you assume the extension is broken.
+</Warning>
+
+## Choose a preset
+
+<Steps>
+  <Step title="Open the preset list">
+    Click **Presets** in the Cortana row. The list is grouped.
+
+    <Frame caption="The Presets list, grouped into app presets and local presets.">
+      <img src="/images/ad-tracking/chrome-extension-adsmanager/06-preset-dropdown.png" alt="The Presets dropdown open above the Ads Manager table, showing a group heading for presets from the app with a cloud icon beside each entry, the active preset marked, and a Create New Preset entry at the bottom." />
+    </Frame>
+
+    | Group | Icon | What you can do |
+    |---|---|---|
+    | **PRESETS FROM APP** | Cloud | Select it. These come from your Cortana account and are read-only in the extension |
+    | **LOCAL PRESETS** | Hard drive | Select, edit or delete. These live in this browser |
+  </Step>
+
+  <Step title="Pick one, then fix URL Params">
+    Click a preset and the table rebuilds with its columns.
+
+    <Warning>
+      **Choosing a preset switches URL Params back off.** Selecting a preset re-applies that preset's extra-column settings, and the default for **URL Params** is off. So turn URL Params on **after** you pick your preset, not before, and expect to turn it on again every time you re-pick one.
+
+      This is a known bug, not a setting you have configured wrongly.
+    </Warning>
+  </Step>
+</Steps>
+
+## Build your own preset
+
+<Steps>
+  <Step title="Open the customizer">
+    In the **Presets** list, click **Create New Preset**. The customizer opens with two sides: **Available Columns** on the left, **Selected Columns** on the right.
+
+    <Frame caption="The preset customizer, with available columns on the left and selected columns on the right.">
+      <img src="/images/ad-tracking/chrome-extension-adsmanager/07-preset-customizer.png" alt="The preset customizer dialog with numbered badges marking the Available Columns list on the left, the Search columns box above it, and the Selected Columns list on the right." />
+    </Frame>
+
+    When everything is already chosen, the left side reads **All columns are selected**. When nothing is chosen yet, the right side reads **No columns selected** above **Add columns from the left to display them**.
+  </Step>
+
+  <Step title="Find a column">
+    Type in **Search columns...** to filter the available list. Useful once a business tracks more conversion sources than fit on screen.
+
+    <Frame caption="The customizer with a search term filtering the available columns.">
+      <img src="/images/ad-tracking/chrome-extension-adsmanager/08-column-search.png" alt="The preset customizer with text typed into the Search columns box and the Available Columns list filtered down to the matching conversion sources." />
+    </Frame>
+  </Step>
+
+  <Step title="Set unique counting and cost per">
+    Each **conversion column** carries two toggles: a **unique mode** and a **cost per** column.
+
+    <Frame caption="A conversion column with its unique and cost per toggles.">
+      <img src="/images/ad-tracking/chrome-extension-adsmanager/10-cost-per-toggle.png" alt="The preset customizer with a numbered badge marking the cost per toggle on a selected conversion column, alongside its unique mode control." />
+    </Frame>
+
+    **Cost per** adds a second column dividing spend by that conversion count.
+
+    **Unique mode** decides how often one person can count. It is a native dropdown, so its open list cannot be screenshotted. The seven options are:
+
+    | Mode | Counts |
+    |---|---|
+    | **Off (Show All)** | Every conversion, however many times the same person converts |
+    | **Unique Per Attribution Fingerprint** | Once per attribution fingerprint |
+    | **Count Only 1 Per Contact** | Once per person, ever |
+    | **Every 7 Days** | Once per person per 7 days |
+    | **Every 14 Days** | Once per person per 14 days |
+    | **Every 30 Days** | Once per person per 30 days |
+    | **Every 90 Days** | Once per person per 90 days |
+
+    <Note>
+      The four extra columns, **Total Revenue**, **ROI**, **ROAS** and **URL Params**, have no unique or cost per toggles. Those two controls belong to conversion columns only.
+    </Note>
+  </Step>
+
+  <Step title="Name it and save">
+    Type a name into **Enter preset name...** and save. It appears under **LOCAL PRESETS**, with edit and delete controls.
+
+    <Frame caption="Naming and saving a preset in the customizer.">
+      <img src="/images/ad-tracking/chrome-extension-adsmanager/11-save-preset.png" alt="The preset customizer with a numbered badge marking the Enter preset name field and the save control beside it." />
+    </Frame>
+  </Step>
+</Steps>
+
+## Sub-functionality
+
+<AccordionGroup>
+  <Accordion title="App presets versus local presets">
+    **PRESETS FROM APP** are defined in your Cortana account and marked with a cloud icon. In the extension they are read-only: you can select one, but the rows carry no edit or delete control. Change them in the web app.
+
+    **LOCAL PRESETS** are created in the customizer, marked with a hard drive icon, and stored in this browser. Only these can be edited or deleted, and only on this machine.
+  </Accordion>
+
+  <Accordion title="Deleting a local preset">
+    Open the **Presets** list and use the delete control on a local preset row. A **Delete Preset** confirmation appears before anything is removed.
+
+    There is no screenshot of this step because it only exists for local presets, and the account these screenshots were taken on had none.
+  </Accordion>
+</AccordionGroup>
+
+## Settings reference
+
+| Setting | What it does | Default | Our recommendation | Caveat |
+|---|---|---|---|---|
+| **Columns On/Off** | Shows or hides all Cortana columns | On | Leave on | Global and persistent |
+| **Preset** | Which column set to show | Your account's preset | Pick one, then set URL Params | Re-picking turns URL Params off |
+| **Search columns...** | Filters the available list | Empty | Use it past a handful of sources | Filters the left side only |
+| **Unique mode** | How often one person can count | **Off (Show All)** | **Count Only 1 Per Contact** for lead volume | Conversion columns only |
+| **Cost per** | Adds spend divided by that count | Off | On for the conversions you optimise to | Conversion columns only |
+| **Total Revenue, ROI, ROAS** | Money columns | On | Leave on | No unique or cost per toggle |
+| **URL Params** | The tracking-parameter health check | **Off** | Turn on after choosing a preset | See the warning above |
+
+## Troubleshooting
+
+<AccordionGroup>
+  <Accordion title="My columns disappeared">
+    Check **Columns On/Off** first. It is global and persistent, so it stays off across restarts.
+  </Accordion>
+
+  <Accordion title="URL Params keeps switching itself off">
+    Known bug. Turn it on after you pick the preset, not before. [Full explanation](#choose-a-preset).
+  </Accordion>
+
+  <Accordion title="I cannot edit or delete a preset">
+    It is an app preset, marked with a cloud icon. Only local presets, marked with a hard drive icon, have edit and delete. Change app presets in the web app.
+  </Accordion>
+
+  <Accordion title="My preset is missing on another computer">
+    Local presets are stored in the browser that made them. Rebuild it there, or create it in the web app so it arrives as an app preset.
+  </Accordion>
+
+  <Accordion title="The popup says I am not signed in">
+    Reconnect from the popup. See [Install and connect](/extension/install-and-connect).
+  </Accordion>
+
+  <Accordion title="I changed a preset and the table has not updated">
+    Use the refresh control in the Cortana row. If it still lags, reload the extension at `chrome://extensions`, then reload the page.
+  </Accordion>
+</AccordionGroup>
+
+## FAQ
+
+<AccordionGroup>
+  <Accordion title="What is the difference between a preset and a column preset?">
+    They are the same thing on this page: a saved set of Cortana conversion columns. Tracking links use the word preset for something else entirely, a saved destination.
+  </Accordion>
+
+  <Accordion title="Why is there no cost per on Total Revenue?">
+    Cost per divides spend by a count of conversions. Revenue, ROI and ROAS are not counts, so the toggle does not apply to them.
+  </Accordion>
+
+  <Accordion title="Which unique mode should I use?">
+    **Count Only 1 Per Contact** when you want to know how many people converted. **Off (Show All)** when repeat purchases matter.
+  </Accordion>
+
+  <Accordion title="Do my column choices affect my Cortana dashboard?">
+    No. A local preset changes what this table shows in this browser.
+  </Accordion>
+</AccordionGroup>
+
+## Next step
+
+<CardGroup cols={2}>
+  <Card title="Reading your data" icon="chart-column" href="/extension/reading-your-data">
+    What each column means, the totals row, and the URL Params check.
+  </Card>
+
+  <Card title="Conversion drill-down" icon="magnifying-glass" href="/extension/conversion-drilldown">
+    Click a number to see the people behind it.
+  </Card>
+</CardGroup>

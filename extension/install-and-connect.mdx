@@ -1,0 +1,227 @@
+---
+title: "Install and connect"
+description: "Install the Cortana AI Chrome extension, pin it to your toolbar, connect it by signing in or with an API key, and pick the business it should show."
+---
+
+{/* TODO: verify — no Loom walkthrough was supplied for this page. When one is recorded, embed it
+    here with a verbatim transcript inside an <Accordion title="Video transcript"> for the KB. */}
+
+## What you are doing here
+
+Installing the extension takes a minute. Connecting it to your Cortana account is the part that matters, because until you connect, the extension knows nothing about your data.
+
+There are **two ways to connect**, and this page covers both. Most people should use the first one.
+
+This page documents extension version **4.20**.
+
+<Note>
+  **Before you start**
+
+  - **Google Chrome.**
+  - **A Cortana account** with at least one business. If you do not have one, the sign-in screen links to sign-up.
+</Note>
+
+## Install and connect
+
+<Steps>
+  <Step title="Install the extension and pin it">
+    Install **Cortana AI** from the Chrome Web Store:
+
+    <Card title="Cortana AI on the Chrome Web Store" icon="chrome" href="https://chromewebstore.google.com/detail/cortana-ai/jkapahgdmjffdkconinemcpmkponpgfi">
+      Open the listing and click **Add to Chrome**.
+    </Card>
+
+    Chrome hides new extensions behind the puzzle-piece icon in the toolbar. Click the puzzle piece, find **Cortana AI**, and click the pin next to it so the icon stays visible. You will open this popup often, so pin it now rather than hunting for it later.
+  </Step>
+
+  <Step title="Open the popup">
+    Click the Cortana icon. Before you connect, the popup reads **Welcome to Cortana AI** above the line *"Connect your Cortana AI account to start tracking conversions in Facebook Ads Manager."*
+
+    You get two choices, separated by **OR**.
+
+    <Frame caption="The extension popup before connecting, offering both connection methods.">
+      <img src="/images/ad-tracking/chrome-extension-popup/01-popup-signed-out.png" alt="The signed-out Cortana extension popup in dark mode, headed Welcome to Cortana AI. A numbered badge 1 marks the Sign in with Cortana AI button, and badge 2 marks the Connect with API Key section below it with its API Key field. The two options are separated by the word OR." />
+    </Frame>
+  </Step>
+
+  <Step title="Method 1: Sign in with Cortana AI (recommended)">
+    Click **Sign in with Cortana AI**.
+
+    This reuses the session you already have in the Cortana web app, described on the button as *"Uses your existing app session if you're already logged in (no new tab)"*. Nothing opens, nothing is pasted, and there is no key to store or rotate.
+
+    If you are not logged in to the web app, log in there first and click the button again.
+  </Step>
+
+  <Step title="Method 2: Connect with API Key">
+    Use this when you cannot rely on a browser session, for example on a shared machine. The popup labels it **For advanced users**.
+
+    Create the key in the Cortana web app at **Control Centre → Settings → API Keys** (`/control-center/settings/api-keys`). The page heading is **API Keys**.
+
+    <Frame caption="The API Keys page in the Cortana web app, where extension keys are created.">
+      <img src="/images/ad-tracking/chrome-extension-popup/07-api-keys-page.png" alt="The API Keys settings page in the Cortana web app with a numbered badge marking the button that opens the key creation dialog." />
+    </Frame>
+  </Step>
+
+  <Step title="Generate the key with the right permission">
+    The **Generate API Key** dialog asks for:
+
+    - **Key Name**, for example `CRM Integration`, `Zapier` or `Read-Only Dashboard`
+    - **Accounts**: **All accounts** or **Specific accounts**
+    - **Permission Preset**: **All Access** (*"Full read + write across everything"*) or **Read Only** (*"View data without making changes"*)
+
+    <Frame caption="The Generate API Key dialog with its name, accounts and permission preset fields.">
+      <img src="/images/ad-tracking/chrome-extension-popup/08-generate-dialog.png" alt="The Generate API Key dialog with numbered badges marking the Key Name field, the Accounts choice between All accounts and Specific accounts, and the Permission Preset choice between All Access and Read Only." />
+    </Frame>
+
+    <Warning>
+      **Choose All Access, and choose All accounts.**
+
+      The preset defaults to **Read Only**, and the extension writes. It sends payment links, creates bookings and changes appointment status. A Read Only key connects, then fails the moment you try to do any of that.
+
+      Scoping a key to **Specific accounts** currently breaks the extension in a way that is easy to misread as your data being missing. See the caveat below.
+    </Warning>
+  </Step>
+
+  <Step title="Copy the key">
+    The key appears once, under **Your New API Key**. Copy it before you close the dialog.
+
+    <Frame caption="The newly generated key, shown once under Your New API Key.">
+      <img src="/images/ad-tracking/chrome-extension-popup/09-new-key.png" alt="The dialog after generating a key, showing the Your New API Key panel with the key value blurred and a copy control beside it." />
+    </Frame>
+  </Step>
+
+  <Step title="Paste the key into the popup">
+    Back in the extension, paste into **API Key** (placeholder *"Enter your API key"*) and click **Connect with API Key**.
+
+    <Frame caption="The popup with a key pasted, ready to connect.">
+      <img src="/images/ad-tracking/chrome-extension-popup/10-popup-key-pasted.png" alt="The signed-out popup with the API Key field filled and its value blurred, and a numbered badge marking the Connect with API Key button underneath." />
+    </Frame>
+  </Step>
+
+  <Step title="Pick your business">
+    Once connected, the popup header carries a business selector. Click it and choose the business you want to work in.
+
+    <Frame caption="The business selector open, listing the businesses on the account.">
+      <img src="/images/ad-tracking/chrome-extension-popup/03-business-selector-open.png" alt="The extension popup with the business selector open, showing a searchable list of businesses with their names blurred, and a numbered badge marking the selector." />
+    </Frame>
+
+    Until you pick one, the tabs cannot load anything and the Payment Link tab reads **You have to select a business first.**
+
+    <Frame caption="The Payment Link tab before a business is selected.">
+      <img src="/images/ad-tracking/chrome-extension-popup/04-no-business-notice.png" alt="The extension popup with the header selector reading Select business and a numbered badge marking the message You have to select a business first in place of the payment link list." />
+    </Frame>
+  </Step>
+
+  <Step title="Check that it worked">
+    The popup should now show your four tabs with content behind them: **Payment Link**, **Appointments**, **Tracking Links** and **Help**. It opens on **Payment Link**.
+
+    <Frame caption="The connected popup with a business selected and the Payment Link tab loaded.">
+      <img src="/images/ad-tracking/chrome-extension-popup/02-popup-connected.png" alt="The connected Cortana extension popup with a numbered badge 1 on the business selector and badge 2 on the tab row reading Payment Link, Appointments, Tracking Links and Help, with a list of saved payment templates below." />
+    </Frame>
+  </Step>
+</Steps>
+
+## The Help tab
+
+The **Help** tab is the extension's own reference, so you do not have to leave the popup to remember what a control does.
+
+<AccordionGroup>
+  <Accordion title="Help and getting started">
+    **Help & Getting Started** is open by default and explains the parts you will use, including **Using the Top Bar Controls** and **Viewing Conversion Data**, with entries for the **Business Selector**, **Preset Selector**, **Column Toggle** and **Timezone Selector**.
+
+    <Frame caption="The Help tab, open on Help and Getting Started.">
+      <img src="/images/ad-tracking/chrome-extension-popup/05-help-tab.png" alt="The Help tab of the extension popup showing the Help and Getting Started section expanded with subsections covering the top bar controls and viewing conversion data." />
+    </Frame>
+  </Accordion>
+
+  <Accordion title="Profile and account">
+    **Profile & Account** sits below it and shows the account the extension is connected as, including the email. Check this first if the extension seems to be showing someone else's data.
+
+    <Frame caption="The Profile and Account section of the Help tab.">
+      <img src="/images/ad-tracking/chrome-extension-popup/06-help-profile.png" alt="The Help tab scrolled to the Profile and Account section, showing the connected account details with the email value blurred." />
+    </Frame>
+  </Accordion>
+</AccordionGroup>
+
+## Settings reference
+
+| Setting | What it does | Default | Our recommendation | Caveat |
+|---|---|---|---|---|
+| **Sign in with Cortana AI** | Connects using your existing web app session | Not connected | Use this one | Lapses when you sign out of the web app |
+| **Connect with API Key** | Connects using a key you paste | Not connected | Only when a session will not do | The key is shown once, at creation |
+| **Key Name** | Labels the key in the web app | Empty | Name it after the machine or person using it | Cosmetic only |
+| **Accounts** | Which businesses the key may reach | **All accounts** | Keep **All accounts** | **Specific accounts** currently breaks the contact view |
+| **Permission Preset** | Read and write, or read only | **Read Only** | **All Access** | Read Only blocks sending, booking and status changes |
+| **Business selector** | Which business every tab reads from | None until you choose | Set it before anything else | Wrong business is the usual cause of wrong numbers |
+
+<Warning>
+  **Do not limit a key to specific accounts yet.**
+
+  Pick **Specific accounts** and the extension gets an empty list of businesses back, so the business selector never appears. Opening a contact then fails too, even though the journey beside it loads fine.
+
+  It looks like your data has gone missing. It has not. It is the key. Use **All accounts** with **All Access** until we have fixed this.
+</Warning>
+
+## Troubleshooting
+
+<AccordionGroup>
+  <Accordion title="The popup says I am not signed in">
+    If you connected with **Sign in with Cortana AI**, that session follows the web app. Log in to Cortana in another tab and connect again. If it keeps dropping, connect with an API key instead.
+  </Accordion>
+
+  <Accordion title="I cannot find the extension icon">
+    Click the puzzle-piece icon in the Chrome toolbar, find **Cortana AI**, and pin it.
+  </Accordion>
+
+  <Accordion title="The Cortana columns are missing from Ads Manager">
+    Check the **Columns On/Off** switch in the Cortana row above the table first. That switch is global and it stays off until you turn it back on, so it survives restarts and looks exactly like a broken extension. Then see [Ads Manager troubleshooting](/extension/ads-manager-troubleshooting).
+  </Accordion>
+
+  <Accordion title="There is no business selector, or the list is empty">
+    You are almost certainly connected with a key scoped to **Specific accounts**. Generate a new key with **All accounts** and **All Access**, then paste it in again.
+  </Accordion>
+
+  <Accordion title="I changed something in Cortana and the extension still shows the old data">
+    The extension caches what it has fetched. Use the refresh control in the Cortana row above the table, or close and reopen the popup.
+  </Accordion>
+
+  <Accordion title="Nothing above helped">
+    Reload the extension, then reload the page. Go to `chrome://extensions`, find **Cortana AI**, click the reload icon, then refresh your tab. The extension attaches when the page loads, so the order matters.
+  </Accordion>
+</AccordionGroup>
+
+## FAQ
+
+<AccordionGroup>
+  <Accordion title="Which connection method should I use?">
+    **Sign in with Cortana AI**, unless you are on a machine where you cannot stay logged in to the web app.
+  </Accordion>
+
+  <Accordion title="Can I use a Read Only key?">
+    Only if you never send a payment link, create a booking or change an appointment status. Those are writes and a Read Only key refuses them. Pick **All Access**.
+  </Accordion>
+
+  <Accordion title="I lost my key. Can I see it again?">
+    No. The key is shown once, under **Your New API Key**. Generate a new one and paste that in.
+  </Accordion>
+
+  <Accordion title="Do I need to connect again on another computer?">
+    Yes. The connection belongs to the browser profile, so each Chrome profile connects once.
+  </Accordion>
+
+  <Accordion title="I have several businesses. Does the extension follow the web app?">
+    No. The extension has its own business selector in the popup header. Set it there.
+  </Accordion>
+</AccordionGroup>
+
+## Next step
+
+<CardGroup cols={2}>
+  <Card title="Meta Ads Manager overview" icon="crosshairs" href="/extension/ads-manager-overview">
+    See what the extension adds to your campaign tables and what each control does.
+  </Card>
+
+  <Card title="Payment links" icon="credit-card" href="/extension/payment-links">
+    Build a payment template once and send it to any contact from the popup.
+  </Card>
+</CardGroup>

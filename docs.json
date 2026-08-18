@@ -55,6 +55,54 @@
         ]
       },
       {
+        "tab": "Chrome Extension",
+        "icon": "puzzle-piece",
+        "groups": [
+          {
+            "group": "Getting Started",
+            "icon": "rocket",
+            "pages": [
+              "extension/overview",
+              "extension/install-and-connect"
+            ]
+          },
+          {
+            "group": "Meta Ads Manager",
+            "icon": "crosshairs",
+            "pages": [
+              "extension/ads-manager-overview",
+              "extension/columns-and-presets",
+              "extension/reading-your-data",
+              "extension/conversion-drilldown",
+              "extension/ads-manager-troubleshooting"
+            ]
+          },
+          {
+            "group": "Contacts",
+            "icon": "user",
+            "pages": [
+              "extension/contact-details-and-journey"
+            ]
+          },
+          {
+            "group": "Sales Tools",
+            "icon": "toolbox",
+            "pages": [
+              "extension/payment-links",
+              "extension/appointments",
+              "extension/tracking-links"
+            ]
+          },
+          {
+            "group": "Other Platforms",
+            "icon": "video",
+            "pages": [
+              "extension/youtube-utm"
+            ]
+          }
+        ]
+      },
+      {
         "tab": "SMS / Voice Agents",
         "icon": "robot",
         "groups": [

@@ -1,0 +1,178 @@
+---
+title: "Tracking links"
+description: "Save a destination in the Cortana extension, then create a tracking link for one contact, so a booking or purchase attaches to the right person."
+---
+
+{/* TODO: verify — no Loom walkthrough was supplied for this page. When one is recorded, embed it
+    here with a verbatim transcript inside an <Accordion title="Video transcript"> for the KB. */}
+
+## What this tab does
+
+A tracking link is a short link that knows who you sent it to. You save a destination once as a **preset**, then create a **link** from it for one person. When that person clicks, Cortana knows exactly who it was, so the booking or purchase at the other end is attached to them instead of arriving with no name on it.
+
+This is what saves an Instagram DM where you never got the person's email.
+
+This page documents extension version **4.20**.
+
+<Note>
+  **Before you start**
+
+  - The extension **connected**, with a **business selected**. See [Install and connect](/extension/install-and-connect).
+  - The **pixel installed on the destination page**. The click hands over the identity, and the pixel on the landing page completes the match. See [Tracking Links](/12-tracking-links) for the full explanation.
+  - An **All Access** key if you connected by key. Creating a link counts as a change, and a Read Only key cannot make changes.
+</Note>
+
+## What you can do where
+
+The extension covers the things you do again and again. The rest stays in the web app.
+
+| Task | Extension | Web app |
+|---|---|---|
+| **List your presets** | Yes | Yes |
+| **Create a preset** | Yes | Yes |
+| **Create a link for a contact** | Yes | Yes |
+| **Edit a preset** | No | Yes |
+| **Reorder presets** | No | Yes |
+| **Archive a preset** | No | Yes |
+
+Editing, reordering and archiving live in the web app at **Settings → Tracking Links**, where the list has room for them.
+
+## The tab
+
+<Frame caption="The Tracking Links tab with a saved preset.">
+  <img src="/images/ad-tracking/chrome-extension-tracking-links/02-list.png" alt="The Tracking Links tab of the extension popup showing a count of saved presets, a search box, a New button, a Send to contact field, and a preset row with its destination blurred and a Send button." />
+</Frame>
+
+On a business with none saved, the tab reads **No tracking links yet.** with a **Create your first link** button.
+
+<Frame caption="The Tracking Links tab before any presets exist.">
+  <img src="/images/ad-tracking/chrome-extension-tracking-links/01-empty-state.png" alt="The Tracking Links tab of the extension popup with the empty state reading No tracking links yet and a Create your first link button." />
+</Frame>
+
+## Create a preset
+
+<Steps>
+  <Step title="Open the create dialog">
+    Click **New**, or **Create your first link** on an empty tab.
+  </Step>
+
+  <Step title="Give it a name and a destination">
+    Two fields:
+
+    - **Name**, for example `Booking page`. Only you see it. It is how the link shows up in your list
+    - **Destination**, for example `https://calendly.com/your-team/intro`
+
+    The destination has to start with `http://` or `https://`. You cannot reuse a name you already have, so every row in the list stays easy to tell apart.
+  </Step>
+
+  <Step title="Save it">
+    The preset appears in the list, ready to make links from.
+  </Step>
+</Steps>
+
+## Create a link for one contact
+
+<Steps>
+  <Step title="Pick the contact">
+    Use **Send to** at the top of the tab. Until you choose someone it prompts you to pick a contact.
+
+    <Frame caption="Choosing the contact a tracking link is for.">
+      <img src="/images/ad-tracking/chrome-extension-tracking-links/03-send-dialog.png" alt="The Tracking Links tab with the send-to contact search in use, showing matching contacts with their names and contact details blurred." />
+    </Frame>
+
+    <Note>
+      **The contact is required.** The link is the identity, so there is no such thing as a generic tracking link. That is the whole point of the feature.
+    </Note>
+  </Step>
+
+  <Step title="Send from the preset">
+    Press **Send** on the preset you want. The **Send Tracking Link** dialog opens with the new link, already copied, alongside **Copied!** and **Send Another**.
+
+    <Frame caption="A new tracking link, made for one contact.">
+      <img src="/images/ad-tracking/chrome-extension-tracking-links/04-generated.png" alt="The Send Tracking Link dialog showing the generated tracked link for the chosen contact with the URL blurred, a numbered badge marking the link field, and Copied and Send Another buttons." />
+    </Frame>
+  </Step>
+
+  <Step title="Send the same person the same preset again">
+    You get the **same link back**, not a new one, and the toast says **Existing link copied**.
+
+    <Frame caption="Re-sending the same preset to the same contact returns the existing link.">
+      <img src="/images/ad-tracking/chrome-extension-tracking-links/05-existing-link.png" alt="The Send Tracking Link dialog with the link field blurred and a numbered badge marking it, above a toast reading Existing link copied." />
+    </Frame>
+
+    This is deliberate. One person plus one destination equals one link, so the click history stays in one place however many times you resend it.
+  </Step>
+</Steps>
+
+## Settings reference
+
+| Setting | What it does | Default | Our recommendation | Caveat |
+|---|---|---|---|---|
+| **Name** | What the preset is called in your list | Empty | Name it after the destination | You cannot reuse a name |
+| **Destination** | Where the link sends people | Empty | Point it at a page carrying your pixel | Must start with `http://` or `https://` |
+| **Send to** | The contact the link belongs to | Empty | Choose one before you send | The link is how Cortana knows who clicked |
+| **Search...** | Filters your presets | Empty | Use past a screenful | Filters titles |
+
+## Troubleshooting
+
+<AccordionGroup>
+  <Accordion title="The tab says I have to select a business first">
+    Pick a business in the popup header.
+  </Accordion>
+
+  <Accordion title="I cannot save a preset">
+    Check the destination starts with `http://` or `https://`, and that the name is not one you already use.
+  </Accordion>
+
+  <Accordion title="I need to change a preset's destination">
+    Editing is web app only. Go to **Settings → Tracking Links** in Cortana.
+  </Accordion>
+
+  <Accordion title="Send does nothing">
+    Choose a contact first. If you connected with an API key, check it is **All Access**. Creating a link is a change, and Read Only keys cannot make changes.
+  </Accordion>
+
+  <Accordion title="The popup says I am not signed in">
+    Reconnect from the popup.
+  </Accordion>
+
+  <Accordion title="Clicks are not attaching to the contact">
+    The destination page needs your pixel on it. The click hands over the identity and the pixel completes the match.
+  </Accordion>
+</AccordionGroup>
+
+## FAQ
+
+<AccordionGroup>
+  <Accordion title="What is the difference between a preset and a link?">
+    A **preset** is the saved destination you reuse. A **link** is the one you make from it for a single person.
+  </Accordion>
+
+  <Accordion title="Why did I get the same link twice?">
+    Because it is the same person and the same preset. Cortana returns the existing link so the click history stays together.
+  </Accordion>
+
+  <Accordion title="Can I make a link without a contact?">
+    No. Without a contact there is no identity to carry, which is the entire feature.
+  </Accordion>
+
+  <Accordion title="Can I create presets here, or only in the web app?">
+    You can create them here. Editing, reordering and archiving are web app only.
+  </Accordion>
+
+  <Accordion title="Do these use my own domain?">
+    If the business has a verified tracking domain, links are served from it. Otherwise they use Cortana's shared shortener.
+  </Accordion>
+</AccordionGroup>
+
+## Next step
+
+<CardGroup cols={2}>
+  <Card title="YouTube UTM panel" icon="video" href="/extension/youtube-utm">
+    Add tracked links to your YouTube descriptions from Studio.
+  </Card>
+
+  <Card title="Tracking Links in the app" icon="link" href="/12-tracking-links">
+    The full explanation of how tracking links match a click to a contact.
+  </Card>
+</CardGroup>

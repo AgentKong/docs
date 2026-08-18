@@ -1,0 +1,230 @@
+---
+title: "Payment links"
+description: "Build payment templates for Stripe, Whop, Fanbasis and PayPal in the Cortana extension, then send a tracked payment link to any contact without leaving the page."
+---
+
+{/* TODO: verify — no Loom walkthrough was supplied for this page. When one is recorded, embed it
+    here with a verbatim transcript inside an <Accordion title="Video transcript"> for the KB. */}
+
+## What this tab does
+
+The **Payment Link** tab is the popup's default tab. You save a payment configuration once as a **template**, then send a **link** from it to a specific contact whenever you need one.
+
+Templates are reusable. A link is made for one person at the moment you press send, and that is what ties the payment back to them.
+
+This page documents extension version **4.20**.
+
+<Note>
+  **Before you start**
+
+  - The extension **connected**, with a **business selected**. Without one the tab reads **You have to select a business first.** See [Install and connect](/extension/install-and-connect).
+  - The payment platform **connected to that business** in the Cortana web app.
+  - An **All Access** key if you connected by key. Sending is a write and a Read Only key refuses it.
+</Note>
+
+## The tab at a glance
+
+<Frame caption="The Payment Link tab with saved templates.">
+  <img src="/images/ad-tracking/chrome-extension-payment-links/02-my-links-list.png" alt="The Payment Link tab of the extension popup showing the My Links and Create Link buttons, a count of saved payment templates, a search box, an Import button, a Send to contact search field, and a list of templates each showing its platform, price, send count, a Send button and a delete control." />
+</Frame>
+
+**My Links** lists your templates. **Create Link** builds a new one. The count beside **Payment Links** tells you how many you have.
+
+On a new business the list is empty until you make your first template.
+
+<Frame caption="The Payment Link tab before any templates exist.">
+  <img src="/images/ad-tracking/chrome-extension-payment-links/01-my-links-empty.png" alt="The Payment Link tab of the extension popup with no saved templates, showing the empty state in place of the template list." />
+</Frame>
+
+## Create a template
+
+<Steps>
+  <Step title="Open Create Link and choose a platform">
+    Click **Create Link**. Choose from the four supported platforms: **Stripe**, **Whop**, **Fanbasis** and **PayPal**.
+
+    <Frame caption="Choosing the payment platform for a new template.">
+      <img src="/images/ad-tracking/chrome-extension-payment-links/03-create-platform-picker.png" alt="The Create Link view in the extension popup with a numbered badge marking the platform picker offering Stripe, Whop, Fanbasis and PayPal." />
+    </Frame>
+
+    Only platforms connected to this business will have anything to select underneath.
+  </Step>
+
+  <Step title="Fill in the platform's fields">
+    Each platform asks for what it needs.
+
+    <AccordionGroup>
+      <Accordion title="Stripe">
+        Pick the Stripe account, then the product and price. The product field searches, with the placeholder **Search or select product & price**.
+
+        <Frame caption="Building a Stripe template.">
+          <img src="/images/ad-tracking/chrome-extension-payment-links/04-create-stripe.png" alt="The Create Link view configured for Stripe, with numbered badges marking the account selector and the product and price search field." />
+        </Frame>
+      </Accordion>
+
+      <Accordion title="Whop">
+        Pick the Whop company, then the product, then the plan.
+
+        <Frame caption="Building a Whop template.">
+          <img src="/images/ad-tracking/chrome-extension-payment-links/05-create-whop.png" alt="The Create Link view configured for Whop, with numbered badges marking the company selector, the product selector and the plan selector." />
+        </Frame>
+      </Accordion>
+
+      <Accordion title="PayPal">
+        Pick the PayPal account and set the payment details.
+
+        <Frame caption="Building a PayPal template.">
+          <img src="/images/ad-tracking/chrome-extension-payment-links/06-create-paypal.png" alt="The Create Link view configured for PayPal, with a numbered badge marking the account selector." />
+        </Frame>
+      </Accordion>
+
+      <Accordion title="Fanbasis">
+        Pick the Fanbasis account and its offer.
+
+        <Frame caption="Building a Fanbasis template.">
+          <img src="/images/ad-tracking/chrome-extension-payment-links/07-create-fanbasis.png" alt="The Create Link view configured for Fanbasis, with a numbered badge marking the account selector." />
+        </Frame>
+      </Accordion>
+    </AccordionGroup>
+
+    If a selector loads nothing, that platform is not connected to this business yet. Connect it in the web app.
+  </Step>
+
+  <Step title="Save the template">
+    Save, and it appears in **My Links** ready to send. Templates are per business.
+  </Step>
+</Steps>
+
+## Send a link to a contact
+
+<Steps>
+  <Step title="Find the contact">
+    Use the **Send to** search at the top of the tab. It searches by name, email or phone, with the placeholder **Search by name, email, or phone...**
+
+    <Frame caption="Choosing the contact to send a payment link to.">
+      <img src="/images/ad-tracking/chrome-extension-payment-links/08-send-dialog-contact.png" alt="The Payment Link tab with the send-to contact search in use, showing matching contacts with their names, emails and phone numbers blurred." />
+    </Frame>
+  </Step>
+
+  <Step title="Send from the template">
+    With a contact chosen, press **Send** on the template you want. Cortana makes a link for that contact and sends it.
+
+    A toast confirms the send, naming the contact. When the link is also copied to your clipboard the toast says so, ending in **· copied**.
+
+    <Warning>
+      **Send makes a real payment link and sends it to a real person.** There is no preview step between the button and the customer. Check the contact and the template before you press it.
+    </Warning>
+  </Step>
+
+  <Step title="Send the same template to several people">
+    Pick a contact in the bar at the top and press **Send** on each template you want them to get, without re-searching each time.
+
+    <Frame caption="The contact bar used for sending several templates to one person.">
+      <img src="/images/ad-tracking/chrome-extension-payment-links/10-bulk-contact-bar.png" alt="The Payment Link tab with a contact selected in the bar above the template list, the contact's details blurred, and a clear control beside it." />
+    </Frame>
+  </Step>
+</Steps>
+
+## Sub-functionality
+
+<AccordionGroup>
+  <Accordion title="Import existing Stripe links">
+    **Import** pulls payment links that already exist in your Stripe account into Cortana as templates, so you do not rebuild them by hand.
+
+    <Frame caption="Importing existing links from Stripe.">
+      <img src="/images/ad-tracking/chrome-extension-payment-links/11-import-stripe.png" alt="The import dialog listing existing Stripe payment links available to import as templates, with their names and prices blurred and a control to import the selection." />
+    </Frame>
+
+    Imported templates are marked as imported in the list.
+  </Accordion>
+
+  <Accordion title="Rename and remove templates">
+    Each row carries a rename control and a delete control. Renaming confirms with **Renamed**, removing with **Removed**. Removing a template does not revoke links already sent.
+  </Accordion>
+
+  <Accordion title="Search your templates">
+    Once you have more than a screenful, the **Search…** box above the list filters by name.
+  </Accordion>
+
+  <Accordion title="No business selected">
+    Every tab needs a business. Until you pick one the tab reads **You have to select a business first.**
+
+    <Frame caption="The Payment Link tab with no business selected.">
+      <img src="/images/ad-tracking/chrome-extension-payment-links/13-no-business.png" alt="The extension popup with the header reading Select business and the Payment Link tab showing the message You have to select a business first." />
+    </Frame>
+  </Accordion>
+</AccordionGroup>
+
+## Settings reference
+
+| Setting | What it does | Default | Our recommendation | Caveat |
+|---|---|---|---|---|
+| **Platform** | Which processor the template uses | None | Match where the business takes payment | Only connected platforms load options |
+| **Account** | Which connected account to charge through | First available | Check on multi-account businesses | Empty means not connected |
+| **Product and price** | What the customer pays for | None | Search rather than scroll | Comes from the platform, not Cortana |
+| **Send to** | The contact who receives the link | Empty | Always set before pressing Send | The link is made for this person |
+| **Import** | Brings existing Stripe links in as templates | Not applicable | Use it instead of rebuilding | Stripe only |
+| **Search…** | Filters your template list | Empty | Use past a screenful | Filters names |
+
+## Troubleshooting
+
+<AccordionGroup>
+  <Accordion title="The tab says I have to select a business first">
+    Pick a business in the popup header. Every tab reads from it.
+  </Accordion>
+
+  <Accordion title="My platform's dropdown is empty">
+    That platform is not connected to this business. Connect it in the Cortana web app, then reopen the popup.
+  </Accordion>
+
+  <Accordion title="Send fails or nothing happens">
+    If you connected with an API key, check it is **All Access**. Sending is a write, and a **Read Only** key cannot do it. See [Install and connect](/extension/install-and-connect).
+  </Accordion>
+
+  <Accordion title="The popup says I am not signed in">
+    Reconnect from the popup.
+  </Accordion>
+
+  <Accordion title="I created a template in the web app and cannot see it here">
+    Close and reopen the popup to refetch. The extension caches what it has already loaded.
+  </Accordion>
+
+  <Accordion title="Nothing above helped">
+    Reload the extension at `chrome://extensions`, then reopen the popup.
+  </Accordion>
+</AccordionGroup>
+
+## FAQ
+
+<AccordionGroup>
+  <Accordion title="What is the difference between a template and a link?">
+    A **template** is the saved configuration, for example a Stripe product at a price. A **link** is what it makes for one contact when you press Send.
+  </Accordion>
+
+  <Accordion title="Which platforms are supported?">
+    Four: Stripe, Whop, Fanbasis and PayPal.
+  </Accordion>
+
+  <Accordion title="Can I send without choosing a contact?">
+    No, and that is deliberate. The contact is what ties the payment back to the person and their journey.
+  </Accordion>
+
+  <Accordion title="Does deleting a template kill links I already sent?">
+    No. Removing a template stops you sending new links from it.
+  </Accordion>
+
+  <Accordion title="Where do payments show up afterwards?">
+    Against the contact, and in your conversion columns if that payment is one of your tracked conversion sources. See [Contact details and journey](/extension/contact-details-and-journey).
+  </Accordion>
+</AccordionGroup>
+
+## Next step
+
+<CardGroup cols={2}>
+  <Card title="Appointments" icon="calendar" href="/extension/appointments">
+    See the calendar, change a status, and create a booking from the popup.
+  </Card>
+
+  <Card title="Tracking links" icon="link" href="/extension/tracking-links">
+    Make a tracking link for one contact from a saved destination.
+  </Card>
+</CardGroup>

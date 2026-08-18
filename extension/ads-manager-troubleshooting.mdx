@@ -1,0 +1,285 @@
+---
+title: "Ads Manager troubleshooting"
+description: "Tell Cortana's three notices apart, fix misaligned rows, understand shortened headers, and act on the Campaign ID card, the status bar and the setup indicator."
+---
+
+{/* Two Looms are embedded below, under the Campaign ID notices. No page-level walkthrough was
+    supplied; if one is recorded, embed it here with a verbatim transcript for the KB. */}
+
+## What this page covers
+
+Two layout problems that look like faults, and the three notices Cortana can put on the page.
+
+This page documents extension version **4.20**.
+
+<Note>
+  **Before you start**
+
+  - The extension **connected**, with a business selected. See [Install and connect](/extension/install-and-connect).
+</Note>
+
+## Which notice am I looking at?
+
+Cortana has three ways of telling you something is wrong, and they mean different things. Find the one on your screen before you do anything.
+
+| What is on screen | Where it is | What it means | What you do |
+|---|---|---|---|
+| A card headed **Add** or **Move the Campaign ID column** | A floating card, lower right | Setup is missing. Cortana cannot tell two same-named rows apart | Add or move Meta's own ID column. [Jump](#the-campaign-id-notices) |
+| A coloured **strip across the Cortana row** | Full width, above the business and preset controls | We have flagged a problem our end that is delaying or blocking your numbers | Read the strip, then **Refresh**. [Jump](#the-status-bar-in-the-cortana-row) |
+| A card headed **Meta changed the ads table** | A floating card, with your Cortana columns gone | Both of Cortana's ways of reading the table have failed | Nothing. We already know. [Jump](#if-the-columns-vanish-and-you-see-meta-changed-the-ads-table) |
+
+The first is about **your setup**. The second is about **us, or the connection**. The third is about **Meta**.
+
+## Rows shifting or data not lining up
+
+Meta's table and Cortana's columns are drawn by two different pieces of software. When Meta's name column is narrow, rows can shift so Cortana's values look one row out.
+
+**Drag Meta's column border to make the column wider.** Hover the edge of a column such as **Delivery** or **Budget** and drag. Once there is room, the Cortana data snaps back into line.
+
+<Frame caption="Meta's resize handle, at the edge after the last Cortana column.">
+  <img src="/images/ad-tracking/chrome-extension-adsmanager/20-resize-handle.png" alt="The Ads Manager table header with a numbered badge marking Meta's column resize handle, positioned immediately after the last Cortana column and before Meta's Campaign ID column." />
+</Frame>
+
+<Warning>
+  **This fixes misalignment. It does not fix shortened headers.** Those are two different problems and only the first one responds to dragging. See the next section.
+</Warning>
+
+## Shortened column headers
+
+Cortana's header labels are cut short with an ellipsis when the conversion source name is long.
+
+<Frame caption="Cortana headers shortened at a narrow window width.">
+  <img src="/images/ad-tracking/chrome-extension-adsmanager/21-truncated.png" alt="The Ads Manager table captured at a deliberately narrow window width, showing Cortana column headers cut short with ellipses and Meta's rows misaligned against the Cortana columns." />
+</Frame>
+
+**Widening the column will not fix this.** Every Cortana column is a fixed width, between 80 and 110 pixels depending on which column it is. They do not stretch when there is more room, so a name longer than about nine characters gets shortened no matter what you do to the table.
+
+What actually helps:
+
+- **Hover the header** to read the full name.
+- **Use shorter conversion source names** in Cortana, if you control them.
+- **Show fewer columns**, so the ones you care about are the ones on screen. See [Columns and presets](/extension/columns-and-presets).
+
+## The Campaign ID notices
+
+Cortana matches each row to your data using Meta's own ID column. When it cannot, it says so in a card on the page. There are two versions.
+
+### Add the Campaign ID column to your table
+
+The ID column is not in your table at all. Two campaigns can share a name, and without the ID both rows show the same combined total.
+
+<Frame caption="The notice shown when the ID column is missing entirely.">
+  <img src="/images/ad-tracking/chrome-extension-adsmanager/27-id-notice-add.png" alt="A Cortana notice card over Ads Manager headed Add the Campaign ID column to your table, with three numbered steps and a Got it button." />
+</Frame>
+
+**The fix**, as the card lists it:
+
+1. Open **Columns → Customize columns**
+2. Search for **Campaign ID** and tick it
+3. Drag it directly after **Campaign name**, then click **Apply**
+
+Watch it done end to end:
+
+<iframe src="https://www.loom.com/embed/cbb01d8b01954af1b4511cf6064aeed2" frameBorder="0" webkitallowfullscreen mozallowfullscreen allowFullScreen style={{ width: '100%', height: '400px' }} />
+
+{/* TODO: transcript — Loom has no captions on this recording yet. When it does, paste the verbatim
+    text into an <Accordion title="Video transcript"> here, as on /10-chrome-extension. */}
+
+### Move the Campaign ID column next to Campaign name
+
+The column is switched on but parked at the far right. Meta only renders the columns currently in view, so those ID cells stay empty and Cortana cannot read them.
+
+<Frame caption="The notice shown when the ID column exists but sits too far right.">
+  <img src="/images/ad-tracking/chrome-extension-adsmanager/26-id-notice-move.png" alt="A Cortana notice card over Ads Manager headed Move the Campaign ID column next to Campaign name, with three numbered steps and a Got it button." />
+</Frame>
+
+**The fix**, as the card lists it:
+
+1. Open **Columns → Customize columns**
+2. Drag **Campaign ID** so it sits directly after **Campaign name**
+3. Click **Apply**
+
+The drag is the fiddly part. Watch it:
+
+<iframe src="https://www.loom.com/embed/ad4e9c50378e4bfba0d1b57a1436633b" frameBorder="0" webkitallowfullscreen mozallowfullscreen allowFullScreen style={{ width: '100%', height: '400px' }} />
+
+{/* TODO: transcript — Loom has no captions on this recording yet. When it does, paste the verbatim
+    text into an <Accordion title="Video transcript"> here, as on /10-chrome-extension. */}
+
+<Note>
+  **On the Ad sets and Ads tabs the names change.** The notice asks for **Ad set ID** next to **Ad set name**, and **Ad ID** next to **Ad name**. The fix is the same dialog.
+</Note>
+
+Both cards are labelled **Critical**, and that label never softens, even when your numbers look right today.
+
+Here is why. Cortana can usually find the ID another way, hidden in the page. That hiding place is not something Meta promises to keep, so any update on their side can take it away without warning. The day it goes, two campaigns with the same name quietly become one row of totals and nothing tells you. Adding the column is the only fix we control, so the card keeps asking until you add it.
+
+<Warning>
+  **If the card still says "Add" after you have added the column, reload the page.** The card does not always change its wording while you stay on the same page. It can keep asking for something you have already done, for a minute or two. Reload and it shows the right message. This is a known bug.
+</Warning>
+
+## The setup indicator
+
+Clicking **Got it** dismisses the card, but the job is still outstanding, so the notice moves into the indicator in the Cortana row rather than disappearing.
+
+<Frame caption="The dismissed notice, parked in the top row indicator.">
+  <img src="/images/ad-tracking/chrome-extension-adsmanager/28-setup-indicator.png" alt="The Cortana control row after dismissing a notice card, with a numbered badge marking the setup indicator that remains lit while the underlying problem is unresolved." />
+</Frame>
+
+The indicator clears when the column is actually fixed. Dismissing is a way to get the card off your screen, not a way to resolve it.
+
+Hover the indicator to see where you stand. With something outstanding it reads **Critical:** followed by the ask. With nothing outstanding it reads **Cortana setup is complete**, which is the state you want it sitting in.
+
+## The status bar in the Cortana row
+
+The third notice is not a card. It is a coloured strip across the top of the Cortana row, above the business and preset controls, and it is the only one of the three that can be about us rather than about your table.
+
+<Frame caption="The status bar in its yellow state, sitting above the Cortana controls.">
+  <img src="/images/ad-tracking/chrome-extension-adsmanager/35-outage-banner.png" alt="The black Cortana control row in Meta Ads Manager with a yellow status strip across the top reading Some attribution data may be delayed, with a Refresh button and a dismiss cross at its right-hand end." />
+</Frame>
+
+**Red is a problem that stops attribution data arriving. Yellow is a smaller one.** Neither one stops your tracking: conversions carry on being recorded and attributed, and everything is still in the Cortana web app. What the strip tells you is that the numbers in this table may not be current.
+
+| Colour | What raised it | What it says | Dismiss hides it for |
+|---|---|---|---|
+| **Red** | We flagged a problem our end | Whatever we sent with the flag | 30 minutes |
+| **Yellow** | We flagged a smaller problem our end | Whatever we sent, or **Some attribution data may be delayed.** when we sent no wording | 1 hour |
+| **Yellow** | The extension's own failure detection | **Having trouble connecting to Meta Ads Manager. Try refreshing columns or reloading the page.** | 1 hour |
+
+The extension asks us for the current status every five minutes, so a flag we set reaches you within about five minutes and clears the same way. **A flag from us outranks the extension's own detection**, so if both were true at once you would read our wording, not the local one.
+
+### The controls on the strip
+
+| Control | What it does |
+|---|---|
+| **Refresh** | Re-runs the whole column injection in place: settings are reloaded, the cached data is dropped and fetched again, without reloading the page |
+| **Go to Dashboard** | Appears **instead of** Refresh, as a red button, when the flag we sent includes somewhere else to go |
+| **×** | Dismisses the strip for the period in the table above. It returns after that if the condition is still there |
+
+<Note>
+  **You will not see the third row in version 4.20.** The extension is meant to show that message after three failed attempts to load your columns. In this version the failures are not counted properly, so it never reaches three. We know about it.
+
+  So if you do see a strip, it came from us. The third message is written down above only so the wording is on record.
+</Note>
+
+## If the columns vanish and you see "Meta changed the ads table"
+
+This is the other notice, and it means something different from the ID ones. Those two ask you to change a setting. This one tells you the extension itself cannot read the table.
+
+The card is labelled **Cortana status**, headed **Meta changed the ads table**, and reads:
+
+> Meta updated the Ads Manager layout, so Cortana's columns can't load right now. Our team has already been alerted automatically and an update is on the way. Your tracking and conversion data is safe, nothing has been lost.
+
+**There is nothing to fix on your side, and nothing to report.** Meta changes the markup of Ads Manager from time to time. When a change stops Cortana finding the rows, the extension reports it to us automatically, with the details our engineers need to write the fix. You do not need to open a ticket, take a screenshot, or paste anything into a console.
+
+### Why this card is rarer than it sounds
+
+Meta changing its layout is not enough on its own to bring it up. Cortana has two ways of finding your rows: a main one and a backup. The card only appears when **both** of them fail.
+
+We tested it. We broke the main way on purpose, and the backup found the rows anyway and kept every column on screen. The extension recorded it as a backup being used, not as a break, and no card appeared, because from your side nothing was wrong.
+
+So the card means something quite specific:
+
+| What you see | What it means |
+|---|---|
+| **Columns working normally** | Either nothing has changed, or something has and the backup handled it. You are not told, because there is nothing for you to do |
+| **This card, columns gone** | A Meta change beat the main way **and** the backup. That is rare, we already know, and a fix is on the way |
+
+What to expect:
+
+| Behaviour | Detail |
+|---|---|
+| **When it appears** | Only when both ways of reading the table have failed and Cortana can see no rows at all. A change the backup handles shows you no card, because your columns keep working |
+| **When it clears** | By itself, as soon as rows render again. You do not need to dismiss it |
+| **If you dismiss it** | **Got it** hides it for 24 hours. It returns after that if the break is still there, and any new version of the extension brings it back immediately, so an update that was supposed to fix it cannot hide behind an old dismissal |
+
+There is no screenshot of this card because the state never occurred while these pages were being captured, and we will not stage a fake outage to photograph one.
+
+<Warning>
+  **Do not confuse this with the Columns On/Off switch.** Both make every Cortana column disappear. If your columns are gone and there is no card on screen, it is the switch, not Meta.
+</Warning>
+
+## Settings reference
+
+| Setting | What it does | Default | Our recommendation | Caveat |
+|---|---|---|---|---|
+| **Meta column width** | Widens Meta's own columns | Meta's default | Widen when rows misalign | Does not change Cortana header truncation |
+| **Campaign ID column** | Lets Cortana tell same-named rows apart | Not always present | Add it directly after the name column | Must be next to the name column to render |
+| **Got it** | Dismisses a notice card | Card showing | Use only after doing the fix | Parks the notice in the indicator |
+| **Columns On/Off** | Shows or hides Cortana columns | On | Check first when columns vanish | Global and persistent |
+| **Setup indicator** | Shows whether Cortana needs anything from you | Clear | Hover it to read the outstanding ask | Reads **Cortana setup is complete** when there is nothing to do |
+| **Got it** on the Meta card | Hides the outage card | Card showing | Leave it, it clears itself | Hides for 24 hours, and returns on a new extension version |
+| **Refresh** on the status bar | Re-runs the column injection in place | Strip showing | Try it once before reloading | Does not fix a problem at our end |
+| **×** on the status bar | Hides the status bar | Strip showing | Only if it is in your way | Comes back in 30 minutes if red, an hour if yellow |
+
+## Troubleshooting
+
+<AccordionGroup>
+  <Accordion title="The popup says I am not signed in">
+    Reconnect from the popup, then reload the Ads Manager tab. See [Install and connect](/extension/install-and-connect).
+  </Accordion>
+
+  <Accordion title="Two rows show identical numbers">
+    They share a name and the ID column is missing or parked right. Add or move it as above.
+  </Accordion>
+
+  <Accordion title="I changed something in Cortana and the table has not caught up">
+    Use the refresh control in the Cortana row. The extension caches what it fetched.
+  </Accordion>
+
+  <Accordion title="The notice will not go away even though I fixed the column">
+    Reload the page. This is the known bug described under [the Campaign ID notices](#the-campaign-id-notices).
+  </Accordion>
+
+  <Accordion title="There is a coloured strip across the Cortana row">
+    Press **Refresh** once. If the numbers still look stale, come back later: the strip clears when we clear the flag behind it. See [the status bar](#the-status-bar-in-the-cortana-row).
+  </Accordion>
+
+  <Accordion title="All my Cortana columns have disappeared">
+    The card on screen tells you which of the two causes it is. If you see **Meta changed the ads table**, Meta shipped a layout change and a fix is already on its way. If there is no card, it is the **Columns On/Off** switch, which stays off until you turn it back on, even after a restart.
+  </Accordion>
+
+  <Accordion title="Do I need to report the Meta changed the ads table error?">
+    No. The extension reports it automatically, with the technical detail needed to write the fix.
+  </Accordion>
+
+  <Accordion title="Nothing above helped">
+    Reload the extension, then the page. Go to `chrome://extensions`, find **Cortana AI**, click reload, then refresh your tab.
+  </Accordion>
+</AccordionGroup>
+
+## FAQ
+
+<AccordionGroup>
+  <Accordion title="Why can I not just widen the Cortana columns?">
+    They are a fixed width so the strip stays aligned with Meta's rows as you scroll. The trade-off is that long names are shortened.
+  </Accordion>
+
+  <Accordion title="Does adding the Campaign ID column change my reporting?">
+    No. It is one of Meta's own columns and it does not affect your numbers. Cortana reads it to tell same-named rows apart.
+  </Accordion>
+
+  <Accordion title="Can I hide the Campaign ID column once Cortana has read it?">
+    No. Cortana reads it from the rendered table every time, so it has to stay visible and next to the name column.
+  </Accordion>
+
+  <Accordion title="Do any of these notices mean my tracking is broken?">
+    No. None of them. Conversions carry on being recorded and attributed whatever is on screen here, and everything is still in the Cortana web app. All three are about what this one table can show you.
+  </Accordion>
+
+  <Accordion title="I dismissed the status bar and it came back">
+    That is what dismissing does. Red hides for 30 minutes, yellow for an hour, and the strip returns after that if the condition has not cleared. There is no way to turn it off permanently, because it is telling you your numbers may not be current.
+  </Accordion>
+</AccordionGroup>
+
+## Next step
+
+<CardGroup cols={2}>
+  <Card title="Contact details and journey" icon="user" href="/extension/contact-details-and-journey">
+    What the contact record shows once you drill into a conversion.
+  </Card>
+
+  <Card title="Columns and presets" icon="table-columns" href="/extension/columns-and-presets">
+    Show fewer columns, or change which conversion sources appear.
+  </Card>
+</CardGroup>

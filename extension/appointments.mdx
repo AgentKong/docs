@@ -1,0 +1,198 @@
+---
+title: "Appointments"
+description: "See your Cortana booking calendar in the extension popup, filter it, change an appointment's status, create a booking, and share booking links."
+---
+
+{/* TODO: verify — no Loom walkthrough was supplied for this page. When one is recorded, embed it
+    here with a verbatim transcript inside an <Accordion title="Video transcript"> for the KB. */}
+
+## What this tab does
+
+The **Appointments** tab mirrors your Cortana booking calendar inside the popup, so you can check what is booked, mark whether someone showed up, and book someone in without opening the web app.
+
+It has two sub-tabs: **Calendar** and **Booking Links**.
+
+This page documents extension version **4.20**.
+
+<Note>
+  **Before you start**
+
+  - The extension **connected**, with a **business selected**. See [Install and connect](/extension/install-and-connect).
+  - A **booking calendar** set up for that business in Cortana.
+  - An **All Access** key if you connected by key. Creating bookings and changing status are writes.
+</Note>
+
+## The calendar
+
+Three views, switchable at the top: month, week and day.
+
+<Frame caption="The Appointments tab on the month view.">
+  <img src="/images/ad-tracking/chrome-extension-appointments/01-calendar-month.png" alt="The Appointments tab of the extension popup showing a month grid with appointment entries on several days, attendee names blurred, and view controls above the calendar." />
+</Frame>
+
+<AccordionGroup>
+  <Accordion title="Week view">
+    <Frame caption="The week view, showing appointments by day across a week.">
+      <img src="/images/ad-tracking/chrome-extension-appointments/02-calendar-week.png" alt="The Appointments tab on the week view, showing columns for each day of the week with appointment entries and attendee names blurred." />
+    </Frame>
+  </Accordion>
+
+  <Accordion title="Day view">
+    <Frame caption="The day view, showing one day in detail.">
+      <img src="/images/ad-tracking/chrome-extension-appointments/03-calendar-day.png" alt="The Appointments tab on the day view, listing the appointments for a single day in time order with attendee names blurred." />
+    </Frame>
+  </Accordion>
+</AccordionGroup>
+
+## Filter what you see
+
+Use the filter control to narrow the calendar, which matters once a business has several calendars or a busy week.
+
+<Frame caption="The appointment filter menu.">
+  <img src="/images/ad-tracking/chrome-extension-appointments/04-filter-menu.png" alt="The Appointments tab with the filter menu open over the calendar, showing the available filter options." />
+</Frame>
+
+## Work with an appointment
+
+<Steps>
+  <Step title="Open it">
+    Click an appointment to see its details: who it is with, when, which calendar, and its current status.
+
+    <Frame caption="An appointment's details.">
+      <img src="/images/ad-tracking/chrome-extension-appointments/05-appointment-details.png" alt="The appointment details view in the extension popup showing the attendee, date and time, calendar and status, with the attendee's personal details blurred." />
+    </Frame>
+  </Step>
+
+  <Step title="Change its status">
+    Open the status control and pick the new state. There are six:
+
+    | Status | Means |
+    |---|---|
+    | **Booked** | Scheduled, not yet happened |
+    | **Completed** | The meeting took place and is finished |
+    | **Rescheduled** | Moved to another time |
+    | **Cancelled** | Called off |
+    | **Shown** | The person turned up |
+    | **Not shown** | The person did not turn up |
+
+    <Frame caption="Changing an appointment's status.">
+      <img src="/images/ad-tracking/chrome-extension-appointments/06-status-dropdown.png" alt="The appointment details view with the status dropdown open, listing Booked, Completed, Rescheduled, Cancelled, Shown and Not shown." />
+    </Frame>
+
+    <Tip>
+      Marking **Shown** and **Not shown** honestly is what makes your show-rate reporting worth reading, and those statuses feed the conversion columns in Ads Manager when you track booking events.
+    </Tip>
+  </Step>
+</Steps>
+
+## Create a booking
+
+<Steps>
+  <Step title="Open the new booking form">
+    Start a new booking from the calendar. Choose the contact, the calendar and the time.
+
+    <Frame caption="Creating a booking from the popup.">
+      <img src="/images/ad-tracking/chrome-extension-appointments/07-new-booking.png" alt="The new booking form in the extension popup with fields for the contact, the calendar, and the date and time, with entered values blurred." />
+    </Frame>
+  </Step>
+
+  <Step title="When the provider is fixed">
+    Some calendars are tied to one provider. In that case the provider field is locked and shows who the booking will be with.
+
+    <Frame caption="A new booking on a calendar with a fixed provider.">
+      <img src="/images/ad-tracking/chrome-extension-appointments/08-new-booking-locked-provider.png" alt="The new booking form with the provider field locked to a single person and a numbered badge marking it, with the provider name blurred." />
+    </Frame>
+  </Step>
+</Steps>
+
+<Warning>
+  **Creating a booking here creates a real appointment**, the same as booking in the web app. The attendee is notified according to that calendar's settings.
+</Warning>
+
+## Booking links
+
+The **Booking Links** sub-tab lists the shareable link for each booking calendar, so you can send someone a link instead of booking for them.
+
+<Frame caption="The Booking Links sub-tab.">
+  <img src="/images/ad-tracking/chrome-extension-appointments/09-booking-links-list.png" alt="The Booking Links sub-tab of the Appointments tab listing each booking calendar with its shareable link and a control to send or copy it, with link values blurred." />
+</Frame>
+
+Use the send control on a row to share the link.
+
+<Frame caption="Sharing a booking link.">
+  <img src="/images/ad-tracking/chrome-extension-appointments/11-send-link-menu.png" alt="The Booking Links sub-tab with the send menu open on a row, showing the options for sharing that booking link." />
+</Frame>
+
+<Note>
+  **If a business has no booking handle yet**, the list shows a **Create booking link** button instead of links. Use it once and the links appear. There is no screenshot of this state because the businesses used for these captures already had handles.
+</Note>
+
+## Settings reference
+
+| Setting | What it does | Default | Our recommendation | Caveat |
+|---|---|---|---|---|
+| **Month, week, day** | Calendar view | Month | Day view when working a list of calls | View only |
+| **Filter** | Narrows what the calendar shows | Unfiltered | Filter by calendar on busy weeks | Affects display only |
+| **Status** | Marks what happened | **Booked** | Update the same day | Feeds show-rate and conversion reporting |
+| **New booking** | Creates a real appointment | Not applicable | Confirm the time zone before saving | Notifies the attendee |
+| **Booking Links** | Shareable link per calendar | One per calendar | Send instead of booking manually | Needs a booking handle |
+
+## Troubleshooting
+
+<AccordionGroup>
+  <Accordion title="The tab says I have to select a business first">
+    Pick a business in the popup header.
+  </Accordion>
+
+  <Accordion title="The calendar is empty">
+    Check the business, the view and the filter. A month with bookings still looks empty on a day view of a free day.
+  </Accordion>
+
+  <Accordion title="I cannot change a status or create a booking">
+    Both are writes. If you connected with an API key, make sure it is **All Access**. See [Install and connect](/extension/install-and-connect).
+  </Accordion>
+
+  <Accordion title="The popup says I am not signed in">
+    Reconnect from the popup.
+  </Accordion>
+
+  <Accordion title="I booked in the web app and it is not here yet">
+    Close and reopen the popup to refetch.
+  </Accordion>
+
+  <Accordion title="Nothing above helped">
+    Reload the extension at `chrome://extensions`, then reopen the popup.
+  </Accordion>
+</AccordionGroup>
+
+## FAQ
+
+<AccordionGroup>
+  <Accordion title="Is this the same calendar as the web app?">
+    Yes. The popup shows your Cortana booking calendar, and changes you make here apply there.
+  </Accordion>
+
+  <Accordion title="What is the difference between Completed and Shown?">
+    **Shown** records that the person turned up. **Completed** records that the meeting is finished. A no-show can still be closed out, which is why both exist.
+  </Accordion>
+
+  <Accordion title="Does changing a status notify the attendee?">
+    Status is internal record-keeping. Creating or rescheduling a booking is what triggers attendee notifications, according to the calendar's settings.
+  </Accordion>
+
+  <Accordion title="Can I edit an appointment's time here?">
+    Use **Rescheduled** to record a move, and manage the reschedule itself in the web app where the full editor lives.
+  </Accordion>
+</AccordionGroup>
+
+## Next step
+
+<CardGroup cols={2}>
+  <Card title="Tracking links" icon="link" href="/extension/tracking-links">
+    Make a tracking link for one contact so a booking attaches to the right person.
+  </Card>
+
+  <Card title="Payment links" icon="credit-card" href="/extension/payment-links">
+    Send a payment link to someone who just booked.
+  </Card>
+</CardGroup>

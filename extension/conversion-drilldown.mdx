@@ -1,0 +1,170 @@
+---
+title: "Conversion drill-down"
+description: "Click any Cortana conversion number in Meta Ads Manager to see the individual contacts behind it, search them, and open a contact's full customer journey."
+---
+
+{/* TODO: verify — no Loom walkthrough was supplied for this page. When one is recorded, embed it
+    here with a verbatim transcript inside an <Accordion title="Video transcript"> for the KB. */}
+
+## What this is for
+
+A conversion count tells you how many. The drill-down tells you **who**.
+
+Click a number in a Cortana conversion column and you get the list of people who make up that number, with the attribution behind each one. From there you can open any contact and trace their whole journey back to the ad.
+
+This page documents extension version **4.20**.
+
+<Note>
+  **Before you start**
+
+  - The extension **connected**, with Cortana columns visible. See [Reading your data](/extension/reading-your-data).
+</Note>
+
+<Warning>
+  This screen shows real customer names, emails and phone numbers. Take care when screen sharing.
+</Warning>
+
+## Open the drill-down
+
+<Steps>
+  <Step title="Click a conversion number">
+    Click any non-zero value in a Cortana **conversion** column. The **Conversion Details** dialog opens, titled with the column you clicked.
+
+    <Frame caption="The Conversion Details dialog, listing the contacts behind one conversion count.">
+      <img src="/images/ad-tracking/chrome-extension-adsmanager/22-conversion-details.png" alt="The Conversion Details dialog open over Ads Manager. It is titled with the conversion column name and shows which entity the conversions are for, a search box, and a table of contacts with their names, emails and phone numbers blurred, plus Event Value, Attribution and Meta CAPI columns. A numbered badge marks the search box and a total conversions count sits in the footer." />
+    </Frame>
+
+    Only **conversion count** columns and **URL Params** open something. Cost per, Total Revenue, ROI and ROAS are display only, so clicking them does nothing.
+  </Step>
+
+  <Step title="Read the header">
+    The title reads `Conversion Details: <column name>`, and underneath, `Showing conversions for [<entity>] in the campaign dimension` names the row you clicked.
+  </Step>
+
+  <Step title="Read the table">
+    | Column | What it shows |
+    |---|---|
+    | **Contact** | The person's name, and the link to open them |
+    | **Email** | Their email address |
+    | **Phone** | Their phone number |
+    | **Event Value** | What the conversion was worth |
+    | **Attribution** | The source Cortana credited, with a hover for the full UTM breakdown |
+    | **Meta CAPI** | Whether the conversion was sent back to Meta |
+
+    Two further columns, **Data** and **Date**, sit to the right of the visible area. Scroll the table sideways to reach them.
+
+    The footer totals the list: **Total: N conversions** and **Total Value**.
+  </Step>
+
+  <Step title="Search for someone">
+    Type into **Search name, email...** to narrow the list. The footer follows, showing the filtered count and noting how many it was filtered from.
+
+    <Frame caption="The drill-down filtered to a single contact by search.">
+      <img src="/images/ad-tracking/chrome-extension-adsmanager/23-details-search.png" alt="The Conversion Details dialog with a search term typed into the search box, the term blurred, the table filtered to one row with its contact details blurred, and a footer reading Total 1 conversion filtered from 17." />
+    </Frame>
+  </Step>
+
+  <Step title="Open a contact">
+    Click a contact's name to open their record: details on the left, **Customer Journey** on the right.
+
+    <Frame caption="A contact opened from the drill-down, with details and journey.">
+      <img src="/images/ad-tracking/chrome-extension-adsmanager/24-contact-journey.png" alt="The contact record open over Ads Manager. The left pane is headed Contact Information with the personal fields blurred, and the right pane is headed Customer Journey with tabs for Journey, Recordings and Merges, a timeline of dated events, and a footer showing First Seen, Last Activity and Total Interactions." />
+    </Frame>
+
+    The eye beside a contact is a **preview**. Hovering it shows a summary of the journey without leaving the list. To open the full record, click the name.
+  </Step>
+
+  <Step title="Expand an event's attribution">
+    On a journey event, click **Attribution Details** to see the UTM parameters Cortana recorded for it.
+
+    <Frame caption="The UTM breakdown for a single journey event.">
+      <img src="/images/ad-tracking/chrome-extension-adsmanager/25-attribution-details.png" alt="The contact record with an Attribution Details popover open over the journey, headed UTM Parameters and listing Source, Campaign and Medium with their recorded values." />
+    </Frame>
+
+    This is how you prove a payment came from a specific campaign rather than assuming it.
+  </Step>
+</Steps>
+
+## Sub-functionality
+
+<AccordionGroup>
+  <Accordion title="The footer totals">
+    **Total: N conversions** counts the rows currently listed, and **Total Value** sums their event values. Search first and the footer reports the filtered count alongside the original.
+  </Accordion>
+
+  <Accordion title="Meta CAPI status">
+    The **Meta CAPI** column tells you whether Cortana sent that conversion back to Meta's Conversions API. It is a record of what was sent, not something you action from this dialog.
+  </Accordion>
+
+  <Accordion title="Drilling down from the totals row">
+    Clicking a conversion value in the totals row drills across everything the table is currently showing, rather than one campaign.
+  </Accordion>
+</AccordionGroup>
+
+## Settings reference
+
+| Setting | What it does | Default | Our recommendation | Caveat |
+|---|---|---|---|---|
+| **Search name, email...** | Filters the contact list | Empty | Use it on long lists | Filters this dialog only |
+| **Attribution hover** | Shows the UTM breakdown for a row | Closed | Use before crediting a campaign | Read only |
+| **Attribution Details** | Expands UTMs on a journey event | Collapsed | Use to prove the source | Only on events that carry UTMs |
+
+## Troubleshooting
+
+<AccordionGroup>
+  <Accordion title="Clicking a number does nothing">
+    Cost per, Total Revenue, ROI and ROAS are display only. Click a conversion count or a URL Params cell instead. A zero also has nothing to open.
+  </Accordion>
+
+  <Accordion title="The dialog opens but the list is empty">
+    The count came from a different date range or attribution setting than the one now selected. Check **Count on** and **Attribution** in the Cortana row.
+  </Accordion>
+
+  <Accordion title="The contact record will not open">
+    If you are connected with an API key scoped to specific accounts, opening a contact fails while the journey behind it still loads. Reconnect with an All Access key for all accounts. See [Install and connect](/extension/install-and-connect).
+  </Accordion>
+
+  <Accordion title="The columns are missing so I cannot drill down">
+    Check the **Columns On/Off** switch. It is global and persistent.
+  </Accordion>
+
+  <Accordion title="The popup says I am not signed in">
+    Reconnect from the popup, then reload the Ads Manager tab.
+  </Accordion>
+
+  <Accordion title="Nothing above helped">
+    Reload the extension at `chrome://extensions`, then reload the page.
+  </Accordion>
+</AccordionGroup>
+
+## FAQ
+
+<AccordionGroup>
+  <Accordion title="Can I message a contact from here?">
+    No. The record is for reading: details and the customer journey. Reply from the Cortana web app.
+  </Accordion>
+
+  <Accordion title="Can I export the list?">
+    Not from this dialog. Use the Cortana web app for exports.
+  </Accordion>
+
+  <Accordion title="Why does a contact appear twice?">
+    They converted more than once. Set a unique mode on that column if you want one row per person. See [Columns and presets](/extension/columns-and-presets).
+  </Accordion>
+
+  <Accordion title="What does the eye icon do?">
+    It previews the journey on hover. Click the contact's name to open the full record.
+  </Accordion>
+</AccordionGroup>
+
+## Next step
+
+<CardGroup cols={2}>
+  <Card title="Contact details and journey" icon="user" href="/extension/contact-details-and-journey">
+    Everything in the contact record, including Stripe, recordings and merges.
+  </Card>
+
+  <Card title="Ads Manager troubleshooting" icon="wrench" href="/extension/ads-manager-troubleshooting">
+    Misaligned rows, shortened headers, and the three notices Cortana can put on the page.
+  </Card>
+</CardGroup>

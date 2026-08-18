@@ -1,0 +1,157 @@
+---
+title: "YouTube UTM panel"
+description: "Use the Cortana panel in YouTube Studio to add a tracked, UTM-tagged link to a video description so YouTube traffic attributes correctly in Cortana."
+---
+
+{/* TODO: verify — no Loom walkthrough was supplied for this page. When one is recorded, embed it
+    here with a verbatim transcript inside an <Accordion title="Video transcript"> for the KB. */}
+
+## What this panel does
+
+Organic YouTube traffic usually arrives untagged, so Cortana cannot tell which video produced a lead.
+
+The extension adds a panel to a video's edit page in YouTube Studio, headed **Cortana AI — Attribution Links**. You save your landing page once, click a button, and Cortana appends the link to your description with the tracking parameters already attached.
+
+This page documents extension version **4.20**.
+
+<Note>
+  **Before you start**
+
+  - The extension **connected**, with a **business selected**. See [Install and connect](/extension/install-and-connect).
+  - Access to the channel in **YouTube Studio**, on a video's edit page.
+</Note>
+
+## Where to find it
+
+Open a video in YouTube Studio and scroll to **Description**. The Cortana panel sits directly underneath it.
+
+<Frame caption="The Cortana panel under Description, before any landing page is saved.">
+  <img src="/images/ad-tracking/chrome-extension-youtube/30-panel-empty.png" alt="The YouTube Studio video details page with the Cortana AI Attribution Links panel below the Description field. A numbered badge marks the empty landing page field with its placeholder, and another marks the Add to description button." />
+</Frame>
+
+The field's placeholder is `https://yourlanding.com/page`.
+
+## Add a tracked link
+
+<Steps>
+  <Step title="Save your landing page">
+    Type the page you want viewers to visit into the field. It is remembered, so you do not retype it on the next video.
+
+    <Frame caption="The panel with a landing page saved.">
+      <img src="/images/ad-tracking/chrome-extension-youtube/31-panel-saved.png" alt="The Cortana panel in YouTube Studio with a landing page URL saved in the field and a numbered badge marking the Add to description button beside it." />
+    </Frame>
+  </Step>
+
+  <Step title="Click Add to description">
+    Cortana reads the live channel name, video title and video ID, then appends your link to the description with tracking parameters attached.
+
+    <Frame caption="The description after adding the tracked link.">
+      <img src="/images/ad-tracking/chrome-extension-youtube/32-added.png" alt="The YouTube Studio description field now containing the landing page URL followed by utm_source, utm_campaign, utm_medium and utm_content parameters, with a green confirmation line in the Cortana panel below and YouTube's own Undo changes and Save buttons visible at the top of the page." />
+    </Frame>
+
+    The appended link carries four parameters:
+
+    | Parameter | Set to |
+    |---|---|
+    | `utm_source` | `YouTube+Organic` |
+    | `utm_campaign` | Your channel name |
+    | `utm_medium` | The video title |
+    | `utm_content` | The video ID |
+
+    That is what lets Cortana attribute a lead to a specific video rather than to YouTube in general.
+  </Step>
+
+  <Step title="Save the video">
+    Cortana edits the description text. **YouTube does not save it for you.** Click YouTube's own **Save** at the top of the page, or the change is lost when you navigate away.
+  </Step>
+</Steps>
+
+## Short links
+
+Under the field, the **Shorten links** switch turns your appended link into a short link on your own tracking domain. What it says depends on your setup.
+
+| The panel says | What it means | What to do |
+|---|---|---|
+| **Short links use the domain below.** | A verified tracking domain is available | Nothing. Shortening is ready |
+| **Select a business in the Cortana extension to shorten links.** | No business is selected in the popup | Open the popup and choose one |
+| **Connect a tracking domain in your Cortana app for short links.** | That business has no tracking domain | Connect one in Cortana, or leave shortening off |
+
+<Frame caption="The panel when no business is selected in the extension.">
+  <img src="/images/ad-tracking/chrome-extension-youtube/33-no-business.png" alt="The Cortana panel in YouTube Studio with a numbered badge marking the message Select a business in the Cortana extension to shorten links, and the shorten switch disabled." />
+</Frame>
+
+<Frame caption="The panel when the business has no tracking domain.">
+  <img src="/images/ad-tracking/chrome-extension-youtube/34-no-domain.png" alt="The Cortana panel in YouTube Studio with a numbered badge marking the message Connect a tracking domain in your Cortana app for short links, and the shorten switch disabled." />
+</Frame>
+
+<Note>
+  **With shortening on, the description gets the short link rather than the visible parameters.** The tracking still works, because the parameters travel inside the short link. Leave shortening off if you want viewers to see the full URL.
+</Note>
+
+## Settings reference
+
+| Setting | What it does | Default | Our recommendation | Caveat |
+|---|---|---|---|---|
+| **Landing page URL** | The destination the tracked link points at | Empty | Save it once and reuse it | Remembered across videos |
+| **Add to description** | Appends the tagged link to the description | Not applicable | Use before writing the rest of your description | Does not save the video |
+| **Shorten links** | Uses your tracking domain | Off | On, once a domain is verified | Disabled without a business and a domain |
+
+## Troubleshooting
+
+<AccordionGroup>
+  <Accordion title="The panel is not there">
+    You need to be on a video's **edit** page in YouTube Studio, scrolled to **Description**. If it is still missing, reload the page. The extension attaches as the page loads.
+  </Accordion>
+
+  <Accordion title="The shorten switch is greyed out">
+    Read the line underneath it. Either no business is selected in the popup, or that business has no tracking domain.
+  </Accordion>
+
+  <Accordion title="I added the link and it vanished">
+    You navigated away without saving. Cortana writes into the description field, and YouTube's own **Save** is what commits it.
+  </Accordion>
+
+  <Accordion title="The popup says I am not signed in">
+    Reconnect from the popup, then reload the Studio tab.
+  </Accordion>
+
+  <Accordion title="The panel says it is still checking my tracking domain">
+    Reload the page. The domain check does not always resolve on the first load of a session.
+  </Accordion>
+
+  <Accordion title="Nothing above helped">
+    Reload the extension at `chrome://extensions`, then reload the Studio tab.
+  </Accordion>
+</AccordionGroup>
+
+## FAQ
+
+<AccordionGroup>
+  <Accordion title="Does this work on Shorts?">
+    Yes. Anything with a video edit page in Studio and a description field.
+  </Accordion>
+
+  <Accordion title="Will viewers see a long ugly URL?">
+    Only with shortening off. Turn **Shorten links** on to post a short link on your own domain instead.
+  </Accordion>
+
+  <Accordion title="Can I use a different landing page per video?">
+    Yes. Change the field before clicking **Add to description**. The last one you used is remembered.
+  </Accordion>
+
+  <Accordion title="Where does this traffic show up in Cortana?">
+    Against the contact, with `YouTube Organic` as the source, and in the customer journey. See [Contact details and journey](/extension/contact-details-and-journey).
+  </Accordion>
+</AccordionGroup>
+
+## Next step
+
+<CardGroup cols={2}>
+  <Card title="Contact details and journey" icon="user" href="/extension/contact-details-and-journey">
+    See a YouTube-sourced lead's full journey.
+  </Card>
+
+  <Card title="Chrome extension overview" icon="puzzle-piece" href="/extension/overview">
+    Back to the five surfaces the extension adds.
+  </Card>
+</CardGroup>

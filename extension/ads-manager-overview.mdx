@@ -1,0 +1,171 @@
+---
+title: "Meta Ads Manager overview"
+description: "What the Cortana extension adds to Meta Ads Manager, and what each control in the Cortana row does: business, presets, attribution model, and the date a conversion counts on."
+---
+
+{/* TODO: verify — no Loom walkthrough was supplied for this page. When one is recorded, embed it
+    here with a verbatim transcript inside an <Accordion title="Video transcript"> for the KB. */}
+
+## What the overlay does
+
+Open Meta Ads Manager with the extension connected and Cortana adds two things to the page.
+
+A **row of controls** across the top, above Meta's table. A set of **Cortana conversion columns** inside the table, to the right of your campaign names, showing the leads, bookings, payments and revenue that Cortana attributed to each row.
+
+Meta's own numbers stay exactly as they were. Cortana's columns sit beside them so you can compare spend against outcomes without leaving the page.
+
+This page documents extension version **4.20**.
+
+<Note>
+  **Before you start**
+
+  - The extension **installed and connected**. See [Install and connect](/extension/install-and-connect).
+  - **Ad tracking set up** for this business, so there are conversions to show. See the [Ad Tracking checklist](/Tracking-Checklist).
+  - You must be on a **campaigns, ad sets or ads table** in Ads Manager.
+</Note>
+
+## The Cortana row
+
+<Frame caption="The Cortana control row above Meta's table, with each control numbered.">
+  <img src="/images/ad-tracking/chrome-extension-adsmanager/01-top-row.png" alt="The Cortana control row across the top of Meta Ads Manager with numbered badges marking, from left to right, the Business selector, the Presets selector, the Attribution selector, the Count on selector, and the Columns On switch. A refresh control, a status check, and the user menu sit at the right end." />
+</Frame>
+
+Left to right, the row carries:
+
+| Control | What it does |
+|---|---|
+| **Business** | Which Cortana business the data comes from |
+| **Presets** | Which set of conversion columns to show. See [Columns and presets](/extension/columns-and-presets) |
+| **Attribution** | How a conversion is credited back to an ad |
+| **Count on** | Which date a conversion is counted on |
+| **Columns On/Off** | Shows or hides every Cortana column |
+| **Refresh** | Clears the cache and refetches |
+| **Setup indicator** | Whether Cortana needs anything from you. Hover it: **Cortana setup is complete**, or **Critical:** and the outstanding ask |
+| **User menu** | The account the extension is connected as |
+
+## Set the row up
+
+<Steps>
+  <Step title="Choose the business">
+    Click **Business** and pick the one whose data you want. Everything else in the row reads from this choice, so set it first.
+
+    <Frame caption="The Business selector open over Ads Manager.">
+      <img src="/images/ad-tracking/chrome-extension-adsmanager/02-business-open.png" alt="The Business selector open above the Ads Manager table, showing a scrollable list of business names with the values blurred." />
+    </Frame>
+
+    <Tip>
+      If your Cortana numbers look wrong, check this first. Pick the wrong business and the table still fills up with numbers, they just belong to someone else.
+    </Tip>
+  </Step>
+
+  <Step title="Choose how conversions are credited">
+    Click **Attribution**. There are four models:
+
+    | Model | Credits the conversion to |
+    |---|---|
+    | **Last Click** | The last ad the person clicked before converting |
+    | **First Click** | The first ad that brought them in |
+    | **Paid Priority** | Paid clicks ahead of organic touches |
+    | **Scientific** | Cortana's own weighting across the touches |
+
+    <Frame caption="The Attribution selector open, listing the four models.">
+      <img src="/images/ad-tracking/chrome-extension-adsmanager/03-attribution-open.png" alt="The Attribution selector open above the Ads Manager table, listing Last Click, First Click, Paid Priority and Scientific, with the current choice marked." />
+    </Frame>
+
+    **Paid Priority** is the default, and it matches what your Cortana dashboard uses. Change it here and the columns refetch.
+  </Step>
+
+  <Step title="Choose the date conversions count on">
+    Click **Count on**. This decides which day a conversion lands on when Cortana lines it up against Meta's spend.
+
+    | Option | Counts the conversion on |
+    |---|---|
+    | **Date of Conversion** | The day the conversion happened. This is the default |
+    | **Date of Click** | The day the person clicked the ad |
+    | `Date of "<event name>"` | The day a specific conversion event fired. One entry per conversion source you track |
+
+    <Frame caption="The Count on selector open, showing the date options.">
+      <img src="/images/ad-tracking/chrome-extension-adsmanager/04-count-on-open.png" alt="The Count on selector open above the Ads Manager table, listing Date of Conversion, Date of Click, and a Date of entry for each configured conversion source." />
+    </Frame>
+
+    <Tip>
+      Use **Date of Click** when you want conversions to line up with the day you paid for the traffic, which is usually what you want when judging a specific day's spend. Use **Date of Conversion** when you want to know what actually happened on a given day.
+    </Tip>
+  </Step>
+
+  <Step title="Check the columns are on">
+    **Columns On/Off** shows or hides every Cortana column at once. Its tooltip reads **Toggle Cortana AI columns**.
+
+    <Warning>
+      **This switch is global and it persists.** Switching it off hides the columns on every tab, in every ad account, and it stays off after you close Chrome. Weeks later that reads as a broken extension. If your columns are gone, look here before anything else.
+    </Warning>
+  </Step>
+</Steps>
+
+## Settings reference
+
+| Setting | What it does | Default | Our recommendation | Caveat |
+|---|---|---|---|---|
+| **Business** | Source of all Cortana data on the page | None until chosen | Set before reading anything | Wrong business looks like wrong data |
+| **Attribution** | How conversions are credited | **Paid Priority** | Leave it, so the page agrees with your dashboard | Changing it refetches every column |
+| **Count on** | Which date a conversion counts on | **Date of Conversion** | **Date of Click** when judging a day's spend | Changes totals per day, not in total |
+| **Columns On/Off** | Shows or hides Cortana columns | On | Leave on | Global and persistent across sessions |
+| **Refresh** | Clears the cache and refetches | Not applicable | Use after changing anything in Cortana | The table reloads its numbers |
+
+## Troubleshooting
+
+<AccordionGroup>
+  <Accordion title="The Cortana row is not there at all">
+    You are either not connected, or not on a table page. Open the popup and check the connection, then make sure you are on the campaigns, ad sets or ads view rather than a settings or billing screen.
+  </Accordion>
+
+  <Accordion title="The row is there but the columns are missing">
+    Check **Columns On/Off** first. It is global and persistent, so it survives restarts.
+
+    If the switch is on and a card reads **Meta changed the ads table**, that is a layout change on Meta's side, already reported automatically, and it clears itself. Either way, see [Ads Manager troubleshooting](/extension/ads-manager-troubleshooting).
+  </Accordion>
+
+  <Accordion title="The popup says I am not signed in">
+    Reconnect from the popup. See [Install and connect](/extension/install-and-connect).
+  </Accordion>
+
+  <Accordion title="I changed something in Cortana and the numbers have not moved">
+    Use the refresh control in the Cortana row. The extension caches what it has already fetched.
+  </Accordion>
+
+  <Accordion title="Nothing above helped">
+    Reload the extension, then the page. Go to `chrome://extensions`, find **Cortana AI**, click reload, then refresh your Ads Manager tab.
+  </Accordion>
+</AccordionGroup>
+
+## FAQ
+
+<AccordionGroup>
+  <Accordion title="Does this change my Meta reporting?">
+    No. Cortana adds columns next to Meta's. Meta's own numbers are untouched.
+  </Accordion>
+
+  <Accordion title="Why do Cortana's conversions not match Meta's?">
+    They are counting different things. Meta counts what its own pixel saw, using Meta's own rule for how long after a click a conversion still counts. Cortana counts conversions it matched to a real person, using the model in the **Attribution** control and the date in **Count on**. Line those two settings up with your dashboard before comparing.
+  </Accordion>
+
+  <Accordion title="Does the row work on ad sets and ads too?">
+    Yes. The controls are the same on all three tables.
+  </Accordion>
+
+  <Accordion title="Does changing attribution affect my Cortana dashboard?">
+    No. The control changes what this table shows.
+  </Accordion>
+</AccordionGroup>
+
+## Next step
+
+<CardGroup cols={2}>
+  <Card title="Columns and presets" icon="table-columns" href="/extension/columns-and-presets">
+    Choose which conversion columns appear, and save the set you use.
+  </Card>
+
+  <Card title="Reading your data" icon="chart-column" href="/extension/reading-your-data">
+    What each column means, the totals row, and the URL Params check.
+  </Card>
+</CardGroup>

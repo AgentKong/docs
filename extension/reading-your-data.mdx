@@ -1,0 +1,171 @@
+---
+title: "Reading your data"
+description: "Understand the Cortana columns in Meta Ads Manager: conversion counts, cost per, revenue, ROI and ROAS, the totals row, and the URL Params tracking check."
+---
+
+{/* TODO: verify — no Loom walkthrough was supplied for this page. When one is recorded, embed it
+    here with a verbatim transcript inside an <Accordion title="Video transcript"> for the KB. */}
+
+## What you are looking at
+
+Cortana's columns sit inside Meta's table, to the right of your campaign names. Each row is one campaign, ad set or ad, and the Cortana cells tell you what that row actually produced.
+
+This page documents extension version **4.20**.
+
+<Note>
+  **Before you start**
+
+  - The extension **connected**, with a **business** and a **preset** chosen. See [Columns and presets](/extension/columns-and-presets).
+</Note>
+
+## The same columns on all three tabs
+
+The columns follow you across **Campaigns**, **Ad sets** and **Ads**. Only the row meaning changes.
+
+<Frame caption="Cortana conversion columns on the Campaigns tab.">
+  <img src="/images/ad-tracking/chrome-extension-adsmanager/13-columns-campaigns.png" alt="The Ads Manager Campaigns table with Cortana's conversion columns inserted to the right of the campaign names. Each row shows conversion counts alongside blurred cost per, revenue, ROI and ROAS values, with a URL Params column and Meta's Campaign ID column to the right." />
+</Frame>
+
+<Frame caption="The same columns on the Ad sets tab.">
+  <img src="/images/ad-tracking/chrome-extension-adsmanager/14-columns-adsets.png" alt="The Ads Manager Ad sets table with the same Cortana conversion columns, one row per ad set." />
+</Frame>
+
+<Frame caption="The same columns on the Ads tab.">
+  <img src="/images/ad-tracking/chrome-extension-adsmanager/15-columns-ads.png" alt="The Ads Manager Ads table with the same Cortana conversion columns, one row per ad." />
+</Frame>
+
+## What each column means
+
+| Column | What it shows |
+|---|---|
+| **A conversion source**, for example a lead or booking event | How many of that conversion Cortana attributed to this row |
+| `Cost Per <source>` | Your spend on this row divided by that conversion count |
+| **Total Revenue** | Revenue Cortana attributed to this row |
+| **ROI** | Return on the spend, as a percentage |
+| **ROAS** | Revenue divided by spend, as a multiple |
+| **URL Params** | A tracking health check, not a performance number. See below |
+
+Which conversion columns you see depends on the preset. Cost per appears only where you switched it on.
+
+<Note>
+  Long conversion source names are shortened in the column headers, because Cortana's cells are a fixed width. Hover a header to read it in full. This is not something the column widths in Ads Manager can change, and [Ads Manager troubleshooting](/extension/ads-manager-troubleshooting) explains why.
+</Note>
+
+## The totals row
+
+Cortana also fills Meta's footer row, so the bottom of the table totals Cortana's columns for everything currently listed.
+
+<Frame caption="Cortana totals rendered into Meta's footer row.">
+  <img src="/images/ad-tracking/chrome-extension-adsmanager/16-footer-totals.png" alt="A close crop of the bottom of the Ads Manager table showing the last data row above Meta's totals row, with Cortana's conversion totals in blue and the currency, ROI and ROAS totals blurred." />
+</Frame>
+
+The totals reflect the rows Meta is showing, so a filter or a date change moves them.
+
+## The URL Params check
+
+**URL Params** does not measure performance. It tells you whether the ads under a row carry the tracking parameters Cortana needs to attribute their clicks.
+
+<Frame caption="The URL Params column, showing a ratio and a status dot per row.">
+  <img src="/images/ad-tracking/chrome-extension-adsmanager/17-url-params.png" alt="A close crop of the URL Params column with a coloured status dot and a ratio such as 24 of 39 on each row, alongside the neighbouring Cortana columns." />
+</Frame>
+
+Each cell shows a ratio of correctly configured ads to total ads, with a status dot. Click a cell to open the breakdown.
+
+<Frame caption="The URL Params breakdown for one campaign.">
+  <img src="/images/ad-tracking/chrome-extension-adsmanager/18-url-params-popover.png" alt="The URL parameter validation panel open over the table. It shows the campaign name with a ratio badge, four counters labelled CORRECT, PARTIAL, INVALID and EMPTY, and a list headed ADS UNDER THIS ENTITY where each ad carries its own status, here CONFIGURED or NOT CONFIGURED." />
+</Frame>
+
+The panel is headed with the row's name and its ratio, subtitled **URL parameter validation**, and breaks the ads into four counters:
+
+| Counter | Meaning |
+|---|---|
+| **CORRECT** | The ad carries the parameters Cortana expects |
+| **PARTIAL** | Some expected parameters are present |
+| **INVALID** | Parameters are present but wrong |
+| **EMPTY** | No tracking parameters at all |
+
+Under **ADS UNDER THIS ENTITY**, every ad is listed with its own status: **CONFIGURED**, **PARTIAL**, **INVALID** or **NOT CONFIGURED**. Click an ad to see the parameters it currently carries and the ones it should carry, so you can fix that ad instead of guessing.
+
+<Tip>
+  A campaign with real spend, zero conversions and a poor URL Params ratio is usually a tracking problem, not a performance problem. Fix the parameters before you judge the creative.
+</Tip>
+
+## While data is loading
+
+Cortana fetches its numbers after Meta's table renders, so the cells shimmer briefly on load.
+
+<Frame caption="Cortana cells mid-load, before the numbers arrive.">
+  <img src="/images/ad-tracking/chrome-extension-adsmanager/19-loading.png" alt="The Ads Manager table with Cortana's columns present but their cells showing placeholder shimmer blocks instead of numbers." />
+</Frame>
+
+If the shimmer never resolves, use the refresh control in the Cortana row, then see [Ads Manager troubleshooting](/extension/ads-manager-troubleshooting).
+
+## Settings reference
+
+| Setting | What it does | Default | Our recommendation | Caveat |
+|---|---|---|---|---|
+| **Preset** | Which conversion columns appear | Your account's preset | Choose before reading | Re-picking turns URL Params off |
+| **URL Params** | Shows the tracking health column | Off | Turn on after choosing a preset | Not a performance metric |
+| **Attribution** | How conversions are credited | **Paid Priority** | Match your dashboard | Changing it changes every count |
+| **Count on** | Which date a conversion lands on | **Date of Conversion** | **Date of Click** to judge a day's spend | Moves conversions between days |
+| **Refresh** | Refetches Cortana's numbers | Not applicable | Use after changing anything | Meta's own numbers are untouched |
+
+## Troubleshooting
+
+<AccordionGroup>
+  <Accordion title="The columns are there but every number is zero">
+    Check the **Business** in the Cortana row, then **Count on** and your date range. A campaign that converted last month shows zero on a last-7-days view.
+  </Accordion>
+
+  <Accordion title="The cells never stop shimmering">
+    Use the refresh control. If it persists, reload the extension at `chrome://extensions`, then reload the page.
+  </Accordion>
+
+  <Accordion title="The columns are missing entirely">
+    Check the **Columns On/Off** switch first. It is global and persistent, so it survives restarts.
+  </Accordion>
+
+  <Accordion title="The popup says I am not signed in">
+    Reconnect from the popup. See [Install and connect](/extension/install-and-connect).
+  </Accordion>
+
+  <Accordion title="I changed a conversion source in Cortana and the columns look stale">
+    Refresh from the Cortana row. The extension caches what it fetched.
+  </Accordion>
+
+  <Accordion title="Two campaigns show identical numbers">
+    They probably share a name, and Meta's **Campaign ID** column is missing so Cortana cannot tell them apart. See [Ads Manager troubleshooting](/extension/ads-manager-troubleshooting).
+  </Accordion>
+</AccordionGroup>
+
+## FAQ
+
+<AccordionGroup>
+  <Accordion title="Why does Cortana show fewer conversions than Meta?">
+    Cortana counts conversions it matched to a real person. Meta counts what its own pixel saw, within its own time limit after the click. They are answering different questions.
+  </Accordion>
+
+  <Accordion title="What does a ratio like 24 of 39 in URL Params mean?">
+    24 of the 39 ads under that row carry the tracking parameters Cortana expects. Click the cell to see which ones do not.
+  </Accordion>
+
+  <Accordion title="Does the totals row include rows I filtered out?">
+    No. It totals what the table is currently showing.
+  </Accordion>
+
+  <Accordion title="Can I export these columns?">
+    Meta's export covers Meta's own columns. To work with Cortana's numbers outside the browser, use the Cortana web app.
+  </Accordion>
+</AccordionGroup>
+
+## Next step
+
+<CardGroup cols={2}>
+  <Card title="Conversion drill-down" icon="magnifying-glass" href="/extension/conversion-drilldown">
+    Click any conversion number to see the people behind it.
+  </Card>
+
+  <Card title="Ads Manager troubleshooting" icon="wrench" href="/extension/ads-manager-troubleshooting">
+    Misaligned rows, shortened headers, and the three notices Cortana can put on the page.
+  </Card>
+</CardGroup>

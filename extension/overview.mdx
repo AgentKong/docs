@@ -1,0 +1,139 @@
+---
+title: "Chrome extension overview"
+description: "What the Cortana AI Chrome extension is, the five places it adds Cortana to your browser, and who should install it."
+---
+
+{/* TODO: verify — no Loom walkthrough was supplied for this page. When one is recorded, embed it
+    here with a verbatim transcript inside an <Accordion title="Video transcript"> for the KB. */}
+
+## What the extension is
+
+The **Cortana AI** Chrome extension puts your Cortana data and your sales tools inside the pages you already work in. You stop switching tabs every time you need to check a campaign or a contact.
+
+It does two jobs. It **adds conversion data to Meta Ads Manager**, next to Meta's own numbers, so you can see which campaigns produced real leads, bookings and payments. It **gives you a toolbar popup** for sending payment links, managing appointments and creating tracking links, without opening the web app.
+
+This documentation covers extension version **4.20**.
+
+<Note>
+  This is not the Cortana Claw browser extension. That one lends a Claw agent a Chrome profile to work in. See [Desktop, cloud, and Chrome extension](/claw/desktop-cloud-extension).
+</Note>
+
+<Frame caption="The extension popup once it is connected, showing the business selector and the four tabs.">
+  <img src="/images/ad-tracking/chrome-extension-popup/02-popup-connected.png" alt="The Cortana extension popup in dark mode. A numbered badge 1 marks the business selector in the header, and badge 2 marks the tab row reading Payment Link, Appointments, Tracking Links and Help. Below the tabs, the Payment Link tab shows My Links and Create Link buttons, a count of saved payment templates, a search box, an Import button, a Send to contact search field, and a list of saved templates, each with its platform, price, send count and a Send button." />
+</Frame>
+
+## The five surfaces
+
+The extension adds Cortana in five places. Each one has its own page.
+
+<CardGroup cols={2}>
+  <Card title="1 · The popup" icon="window" href="/extension/install-and-connect">
+    Click the Cortana icon in your Chrome toolbar. The popup carries four tabs: **Payment Link**, **Appointments**, **Tracking Links** and **Help**. It opens on **Payment Link**.
+  </Card>
+
+  <Card title="2 · Meta Ads Manager columns" icon="table-columns" href="/extension/ads-manager-overview">
+    Cortana adds its own conversion columns to your campaigns, ad sets and ads tables, plus a control row above the table for choosing the business, the attribution model and the date each conversion counts on.
+  </Card>
+
+  <Card title="3 · The conversion drill-down" icon="magnifying-glass" href="/extension/conversion-drilldown">
+    Click any conversion number in a Cortana column to open **Conversion Details** and see the individual people behind that number, rather than just the total.
+  </Card>
+
+  <Card title="4 · The contact record" icon="user" href="/extension/contact-details-and-journey">
+    Open a person from the drill-down to see their details and their **Customer Journey**, so you can trace a payment back to the ad that produced it.
+  </Card>
+
+  <Card title="5 · The YouTube Studio panel" icon="video" href="/extension/youtube-utm">
+    On a video's edit page in YouTube Studio, a Cortana panel appears under **Description** and adds a tracked link to the description for you.
+  </Card>
+</CardGroup>
+
+The popup works on any page. The other four appear only in **Meta Ads Manager** and **YouTube Studio**, because those are the only pages they have anything to add to.
+
+## Who it is for
+
+<CardGroup cols={2}>
+  <Card title="Media buyers" icon="chart-line">
+    You live in Ads Manager and want conversions, revenue and return next to spend, without exporting anything or opening a second tab.
+  </Card>
+
+  <Card title="Sales and setters" icon="phone">
+    You want to send a payment link, book an appointment or send a tracking link while you are still in the conversation.
+  </Card>
+</CardGroup>
+
+If you only ever read reports, you do not need the extension. It exists to save you the trip to the web app, not to replace it.
+
+## What you need first
+
+<Note>
+  **Before any of this works**
+
+  - **Google Chrome**, with the Cortana AI extension installed from the [Chrome Web Store](https://chromewebstore.google.com/detail/cortana-ai/jkapahgdmjffdkconinemcpmkponpgfi) and pinned to the toolbar.
+  - **A Cortana account** with at least one business.
+  - **A connection**, made either by signing in with your Cortana session or by pasting an API key. Both methods, and which key type to choose, are covered in [Install and connect](/extension/install-and-connect).
+
+  For the Ads Manager columns you also need ad tracking already set up for that business. See the [Ad Tracking checklist](/Tracking-Checklist).
+</Note>
+
+## Troubleshooting
+
+<AccordionGroup>
+  <Accordion title="The popup says I am not signed in">
+    Open the popup and connect again. Sign-in can lapse when you sign out of the Cortana web app, because one of the two methods reuses that session. See [Install and connect](/extension/install-and-connect).
+  </Accordion>
+
+  <Accordion title="I cannot find the extension icon">
+    Chrome hides new extensions behind the puzzle-piece icon in the toolbar. Click it, find **Cortana AI**, and click the pin so the icon stays visible.
+  </Accordion>
+
+  <Accordion title="The Cortana columns are missing from Ads Manager">
+    Check the **Columns On/Off** switch in the Cortana row above the table first. **This switch is global and it stays off until you turn it back on**, including after you close and reopen Chrome, so a switch flipped last week looks exactly like a broken extension today.
+
+    If the switch is on and the columns are still missing, see [Ads Manager troubleshooting](/extension/ads-manager-troubleshooting).
+  </Accordion>
+
+  <Accordion title="I changed something in Cortana and the extension still shows the old data">
+    The extension caches what it has already fetched. Use the refresh control in the Cortana row above the table, or close and reopen the popup.
+  </Accordion>
+
+  <Accordion title="Nothing above helped">
+    Reload the extension, then reload the page. Go to `chrome://extensions`, find **Cortana AI**, click the reload icon, then return to your tab and refresh it. Load order matters: the extension attaches to the page when the page loads.
+  </Accordion>
+</AccordionGroup>
+
+## FAQ
+
+<AccordionGroup>
+  <Accordion title="Do I need the extension to use Cortana?">
+    No. The extension is a shortcut, not a separate product: the conversion data it shows and the tools it carries are your Cortana account's, reached from Ads Manager and your toolbar instead of from the web app.
+  </Accordion>
+
+  <Accordion title="Does it work in Safari, Firefox or Edge?">
+    The extension is built for Google Chrome and is distributed as a Chrome extension.
+  </Accordion>
+
+  <Accordion title="Does it change my Meta Ads Manager settings?">
+    Cortana adds its own columns alongside Meta's. One setup step does ask you to add Meta's own **Campaign ID** column so Cortana can tell two same-named campaigns apart, and that step is covered in [Ads Manager troubleshooting](/extension/ads-manager-troubleshooting).
+  </Accordion>
+
+  <Accordion title="Can I reply to a contact from the extension?">
+    No. The contact record is for reading: details and the customer journey. Reply from the Cortana web app.
+  </Accordion>
+
+  <Accordion title="Which business does the extension show?">
+    Whichever one is selected in the business selector at the top of the popup, marked **1** in the screenshot above. If your Cortana account has several businesses, check this first when the numbers look wrong.
+  </Accordion>
+</AccordionGroup>
+
+## Next step
+
+<CardGroup cols={2}>
+  <Card title="Install and connect" icon="rocket" href="/extension/install-and-connect">
+    Install the extension, pin it, and connect it to your Cortana account.
+  </Card>
+
+  <Card title="Meta Ads Manager overview" icon="crosshairs" href="/extension/ads-manager-overview">
+    What the overlay adds to your tables and what each control in the Cortana row does.
+  </Card>
+</CardGroup>

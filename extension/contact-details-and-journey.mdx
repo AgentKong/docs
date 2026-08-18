@@ -1,0 +1,173 @@
+---
+title: "Contact details and journey"
+description: "Read a contact's details and full customer journey from the Cortana extension, including Stripe payment history, call recordings and merge history."
+---
+
+{/* TODO: verify — no Loom walkthrough was supplied for this page. When one is recorded, embed it
+    here with a verbatim transcript inside an <Accordion title="Video transcript"> for the KB. */}
+
+## What the contact record is
+
+Open a contact and you get everything Cortana knows about that person. Their details are on the left. Their **Customer Journey** is on the right, from the first time you saw them to the most recent thing they did.
+
+This screen is for reading, not editing. It is where you answer "where did this customer come from" and "what have they done since".
+
+This page documents extension version **4.20**.
+
+<Warning>
+  **You cannot reply to a contact from the extension.** The record shows details and journey only. Send messages from the Cortana web app.
+</Warning>
+
+<Note>
+  **Before you start**
+
+  - The extension **connected**. See [Install and connect](/extension/install-and-connect).
+  - A contact to open, usually from a [conversion drill-down](/extension/conversion-drilldown).
+</Note>
+
+<Warning>
+  This screen shows real customer data. Take care when screen sharing.
+</Warning>
+
+## Open a contact
+
+You can reach the record two ways.
+
+**From Ads Manager**, drill into a conversion count and click a contact's name. See [Conversion drill-down](/extension/conversion-drilldown).
+
+**From the popup**, use the eye control beside a contact to preview their journey.
+
+<Frame caption="The journey preview opened from the popup.">
+  <img src="/images/ad-tracking/chrome-extension-contact-modal/07-popup-journey-eye.png" alt="The extension popup with a numbered badge marking the eye control beside a contact row, which previews that contact's customer journey. The contact's personal details are blurred." />
+</Frame>
+
+## What you see
+
+<Frame caption="The contact record: details on the left, customer journey on the right.">
+  <img src="/images/ad-tracking/chrome-extension-contact-modal/02-contact-details.png" alt="The contact record with the left pane headed Contact Information showing name, email, phone, business, location and time zone fields with their values blurred, and the right pane headed Customer Journey with a dated timeline of events." />
+</Frame>
+
+| Pane | What it holds |
+|---|---|
+| **Left: Contact Information** | Name, email, phone, company and website, location and time zone |
+| **Right: Customer Journey** | A dated timeline of everything Cortana recorded, newest first |
+
+The journey footer totals the relationship: **First Seen**, **Last Activity** and **Total Interactions**.
+
+<Note>
+  **The centre pane does not load.** Between the two panes sits a conversation area that never finishes loading. That is a known bug, and it is why this page does not describe replying to anyone. Use the web app to message a contact.
+</Note>
+
+## The journey tabs
+
+The right pane is tabbed. **Journey**, **Recordings** and **Merges** are always there. **Stripe** appears only when that business has a Stripe connection, so do not expect it on every contact.
+
+<AccordionGroup>
+  <Accordion title="Journey">
+    The default tab. Every recorded event in order, each with its date and source. Expand **Attribution Details** on an event to see the UTM parameters behind it, which is how you prove which campaign produced a customer.
+  </Accordion>
+
+  <Accordion title="Stripe">
+    Payment history for this person, when the business has Stripe connected.
+
+    <Frame caption="The Stripe tab, showing payment history for the contact.">
+      <img src="/images/ad-tracking/chrome-extension-contact-modal/04-tab-stripe.png" alt="The Stripe tab of the contact record showing Lifetime Value, Current MRR and Total Payments summary figures with their amounts blurred, a status, and a list of subscriptions and past payments." />
+    </Frame>
+
+    It summarises **Lifetime Value**, **Current MRR**, **Total Payments** and **Status**, then lists subscriptions and payment history.
+
+    When there is no match, the tab reads **No Stripe customer linked to this contact**.
+  </Accordion>
+
+  <Accordion title="Recordings">
+    Call recordings tied to this contact, under the heading **Call Recordings** with a count, each showing its platform, attendees and transcript.
+
+    <Frame caption="The Recordings tab of the contact record.">
+      <img src="/images/ad-tracking/chrome-extension-contact-modal/05-tab-recordings.png" alt="The Recordings tab of the contact record showing the Call Recordings heading with a count and a list of recordings with platform and attendee details blurred." />
+    </Frame>
+
+    Two empty states: **No call recordings yet** when nothing has been recorded, and **Connect Call Recordings** when the integration is not set up.
+  </Accordion>
+
+  <Accordion title="Merges">
+    When Cortana decides two records are the same person, it merges them and logs why here.
+
+    <Frame caption="The Merges tab, showing how records were combined.">
+      <img src="/images/ad-tracking/chrome-extension-contact-modal/06-tab-merges.png" alt="The Merges tab of the contact record listing merge entries with their reason labels and the merged data sources, with identifying values blurred." />
+    </Frame>
+
+    Entries are labelled with the reason: **Merged by hand**, **Shared identifier**, **Duplicate cleanup**, **Merged in HubSpot**, **Stripe payment link** or **Backfill script**. The merged data is named too, for example **Whop payments**, **Fanbasis payments**, **Shopify orders**, **WooCommerce orders** or **Stripe customers**.
+
+    This tab is the audit trail. If a contact's totals look too high, look here first.
+  </Accordion>
+</AccordionGroup>
+
+## Settings reference
+
+| Setting | What it does | Default | Our recommendation | Caveat |
+|---|---|---|---|---|
+| **Journey tab** | The event timeline | Open | Start here | Newest first |
+| **Attribution Details** | UTMs for one event | Collapsed | Expand before crediting a campaign | Only on events carrying UTMs |
+| **Stripe tab** | Payment history | Present only with Stripe connected | Use to confirm real revenue | Absent when the business has no Stripe connection |
+| **Recordings tab** | Call recordings | Always present | Use for context before a follow-up | Needs the recordings integration |
+| **Merges tab** | Merge audit trail | Always present | Check when totals look wrong | Read only |
+
+## Troubleshooting
+
+<AccordionGroup>
+  <Accordion title="The middle of the record just says it is loading">
+    That is the known conversation-pane bug. The left and right panes are unaffected. Message the contact from the web app.
+  </Accordion>
+
+  <Accordion title="The record will not open at all">
+    If you connected with an API key scoped to specific accounts, opening a contact fails while the journey still loads. Reconnect with an **All Access** key for **All accounts**. See [Install and connect](/extension/install-and-connect).
+  </Accordion>
+
+  <Accordion title="There is no Stripe tab">
+    That business has no Stripe connection. The tab appears once Stripe is connected in the web app.
+  </Accordion>
+
+  <Accordion title="The popup says I am not signed in">
+    Reconnect from the popup, then reload the page you were on.
+  </Accordion>
+
+  <Accordion title="The Cortana columns are missing so I cannot reach a contact">
+    Check the **Columns On/Off** switch in the Cortana row. It is global and persistent.
+  </Accordion>
+
+  <Accordion title="I updated the contact in Cortana and the record looks stale">
+    Close and reopen the record. If it persists, reload the extension at `chrome://extensions`, then reload the page.
+  </Accordion>
+</AccordionGroup>
+
+## FAQ
+
+<AccordionGroup>
+  <Accordion title="Can I edit a contact here?">
+    Treat this as a reading surface. Make changes in the Cortana web app, where the full contact editor lives.
+  </Accordion>
+
+  <Accordion title="Why does the journey show events from before my ads ran?">
+    Cortana keeps the whole relationship, including touches that predate the campaign you drilled in from.
+  </Accordion>
+
+  <Accordion title="What does a merge mean for my numbers?">
+    Two records became one, so their history is combined. The **Merges** tab shows what was joined and why.
+  </Accordion>
+
+  <Accordion title="Why can I not message from here?">
+    The conversation pane does not load. It is a known bug, and we would rather say so than have you wait on a spinner.
+  </Accordion>
+</AccordionGroup>
+
+## Next step
+
+<CardGroup cols={2}>
+  <Card title="Payment links" icon="credit-card" href="/extension/payment-links">
+    Send a payment link to the contact you just looked at.
+  </Card>
+
+  <Card title="Conversion drill-down" icon="magnifying-glass" href="/extension/conversion-drilldown">
+    Go back to the list of people behind a conversion count.
+  </Card>
+</CardGroup>
