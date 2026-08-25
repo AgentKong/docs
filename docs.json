@@ -427,6 +427,7 @@
               "platform/control-centre/unified-attribution",
               "platform/control-centre/businesses",
               "platform/control-centre/users",
+              "platform/control-centre/business-sharing",
               "platform/control-centre/settings",
               "platform/control-centre/affiliate-portal",
               "platform/control-centre/white-label"
