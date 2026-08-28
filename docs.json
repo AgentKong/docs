@@ -50,6 +50,13 @@
             ],
             "expanded": true
           },
+          {
+            "group": "Reference",
+            "icon": "plug",
+            "pages": [
+              "integrations-reference"
+            ]
+          },
           "untitled-page",
           "frequently-asked-questions"
         ]
