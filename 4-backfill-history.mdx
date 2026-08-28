@@ -55,7 +55,22 @@ Ten tools can be imported. How far back you can go depends on how much history e
 | Shopify | 60 days |
 | Close | 30 days |
 
-If you pick **90 days** on a Shopify source, you get 60. On a Close source, you get 30. Cortana quietly shortens the window instead of showing you an error.
+### Why 90 days does not always mean 90 days
+
+Every source shows the same three buttons, so you can always click **90 days**. But two tools will not give us that much history:
+
+- **Shopify** only hands over 60 days of orders.
+- **Close** only keeps 30 days of the record Cortana reads.
+
+On those two, Cortana asks for as much as the tool allows and imports that. You do not get an error, and nothing fails. You simply get less history than the button says.
+
+<Warning>
+  **On Shopify and Close, the screen still says 90.**
+
+  The button keeps reading **Preview my last 90 days**, and the line at the top of the window still says *"Import your last 90 days"*. Only the import itself is shortened.
+
+  So on a Shopify source, 90 days on screen means 60 days of orders. On a Close source, it means 30 days. Everywhere else, 90 days really is 90 days.
+</Warning>
 
 **Meta lead forms** and **LinkedIn lead forms** mean the lead ads you run on Facebook, Instagram and LinkedIn, where someone fills in a form without leaving the platform. These are separate from your ad spend and performance figures, which Cortana already brings in on its own.
 
@@ -391,7 +406,7 @@ If you pick **90 days** on a Shopify source, you get 60. On a Close source, you 
 
 | Setting | What it does | Default | We recommend | Watch out for |
 | --- | --- | --- | --- | --- |
-| **Window** (30 / 60 / 90 days) | How far back the import goes. | **90 days** | 90 days, unless you only started advertising recently. | Shortened automatically where the tool allows less: 60 days on Shopify, 30 on Close. You cannot pick your own dates. |
+| **Window** (30 / 60 / 90 days) | How far back the import goes. | **90 days** | 90 days, unless you only started advertising recently. | Shortened automatically where the tool allows less: 60 days on Shopify, 30 on Close. The screen still shows the number you picked, so check the table above for what you actually get. You cannot pick your own dates. |
 | **Send imported conversions to ad platforms (CAPI)** | Tells Facebook, Google and your other ad platforms about the imported conversions. | **Off** | Leave it off. | Even when on, only the last 7 days can be sent, because ad platforms refuse older events. It can lower your Event Match Quality for about a week. |
 | **Also import conversions we can't attribute** | Keeps the records Cortana cannot trace instead of leaving them out. | **Off** | Leave it off. | They arrive as untracked and push your untracked percentage up. Turning the setting off again later does not remove them. |
 | **Record limit** | The most records one import can bring in. | **50,000** | Nothing to do. | If your preview is bigger than this, **Continue** is greyed out and you are asked to contact support to raise it for your account. |
