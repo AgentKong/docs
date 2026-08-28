@@ -1,0 +1,182 @@
+---
+title: "Integrations Reference"
+description: "Every Cortana integration, what it does, and the latest integration updates."
+---
+
+{/*
+  MAINTAINERS: this page is the running reference for ALL integrations.
+  When an integration ships or changes behavior:
+    1. Update its entry below.
+    2. Add a dated row to "Latest updates" at the bottom.
+  The in-app source of truth for the list is src/data/channels.data.ts in
+  AgentKong_App. The AI support agent learns this page automatically on the
+  next docs sync — keeping it current keeps the agent's answers current.
+*/}
+
+This page lists every integration Cortana supports and what each one does. To connect any of them, head to **Settings → Integrations** — the step-by-step walkthrough is in [Connect Integrations](/1-connect-integrations).
+
+<Note>
+Don't see your tool? Any platform that can send a webhook (natively or via Zapier, Make, or n8n) can still feed conversions into Cortana — see [Conversion Setup](/4-conversion-setup).
+</Note>
+
+## CRMs
+
+<AccordionGroup>
+  <Accordion title="GoHighLevel">
+    Two-way CRM sync: contacts, tags, pipelines, and calendars. Send and receive messages through GHL channels and track conversions with full attribution. Supports multiple sub-accounts, each connected separately.
+  </Accordion>
+  <Accordion title="HubSpot">
+    Two-way contact sync with attribution for the events that matter: meetings booked, deal stage changes, deal values, form submissions, and custom property changes can all become conversions. Custom fields sync both ways.
+
+    **Household associations** — when two HubSpot contacts are associated with each other (for example a parent booking on behalf of a student), Cortana automatically merges them into one contact: sessions, conversions, and the whole timeline unify, and a booking made by the untracked person inherits the tracked person's ad attribution — retroactively too. The customer journey shows a "Household merged" entry explaining exactly what happened, and the Merge log keeps the undo. On by default; turn it off per business with the **Household associations** toggle on the HubSpot integration card.
+  </Accordion>
+  <Accordion title="Close.io">
+    Real-time contact sync (secondary emails and phones included), with opportunity wins, meetings, and calls tracked as conversions with full attribution.
+  </Accordion>
+  <Accordion title="Salesforce">
+    Contact sync plus opportunity stage changes tracked and attributed as conversions.
+  </Accordion>
+</AccordionGroup>
+
+## Scheduling & Calls
+
+<AccordionGroup>
+  <Accordion title="Calendly">
+    Syncs appointments, tracks bookings as conversions, and lets your AI agents schedule meetings automatically.
+  </Accordion>
+  <Accordion title="Cal.com">
+    Tracks bookings as conversions with full attribution and syncs scheduling data.
+  </Accordion>
+  <Accordion title="iClosed">
+    Tracks form submissions, qualified leads, and appointment bookings as conversions with full attribution.
+  </Accordion>
+  <Accordion title="CallRail">
+    One API key connects call tracking: calls, good leads, and form submissions become attributed conversions. Cortana installs the webhooks for you.
+  </Accordion>
+  <Accordion title="Fathom">
+    Syncs meeting recordings, transcripts, and AI summaries onto the right contacts automatically.
+  </Accordion>
+</AccordionGroup>
+
+## Forms & Funnels
+
+<AccordionGroup>
+  <Accordion title="Typeform">
+    Form submissions become attributed conversions; answers sync to contact fields and can trigger AI agent follow-ups.
+  </Accordion>
+  <Accordion title="Tally Forms">
+    Same as Typeform: attributed submission conversions, field sync, and AI agent triggers.
+  </Accordion>
+  <Accordion title="ClickFunnels">
+    Tracks form submissions, appointments, orders, and subscriptions from ClickFunnels 2.0 with full ad attribution.
+  </Accordion>
+</AccordionGroup>
+
+## Payments & E-commerce
+
+<AccordionGroup>
+  <Accordion title="Stripe">
+    Tracks revenue and MRR, and turns payments into conversion events for accurate ad attribution. Refunds and churn signals included.
+  </Accordion>
+  <Accordion title="PayPal">
+    Payments and refunds tracked as attributed conversion events.
+  </Accordion>
+  <Accordion title="Shopify">
+    Tracks all store purchases and revenue with full attribution, including a store pixel for on-site behavior.
+  </Accordion>
+  <Accordion title="WooCommerce">
+    Orders, cart events, and conversions tracked with full attribution.
+  </Accordion>
+  <Accordion title="Whop">
+    Digital product sales and memberships tracked with full ad attribution.
+  </Accordion>
+  <Accordion title="Kajabi">
+    Every payment tracked as lifetime value with full attribution — all offers covered automatically, nothing to configure per offer.
+  </Accordion>
+  <Accordion title="Fanbasis">
+    Payments, subscriptions, refunds, and disputes as attributed conversions. Paste an API key; webhooks auto-register.
+  </Accordion>
+  <Accordion title="Shopier">
+    Paid orders tracked as attributed conversions. Cortana polls your orders automatically — just paste an API key, no webhooks needed.
+  </Accordion>
+</AccordionGroup>
+
+## Ad Platforms
+
+<AccordionGroup>
+  <Accordion title="Meta Ads">
+    Campaign sync, conversion tracking, and conversions sent back to Meta (CAPI) for optimization.
+  </Accordion>
+  <Accordion title="Google Ads">
+    Campaign sync, conversion tracking, and offline conversions sent back to Google for optimization.
+  </Accordion>
+  <Accordion title="TikTok Ads">
+    Syncs campaigns, ad groups, ads, and performance data, with conversions sent back via the Events API.
+  </Accordion>
+  <Accordion title="Bing Ads (Microsoft Advertising)">
+    Campaign tracking, performance sync, and attribution.
+  </Accordion>
+  <Accordion title="LinkedIn Ads">
+    Campaign and spend sync, real-time Lead Gen Form capture, and conversions sent back for optimization.
+  </Accordion>
+  <Accordion title="Whop Ads">
+    Syncs Whop-managed Meta campaigns, ad sets, ads, and daily spend, and sends conversions back to Whop.
+  </Accordion>
+  <Accordion title="YouTube Organic">
+    Syncs your channel's videos, transcripts, and analytics, and attributes conversions back to specific videos.
+  </Accordion>
+</AccordionGroup>
+
+## Affiliates & Data Import
+
+<AccordionGroup>
+  <Accordion title="FirstPromoter">
+    Attributes affiliate traffic: syncs promoters and referrals and resolves affiliate links to promoter names in your attribution dashboard.
+  </Accordion>
+  <Accordion title="Hyros Data Import">
+    One-time transfer of all your Hyros conversions and purchase history into Cortana.
+  </Accordion>
+</AccordionGroup>
+
+## Communication Channels
+
+<AccordionGroup>
+  <Accordion title="Twilio">
+    Voice calls, SMS, WhatsApp, and email for your AI agents and team.
+  </Accordion>
+  <Accordion title="iMessage">
+    A dedicated blue-bubble iMessage line for higher reply rates.
+  </Accordion>
+  <Accordion title="WhatsApp">
+    24/7 customer chats handled by your agents.
+  </Accordion>
+  <Accordion title="Instagram & Messenger DMs">
+    Captures DM ad attribution and lets you reply to Instagram and Messenger conversations from Cortana.
+  </Accordion>
+  <Accordion title="Email (Nylas)">
+    Connects your inbox so AI agents can send email on your behalf.
+  </Accordion>
+  <Accordion title="Slack">
+    Delegate tasks to your Cortana agent — @mention it or use /cortana, with progress and approvals in-thread.
+  </Accordion>
+</AccordionGroup>
+
+## AI & Agent Infrastructure
+
+<AccordionGroup>
+  <Accordion title="OpenAI (Primary AI)">
+    Powers advanced AI capabilities for your agents.
+  </Accordion>
+  <Accordion title="Claude / Anthropic (Fallback AI)">
+    Backup AI provider in case of OpenAI downtime.
+  </Accordion>
+  <Accordion title="mem0 (Agent Memory)">
+    Long-term semantic memory for your business's Cortana agents across runs.
+  </Accordion>
+</AccordionGroup>
+
+## Latest updates
+
+| Date | Integration | What changed |
+| --- | --- | --- |
+| 2026-08-28 | HubSpot | **Household associations**: HubSpot contact-to-contact associations now merge the two contacts in Cortana automatically — journeys and attribution unify (a parent's booking inherits the student's ad attribution, retroactively). Includes a per-business toggle on the HubSpot card (on by default), a "Household merged" entry in the customer journey, and a one-time backfill for households that existed before the feature. |
