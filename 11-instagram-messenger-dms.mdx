@@ -36,7 +36,7 @@ When someone sends a DM to a subscribed Page or Instagram account:
 | Ad attribution is recorded | Only if the DM began from a click-to-message ad. See [Organic versus ad-driven DMs](#organic-versus-ad-driven-dms). |
 | A journey entry is added | Labelled **Instagram DM Started** or **Messenger DM Started** on the contact's customer journey. |
 | Name is filled in | From the Meta profile name attached to the conversation. |
-| Email and phone are captured | Only if the person types them into the chat. Meta never supplies them. |
+| Email and phone are captured | Only if the person types them into the chat. Meta never supplies them. Every email and phone they share is kept, across the whole conversation. |
 
 <Frame caption="Contacts created from DMs sit in your contact list like any other lead.">
   <img className="block dark:hidden" src="/images/integrations/instagram-messenger-dms/dm-11-contacts-list.png" alt="The Contacts list showing contacts with name, email, phone, AI lead score and created date columns." />
@@ -193,11 +193,31 @@ When someone sends a DM to a subscribed Page or Instagram account:
   </Accordion>
 
   <Accordion title="Automatic email and phone capture">
-    Cortana reads each inbound DM for an email address and a phone number, and writes what it finds onto the contact. This is the only way an email or phone reaches a DM contact from the conversation itself, because Meta supplies neither.
+    Cortana reads every inbound DM for email addresses and phone numbers, and writes what it finds onto the contact. This is the only way an email or phone reaches a DM contact from the conversation itself, because Meta supplies neither.
 
-    **It only ever fills a blank field.** If the contact already has an email, a new email in the chat is ignored, and the same for phone. Nothing a rep typed is ever overwritten.
+    **Everything the person shares is kept, not just the first thing.** A single message can carry several — a work email and a personal one, a mobile and a landline, numbers on separate lines or one after another. Cortana takes up to five emails and five phone numbers from each message, and keeps reading every message in the thread.
 
-    A phone number is only accepted when Cortana can validate it as a real number. A number written with a country code, like `+1 555 0100`, is recognised. A bare local number shorter than 10 digits is deliberately ignored, so an order number or a house number in a sentence is not mistaken for a phone number.
+    Where each value lands:
+
+    | Value | Where it goes |
+    | --- | --- |
+    | The first one, when the field is blank | Into **Email** or **Phone number** on the contact. |
+    | Every one after that | Into the contact's secondary emails and phones, the same place values from your CRM land. |
+    | Any value, when the field is already filled | Into secondaries. A DM never overwrites an existing email or phone. |
+
+    Secondary values show in the contact modal with a **from an Instagram/Facebook DM** tooltip, so you can see where each one came from.
+
+    **A DM can never overwrite a primary.** If the contact already has a phone or email from a form, your CRM, or a payment, the value from the chat is filed as a secondary instead. This holds even when two things arrive at the same instant, because the rule is enforced when the record is written, not before.
+
+    **A value you already hold merges the records.** If someone DMs an email or phone that already sits on another contact, the DM contact merges into it. The ad click, the DM thread and the CRM record become one person with one journey.
+
+    ### What is not captured
+
+    Cortana is deliberately strict, because a wrong phone number is worse than a missing one.
+
+    - **Postcodes, dates, times, prices and short order numbers** are never captured. They fail phone validation outright.
+    - **A bare ten-digit number is read in context.** `Order 2025550123` or a number after `total:` or `$` is treated as an order number or an amount and ignored. `my number: 2025550123` is captured, and so is anything written with a country code.
+    - **Local-format numbers with no country code**, like `0541 546 35 17`, are not captured. Cortana will not guess which country a number belongs to.
 
     <Note>
       Instagram does not offer a one-tap prompt for collecting an email address inside a DM, so there is no button that asks the customer for their email. They either type it, or you send them a [tracking link](/12-tracking-links).
@@ -224,7 +244,7 @@ When someone sends a DM to a subscribed Page or Instagram account:
   <Accordion title="Running alongside GoHighLevel">
     Cortana reads DMs natively at the same time as GoHighLevel, which keeps its own inbox and its own AI. The two do not conflict.
 
-    You may briefly see **two contacts for the same person**, one created by Cortana from the DM and one arriving from GoHighLevel. They merge automatically as soon as a shared email address or phone number appears on both.
+    You may briefly see **two contacts for the same person**, one created by Cortana from the DM and one arriving from GoHighLevel. They merge automatically as soon as a shared email address or phone number appears on both. Someone typing an email you already hold on the GoHighLevel record is enough to trigger it, whether or not the DM contact's own email field was empty.
 
     A contact arriving **from GoHighLevel** is only created in Cortana once it carries an email or a phone number. A name-only lead from GoHighLevel is held back rather than created, and it materialises later if that person supplies an email or phone. This is deliberate: name-only records cannot be matched reliably and used to attach themselves to the wrong DM.
 
@@ -263,7 +283,7 @@ When someone sends a DM to a subscribed Page or Instagram account:
 | Instagram tab selection | Chooses which Instagram accounts Cortana reads DMs from. | Nothing subscribed | Subscribe only accounts you actively monitor. | Rows showing **Not linked** cannot be selected here. |
 | Messenger tab selection | Chooses which Facebook Pages Cortana reads DMs from. | Nothing subscribed | Subscribe the Pages your ads point at. | Independent of the Instagram tab. Subscribe both if you want both. |
 | Reply window | Blocks the composer outside Meta's 24-hour window. | Always on | Reply the same day. | Meta's rule. It cannot be turned off or extended from Cortana. |
-| Email and phone capture | Reads inbound message text and fills blank contact fields. | Always on | Ask for an email early in the conversation. | Fills blanks only. Never overwrites an existing value. |
+| Email and phone capture | Reads inbound message text and captures every email and phone shared. | Always on | Ask for an email early in the conversation. | Fills a blank field with the first value, files the rest as secondaries. Never overwrites an existing value. |
 | Name capture | Fills **First name** and **Last name** from the Meta profile. | Always on | Leave it alone. | Repairs blank names only. A rep's correction is never overwritten. |
 | Contact creation | Creates a contact for every inbound DM. | Always on | — | Organic DMs create contacts too. Subscribing an unused Page will clutter your list. |
 
