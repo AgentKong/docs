@@ -1,6 +1,6 @@
 ---
 title: "4.2) Conversion Sources"
-description: "Add conversion sources to track sales and leads in Cortana. Connect Stripe, PayPal, Shopify, Kajabi, GoHighLevel, Meta Ads, Calendly, CallRail, webhooks, pixels, CSV and 14 other source types to any conversion."
+description: "Add conversion sources to track sales and leads in Cortana. Connect Stripe, PayPal, Shopify, Kajabi, GoHighLevel, Meta Ads, LinkedIn Ads, Calendly, CallRail, webhooks, pixels, CSV and 14 other source types to any conversion."
 ---
 
 ## <u>Conversion Sources</u>
@@ -13,11 +13,11 @@ Sources live at **Tracking → Conversion Setup**. You open (or create) a conver
 
 ### Available vs locked sources
 
-The **Integration** dropdown lists all 25 source types. Four are always available because they do not depend on an outside tool:
+The **Integration** dropdown lists all 26 source types. Four are always available because they do not depend on an outside tool:
 
 **Forms / Appointments** · **Webhook** · **CSV Upload** · **Pixel**
 
-The other 21 require their integration to be connected to this business first. Until it is connected, the entry is greyed out with a **padlock icon** and sorts to the bottom of the list. Clicking a locked entry does not select it. It shows an error toast such as `Please connect Stripe first. Go to Settings → Integrations to connect.`
+The other 22 require their integration to be connected to this business first. Until it is connected, the entry is greyed out with a **padlock icon** and sorts to the bottom of the list. Clicking a locked entry does not select it. It shows an error toast such as `Please connect Stripe first. Go to Settings → Integrations to connect.`
 
 The dropdown sorts **available sources A-Z first, then locked sources A-Z**. So on a business with everything connected, the whole list is simply A-Z. The accordions below follow that same A-Z order.
 
@@ -43,7 +43,7 @@ Every source is added the same way. Follow these six steps, then open your sourc
   </Step>
 
   <Step title="Go to the Conversion Setup tab">
-    Click the **Conversion Setup** tab, then stay on its **Conversion Events** sub-tab (the other sub-tabs are **Conversions Dashboard**, **Meta Lead Forms**, and **Deleted Audit Log**).
+    Click the **Conversion Setup** tab, then stay on its **Conversion Events** sub-tab (the other sub-tabs are **Conversions Dashboard**, **Lead Forms**, and **Deleted Audit Log**).
 
     You now see a table of your conversions with the columns **Status**, **Conversion Name**, **Event Activity**, **Last Event**, **Sources**, **Column Presets**, and **Actions**.
 
@@ -870,6 +870,99 @@ Every source is added the same way. Follow these six steps, then open your sourc
     Disconnecting deletes the webhooks Cortana created in your Kajabi account and deactivates the three sources. Conversions already recorded are kept, and reconnecting later reuses the same webhook URLs.
   </Accordion>
 
+  <Accordion title="LinkedIn Ads">
+    **What it tracks:** lead form submissions from your LinkedIn Lead Gen Forms. Someone fills in the form on your LinkedIn ad, and it lands in this conversion.
+
+    **Prerequisite integration:** LinkedIn Ads. When it is not connected the entry is locked and clicking it shows `Please connect LinkedIn first. Go to Settings → Integrations to connect.` See [Connecting LinkedIn Ads](/1-connect-integrations#connecting-linkedin-ads) for the one-time setup. You also have to connect your ad account and switch on the forms you want in the **Lead Forms** tab first, exactly like Meta.
+
+    <Frame caption="The LinkedIn Ads source form. Integration and Source at the top, then the forms panel.">
+      <img className="block dark:hidden" src="/images/ad-tracking/conversion-sources/linkedin-ads/01-linkedin-ads-form.png" alt="Create Conversion Source dialog with Integration set to LinkedIn Ads and Source set to Lead Form Submissions, showing the Track all forms panel and the searchable list of lead forms below it. Form names are blurred." />
+      <img className="hidden dark:block" src="/images/ad-tracking/conversion-sources/linkedin-ads/01-linkedin-ads-form-dark.png" alt="Create Conversion Source dialog with Integration set to LinkedIn Ads and Source set to Lead Form Submissions, showing the Track all forms panel and the searchable list of lead forms below it. Form names are blurred." />
+    </Frame>
+
+    <Steps>
+      <Step title="Connect your ad account in the Lead Forms tab">
+        Go to **Tracking → Conversion Setup** and open the **Lead Forms** tab, then its **LinkedIn** sub-tab. The page is titled **LinkedIn Form Fields Mapping**.
+
+        Next to **Select Account**, open the account dropdown. It has two tabs, **Connected Accounts** and **All Accounts**, a search box, and a line at the bottom reading **"X of Y accounts connected"**.
+
+        Open **All Accounts** and switch on each ad account you want. One switch does both jobs. It pulls that account's Lead Gen Forms into Cortana, and it tells LinkedIn to start sending you the leads. You will see **"Connected. 4 lead forms synced."** Click **Turn all on** to connect every account at once.
+
+        Under each account name you see how it is doing, like **"4 lead forms · delivery on"**. **Not connected** means nothing is coming in from it yet.
+
+        <Frame caption="Tracking → Conversion Setup → Lead Forms → LinkedIn. Connect an account, map its forms, then switch each form on.">
+          <img className="block dark:hidden" src="/images/ad-tracking/conversion-sources/linkedin-ads/02-linkedin-lead-forms-tab.png" alt="The LinkedIn sub-tab of the Lead Forms tab, showing the LinkedIn Form Fields Mapping heading, the Select Account dropdown, the Auto-connect new accounts toggle, a search box, and a table of lead forms with Account Name, Form Name, Leads Collected, Map Fields, Status, and On/Off columns. Account and form names are blurred." />
+          <img className="hidden dark:block" src="/images/ad-tracking/conversion-sources/linkedin-ads/02-linkedin-lead-forms-tab-dark.png" alt="The LinkedIn sub-tab of the Lead Forms tab, showing the LinkedIn Form Fields Mapping heading, the Select Account dropdown, the Auto-connect new accounts toggle, a search box, and a table of lead forms with Account Name, Form Name, Leads Collected, Map Fields, Status, and On/Off columns. Account and form names are blurred." />
+        </Frame>
+      </Step>
+
+      <Step title="Map the fields on each form">
+        Your forms now show in a table with the columns **Account Name**, **Form Name**, **Leads Collected**, **Map Fields**, **Status**, and **On/Off**. **Status** is the form's state on LinkedIn, so **ACTIVE** means it is live there.
+
+        Click **Map Fields** on a form. The dialog asks which contact field each LinkedIn question should fill. Standard questions like first name, last name, email, phone, and company are matched for you. Custom questions are left blank for you to place.
+
+        Pick **Create a custom field** in any dropdown to make a new contact field there and then. Type a **Field label**, for example **Industry**, and it is created and mapped in one go.
+      </Step>
+
+      <Step title="Turn on the forms you want to track">
+        Use the **On/Off** switch at the end of each row. Only forms that are on can feed a conversion source.
+
+        The switch stays greyed out until that form has at least one mapped field. Map a field first, then it turns on.
+      </Step>
+
+      <Step title="Add the source and pick the Source">
+        Go back to the **Conversion Events** sub-tab, open your conversion with the gear icon, click **Add Source**, and pick **LinkedIn Ads** in the **Integration** dropdown.
+
+        **Source**. The only option is **Lead Form Submissions**.
+
+        There is no ad account to pick. LinkedIn leads are routed by form, so an account choice would not change anything.
+      </Step>
+
+      <Step title="Choose Track all forms, or pick specific forms">
+        A **Track all forms** panel appears with a **Default** badge and the toggle **on**. It reads: *"All current and future lead forms are tracked. New forms you build in LinkedIn count automatically."*
+
+        Leave it on and you never have to come back when you build a new form.
+
+        Turn it off to pick forms one by one. A search box (**"Search forms..."**) and a list appear, with a counter reading **"X forms selected"** and a **Select all** link. Forms already used by another source are greyed out and say **Already used by "source name"**. Under the list you see **"Only forms enabled in the LinkedIn tab under Lead Forms appear here."**
+
+        Only one source in the business can be the catch-all. If another one already holds it, the badge changes to **Unavailable**, the toggle is locked off, and the panel names the source that has it.
+
+        Saving with the toggle off and no forms ticked fails with: `Pick at least one form, or turn "Track all forms" back on`.
+
+        <Frame caption="Track all forms, on by default. Reopen it any time with the pencil icon on the source row.">
+          <img className="block dark:hidden" src="/images/ad-tracking/conversion-sources/linkedin-ads/03-linkedin-track-all-forms.png" alt="The Edit Lead Forms dialog with Track all forms carrying a Default badge and its toggle switched on, opened from a LinkedIn Ads source row in the Sources table that reads All lead forms." />
+          <img className="hidden dark:block" src="/images/ad-tracking/conversion-sources/linkedin-ads/03-linkedin-track-all-forms-dark.png" alt="The Edit Lead Forms dialog with Track all forms carrying a Default badge and its toggle switched on, opened from a LinkedIn Ads source row in the Sources table that reads All lead forms." />
+        </Frame>
+      </Step>
+
+      <Step title="Save">
+        Click **Submit**. Every lead from the forms you chose now flows into this conversion.
+
+        The source appears in the **Sources** table named **LinkedIn Lead Forms - your conversion name**, with **LinkedIn Ads • All lead forms** underneath when it is the catch-all. To change which forms it takes later, click the pencil icon on that row and the **Edit Lead Forms** dialog opens.
+      </Step>
+    </Steps>
+
+    <Warning>
+      **A form with no mapped fields cannot be switched on.** This is the most common reason a LinkedIn form never sends anything. The **On/Off** switch looks broken, but it is only waiting for you to click **Map Fields** and save one mapping first.
+    </Warning>
+
+    <Note>
+      **LinkedIn leads arrive in seconds.** Connecting an account registers Cortana with LinkedIn to receive leads as they happen, so there is no sync to wait for. A background check also runs every 45 minutes and picks up anything LinkedIn failed to deliver, so a lead is not lost if delivery hiccups.
+    </Note>
+
+    <Note>
+      **Turn on auto-connect if you add ad accounts often.** Next to the account dropdown is an **Auto-connect new accounts** switch. With it on, any new LinkedIn ad account you gain connects itself within the hour, forms and lead delivery included, without you opening Cortana. It is off by default.
+    </Note>
+
+    <Warning>
+      **Two banners tell you delivery has stopped.** **"Lead delivery could not be turned on"** means LinkedIn refused the permission, so your forms are synced and can be mapped but nothing is arriving yet. **"Lead delivery may be paused"** means LinkedIn stopped confirming our connection. Fix both by reconnecting the account in the selector at the top of the tab.
+    </Warning>
+
+    <Tip>
+      **Disconnecting an account deletes your field mappings.** Cortana asks you to confirm first, warning that reconnecting later means mapping its forms again. Do not switch an account off just to test something.
+    </Tip>
+  </Accordion>
+
   <Accordion title="Meta Ads">
     **What it tracks:** lead form submissions from Facebook and Instagram lead ads. This is the source previously called *Meta Lead Forms*.
 
@@ -1658,12 +1751,12 @@ These settings appear on more than one source. Where a source uses one, its acco
 - **Recommendation:** turn it on unless you specifically want to count re-entries.
 - **Caveat:** with it off, a deal moved back and forth between stages logs an entry every time.
 
-### Track all forms (Meta Ads)
+### Track all forms (Meta Ads and LinkedIn Ads)
 
-- **What it does:** makes the source a catch-all for every enabled lead form, including forms you create later.
+- **What it does:** makes the source a catch-all for every enabled lead form on that platform, including forms you create later.
 - **Default:** on.
 - **Recommendation:** leave it on. It is the only setting that picks up new forms without you revisiting this screen.
-- **Caveat:** only one source can hold the catch-all. If another source already has it, the toggle is locked off and you must select specific forms.
+- **Caveat:** only one source per platform can hold the catch-all. If another source already has it, the badge reads **Unavailable**, the toggle is locked off, and you must select specific forms. Meta and LinkedIn are counted separately, so one catch-all for each is fine.
 
 ## Tips and caveats
 
@@ -1676,7 +1769,7 @@ These settings appear on more than one source. Where a source uses one, its acco
 </Warning>
 
 <Note>
-  **Some sources are instant, some are polled.** Webhook-driven sources (Shopify, Stripe, Whop, WooCommerce, HubSpot, GoHighLevel webhooks) arrive within seconds. Polled sources arrive on a schedule:
+  **Some sources are instant, some are polled.** Webhook-driven sources (Shopify, Stripe, Whop, WooCommerce, HubSpot, GoHighLevel webhooks, LinkedIn Ads lead forms) arrive within seconds. Polled sources arrive on a schedule:
 
   | Source | Frequency |
   | --- | --- |
@@ -1745,11 +1838,18 @@ These settings appear on more than one source. Where a source uses one, its acco
     2. **Click Refresh.** The **Sources** table has a **Refresh** button that re-reads counts.
     3. **Check the Requests column** on the source row. For webhook sources this opens the logs showing test, failed, and successful requests, with a reason on each failure. The most common failure is a payload carrying no name, email, or phone, which makes the person unidentifiable.
     4. **Meta Ads specifically**: verify Lead Access. Go to **business.facebook.com/settings → Integrations → Lead Access**, click your page, open **CRMs**, and confirm **Cortana AI** is assigned. Meta blocks lead delivery silently when it is not, and nothing inside Cortana will indicate this.
-    5. **WooCommerce specifically**: check your **Count orders with status** selection actually includes the status your gateway uses.
-    6. **HubSpot Custom Field Updated specifically**: this needs the property subscribed to Cortana's HubSpot app `contact.propertyChange` events. Contact support to add the subscription.
-    7. **Manually-connected Shopify**: the webhook must be created in your Shopify admin using the URL and secret shown in the setup card. Save stays gated until a test event arrives.
-    8. **PayPal specifically**: give it 3 hours before treating it as broken, and check the account's status badge at **Settings → Integrations → PayPal Accounts**. See the two PayPal entries below.
-    9. **Reconnect the integration.** Expired tokens frequently fail quietly. Calendly refresh tokens in particular are single-use.
+    5. **LinkedIn Ads specifically**: open **Lead Forms → LinkedIn** and check the form's **On/Off** switch is actually on. A form with no mapped fields cannot be switched on, so click **Map Fields**, save one mapping, then switch it on. Also check the account itself still says **delivery on** in the account dropdown.
+    6. **WooCommerce specifically**: check your **Count orders with status** selection actually includes the status your gateway uses.
+    7. **HubSpot Custom Field Updated specifically**: this needs the property subscribed to Cortana's HubSpot app `contact.propertyChange` events. Contact support to add the subscription.
+    8. **Manually-connected Shopify**: the webhook must be created in your Shopify admin using the URL and secret shown in the setup card. Save stays gated until a test event arrives.
+    9. **PayPal specifically**: give it 3 hours before treating it as broken, and check the account's status badge at **Settings → Integrations → PayPal Accounts**. See the two PayPal entries below.
+    10. **Reconnect the integration.** Expired tokens frequently fail quietly. Calendly refresh tokens in particular are single-use.
+  </Accordion>
+
+  <Accordion title="My LinkedIn form will not switch on">
+    The **On/Off** switch on a form in **Lead Forms → LinkedIn** is disabled until that form has at least one mapped field. Nothing is broken.
+
+    Click **Map Fields** on that row, point at least one LinkedIn question at a contact field, save, and the switch becomes usable. Email is the field to map first, because a lead with no email and no phone cannot be matched to a person or to an ad.
   </Accordion>
 
   <Accordion title="My PayPal account says Enabling access, and nothing is importing">
@@ -1835,7 +1935,7 @@ These settings appear on more than one source. Where a source uses one, its acco
   <Accordion title="My source is not in the list. Where is it?">
     Locked sources sort to the bottom of the dropdown, below every available one, so scroll down. If it is there with a padlock, its integration is not connected yet.
 
-    If the platform you use is not one of the 22 at all, use a **Webhook** source. Any tool that can send an HTTP request, including Zapier, Make.com, and n8n, can feed a conversion that way.
+    If the platform you use is not one of the 26 at all, use a **Webhook** source. Any tool that can send an HTTP request, including Zapier, Make.com, and n8n, can feed a conversion that way.
   </Accordion>
 
   <Accordion title="How do I import historical leads or sales?">
