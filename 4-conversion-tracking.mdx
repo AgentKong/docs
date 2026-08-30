@@ -1,6 +1,6 @@
 ---
 title: "4.2) Conversion Sources"
-description: "Add conversion sources to track sales and leads in Cortana. Connect Stripe, PayPal, Shopify, Kajabi, GoHighLevel, Meta Ads, LinkedIn Ads, Instagram and Messenger DMs, Calendly, CallRail, webhooks, pixels, CSV and 14 other source types to any conversion."
+description: "Add conversion sources to track sales and leads in Cortana. Connect Stripe, PayPal, Shopify, Kajabi, GoHighLevel, Meta Ads, LinkedIn Ads, Meta and Instagram DMs, Calendly, CallRail, webhooks, pixels, CSV and 14 other source types to any conversion."
 ---
 
 ## <u>Conversion Sources</u>
@@ -749,81 +749,6 @@ Every source is added the same way. Follow these six steps, then open your sourc
     </Tip>
   </Accordion>
 
-  <Accordion title="Instagram DMs">
-    **What it tracks:** new Instagram DM conversations. Someone sends your Instagram account a message, and that conversation counts as a conversion.
-
-    Instagram DMs and Messenger DMs are **two separate sources**. Pick this one for Instagram. Pick **Messenger DMs** for Facebook Messenger. They run on the same Meta connection, but each gets its own row, its own count, and its own on and off switch.
-
-    **No revenue.** A DM is a lead, not a sale, so nothing is attached as money.
-
-    **Prerequisite integration:** Meta, with messaging access granted. When it is missing, the entry is locked and clicking it shows `Connect Meta and grant messaging access first. Go to Settings → Integrations.` You also have to switch on the Instagram accounts you want Cortana to watch. Full setup is in [**11) Instagram & Messenger DMs**](/11-instagram-messenger-dms).
-
-    <Steps>
-      <Step title="Connect Meta and switch on your Instagram accounts">
-        Do this once, in [**11) Instagram & Messenger DMs**](/11-instagram-messenger-dms). Connect Meta, grant messaging access, then turn on each Instagram account you want watched.
-
-        Until that is done, **Instagram DMs** sits at the bottom of the **Integration** list with a padlock and cannot be picked.
-      </Step>
-
-      <Step title="Add the source and pick Instagram DMs">
-        Open your conversion with the gear icon, click **Add Source**, and choose **Instagram DMs** in the **Integration** dropdown.
-
-        While Cortana checks your connection you see **"Checking Meta messaging status..."**. If messaging access is missing you see **"Connect Meta and grant messaging access in Settings → Integrations before tracking conversations."** instead of the form.
-      </Step>
-
-      <Step title="Choose which conversations count">
-        The form has exactly one setting, and it is required: **Which conversations count?** It starts empty, on the placeholder **"Select which conversations to count"**, and saving without answering it fails with `Please choose which conversations count`.
-
-        **First, what is a conversation?** It is one person's thread with you. Not one message. When a new person messages your Instagram account, that is one conversation, and it counts once.
-
-        **Every conversation arrives one of two ways.**
-
-        - **From an ad.** The person tapped a click to message ad and Instagram opened the chat for them. Cortana can see the exact ad, so this conversation can be credited to a campaign.
-        - **On its own.** They found you in search, tapped your profile, replied to a story, or followed a link someone shared. There is no ad behind it, so there is nothing to credit.
-
-        <Frame caption="The question, before you answer it. Nothing is chosen for you.">
-          <img className="block dark:hidden" src="/images/ad-tracking/conversion-sources/instagram-dms/01-instagram-dms-form.png" alt="Create Conversion Source dialog with Integration set to Instagram DMs, showing the required Which conversations count question still on its Select which conversations to count placeholder, above the note that it counts once per conversation on the first message." />
-          <img className="hidden dark:block" src="/images/ad-tracking/conversion-sources/instagram-dms/01-instagram-dms-form-dark.png" alt="Create Conversion Source dialog with Integration set to Instagram DMs, showing the required Which conversations count question still on its Select which conversations to count placeholder, above the note that it counts once per conversation on the first message." />
-        </Frame>
-
-        **Now pick which of those you want counted.**
-
-        | Option | What it counts | Pick it when |
-        | --- | --- | --- |
-        | **All conversations** | Both kinds. Every new person who messages you. | You treat every inbound DM as a lead, and you want the total. |
-        | **Ad conversations only** | Only the ones that started from a click to message ad. | This conversion measures ad performance, and you want cost per conversation to be honest. |
-
-        **Why this matters more than it looks.** On most Instagram accounts the organic messages massively outnumber the ad ones. A busy account runs around 60 to 90 ad conversations a day against 700 to 1,800 conversations in total. Put that whole total on an ad conversion and your cost per lead looks roughly ten times better than it really is, because you are dividing your ad spend by messages your ads never produced.
-
-        **Not sure? Take Ad conversations only.** You can always add a second source on a different conversion later to count everything, and then you have both numbers side by side instead of one blended number you cannot trust.
-      </Step>
-
-      <Step title="Save">
-        Click **Submit**. You will see **"Instagram DMs source created!"**.
-
-        The source appears in the **Sources** table named after what you picked, like **Instagram DMs — All conversations**.
-      </Step>
-    </Steps>
-
-    <Note>
-      **It counts once per conversation, on the first message.** A person who sends you twenty messages is one conversion, not twenty. The same person opening a brand new conversation later counts again.
-    </Note>
-
-    <Warning>
-      **There is no backfill.** Only conversations that arrive after you save the source are counted. DMs already sitting in your inbox are not pulled in, and editing the source later does not go back and change what was already recorded. It only changes what counts from that point on.
-    </Warning>
-
-    <Warning>
-      **One Instagram source per conversion.** Adding a second one to the same conversion is blocked, because both would count the same conversation and double your number. You will see a message naming the source that already has it, telling you to edit or delete that one, or put this one on a different conversion.
-
-      Putting Instagram DMs on **two different conversions** is fine and is how one DM can count as both a lead and something further down your funnel.
-    </Warning>
-
-    <Tip>
-      **Ad conversations roll up under the real ad.** When a DM starts from a click to message ad, Cortana records the actual campaign, ad set and ad, so it shows up in the Attribution Table like any other conversion. A DM that started from a shared ig.me link is not an ad conversation. It carries no ad id, so it can never sit under a campaign and it does not count under **Ad conversations only**.
-    </Tip>
-  </Accordion>
-
   <Accordion title="Kajabi">
     **What it tracks:** every successful payment on your Kajabi site, including subscription rebills, as **lifetime value**. Connecting once covers **every offer you have and every offer you create later** — there is nothing to set up per offer.
 
@@ -1038,59 +963,76 @@ Every source is added the same way. Follow these six steps, then open your sourc
     </Tip>
   </Accordion>
 
-  <Accordion title="Messenger DMs">
-    **What it tracks:** new Facebook Messenger conversations. Someone messages your Facebook Page, and that conversation counts as a conversion.
+  <Accordion title="Meta / Instagram DM">
+    **What it tracks:** new DM conversations on Instagram and Facebook Messenger. Someone messages your Instagram account or your Facebook Page, and that conversation counts as a conversion.
 
-    Messenger DMs and Instagram DMs are **two separate sources**. Pick this one for Messenger. Pick **Instagram DMs** for Instagram. They run on the same Meta connection, but each gets its own row, its own count, and its own on and off switch.
+    **One source, both inboxes.** There used to be two sources, one for Instagram and one for Messenger. Now there is one. Inside it you pick exactly which Instagram accounts and Facebook Pages you want to receive DMs from, the same way the GoHighLevel Forms source lets you pick forms. You can also **subscribe and unsubscribe pages right here**, so you no longer have to go to **Settings → Integrations** first, switch a page on there, and come back.
 
     **No revenue.** A DM is a lead, not a sale, so nothing is attached as money.
 
-    **Prerequisite integration:** Meta, with messaging access granted. When it is missing, the entry is locked and clicking it shows `Connect Meta and grant messaging access first. Go to Settings → Integrations.` You also have to switch on the Facebook Pages you want Cortana to watch. Full setup is in [**11) Instagram & Messenger DMs**](/11-instagram-messenger-dms).
+    **Prerequisite integration:** Meta, with messaging access granted. When it is missing, the entry is locked and clicking it shows `Connect Meta and grant messaging access first. Go to Settings → Integrations.` Full connection setup is in [**11) Instagram & Messenger DMs**](/11-instagram-messenger-dms).
 
     <Steps>
-      <Step title="Connect Meta and switch on your Facebook Pages">
-        Do this once, in [**11) Instagram & Messenger DMs**](/11-instagram-messenger-dms). Connect Meta, grant messaging access, then turn on each Facebook Page you want watched.
+      <Step title="Connect Meta and grant messaging access">
+        Do this once, in [**11) Instagram & Messenger DMs**](/11-instagram-messenger-dms). Connect Meta and grant the messaging permission.
 
-        Until that is done, **Messenger DMs** sits at the bottom of the **Integration** list with a padlock and cannot be picked.
+        Until that is done, **Meta / Instagram DM** sits at the bottom of the **Integration** list with a padlock and cannot be picked.
       </Step>
 
-      <Step title="Add the source and pick Messenger DMs">
-        Open your conversion with the gear icon, click **Add Source**, and choose **Messenger DMs** in the **Integration** dropdown.
+      <Step title="Add the source">
+        Open your conversion with the gear icon, click **Add Source**, and choose **Meta / Instagram DM** in the **Integration** dropdown.
 
-        While Cortana checks your connection you see **"Checking Meta messaging status..."**. If messaging access is missing you see **"Connect Meta and grant messaging access in Settings → Integrations before tracking conversations."** instead of the form.
+        While Cortana checks your connection you see **"Checking Meta messaging status..."**. If messaging access is missing you see **"Connect Meta and grant messaging access in Settings → Integrations before tracking DMs."** instead of the form.
+      </Step>
+
+      <Step title="Pick the pages to collect DMs from">
+        This is the first required choice: **Pages to collect DMs from**. It has two tabs, **Instagram** and **Facebook**. Tick the accounts and Pages you want this conversion to receive DMs from, and subscribe or unsubscribe any page from the same list. You can tick different ones on each tab, and the count in each tab label tells you how many you have picked. Nothing is ticked for you.
+
+        <Frame caption="The Instagram tab. Tick the accounts this conversion should count Instagram DMs from.">
+          <img className="block dark:hidden" src="/images/ad-tracking/conversion-sources/meta-instagram-dm/01-meta-instagram-dm-instagram.png" alt="Create Conversion Source dialog with Integration set to Meta / Instagram DM. The Instagram tab is open, showing a searchable list of accounts. One is ticked and subscribed with an Unsubscribe link, some are greyed with a Subscribe button, and some are greyed because no Instagram account is linked to the Page. Below the list is the required Which conversations count question, set to All conversations." />
+          <img className="hidden dark:block" src="/images/ad-tracking/conversion-sources/meta-instagram-dm/01-meta-instagram-dm-instagram-dark.png" alt="Create Conversion Source dialog with Integration set to Meta / Instagram DM. The Instagram tab is open, showing a searchable list of accounts. One is ticked and subscribed with an Unsubscribe link, some are greyed with a Subscribe button, and some are greyed because no Instagram account is linked to the Page. Below the list is the required Which conversations count question, set to All conversations." />
+        </Frame>
+
+        **A page has to be subscribed before you can tick it.** A page Cortana is not receiving DMs for yet shows a **Subscribe** button and its tick box is greyed, with the hint *"subscribe a page to select it"*. Click **Subscribe**. Once it turns on, the tick box unlocks and the page is ticked for you.
+
+        **Subscribe and Unsubscribe here change DM capture for the whole business.** Subscribing a page starts DM capture for it everywhere in Cortana, not just this conversion. Unsubscribing stops it everywhere, so it asks you to confirm first.
+
+        **"No Instagram account linked to this Page"** on the Instagram tab means that Page has no Instagram account attached in Meta, so it cannot receive Instagram DMs. It can still receive Messenger DMs, so it is pickable on the Facebook tab.
+
+        <Frame caption="The Facebook tab. Same idea, for Messenger. What you tick here is separate from the Instagram tab.">
+          <img className="block dark:hidden" src="/images/ad-tracking/conversion-sources/meta-instagram-dm/02-meta-instagram-dm-facebook.png" alt="The Facebook tab of the same dialog, listing Facebook Pages, each with a Subscribe button, and one Page ticked and subscribed with an Unsubscribe link." />
+          <img className="hidden dark:block" src="/images/ad-tracking/conversion-sources/meta-instagram-dm/02-meta-instagram-dm-facebook-dark.png" alt="The Facebook tab of the same dialog, listing Facebook Pages, each with a Subscribe button, and one Page ticked and subscribed with an Unsubscribe link." />
+        </Frame>
       </Step>
 
       <Step title="Choose which conversations count">
-        The form has exactly one setting, and it is required: **Which conversations count?** It starts empty, on the placeholder **"Select which conversations to count"**, and saving without answering it fails with `Please choose which conversations count`.
+        The second required setting: **Which conversations count?** It starts empty, on the placeholder **"Select which conversations to count"**, and saving without answering it fails with `Please choose which conversations count`.
 
-        **First, what is a conversation?** It is one person's thread with you. Not one message. When a new person messages your Facebook Page, that is one conversation, and it counts once.
+        **First, what is a conversation?** It is one person's thread with you. Not one message. When a new person messages you, that is one conversation, and it counts once.
 
         **Every conversation arrives one of two ways.**
 
-        - **From an ad.** The person tapped a click to message ad and Messenger opened the chat for them. Cortana can see the exact ad, so this conversation can be credited to a campaign.
+        - **From an ad.** The person tapped a click to message ad and the chat opened for them. Cortana can see the exact ad, so this conversation can be credited to a campaign.
         - **On its own.** They found you in search, tapped your profile, replied to a story, or followed a link someone shared. There is no ad behind it, so there is nothing to credit.
 
         **Now pick which of those you want counted.**
 
         | Option | What it counts | Pick it when |
         | --- | --- | --- |
-        | **All conversations** | Both kinds. Every new person who messages you. | You treat every inbound message as a lead, and you want the total. |
+        | **All conversations** | Both kinds. Every new person who messages you. | You treat every inbound DM as a lead, and you want the total. |
         | **Ad conversations only** | Only the ones that started from a click to message ad. | This conversion measures ad performance, and you want cost per conversation to be honest. |
 
-        <Frame caption="Answered. This source counts ad conversations only.">
-          <img className="block dark:hidden" src="/images/ad-tracking/conversion-sources/messenger-dms/01-messenger-dms-form.png" alt="Create Conversion Source dialog with Integration set to Messenger DMs and Which conversations count set to Ad conversations only, started from a click-to-message ad, above the note that it counts once per conversation on the first message." />
-          <img className="hidden dark:block" src="/images/ad-tracking/conversion-sources/messenger-dms/01-messenger-dms-form-dark.png" alt="Create Conversion Source dialog with Integration set to Messenger DMs and Which conversations count set to Ad conversations only, started from a click-to-message ad, above the note that it counts once per conversation on the first message." />
-        </Frame>
-
-        **Why this matters more than it looks.** On most Facebook Pages the organic messages massively outnumber the ad ones. A busy account runs around 60 to 90 ad conversations a day against 700 to 1,800 conversations in total. Put that whole total on an ad conversion and your cost per lead looks roughly ten times better than it really is, because you are dividing your ad spend by messages your ads never produced.
+        **Why this matters more than it looks.** On most accounts the organic messages massively outnumber the ad ones. A busy account runs around 60 to 90 ad conversations a day against 700 to 1,800 conversations in total. Put that whole total on an ad conversion and your cost per lead looks roughly ten times better than it really is, because you are dividing your ad spend by messages your ads never produced.
 
         **Not sure? Take Ad conversations only.** You can always add a second source on a different conversion later to count everything, and then you have both numbers side by side instead of one blended number you cannot trust.
+
+        This setting covers the whole source. It is not per page.
       </Step>
 
       <Step title="Save">
-        Click **Submit**. You will see **"Messenger DMs source created!"**.
+        Click **Submit**. You will see **"Meta / Instagram DM source created!"**.
 
-        The source appears in the **Sources** table named after what you picked, like **Messenger DMs — Ad conversations**.
+        The source appears in the **Sources** table as **Meta / Instagram DM**, or **Meta / Instagram DM (Ad conversations)** if you chose ad conversations only.
       </Step>
     </Steps>
 
@@ -1099,18 +1041,22 @@ Every source is added the same way. Follow these six steps, then open your sourc
     </Note>
 
     <Warning>
-      **There is no backfill.** Only conversations that arrive after you save the source are counted. Messages already sitting in your inbox are not pulled in, and editing the source later does not go back and change what was already recorded. It only changes what counts from that point on.
+      **There is no backfill.** Only conversations that arrive after you save the source are counted. DMs already sitting in your inbox are not pulled in. Editing the source later, adding or removing pages, only changes what counts from that point on. It never goes back and rewrites what was already recorded.
     </Warning>
 
     <Warning>
-      **One Messenger source per conversion.** Adding a second one to the same conversion is blocked, because both would count the same conversation and double your number. You will see a message naming the source that already has it, telling you to edit or delete that one, or put this one on a different conversion.
+      **One source per page and channel, per conversion.** You cannot add a second **Meta / Instagram DM** source to the same conversion if it overlaps on a page and channel another source already covers, because both would count the same conversation and double your number. You will see a message naming the source that already covers it, telling you to edit or delete that one, or pick different pages.
 
-      Putting Messenger DMs on **two different conversions** is fine and is how one message can count as both a lead and something further down your funnel.
+      Splitting your pages across two conversions is fine. Pointing the same page at two different conversions is also fine, and is how one DM can count as both a lead and something further down your funnel.
     </Warning>
 
     <Tip>
-      **Ad conversations roll up under the real ad.** When a message starts from a click to message ad, Cortana records the actual campaign, ad set and ad, so it shows up in the Attribution Table like any other conversion. A message that started from a shared m.me link is not an ad conversation. It carries no ad id, so it can never sit under a campaign and it does not count under **Ad conversations only**.
+      **Ad conversations roll up under the real ad.** When a DM starts from a click to message ad, Cortana records the actual campaign, ad set and ad, so it shows up in the Attribution Table like any other conversion. A DM that started from a shared ig.me or m.me link is not an ad conversation. It carries no ad id, so it can never sit under a campaign and it does not count under **Ad conversations only**.
     </Tip>
+
+    <Note>
+      **Had the old Instagram DMs or Messenger DMs sources?** They keep working exactly as before, counting every page on their one channel. Open **Edit** on one to move it onto the new picker. It opens with every page on that channel already ticked, so saving keeps the same behaviour, and you can then trim the list.
+    </Note>
   </Accordion>
 
   <Accordion title="Meta Ads">
@@ -1908,9 +1854,16 @@ These settings appear on more than one source. Where a source uses one, its acco
 - **Recommendation:** leave it on. It is the only setting that picks up new forms without you revisiting this screen.
 - **Caveat:** only one source per platform can hold the catch-all. If another source already has it, the badge reads **Unavailable**, the toggle is locked off, and you must select specific forms. Meta and LinkedIn are counted separately, so one catch-all for each is fine.
 
-### Which conversations count? (Instagram DMs and Messenger DMs)
+### Pages to collect DMs from (Meta / Instagram DM)
 
-- **What it does:** decides whether the source counts every new DM, or only DMs that started from a click to message ad.
+- **What it does:** picks which Instagram accounts and Facebook Pages this source counts DMs from. Two tabs, Instagram and Facebook, ticked separately.
+- **Default:** none ticked. You have to pick at least one, and it only lets you tick pages Cortana is subscribed to. A page that is not subscribed shows a **Subscribe** button; subscribing it here starts DM capture for that page across the whole business.
+- **Recommendation:** tick the accounts and Pages that actually run the ads or campaigns this conversion measures. Leave the rest off.
+- **Caveat:** editing the list later only affects future conversations. Old **Instagram DMs** and **Messenger DMs** sources still work as before and open on this picker with their whole channel pre-ticked.
+
+### Which conversations count? (Meta / Instagram DM)
+
+- **What it does:** decides whether the source counts every new DM, or only DMs that started from a click to message ad. One setting for the whole source, not per page.
 - **Default:** none. You have to choose, and saving without choosing fails with `Please choose which conversations count`.
 - **Recommendation:** **Ad conversations only** when the conversion is about ad performance. **All conversations** when you want every inbound message counted as a lead.
 - **Caveat:** organic DM volume usually dwarfs ad DM volume, so **All conversations** can bury your real ad numbers in a much bigger total. Changing this later only affects future conversations, never what was already recorded.
@@ -1926,7 +1879,7 @@ These settings appear on more than one source. Where a source uses one, its acco
 </Warning>
 
 <Note>
-  **Some sources are instant, some are polled.** Webhook-driven sources (Shopify, Stripe, Whop, WooCommerce, HubSpot, GoHighLevel webhooks, LinkedIn Ads lead forms, Instagram and Messenger DMs) arrive within seconds. Polled sources arrive on a schedule:
+  **Some sources are instant, some are polled.** Webhook-driven sources (Shopify, Stripe, Whop, WooCommerce, HubSpot, GoHighLevel webhooks, LinkedIn Ads lead forms, Meta and Instagram DMs) arrive within seconds. Polled sources arrive on a schedule:
 
   | Source | Frequency |
   | --- | --- |
@@ -1996,7 +1949,7 @@ These settings appear on more than one source. Where a source uses one, its acco
     3. **Check the Requests column** on the source row. For webhook sources this opens the logs showing test, failed, and successful requests, with a reason on each failure. The most common failure is a payload carrying no name, email, or phone, which makes the person unidentifiable.
     4. **Meta Ads specifically**: verify Lead Access. Go to **business.facebook.com/settings → Integrations → Lead Access**, click your page, open **CRMs**, and confirm **Cortana AI** is assigned. Meta blocks lead delivery silently when it is not, and nothing inside Cortana will indicate this.
     5. **LinkedIn Ads specifically**: open **Lead Forms → LinkedIn** and check the form's **On/Off** switch is actually on. A form with no mapped fields cannot be switched on, so click **Map Fields**, save one mapping, then switch it on. Also check the account itself still says **delivery on** in the account dropdown.
-    6. **Instagram DMs or Messenger DMs specifically**: only conversations that arrive AFTER you saved the source are counted, so send yourself a fresh test message rather than looking at an old thread. If the source is set to **Ad conversations only**, a plain DM will never count. Check the account or Page is still switched on in the DM setup.
+    6. **Meta / Instagram DM specifically**: only conversations that arrive AFTER you saved the source are counted, so send yourself a fresh test message rather than looking at an old thread. If the source is set to **Ad conversations only**, a plain DM will never count. Open **Edit** on the source and check the account or Page is still ticked, and still shows as subscribed. A page that was unsubscribed stops collecting for every conversion.
     7. **WooCommerce specifically**: check your **Count orders with status** selection actually includes the status your gateway uses.
     8. **HubSpot Custom Field Updated specifically**: this needs the property subscribed to Cortana's HubSpot app `contact.propertyChange` events. Contact support to add the subscription.
     9. **Manually-connected Shopify**: the webhook must be created in your Shopify admin using the URL and secret shown in the setup card. Save stays gated until a test event arrives.
