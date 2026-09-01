@@ -8094,6 +8094,10 @@
             "type": "integer",
             "nullable": true
           },
+          "introSwitchPriceId": {
+            "type": "string",
+            "nullable": true
+          },
           "promotionCodeId": {
             "type": "string",
             "nullable": true,
@@ -8231,6 +8235,11 @@
             "nullable": true,
             "description": "Free-trial length. Requires a subscription (recurring) price."
           },
+          "introSwitchPriceId": {
+            "type": "string",
+            "nullable": true,
+            "description": "Intro offer: after the first billing period, move the subscription to this recurring price (same Stripe account and currency). lineItems must hold exactly one recurring price. Cannot be combined with trialPeriodDays."
+          },
           "promotionCodeId": {
             "type": "string",
             "pattern": "^promo_[A-Za-z0-9]+$",
@@ -8308,6 +8317,11 @@
             "minimum": 1,
             "maximum": 365,
             "nullable": true
+          },
+          "introSwitchPriceId": {
+            "type": "string",
+            "nullable": true,
+            "description": "Intro offer switch price. null clears it."
           },
           "promotionCodeId": {
             "type": "string",

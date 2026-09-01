@@ -26,10 +26,23 @@ Click **New Embedded Checkout** to open the builder. It walks three steps (**The
 </Frame>
 
 1. **How does it show up?** Choose **On-page** so the checkout form renders directly in your page and buyers never leave. **Popup** shows a button that opens it in a modal, and **Stripe page** sends them to a Stripe-hosted page. With On-page selected, the live preview shows the exact form buyers will see.
-2. **What are they buying?** Pick one or more prices. A recurring price makes it a **Subscription** and unlocks a **Free trial (days)** field. If the product does not exist yet, **New product** creates it on the spot.
+2. **What are they buying?** Pick one or more prices. A recurring price makes it a **Subscription** and unlocks a **Free trial (days)** field and the **After the first billing period** dropdown (see Intro offer below). If the product does not exist yet, **New product** creates it on the spot.
 3. **Order bump.** Turn this on to offer an add-on the buyer can tick at checkout, the low-ticket upsell classic. Pick the add-on price. You can also apply a **Discount** here.
 
 Name the checkout (just for you, buyers never see it), pick the **Stripe account** that gets paid, then click **Create checkout**.
+
+## Intro offer: switch price after the first billing period
+
+Sell a subscription at one price for its first billing period, then move the buyer to a different price automatically. The classic shape is an intro month followed by a quarterly plan, for example $297 for the first month, then $891 every 3 months. Because the buyer is on an active subscription from day one, the sale counts as recurring revenue immediately in Stripe. A free trial does not: it reports $0 until it converts.
+
+{/* TODO: screenshot images/sales-dashboard/embedded-checkout/03-intro-offer.jpg, the offer step with the After the first billing period dropdown open and the live preview showing the disclosure line above the pay button */}
+
+1. In **What are they buying?**, pick exactly **one recurring price**. This is the intro price and it is what the buyer pays at checkout.
+2. Open **After the first billing period** and choose **Switch to** the price the subscription should move to. The list shows the other recurring prices on the same Stripe account. The default, **Keep billing the same price**, is a normal subscription.
+3. Check the live preview. Stripe shows the intro price, and directly above the pay button Cortana adds one line spelling out the full offer, for example "$297.00 for your first month, then $891.00 every 3 months." The buyer always sees both prices before paying.
+4. Optional but recommended: on the **On the page** step, require custom terms with the same wording, so the buyer also ticks a box on the full offer. See Consent and terms below.
+
+Picking a switch price clears the **Free trial (days)** field, and typing a trial clears the switch: the intro price is the first billing period, so the two cannot be combined.
 
 ## Consent and terms (chargeback protection)
 
@@ -64,7 +77,19 @@ Each checkout shows its own funnel: **Viewed**, **Clicked**, **Opened**, **Email
     - **On-page** (or popup, or hosted): how the checkout displays.
     - **Subscription** or one-time: derived from the prices.
     - **30-day trial** or similar: shown when a free trial is set.
+    - **Intro offer**: the subscription switches to another price after its first billing period.
     - **custom terms required**: the checkout collects terms-of-service acceptance, which needs a Terms of Service URL on the connected Stripe account.
+  </Accordion>
+  <Accordion title="How an intro offer bills and switches">
+    At checkout the buyer starts a normal subscription on the intro price and pays its first period right away. Cortana then attaches a Stripe subscription schedule with two phases: the intro price until the end of that first period, then the switch price. From the switch onward the subscription simply renews on the switch price, for as long as the buyer stays. There is no gap and no second checkout.
+
+    Rules the builder enforces when you save:
+    - The main items must contain exactly one recurring price (the intro price). One-time prices can sit beside it.
+    - The switch price must be a recurring price on the same Stripe account, in the same currency as the intro price, and not the intro price itself.
+    - Order bumps must be one-time prices.
+    - A free trial and an intro offer cannot be combined.
+
+    Discounts and promo codes apply to the intro period. The buyer sees the intro price in Stripe's checkout summary plus the full-offer line above the pay button. In Stripe, the subscription shows the upcoming price change. Cancelling the subscription cancels the scheduled switch too. If you change the price directly in Stripe, Cortana leaves your change alone. If a switch ever fails to attach, Cortana retries every hour and flags it, so a buyer is never left on the intro price by accident.
   </Accordion>
   <Accordion title="Why the snippet needs a tracking pixel">
     The snippet is built from your business's tracking pixel so it can attribute the sale. If your business has no pixel yet, create one under Ad Tracking, then Tracking Pixels, then build the checkout.
@@ -82,6 +107,15 @@ Each checkout shows its own funnel: **Viewed**, **Clicked**, **Opened**, **Email
   </Accordion>
   <Accordion title="The Snippet button gave me nothing to paste.">
     The business has no tracking pixel yet, so the snippet cannot be built. Create a pixel under Ad Tracking, then Tracking Pixels, and try again.
+  </Accordion>
+  <Accordion title="How do I charge one price for the first month and a different price after?">
+    Build a subscription with the intro price as the only recurring main item, then set **After the first billing period** to the price you want next. The buyer pays the intro price at checkout and moves to the other price automatically when the first period ends.
+  </Accordion>
+  <Accordion title="Why can't I set a free trial on my intro offer?">
+    The intro price is the first billing period, so there is nothing to trial. Choose one: a free trial (nothing charged today) or an intro offer (the intro price charged today, then the switch). Picking one clears the other.
+  </Accordion>
+  <Accordion title="Does the buyer see the price they will switch to?">
+    Yes. Stripe's checkout shows the intro price, and one line above the pay button states the full offer, for example "$297.00 for your first month, then $891.00 every 3 months." For extra protection, require custom terms with the same wording so the buyer ticks a box on it.
   </Accordion>
   <Accordion title="How do I stop a checkout without deleting it?">
     Use the power icon to turn it off. It stops rendering immediately, and its history and stats are kept so you can turn it back on later.
