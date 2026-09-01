@@ -15,9 +15,33 @@ Go to **Payment Links**, then the **Embedded Checkout** sub-tab. Existing checko
   <img src="/images/sales-dashboard/embedded-checkout/01-embedded-checkout.jpg" alt="Embedded Checkout tab showing a checkout named Ad Tracking 297 plus quarterly with On-page, Subscription, and 30-day trial badges, Preview, Snippet, and Consents actions, and stats for viewed, opened, completed, and revenue" />
 </Frame>
 
-## Create one
+## Create one, step by step
 
-Click **New Embedded Checkout** and follow the wizard: pick the Stripe account, choose the prices to charge, and set how it displays. A checkout becomes a **Subscription** automatically when any of its prices is recurring, and you can add a free trial and order bumps.
+Click **New Embedded Checkout** to open the builder. It is a short wizard (**The offer**, then **On the page**, then **Done**) with a live preview on the right, always in test mode so nothing is charged while you build.
+
+### Step 1: The offer
+
+1. **Name** the checkout (just for you, buyers never see it).
+2. Pick the **Stripe account** that gets paid.
+3. Under **How does it show up?**, choose **Popup** (a button opens the checkout), **On-page** (the form sits in your page), or **Stripe page** (a Stripe-hosted page).
+4. Under **What are they buying?**, choose one or more prices. A recurring price makes it a **Subscription**. If the product does not exist yet, click **New product** to create it on the spot.
+
+<Frame caption="Step 1: name it, pick the account, choose how it shows up, and select what they are buying. New product creates one without leaving the page.">
+  <img src="/images/sales-dashboard/embedded-checkout/02-setup.jpg" alt="New embedded checkout wizard step one: name field, Stripe account, a Popup or On-page or Stripe page choice, and a product-and-price picker with a New product button, next to a live preview" />
+</Frame>
+
+### Step 2: On the page
+
+Once a price is selected, add the optional extras and continue:
+
+- **Order bump**: an add-on the buyer can tick at checkout.
+- **Discounts**: apply a discount, or leave as No discount.
+
+The live preview updates as you go. When it looks right, click **Create checkout**.
+
+<Frame caption="Step 2: add an order bump and any discount. The preview on the right shows exactly what the buyer sees.">
+  <img src="/images/sales-dashboard/embedded-checkout/03-setup-details.jpg" alt="New embedded checkout wizard on the page step: selected price chip, an order bump toggle, a discounts dropdown, and a live preview showing a Checkout button" />
+</Frame>
 
 ## Put it on your page
 
