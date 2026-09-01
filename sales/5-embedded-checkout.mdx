@@ -15,42 +15,45 @@ Go to **Payment Links**, then the **Embedded Checkout** sub-tab. Existing checko
   <img src="/images/sales-dashboard/embedded-checkout/01-embedded-checkout.jpg" alt="Embedded Checkout tab showing a checkout named Ad Tracking 297 plus quarterly with On-page, Subscription, and 30-day trial badges, Preview, Snippet, and Consents actions, and stats for viewed, opened, completed, and revenue" />
 </Frame>
 
-## Create one, step by step
+## Create your checkout
 
-Click **New Embedded Checkout** to open the builder. It is a short wizard (**The offer**, then **On the page**, then **Done**) with a live preview on the right, always in test mode so nothing is charged while you build.
+Click **New Embedded Checkout** to open the builder. It walks three steps (**The offer**, **On the page**, then **Done**) with a live preview on the right, always in Stripe test mode so nothing is charged while you build.
 
-### Step 1: The offer
+### Configure the offer
 
-1. **Name** the checkout (just for you, buyers never see it).
-2. Pick the **Stripe account** that gets paid.
-3. Under **How does it show up?**, choose **Popup** (a button opens the checkout), **On-page** (the form sits in your page), or **Stripe page** (a Stripe-hosted page).
-4. Under **What are they buying?**, choose one or more prices. A recurring price makes it a **Subscription**. If the product does not exist yet, click **New product** to create it on the spot.
-
-<Frame caption="Step 1: name it, pick the account, choose how it shows up, and select what they are buying. New product creates one without leaving the page.">
-  <img src="/images/sales-dashboard/embedded-checkout/02-setup.jpg" alt="New embedded checkout wizard step one: name field, Stripe account, a Popup or On-page or Stripe page choice, and a product-and-price picker with a New product button, next to a live preview" />
+<Frame caption="Configuring the offer: choose On-page (1) so the form renders in your page, pick the price (2), and turn on an order bump (3) to offer an add-on at checkout.">
+  <img src="/images/sales-dashboard/embedded-checkout/02-setup.jpg" alt="Embedded checkout builder with On-page selected, a recurring price chosen, and an order bump toggled on with an add-on price, beside a live preview of the on-page checkout" />
 </Frame>
 
-### Step 2: On the page
+1. **How does it show up?** Choose **On-page** so the checkout form renders directly in your page and buyers never leave. **Popup** shows a button that opens it in a modal, and **Stripe page** sends them to a Stripe-hosted page. With On-page selected, the live preview shows the exact form buyers will see.
+2. **What are they buying?** Pick one or more prices. A recurring price makes it a **Subscription** and unlocks a **Free trial (days)** field. If the product does not exist yet, **New product** creates it on the spot.
+3. **Order bump.** Turn this on to offer an add-on the buyer can tick at checkout, the low-ticket upsell classic. Pick the add-on price. You can also apply a **Discount** here.
 
-Once a price is selected, add the optional extras and continue:
+Name the checkout (just for you, buyers never see it), pick the **Stripe account** that gets paid, then click **Create checkout**.
 
-- **Order bump**: an add-on the buyer can tick at checkout.
-- **Discounts**: apply a discount, or leave as No discount.
+## Consent and terms (chargeback protection)
 
-The live preview updates as you go. When it looks right, click **Create checkout**.
+If your offer has conditions, a money-back guarantee with rules, or an attendance requirement, collect the buyer's explicit agreement at checkout. Cortana shows your terms as a checkbox the buyer **must** tick before they can pay. Leave it unchecked and press pay, and the checkout blocks with a please-check-consent message, so no one buys without agreeing.
 
-<Frame caption="Step 2: add an order bump and any discount. The preview on the right shows exactly what the buyer sees.">
-  <img src="/images/sales-dashboard/embedded-checkout/03-setup-details.jpg" alt="New embedded checkout wizard on the page step: selected price chip, an order bump toggle, a discounts dropdown, and a live preview showing a Checkout button" />
+<Frame caption="The buyer must tick your terms (1) before the pay button (2) will submit. The checkout blocks the payment until they do.">
+  <img src="/images/sales-dashboard/embedded-checkout/04-consent.jpg" alt="On-page checkout with a required terms-of-service checkbox listing the money-back guarantee conditions above the Pay and start trial button" />
 </Frame>
+
+Edit this wording with the **Consents** action on the checkout card. The acceptance is captured and recorded with the payment in Stripe, so it is exactly the evidence you need to win a chargeback: proof the customer saw and agreed to your terms at the moment of purchase.
 
 ## Put it on your page
 
-Each checkout card has the actions you need:
+When you finish the builder (the **Done** step), or click **Snippet** on any checkout card, you get the embed code and where to paste it.
 
-1. **Preview** opens the checkout so you can see exactly what a buyer sees.
-2. **Snippet** gives you the code to paste. Drop it into your page where the checkout should render. That is all: it carries attribution by itself.
-3. **Consents** manages the terms-of-service text buyers must accept.
-4. The **power** icon turns the checkout on or off. Off stops it rendering for visitors immediately.
+<Frame caption="Copy the snippet (2), choose the tracking pixel for the site, and follow the three steps (3) to paste it into your page builder.">
+  <img src="/images/sales-dashboard/embedded-checkout/05-snippet.jpg" alt="Put it on your page dialog with a tracking-pixel selector, the embed snippet code, a Copy snippet button, and three steps to paste it into a page builder" />
+</Frame>
+
+1. Choose the **tracking pixel** for the site the checkout will live on (this is what carries attribution).
+2. **Copy snippet** and paste it into a custom HTML or embed block in your page builder: GHL, Webflow, WordPress, or anything that takes custom HTML, exactly where the checkout should sit.
+3. Publish. Sales, contacts, and attribution flow in automatically.
+
+Each checkout card also has **Preview** (see what buyers see), **Consents** (edit the terms), and the **power** icon (turn it off, which stops it selling immediately).
 
 ## Read the stats
 
