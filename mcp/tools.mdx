@@ -502,6 +502,7 @@ Create a Cortana embedded checkout and get its paste-ready snippet back in the s
 | `title` | string | No | Internal name, buyers never see it |
 | `optionalItems` | array | No | Order bumps the buyer can tick on. Each: `priceId`, `quantity`, `label`. |
 | `trialPeriodDays` | integer | No | 1 to 365. Requires a subscription price. |
+| `introSwitchPriceId` | string | No | Intro offer: after the first billing period, move the subscription to this recurring price (same Stripe account and currency). `lineItems` must hold exactly one recurring price. Cannot be combined with `trialPeriodDays`. |
 | `buttonLabel` | string | No | Popup-mode button text |
 | `successMessage` | string | No | Message shown after payment |
 | `returnUrl` | string | No | Where the buyer goes after payment. Omit to stay on the page. |

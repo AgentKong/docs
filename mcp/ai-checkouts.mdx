@@ -40,7 +40,7 @@ The AI runs these in order. With MCP it calls the tools by name, with the REST A
     `popup` renders a button that opens the checkout in a modal. `inline` places the payment form directly in the page. `hosted` sends the buyer to a Stripe-hosted page. For most landing pages, `popup` or `inline` keeps the buyer on your page.
   </Accordion>
   <Accordion title="Subscriptions, trials, and order bumps">
-    A checkout becomes a subscription automatically when any of its prices is recurring. `trialPeriodDays` is only valid on a subscription. Add order bumps with `optionalItems`, each a price id the buyer can tick on. A recurring bump is only allowed on a subscription checkout.
+    A checkout becomes a subscription automatically when any of its prices is recurring. `trialPeriodDays` is only valid on a subscription. Add order bumps with `optionalItems`, each a price id the buyer can tick on. A recurring bump is only allowed on a subscription checkout. For an intro offer (one price for the first billing period, then another price for good), put exactly one recurring price in `lineItems` and set `introSwitchPriceId` to the recurring price to move to; it must be on the same Stripe account and in the same currency, bumps must be one-time, and `trialPeriodDays` cannot be combined with it. The buyer sees the full offer above the pay button, and the sale counts as recurring revenue from day one.
   </Accordion>
   <Accordion title="Scopes and safety">
     Read tools (`get_embedded_checkouts`, `get_embedded_checkout_snippet`) need `checkouts:read` and are on by default. The write tools need `checkouts:manage`, granted only by the manage opt-in. On the REST API the equivalents are `embedded_checkouts:read` for reads, `embedded_checkouts:write` for checkout writes, and `stripe:write` for product creation.
@@ -67,6 +67,9 @@ The AI runs these in order. With MCP it calls the tools by name, with the REST A
   </Accordion>
   <Accordion title="How do I make it a subscription?">
     Use a recurring price in `lineItems`. Any recurring price makes the whole checkout a subscription. Add `trialPeriodDays` for a free trial.
+  </Accordion>
+  <Accordion title="How do I charge one price for the first month and a different price after?">
+    Put the intro price as the only recurring price in `lineItems` and set `introSwitchPriceId` to the price to switch to. The buyer pays the intro price at checkout and is moved to the switch price automatically when the first billing period ends. Do not add `trialPeriodDays`: the intro price is the first period.
   </Accordion>
 </AccordionGroup>
 
