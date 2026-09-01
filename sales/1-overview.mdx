@@ -1,0 +1,55 @@
+---
+title: "Sales Dashboard overview"
+description: "The Sales Dashboard is where you run and measure closing: track your call-to-close funnel, send and manage payment links, embed checkouts, pay rep commissions, and review call recordings, all tied to real revenue."
+---
+
+{/* last-verified: 2026-09-01 · route: /business/[businessId]/sales-dashboard */}
+
+The Sales Dashboard is your closing cockpit. It ties calls, payment links, and revenue to the reps and offers behind them, so you can see your funnel, get paid, and pay your team from one place.
+
+By the end of setup you will have a live funnel (booked to showed to closed), payment links your reps can send, and commission and call data flowing in automatically.
+
+## The four tabs
+
+<CardGroup cols={2}>
+  <Card title="Performance" icon="chart-line">
+    Your funnel and per-rep scoreboard: calls booked, showed, and closed, links sent and opened, revenue, show rate, and close rate.
+  </Card>
+  <Card title="Commissions" icon="hand-holding-dollar">
+    What each rep has earned: pending, ready to pay, and paid, generated automatically from completed payments once you set rates.
+  </Card>
+  <Card title="Payment Links" icon="link">
+    Create and manage reusable payment links, and embed a Cortana checkout on your own pages. Three sub-tabs: My Links, Create Link, and Embedded Checkout.
+  </Card>
+  <Card title="Call Recordings" icon="phone">
+    Every sales call, grouped by outcome or rep, with filters for the deal stage (won, verbal commit, follow-up scheduled, and more).
+  </Card>
+</CardGroup>
+
+## Set it up once
+
+Before the numbers make sense, tell Cortana what counts as a sales call and what counts as a close. That is the **Funnel setup** button in the top-right of the Performance tab. It takes a minute and everything downstream (show rate, close rate, commissions) depends on it.
+
+<Frame caption="The Sales Dashboard Performance tab: stat cards, the booked-to-closed funnel, and the per-rep table.">
+  <img src="/images/sales-dashboard/overview/01-overview.jpg" alt="Sales Dashboard Performance tab showing links sent, payments completed, revenue, a funnel of taken to showed to closed, and a per-rep table" />
+</Frame>
+
+## FAQ
+
+<AccordionGroup>
+  <Accordion title="Where does the Sales Dashboard get its data?">
+    Calls come from your connected calendar and call recorder, payments from Stripe, Whop, Fanbasis, or PayPal, and closes from completed payment links plus any conversion events you add. Reps are matched from the person who sent the link or ran the call.
+  </Accordion>
+  <Accordion title="Why is everything zero or blank?">
+    Usually the funnel is not set up yet. Open Funnel setup and pick your sales call event type. If payments look right but commissions are zero, set commission rates on the Commissions tab.
+  </Accordion>
+  <Accordion title="Does the date range affect every tab?">
+    Yes. The date picker at the top-left of each tab scopes the funnel, the stats, commissions, and the recordings list.
+  </Accordion>
+</AccordionGroup>
+
+## Next step
+
+<Card title="Set up your sales funnel" icon="sliders" href="/sales/2-funnel-setup">
+  Tell Cortana what a sales call and a close are, so the funnel and rates are accurate.
+</Card>

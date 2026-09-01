@@ -1,0 +1,68 @@
+---
+title: "Embedded checkout"
+description: "Sell on your own landing pages by pasting one Cortana checkout snippet. The embedded checkout carries attribution, rep credit, and commissions by itself, and tracks views, opens, and revenue."
+---
+
+{/* last-verified: 2026-09-01 · Payment Links tab, Embedded Checkout sub-tab */}
+
+An embedded checkout lets you sell directly on your own page. You build it once, paste a single snippet where the checkout should appear, and Cortana handles attribution, rep credit, and commissions with no extra tracking code.
+
+## Open Embedded Checkout
+
+Go to **Payment Links**, then the **Embedded Checkout** sub-tab. Existing checkouts are listed with their offer, badges, and live stats.
+
+<Frame caption="An embedded checkout with its badges, actions, and funnel stats. Preview shows it, Snippet gives you the code to paste.">
+  <img src="/images/sales-dashboard/embedded-checkout/01-embedded-checkout.jpg" alt="Embedded Checkout tab showing a checkout named Ad Tracking 297 plus quarterly with On-page, Subscription, and 30-day trial badges, Preview, Snippet, and Consents actions, and stats for viewed, opened, completed, and revenue" />
+</Frame>
+
+## Create one
+
+Click **New Embedded Checkout** and follow the wizard: pick the Stripe account, choose the prices to charge, and set how it displays. A checkout becomes a **Subscription** automatically when any of its prices is recurring, and you can add a free trial and order bumps.
+
+## Put it on your page
+
+Each checkout card has the actions you need:
+
+1. **Preview** opens the checkout so you can see exactly what a buyer sees.
+2. **Snippet** gives you the code to paste. Drop it into your page where the checkout should render. That is all: it carries attribution by itself.
+3. **Consents** manages the terms-of-service text buyers must accept.
+4. The **power** icon turns the checkout on or off. Off stops it rendering for visitors immediately.
+
+## Read the stats
+
+Each checkout shows its own funnel: **Viewed**, **Clicked**, **Opened**, **Emails**, **Completed**, **Conv. %**, and **Revenue**, so you can see how the page is converting.
+
+<AccordionGroup>
+  <Accordion title="Badges on a checkout">
+    - **On-page** (or popup, or hosted): how the checkout displays.
+    - **Subscription** or one-time: derived from the prices.
+    - **30-day trial** or similar: shown when a free trial is set.
+    - **custom terms required**: the checkout collects terms-of-service acceptance, which needs a Terms of Service URL on the connected Stripe account.
+  </Accordion>
+  <Accordion title="Why the snippet needs a tracking pixel">
+    The snippet is built from your business's tracking pixel so it can attribute the sale. If your business has no pixel yet, create one under Ad Tracking, then Tracking Pixels, then build the checkout.
+  </Accordion>
+  <Accordion title="Building checkouts with the API or an AI tool">
+    Developers and AI page builders can create these same checkouts through the Cortana API and MCP. See the Dev Docs, Add a Cortana checkout with AI.
+  </Accordion>
+</AccordionGroup>
+
+## FAQ
+
+<AccordionGroup>
+  <Accordion title="Is the checkout live as soon as I create it?">
+    Yes. Check whether it is on a live or test Stripe account before you share the page. The stats and the account badge tell you.
+  </Accordion>
+  <Accordion title="The Snippet button gave me nothing to paste.">
+    The business has no tracking pixel yet, so the snippet cannot be built. Create a pixel under Ad Tracking, then Tracking Pixels, and try again.
+  </Accordion>
+  <Accordion title="How do I stop a checkout without deleting it?">
+    Use the power icon to turn it off. It stops rendering immediately, and its history and stats are kept so you can turn it back on later.
+  </Accordion>
+</AccordionGroup>
+
+## Next step
+
+<Card title="Read the Performance tab" icon="chart-line" href="/sales/6-performance">
+  See how all of this rolls up into your funnel and per-rep numbers.
+</Card>

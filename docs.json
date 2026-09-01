@@ -218,6 +218,26 @@
         ]
       },
       {
+        "tab": "Sales Dashboard",
+        "icon": "chart-mixed",
+        "groups": [
+          {
+            "group": "A-Z Guide",
+            "icon": "rocket",
+            "pages": [
+              "sales/1-overview",
+              "sales/2-funnel-setup",
+              "sales/3-send-payment-links",
+              "sales/4-create-a-link",
+              "sales/5-embedded-checkout",
+              "sales/6-performance",
+              "sales/7-commissions",
+              "sales/8-call-recordings"
+            ]
+          }
+        ]
+      },
+      {
         "tab": "Dev Docs + MCP",
         "icon": "code",
         "groups": [
