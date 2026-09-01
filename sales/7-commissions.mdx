@@ -1,0 +1,69 @@
+---
+title: "Commissions"
+description: "The Commissions tab tracks what each rep has earned. Set a rate per rep and commissions generate automatically from completed payments, moving from pending to ready to paid, with CSV export for payouts."
+---
+
+{/* last-verified: 2026-09-01 · Commissions tab */}
+
+Commissions turn closed deals into what you owe each rep. Set a rate once and Cortana calculates commissions automatically as payments complete, then tracks each one from pending to paid.
+
+## Open Commissions
+
+Go to the **Commissions** tab. Four cards summarize the range, and the **Commissions by Rep** table breaks it down.
+
+<Frame caption="The Commissions tab: pending, ready to pay, paid, and total liability, with a per-rep breakdown. Set commission rates to start.">
+  <img src="/images/sales-dashboard/commissions/01-commissions.jpg" alt="Commissions tab with cards for pending, ready to pay, paid, and total liability all at zero, a Commissions by Rep table, and a Set commission rates button" />
+</Frame>
+
+## Set commission rates first
+
+If everything is zero, no rates are set yet. Click **Set commission rates** (or **Settings**). For each rep, **Pick a rep**, choose a **Commission type**, and enter the rate as a percentage. Until a rep has a rate, their deals generate no commission.
+
+## How commissions flow
+
+Commissions **auto-generate when a tracked payment completes**, then move through three states:
+
+- **Pending**: earned, not yet approved for payout.
+- **Ready to Pay**: approved and waiting to be paid.
+- **Paid**: paid out.
+
+The **Total Liability** card is everything you still owe (pending plus ready).
+
+## Pay reps
+
+When you are ready to pay, use **Mark commissions as paid**. Add a **Payment reference** (for example the transfer id) so the payout is recorded. Use **Export CSV** to hand a payout run to finance or to a payroll tool.
+
+<AccordionGroup>
+  <Accordion title="Commissions by Rep columns">
+    - **Rep**: the person earning.
+    - **Rate**: their configured commission rate.
+    - **Pending / Ready / Paid**: their commission in each state.
+    - **Total Revenue**: revenue attributed to the rep in the range.
+  </Accordion>
+  <Accordion title="What a single commission records">
+    Each commission line carries the **Date**, **Contact**, **Product**, **Platform**, **New Revenue Generated**, **Renewal Revenue**, the **Commission** amount, and its **Status**. New business and renewals are tracked separately so you can pay them differently if you choose.
+  </Accordion>
+  <Accordion title="Voiding a commission">
+    If a payment is refunded or a deal is reversed, void that commission so it is removed from what you owe. Voided commissions drop out of the pending and ready totals.
+  </Accordion>
+</AccordionGroup>
+
+## FAQ
+
+<AccordionGroup>
+  <Accordion title="I have revenue but commissions are zero.">
+    No rate is set for that rep. Open Set commission rates and give them a rate. Commissions only generate for reps who have one.
+  </Accordion>
+  <Accordion title="A rep was paid but the card still shows the amount as ready.">
+    Mark those commissions as paid and add a payment reference. Until then they stay in Ready to Pay.
+  </Accordion>
+  <Accordion title="Do renewals pay commission?">
+    Renewal revenue is tracked separately from new business on each commission line, so you can see and handle it on its own.
+  </Accordion>
+</AccordionGroup>
+
+## Next step
+
+<Card title="Call recordings" icon="phone" href="/sales/8-call-recordings">
+  Review the calls behind these closes, grouped by outcome or rep.
+</Card>
