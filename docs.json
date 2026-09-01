@@ -240,6 +240,7 @@
               "mcp/setup",
               "mcp/meta-ads",
               "mcp/tools",
+              "mcp/ai-checkouts",
               "mcp/examples"
             ]
           },
@@ -372,12 +373,23 @@
                   "api-reference/endpoint/stripe-customers",
                   "api-reference/endpoint/stripe-metrics",
                   "api-reference/endpoint/stripe-products",
+                  "api-reference/endpoint/create-stripe-product",
                   "api-reference/endpoint/stripe-invoices",
                   "api-reference/endpoint/stripe-disputes",
                   "api-reference/endpoint/stripe-payment-intents",
                   "api-reference/endpoint/stripe-payment-links",
                   "api-reference/endpoint/stripe-prices",
                   "api-reference/endpoint/stripe-promotion-codes"
+                ]
+              },
+              {
+                "group": "Embedded Checkouts",
+                "pages": [
+                  "api-reference/endpoint/list-embedded-checkouts",
+                  "api-reference/endpoint/create-embedded-checkout",
+                  "api-reference/endpoint/get-embedded-checkout",
+                  "api-reference/endpoint/update-embedded-checkout",
+                  "api-reference/endpoint/deactivate-embedded-checkout"
                 ]
               },
               {
