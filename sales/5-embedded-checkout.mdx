@@ -17,9 +17,19 @@ Go to **Payment Links**, then the **Embedded Checkout** sub-tab. Existing checko
 
 ## Create your checkout
 
-Click **New Embedded Checkout** to open the builder. It walks three steps (**The offer**, **On the page**, then **Done**) with a live preview on the right, always in Stripe test mode so nothing is charged while you build.
+Click **New Embedded Checkout** to open the builder. It walks three steps (**The offer**, **On the page**, then **Done**) with a live preview on the right. For Stripe checkouts the preview runs in Stripe test mode so nothing is charged while you build.
 
-### Configure the offer
+The first choice is the **Payment platform**: **Stripe**, **Whop**, or **Fanbasis**. This decides which checkout renders on your page and cannot be changed after the checkout is saved.
+
+- **Stripe**: the full builder below, with prices, order bumps, trials, and discounts.
+- **Whop**: pick your **Whop company**, then the **Plan** the buyer purchases. Whop renders its own checkout inside your page when the snippet loads.
+- **Fanbasis**: pick your **Fanbasis account**, then the **Product**. Fanbasis renders its checkout inside your page in a secure frame, with a fallback link if the frame cannot load.
+
+Order bumps, free trials, and discounts are Stripe features; a Whop or Fanbasis checkout sells the one plan or product you picked.
+
+{/* TODO: capture the three-card platform picker once the release is live */}
+
+### Configure the offer (Stripe)
 
 <Frame caption="Configuring the offer: choose On-page (1) so the form renders in your page, pick the price (2), and turn on an order bump (3) to offer an add-on at checkout.">
   <img src="/images/sales-dashboard/embedded-checkout/02-setup.jpg" alt="Embedded checkout builder with On-page selected, a recurring price chosen, and an order bump toggled on with an add-on price, beside a live preview of the on-page checkout" />
@@ -52,7 +62,20 @@ If your offer has conditions, a money-back guarantee with rules, or an attendanc
   <img src="/images/sales-dashboard/embedded-checkout/04-consent.jpg" alt="On-page checkout with a required terms-of-service checkbox listing the money-back guarantee conditions above the Pay and start trial button" />
 </Frame>
 
-Edit this wording with the **Consents** action on the checkout card. The acceptance is captured and recorded with the payment in Stripe, so it is exactly the evidence you need to win a chargeback: proof the customer saw and agreed to your terms at the moment of purchase.
+Edit this wording with the **Consents** action on the checkout card. On a Stripe checkout, Stripe itself enforces and records the checkbox with the payment. On a Whop or Fanbasis checkout, Cortana shows your terms as its own required checkbox **before** the checkout is even created: nothing payable exists until the buyer ticks it, and the acceptance rides with the payment. Either way, it is exactly the evidence you need to win a chargeback: proof the customer saw and agreed to your terms at the moment of purchase.
+
+## The consent certificate
+
+Every accepted consent automatically produces an official **Certificate of Consent**: a stamped PDF recording who bought, their IP address at checkout, their device, the exact terms wording they agreed to, the amount paid, and the timestamp. You never have to assemble dispute evidence by hand.
+
+Find it in two places:
+
+1. **The customer journey timeline**: open the contact and look for the green **Checkout Consent Accepted** event. Click **Download certificate** to get the PDF.
+2. **The Consents dialog**: click **Consents** on the checkout card, open a buyer's signed agreement, and click **Download certificate** next to **Print dispute packet**.
+
+The certificate is generated within moments of the purchase and is also generated on demand if you download it before the background job finishes.
+
+{/* TODO: capture the journey timeline consent event and the certificate PDF once the release is live */}
 
 ## Put it on your page
 
@@ -78,7 +101,7 @@ Each checkout shows its own funnel: **Viewed**, **Clicked**, **Opened**, **Email
     - **Subscription** or one-time: derived from the prices.
     - **30-day trial** or similar: shown when a free trial is set.
     - **Intro offer**: the subscription switches to another price after its first billing period.
-    - **custom terms required**: the checkout collects terms-of-service acceptance, which needs a Terms of Service URL on the connected Stripe account.
+    - **custom terms required**: the checkout collects terms-of-service acceptance. On Stripe this needs a Terms of Service URL on the connected Stripe account; on Whop and Fanbasis, Cortana shows the checkbox itself, so nothing extra is needed.
   </Accordion>
   <Accordion title="How an intro offer bills and switches">
     At checkout the buyer starts a normal subscription on the intro price and pays its first period right away. Cortana then attaches a Stripe subscription schedule with two phases: the intro price until the end of that first period, then the switch price. From the switch onward the subscription simply renews on the switch price, for as long as the buyer stays. There is no gap and no second checkout.
@@ -103,7 +126,10 @@ Each checkout shows its own funnel: **Viewed**, **Clicked**, **Opened**, **Email
 
 <AccordionGroup>
   <Accordion title="Is the checkout live as soon as I create it?">
-    Yes. Check whether it is on a live or test Stripe account before you share the page. The stats and the account badge tell you.
+    Yes. For Stripe, check whether it is on a live or test Stripe account before you share the page. Whop and Fanbasis checkouts sell against your live connected account from the start.
+  </Accordion>
+  <Accordion title="Why is there no live preview for my Whop or Fanbasis checkout?">
+    Whop and Fanbasis render their own checkout inside your page when the snippet loads, so there is nothing Cortana can safely mount inside the builder. The preview pane explains this; paste the snippet on a draft page to see the real thing.
   </Accordion>
   <Accordion title="The Snippet button gave me nothing to paste.">
     The business has no tracking pixel yet, so the snippet cannot be built. Create a pixel under Ad Tracking, then Tracking Pixels, and try again.
