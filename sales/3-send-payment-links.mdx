@@ -7,6 +7,10 @@ description: "The My Links tab holds your reusable payment links across Stripe, 
 
 Every reusable payment link you have lives on the **My Links** tab. From here you copy a link to send it, watch how many times it was sent and opened, and pull in links you already have in Stripe.
 
+<Tip>
+  A payment link is a card form. If the buyer still needs testimonials or a what's-included list (typical on a high-ticket offer), send a [tracking link to your sales page](/sales/send-a-sales-page) instead. Same contact picker, different destination.
+</Tip>
+
 ## Open My Links
 
 Go to the **Payment Links** tab, then the **My Links** sub-tab. You will see your links with their platform, price, and send and open counts.
@@ -62,10 +66,18 @@ Use the **Search** box to filter by link name. The number next to **Payment Link
   <Accordion title="How do I make a new link?">
     Use the Create Link sub-tab. See the next page.
   </Accordion>
+  <Accordion title="Can I add testimonials or a what's-included list to a payment link?">
+    Not on the checkout form itself. Put that copy on your own sales page, embed the Cortana checkout there, and send the page as a tracking link. See [Send a sales page](/sales/send-a-sales-page).
+  </Accordion>
 </AccordionGroup>
 
 ## Next step
 
-<Card title="Create a link" icon="plus" href="/sales/4-create-a-link">
-  Build a new reusable payment link, and create a product on the fly if you need one.
-</Card>
+<CardGroup cols={2}>
+  <Card title="Create a link" icon="plus" href="/sales/4-create-a-link">
+    Build a new reusable payment link, and create a product on the fly if you need one.
+  </Card>
+  <Card title="Send a sales page" icon="file-invoice" href="/sales/send-a-sales-page">
+    High-ticket? Send a tracking link to a page with testimonials and checkout, not a bare form.
+  </Card>
+</CardGroup>

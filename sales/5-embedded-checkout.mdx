@@ -91,6 +91,10 @@ When you finish the builder (the **Done** step), or click **Snippet** on any che
 
 Each checkout card also has **Preview** (see what buyers see), **Consents** (edit the terms), and the **power** icon (turn it off, which stops it selling immediately).
 
+<Tip>
+  The snippet lives on **your** page. Cortana does not host a testimonials wrapper around it. For a high-ticket send, save that page URL as a tracking link and have the rep send the tracking link instead of a payment link. See [Send a sales page](/sales/send-a-sales-page).
+</Tip>
+
 ## Read the stats
 
 Each checkout shows its own funnel: **Viewed**, **Clicked**, **Opened**, **Emails**, **Completed**, **Conv. %**, and **Revenue**, so you can see how the page is converting.
@@ -113,6 +117,13 @@ Each checkout shows its own funnel: **Viewed**, **Clicked**, **Opened**, **Email
     - A free trial and an intro offer cannot be combined.
 
     Discounts and promo codes apply to the intro period. The buyer sees the intro price in Stripe's checkout summary plus the full-offer line above the pay button. In Stripe, the subscription shows the upcoming price change. Cancelling the subscription cancels the scheduled switch too. If you change the price directly in Stripe, Cortana leaves your change alone. If a switch ever fails to attach, Cortana retries every hour and flags it, so a buyer is never left on the intro price by accident.
+  </Accordion>
+  <Accordion title="Session expiry, abandoned emails, and auto-refresh">
+    Each Stripe checkout session stays payable for 1 hour after it opens on the page. The widget watches for returning visitors: if someone comes back to a checkout that has gone stale (for example a tab left open, or the browser Back button), it silently swaps in a fresh session, so they never meet a dead payment form.
+
+    When a session expires without a payment, Stripe tells Cortana whether the visitor had typed an email into the checkout. When that email is reported, Cortana counts it under **Emails** and creates or updates the matching contact, linked to that visitor's tracked session, so they appear identified in Page Views and Contacts with the source "abandoned checkout". Stripe also issues a recovery link for the abandoned session, which Cortana stores with the capture for future win-back tooling.
+
+    Closing the checkout popup or leaving the page reports the abandon right away. Otherwise it is reported when the 1-hour session expires. A visitor who merely scrolls past the checkout without typing anything is never captured, and a visitor who pays is never counted as an abandon.
   </Accordion>
   <Accordion title="Why the snippet needs a tracking pixel">
     The snippet is built from your business's tracking pixel so it can attribute the sale. If your business has no pixel yet, create one under Ad Tracking, then Tracking Pixels, then build the checkout.
@@ -146,10 +157,27 @@ Each checkout shows its own funnel: **Viewed**, **Clicked**, **Opened**, **Email
   <Accordion title="How do I stop a checkout without deleting it?">
     Use the power icon to turn it off. It stops rendering immediately, and its history and stats are kept so you can turn it back on later.
   </Accordion>
+  <Accordion title="A visitor typed their email into the checkout but never paid. Where do I see them?">
+    When Stripe reports that email on the abandoned session, the checkout's **Emails** count goes up and the person shows up in Contacts with the source "abandoned checkout", linked to their tracked visit. Closing the popup or leaving the page reports it within seconds; a session that just sits there reports when it expires, about an hour after it opened.
+  </Accordion>
+  <Accordion title="Why did a buyer see a session expired message?">
+    A checkout session stays payable for 1 hour. The widget refreshes a stale checkout automatically when the visitor comes back to the tab or moves their cursor over it, so this is rare: it can still happen if someone leaves the form open and idle for over an hour and then pays without any signal the widget can see. They can reload the page and pay normally, and no charge was made.
+  </Accordion>
+  <Accordion title="Does an abandoned email count the same visitor twice?">
+    Counts are per checkout session. If the same visitor opens the checkout on two occasions and types their email both times, Emails counts two, but Contacts still holds a single person: every capture resolves to the same contact by email.
+  </Accordion>
+  <Accordion title="How do reps send this page to one contact?">
+    Do not send a payment link. Save the page URL as a tracking link, then send that tracking link for the selected contact. Same motion as the payment URL builder. See [Send a sales page](/sales/send-a-sales-page).
+  </Accordion>
 </AccordionGroup>
 
 ## Next step
 
-<Card title="Read the Performance tab" icon="chart-line" href="/sales/6-performance">
-  See how all of this rolls up into your funnel and per-rep numbers.
-</Card>
+<CardGroup cols={2}>
+  <Card title="Send a sales page" icon="file-invoice" href="/sales/send-a-sales-page">
+    High-ticket send: tracking link to this page, not a bare payment form.
+  </Card>
+  <Card title="Read the Performance tab" icon="chart-line" href="/sales/6-performance">
+    See how all of this rolls up into your funnel and per-rep numbers.
+  </Card>
+</CardGroup>

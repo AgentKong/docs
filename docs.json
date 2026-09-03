@@ -157,6 +157,7 @@
               "sales/1-overview",
               "sales/2-funnel-setup",
               "sales/3-send-payment-links",
+              "sales/send-a-sales-page",
               "sales/4-create-a-link",
               "sales/5-embedded-checkout",
               "sales/6-performance",
@@ -457,7 +458,8 @@
           {
             "group": "Overview",
             "pages": [
-              "platform/overview"
+              "platform/overview",
+              "platform/onboarding-survey"
             ]
           },
           {
