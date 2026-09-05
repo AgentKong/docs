@@ -70,6 +70,9 @@ The AI runs these in order. With MCP it calls the tools by name, with the REST A
   <Accordion title="How do I make it a subscription?">
     Use a recurring price in `lineItems`. Any recurring price makes the whole checkout a subscription. Add `trialPeriodDays` for a free trial.
   </Accordion>
+  <Accordion title="Does an AI-built checkout get consent terms and the chargeback certificate?">
+    Yes. It is the same embedded checkout as one built in the dashboard. Once the AI has created it, open **Payment Links**, then **Embedded Checkout**, and click **Consents** on the card to set the terms the buyer must tick. Every acceptance then produces the stamped Certificate of Consent on the contact's journey. See [Consent and terms](/sales/5-embedded-checkout#consent-and-terms-chargeback-protection).
+  </Accordion>
   <Accordion title="How do I charge one price for the first month and a different price after?">
     Put the intro price as the only recurring price in `lineItems` and set `introSwitchPriceId` to the price to switch to. The buyer pays the intro price at checkout and is moved to the switch price automatically when the first billing period ends. Do not add `trialPeriodDays`: the intro price is the first period.
   </Accordion>

@@ -3,7 +3,7 @@ title: "Embedded checkout"
 description: "Sell on your own landing pages by pasting one Cortana checkout snippet. The embedded checkout carries attribution, rep credit, and commissions by itself, and tracks views, opens, and revenue."
 ---
 
-{/* last-verified: 2026-09-01 · Payment Links tab, Embedded Checkout sub-tab */}
+{/* last-verified: 2026-09-04 · Payment Links tab, Embedded Checkout sub-tab · consent certificate + journey event */}
 
 An embedded checkout lets you sell directly on your own page. You build it once, paste a single snippet where the checkout should appear, and Cortana handles attribution, rep credit, and commissions with no extra tracking code.
 
@@ -66,16 +66,48 @@ Edit this wording with the **Consents** action on the checkout card. On a Stripe
 
 ## The consent certificate
 
-Every accepted consent automatically produces an official **Certificate of Consent**: a stamped PDF recording who bought, their IP address at checkout, their device, the exact terms wording they agreed to, the amount paid, and the timestamp. You never have to assemble dispute evidence by hand.
+Every accepted consent automatically produces a stamped **Certificate of Consent**: a one-page PDF that reads as proof, not as a database export. It is the document you attach when a buyer disputes a charge and claims they never agreed to your terms.
 
-Find it in two places:
+<Frame caption="A Certificate of Consent. Buyer, IP, session id, and verification code are blurred here; the real PDF shows them in full.">
+  <img src="/images/sales-dashboard/embedded-checkout/06-consent-certificate.jpg" alt="Certificate of Consent PDF with a Proof of Consent stamp, a table of buyer, IP address at checkout, device, amount paid, payment platform, accepted-at timestamp, and checkout session, the verbatim terms in a box, and a verification code at the bottom" />
+</Frame>
 
-1. **The customer journey timeline**: open the contact and look for the green **Checkout Consent Accepted** event. Click **Download certificate** to get the PDF.
-2. **The Consents dialog**: click **Consents** on the checkout card, open a buyer's signed agreement, and click **Download certificate** next to **Print dispute packet**.
+### What the certificate records
 
-The certificate is generated within moments of the purchase and is also generated on demand if you download it before the background job finishes.
+| Field | What it is | Why it matters in a dispute |
+| --- | --- | --- |
+| **Buyer** | Name and email the buyer entered at checkout | Ties the acceptance to the cardholder |
+| **IP address at checkout** | The address of the browser that opened the checkout | Places the buyer at the purchase; this is their browser, not the card processor's network |
+| **Device / user agent** | The full browser string | Matches the device the buyer normally uses |
+| **Amount paid** and **Payment platform** | The charge and where it ran (Stripe, Whop, or Fanbasis) | Links the consent to the exact transaction being disputed |
+| **Accepted at** | UTC timestamp of the tick | Proves consent came before the payment, not after |
+| **Checkout session** | The processor's session id | Lets the processor cross-check its own record |
+| **Terms accepted (verbatim)** | Your terms wording exactly as the buyer saw it | The core evidence: what they agreed to, word for word |
+| **Verification code** | A code derived from the immutable consent record | Proves the PDF has not been edited |
 
-{/* TODO: capture the journey timeline consent event and the certificate PDF once the release is live */}
+### How it is built
+
+1. **Capture at the moment of purchase.** When the buyer ticks the box and pays, Cortana stores an immutable record of consent: the buyer, IP, device, amount, platform, timestamp, session id, and the exact terms text shown. The record is never edited after that. On Stripe, the checkbox itself is collected and attested by Stripe's own consent mechanism; Cortana keeps the surrounding evidence.
+2. **Render the certificate.** A background job turns the record into the stamped PDF within moments of the purchase. Nothing is retyped: the fields are reproduced from the record unaltered, and the terms box is the wording the buyer saw, verbatim.
+3. **Sign it with a verification code.** The code at the bottom is computed from the consent record. Regenerating the certificate from the same record always produces the same code, so anyone who questions the document can have it regenerated and compare. A mismatch means the document was altered.
+4. **Generate on demand if needed.** If you click download before the background job has finished, Cortana generates the certificate on the spot from the same record. You never wait and you never get a blank.
+
+### Where to find it
+
+<Frame caption="The Checkout Consent Accepted event in a contact's Customer Journey, with the Download certificate button. Contact details are blurred here.">
+  <img src="/images/sales-dashboard/embedded-checkout/07-journey-consent-event.jpg" alt="Contact profile with the Customer Journey panel showing a green Checkout Consent Accepted event, Terms accepted at checkout paid 297 dollars, and a Download certificate button, between a Page View and two Stripe conversion events" />
+</Frame>
+
+1. **The customer journey timeline.** Open the contact and look for the green **Checkout Consent Accepted** event. It sits in sequence with the page view that led to the checkout and the Stripe payment that followed, so the whole story is on one screen. Click **Download certificate** to get the PDF.
+2. **The Consents dialog.** Click **Consents** on the checkout card, open a buyer's signed agreement, and click **Download certificate** next to **Print dispute packet**.
+
+### Using it in a chargeback
+
+When a dispute lands, open the buyer's journey, download the certificate, and upload it as your evidence along with the **dispute packet** from the Consents dialog. The processor sees the buyer's identity, IP, device, timestamp, and the verbatim terms in one stamped document, plus the session id to match against its own record. Pair it with the journey itself if the dispute claims the buyer never visited: the page views, the consent, and the payment are timestamped in order.
+
+<Tip>
+  The certificate is only as strong as your terms. Write the conditions the buyer is most likely to dispute later, such as a guarantee tied to the first payment, attendance requirements, or what counts as proof of an issue, directly into the consent text. Whatever is in that box is what the certificate proves they agreed to.
+</Tip>
 
 ## Put it on your page
 
@@ -165,6 +197,12 @@ Each checkout shows its own funnel: **Viewed**, **Clicked**, **Opened**, **Email
   </Accordion>
   <Accordion title="Does an abandoned email count the same visitor twice?">
     Counts are per checkout session. If the same visitor opens the checkout on two occasions and types their email both times, Emails counts two, but Contacts still holds a single person: every capture resolves to the same contact by email.
+  </Accordion>
+  <Accordion title="A buyer filed a chargeback and says they never agreed to my terms. What do I send?">
+    Open their contact, find the green **Checkout Consent Accepted** event in the journey, and click **Download certificate**. Upload the PDF as your dispute evidence. It records who bought, their IP and device, the timestamp, the amount, the checkout session id, and your terms word for word, with a verification code that proves the document is unaltered. For the fuller bundle, use **Print dispute packet** in the Consents dialog.
+  </Accordion>
+  <Accordion title="Can a certificate be edited or faked?">
+    Not without detection. The verification code is derived from Cortana's immutable record of the consent. Regenerating the certificate from that record reproduces the same code, so an edited PDF will not match. If a processor or buyer questions it, regenerate and compare.
   </Accordion>
   <Accordion title="How do reps send this page to one contact?">
     Do not send a payment link. Save the page URL as a tracking link, then send that tracking link for the selected contact. Same motion as the payment URL builder. See [Send a sales page](/sales/send-a-sales-page).
