@@ -1,0 +1,18 @@
+/* Cortana docs: tighter, quieter chrome. Targets Mintlify's documented ids only. */
+
+/* Frosted top bar (Mintlify already sets the translucent background per theme) */
+#navbar {
+  backdrop-filter: saturate(180%) blur(12px);
+  -webkit-backdrop-filter: saturate(180%) blur(12px);
+}
+
+/* Tighter headings */
+#content-area h1,
+#content-area h2,
+#content-area h3 {
+  letter-spacing: -0.02em;
+}
+
+/* Denser sidebar and table of contents */
+#sidebar { font-size: 0.875rem; }
+#table-of-contents { font-size: 0.8125rem; }

@@ -39,6 +39,12 @@ In the Customer Journey panel, you’ll see every page view and conversion event
 - **URL Parameters:** We break out all the UTM parameters (source, medium, campaign, etc.) so you can see exactly which ad or link brought them there.
 - **Technical Details:** View the device type, browser, IP address, and cookie ID.
 
+### Proof of consent for chargebacks
+
+If a contact bought through an [embedded checkout](/sales/5-embedded-checkout) that required custom terms, the journey shows a green **Checkout Consent Accepted** event at the moment they paid. It records the amount and the buyer's email, and sits in sequence between the page view that led to the checkout and the payment itself.
+
+Click **Download certificate** on that event to get the stamped **Certificate of Consent** PDF: buyer, IP address at checkout, device, timestamp, checkout session, and the terms they agreed to, word for word, with a verification code that proves the document is unaltered. This is the evidence to upload when a buyer disputes the charge. See [The consent certificate](/sales/5-embedded-checkout#the-consent-certificate).
+
 ### Troubleshooting with Metadata
 
 If you’re seeing something that doesn't look right—like a purchase showing up as \$0—you can use the **Webhook Metadata** to find the answer.

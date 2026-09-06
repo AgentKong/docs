@@ -6,15 +6,51 @@
     "light": "/logo/light.png"
   },
   "favicon": "/favicon.png",
+  "theme": "mint",
   "colors": {
-    "primary": "#a855f7",
-    "light": "#c084fc",
-    "dark": "#9333ea"
+    "primary": "#18181b",
+    "light": "#a78bfa",
+    "dark": "#18181b"
   },
-  "theme": "palm",
-  "layout": "sidenav",
-  "sidebar": {
-    "items": "border"
+  "appearance": {
+    "default": "system"
+  },
+  "background": {
+    "color": {
+      "light": "#fafafa",
+      "dark": "#09090b"
+    }
+  },
+  "fonts": {
+    "family": "Inter",
+    "heading": {
+      "family": "Inter",
+      "weight": 600
+    },
+    "body": {
+      "family": "Inter",
+      "weight": 400
+    }
+  },
+  "styling": {
+    "eyebrows": "breadcrumbs",
+    "codeblocks": "system"
+  },
+  "navbar": {
+    "links": [
+      {
+        "label": "Log in",
+        "href": "https://app.usecortana.ai"
+      }
+    ],
+    "primary": {
+      "type": "button",
+      "label": "Open Cortana",
+      "href": "https://app.usecortana.ai"
+    }
+  },
+  "search": {
+    "prompt": "Search docs..."
   },
   "navigation": {
     "tabs": [
@@ -63,7 +99,7 @@
         ]
       },
       {
-        "tab": "Chrome Extension",
+        "tab": "Chrome EXT",
         "icon": "puzzle-piece",
         "groups": [
           {
@@ -111,7 +147,7 @@
         ]
       },
       {
-        "tab": "SMS / Voice Agents",
+        "tab": "SMS / Call Agents",
         "icon": "robot",
         "groups": [
           {
@@ -147,7 +183,28 @@
         ]
       },
       {
-        "tab": "Cortana Calendar",
+        "tab": "Sales Dashboard",
+        "icon": "chart-mixed",
+        "groups": [
+          {
+            "group": "A-Z Guide",
+            "icon": "rocket",
+            "pages": [
+              "sales/1-overview",
+              "sales/2-funnel-setup",
+              "sales/3-send-payment-links",
+              "sales/send-a-sales-page",
+              "sales/4-create-a-link",
+              "sales/5-embedded-checkout",
+              "sales/6-performance",
+              "sales/7-commissions",
+              "sales/8-call-recordings"
+            ]
+          }
+        ]
+      },
+      {
+        "tab": "Calendar",
         "icon": "calendar",
         "groups": [
           {
@@ -240,6 +297,7 @@
               "mcp/setup",
               "mcp/meta-ads",
               "mcp/tools",
+              "mcp/ai-checkouts",
               "mcp/examples"
             ]
           },
@@ -372,12 +430,23 @@
                   "api-reference/endpoint/stripe-customers",
                   "api-reference/endpoint/stripe-metrics",
                   "api-reference/endpoint/stripe-products",
+                  "api-reference/endpoint/create-stripe-product",
                   "api-reference/endpoint/stripe-invoices",
                   "api-reference/endpoint/stripe-disputes",
                   "api-reference/endpoint/stripe-payment-intents",
                   "api-reference/endpoint/stripe-payment-links",
                   "api-reference/endpoint/stripe-prices",
                   "api-reference/endpoint/stripe-promotion-codes"
+                ]
+              },
+              {
+                "group": "Embedded Checkouts",
+                "pages": [
+                  "api-reference/endpoint/list-embedded-checkouts",
+                  "api-reference/endpoint/create-embedded-checkout",
+                  "api-reference/endpoint/get-embedded-checkout",
+                  "api-reference/endpoint/update-embedded-checkout",
+                  "api-reference/endpoint/deactivate-embedded-checkout"
                 ]
               },
               {
@@ -419,13 +488,14 @@
         ]
       },
       {
-        "tab": "Platform Walkthrough",
+        "tab": "App Walkthrough",
         "icon": "mouse-pointer",
         "groups": [
           {
             "group": "Overview",
             "pages": [
-              "platform/overview"
+              "platform/overview",
+              "platform/onboarding-survey"
             ]
           },
           {

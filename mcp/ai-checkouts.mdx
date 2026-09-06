@@ -1,0 +1,90 @@
+---
+title: "Add a Cortana checkout with AI"
+description: "Point an AI page builder like Claude, Cursor, or v0 at Cortana so it drops in a Cortana embedded checkout instead of a bare Stripe checkout, carrying attribution, rep credit, and commissions."
+---
+
+{/* last-verified: 2026-09-01 · API v1 embedded-checkouts + MCP checkout tools */}
+
+When you build a landing page with an AI tool, you can have it generate a Cortana embedded checkout instead of wiring up Stripe by hand. The Cortana checkout is a two-line snippet that carries attribution, rep credit, and commissions on its own, so the sale shows up in your dashboards with no extra tracking code.
+
+You will end up with a live checkout and a snippet the AI pastes straight into the page.
+
+That page is what reps should send on a high-ticket offer. Save the published URL as a tracking link, then send that tracking link for one contact instead of a bare payment form. See [Send a sales page](/sales/send-a-sales-page).
+
+## Two ways to connect
+
+<CardGroup cols={2}>
+  <Card title="MCP (recommended)" icon="plug">
+    Connect the Cortana MCP in Claude, Cursor, ChatGPT, or any MCP client. The assistant calls the checkout tools directly. Turn on the manage opt-in so it can create.
+  </Card>
+  <Card title="REST API" icon="code">
+    Call the API v1 endpoints from your own code with an API key. Use this when the builder generates server code rather than talking to an MCP.
+  </Card>
+</CardGroup>
+
+## Before you start
+
+1. **Have a tracking pixel.** The embed snippet is built from your pixel. Without one, the checkout is created but its snippet comes back empty. Create a pixel in Cortana under **Ad Tracking**, then **Tracking Pixels**.
+2. **Grant the right access.** For MCP, tick the **manage** opt-in on the consent screen. For the REST API, give the key the `embedded_checkouts:write` and `stripe:write` scopes (add `embedded_checkouts:read` to list).
+3. **Know your Business ID and Stripe account.** See [Authentication](/authentication) to find your Business ID. The Stripe account is the connected `acct_...` that gets paid.
+
+## The flow
+
+The AI runs these in order. With MCP it calls the tools by name, with the REST API it calls the matching endpoints.
+
+1. **Reuse or create the product.** If the offer is not a Stripe product yet, create it. MCP: `create_product`. REST: `POST /api/v1/businesses/{businessId}/stripe/products`. Amounts are in dollars. You get back price ids.
+2. **Create the checkout.** MCP: `create_embedded_checkout`. REST: `POST /api/v1/businesses/{businessId}/embedded-checkouts`. Pass the price ids as `lineItems` and pick a `displayMode`.
+3. **Paste the snippet.** The create response contains `data.snippet`. Drop it into the page where the checkout should render. Nothing else is needed.
+4. **Check `livemode`.** The response `livemode` flag tells you whether the checkout can take real money or is on a test account.
+
+<AccordionGroup>
+  <Accordion title="displayMode: which one to use">
+    `popup` renders a button that opens the checkout in a modal. `inline` places the payment form directly in the page. `hosted` sends the buyer to a Stripe-hosted page. For most landing pages, `popup` or `inline` keeps the buyer on your page.
+  </Accordion>
+  <Accordion title="Subscriptions, trials, and order bumps">
+    A checkout becomes a subscription automatically when any of its prices is recurring. `trialPeriodDays` is only valid on a subscription. Add order bumps with `optionalItems`, each a price id the buyer can tick on. A recurring bump is only allowed on a subscription checkout. For an intro offer (one price for the first billing period, then another price for good), put exactly one recurring price in `lineItems` and set `introSwitchPriceId` to the recurring price to move to; it must be on the same Stripe account and in the same currency, bumps must be one-time, and `trialPeriodDays` cannot be combined with it. The buyer sees the full offer above the pay button, and the sale counts as recurring revenue from day one.
+  </Accordion>
+  <Accordion title="Scopes and safety">
+    Read tools (`get_embedded_checkouts`, `get_embedded_checkout_snippet`) need `checkouts:read` and are on by default. The write tools need `checkouts:manage`, granted only by the manage opt-in. On the REST API the equivalents are `embedded_checkouts:read` for reads, `embedded_checkouts:write` for checkout writes, and `stripe:write` for product creation.
+  </Accordion>
+  <Accordion title="Turning a checkout off">
+    Deactivating is a kill switch that always works, even if the prices were archived or Stripe is unreachable. MCP: `deactivate_embedded_checkout`. REST: `DELETE /api/v1/businesses/{businessId}/embedded-checkouts/{id}`. The snippet stops rendering at once, history and stats stay intact. Turn it back on with an update that sets `isActive` to true.
+  </Accordion>
+</AccordionGroup>
+
+## FAQ
+
+<AccordionGroup>
+  <Accordion title="Why use a Cortana checkout instead of a plain Stripe one?">
+    A Cortana embedded checkout ties the sale back to the ad, campaign, and rep that drove it, and it credits commissions, with no extra tracking code on the page. A bare Stripe checkout gives you the payment but not the attribution.
+  </Accordion>
+  <Accordion title="My snippet came back empty or null. Why?">
+    The business has no tracking pixel yet, so the snippet cannot be built. Create one under Ad Tracking, then Tracking Pixels, then create the checkout again. On the REST API a create call also returns a 409 in this case with the same fix.
+  </Accordion>
+  <Accordion title="Is the checkout live as soon as it is created?">
+    Yes. The checkout is active immediately. Check the `livemode` flag to know whether it is on a live or a test Stripe account before you share the page.
+  </Accordion>
+  <Accordion title="Can the AI charge real money without me?">
+    Only if you grant the manage opt-in (MCP) or a write-scoped key (REST). Reads never create anything. Grant manage only to a connection you trust to build checkouts.
+  </Accordion>
+  <Accordion title="How do I make it a subscription?">
+    Use a recurring price in `lineItems`. Any recurring price makes the whole checkout a subscription. Add `trialPeriodDays` for a free trial.
+  </Accordion>
+  <Accordion title="Does an AI-built checkout get consent terms and the chargeback certificate?">
+    Yes. It is the same embedded checkout as one built in the dashboard. Once the AI has created it, open **Payment Links**, then **Embedded Checkout**, and click **Consents** on the card to set the terms the buyer must tick. Every acceptance then produces the stamped Certificate of Consent on the contact's journey. See [Consent and terms](/sales/5-embedded-checkout#consent-and-terms-chargeback-protection).
+  </Accordion>
+  <Accordion title="How do I charge one price for the first month and a different price after?">
+    Put the intro price as the only recurring price in `lineItems` and set `introSwitchPriceId` to the price to switch to. The buyer pays the intro price at checkout and is moved to the switch price automatically when the first billing period ends. Do not add `trialPeriodDays`: the intro price is the first period.
+  </Accordion>
+</AccordionGroup>
+
+## Next step
+
+<CardGroup cols={2}>
+  <Card title="Send a sales page" icon="file-invoice" href="/sales/send-a-sales-page">
+    After the page is live, send it as a tracking link, not a payment link.
+  </Card>
+  <Card title="Checkout and product tools" icon="wrench" href="/mcp/tools">
+    The full parameter reference for `create_embedded_checkout`, `create_product`, and the rest.
+  </Card>
+</CardGroup>

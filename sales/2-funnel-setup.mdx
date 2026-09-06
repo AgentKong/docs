@@ -1,0 +1,76 @@
+---
+title: "Set up your sales funnel"
+description: "Funnel setup tells Cortana what counts as a sales call, what counts as a close, and how repeat bookings are counted, so your show rate, close rate, and commissions are accurate."
+---
+
+{/* last-verified: 2026-09-01 · Performance tab, Funnel setup dialog */}
+
+Funnel setup is the one configuration the whole Sales Dashboard depends on. You set it once: which calendar events are sales calls, what makes a close, and whether repeat bookings from the same contact are collapsed. Every rate and commission is calculated from these choices.
+
+## Open Funnel setup
+
+On the **Performance** tab, click **Funnel setup** in the top-right. A dialog opens with three settings.
+
+<Frame caption="The Funnel setup dialog: Sales Call event types, Count Closes From, and Count Unique.">
+  <img src="/images/sales-dashboard/funnel-setup/01-funnel-setup.jpg" alt="Funnel setup dialog with a Sales Call event-type picker, a Count Closes From row showing Payment links on plus optional conversion events, and a Count Unique dropdown set to Count Only 1 Per Contact" />
+</Frame>
+
+## 1. Sales Call
+
+Pick the **calendar event type** that is your sales or demo call. You can select more than one (for example a discovery call and a closing call). Only bookings of these event types are counted as sales calls in the funnel, so choose the events where selling actually happens, not internal or onboarding meetings.
+
+<Note>
+  You do not need to use Cortana's own calendar for this. Cortana connects directly to your existing scheduling platforms, so the funnel piggybacks on the calendar your team already uses.
+</Note>
+
+### Where these event types come from
+
+The event types in this picker are pulled from your connected scheduling platform. Cortana integrates directly with **Go High Level (GHL)**, **Calendly**, and **iClosed**, reading the booking event types and their statuses so bookings, shows, and no-shows flow into the funnel automatically.
+
+- **Go High Level**: a **two-way calendar sync**. Cortana reads GHL bookings and mirrors calendar changes back, so the two stay in step. You can run your whole booking flow in GHL and still get the full funnel here.
+- **Calendly** and **iClosed**: connected directly, with their bookings and statuses flowing into Cortana, so you keep scheduling where you already do.
+
+Connect these under the business's **Integrations**. Once connected, their event types appear in the picker above.
+
+## 2. Count Closes From
+
+**Payment links are always on**: any completed payment link counts as a close, automatically. If some deals close outside payment links (a CRM stage, a webhook), add those as **conversion events** with the optional picker. Use this when reps mark deals won in a CRM instead of collecting payment in Cortana.
+
+## 3. Count Unique
+
+Choose how repeat bookings from the same person are handled. **Count Only 1 Per Contact** collapses a contact's repeat bookings so a single prospect booking three times does not inflate your show and close rates. This applies immediately once saved.
+
+## Save
+
+Click **Save setup**. The funnel, show rate, and close rate recalculate right away.
+
+<AccordionGroup>
+  <Accordion title="Settings reference">
+    - **Sales Call event types** (required): the calendar event(s) that count as a sales/demo call. Default: none, so set this first. Recommendation: pick only the events where a rep is selling.
+    - **Count Closes From**: payment links are always counted. Optional conversion events extend this to CRM or webhook closes. Recommendation: leave as payment-links-only unless deals close outside Cortana.
+    - **Count Unique**: Count Only 1 Per Contact (recommended) collapses repeat bookings. The alternative counts every booking, which can distort rates for prospects who reschedule.
+  </Accordion>
+  <Accordion title="How rates are calculated">
+    Show rate is showed divided by taken (calls that happened divided by calls booked). Close rate is closed divided by showed. Both use only the event types you selected as sales calls, and both respect the Count Unique setting.
+  </Accordion>
+</AccordionGroup>
+
+## FAQ
+
+<AccordionGroup>
+  <Accordion title="I set it up but the funnel is still empty.">
+    Check that the date range at the top-left covers days with booked calls, and that the event type you picked is the one your reps actually book. If reps book a different event type, add it here.
+  </Accordion>
+  <Accordion title="Why is my close rate higher than my payment count?">
+    If you added conversion events, closes include CRM or webhook wins, not just payments. Remove those events to count only paid closes.
+  </Accordion>
+  <Accordion title="A prospect booked five times and my show rate looks wrong.">
+    Set Count Unique to Count Only 1 Per Contact. It collapses their repeat bookings so one contact counts once.
+  </Accordion>
+</AccordionGroup>
+
+## Next step
+
+<Card title="Send payment links" icon="paper-plane" href="/sales/3-send-payment-links">
+  With the funnel set, start sending reusable payment links and tracking sends and opens.
+</Card>

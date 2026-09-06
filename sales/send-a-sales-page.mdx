@@ -1,0 +1,101 @@
+---
+title: "Send a sales page"
+description: "For a high-ticket offer, send a tracking link to your own sales page (testimonials, what's included, and an embedded checkout) instead of a bare payment form."
+---
+
+{/* last-verified: 2026-09-03 · Payment Links + Settings → Tracking Links */}
+
+A payment link is a card form. That is enough when the buyer is already sold. A cold buyer will not drop $10k on a bare Stripe page.
+
+You do not need Cortana to host a testimonials wrapper. Embedded checkout already runs on **your** page. Tracking links already send that page to **one contact**, the same way the payment URL builder sends a checkout URL.
+
+Build the page once. Save it as a tracking link. Reps pick the contact and send that, not a payment link.
+
+## When to send which
+
+| The buyer | What the rep sends |
+| --- | --- |
+| Already sold, low-ticket, just needs to pay | A **payment link** from [My Links](/sales/3-send-payment-links) |
+| Still deciding, high-ticket, needs proof | A **tracking link** to your sales page |
+
+Same contact picker. Same "one link for this person." The destination is the only thing that changes.
+
+## Set it up once
+
+<Steps>
+  <Step title="Build the page">
+    Put the offer story on a page you control: what's included, testimonials, price, and the buy button. Use your existing site, or have an AI page builder generate one. Cortana does not host this page.
+  </Step>
+
+  <Step title="Drop in the embedded checkout">
+    Create the offer under **Payment Links → Embedded Checkout**, then paste the snippet where the form should sit. That checkout carries attribution, rep credit, and commissions on its own. See [Embedded checkout](/sales/5-embedded-checkout).
+
+    If an AI tool is building the page, point it at [Add a Cortana checkout with AI](/mcp/ai-checkouts) so it drops in a Cortana checkout instead of a bare Stripe form.
+  </Step>
+
+  <Step title="Save the page as a tracking link">
+    In **Settings → Tracking Links**, create a link whose **Destination** is that sales page URL. Name it after the offer, for example `High-ticket checkout`.
+
+    The page must carry your pixel. The checkout snippet is built from that pixel, so a page with the snippet already installed is ready. See [Tracking Links](/12-tracking-links).
+  </Step>
+</Steps>
+
+## Send it on every deal
+
+This is the same motion as sending a payment link. The rep uses **Tracking Links** instead of **Payment Links**.
+
+<Steps>
+  <Step title="Pick the contact">
+    The link is the identity. There is no generic "share this offer" URL. Choose the one person you are selling.
+  </Step>
+
+  <Step title="Send the tracking link, not a payment link">
+    **From a conversation:** click the **link** button in the composer (tooltipped **Insert tracking link**), pick the sales-page link, and send.
+
+    **From the Chrome extension:** open the **Tracking Links** tab, set **Send to** that contact, and press **Send** on the preset. The unique URL is copied for you. See [Tracking links in the extension](/extension/tracking-links).
+  </Step>
+
+  <Step title="They land on your page, not a bare form">
+    Their short link opens your sales page. They read the offer, then pay in the embedded checkout. Cortana still knows who clicked and who paid.
+  </Step>
+</Steps>
+
+<Tip>
+  Re-sending the same sales page to the same person reuses the same short link, just like a payment link. Click history stays in one place.
+</Tip>
+
+## FAQ
+
+<AccordionGroup>
+  <Accordion title="Can I put testimonials on a payment link?">
+    Not on the Stripe, Whop, Fanbasis, or PayPal form itself. Those are checkout pages, not sales pages. Put testimonials and what's included on **your** page, embed the checkout there, and send that page as a tracking link.
+  </Accordion>
+
+  <Accordion title="Should Cortana host a page that wraps the checkout?">
+    No. Embedded checkout is built to run on a page you already have (or one you generate with AI). Tracking links are how you send that page to one contact. That is the product, not a missing hosted wrapper.
+  </Accordion>
+
+  <Accordion title="Does this still credit the rep and pay commissions?">
+    Yes. The embedded checkout carries attribution, rep credit, and commissions. The tracking link is what attaches the click to the contact you selected.
+  </Accordion>
+
+  <Accordion title="Do I still create a payment link for this offer?">
+    Only if you also want a bare-form fallback for buyers who are already sold. The high-ticket send is the tracking link to the sales page. Keep those two presets named clearly so reps grab the right one.
+  </Accordion>
+
+  <Accordion title="Clicks are not attaching to the contact.">
+    The destination page needs your pixel. If you pasted the embedded checkout snippet, the pixel is already there. If you pointed the tracking link at a different URL, install the pixel on that URL too.
+  </Accordion>
+</AccordionGroup>
+
+## Next step
+
+<CardGroup cols={2}>
+  <Card title="Embedded checkout" icon="code" href="/sales/5-embedded-checkout">
+    Build the form that sits on the sales page.
+  </Card>
+
+  <Card title="Tracking Links" icon="link" href="/12-tracking-links">
+    Save the page once, then mint a unique link per contact.
+  </Card>
+</CardGroup>

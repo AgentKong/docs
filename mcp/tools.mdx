@@ -437,6 +437,108 @@ Full-text search across the user's YouTube videos. Backed by MySQL FULLTEXT inde
 
 ---
 
+# Checkouts and products
+
+New. Build and manage Cortana embedded checkouts, and create Stripe products on the fly. The two read tools are available as soon as you connect. The four write tools require the manage opt-in on the consent screen (the same checkbox that unlocks ad management). A Cortana embedded checkout carries attribution, rep credit, and commissions by itself, so when an assistant builds a page that sells, it should create one of these instead of wiring a bare Stripe checkout.
+
+<Warning>
+  `create_embedded_checkout` produces a checkout that is live immediately. Check the `livemode` flag in the response to know whether it can take real money.
+</Warning>
+
+## get\_embedded\_checkouts
+
+List this business's embedded checkouts, each with its config, funnel stats, livemode label, and paste-ready embed snippet. Read scope: `checkouts:read`.
+
+| Parameter | Type | Required | Description |
+| --- | --- | --- | --- |
+| `businessId` | string | No | Your Business ID. Omit if the key is scoped to one business. |
+| `id` | string | No | A specific checkout id. Returns just that one. |
+| `page` | integer | No | Page number |
+| `limit` | integer | No | Items per page. Max 100. |
+
+**Returns:** per checkout, the config, stats (viewed, clicked, opened, completed, revenue), the livemode label, and the ready-to-paste embed snippet.
+
+---
+
+## get\_embedded\_checkout\_snippet
+
+Get only the paste-ready HTML embed snippet for one checkout. Read scope: `checkouts:read`.
+
+| Parameter | Type | Required | Description |
+| --- | --- | --- | --- |
+| `businessId` | string | No | Your Business ID |
+| `id` | string | Yes | The embedded checkout id |
+
+**Returns:** `snippet` (a two-line mount div plus one script tag that carries attribution by itself), `livemode`, and `isActive`. Paste the snippet verbatim where the checkout should render.
+
+---
+
+## create\_product
+
+Create a product with one or more prices on a connected Stripe account, synced into Cortana immediately. Manage scope: `checkouts:manage`.
+
+| Parameter | Type | Required | Description |
+| --- | --- | --- | --- |
+| `businessId` | string | No | Your Business ID |
+| `stripeAccountId` | string | Yes | The connected Stripe account (`acct_...`) |
+| `name` | string | Yes | Product name the buyer sees |
+| `description` | string | No | Product description |
+| `prices` | array | Yes | 1 to 10 prices. Each: `amount` in DOLLARS (e.g. 49.99), `currency` (optional, defaults to the account currency), `recurring` (optional: `interval` of day, week, month, or year, plus `intervalCount`). Omit `recurring` for a one-time price. |
+
+**Returns:** `localProductId`, `livemode`, `product`, and `prices`. Feed a `prices[].stripePriceId` straight into `create_embedded_checkout`.
+
+---
+
+## create\_embedded\_checkout
+
+Create a Cortana embedded checkout and get its paste-ready snippet back in the same response. The checkout is live at once. Manage scope: `checkouts:manage`.
+
+| Parameter | Type | Required | Description |
+| --- | --- | --- | --- |
+| `businessId` | string | No | Your Business ID |
+| `stripeAccountId` | string | Yes | The connected Stripe account that gets paid |
+| `lineItems` | array | Yes | Prices to charge. Each: `priceId` and `quantity`. Any recurring price makes it a subscription. |
+| `displayMode` | enum | Yes | `popup` shows a button that opens the checkout, `inline` embeds the form in the page, `hosted` uses a Stripe-hosted page. |
+| `title` | string | No | Internal name, buyers never see it |
+| `optionalItems` | array | No | Order bumps the buyer can tick on. Each: `priceId`, `quantity`, `label`. |
+| `trialPeriodDays` | integer | No | 1 to 365. Requires a subscription price. |
+| `introSwitchPriceId` | string | No | Intro offer: after the first billing period, move the subscription to this recurring price (same Stripe account and currency). `lineItems` must hold exactly one recurring price. Cannot be combined with `trialPeriodDays`. |
+| `buttonLabel` | string | No | Popup-mode button text |
+| `successMessage` | string | No | Message shown after payment |
+| `returnUrl` | string | No | Where the buyer goes after payment. Omit to stay on the page. |
+
+**Returns:** the checkout, including `data.snippet` to paste into the page and the `livemode` flag.
+
+---
+
+## update\_embedded\_checkout
+
+Update a checkout with merge semantics: send only the fields to change. Manage scope: `checkouts:manage`.
+
+| Parameter | Type | Required | Description |
+| --- | --- | --- | --- |
+| `businessId` | string | No | Your Business ID |
+| `id` | string | Yes | The embedded checkout id |
+| any create field | | No | Send to change it. Omit to keep the current value, send `null` to clear it. |
+| `isActive` | boolean | No | `false` to pause, `true` to resume. Resuming re-validates the config. |
+
+**Returns:** the updated checkout.
+
+---
+
+## deactivate\_embedded\_checkout
+
+Turn a checkout OFF immediately. Manage scope: `checkouts:manage`.
+
+| Parameter | Type | Required | Description |
+| --- | --- | --- | --- |
+| `businessId` | string | No | Your Business ID |
+| `id` | string | Yes | The embedded checkout id |
+
+**Returns:** `{ id, isActive: false }`. This is the kill switch: it always works with no validation, even if the prices were archived or Stripe is unreachable. The snippet stops rendering at once, history and stats stay intact. Reactivate later with `update_embedded_checkout` and `isActive: true`.
+
+---
+
 # Ad Management Tools
 
 New. These tools let the assistant create and manage Meta ads. They require the ad management opt-in checkbox on the consent screen (see [Connect](/mcp/setup)).

@@ -1,0 +1,78 @@
+---
+title: "Create a link"
+description: "Build a reusable payment link in the Create Link tab: pick a platform and account, choose a product and price, or create a new product on the spot, then save it to your library."
+---
+
+{/* last-verified: 2026-09-01 · Payment Links tab, Create Link sub-tab */}
+
+The **Create Link** tab builds a new reusable payment link. Pick where the money lands, choose what you are selling, and save it to your library so any rep can send it. If the product does not exist yet, you can create it without leaving the page.
+
+## 1. Pick a platform
+
+Go to **Payment Links**, then **Create Link**. Choose the platform that will process the payment: **Whop**, **Stripe**, **Fanbasis**, or **PayPal**.
+
+<Frame caption="Create Link with Stripe selected: choose the account, then pick or create a product. The New product button creates one on the spot.">
+  <img src="/images/sales-dashboard/create-a-link/01-create-link.jpg" alt="Create Link builder showing the platform picker with Stripe selected, a Stripe account dropdown set to Cortana AI, and a Product and Price section with a New product button" />
+</Frame>
+
+## 2. Pick the account
+
+For Stripe, choose the **Stripe account** that gets paid. If you have more than one connected account, each is listed with a Live or Test badge. The other platforms work the same way with their own connection.
+
+## 3. Choose or create a product
+
+Search and select an existing product and price. If the offer does not exist yet, click **New product** and fill in the short form. Creation works on every platform, each in its own way:
+
+- **Stripe**: under **Product & Price**, click **New product** and enter a **Name**, a **Price** in dollars, and a **Billing** cadence (one-time, weekly, every 4 weeks, monthly, every 3 months, yearly). The product and price are created on the connected Stripe account and selected immediately.
+- **Whop**: pick your **Whop company**, then click **New product** next to **Product**. Enter a **Name** (up to 80 characters), a **Price**, and a **Billing** cadence. Cortana creates the product with its priced plan on your Whop company and selects both for you.
+- **Fanbasis**: pick your **Fanbasis account**, then click **New product** next to **Product**. Enter a **Name** and a one-time **Price**. Fanbasis has no separate product catalog for this, so the offer is created fresh on every checkout from that name and price. Recurring Fanbasis offers are created in the Fanbasis dashboard, then selected here.
+- **PayPal**: a one-time link needs no product at all, just enter the **Amount**. For a subscription, click **New plan** to create the billing plan on your PayPal account, or pick an existing one.
+
+{/* TODO: capture 02-whop-new-product.png and 03-fanbasis-new-product.png once the release is live */}
+
+## 4. Save to library
+
+Click **Save to Library**. The link now appears on the **My Links** tab, ready for any rep to copy and send.
+
+<AccordionGroup>
+  <Accordion title="New product field rules">
+    - **Name** is required and is what the buyer sees on checkout. Whop limits it to 80 characters.
+    - **Price** is entered in dollars, for example 297 or 49.99, up to 999,999.99. Do not add currency symbols or thousands separators: an amount like 1,000 is rejected rather than misread.
+    - **Billing** determines whether the price is one-time or recurring. A recurring price makes any checkout built from it a subscription. Fanbasis new products are one-time only; PayPal subscriptions bill weekly, monthly, or yearly.
+    - The product is created live on the selected connected account or company. Switching accounts before saving clears an unsaved new product.
+  </Accordion>
+  <Accordion title="Platforms and what they need">
+    All four platforms (Stripe, Whop, Fanbasis, PayPal) can carry a reusable link, and all four support creating the offer without leaving Cortana. The differences: **Stripe** and **Whop** create a real product (and price or plan) on your connected account; **Fanbasis** stores the name and price on the link itself and materializes the offer at each checkout; **PayPal** needs no product for one-time amounts and creates a billing plan for subscriptions.
+  </Accordion>
+</AccordionGroup>
+
+## FAQ
+
+<AccordionGroup>
+  <Accordion title="My new product did not show up.">
+    Confirm you did not switch the account or company after creating it. The product is tied to the account that was selected when you created it. Re-select that account and it will be in the picker.
+  </Accordion>
+  <Accordion title="Why can I not make a recurring Fanbasis product here?">
+    Fanbasis offers created in Cortana are billed as one-time payments. For a recurring Fanbasis offer, create it in your Fanbasis dashboard first, then select it in the Product picker here.
+  </Accordion>
+  <Accordion title="Can I make a subscription link?">
+    Yes. When you create the product, choose a recurring billing cadence, or pick an existing recurring price. The link then sells a subscription.
+  </Accordion>
+  <Accordion title="Where does the link go after I save it?">
+    To My Links, where you and your reps copy and send it. See Send payment links.
+  </Accordion>
+  <Accordion title="Can this payment link show testimonials or what's included?">
+    No. A payment link is the checkout form. For that copy, build a sales page, embed the checkout, and send a tracking link. See [Send a sales page](/sales/send-a-sales-page).
+  </Accordion>
+</AccordionGroup>
+
+## Next step
+
+<CardGroup cols={2}>
+  <Card title="Embedded checkout" icon="code" href="/sales/5-embedded-checkout">
+    Sell on your own pages by pasting one Cortana checkout snippet instead of a link.
+  </Card>
+  <Card title="Send a sales page" icon="file-invoice" href="/sales/send-a-sales-page">
+    High-ticket: wrap that checkout in your page, then send it as a tracking link.
+  </Card>
+</CardGroup>

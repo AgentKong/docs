@@ -1,0 +1,75 @@
+---
+title: "Read the Performance tab"
+description: "The Performance tab is your closing scoreboard: stat cards for links, payments, and revenue, a booked-to-closed funnel you can drill into, a per-rep table, and a trend chart over your date range."
+---
+
+{/* last-verified: 2026-09-01 · Performance tab */}
+
+The Performance tab shows how your team is closing over the selected date range. Read it top to bottom: headline numbers, then the funnel, then each rep, then the trend.
+
+<Frame caption="The Performance tab: four stat cards, the booked-to-closed funnel, and the per-rep table.">
+  <img src="/images/sales-dashboard/performance/01-performance.jpg" alt="Performance tab with stat cards for links sent, payments completed, new revenue, and total revenue, a funnel of taken, showed, and closed, and a per-rep table with show rate, close rate, and revenue" />
+</Frame>
+
+## Stat cards
+
+Four cards summarize the range, each with a sparkline and a change versus the previous period:
+
+- **Links Sent**: payment links your reps shared.
+- **Payments Completed**: links that resulted in a paid checkout.
+- **New Revenue Generated**: revenue from first-time payments in the range.
+- **Total Revenue**: all revenue in the range, including recurring.
+
+## The funnel
+
+The funnel shows **Taken**, **Showed**, and **Closed**, with your **show rate** and **close rate** on the right, plus totals for the range (booked, upcoming, and amount closed). Click any bar to see the people behind that stage.
+
+## The per-rep table
+
+Each rep gets a row with their calls and their links side by side:
+
+| Column | Meaning |
+| --- | --- |
+| Calls / Taken / Showed / No-show / Unmarked | The rep's call outcomes |
+| Show % | Showed divided by taken |
+| Sent / Opened | Links the rep sent and how many were opened |
+| Closes / Close % | Deals closed and the rate |
+| Revenue | Revenue attributed to the rep |
+
+A dash in a column means that rail does not apply to that rep. For example an AI agent that only sends links has dashes in the call columns. Click a call number to drill into the calls behind it, or click a rep to see their deal history.
+
+## The trend chart
+
+The **Trend** chart plots per-rep activity over the range. Toggle between **Links sent**, **New payments**, and **New revenue** to see who is driving each.
+
+<AccordionGroup>
+  <Accordion title="How show rate and close rate are calculated">
+    Show rate is showed divided by taken. Close rate is closed divided by showed. Both use the sales-call event types and the unique-contact setting from Funnel setup, so if these look off, check Funnel setup first.
+  </Accordion>
+  <Accordion title="Reps, AI agents, and Unknown">
+    Human reps show both calls and links. AI agents (for example a DM setter) send links but take no calls, so their call columns are dashes. Unknown groups activity that could not be matched to a rep.
+  </Accordion>
+  <Accordion title="What the drill-downs show">
+    Clicking a funnel bar or a rep's call number opens the list of calls or deals behind that number, so you can see the actual contacts and outcomes, not just the totals.
+  </Accordion>
+</AccordionGroup>
+
+## FAQ
+
+<AccordionGroup>
+  <Accordion title="Why does a rep show 3 sends but 0 revenue?">
+    Their links were sent but not yet paid, or the payments were attributed to a different rep. Open the rep to see their deal history.
+  </Accordion>
+  <Accordion title="My revenue looks low compared to Stripe.">
+    The Performance tab is scoped to your date range and to closes counted by Funnel setup. Widen the range, or check whether closes outside payment links need a conversion event added in Funnel setup.
+  </Accordion>
+  <Accordion title="Why is a whole column dashes for one rep?">
+    That rail does not apply to them. AI agents that only send links have no call numbers, so those columns are dashes.
+  </Accordion>
+</AccordionGroup>
+
+## Next step
+
+<Card title="Commissions" icon="hand-holding-dollar" href="/sales/7-commissions">
+  Turn these closes into what each rep gets paid.
+</Card>
