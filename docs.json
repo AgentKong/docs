@@ -369,13 +369,18 @@
               {
                 "group": "Conversions",
                 "pages": [
+                  "api-reference/conversions-walkthrough",
                   "api-reference/endpoint/list-conversion-configs",
+                  "api-reference/endpoint/create-conversion-config",
                   "api-reference/endpoint/get-conversion-config",
+                  "api-reference/endpoint/update-conversion-config",
+                  "api-reference/endpoint/delete-conversion-config",
                   "api-reference/endpoint/list-conversion-sources",
                   "api-reference/endpoint/create-conversion-source",
                   "api-reference/endpoint/get-conversion-source",
                   "api-reference/endpoint/update-conversion-source",
                   "api-reference/endpoint/delete-conversion-source",
+                  "api-reference/endpoint/get-conversion-source-options",
                   "api-reference/endpoint/list-conversion-entries",
                   "api-reference/endpoint/create-conversion-entry",
                   "api-reference/endpoint/get-conversion-entry",

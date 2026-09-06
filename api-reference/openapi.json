@@ -2576,6 +2576,88 @@
             "$ref": "#/components/responses/RateLimited"
           }
         }
+      },
+      "post": {
+        "tags": [
+          "Conversions"
+        ],
+        "operationId": "createConversionConfig",
+        "summary": "Create a conversion config",
+        "description": "Creates a custom conversion for the business. Every business also has the standard conversions seeded, listed by GET; they are created inactive, so activate one with PATCH before pointing traffic at its sources.",
+        "parameters": [
+          {
+            "name": "businessId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            },
+            "description": "The business ID"
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateConversionConfig"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Conversion config created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "$ref": "#/components/schemas/ConversionConfig"
+                    }
+                  }
+                }
+              }
+            },
+            "headers": {
+              "X-RateLimit-Limit": {
+                "schema": {
+                  "type": "integer"
+                },
+                "description": "Request limit per window"
+              },
+              "X-RateLimit-Remaining": {
+                "schema": {
+                  "type": "integer"
+                },
+                "description": "Remaining requests in window"
+              },
+              "X-RateLimit-Reset": {
+                "schema": {
+                  "type": "integer"
+                },
+                "description": "Unix timestamp when window resets"
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "409": {
+            "$ref": "#/components/responses/Conflict"
+          },
+          "429": {
+            "$ref": "#/components/responses/RateLimited"
+          }
+        }
       }
     },
     "/api/v1/businesses/{businessId}/conversions/configs/{configId}": {
@@ -2647,6 +2729,177 @@
           },
           "404": {
             "$ref": "#/components/responses/NotFound"
+          },
+          "429": {
+            "$ref": "#/components/responses/RateLimited"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "Conversions"
+        ],
+        "operationId": "updateConversionConfig",
+        "summary": "Update a conversion config",
+        "parameters": [
+          {
+            "name": "businessId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            },
+            "description": "The business ID"
+          },
+          {
+            "name": "configId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            },
+            "description": "The conversion configuration ID"
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateConversionConfig"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Updated conversion config",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "$ref": "#/components/schemas/ConversionConfig"
+                    }
+                  }
+                }
+              }
+            },
+            "headers": {
+              "X-RateLimit-Limit": {
+                "schema": {
+                  "type": "integer"
+                },
+                "description": "Request limit per window"
+              },
+              "X-RateLimit-Remaining": {
+                "schema": {
+                  "type": "integer"
+                },
+                "description": "Remaining requests in window"
+              },
+              "X-RateLimit-Reset": {
+                "schema": {
+                  "type": "integer"
+                },
+                "description": "Unix timestamp when window resets"
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "429": {
+            "$ref": "#/components/responses/RateLimited"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Conversions"
+        ],
+        "operationId": "deleteConversionConfig",
+        "summary": "Delete a conversion config",
+        "description": "Permanently deletes the conversion, its sources and every conversion entry under it (with an audit record for each entry). When the conversion holds entries the call answers 409 with the count until you re-send it with confirmEntryCount equal to that count. Refund conversions managed by the system answer 403; they are removed with the conversion they belong to.",
+        "parameters": [
+          {
+            "name": "businessId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            },
+            "description": "The business ID"
+          },
+          {
+            "name": "configId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            },
+            "description": "The conversion configuration ID"
+          },
+          {
+            "name": "confirmEntryCount",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "description": "Required when the conversion holds entries: the exact number of entries you expect to delete, as returned by the 409."
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Deleted",
+            "headers": {
+              "X-RateLimit-Limit": {
+                "schema": {
+                  "type": "integer"
+                },
+                "description": "Request limit per window"
+              },
+              "X-RateLimit-Remaining": {
+                "schema": {
+                  "type": "integer"
+                },
+                "description": "Remaining requests in window"
+              },
+              "X-RateLimit-Reset": {
+                "schema": {
+                  "type": "integer"
+                },
+                "description": "Unix timestamp when window resets"
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "409": {
+            "$ref": "#/components/responses/Conflict"
           },
           "429": {
             "$ref": "#/components/responses/RateLimited"
@@ -2833,10 +3086,17 @@
           "401": {
             "$ref": "#/components/responses/Unauthorized"
           },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "409": {
+            "$ref": "#/components/responses/Conflict"
+          },
           "429": {
             "$ref": "#/components/responses/RateLimited"
           }
-        }
+        },
+        "description": "Creates a source under the conversion. sourceType selects the shape: WEBHOOK (default) returns a webhookUrl to POST payloads to; STRIPE_WEBHOOK, TYPEFORM_WEBHOOK and GHL_WEBHOOK are backed by the business's connected integration. Use GET .../source-options/{integration} to discover ids."
       }
     },
     "/api/v1/businesses/{businessId}/conversions/configs/{configId}/sources/{sourceId}": {
@@ -3015,10 +3275,14 @@
           "404": {
             "$ref": "#/components/responses/NotFound"
           },
+          "409": {
+            "$ref": "#/components/responses/Conflict"
+          },
           "429": {
             "$ref": "#/components/responses/RateLimited"
           }
-        }
+        },
+        "description": "Updates a source. The stored sourceType decides which fields are accepted."
       },
       "delete": {
         "tags": [
@@ -3079,6 +3343,138 @@
                 "description": "Unix timestamp when window resets"
               }
             }
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "429": {
+            "$ref": "#/components/responses/RateLimited"
+          }
+        },
+        "description": "Removes the source. Conversion entries it created are kept and stay counted under their conversion; they are detached from the removed source."
+      }
+    },
+    "/api/v1/businesses/{businessId}/conversions/source-options/{integration}": {
+      "get": {
+        "tags": [
+          "Conversions"
+        ],
+        "operationId": "getConversionSourceOptions",
+        "summary": "Get source options for an integration",
+        "description": "What you can pass to POST .../sources for a connected integration: the event catalogue each accepts and, where a business can have several, the connections to choose between. Data comes from the mirrored tables; refresh=true re-syncs from the integration first (typeform, ghl, close).",
+        "parameters": [
+          {
+            "name": "businessId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            },
+            "description": "The business ID"
+          },
+          {
+            "name": "integration",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "stripe",
+                "typeform",
+                "ghl",
+                "close",
+                "paypal",
+                "whop",
+                "fanbasis",
+                "calendly",
+                "cal-com",
+                "fathom",
+                "hubspot",
+                "salesforce",
+                "iclosed",
+                "shopier",
+                "shopify",
+                "woocommerce",
+                "clickfunnels",
+                "tally",
+                "kajabi",
+                "callrail"
+              ]
+            }
+          },
+          {
+            "name": "refresh",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "boolean",
+              "default": false
+            },
+            "description": "Re-sync from the integration before answering (typeform, ghl, tally)."
+          },
+          {
+            "name": "ghlConnectionId",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            },
+            "description": "ghl with refresh=true: sync only this sub-account."
+          },
+          {
+            "name": "connectionId",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            },
+            "description": "clickfunnels: also list this workspace connection's products, pipelines (with stages) and funnels, fetched live from ClickFunnels (502 if it refuses)."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Options for the integration",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "$ref": "#/components/schemas/ConversionSourceOptions"
+                    }
+                  }
+                }
+              }
+            },
+            "headers": {
+              "X-RateLimit-Limit": {
+                "schema": {
+                  "type": "integer"
+                },
+                "description": "Request limit per window"
+              },
+              "X-RateLimit-Remaining": {
+                "schema": {
+                  "type": "integer"
+                },
+                "description": "Remaining requests in window"
+              },
+              "X-RateLimit-Reset": {
+                "schema": {
+                  "type": "integer"
+                },
+                "description": "Unix timestamp when window resets"
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
           },
           "401": {
             "$ref": "#/components/responses/Unauthorized"
@@ -10225,15 +10621,51 @@
             "type": "string",
             "format": "uuid"
           },
-          "businessId": {
-            "type": "string",
-            "format": "uuid"
-          },
           "name": {
-            "type": "string"
+            "type": "string",
+            "description": "Internal key, lower-case with underscores. Unique per business."
+          },
+          "displayName": {
+            "type": "string",
+            "description": "The label shown in the dashboard."
+          },
+          "description": {
+            "type": "string",
+            "nullable": true
+          },
+          "icon": {
+            "type": "string",
+            "nullable": true,
+            "description": "Emoji or short icon token."
           },
           "isActive": {
+            "type": "boolean",
+            "description": "When false the conversion accepts webhooks but creates no contacts or conversions."
+          },
+          "isStandard": {
+            "type": "boolean",
+            "description": "True for the conversions seeded on every new business."
+          },
+          "isDeletable": {
             "type": "boolean"
+          },
+          "valueRequired": {
+            "type": "boolean"
+          },
+          "trackNewOnly": {
+            "type": "boolean",
+            "description": "Count a contact once for this conversion, not every time it fires."
+          },
+          "revenueCategory": {
+            "type": "string",
+            "enum": [
+              "CASH_COLLECTED",
+              "LTV_ONLY"
+            ],
+            "description": "CASH_COLLECTED counts toward cash collected; LTV_ONLY counts toward lifetime value only."
+          },
+          "displayOrder": {
+            "type": "integer"
           },
           "createdAt": {
             "type": "string",
@@ -10260,10 +10692,36 @@
             "type": "string"
           },
           "sourceType": {
-            "type": "string"
+            "type": "string",
+            "description": "WEBHOOK, STRIPE_WEBHOOK, TYPEFORM_WEBHOOK, GHL_WEBHOOK, CLOSE_WEBHOOK, PAYPAL_WEBHOOK, WHOP_WEBHOOK, FANBASIS_WEBHOOK, CALENDLY_WEBHOOK, CAL_COM_WEBHOOK, FATHOM_WEBHOOK, HUBSPOT_WEBHOOK, SALESFORCE_WEBHOOK, ICLOSED_WEBHOOK, SHOPIER, SHOPIFY_WEBHOOK, SHOPIFY_PIXEL, WOOCOMMERCE_WEBHOOK, WOOCOMMERCE_PIXEL, CLICKFUNNELS_WEBHOOK, TALLY_WEBHOOK, CALLRAIL_WEBHOOK, or another type created from the dashboard. Kajabi sources are WEBHOOK rows."
           },
           "isActive": {
             "type": "boolean"
+          },
+          "fieldMappings": {
+            "type": "object",
+            "nullable": true,
+            "additionalProperties": true,
+            "description": "The stored configuration for this source. For WEBHOOK sources this is the field mapping; for integration sources it holds the event and filters."
+          },
+          "webhookUrl": {
+            "type": "string",
+            "nullable": true,
+            "description": "Where to POST payloads for WEBHOOK sources. Null for integration sources, which receive data through their own connection."
+          },
+          "totalRequests": {
+            "type": "integer"
+          },
+          "successRequests": {
+            "type": "integer"
+          },
+          "failureRequests": {
+            "type": "integer"
+          },
+          "lastUsedAt": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
           },
           "createdAt": {
             "type": "string",
@@ -10276,30 +10734,149 @@
         }
       },
       "CreateSource": {
-        "type": "object",
-        "required": [
-          "name"
-        ],
-        "properties": {
-          "name": {
-            "type": "string",
-            "minLength": 1,
-            "maxLength": 255
+        "description": "Pick the shape by sourceType. WEBHOOK (the default) is a URL you POST to; every other type is backed by the business's connected integration. Use GET .../source-options/{integration} to discover the events and connections each accepts.",
+        "oneOf": [
+          {
+            "$ref": "#/components/schemas/CreateWebhookSource"
+          },
+          {
+            "$ref": "#/components/schemas/CreateStripeSource"
+          },
+          {
+            "$ref": "#/components/schemas/CreateTypeformSource"
+          },
+          {
+            "$ref": "#/components/schemas/CreateGhlSource"
+          },
+          {
+            "$ref": "#/components/schemas/CreateCloseSource"
+          },
+          {
+            "$ref": "#/components/schemas/CreatePayPalSource"
+          },
+          {
+            "$ref": "#/components/schemas/CreateWhopSource"
+          },
+          {
+            "$ref": "#/components/schemas/CreateFanbasisSource"
+          },
+          {
+            "$ref": "#/components/schemas/CreateCalendlySource"
+          },
+          {
+            "$ref": "#/components/schemas/CreateCalComSource"
+          },
+          {
+            "$ref": "#/components/schemas/CreateFathomSource"
+          },
+          {
+            "$ref": "#/components/schemas/CreateHubSpotSource"
+          },
+          {
+            "$ref": "#/components/schemas/CreateSalesforceSource"
+          },
+          {
+            "$ref": "#/components/schemas/CreateIClosedSource"
+          },
+          {
+            "$ref": "#/components/schemas/CreateShopierSource"
+          },
+          {
+            "$ref": "#/components/schemas/CreateShopifySource"
+          },
+          {
+            "$ref": "#/components/schemas/CreateWooCommerceSource"
+          },
+          {
+            "$ref": "#/components/schemas/CreateWooCommercePixelSource"
+          },
+          {
+            "$ref": "#/components/schemas/CreateClickFunnelsSource"
+          },
+          {
+            "$ref": "#/components/schemas/CreateTallySource"
+          },
+          {
+            "$ref": "#/components/schemas/CreateKajabiSource"
+          },
+          {
+            "$ref": "#/components/schemas/CreateCallRailSource"
           }
-        }
+        ]
       },
       "UpdateSource": {
-        "type": "object",
-        "properties": {
-          "name": {
-            "type": "string",
-            "minLength": 1,
-            "maxLength": 255
+        "description": "The stored sourceType decides which fields are accepted; fields for another type are a 400. At least one field is required.",
+        "oneOf": [
+          {
+            "$ref": "#/components/schemas/UpdateWebhookSource"
           },
-          "isActive": {
-            "type": "boolean"
+          {
+            "$ref": "#/components/schemas/UpdateStripeSource"
+          },
+          {
+            "$ref": "#/components/schemas/UpdateTypeformSource"
+          },
+          {
+            "$ref": "#/components/schemas/UpdateGhlSource"
+          },
+          {
+            "$ref": "#/components/schemas/UpdateCloseSource"
+          },
+          {
+            "$ref": "#/components/schemas/UpdatePayPalSource"
+          },
+          {
+            "$ref": "#/components/schemas/UpdateWhopSource"
+          },
+          {
+            "$ref": "#/components/schemas/UpdateFanbasisSource"
+          },
+          {
+            "$ref": "#/components/schemas/UpdateCalendlySource"
+          },
+          {
+            "$ref": "#/components/schemas/UpdateCalComSource"
+          },
+          {
+            "$ref": "#/components/schemas/UpdateFathomSource"
+          },
+          {
+            "$ref": "#/components/schemas/UpdateHubSpotSource"
+          },
+          {
+            "$ref": "#/components/schemas/UpdateSalesforceSource"
+          },
+          {
+            "$ref": "#/components/schemas/UpdateIClosedSource"
+          },
+          {
+            "$ref": "#/components/schemas/UpdateShopierSource"
+          },
+          {
+            "$ref": "#/components/schemas/UpdateShopifySource"
+          },
+          {
+            "$ref": "#/components/schemas/UpdateWooCommerceSource"
+          },
+          {
+            "$ref": "#/components/schemas/UpdateWooCommercePixelSource"
+          },
+          {
+            "$ref": "#/components/schemas/UpdateClickFunnelsSource"
+          },
+          {
+            "$ref": "#/components/schemas/UpdateTallySource"
+          },
+          {
+            "$ref": "#/components/schemas/UpdateKajabiSource"
+          },
+          {
+            "$ref": "#/components/schemas/UpdateCallRailSource"
+          },
+          {
+            "$ref": "#/components/schemas/UpdateBasicSource"
           }
-        }
+        ]
       },
       "ConversionEntry": {
         "type": "object",
@@ -10460,6 +11037,2443 @@
             "format": "date-time"
           }
         }
+      },
+      "CreateConversionConfig": {
+        "type": "object",
+        "required": [
+          "name"
+        ],
+        "properties": {
+          "name": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 100,
+            "description": "Becomes the internal key (lower-cased, spaces to underscores, at most 50 characters after normalising) and, unless displayName is given, the label. A duplicate key is a 409."
+          },
+          "displayName": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 100
+          },
+          "description": {
+            "type": "string",
+            "maxLength": 500
+          },
+          "icon": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 10
+          },
+          "valueRequired": {
+            "type": "boolean",
+            "default": false
+          },
+          "revenueCategory": {
+            "type": "string",
+            "enum": [
+              "CASH_COLLECTED",
+              "LTV_ONLY"
+            ],
+            "description": "CASH_COLLECTED counts toward cash collected; LTV_ONLY counts toward lifetime value only.",
+            "default": "CASH_COLLECTED"
+          },
+          "trackNewOnly": {
+            "type": "boolean",
+            "default": false
+          },
+          "isActive": {
+            "type": "boolean",
+            "default": true,
+            "description": "Defaults to true so a conversion created by an automation receives data immediately."
+          }
+        },
+        "example": {
+          "name": "Booked Call",
+          "description": "Discovery call booked from any sub-account",
+          "revenueCategory": "CASH_COLLECTED"
+        }
+      },
+      "UpdateConversionConfig": {
+        "type": "object",
+        "description": "Merge patch: omitted fields are left unchanged. At least one field is required.",
+        "properties": {
+          "displayName": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 100
+          },
+          "description": {
+            "type": "string",
+            "maxLength": 500,
+            "nullable": true,
+            "description": "null clears the description."
+          },
+          "icon": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 10,
+            "description": "Custom conversions only; a standard conversion answers 400."
+          },
+          "valueRequired": {
+            "type": "boolean",
+            "description": "Custom conversions only; a standard conversion answers 400."
+          },
+          "isActive": {
+            "type": "boolean",
+            "description": "Also applied to every source under the conversion, as the dashboard toggle does. Standard conversions are seeded inactive: activate one before pointing traffic at its sources."
+          },
+          "trackNewOnly": {
+            "type": "boolean"
+          },
+          "revenueCategory": {
+            "type": "string",
+            "enum": [
+              "CASH_COLLECTED",
+              "LTV_ONLY"
+            ],
+            "description": "CASH_COLLECTED counts toward cash collected; LTV_ONLY counts toward lifetime value only."
+          }
+        },
+        "example": {
+          "isActive": true
+        }
+      },
+      "WebhookFieldMappings": {
+        "oneOf": [
+          {
+            "type": "object",
+            "additionalProperties": {
+              "type": "string"
+            },
+            "description": "Keys are paths into your payload (dot notation, for example contact.email). Values are the target field: one of email, firstName, lastName, name, phone, company, address, city, state, country, timezone, website, eventValue, revenue, currency, orderId, externalId, expense, occurredAt, utm_source, utm_medium, utm_campaign, utm_ad, utm_ad_id, utm_content, utm_term, fbclid, gclid; do_nothing to keep a field visible but ignored; or custom_<customFieldId> for a custom field that belongs to this business. Any other value is a 400 that names it.",
+            "title": "Simple mapping"
+          },
+          {
+            "type": "object",
+            "title": "Mapping with static currency",
+            "required": [
+              "mappings"
+            ],
+            "properties": {
+              "mappings": {
+                "type": "object",
+                "additionalProperties": {
+                  "type": "string"
+                },
+                "description": "Keys are paths into your payload (dot notation, for example contact.email). Values are the target field: one of email, firstName, lastName, name, phone, company, address, city, state, country, timezone, website, eventValue, revenue, currency, orderId, externalId, expense, occurredAt, utm_source, utm_medium, utm_campaign, utm_ad, utm_ad_id, utm_content, utm_term, fbclid, gclid; do_nothing to keep a field visible but ignored; or custom_<customFieldId> for a custom field that belongs to this business. Any other value is a 400 that names it."
+              },
+              "config": {
+                "type": "object",
+                "properties": {
+                  "revenueCurrency": {
+                    "type": "string",
+                    "minLength": 3,
+                    "maxLength": 3,
+                    "description": "ISO 4217 code applied when the payload carries no currency."
+                  }
+                }
+              }
+            }
+          }
+        ]
+      },
+      "CreateWebhookSource": {
+        "type": "object",
+        "title": "Webhook source",
+        "required": [
+          "name"
+        ],
+        "properties": {
+          "sourceType": {
+            "type": "string",
+            "enum": [
+              "WEBHOOK"
+            ],
+            "default": "WEBHOOK",
+            "description": "Optional for webhook sources."
+          },
+          "name": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 255,
+            "description": "Unique within the conversion."
+          },
+          "fieldMappings": {
+            "$ref": "#/components/schemas/WebhookFieldMappings"
+          },
+          "mode": {
+            "type": "string",
+            "enum": [
+              "direct"
+            ],
+            "description": "Direct mode: your payload already uses the target field names above (email, phone, utm_source, revenue, and so on), so no mapping is needed. Mutually exclusive with fieldMappings. Without either, the source stores payloads for later mapping and creates nothing."
+          },
+          "revenueCurrency": {
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 3,
+            "description": "Direct mode only. ISO 4217 code applied when the payload carries no currency."
+          }
+        },
+        "example": {
+          "name": "GHL sub-account webhook",
+          "mode": "direct",
+          "revenueCurrency": "USD"
+        }
+      },
+      "CreateStripeSource": {
+        "type": "object",
+        "title": "Stripe source",
+        "required": [
+          "sourceType",
+          "webhookEvent"
+        ],
+        "properties": {
+          "sourceType": {
+            "type": "string",
+            "enum": [
+              "STRIPE_WEBHOOK"
+            ]
+          },
+          "webhookEvent": {
+            "type": "string",
+            "description": "One of the values returned by GET .../source-options/stripe, for example charge.succeeded or charge.succeeded.first (first-ever payment by the customer). The source name is set from the event label."
+          },
+          "accountFilter": {
+            "type": "array",
+            "nullable": true,
+            "items": {
+              "type": "string"
+            },
+            "description": "Stripe account ids (acct_...) connected to this business. Omitted, null or empty means every connected account. An account not connected to this business is a 400."
+          },
+          "productFilter": {
+            "type": "array",
+            "nullable": true,
+            "items": {
+              "type": "string"
+            },
+            "description": "Stripe product ids (prod_...). Omitted, null or empty means every product."
+          },
+          "qualificationRules": {
+            "$ref": "#/components/schemas/QualificationRules"
+          }
+        },
+        "example": {
+          "sourceType": "STRIPE_WEBHOOK",
+          "webhookEvent": "charge.succeeded.first"
+        }
+      },
+      "CreateTypeformSource": {
+        "type": "object",
+        "title": "Typeform source",
+        "required": [
+          "sourceType",
+          "formId"
+        ],
+        "properties": {
+          "sourceType": {
+            "type": "string",
+            "enum": [
+              "TYPEFORM_WEBHOOK"
+            ]
+          },
+          "formId": {
+            "type": "string",
+            "description": "The Typeform form id (see GET .../source-options/typeform). Registers a webhook on the form and names the source \"Typeform - <form title>\"."
+          },
+          "fieldMappings": {
+            "type": "object",
+            "additionalProperties": true,
+            "description": "Optional Typeform-side field mappings, stored on the form record."
+          },
+          "qualificationRules": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/QualificationRules"
+              }
+            ],
+            "description": "Stored on this source; the form record is only a legacy fallback."
+          }
+        },
+        "example": {
+          "sourceType": "TYPEFORM_WEBHOOK",
+          "formId": "AbC123xy"
+        }
+      },
+      "CreateGhlSource": {
+        "type": "object",
+        "title": "GoHighLevel source",
+        "required": [
+          "sourceType",
+          "eventType"
+        ],
+        "properties": {
+          "sourceType": {
+            "type": "string",
+            "enum": [
+              "GHL_WEBHOOK"
+            ]
+          },
+          "eventType": {
+            "type": "string",
+            "enum": [
+              "FormSubmitted",
+              "SurveySubmitted",
+              "AppointmentCreate",
+              "AppointmentUpdate",
+              "OpportunityStageUpdate",
+              "OpportunityStatusUpdate"
+            ]
+          },
+          "ghlConnectionId": {
+            "type": "string",
+            "format": "uuid",
+            "description": "Which connected sub-account. Omitted means the primary connection (see GET .../source-options/ghl)."
+          },
+          "formId": {
+            "type": "string",
+            "description": "FormSubmitted: the GoHighLevel form id. Names are resolved server-side; an unknown id is a 400."
+          },
+          "surveyId": {
+            "type": "string",
+            "description": "SurveySubmitted: the GoHighLevel survey id."
+          },
+          "calendarIds": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "AppointmentCreate / AppointmentUpdate: calendar ids. Omitted or empty means every calendar."
+          },
+          "appointmentStatuses": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "new",
+                "confirmed",
+                "showed",
+                "noshow",
+                "cancelled",
+                "invalid"
+              ]
+            },
+            "description": "AppointmentUpdate: required, at least one."
+          },
+          "pipelineId": {
+            "type": "string",
+            "description": "OpportunityStageUpdate / OpportunityStatusUpdate: the pipeline id."
+          },
+          "stageIds": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "OpportunityStageUpdate: required, at least one stage in that pipeline."
+          },
+          "opportunityStatuses": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "open",
+                "won",
+                "lost",
+                "abandoned"
+              ]
+            },
+            "description": "OpportunityStatusUpdate: required, at least one."
+          },
+          "trackRevenue": {
+            "type": "boolean",
+            "description": "Opportunity events: record the opportunity value as revenue."
+          },
+          "dedupOneEntryPerStage": {
+            "type": "boolean",
+            "description": "OpportunityStageUpdate: one conversion per opportunity and stage; re-entries collapse."
+          },
+          "currency": {
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 3,
+            "description": "Opportunity events with trackRevenue: ISO 4217 code. Unknown codes fall back to USD."
+          },
+          "qualificationRules": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/QualificationRules"
+              }
+            ],
+            "description": "FormSubmitted, SurveySubmitted, AppointmentCreate, AppointmentUpdate: stored on the source and evaluated at ingest."
+          }
+        },
+        "example": {
+          "sourceType": "GHL_WEBHOOK",
+          "eventType": "OpportunityStageUpdate",
+          "pipelineId": "pipe_123",
+          "stageIds": [
+            "stage_won"
+          ],
+          "trackRevenue": true,
+          "currency": "USD"
+        }
+      },
+      "UpdateWebhookSource": {
+        "type": "object",
+        "title": "Webhook source",
+        "properties": {
+          "name": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 255
+          },
+          "isActive": {
+            "type": "boolean"
+          },
+          "fieldMappings": {
+            "$ref": "#/components/schemas/WebhookFieldMappings"
+          },
+          "mode": {
+            "type": "string",
+            "enum": [
+              "direct"
+            ]
+          },
+          "revenueCurrency": {
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 3
+          }
+        },
+        "description": "fieldMappings or mode replace the stored mapping in full."
+      },
+      "UpdateStripeSource": {
+        "type": "object",
+        "title": "Stripe source",
+        "properties": {
+          "name": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 255
+          },
+          "isActive": {
+            "type": "boolean"
+          },
+          "webhookEvent": {
+            "type": "string"
+          },
+          "accountFilter": {
+            "type": "array",
+            "nullable": true,
+            "items": {
+              "type": "string"
+            }
+          },
+          "productFilter": {
+            "type": "array",
+            "nullable": true,
+            "items": {
+              "type": "string"
+            }
+          },
+          "qualificationRules": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/QualificationRules"
+              }
+            ],
+            "nullable": true,
+            "description": "null clears the rules."
+          }
+        },
+        "description": "Merge patch over the stored event and filters: an omitted filter is kept, null clears it."
+      },
+      "UpdateGhlSource": {
+        "type": "object",
+        "title": "GoHighLevel source",
+        "properties": {
+          "name": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 255
+          },
+          "isActive": {
+            "type": "boolean"
+          },
+          "eventType": {
+            "type": "string",
+            "enum": [
+              "FormSubmitted",
+              "SurveySubmitted",
+              "AppointmentCreate",
+              "AppointmentUpdate",
+              "OpportunityStageUpdate",
+              "OpportunityStatusUpdate"
+            ]
+          },
+          "ghlConnectionId": {
+            "type": "string",
+            "format": "uuid",
+            "description": "Which connected sub-account. Omitted means the primary connection (see GET .../source-options/ghl)."
+          },
+          "formId": {
+            "type": "string",
+            "description": "FormSubmitted: the GoHighLevel form id. Names are resolved server-side; an unknown id is a 400."
+          },
+          "surveyId": {
+            "type": "string",
+            "description": "SurveySubmitted: the GoHighLevel survey id."
+          },
+          "calendarIds": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "AppointmentCreate / AppointmentUpdate: calendar ids. Omitted or empty means every calendar."
+          },
+          "appointmentStatuses": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "new",
+                "confirmed",
+                "showed",
+                "noshow",
+                "cancelled",
+                "invalid"
+              ]
+            },
+            "description": "AppointmentUpdate: required, at least one."
+          },
+          "pipelineId": {
+            "type": "string",
+            "description": "OpportunityStageUpdate / OpportunityStatusUpdate: the pipeline id."
+          },
+          "stageIds": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "OpportunityStageUpdate: required, at least one stage in that pipeline."
+          },
+          "opportunityStatuses": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "open",
+                "won",
+                "lost",
+                "abandoned"
+              ]
+            },
+            "description": "OpportunityStatusUpdate: required, at least one."
+          },
+          "trackRevenue": {
+            "type": "boolean",
+            "description": "Opportunity events: record the opportunity value as revenue."
+          },
+          "dedupOneEntryPerStage": {
+            "type": "boolean",
+            "description": "OpportunityStageUpdate: one conversion per opportunity and stage; re-entries collapse."
+          },
+          "currency": {
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 3,
+            "description": "Opportunity events with trackRevenue: ISO 4217 code. Unknown codes fall back to USD."
+          },
+          "qualificationRules": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/QualificationRules"
+              }
+            ],
+            "nullable": true,
+            "description": "null clears the rules."
+          }
+        },
+        "description": "Merge patch over the stored event: omitted fields are kept, then the event is re-validated and the source renamed as on create."
+      },
+      "UpdateBasicSource": {
+        "type": "object",
+        "title": "Any other source type",
+        "properties": {
+          "name": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 255
+          },
+          "isActive": {
+            "type": "boolean"
+          }
+        },
+        "description": "Sources created from the dashboard for other integrations accept name and isActive only."
+      },
+      "ConversionSourceOptions": {
+        "type": "object",
+        "description": "Shape depends on the integration. stripe: events[] and accounts[]. typeform: connected and forms[]. ghl: connected, connections[], eventTypes[], appointmentStatuses[], opportunityStatuses[], forms[], surveys[], calendars[], pipelines[] (with stages[]), products[]. close: connected, eventTypes[], forms[], pipelines[] (with statuses[]). shopify: connected, authMode (oauth or manual), shopDomain, events[] (topic, displayName, eventType, sourceType, requiresPlus) and usedTopics[] (which topics already feed a conversion, and which). woocommerce: connected, connections[] (stores), events[], orderStatuses[] (with recommended), defaultStatusFilter[], pixelEvents[]. clickfunnels: connected, connections[], events[] (with supportsProductFilter, requiresStageFilter, supportsPipelineFilter, supportsFunnelFilter), dedupWindowSeconds bounds, and with ?connectionId= also products[], pipelines[] (with stages[]) and funnels[]. tally: connected and forms[] (refresh=true re-syncs). kajabi: connected, siteId, siteTitle, events[]. callrail: connected, accountName, companyName, events[] (with hasRevenue, supportsCallFilters). Other integrations: events[] (the accepted catalogue) plus connected and, for whop / fanbasis / calendly, connections[].",
+        "additionalProperties": true,
+        "properties": {
+          "connected": {
+            "type": "boolean",
+            "description": "typeform and ghl only."
+          },
+          "events": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "value": {
+                  "type": "string"
+                },
+                "label": {
+                  "type": "string"
+                },
+                "description": {
+                  "type": "string"
+                },
+                "category": {
+                  "type": "string"
+                },
+                "supportsProductFilter": {
+                  "type": "boolean"
+                },
+                "supportsAccountFilter": {
+                  "type": "boolean"
+                }
+              }
+            },
+            "description": "stripe only."
+          },
+          "accounts": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "stripeAccountId": {
+                  "type": "string"
+                },
+                "name": {
+                  "type": "string",
+                  "nullable": true
+                },
+                "livemode": {
+                  "type": "boolean"
+                },
+                "status": {
+                  "type": "string"
+                },
+                "isPrimary": {
+                  "type": "boolean"
+                }
+              }
+            },
+            "description": "stripe only."
+          },
+          "forms": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "additionalProperties": true
+            }
+          },
+          "surveys": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "additionalProperties": true
+            },
+            "description": "ghl only."
+          },
+          "calendars": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "additionalProperties": true
+            },
+            "description": "ghl only."
+          },
+          "pipelines": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "additionalProperties": true
+            },
+            "description": "ghl only; each carries stages[]."
+          },
+          "products": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "additionalProperties": true
+            },
+            "description": "ghl only."
+          },
+          "connections": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "additionalProperties": true
+            },
+            "description": "ghl only: the connected sub-accounts and which is primary."
+          },
+          "eventTypes": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "additionalProperties": true
+            },
+            "description": "ghl only."
+          },
+          "syncErrors": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "string"
+            },
+            "description": "Present when refresh=true and a sync failed; the cached data is still returned."
+          }
+        }
+      },
+      "QualificationRules": {
+        "type": "object",
+        "description": "Lead-qualification rules, the same shape the dashboard stores. A conversion is recorded only when the rules pass. On update, null clears them.",
+        "required": [
+          "enabled",
+          "logic",
+          "rules"
+        ],
+        "properties": {
+          "enabled": {
+            "type": "boolean"
+          },
+          "logic": {
+            "type": "string",
+            "enum": [
+              "AND",
+              "OR"
+            ]
+          },
+          "rules": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": [
+                "id",
+                "fieldId",
+                "operator",
+                "value"
+              ],
+              "properties": {
+                "id": {
+                  "type": "string",
+                  "description": "Any stable id you choose for the rule."
+                },
+                "fieldId": {
+                  "type": "string",
+                  "description": "The field the rule reads (a form question id, a GHL custom field id, a Stripe payment field)."
+                },
+                "operator": {
+                  "type": "string",
+                  "enum": [
+                    "equals",
+                    "not_equals",
+                    "greater_than",
+                    "less_than",
+                    "greater_than_or_equal",
+                    "less_than_or_equal",
+                    "contains",
+                    "not_contains",
+                    "starts_with",
+                    "ends_with",
+                    "is_empty",
+                    "is_not_empty"
+                  ]
+                },
+                "value": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "outcomeFilter": {
+            "type": "object",
+            "properties": {
+              "enabled": {
+                "type": "boolean"
+              },
+              "minScore": {
+                "type": "number"
+              },
+              "maxScore": {
+                "type": "number"
+              }
+            }
+          }
+        },
+        "example": {
+          "enabled": true,
+          "logic": "AND",
+          "rules": [
+            {
+              "id": "r1",
+              "fieldId": "budget",
+              "operator": "greater_than_or_equal",
+              "value": "5000"
+            }
+          ]
+        }
+      },
+      "UpdateTypeformSource": {
+        "type": "object",
+        "title": "Typeform source",
+        "properties": {
+          "name": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 255
+          },
+          "isActive": {
+            "type": "boolean"
+          },
+          "qualificationRules": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/QualificationRules"
+              }
+            ],
+            "nullable": true,
+            "description": "null clears the rules."
+          }
+        }
+      },
+      "CreateCloseSource": {
+        "type": "object",
+        "title": "Close source",
+        "required": [
+          "sourceType",
+          "eventType"
+        ],
+        "properties": {
+          "sourceType": {
+            "type": "string",
+            "enum": [
+              "CLOSE_WEBHOOK"
+            ]
+          },
+          "eventType": {
+            "type": "string",
+            "enum": [
+              "FormSubmitted",
+              "OpportunityWon",
+              "OpportunityStageChange",
+              "MeetingScheduled",
+              "MeetingCompleted",
+              "CallCompleted",
+              "ContactCreated",
+              "ContactUpdated",
+              "CustomActivity"
+            ]
+          },
+          "formId": {
+            "type": "string",
+            "description": "FormSubmitted: the Close form id (see GET .../source-options/close). Names are resolved server-side."
+          },
+          "pipelineId": {
+            "type": "string",
+            "description": "OpportunityWon / OpportunityStageChange: the Close pipeline id."
+          },
+          "statusIds": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "OpportunityWon: optional narrowing to these statuses (omitted = every won status). OpportunityStageChange: required, at least one status in that pipeline."
+          },
+          "customActivityTypeId": {
+            "type": "string",
+            "description": "CustomActivity: optional narrowing to one activity type. Omitted = every custom activity."
+          },
+          "customActivityTypeName": {
+            "type": "string",
+            "description": "CustomActivity: label for the activity type; Close exposes no mirror to resolve it from."
+          },
+          "trackRevenue": {
+            "type": "boolean",
+            "default": true,
+            "description": "Opportunity events: record the opportunity value as revenue."
+          }
+        },
+        "example": {
+          "sourceType": "CLOSE_WEBHOOK",
+          "eventType": "OpportunityStageChange",
+          "pipelineId": "pipe_123",
+          "statusIds": [
+            "stat_won"
+          ]
+        }
+      },
+      "UpdateCloseSource": {
+        "type": "object",
+        "title": "Close source",
+        "properties": {
+          "name": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 255
+          },
+          "isActive": {
+            "type": "boolean"
+          },
+          "eventType": {
+            "type": "string",
+            "enum": [
+              "FormSubmitted",
+              "OpportunityWon",
+              "OpportunityStageChange",
+              "MeetingScheduled",
+              "MeetingCompleted",
+              "CallCompleted",
+              "ContactCreated",
+              "ContactUpdated",
+              "CustomActivity"
+            ]
+          },
+          "formId": {
+            "type": "string",
+            "description": "FormSubmitted: the Close form id (see GET .../source-options/close). Names are resolved server-side."
+          },
+          "pipelineId": {
+            "type": "string",
+            "description": "OpportunityWon / OpportunityStageChange: the Close pipeline id."
+          },
+          "statusIds": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "OpportunityWon: optional narrowing to these statuses (omitted = every won status). OpportunityStageChange: required, at least one status in that pipeline."
+          },
+          "customActivityTypeId": {
+            "type": "string",
+            "description": "CustomActivity: optional narrowing to one activity type. Omitted = every custom activity."
+          },
+          "customActivityTypeName": {
+            "type": "string",
+            "description": "CustomActivity: label for the activity type; Close exposes no mirror to resolve it from."
+          },
+          "trackRevenue": {
+            "type": "boolean",
+            "default": true,
+            "description": "Opportunity events: record the opportunity value as revenue."
+          }
+        },
+        "description": "Merge patch over the stored event: omitted fields are kept, then the event is re-validated and the source renamed as on create."
+      },
+      "CreatePayPalSource": {
+        "type": "object",
+        "title": "PayPal source",
+        "required": [
+          "sourceType",
+          "webhookEvent"
+        ],
+        "properties": {
+          "sourceType": {
+            "type": "string",
+            "enum": [
+              "PAYPAL_WEBHOOK"
+            ]
+          },
+          "webhookEvent": {
+            "type": "string",
+            "description": "From GET .../source-options/paypal, for example PAYMENT.CAPTURE.COMPLETED or PAYMENT.CAPTURE.COMPLETED.first (first payment Cortana has seen; PayPal cannot verify prior purchases)."
+          },
+          "accountFilter": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "PayPal merchant ids; omitted or null = every account.",
+            "nullable": true
+          },
+          "productFilter": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "nullable": true
+          },
+          "qualificationRules": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/QualificationRules"
+              }
+            ]
+          }
+        },
+        "example": {
+          "sourceType": "PAYPAL_WEBHOOK",
+          "webhookEvent": "PAYMENT.CAPTURE.COMPLETED"
+        }
+      },
+      "UpdatePayPalSource": {
+        "type": "object",
+        "title": "PayPal source",
+        "properties": {
+          "name": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 255
+          },
+          "isActive": {
+            "type": "boolean"
+          },
+          "webhookEvent": {
+            "type": "string"
+          },
+          "accountFilter": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "nullable": true
+          },
+          "productFilter": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "nullable": true
+          },
+          "qualificationRules": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/QualificationRules"
+              }
+            ],
+            "nullable": true,
+            "description": "null clears the rules."
+          }
+        },
+        "description": "Merge patch over the stored configuration; omitted fields are kept and the source is re-validated and renamed as on create."
+      },
+      "CreateWhopSource": {
+        "type": "object",
+        "title": "Whop source",
+        "required": [
+          "sourceType",
+          "webhookEvent"
+        ],
+        "properties": {
+          "sourceType": {
+            "type": "string",
+            "enum": [
+              "WHOP_WEBHOOK"
+            ]
+          },
+          "whopConnectionId": {
+            "type": "string",
+            "format": "uuid",
+            "description": "Which Whop connection (GET .../source-options/whop). May be omitted when the business has exactly one."
+          },
+          "webhookEvent": {
+            "type": "string",
+            "description": "payment.succeeded, payment.succeeded.first, membership.went_valid, membership.went_invalid, membership.updated."
+          },
+          "productFilter": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Whop product ids; a filtered source shares its webhook with the unfiltered one.",
+            "nullable": true
+          },
+          "qualificationRules": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/QualificationRules"
+              }
+            ]
+          }
+        },
+        "example": {
+          "sourceType": "WHOP_WEBHOOK",
+          "webhookEvent": "payment.succeeded.first"
+        },
+        "description": "Creating a Whop source switches conversions on for an ads-only connection and registers a webhook for the event on a best-effort basis, exactly as the dashboard does."
+      },
+      "UpdateWhopSource": {
+        "type": "object",
+        "title": "Whop source",
+        "properties": {
+          "name": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 255
+          },
+          "isActive": {
+            "type": "boolean"
+          },
+          "whopConnectionId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "webhookEvent": {
+            "type": "string"
+          },
+          "productFilter": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "nullable": true
+          },
+          "qualificationRules": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/QualificationRules"
+              }
+            ],
+            "nullable": true,
+            "description": "null clears the rules."
+          }
+        },
+        "description": "Merge patch over the stored configuration; omitted fields are kept and the source is re-validated and renamed as on create."
+      },
+      "CreateFanbasisSource": {
+        "type": "object",
+        "title": "Fanbasis source",
+        "required": [
+          "sourceType",
+          "webhookEvent"
+        ],
+        "properties": {
+          "sourceType": {
+            "type": "string",
+            "enum": [
+              "FANBASIS_WEBHOOK"
+            ]
+          },
+          "fanbasisConnectionId": {
+            "type": "string",
+            "format": "uuid",
+            "description": "Which Fanbasis connection (GET .../source-options/fanbasis). May be omitted when the business has exactly one."
+          },
+          "webhookEvent": {
+            "type": "string",
+            "description": "A conversion-eligible Fanbasis event, for example payment.succeeded, payment.succeeded.first, payment.refunded, subscription.created."
+          },
+          "productFilter": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Only on events that support it.",
+            "nullable": true
+          },
+          "qualificationRules": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/QualificationRules"
+              }
+            ]
+          },
+          "name": {
+            "type": "string",
+            "maxLength": 255
+          }
+        },
+        "example": {
+          "sourceType": "FANBASIS_WEBHOOK",
+          "webhookEvent": "payment.succeeded"
+        }
+      },
+      "UpdateFanbasisSource": {
+        "type": "object",
+        "title": "Fanbasis source",
+        "properties": {
+          "name": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 255
+          },
+          "isActive": {
+            "type": "boolean"
+          },
+          "webhookEvent": {
+            "type": "string"
+          },
+          "productFilter": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "nullable": true
+          },
+          "qualificationRules": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/QualificationRules"
+              }
+            ],
+            "nullable": true,
+            "description": "null clears the rules."
+          }
+        },
+        "description": "Merge patch over the stored configuration; omitted fields are kept and the source is re-validated and renamed as on create."
+      },
+      "CreateCalendlySource": {
+        "type": "object",
+        "title": "Calendly source",
+        "required": [
+          "sourceType",
+          "webhookEvent",
+          "eventTypeUris"
+        ],
+        "properties": {
+          "sourceType": {
+            "type": "string",
+            "enum": [
+              "CALENDLY_WEBHOOK"
+            ]
+          },
+          "webhookEvent": {
+            "type": "string",
+            "enum": [
+              "invitee.created",
+              "invitee.canceled"
+            ]
+          },
+          "eventTypeUris": {
+            "type": "array",
+            "minItems": 1,
+            "items": {
+              "type": "object",
+              "required": [
+                "uri",
+                "name"
+              ],
+              "properties": {
+                "uri": {
+                  "type": "string"
+                },
+                "name": {
+                  "type": "string"
+                }
+              }
+            },
+            "description": "The Calendly event types (calendars) to track. A calendar can be tracked once per event across the business."
+          },
+          "calendlyConnectionId": {
+            "type": "string",
+            "format": "uuid",
+            "description": "Which Calendly account (GET .../source-options/calendly). May be omitted when the business has exactly one; required otherwise."
+          }
+        },
+        "example": {
+          "sourceType": "CALENDLY_WEBHOOK",
+          "webhookEvent": "invitee.created",
+          "eventTypeUris": [
+            {
+              "uri": "https://api.calendly.com/event_types/ABC",
+              "name": "Discovery Call"
+            }
+          ]
+        }
+      },
+      "UpdateCalendlySource": {
+        "type": "object",
+        "title": "Calendly source",
+        "properties": {
+          "name": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 255
+          },
+          "isActive": {
+            "type": "boolean"
+          },
+          "eventTypeUris": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "uri": {
+                  "type": "string"
+                },
+                "name": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        },
+        "description": "Merge patch over the stored configuration; omitted fields are kept and the source is re-validated and renamed as on create."
+      },
+      "CreateCalComSource": {
+        "type": "object",
+        "title": "CalCom source",
+        "required": [
+          "sourceType",
+          "webhookEvent"
+        ],
+        "properties": {
+          "sourceType": {
+            "type": "string",
+            "enum": [
+              "CAL_COM_WEBHOOK"
+            ]
+          },
+          "webhookEvent": {
+            "type": "string",
+            "enum": [
+              "BOOKING_CREATED",
+              "BOOKING_CANCELLED",
+              "BOOKING_RESCHEDULED"
+            ]
+          },
+          "eventTypeId": {
+            "type": "string",
+            "description": "Optional Cal.com event type id; omitted = every event type. One source per event + event type across the business."
+          },
+          "eventTypeName": {
+            "type": "string"
+          }
+        },
+        "example": {
+          "sourceType": "CAL_COM_WEBHOOK",
+          "webhookEvent": "BOOKING_CREATED"
+        }
+      },
+      "UpdateCalComSource": {
+        "type": "object",
+        "title": "CalCom source",
+        "properties": {
+          "name": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 255
+          },
+          "isActive": {
+            "type": "boolean"
+          }
+        },
+        "description": "Merge patch over the stored configuration; omitted fields are kept and the source is re-validated and renamed as on create."
+      },
+      "CreateFathomSource": {
+        "type": "object",
+        "title": "Fathom source",
+        "required": [
+          "sourceType",
+          "webhookEvent"
+        ],
+        "properties": {
+          "sourceType": {
+            "type": "string",
+            "enum": [
+              "FATHOM_WEBHOOK"
+            ]
+          },
+          "webhookEvent": {
+            "type": "string",
+            "enum": [
+              "meeting.recorded"
+            ],
+            "description": "One Fathom source per business."
+          }
+        },
+        "example": {
+          "sourceType": "FATHOM_WEBHOOK",
+          "webhookEvent": "meeting.recorded"
+        }
+      },
+      "UpdateFathomSource": {
+        "type": "object",
+        "title": "Fathom source",
+        "properties": {
+          "name": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 255
+          },
+          "isActive": {
+            "type": "boolean"
+          }
+        },
+        "description": "Merge patch over the stored configuration; omitted fields are kept and the source is re-validated and renamed as on create."
+      },
+      "CreateHubSpotSource": {
+        "type": "object",
+        "title": "HubSpot source",
+        "required": [
+          "sourceType",
+          "eventType"
+        ],
+        "properties": {
+          "sourceType": {
+            "type": "string",
+            "enum": [
+              "HUBSPOT_WEBHOOK"
+            ]
+          },
+          "eventType": {
+            "type": "string",
+            "enum": [
+              "FormSubmitted",
+              "MeetingCreated",
+              "MeetingUpdated",
+              "DealStageChange",
+              "ContactPropertyChange"
+            ]
+          },
+          "formId": {
+            "type": "string",
+            "description": "FormSubmitted: required with formName."
+          },
+          "formName": {
+            "type": "string"
+          },
+          "pipelineId": {
+            "type": "string",
+            "description": "DealStageChange: required."
+          },
+          "pipelineName": {
+            "type": "string"
+          },
+          "stageIds": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "DealStageChange: required, at least one."
+          },
+          "stageNames": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "trackRevenue": {
+            "type": "boolean"
+          },
+          "meetingLinkIds": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Meeting events: optional narrowing."
+          },
+          "meetingLinkNames": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "meetingBookingPageIds": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "meetingOrganizerIds": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "outcomeFilter": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "propertyName": {
+            "type": "string",
+            "description": "ContactPropertyChange: required."
+          },
+          "propertyLabel": {
+            "type": "string"
+          },
+          "valueMatchMode": {
+            "type": "string",
+            "enum": [
+              "any",
+              "specific"
+            ]
+          },
+          "propertyValues": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Required when valueMatchMode is specific."
+          },
+          "propertyValueLabels": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        },
+        "example": {
+          "sourceType": "HUBSPOT_WEBHOOK",
+          "eventType": "DealStageChange",
+          "pipelineId": "default",
+          "pipelineName": "Sales Pipeline",
+          "stageIds": [
+            "closedwon"
+          ],
+          "stageNames": [
+            "Closed Won"
+          ],
+          "trackRevenue": true
+        },
+        "description": "Ids and names come from your HubSpot portal; Cortana does not mirror them."
+      },
+      "UpdateHubSpotSource": {
+        "type": "object",
+        "title": "HubSpot source",
+        "properties": {
+          "name": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 255
+          },
+          "isActive": {
+            "type": "boolean"
+          },
+          "eventType": {
+            "type": "string",
+            "enum": [
+              "FormSubmitted",
+              "MeetingCreated",
+              "MeetingUpdated",
+              "DealStageChange",
+              "ContactPropertyChange"
+            ]
+          },
+          "formId": {
+            "type": "string",
+            "description": "FormSubmitted: required with formName."
+          },
+          "formName": {
+            "type": "string"
+          },
+          "pipelineId": {
+            "type": "string",
+            "description": "DealStageChange: required."
+          },
+          "pipelineName": {
+            "type": "string"
+          },
+          "stageIds": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "DealStageChange: required, at least one."
+          },
+          "stageNames": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "trackRevenue": {
+            "type": "boolean"
+          },
+          "meetingLinkIds": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Meeting events: optional narrowing."
+          },
+          "meetingLinkNames": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "meetingBookingPageIds": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "meetingOrganizerIds": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "outcomeFilter": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "propertyName": {
+            "type": "string",
+            "description": "ContactPropertyChange: required."
+          },
+          "propertyLabel": {
+            "type": "string"
+          },
+          "valueMatchMode": {
+            "type": "string",
+            "enum": [
+              "any",
+              "specific"
+            ]
+          },
+          "propertyValues": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Required when valueMatchMode is specific."
+          },
+          "propertyValueLabels": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        },
+        "description": "Merge patch over the stored configuration; omitted fields are kept and the source is re-validated and renamed as on create."
+      },
+      "CreateSalesforceSource": {
+        "type": "object",
+        "title": "Salesforce source",
+        "required": [
+          "sourceType",
+          "eventType"
+        ],
+        "properties": {
+          "sourceType": {
+            "type": "string",
+            "enum": [
+              "SALESFORCE_WEBHOOK"
+            ]
+          },
+          "eventType": {
+            "type": "string",
+            "enum": [
+              "OpportunityStageChange",
+              "LeadStageChange",
+              "LeadConversion",
+              "CampaignMemberStatus",
+              "FieldChange"
+            ]
+          },
+          "pipelineId": {
+            "type": "string"
+          },
+          "pipelineName": {
+            "type": "string"
+          },
+          "stageIds": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "OpportunityStageChange: required, at least one."
+          },
+          "stageNames": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "statusValues": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "LeadStageChange: Lead.Status values (required). CampaignMemberStatus: CampaignMember.Status values (optional)."
+          },
+          "campaignIds": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "CampaignMemberStatus: optional narrowing."
+          },
+          "respondedOnly": {
+            "type": "boolean"
+          },
+          "objectType": {
+            "type": "string",
+            "enum": [
+              "Contact",
+              "Lead"
+            ],
+            "description": "FieldChange."
+          },
+          "fieldName": {
+            "type": "string",
+            "description": "FieldChange: required."
+          },
+          "fieldValue": {
+            "type": "string"
+          },
+          "revenueField": {
+            "type": "string",
+            "nullable": true,
+            "description": "Opportunity-backed events only: the Opportunity API field to read the value from. Omit for the standard Amount."
+          },
+          "revenueDisabled": {
+            "type": "boolean",
+            "description": "Opportunity-backed events only: record no revenue."
+          }
+        },
+        "example": {
+          "sourceType": "SALESFORCE_WEBHOOK",
+          "eventType": "OpportunityStageChange",
+          "stageIds": [
+            "Closed Won"
+          ],
+          "stageNames": [
+            "Closed Won"
+          ]
+        },
+        "description": "LeadStageChange is refused when the Salesforce org is not recording Lead.Status history, because such a source could never fire. Update changes the revenue mapping only."
+      },
+      "UpdateSalesforceSource": {
+        "type": "object",
+        "title": "Salesforce source",
+        "properties": {
+          "name": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 255
+          },
+          "isActive": {
+            "type": "boolean"
+          },
+          "revenueField": {
+            "type": "string",
+            "nullable": true,
+            "description": "Omit or empty to go back to Amount."
+          },
+          "revenueDisabled": {
+            "type": "boolean"
+          }
+        },
+        "description": "Merge patch over the stored configuration; omitted fields are kept and the source is re-validated and renamed as on create."
+      },
+      "CreateIClosedSource": {
+        "type": "object",
+        "title": "IClosed source",
+        "required": [
+          "sourceType",
+          "iClosedEvent"
+        ],
+        "properties": {
+          "sourceType": {
+            "type": "string",
+            "enum": [
+              "ICLOSED_WEBHOOK"
+            ]
+          },
+          "iClosedEvent": {
+            "type": "string",
+            "enum": [
+              "contact.created",
+              "contact.status_changed.qualified",
+              "contact.status_changed.disqualified",
+              "call.booked",
+              "call.cancelled",
+              "call.rescheduled",
+              "call.outcome_added"
+            ]
+          },
+          "name": {
+            "type": "string",
+            "maxLength": 255
+          },
+          "iClosedEventIds": {
+            "type": "array",
+            "items": {
+              "oneOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "number"
+                }
+              ]
+            },
+            "description": "call.booked and Lead Generated: calendar or funnel ids; empty = all."
+          },
+          "iClosedEventNames": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "iClosedOutcomes": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "call.outcome_added: outcome allow-list (WON, NO_SALE, ...); empty = all."
+          },
+          "trackRevenue": {
+            "type": "boolean",
+            "description": "call.outcome_added: store the closed deal value as revenue."
+          },
+          "currency": {
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 3
+          },
+          "qualificationRules": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/QualificationRules"
+              }
+            ],
+            "description": "Lead Generated and call.booked only."
+          }
+        },
+        "example": {
+          "sourceType": "ICLOSED_WEBHOOK",
+          "iClosedEvent": "call.outcome_added",
+          "iClosedOutcomes": [
+            "WON"
+          ],
+          "trackRevenue": true,
+          "currency": "USD"
+        },
+        "description": "The event is locked on update; filters are replaced wholesale."
+      },
+      "UpdateIClosedSource": {
+        "type": "object",
+        "title": "IClosed source",
+        "properties": {
+          "name": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 255
+          },
+          "isActive": {
+            "type": "boolean"
+          },
+          "iClosedEventIds": {
+            "type": "array",
+            "items": {
+              "oneOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "number"
+                }
+              ]
+            }
+          },
+          "iClosedEventNames": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "iClosedOutcomes": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "trackRevenue": {
+            "type": "boolean"
+          },
+          "currency": {
+            "type": "string"
+          },
+          "qualificationRules": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/QualificationRules"
+              }
+            ],
+            "nullable": true,
+            "description": "null clears the rules."
+          }
+        },
+        "description": "Merge patch over the stored configuration; omitted fields are kept and the source is re-validated and renamed as on create."
+      },
+      "CreateShopierSource": {
+        "type": "object",
+        "title": "Shopier source",
+        "required": [
+          "sourceType",
+          "paymentScope"
+        ],
+        "properties": {
+          "sourceType": {
+            "type": "string",
+            "enum": [
+              "SHOPIER"
+            ]
+          },
+          "paymentScope": {
+            "type": "string",
+            "enum": [
+              "all_payments",
+              "first_payment"
+            ]
+          },
+          "name": {
+            "type": "string",
+            "maxLength": 255
+          }
+        },
+        "example": {
+          "sourceType": "SHOPIER",
+          "paymentScope": "all_payments"
+        }
+      },
+      "UpdateShopierSource": {
+        "type": "object",
+        "title": "Shopier source",
+        "properties": {
+          "name": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 255
+          },
+          "isActive": {
+            "type": "boolean"
+          },
+          "paymentScope": {
+            "type": "string",
+            "enum": [
+              "all_payments",
+              "first_payment"
+            ]
+          }
+        },
+        "description": "Merge patch over the stored configuration; omitted fields are kept and the source is re-validated and renamed as on create."
+      },
+      "CreateShopifySource": {
+        "type": "object",
+        "title": "Shopify source",
+        "required": [
+          "sourceType",
+          "webhookTopic"
+        ],
+        "properties": {
+          "sourceType": {
+            "type": "string",
+            "enum": [
+              "SHOPIFY_WEBHOOK",
+              "SHOPIFY_PIXEL"
+            ],
+            "description": "SHOPIFY_WEBHOOK for server-side topics (orders/paid, checkouts/create, ...), SHOPIFY_PIXEL for storefront pixel topics (product_viewed, product_added_to_cart). Each topic belongs to one of the two; GET .../source-options/shopify lists the sourceType per topic and a mismatch is a 400."
+          },
+          "webhookTopic": {
+            "type": "string",
+            "description": "A Shopify topic from the catalogue: product_viewed, product_added_to_cart, carts/create, carts/update, checkouts/create, checkouts/update, checkouts/delete, orders/create, orders/paid, orders/fulfilled, orders/cancelled, refunds/create. carts/* need Shopify Plus (403 otherwise)."
+          }
+        },
+        "example": {
+          "sourceType": "SHOPIFY_WEBHOOK",
+          "webhookTopic": "orders/paid"
+        },
+        "description": "One topic feeds one conversion, business-wide (409 names the conversion that already tracks it). For a shop connected through OAuth the webhook is registered in Shopify before the source is created; a manual-install shop registers webhook topics through the dashboard's prepare and test-event steps and gets a 400 here, while pixel topics work for both. Deleting the source removes the Shopify webhook."
+      },
+      "UpdateShopifySource": {
+        "type": "object",
+        "title": "Shopify source",
+        "properties": {
+          "name": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 255
+          },
+          "isActive": {
+            "type": "boolean"
+          }
+        },
+        "description": "Shopify sources accept name and isActive only."
+      },
+      "CreateWooCommerceSource": {
+        "type": "object",
+        "title": "WooCommerce order source",
+        "required": [
+          "sourceType",
+          "webhookEvent",
+          "connectionId"
+        ],
+        "properties": {
+          "sourceType": {
+            "type": "string",
+            "enum": [
+              "WOOCOMMERCE_WEBHOOK"
+            ]
+          },
+          "webhookEvent": {
+            "type": "string",
+            "enum": [
+              "order.created",
+              "order.updated"
+            ]
+          },
+          "connectionId": {
+            "type": "string",
+            "format": "uuid",
+            "description": "Which connected store (GET .../source-options/woocommerce lists them). The source listens to that store only."
+          },
+          "statusFilter": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Order statuses that count (processing, completed, on-hold, ...; custom plugin statuses allowed). Omitted means the legacy ingestion gate applies. GET .../source-options/woocommerce lists the statuses and the recommended default."
+          }
+        },
+        "example": {
+          "sourceType": "WOOCOMMERCE_WEBHOOK",
+          "webhookEvent": "order.created",
+          "connectionId": "11111111-1111-4111-8111-111111111111",
+          "statusFilter": [
+            "processing",
+            "completed",
+            "on-hold"
+          ]
+        },
+        "description": "The same event for the same store may feed a conversion once (409). The source is named after the event and the store."
+      },
+      "UpdateWooCommerceSource": {
+        "type": "object",
+        "title": "WooCommerce order source",
+        "properties": {
+          "name": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 255
+          },
+          "isActive": {
+            "type": "boolean"
+          },
+          "statusFilter": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Replaces the order-status allow-list; at least one status."
+          }
+        },
+        "description": "The event and store are fixed."
+      },
+      "CreateWooCommercePixelSource": {
+        "type": "object",
+        "title": "WooCommerce pixel source",
+        "required": [
+          "sourceType",
+          "pixelEvent",
+          "connectionId"
+        ],
+        "properties": {
+          "sourceType": {
+            "type": "string",
+            "enum": [
+              "WOOCOMMERCE_PIXEL"
+            ]
+          },
+          "pixelEvent": {
+            "type": "string",
+            "enum": [
+              "view_product",
+              "cart_created",
+              "add_to_cart",
+              "cart_emptied",
+              "checkout_initiated",
+              "purchase_confirmed"
+            ],
+            "description": "A storefront event fired by the tracking pixel on the connected store."
+          },
+          "connectionId": {
+            "type": "string",
+            "format": "uuid",
+            "description": "Which connected store."
+          }
+        },
+        "example": {
+          "sourceType": "WOOCOMMERCE_PIXEL",
+          "pixelEvent": "add_to_cart",
+          "connectionId": "11111111-1111-4111-8111-111111111111"
+        }
+      },
+      "UpdateWooCommercePixelSource": {
+        "type": "object",
+        "title": "WooCommerce pixel source",
+        "properties": {
+          "name": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 255
+          },
+          "isActive": {
+            "type": "boolean"
+          }
+        },
+        "description": "WooCommerce pixel sources accept name and isActive only."
+      },
+      "CreateClickFunnelsSource": {
+        "type": "object",
+        "title": "ClickFunnels source",
+        "required": [
+          "sourceType",
+          "clickFunnelsConnectionId",
+          "webhookEvent"
+        ],
+        "properties": {
+          "sourceType": {
+            "type": "string",
+            "enum": [
+              "CLICKFUNNELS_WEBHOOK"
+            ]
+          },
+          "clickFunnelsConnectionId": {
+            "type": "string",
+            "format": "uuid",
+            "description": "Which workspace connection (GET .../source-options/clickfunnels lists them). A connection of another business is a 404."
+          },
+          "webhookEvent": {
+            "type": "string",
+            "description": "A ClickFunnels 2.0 event type: form_submission.created, appointments/scheduled_event.created, sales/opportunity.moved_stage, sales/opportunity.closed, one-time-order.completed, one-time-order.invoice.paid, subscription.first_payment_received, subscription.activated, subscription.trial_started, subscription.trial_converted, subscription.invoice.paid, orders/invoice.paid. The catalogue carries which filters each supports."
+          },
+          "productFilter": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "ClickFunnels product ids for order and subscription events; null or omitted means every product.",
+            "nullable": true
+          },
+          "pipelineId": {
+            "type": "string",
+            "nullable": true,
+            "description": "Required for sales/opportunity.moved_stage; optional scope for sales/opportunity.closed."
+          },
+          "pipelineName": {
+            "type": "string",
+            "nullable": true,
+            "description": "Shown in the source name."
+          },
+          "targetStageIds": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Required (at least one) for sales/opportunity.moved_stage.",
+            "nullable": true
+          },
+          "funnelIds": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "form_submission.created only: accept submissions from these funnels; empty means any funnel.",
+            "nullable": true
+          },
+          "dedupWindowSeconds": {
+            "type": "integer",
+            "minimum": 30,
+            "maximum": 7776000,
+            "description": "Seconds within which a repeat for the same contact is skipped. 30 to 90 days; default 30."
+          }
+        },
+        "example": {
+          "sourceType": "CLICKFUNNELS_WEBHOOK",
+          "clickFunnelsConnectionId": "11111111-1111-4111-8111-111111111111",
+          "webhookEvent": "one-time-order.completed",
+          "productFilter": [
+            "12345"
+          ]
+        },
+        "description": "The workspace's webhook endpoint is subscribed to the event before the source is created (502 if ClickFunnels refuses). The exact same source (event, connection, filters) may exist once per conversion (409). Use GET .../source-options/clickfunnels?connectionId=... to list the workspace's products, pipelines with stages, and funnels."
+      },
+      "UpdateClickFunnelsSource": {
+        "type": "object",
+        "title": "ClickFunnels source",
+        "properties": {
+          "name": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 255
+          },
+          "isActive": {
+            "type": "boolean"
+          },
+          "productFilter": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "ClickFunnels product ids for order and subscription events; null or omitted means every product.",
+            "nullable": true
+          },
+          "pipelineId": {
+            "type": "string",
+            "nullable": true,
+            "description": "Required for sales/opportunity.moved_stage; optional scope for sales/opportunity.closed."
+          },
+          "pipelineName": {
+            "type": "string",
+            "nullable": true,
+            "description": "Shown in the source name."
+          },
+          "targetStageIds": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Required (at least one) for sales/opportunity.moved_stage.",
+            "nullable": true
+          },
+          "funnelIds": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "form_submission.created only: accept submissions from these funnels; empty means any funnel.",
+            "nullable": true
+          },
+          "dedupWindowSeconds": {
+            "type": "integer",
+            "minimum": 30,
+            "maximum": 7776000,
+            "description": "Seconds within which a repeat for the same contact is skipped. 30 to 90 days; default 30."
+          }
+        },
+        "description": "A merge: an omitted filter is kept, null clears it. The event and connection are fixed. The name is rebuilt from the event, workspace and filters unless a name is sent."
+      },
+      "CreateTallySource": {
+        "type": "object",
+        "title": "Tally source",
+        "required": [
+          "sourceType",
+          "formId"
+        ],
+        "properties": {
+          "sourceType": {
+            "type": "string",
+            "enum": [
+              "TALLY_WEBHOOK"
+            ]
+          },
+          "formId": {
+            "type": "string",
+            "description": "The Tally form id (GET .../source-options/tally lists them)."
+          },
+          "fieldMappings": {
+            "type": "object",
+            "additionalProperties": true,
+            "description": "Tally-side field mappings stored on the form record; omitted keeps the form's current mappings."
+          },
+          "qualificationRules": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/QualificationRules"
+              }
+            ]
+          }
+        },
+        "example": {
+          "sourceType": "TALLY_WEBHOOK",
+          "formId": "WOPdQL"
+        },
+        "description": "Registers a webhook for the form in Tally before the source is created (502 if Tally refuses) and marks the form selected. One source per form per conversion (409). The source is named after the form."
+      },
+      "UpdateTallySource": {
+        "type": "object",
+        "title": "Tally source",
+        "properties": {
+          "name": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 255
+          },
+          "isActive": {
+            "type": "boolean"
+          },
+          "qualificationRules": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/QualificationRules"
+              }
+            ],
+            "nullable": true,
+            "description": "Replaces the rules on this source; null clears them."
+          }
+        }
+      },
+      "CreateKajabiSource": {
+        "type": "object",
+        "title": "Kajabi source",
+        "required": [
+          "sourceType",
+          "kajabiEvent"
+        ],
+        "properties": {
+          "sourceType": {
+            "type": "string",
+            "enum": [
+              "KAJABI_WEBHOOK"
+            ],
+            "description": "API type only: the source is stored as a WEBHOOK row carrying a Kajabi marker, exactly as the dashboard stores it, and the response shows sourceType WEBHOOK."
+          },
+          "kajabiEvent": {
+            "type": "string",
+            "enum": [
+              "purchase",
+              "payment_succeeded",
+              "order_created",
+              "form_submission"
+            ]
+          },
+          "name": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 255,
+            "description": "Defaults to the event's standard name (Kajabi Purchase, Kajabi Payment, Kajabi Order, Kajabi Form Submission)."
+          }
+        },
+        "example": {
+          "sourceType": "KAJABI_WEBHOOK",
+          "kajabiEvent": "purchase"
+        },
+        "description": "Registers the matching wildcard hook in Kajabi (every offer, now and later). Idempotent per conversion and name: a repeat call reuses the source and its hook URL. A rejected Kajabi key is a 400 asking for a reconnect. Once created the source updates like a webhook source."
+      },
+      "UpdateKajabiSource": {
+        "type": "object",
+        "title": "Kajabi source",
+        "properties": {
+          "name": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 255
+          },
+          "isActive": {
+            "type": "boolean"
+          }
+        },
+        "description": "Stored as a WEBHOOK row, so it accepts the webhook source update body."
+      },
+      "CreateCallRailSource": {
+        "type": "object",
+        "title": "CallRail source",
+        "required": [
+          "sourceType",
+          "eventType"
+        ],
+        "properties": {
+          "sourceType": {
+            "type": "string",
+            "enum": [
+              "CALLRAIL_WEBHOOK"
+            ]
+          },
+          "eventType": {
+            "type": "string",
+            "enum": [
+              "call_completed",
+              "call_good_lead",
+              "form_submission"
+            ],
+            "description": "call_completed is Phone Call, call_good_lead is Call marked as Good Lead, form_submission is Form Submission (CallRail's own names)."
+          },
+          "name": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 255,
+            "description": "Defaults to CallRail followed by the trigger's label."
+          },
+          "trackRevenue": {
+            "type": "boolean",
+            "description": "Phone Call and Good Lead only: record the call's value field as revenue. Default false."
+          },
+          "currency": {
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 3,
+            "description": "With trackRevenue; unknown codes fall back to USD."
+          },
+          "answeredOnly": {
+            "type": "boolean",
+            "description": "Phone Call only. Default true."
+          },
+          "minDurationSeconds": {
+            "type": "integer",
+            "minimum": 0,
+            "description": "Phone Call only. Default 0."
+          },
+          "firstTimeCallersOnly": {
+            "type": "boolean",
+            "description": "Phone Call only. Default false."
+          },
+          "includeVoicemails": {
+            "type": "boolean",
+            "description": "Phone Call only. Default false."
+          }
+        },
+        "example": {
+          "sourceType": "CALLRAIL_WEBHOOK",
+          "eventType": "call_completed",
+          "trackRevenue": true,
+          "currency": "USD",
+          "minDurationSeconds": 60
+        },
+        "description": "The source's receiver URL is installed into the company's CallRail Webhooks integration in the same request; the source is created inactive and activated only after the install succeeds (502 with CallRail's reason otherwise, nothing left behind)."
+      },
+      "UpdateCallRailSource": {
+        "type": "object",
+        "title": "CallRail source",
+        "properties": {
+          "name": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 255
+          },
+          "isActive": {
+            "type": "boolean",
+            "description": "false unsubscribes the receiver URL from CallRail (best-effort), true re-installs it."
+          },
+          "trackRevenue": {
+            "type": "boolean",
+            "description": "Phone Call and Good Lead only: record the call's value field as revenue. Default false."
+          },
+          "currency": {
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 3,
+            "description": "With trackRevenue; unknown codes fall back to USD."
+          },
+          "answeredOnly": {
+            "type": "boolean",
+            "description": "Phone Call only. Default true."
+          },
+          "minDurationSeconds": {
+            "type": "integer",
+            "minimum": 0,
+            "description": "Phone Call only. Default 0."
+          },
+          "firstTimeCallersOnly": {
+            "type": "boolean",
+            "description": "Phone Call only. Default false."
+          },
+          "includeVoicemails": {
+            "type": "boolean",
+            "description": "Phone Call only. Default false."
+          }
+        },
+        "description": "Settings are editable; the trigger is fixed. A trackRevenue change re-subscribes with the right CallRail event set. Delete unsubscribes first, then removes the source."
       }
     },
     "responses": {
@@ -10538,6 +13552,26 @@
               "type": "integer"
             },
             "description": "Unix timestamp when window resets"
+          }
+        }
+      },
+      "Forbidden": {
+        "description": "The caller may not perform this action on this resource",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/ErrorResponse"
+            }
+          }
+        }
+      },
+      "Conflict": {
+        "description": "The request conflicts with the current state of the resource (for example a duplicate name, or a delete that needs confirmation)",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/ErrorResponse"
+            }
           }
         }
       }

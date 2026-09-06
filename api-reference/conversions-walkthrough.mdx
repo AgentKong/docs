@@ -1,0 +1,391 @@
+---
+title: "Conversions walkthrough"
+description: "Create a conversion, add a webhook or an integration source, map its fields and fire it, all with curl."
+---
+
+Everything the Conversions section of the dashboard does (create a conversion, add a source, edit its field mappings, pick an event on Stripe or GoHighLevel, set qualification rules, pause, delete) can be done with plain HTTP calls. This page walks through the whole flow once, with curl. The field-by-field reference for every request lives on the endpoint pages linked along the way.
+
+## Before you start
+
+You need three things:
+
+- An API key with the `conversions:read` and `conversions:write` scopes (see [Authentication](/authentication)).
+- The `businessId` of the account you are configuring. A key can be limited to specific businesses; any other business answers `404`.
+- The base URL: `https://app.usecortana.ai/api/v1/businesses/{businessId}`.
+
+Every call below sends `Authorization: Bearer sk-ak-...` and `Content-Type: application/json`. To keep the examples short:
+
+```bash
+export CORTANA_KEY="sk-ak-your-api-key"
+export BIZ="https://app.usecortana.ai/api/v1/businesses/8c2b7c0e-2f5c-4b40-9d8a-1c2d3e4f5a6b"
+```
+
+<Note>
+  Replace the ids in the examples with your own. Ids in responses are the ones you pass to the next call.
+</Note>
+
+## Step 1: Create the conversion
+
+A conversion (the dashboard calls it a conversion config) is the event you want to count, for example "Booked Call" or "Purchase". Sources feed it.
+
+```bash
+curl -X POST "$BIZ/conversions/configs" \
+  -H "Authorization: Bearer $CORTANA_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "name": "Booked Call",
+    "description": "Discovery calls booked from any funnel",
+    "valueRequired": false
+  }'
+```
+
+```json
+{
+  "data": {
+    "id": "3f9d2c8a-6b1e-4f0c-9a7d-2e5b8c1d4f70",
+    "name": "booked_call",
+    "displayName": "Booked Call",
+    "description": "Discovery calls booked from any funnel",
+    "icon": null,
+    "isActive": true,
+    "isStandard": false,
+    "isDeletable": true,
+    "valueRequired": false,
+    "trackNewOnly": false,
+    "revenueCategory": "CASH_COLLECTED",
+    "displayOrder": 0,
+    "createdAt": "2026-09-06T14:03:21.172Z",
+    "updatedAt": "2026-09-06T14:03:21.172Z"
+  }
+}
+```
+
+`name` becomes the internal key (`booked_call`) and the label. A second create with the same name is a `409`. A config created here is active straight away, so it receives data as soon as a source exists. Keep the `id`; the examples call it `$CFG`.
+
+```bash
+export CFG="3f9d2c8a-6b1e-4f0c-9a7d-2e5b8c1d4f70"
+```
+
+Reference: [Create conversion config](/api-reference/endpoint/create-conversion-config).
+
+## Step 2: Add a webhook source
+
+A webhook source is a URL you POST to. There are two ways to tell Cortana what the fields in your payload mean.
+
+### Direct mode: your payload already uses Cortana's field names
+
+If the system sending the webhook lets you shape the body (a GoHighLevel workflow, Zapier, Make, your own code), name the fields the way Cortana expects and no mapping is needed:
+
+```bash
+curl -X POST "$BIZ/conversions/configs/$CFG/sources" \
+  -H "Authorization: Bearer $CORTANA_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "name": "GHL workflow: call booked",
+    "mode": "direct",
+    "revenueCurrency": "USD"
+  }'
+```
+
+```json
+{
+  "data": {
+    "id": "a4879012-cd10-40f6-85d8-3d7f173533b7",
+    "configId": "3f9d2c8a-6b1e-4f0c-9a7d-2e5b8c1d4f70",
+    "name": "GHL workflow: call booked",
+    "sourceType": "WEBHOOK",
+    "isActive": true,
+    "fieldMappings": {
+      "mappings": {
+        "email": "email",
+        "phone": "phone",
+        "firstName": "firstName",
+        "lastName": "lastName",
+        "revenue": "revenue",
+        "utm_source": "utm_source",
+        "utm_campaign": "utm_campaign"
+      },
+      "config": { "revenueCurrency": "USD" }
+    },
+    "webhookUrl": "https://app.usecortana.ai/api/webhook/8c2b7c0e-2f5c-4b40-9d8a-1c2d3e4f5a6b/a4879012-cd10-40f6-85d8-3d7f173533b7",
+    "totalRequests": 0,
+    "successRequests": 0,
+    "failureRequests": 0,
+    "lastUsedAt": null,
+    "createdAt": "2026-09-06T14:03:34.757Z",
+    "updatedAt": "2026-09-06T14:03:34.757Z"
+  }
+}
+```
+
+The stored mapping is the identity over every field Cortana understands (the response above is shortened). `webhookUrl` is the address to send to. `revenueCurrency` is used when a payload carries no `currency`.
+
+### Mapped mode: describe where each field lives in your payload
+
+When you cannot change the sender's body, map its paths to Cortana's fields. Keys are paths into your payload (dot notation for nested objects), values are the target field:
+
+```bash
+curl -X POST "$BIZ/conversions/configs/$CFG/sources" \
+  -H "Authorization: Bearer $CORTANA_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "name": "Booking tool webhook",
+    "fieldMappings": {
+      "mappings": {
+        "attendee.email": "email",
+        "attendee.phone_number": "phone",
+        "attendee.first_name": "firstName",
+        "attendee.last_name": "lastName",
+        "tracking.utm_source": "utm_source",
+        "tracking.utm_campaign": "utm_campaign",
+        "tracking.ad_id": "utm_ad_id",
+        "questions.budget": "custom_9d1b6d8e-0c2a-4a3d-8f1e-7b5c4d3e2f10",
+        "internal_note": "do_nothing"
+      },
+      "config": { "revenueCurrency": "EUR" }
+    }
+  }'
+```
+
+The accepted targets are: `email`, `firstName`, `lastName`, `name`, `phone`, `company`, `address`, `city`, `state`, `country`, `timezone`, `website`, `eventValue`, `revenue`, `currency`, `orderId`, `externalId`, `expense`, `occurredAt`, `utm_source`, `utm_medium`, `utm_campaign`, `utm_ad`, `utm_ad_id`, `utm_content`, `utm_term`, `fbclid`, `gclid`. Two more forms are allowed: `do_nothing` keeps a field visible in the payload viewer but ignores it, and `custom_<customFieldId>` writes to one of the business's custom fields ([list them](/api-reference/endpoint/list-custom-fields)). Any other target is a `400` that names the offending value:
+
+```json
+{
+  "error": {
+    "code": "VALIDATION_ERROR",
+    "message": "Unknown mapping target(s): lastname. Allowed: email, firstName, lastName, name, phone, company, address, city, state, country, timezone, website, eventValue, revenue, currency, orderId, externalId, expense, occurredAt, utm_source, utm_medium, utm_campaign, utm_ad, utm_ad_id, utm_content, utm_term, fbclid, gclid, do_nothing, or custom_<customFieldId>"
+  }
+}
+```
+
+<Tip>
+  You can also create the source with no mapping at all. Payloads are then stored for review and nothing is created until you PATCH a mapping in; that is the state a dashboard user is in before opening Edit Field Mappings.
+</Tip>
+
+To change a mapping later, PATCH the source. `fieldMappings` or `mode` replaces the stored mapping in full:
+
+```bash
+curl -X PATCH "$BIZ/conversions/configs/$CFG/sources/a4879012-cd10-40f6-85d8-3d7f173533b7" \
+  -H "Authorization: Bearer $CORTANA_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{ "fieldMappings": { "contact.email": "email", "contact.phone": "phone", "amount": "revenue" } }'
+```
+
+Reference: [Create conversion source](/api-reference/endpoint/create-conversion-source), [Update conversion source](/api-reference/endpoint/update-conversion-source).
+
+## Step 3: Fire the webhook
+
+Send a JSON body to the `webhookUrl` from Step 2. No API key is needed on this call; the URL itself is the credential, so treat it like one.
+
+```bash
+curl -X POST "https://app.usecortana.ai/api/webhook/8c2b7c0e-2f5c-4b40-9d8a-1c2d3e4f5a6b/a4879012-cd10-40f6-85d8-3d7f173533b7" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "email": "dana@example.com",
+    "phone": "+14243755583",
+    "firstName": "Dana",
+    "lastName": "Reyes",
+    "revenue": 1500,
+    "utm_source": "facebook",
+    "utm_campaign": "sept-launch"
+  }'
+```
+
+```json
+{
+  "success": true,
+  "conversionEntryId": "5b7a0f3c-9e2d-4c1b-8a6f-0d1e2f3a4b5c",
+  "conversionConfigId": "3f9d2c8a-6b1e-4f0c-9a7d-2e5b8c1d4f70",
+  "contactId": "c1d2e3f4-5a6b-4c7d-8e9f-0a1b2c3d4e5f",
+  "processingTime": 412
+}
+```
+
+The contact is matched or created from the identity fields, the conversion entry is recorded against the config, and attribution runs on the UTM values. Two replies mean "received but not counted": a config that is paused answers `200` with `"inactive": true`, and a source with no mapping answers `200` with `"testMode": true` and stores the payload for review.
+
+## Step 4: Add a Stripe source
+
+Integration-backed sources are created the same way, with a `sourceType` and the fields that integration needs. Ask the API what it accepts first; the answer is what the dashboard's picker shows.
+
+```bash
+curl "$BIZ/conversions/source-options/stripe" \
+  -H "Authorization: Bearer $CORTANA_KEY"
+```
+
+```json
+{
+  "data": {
+    "events": [
+      { "value": "charge.succeeded.first", "label": "First Stripe Purchase", "category": "payments", "supportsProductFilter": true, "supportsAccountFilter": true },
+      { "value": "charge.succeeded", "label": "Payment Succeeded", "category": "payments", "supportsProductFilter": true, "supportsAccountFilter": true },
+      { "value": "invoice.paid", "label": "Subscription Payment", "category": "subscriptions", "supportsProductFilter": true, "supportsAccountFilter": true }
+    ],
+    "accounts": [
+      { "stripeAccountId": "acct_1PqX2LAbCdEfGhIj", "name": "Main store", "livemode": true, "status": "connected", "isPrimary": true }
+    ]
+  }
+}
+```
+
+Create the source, here limited to one connected account and only counted when the charge is over 100:
+
+```bash
+curl -X POST "$BIZ/conversions/configs/$CFG/sources" \
+  -H "Authorization: Bearer $CORTANA_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "sourceType": "STRIPE_WEBHOOK",
+    "webhookEvent": "charge.succeeded.first",
+    "accountFilter": ["acct_1PqX2LAbCdEfGhIj"],
+    "qualificationRules": {
+      "enabled": true,
+      "logic": "AND",
+      "rules": [
+        { "id": "min-amount", "fieldId": "amount", "operator": "greater_than", "value": "100" }
+      ]
+    }
+  }'
+```
+
+```json
+{
+  "data": {
+    "id": "7c6e5d4f-3b2a-4190-8f7e-6d5c4b3a2910",
+    "configId": "3f9d2c8a-6b1e-4f0c-9a7d-2e5b8c1d4f70",
+    "name": "First Stripe Purchase",
+    "sourceType": "STRIPE_WEBHOOK",
+    "isActive": true,
+    "fieldMappings": {
+      "revenue": "data.object.amount",
+      "revenueTransform": "divide_100",
+      "currency": "data.object.currency",
+      "email": "data.object.billing_details.email",
+      "name": "data.object.billing_details.name",
+      "externalId": "data.object.id",
+      "metadata": "data.object.metadata",
+      "productId": "data.object.invoice.lines.data[0].price.product",
+      "webhookEvent": "charge.succeeded",
+      "isFirstPaymentOnly": true,
+      "accountFilter": ["acct_1PqX2LAbCdEfGhIj"],
+      "productFilter": null,
+      "qualificationRules": {
+        "enabled": true,
+        "logic": "AND",
+        "rules": [{ "id": "min-amount", "fieldId": "amount", "operator": "greater_than", "value": "100" }]
+      }
+    },
+    "webhookUrl": null
+  }
+}
+```
+
+The name comes from the event's label, and the stored mapping carries the paths Cortana reads from the Stripe event (you do not send those). `charge.succeeded.first` is stored as `charge.succeeded` with `isFirstPaymentOnly` set. Nothing has to be registered in Stripe; the connected account's events already reach Cortana. Creating the same event with the same filters and rules again is a `409`; the same event with different filters is a different source and is allowed.
+
+Filters and rules are edited as a merge: an omitted field is kept, `null` clears it.
+
+```bash
+curl -X PATCH "$BIZ/conversions/configs/$CFG/sources/7c6e5d4f-3b2a-4190-8f7e-6d5c4b3a2910" \
+  -H "Authorization: Bearer $CORTANA_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{ "productFilter": ["prod_QxYz123"], "qualificationRules": null }'
+```
+
+Reference: [Get conversion source options](/api-reference/endpoint/get-conversion-source-options).
+
+## Step 5: The same pattern for every other integration
+
+Every integration follows Step 4: `GET .../source-options/{integration}` to see the events, forms, pipelines or connections it offers, then `POST .../sources` with its `sourceType`. The most used ones:
+
+| sourceType | What to send | Notes |
+|--|--|--|
+| `GHL_WEBHOOK` | `eventType` (FormSubmitted, SurveySubmitted, AppointmentCreate, AppointmentUpdate, OpportunityStageUpdate, OpportunityStatusUpdate) plus `formId`, `surveyId`, `calendarIds`, `pipelineId` and `stageIds` as the event needs | Names resolve from the connected sub-account; `qualificationRules` for forms, surveys and appointments |
+| `TYPEFORM_WEBHOOK` | `formId`, optional `qualificationRules` | Registers the Typeform webhook for you |
+| `TALLY_WEBHOOK` | `formId`, optional `qualificationRules` | Registers the Tally webhook for you |
+| `CLOSE_WEBHOOK` | `eventType` plus `formId`, `pipelineId`, `statusIds` as needed | |
+| `SHOPIFY_WEBHOOK`, `SHOPIFY_PIXEL` | `webhookTopic` | One topic feeds one conversion; the options list says which type each topic is |
+| `WOOCOMMERCE_WEBHOOK`, `WOOCOMMERCE_PIXEL` | `webhookEvent` or `pixelEvent`, `connectionId`, optional `statusFilter` | Bound to one store |
+| `CLICKFUNNELS_WEBHOOK` | `clickFunnelsConnectionId`, `webhookEvent`, filters, `dedupWindowSeconds` | `?connectionId=` on the options call lists products, pipelines and funnels |
+| `PAYPAL_WEBHOOK`, `WHOP_WEBHOOK`, `FANBASIS_WEBHOOK` | `webhookEvent`, optional filters and `qualificationRules` | |
+| `CALENDLY_WEBHOOK`, `CAL_COM_WEBHOOK`, `FATHOM_WEBHOOK`, `HUBSPOT_WEBHOOK`, `SALESFORCE_WEBHOOK`, `ICLOSED_WEBHOOK`, `SHOPIER`, `KAJABI_WEBHOOK`, `CALLRAIL_WEBHOOK` | See the schema on the create page | |
+
+A GoHighLevel example, counting only survey submissions where the budget answer is at least 5000:
+
+```bash
+curl -X POST "$BIZ/conversions/configs/$CFG/sources" \
+  -H "Authorization: Bearer $CORTANA_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "sourceType": "GHL_WEBHOOK",
+    "eventType": "SurveySubmitted",
+    "surveyId": "hRk3mN9pQ2sT7vW1xY4z",
+    "qualificationRules": {
+      "enabled": true,
+      "logic": "OR",
+      "rules": [{ "id": "budget", "fieldId": "budget", "operator": "greater_than_or_equal", "value": "5000" }]
+    }
+  }'
+```
+
+When an integration is not connected on the business, or a form, pipeline or account id does not belong to it, the create is a `400` that says so, and nothing is created.
+
+## Step 6: Pause, rename, delete
+
+Pausing the config pauses every source under it, as the dashboard toggle does:
+
+```bash
+curl -X PATCH "$BIZ/conversions/configs/$CFG" \
+  -H "Authorization: Bearer $CORTANA_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{ "isActive": false }'
+```
+
+Renaming or pausing a single source:
+
+```bash
+curl -X PATCH "$BIZ/conversions/configs/$CFG/sources/a4879012-cd10-40f6-85d8-3d7f173533b7" \
+  -H "Authorization: Bearer $CORTANA_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{ "name": "GHL workflow: call booked (old)", "isActive": false }'
+```
+
+Deleting a source removes it and keeps its recorded conversions, still counted under the config. Integrations that registered something upstream clean it up (Shopify removes its webhook, CallRail unsubscribes, ClickFunnels re-syncs its endpoint):
+
+```bash
+curl -X DELETE "$BIZ/conversions/configs/$CFG/sources/a4879012-cd10-40f6-85d8-3d7f173533b7" \
+  -H "Authorization: Bearer $CORTANA_KEY"
+```
+
+Deleting a config that already holds conversions is refused until you confirm the count it reports:
+
+```bash
+curl -X DELETE "$BIZ/conversions/configs/$CFG" \
+  -H "Authorization: Bearer $CORTANA_KEY"
+```
+
+```json
+{
+  "error": {
+    "code": "CONFLICT",
+    "message": "This conversion holds 42 conversion entries that will be permanently deleted. Re-send with ?confirmEntryCount=42 to confirm.",
+    "details": [{ "entryCount": 42 }]
+  }
+}
+```
+
+```bash
+curl -X DELETE "$BIZ/conversions/configs/$CFG?confirmEntryCount=42" \
+  -H "Authorization: Bearer $CORTANA_KEY"
+```
+
+<Warning>
+  That delete is permanent: the config, its sources and its 42 conversion entries are gone. A conversion Cortana manages itself (the refund twin of a purchase conversion) answers `403` and stays.
+</Warning>
+
+## Errors you will meet
+
+| Status | code | When |
+|--|--|--|
+| 400 | `VALIDATION_ERROR` | A field is missing or wrong; the message names it (an unknown mapping target, a form that does not belong to the business, an event the integration does not support) |
+| 404 | `NOT_FOUND` | The business, config or source is not reachable with this key |
+| 409 | `CONFLICT` | A duplicate (same name, same event and filters, a Shopify topic another conversion already tracks) or a delete that needs `confirmEntryCount` |
+| 502 | `UPSTREAM_ERROR` | The integration refused (an expired Typeform or Shopify token, a ClickFunnels or Tally registration failure); nothing was created |
