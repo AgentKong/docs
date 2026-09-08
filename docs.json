@@ -235,6 +235,33 @@
         ]
       },
       {
+        "tab": "Forms",
+        "icon": "file-lines",
+        "groups": [
+          {
+            "group": "Getting Started",
+            "pages": [
+              "forms-overview",
+              "forms-create"
+            ]
+          },
+          {
+            "group": "Building Your Form",
+            "pages": [
+              "forms-build",
+              "forms-design"
+            ]
+          },
+          {
+            "group": "Going Live",
+            "pages": [
+              "forms-share",
+              "forms-answers"
+            ]
+          }
+        ]
+      },
+      {
         "tab": "Cortana Claw",
         "icon": "user-robot",
         "groups": [

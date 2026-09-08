@@ -1,0 +1,336 @@
+---
+title: "5) Where Your Answers Go"
+description: "What really happens after someone fills your form in, what Cortana shows you, and the two ways to get their details into your contacts."
+---
+
+{/* TODO: verify. No Loom walkthrough was supplied for this page. Add the embed + a
+    verbatim transcript inside an <Accordion title="Video transcript"> here once recorded,
+    matching the pattern used on platform/business/appointments.mdx. */}
+
+## Overview
+
+Read this page before you send your form to real people.
+
+Cortana stores every answer. It does not yet show them to you anywhere in the app.
+
+That surprises people, so this page says plainly what you get and what you do not.
+
+It also covers the two things you can add to a form so the person's details do reach your contacts.
+
+<Note>
+  **Before you start**
+
+  - You need a live form. See [Sharing Your Form](/forms-share).
+  - Fill your own form in once. Everything below is easier to follow when there is a real answer to look for.
+</Note>
+
+---
+
+## 1. What Happens When Someone Presses The Button
+
+<Steps>
+  <Step title="The answers are stored">
+    Every answer is stored against the form, straight away. Nothing is lost.
+
+    Cortana also keeps what it knows about the visit: where they came from, which ad brought them, and when they started.
+
+    A half-finished form is stored too. Cortana saves as they type, so someone who gives up part way is recorded as a partial answer rather than nothing at all.
+  </Step>
+
+  <Step title="The visit is counted">
+    Every form gets its own tracking pixel when its page is first opened. It is named after the form, such as **Form: Contact Us**.
+
+    You'll find it under **Ad Tracking**, on the **Tracking Pixels** tab.
+
+    This is where you see that your form is being looked at.
+
+    <Frame caption="Every form gets a pixel named after it, so its visits are counted like any other page.">
+      <img className="block dark:hidden" src="/images/forms/answers/01-pixels.png" alt="The Tracking Pixels tab of Ad Tracking, with a pixel card named after a form highlighted. The card is marked Active and shows the date it was made, with the tracking domain and the pixel script blurred out." />
+      <img className="hidden dark:block" src="/images/forms/answers/01-pixels-dark.png" alt="The Tracking Pixels tab of Ad Tracking, with a pixel card named after a form highlighted. The card is marked Active and shows the date it was made, with the tracking domain and the pixel script blurred out." />
+    </Frame>
+  </Step>
+
+  <Step title="Nothing else happens on its own">
+    No contact is made. No conversion is counted. Nothing is emailed to you.
+
+    Those things need setting up, and the next two sections cover them.
+  </Step>
+</Steps>
+
+<Warning>
+  **There is no screen anywhere in Cortana that shows you the answers.**
+
+  No submissions table, no export, no count of who finished, and no email when someone fills your form in.
+
+  If you need to read what people wrote, do not rely on Forms alone yet. Send people to a form that also books a call, or use a booking calendar's form instead. Both are covered below.
+
+  We would rather you knew this before you launched a campaign than after.
+</Warning>
+
+---
+
+## 2. Count Form Answers As Conversions
+
+You can tell Cortana that finishing your form counts as a conversion. Then it shows up in your ad reports next to everything else.
+
+<Steps>
+  <Step title="Open Conversion Setup">
+    Go to **Ad Tracking** in the menu on the left, then the **Conversion Setup** tab.
+
+    You'll see your list of conversion events. Each row is one thing you count, such as a lead or a purchase.
+
+    <Frame caption="Conversion Setup. Each row is one thing you count in your ad reports.">
+      <img className="block dark:hidden" src="/images/forms/answers/02-conversion-setup.png" alt="The Ad Tracking area with the Conversion Setup tab highlighted, showing a table of conversion events with their status, name, recent activity, last event and number of sources." />
+      <img className="hidden dark:block" src="/images/forms/answers/02-conversion-setup-dark.png" alt="The Ad Tracking area with the Conversion Setup tab highlighted, showing a table of conversion events with their status, name, recent activity, last event and number of sources." />
+    </Frame>
+  </Step>
+
+  <Step title="Add a source to a conversion event">
+    Click the name of the conversion event you want your form to feed. Use **Add Custom Event** first if you need a new one.
+
+    In the box that opens, scroll to **Sources** and click **Add Source**.
+
+    <Frame caption="A conversion event holds sources. A source is one place its conversions come from.">
+      <img className="block dark:hidden" src="/images/forms/answers/03-add-source.png" alt="The Edit Conversion box with the Add Source button highlighted in its Sources section, above a line reading no sources created yet." />
+      <img className="hidden dark:block" src="/images/forms/answers/03-add-source-dark.png" alt="The Edit Conversion box with the Add Source button highlighted in its Sources section, above a line reading no sources created yet." />
+    </Frame>
+  </Step>
+
+  <Step title="Choose Cortana Forms">
+    In **Create Conversion Source**, open the **Integration** list and pick **Cortana Forms**.
+  </Step>
+
+  <Step title="Pick the event and the forms">
+    **What counts as a conversion?** offers two things.
+
+    - **Partial Submission**, described as *started, never finished*.
+    - **Form Submission**, described as *completed and sent*.
+
+    Each source tracks one of them. Make a second conversion event if you want both.
+
+    Then tick the forms this event should count under **Which forms to track?**. A form that is still off is marked **draft**, and counts nothing until you turn it on.
+
+    Click **Submit**.
+
+    <Frame caption="Pick what counts, then tick the forms. Only ticked forms feed this event.">
+      <img className="block dark:hidden" src="/images/forms/answers/04-cortana-form-source.png" alt="The Create Conversion Source box with Cortana Forms chosen as the integration, Form Submission chosen as the event, and the Which forms to track list highlighted, showing tickboxes beside each form name with draft labels on the ones that are off." />
+      <img className="hidden dark:block" src="/images/forms/answers/04-cortana-form-source-dark.png" alt="The Create Conversion Source box with Cortana Forms chosen as the integration, Form Submission chosen as the event, and the Which forms to track list highlighted, showing tickboxes beside each form name with draft labels on the ones that are off." />
+    </Frame>
+  </Step>
+</Steps>
+
+<Warning>
+  **This will not count anything on a form you built in Forms today.**
+
+  A conversion needs a person, and a person needs an email address or a phone number.
+
+  A form you build in the Forms builder never hands Cortana either one, even when you put an **Email** question on it. We tested this on a live form and no contact and no conversion were made.
+
+  So set the source up if you like, but expect it to sit at zero until this is fixed. The next section is the way round it.
+</Warning>
+
+<Note>
+  **This is a real gap, not a setting you have missed.**
+
+  When you add an **Email** question, the picker says *Validated, maps onto the contact*. Nothing in the builder actually makes that connection.
+
+  It works on a booking calendar's form because that builder picks its questions from your contact fields. The Forms builder has no such control.
+</Note>
+
+---
+
+## 3. Get The Person Into Your Contacts
+
+There are two ways that work today. Both are tested.
+
+<Steps>
+  <Step title="Add a Scheduler step to your form">
+    Add a **Scheduler** question and point it at one of your booking calendars.
+
+    The booking page appears inside your form. It brings its own questions, and those are joined to your contact fields.
+
+    So someone who books becomes a contact and an appointment. That calendar's own confirmation email goes out too, exactly as it would for any booking.
+
+    The form then shows **Your time is booked.**
+
+    You'll find the booking under **Appointments**, on the **Business Cal** tab and in **Events → Appointment Booked**.
+
+    It is counted as a booking, not as a form answer. So it still does not make a **Cortana Forms** conversion source count anything.
+  </Step>
+
+  <Step title="Or use a booking calendar's own form instead">
+    If you do not need a standalone web page, build the questions on a booking calendar instead of here.
+
+    A booking calendar's form picks its questions from your contact fields, so every answer lands on the person's record.
+
+    See [Creating Your Booking Calendar](/cal-calendars) for that.
+  </Step>
+</Steps>
+
+<Note>
+  **A form can be shared with a booking calendar.**
+
+  A form you build here can be attached to a booking calendar. When it is, the card in the Forms list says how many calendars use it.
+
+  Editing that form then changes every calendar using it. That is also why Cortana refuses to archive it while a calendar still points at it.
+</Note>
+
+---
+
+## 4. What A Payment Step Does
+
+A **Payment** question charges the card inside the form, on your own Stripe or Whop account. Cortana takes 0%.
+
+The money goes to your own account. So you see it in your Stripe or Whop dashboard, like any other charge.
+
+{/* TODO: verify: an end-to-end Cortana Forms payment, and whether it creates a contact or a
+    conversion. Not tested, because it needs a real card on the live Stripe account. */}
+
+---
+
+## 5. What A Signature Step Does
+
+A **Signature** question keeps more than the drawing.
+
+Cortana stores four things. The picture of the signature. The wording you set under **What are they agreeing to?**. The date. And a fingerprint of the exact questions and answers that were on screen.
+
+That fingerprint cannot be changed afterwards, and neither can the record. It exists so "I never agreed to that" can be answered.
+
+{/* TODO: verify: where a signature record can be read back from, if anywhere. No screen in the
+    app was found that lists them. */}
+
+---
+
+## Settings Reference
+
+The controls that decide what happens to an answer. None of them live in the form builder.
+
+| Setting | Where it lives | What it does | Default | We recommend | Watch out for |
+| --- | --- | --- | --- | --- | --- |
+| **Cortana Forms** source | Ad Tracking → Conversion Setup → a conversion → **Add Source** | Makes form answers count towards that conversion event. | Not set up | Set it up now so it works the day the contact gap is fixed. | Counts nothing today, because a form built in Forms never supplies an email or phone. |
+| **What counts as a conversion?** | The same box | **Partial Submission** *(started, never finished)* or **Form Submission** *(completed and sent)*. | Nothing chosen | **Form Submission** unless you are chasing people who gave up. | One source tracks one of them. Make a second conversion event for the other. |
+| **Which forms to track?** | The same box | The forms this event counts. | None ticked | Tick only the forms that really mean a lead. | A form marked **draft** is off, so it can never fire. |
+| **Form pixel** | Ad Tracking → Tracking Pixels | Counts visits to the form's page and ties them to the ad they came from. | Made on its own the first time the page is opened | Nothing to do. It looks after itself. | Named **Form: your form name**. Do not delete it. |
+| **Scheduler question** | The form builder, **Add a question → Scheduler** | Puts a booking calendar inside the form. Booking there makes a contact and an appointment. | Not on a form | Add one if you need the person's details in Cortana today. | The booking page brings its own questions. Yours are separate from them. |
+| **Payment question** | The form builder, **Add a question → Payment** | Charges the card inside the form, on your own account. | Not on a form | Only Stripe and Whop. Nothing else can be used. | The money lands in your own account, so check it there. |
+
+---
+
+## Troubleshooting
+
+<AccordionGroup>
+  <Accordion title="Where do I see the answers people gave?">
+    Nowhere in Cortana today. There is no submissions screen, no export and no email.
+
+    Add a **Scheduler** step, or build your questions on a booking calendar instead. Both put real records in front of you.
+  </Accordion>
+
+  <Accordion title="My conversion source shows zero, but people are filling the form in">
+    That is expected today. A conversion needs an email address or a phone number, and a form built in Forms does not hand Cortana either.
+
+    The source is set up correctly. It has nothing to count yet.
+  </Accordion>
+
+  <Accordion title="Nobody appeared in my Contacts after a submission">
+    Same cause. Filling in a form on its own does not make a contact today.
+
+    Add a **Scheduler** step to the form. Someone who books through it does become a contact.
+  </Accordion>
+
+  <Accordion title="I cannot see any numbers for my form">
+    Forms itself shows none. No submission count, no conversion rate and no funnel for a single form.
+
+    The nearest thing is the form's own pixel under **Ad Tracking → Tracking Pixels**, which counts visits to its page.
+  </Accordion>
+
+  <Accordion title="The Which forms to track list shows my form as draft">
+    The form is off. Turn it on from its card in the Forms list, or from the switch at the top of the builder.
+
+    A form that is off has no page, so nothing can ever be submitted on it.
+  </Accordion>
+
+  <Accordion title="I connected Fanbasis or PayPal but Payment will not offer it">
+    Forms can only take money through **Stripe** and **Whop**.
+
+    Any other processor you have connected is used elsewhere in Cortana, but not by a form.
+  </Accordion>
+
+  <Accordion title="The Payment question says no processor is connected">
+    The business has no connected Stripe or Whop account.
+
+    Connect one in **Settings**, then reopen the question. Only accounts that are really connected are offered, so a half-finished setup will not show.
+  </Accordion>
+</AccordionGroup>
+
+---
+
+## FAQ
+
+<AccordionGroup>
+  <Accordion title="Are my answers safe, even though I cannot see them?">
+    Yes. Every answer is stored the moment it is sent, and half-finished ones are stored too.
+
+    You cannot read them in the app yet. That is a missing screen, not missing data.
+  </Accordion>
+
+  <Accordion title="Can I get an email when someone fills my form in?">
+    No. A form sends nothing to you.
+
+    A **Scheduler** step does send a confirmation email, but to the person who booked, not to you.
+  </Accordion>
+
+  <Accordion title="Can I export my answers to a spreadsheet?">
+    No. There is no export in Forms.
+  </Accordion>
+
+  <Accordion title="Can I read the answers through the API?">
+    Not these ones. The **Form Submissions** part of the API returns booking form fills, from booking calendars.
+
+    A form you build in Forms is a different thing and is not in that list.
+  </Accordion>
+
+  <Accordion title="Do form answers save onto a person's record?">
+    Not from a form you build here.
+
+    They do from a booking calendar's form. That builder picks its questions from your contact fields, so each answer knows where it belongs.
+  </Accordion>
+
+  <Accordion title="Does the form know which ad someone came from?">
+    Yes. The form's page carries its own pixel, and the website code carries your ad link's tracking tags across.
+
+    So the visit is attributed properly. It is the step after, turning that visit into a person, that is missing.
+  </Accordion>
+
+  <Accordion title="What is a partial submission?">
+    Someone who started answering and never pressed the button at the end.
+
+    Cortana stores what they typed as they typed it, so an abandoned form is not simply lost. You can count those as their own conversion event.
+  </Accordion>
+
+  <Accordion title="Does a payment through a form cost me anything extra?">
+    No. The builder says *Charged on your own Stripe account. Cortana takes 0%.*
+
+    Your processor's own fees still apply, as they would anywhere else.
+  </Accordion>
+</AccordionGroup>
+
+---
+
+## Next Steps
+
+<CardGroup cols={2}>
+  <Card title="1) Creating Your Booking Calendar" icon="calendar-plus" href="/cal-calendars">
+    Build your questions on a booking calendar instead, so every answer lands on the person's record.
+  </Card>
+  <Card title="4) Sharing Your Form" icon="share-nodes" href="/forms-share">
+    Back to turning the form on, the link, and the website code.
+  </Card>
+  <Card title="2) Building Your Form" icon="list-check" href="/forms-build">
+    Back to the questions, including the Scheduler and Payment steps.
+  </Card>
+  <Card title="Conversion Setup" icon="bullseye-arrow" href="/4-conversion-setup">
+    The full guide to conversion events and the sources that feed them.
+  </Card>
+</CardGroup>
+
+If any of this does not match what you see on screen, message the support team using the button in the bottom right.
