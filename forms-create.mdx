@@ -136,14 +136,14 @@ Cortana can rebuild a form you already have somewhere else. Four tools are suppo
   </Step>
 
   <Step title="Pick the tool">
-    Four tools are offered. Each says where its copy of the form comes from.
+    Four tools are offered. Each tile carries a short line of its own on screen.
 
-    | Tool | What the box says |
+    | Tool | Where the wizard gets your form |
     | --- | --- |
-    | **Typeform** | *Their API returns your form as JSON at api.typeform.com/forms/&#123;id&#125;* |
-    | **Tally** | *Their API returns your form as JSON at api.tally.so/forms/&#123;id&#125;* |
-    | **HubSpot** | *The form definition from the HubSpot Forms API* |
-    | **GoHighLevel** | *Rebuilt from your submissions, since GHL exposes no form schema* |
+    | **Typeform** | Their own copy of the form, from `api.typeform.com/forms/{id}`. |
+    | **Tally** | Their own copy of the form, from `api.tally.so/forms/{id}`. |
+    | **HubSpot** | The form definition, from the HubSpot Forms API. |
+    | **GoHighLevel** | Answers people have already sent you. The wizard works the questions out from those, rather than from the form itself. |
 
     Click one and Cortana moves you to **Paste**.
 
@@ -204,12 +204,20 @@ Cortana can rebuild a form you already have somewhere else. Four tools are suppo
 <Warning>
   **A GoHighLevel form is a guess, not a copy.**
 
-  GoHighLevel does not hand out the design of a form. So Cortana works backwards from answers people already sent you.
+  The wizard builds it from answers people have already sent you, not from the form itself.
 
   That means a question nobody has answered yet will be missing. A question with a small set of answers may come across as free text.
 
   Check a GoHighLevel import question by question, against the real form.
 </Warning>
+
+<Note>
+  **The wording on the GoHighLevel tile is out of date.**
+
+  On screen it reads *"Rebuilt from your submissions, since GHL exposes no form schema"*. A schema is the form's design.
+
+  The first half is right. The reason is not. GoHighLevel does hand out a form's design. This wizard just does not read it.
+</Note>
 
 ---
 
