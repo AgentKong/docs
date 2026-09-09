@@ -137,11 +137,11 @@ There is no **Save** button. Your work is stored about half a second after you s
 
     The top of the panel names the kind of question in capitals, such as **EMAIL**. Beside it sits **Change type**.
 
-    Under that come three boxes every question has.
+    Under that come the boxes that set the wording.
 
     - **Question**: the wording, the same as the title in the middle column.
     - **Help text**: a second line under the question. *Shown under the question. Use it for anything that would otherwise sit in brackets.*
-    - **Placeholder**: *Greyed-out example text inside the box.*
+    - **Placeholder**: *Greyed-out example text inside the box.* It appears on questions you type into.
 
     <Frame caption="Field settings is about one question only. Click another and it changes.">
       <img className="block dark:hidden" src="/images/forms/build/05-field-settings.png" alt="The builder with the Field settings tab highlighted at the top of the right column. Below it the panel shows the question kind, a Change type button and the Question, Help text and Placeholder boxes." />
@@ -161,6 +161,25 @@ There is no **Save** button. Your work is stored about half a second after you s
     <Frame caption="Required is off to start with. Turn it on for anything you cannot follow up without.">
       <img className="block dark:hidden" src="/images/forms/build/06-required.png" alt="The Field settings panel with the Required switch row highlighted, showing the line They cannot continue without answering, above the Hide until the previous field is completed and Show on the form rows." />
       <img className="hidden dark:block" src="/images/forms/build/06-required-dark.png" alt="The Field settings panel with the Required switch row highlighted, showing the line They cannot continue without answering, above the Hide until the previous field is completed and Show on the form rows." />
+    </Frame>
+  </Step>
+
+  <Step title="Make one question bigger, or push it down">
+    **Text size** and **Space above** sit lower down the panel, just above **Logic**.
+
+    Both start at **Match form**. That means the question follows the whole form, which is what you want most of the time.
+
+    **Text size** changes this one question, from 12px to 24px. Use it to make an opening question carry more weight.
+
+    **Space above** sets the gap above the question, from 0px to 96px. It replaces the form's own gap rather than adding to it.
+
+    Set it to 0 and the question sits right against the one before it. That is how two short questions read as one pair.
+
+    Moving a slider is what creates the change. A link then appears underneath to put it back.
+
+    <Frame caption="Text size and Space above start at Match form, so the question follows the whole form.">
+      <img className="block dark:hidden" src="/images/forms/build/07-question-typography.png" alt="The Field settings panel of the form builder with the Text size and Space above rows highlighted, each a slider reading Match form, sitting between the Placeholder box and the Logic block." />
+      <img className="hidden dark:block" src="/images/forms/build/07-question-typography-dark.png" alt="The Field settings panel of the form builder with the Text size and Space above rows highlighted, each a slider reading Match form, sitting between the Placeholder box and the Logic block." />
     </Frame>
   </Step>
 </Steps>
@@ -192,8 +211,8 @@ This section is for **Single choice**, **Multiple choice**, **Dropdown**, **Pict
     In **Field settings**, use the **Options** box. Its hint reads *One per line. Blank lines are ignored.* It stores when you click somewhere else.
 
     <Frame caption="Edit choices. One choice per line, and blank lines are ignored.">
-      <img className="block dark:hidden" src="/images/forms/build/07-edit-choices.png" alt="The Edit choices box with its text area highlighted, holding three choices on separate lines, above Cancel and Save choices buttons." />
-      <img className="hidden dark:block" src="/images/forms/build/07-edit-choices-dark.png" alt="The Edit choices box with its text area highlighted, holding three choices on separate lines, above Cancel and Save choices buttons." />
+      <img className="block dark:hidden" src="/images/forms/build/08-edit-choices.png" alt="The Edit choices box with its text area highlighted, holding three choices on separate lines, above Cancel and Save choices buttons." />
+      <img className="hidden dark:block" src="/images/forms/build/08-edit-choices-dark.png" alt="The Edit choices box with its text area highlighted, holding three choices on separate lines, above Cancel and Save choices buttons." />
     </Frame>
   </Step>
 
@@ -205,8 +224,8 @@ This section is for **Single choice**, **Multiple choice**, **Dropdown**, **Pict
     Buttons suit two to five choices. A dropdown suits a long list, such as a country.
 
     <Frame caption="The same choices, shown two ways. Buttons for a few, a dropdown for many.">
-      <img className="block dark:hidden" src="/images/forms/build/08-choice-display.png" alt="A choice question in the middle column of the builder with the two small display icons highlighted beside its title, one for showing the choices as buttons and one for showing them as a dropdown." />
-      <img className="hidden dark:block" src="/images/forms/build/08-choice-display-dark.png" alt="A choice question in the middle column of the builder with the two small display icons highlighted beside its title, one for showing the choices as buttons and one for showing them as a dropdown." />
+      <img className="block dark:hidden" src="/images/forms/build/09-choice-display.png" alt="A choice question in the middle column of the builder with the two small display icons highlighted beside its title, one for showing the choices as buttons and one for showing them as a dropdown." />
+      <img className="hidden dark:block" src="/images/forms/build/09-choice-display-dark.png" alt="A choice question in the middle column of the builder with the two small display icons highlighted beside its title, one for showing the choices as buttons and one for showing them as a dropdown." />
     </Frame>
   </Step>
 </Steps>
@@ -252,8 +271,8 @@ A rule can hide a question until an earlier answer matches. This is called condi
     Click **Add a condition** for a second test on the same rule. Click **Always show** to drop the rule.
 
     <Frame caption="The rule reads as a sentence, so you can check it at a glance.">
-      <img className="block dark:hidden" src="/images/forms/build/09-logic.png" alt="The Logic box in Field settings highlighted, reading Show this when all of these are true, followed by a row naming an earlier question, the test is, and a value chosen from that question's own list." />
-      <img className="hidden dark:block" src="/images/forms/build/09-logic-dark.png" alt="The Logic box in Field settings highlighted, reading Show this when all of these are true, followed by a row naming an earlier question, the test is, and a value chosen from that question's own list." />
+      <img className="block dark:hidden" src="/images/forms/build/10-logic.png" alt="The Logic box in Field settings highlighted, reading Show this when all of these are true, followed by a row naming an earlier question, the test is, and a value chosen from that question's own list." />
+      <img className="hidden dark:block" src="/images/forms/build/10-logic-dark.png" alt="The Logic box in Field settings highlighted, reading Show this when all of these are true, followed by a row naming an earlier question, the test is, and a value chosen from that question's own list." />
     </Frame>
   </Step>
 </Steps>
@@ -287,8 +306,8 @@ A page is a screen. People answer the questions on it, press the round button, a
     Drag a question by the dotted handle on the left of its row to move it between pages.
 
     <Frame caption="Add page adds an empty page at the bottom. Drag questions into it.">
-      <img className="block dark:hidden" src="/images/forms/build/10-pages.png" alt="The builder's left column showing two page blocks with their questions, and the Add page button highlighted underneath them." />
-      <img className="hidden dark:block" src="/images/forms/build/10-pages-dark.png" alt="The builder's left column showing two page blocks with their questions, and the Add page button highlighted underneath them." />
+      <img className="block dark:hidden" src="/images/forms/build/11-pages.png" alt="The builder's left column showing two page blocks with their questions, and the Add page button highlighted underneath them." />
+      <img className="hidden dark:block" src="/images/forms/build/11-pages-dark.png" alt="The builder's left column showing two page blocks with their questions, and the Add page button highlighted underneath them." />
     </Frame>
   </Step>
 
@@ -308,8 +327,8 @@ A page is a screen. People answer the questions on it, press the round button, a
     A page with questions on it gives you a choice. **Keep the questions** moves them to the page before. **Delete page and questions** removes them with the page.
 
     <Frame caption="Deleting a page asks what to do with its questions.">
-      <img className="block dark:hidden" src="/images/forms/build/11-delete-page.png" alt="The delete page box, naming the page and explaining that its one question can either move to the page before or be deleted with it. The Keep the question button is highlighted, beside Cancel and Delete page and question." />
-      <img className="hidden dark:block" src="/images/forms/build/11-delete-page-dark.png" alt="The delete page box, naming the page and explaining that its one question can either move to the page before or be deleted with it. The Keep the question button is highlighted, beside Cancel and Delete page and question." />
+      <img className="block dark:hidden" src="/images/forms/build/12-delete-page.png" alt="The delete page box, naming the page and explaining that its one question can either move to the page before or be deleted with it. The Keep the question button is highlighted, beside Cancel and Delete page and question." />
+      <img className="hidden dark:block" src="/images/forms/build/12-delete-page-dark.png" alt="The delete page box, naming the page and explaining that its one question can either move to the page before or be deleted with it. The Keep the question button is highlighted, beside Cancel and Delete page and question." />
     </Frame>
   </Step>
 </Steps>
@@ -339,8 +358,8 @@ A page is a screen. People answer the questions on it, press the round button, a
     Most people fill a form in on a phone. Look at it here before you send the link out.
 
     <Frame caption="Mobile draws the form at real phone width, scaled to fit.">
-      <img className="block dark:hidden" src="/images/forms/build/12-mobile-preview.png" alt="The builder with the Mobile button highlighted above the preview, and the form redrawn narrow inside a phone-shaped frame in the middle column." />
-      <img className="hidden dark:block" src="/images/forms/build/12-mobile-preview-dark.png" alt="The builder with the Mobile button highlighted above the preview, and the form redrawn narrow inside a phone-shaped frame in the middle column." />
+      <img className="block dark:hidden" src="/images/forms/build/13-mobile-preview.png" alt="The builder with the Mobile button highlighted above the preview, and the form redrawn narrow inside a phone-shaped frame in the middle column." />
+      <img className="hidden dark:block" src="/images/forms/build/13-mobile-preview-dark.png" alt="The builder with the Mobile button highlighted above the preview, and the form redrawn narrow inside a phone-shaped frame in the middle column." />
     </Frame>
   </Step>
 
@@ -350,8 +369,8 @@ A page is a screen. People answer the questions on it, press the round button, a
     The editing handles disappear here, so this is the closest thing to the real page. Press **Esc** to come back.
 
     <Frame caption="Full screen hides the editing handles, so you see what a visitor sees.">
-      <img className="block dark:hidden" src="/images/forms/build/13-fullscreen.png" alt="The form filling the whole screen with no builder columns around it, and the exit full screen button highlighted at the top right." />
-      <img className="hidden dark:block" src="/images/forms/build/13-fullscreen-dark.png" alt="The form filling the whole screen with no builder columns around it, and the exit full screen button highlighted at the top right." />
+      <img className="block dark:hidden" src="/images/forms/build/14-fullscreen.png" alt="The form filling the whole screen with no builder columns around it, and the exit full screen button highlighted at the top right." />
+      <img className="hidden dark:block" src="/images/forms/build/14-fullscreen-dark.png" alt="The form filling the whole screen with no builder columns around it, and the exit full screen button highlighted at the top right." />
     </Frame>
   </Step>
 
@@ -361,8 +380,8 @@ A page is a screen. People answer the questions on it, press the round button, a
     **Start again** clears your practice answers and puts you back on page one.
 
     <Frame caption="The preview's ending, with Start again to clear your practice answers.">
-      <img className="block dark:hidden" src="/images/forms/build/14-preview-ending.png" alt="The builder preview showing the ending screen with a headline and message, and the Start again link highlighted underneath." />
-      <img className="hidden dark:block" src="/images/forms/build/14-preview-ending-dark.png" alt="The builder preview showing the ending screen with a headline and message, and the Start again link highlighted underneath." />
+      <img className="block dark:hidden" src="/images/forms/build/15-preview-ending.png" alt="The builder preview showing the ending screen with a headline and message, and the Start again link highlighted underneath." />
+      <img className="hidden dark:block" src="/images/forms/build/15-preview-ending-dark.png" alt="The builder preview showing the ending screen with a headline and message, and the Start again link highlighted underneath." />
     </Frame>
   </Step>
 </Steps>
@@ -428,6 +447,8 @@ All 31, in the nine groups the picker uses.
 | **Help text** | A quieter second line under the question. | Empty | Use it for anything you would otherwise put in brackets. | It is plain text. No links, no bold. |
 | **Placeholder** | Faint example text inside the answer box. | Empty | Show the shape you want, such as `+44 7700 900123`. | Not offered on choice questions or display-only blocks. They have no box. |
 | **Options** | The choices, one per line. Blank lines are ignored. | Empty | Keep them short. Long choices wrap badly on a phone. | The same list as **Edit choices** in the middle column. Editing either changes both. |
+| **Text size** | The size of this one question, from 12 to 24. Every other question keeps the form's size. | **Match form**, so it follows the whole form | Use it on an opening question, then leave the rest alone. | The form-wide size lives under **Typography** on the **Form** tab. |
+| **Space above** | The gap above this one question, from 0 to 96. It replaces the gap rather than adding to it. | **Match form**. A page's first question reads 0 | Use 0 to pair two short questions, or 48 to start a new section. | Moving the slider at all is what sets it. There is no switch to turn on first. |
 | **Logic** | Shows or hides this question depending on an earlier answer. | No rule, so always shown | Use it to keep pages short. | Only questions above this one can be used. The middle column ignores rules. |
 | **Required** | Stops people continuing without answering. | Off | On for anything you cannot follow up without, such as email. | Nothing warns you if every question is optional. |
 | **Hide until the previous field is completed** | Shows the question once the one above it is filled in. | Off | On for long pages, so people see one thing at a time. | Greyed out on a page's first question. It has nothing to wait for. |
@@ -484,6 +505,18 @@ All 31, in the nine groups the picker uses.
     You are on the first question of a page. The panel says *The first field on a page always shows.*
 
     There is nothing above it to wait for. Move the question down, or use it on a later one.
+  </Accordion>
+
+  <Accordion title="Text size and Space above both say Match form">
+    That is the starting state, and it is the right one for most questions. The question simply follows the whole form.
+
+    Drag either slider to change this question on its own. A link appears underneath to put it back.
+  </Accordion>
+
+  <Accordion title="Space above says 0 and the slider will not help">
+    You are on the first question of a page. There is nothing above it, so there is no gap to change.
+
+    Use **Space above** on a later question instead.
   </Accordion>
 
   <Accordion title="My logic rule does not seem to work in the preview">
@@ -554,6 +587,18 @@ All 31, in the nine groups the picker uses.
     [Where Your Answers Go](/forms-answers) shows you where to read them.
   </Accordion>
 
+  <Accordion title="Can I make one question stand out?">
+    Yes. Click it, then drag **Text size** in **Field settings**.
+
+    **Space above** does the same job with room rather than size. It pushes the question down so it reads as a fresh start.
+  </Accordion>
+
+  <Accordion title="How do I change the writing on the whole form?">
+    On the **Form** tab, under **Typography**. That sets the font and the size for every question at once.
+
+    [Design And Endings](/forms-design) covers it.
+  </Accordion>
+
   <Accordion title="Can two forms share the same questions?">
     Only if one is a copy of the other, and after that they are separate.
 
@@ -567,7 +612,7 @@ All 31, in the nine groups the picker uses.
 
 <CardGroup cols={2}>
   <Card title="3) Design And Endings" icon="palette" href="/forms-design">
-    Pick the colours, and choose what people see after they press the button.
+    Pick the colours and the writing, and choose what people see after they press the button.
   </Card>
   <Card title="4) Sharing Your Form" icon="share-nodes" href="/forms-share">
     Turn the form on, copy the link, and paste the form into your own website.
