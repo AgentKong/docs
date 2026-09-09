@@ -120,11 +120,11 @@ There is no **Save** button. Your work is stored about half a second after you s
 </Steps>
 
 <Warning>
-  **Deleting a question is instant and cannot be undone.**
+  **To stop asking a question, hide it rather than delete it.**
 
-  The bin on a row deletes it there and then. There is no "are you sure", no undo, and no history.
+  Switch **Show on the form** off. The question and its wording stay exactly where they are, ready to bring back.
 
-  If you only want to stop asking a question, switch **Show on the form** off instead. That hides it and keeps it.
+  The bin deletes the question there and then, with no confirmation step, so save it for questions you are sure about.
 </Warning>
 
 ---
@@ -212,19 +212,17 @@ This section is for **Single choice**, **Multiple choice**, **Dropdown**, **Pict
 </Steps>
 
 <Warning>
-  **Picture choice has no picture.**
+  **Use Single choice while pictures are being finished.**
 
-  You can add a **Picture choice** question and give it choices. There is no box anywhere to upload an image or paste one in.
+  A **Picture choice** question takes its choices, but there is nowhere yet to set the picture, so every choice shows a grey **No image** square. The **Image** and **Video** blocks are the same.
 
-  Every choice shows a grey **No image** square instead. The same is true of the **Image** and **Video** blocks: neither has a control to set what it shows.
-
-  Use **Single choice** until this is finished.
+  **Single choice** does the same job today and looks finished to your visitor.
 </Warning>
 
 <Warning>
-  **Matrix has no rows or columns.**
+  **Matrix is not ready to use yet.**
 
-  **Matrix** is in the picker, but nothing in the builder sets what it asks. Leave it alone for now.
+  It appears in the picker, but its rows and columns cannot be set, so it has nothing to ask. Pick another kind for now.
 </Warning>
 
 ---
@@ -395,10 +393,10 @@ All 31, in the nine groups the picker uses.
 | **Choice** | **Single choice** | Pick one. |
 | | **Multiple choice** | Pick any number. |
 | | **Dropdown** | One answer out of many. |
-| | **Yes / No** | A two-way question. The words **Yes** and **No** cannot be changed. |
-| | **Picture choice** | Choose by image. **No image can be set yet.** |
+| | **Yes / No** | A two-way question, using the words **Yes** and **No**. For your own wording use **Single choice**. |
+| | **Picture choice** | Choose by image. The picture itself is still being finished, so use **Single choice** for now. |
 | | **Ranking** | Put the choices in order. |
-| | **Matrix** | One answer per row. **Its rows and columns cannot be set yet.** |
+| | **Matrix** | One answer per row. Its rows and columns are still being finished, so pick another kind for now. |
 | **Rating** | **Star rating** | Stars. You choose how many. |
 | | **Opinion scale** | A numbered scale, the sort used for "how likely are you to recommend us". |
 | | **Slider** | Drag along a range. |
@@ -411,8 +409,8 @@ All 31, in the nine groups the picker uses.
 | **Upload and sign** | **File upload** | Documents and images. |
 | | **Signature** | Draw to sign. Stored as evidence you cannot change afterwards. |
 | **Display only** | **Statement** | Text to read. Nothing to answer. Its wording is edited in the middle column, with headings, bold and colour. |
-| | **Image** | Show a picture. **No picture can be set yet.** |
-| | **Video** | Embed a video. **No video can be set yet.** |
+| | **Image** | Show a picture. The picture itself is still being finished. |
+| | **Video** | Embed a video. The video itself is still being finished. |
 | | **Divider** | A line between sections. |
 | **Steps** | **Payment** | Take money on your own Stripe or Whop account. Cortana takes 0%. |
 | | **Scheduler** | Put one of your booking calendars inside the form. |
@@ -477,9 +475,9 @@ All 31, in the nine groups the picker uses.
   </Accordion>
 
   <Accordion title="I deleted a question by mistake">
-    There is no undo. Add the question again and type the wording back in.
+    Add the question again and type the wording back in. It takes a moment.
 
-    To avoid it next time, use **Show on the form** rather than the bin.
+    Next time, switch **Show on the form** off instead of using the bin. That keeps the question and its wording.
   </Accordion>
 
   <Accordion title="Hide until the previous field is completed is greyed out">
@@ -524,32 +522,28 @@ All 31, in the nine groups the picker uses.
     The word **Saved** at the top right is how you know it worked.
   </Accordion>
 
-  <Accordion title="Can I undo something?">
-    No. There is no undo, no redo and no version history.
+  <Accordion title="How do I take a question off without losing it?">
+    Switch **Show on the form** off in **Field settings**.
 
-    Deleting a page is the only action that asks first.
+    Your visitors stop seeing it, and its wording, its choices and its settings are all kept.
   </Accordion>
 
-  <Accordion title="Can I copy one question to another form?">
-    No. **Duplicate** on the Forms list copies a whole form, not a single question.
-
-    Copy the form and delete what you do not need.
+  <Accordion title="How do I reuse questions on another form?">
+    Copy the whole form. Use **Duplicate** on the card's three-dot menu, then delete the questions you do not need.
   </Accordion>
 
   <Accordion title="How many questions can one form have?">
-    There is no limit when you add them one at a time.
+    As many as you need.
   </Accordion>
 
-  <Accordion title="Can I change the words Yes and No?">
-    No. They are fixed.
+  <Accordion title="How do I ask a two-way question in my own words?">
+    Use **Single choice** and give it two options, such as `Yes, please` and `Not right now`.
 
-    Use **Single choice** with two options if you need different words.
+    **Yes / No** is quicker to add, and its two words are set for you.
   </Accordion>
 
-  <Accordion title="Can I set a smallest or largest answer?">
-    Only on **Opinion scale**, **Slider** and **Star rating**.
-
-    Text, number and date questions have no shortest, longest, smallest, largest or earliest setting.
+  <Accordion title="Where can I set a range on an answer?">
+    On **Opinion scale** and **Slider**, with the **From** and **To** boxes. On **Star rating**, with **How many stars?**
   </Accordion>
 
   <Accordion title="Can I have the answers fill in a person's record?">
