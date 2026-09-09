@@ -203,15 +203,51 @@ It has four tabs. **Details**, **Questions**, **Availability** and **Notificatio
   </Step>
 
   <Step title="Style the booking page">
-    The panel on the right has two tabs, **Calendar** and **Field settings**. Under **Calendar** you can set five things.
+    The panel on the right has two tabs, **Calendar** and **Field settings**. Under **Calendar** you set the look of the whole page, top to bottom.
 
     - **Calendar type**: **Calendar Combo** shows the questions and the calendar side by side. **Application + Cal** asks every question first, then shows the calendar.
-    - **Hide title**, **Transition** and **Sticky Contact**. **Sticky Contact** fills in the details of people who have booked with you before.
+    - **Booking page header**: **Hide title** and **Hide business name**. On **Application + Cal** you also get **Hide duration**. The panel says *Trim what shows above the questions. None of this changes what you collect.*
+    - **Transition** and **Sticky Contact**. **Sticky Contact** fills in the details of people who have booked with you before.
     - **Theme**: six light looks (Sage, Snow, Cream, Azure, Blush, Lavender) and six dark ones (Midnight, Royal, Obsidian, Forest, Ember, Rose).
-    - **Colors**: Text, Accent, Button and Button Text.
+    - **Colors**: five of them. **Background**, **Text**, **Accent**, **Button** and **Button Text**.
+    - **Typography**: the **Font** and the **Size** of the writing, plus a **Reset theme and typography** link. The next step covers it.
     - **Logo**: a PNG, JPG or WebP image file, up to 2 MB.
 
     The middle column shows your real booking page as you edit it. Use the **Desktop** and **Mobile** buttons to see how it looks on a computer and on a phone.
+  </Step>
+
+  <Step title="Pick a font and a text size">
+    **Typography** sits under **Colors**.
+
+    **Font** gives you seven to choose from: **Inter**, **Roboto**, **Open Sans**, **Lato**, **Poppins**, **Montserrat** and **System**. **System** means the visitor's own device font, the one their phone or computer uses everywhere. A new calendar uses **Inter**.
+
+    **Size** makes all the writing bigger or smaller. Drag it anywhere from 12 to 24. It starts at 16.
+
+    The middle column changes as you drag, so you can watch it. Check it on **Mobile** too.
+
+    Under the slider it says *Sets the base size for the whole form. Default is 16px. Inputs never go below 16px, so phones do not zoom on them.*
+
+    <Frame caption="Typography sets the font and the size of the writing for the whole booking page.">
+      <img src="/images/appointments/calendars/16-typography.png" alt="The Calendar tab of the calendar builder with the Typography block highlighted, showing a Font dropdown set to Inter, a Size slider reading 20px, the hint about the default size and inputs never going below 16px, and a Reset theme and typography link underneath." />
+    </Frame>
+
+    Picking a **Theme** tile changes the colours only. It never changes your font or your size.
+  </Step>
+
+  <Step title="Make one question bigger, or push it down">
+    Every question can break away from the form's size and spacing.
+
+    Click a question, then switch the panel to **Field settings**. **Text size** and **Space above** sit under **Hide field till ready**.
+
+    Both read **Match form** until you move them. That means the question is following the whole form.
+
+    Move a handle and the question is on its own. A link then appears to put it back: **Match the form's size**, or **Match the form's spacing**.
+
+    **Space above** replaces the gap above the question, it does not add to it. Set it to 0 and the question sits right against the one above, which is how two short fields read as one pair. On the first question of a page it reads 0, because there is nothing above it.
+
+    <Frame caption="Text size and Space above, on one question. The links put it back to following the form.">
+      <img src="/images/appointments/calendars/17-question-typography.png" alt="The Field settings tab of the calendar builder with the Text size row highlighted, reading 14px above a Match the form's size link, and the Space above row underneath reading 48px above a Match the form's spacing link." />
+    </Frame>
   </Step>
 </Steps>
 
@@ -248,7 +284,7 @@ Set this up if you want to spot your best enquiries at a glance. It also lets yo
     The first range that fits wins. So put your narrowest range at the top, and never let two ranges overlap.
 
     <Frame caption="Field settings for a Budget question, with points next to each answer.">
-      <img src="/images/appointments/calendars/15-lead-scoring.png" alt="The calendar builder Questions tab with a Budget question selected. The right-hand Field settings panel shows the field type, a Required toggle, a Hide field till ready toggle, and a Lead score box with a number input beside each of the low, mid and high options." />
+      <img src="/images/appointments/calendars/15-lead-scoring.png" alt="The calendar builder Questions tab with a question selected. The right-hand Field settings panel shows the field type, a Required toggle, a Hide field till ready toggle, the Text size and Space above sliders, an Opt-in consent toggle, and the Lead score box at the bottom." />
     </Frame>
   </Step>
 
@@ -505,8 +541,13 @@ Always book your own calendar once before you send it to anyone.
 | Setting | What it does | Default |
 | --- | --- | --- |
 | **Calendar type** | Chooses whether people see the questions and calendar together, or answer everything first. | Calendar Combo, so both show together |
-| **Theme** | Sets the overall look. Six light and six dark ones. | Whichever look you use in Cortana when you make the calendar |
-| **Colors** | Sets the Text, Accent, Button and Button Text colours. | Blue, `#3B82F6`, for Accent and Button |
+| **Theme** | Sets the overall look. Six light and six dark ones. Colours only, never the font or the size. | Whichever look you use in Cortana when you make the calendar |
+| **Colors** | Sets the Background, Text, Accent, Button and Button Text colours. | Blue, `#3B82F6`, for Accent and Button |
+| **Font** | Sets the writing for the whole page. Seven to pick from, including **System**, the visitor's own device font. | Inter |
+| **Size** | Makes all the writing bigger or smaller, from 12 to 24. | `16px`. The boxes people type in never go below `16px` |
+| **Text size** | On one question, in **Field settings**. Overrides the form's size for that question only, from 12 to 24. | **Match form**, so it follows the whole page |
+| **Space above** | On one question, in **Field settings**. Replaces the gap above it, from 0 to 96. | **Match form**. The first question on a page reads 0 |
+| **Reset theme and typography** | Puts back the shipped look: the theme for the mode you are in, all five colours, the font and the size. | Not applicable. A toast offers **Undo** for ten seconds |
 | **Logo** | Puts your logo on the page. Takes PNG, JPG or WebP files. | No logo. Files up to 2 MB |
 | **Sticky Contact** | Fills in the details of people who booked with you before. | On, so returning people type less |
 | **Hide title** | Hides the meeting name on the booking page. | Off, so the name is shown |
