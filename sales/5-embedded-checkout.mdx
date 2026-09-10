@@ -43,13 +43,13 @@ Name the checkout (just for you, buyers never see it), pick the **Stripe account
 
 ## Intro offer: switch price after the first billing period
 
-Sell a subscription at one price for its first billing period, then move the buyer to a different price automatically. The classic shape is an intro month followed by a quarterly plan, for example $297 for the first month, then $891 every 3 months. Because the buyer is on an active subscription from day one, the sale counts as recurring revenue immediately in Stripe. A free trial does not: it reports $0 until it converts.
+Sell a subscription at one price for its first billing period, then move the buyer to a different price automatically. The classic shape is an intro month followed by a quarterly plan, for example \$297 for the first month, then \$891 every 3 months. Because the buyer is on an active subscription from day one, the sale counts as recurring revenue immediately in Stripe. A free trial does not: it reports \$0 until it converts.
 
 {/* TODO: screenshot images/sales-dashboard/embedded-checkout/03-intro-offer.jpg, the offer step with the After the first billing period dropdown open and the live preview showing the disclosure line above the pay button */}
 
 1. In **What are they buying?**, pick exactly **one recurring price**. This is the intro price and it is what the buyer pays at checkout.
 2. Open **After the first billing period** and choose **Switch to** the price the subscription should move to. The list shows the other recurring prices on the same Stripe account. The default, **Keep billing the same price**, is a normal subscription.
-3. Check the live preview. Stripe shows the intro price, and directly above the pay button Cortana adds one line spelling out the full offer, for example "$297.00 for your first month, then $891.00 every 3 months." The buyer always sees both prices before paying.
+3. Check the live preview. Stripe shows the intro price, and directly above the pay button Cortana adds one line spelling out the full offer, for example "\$297.00 for your first month, then \$891.00 every 3 months." The buyer always sees both prices before paying.
 4. Optional but recommended: on the **On the page** step, require custom terms with the same wording, so the buyer also ticks a box on the full offer. See Consent and terms below.
 
 Picking a switch price clears the **Free trial (days)** field, and typing a trial clears the switch: the intro price is the first billing period, so the two cannot be combined.
@@ -184,7 +184,7 @@ Each checkout shows its own funnel: **Viewed**, **Clicked**, **Opened**, **Email
     The intro price is the first billing period, so there is nothing to trial. Choose one: a free trial (nothing charged today) or an intro offer (the intro price charged today, then the switch). Picking one clears the other.
   </Accordion>
   <Accordion title="Does the buyer see the price they will switch to?">
-    Yes. Stripe's checkout shows the intro price, and one line above the pay button states the full offer, for example "$297.00 for your first month, then $891.00 every 3 months." For extra protection, require custom terms with the same wording so the buyer ticks a box on it.
+    Yes. Stripe's checkout shows the intro price, and one line above the pay button states the full offer, for example "\$297.00 for your first month, then \$891.00 every 3 months." For extra protection, require custom terms with the same wording so the buyer ticks a box on it.
   </Accordion>
   <Accordion title="How do I stop a checkout without deleting it?">
     Use the power icon to turn it off. It stops rendering immediately, and its history and stats are kept so you can turn it back on later.
