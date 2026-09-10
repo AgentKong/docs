@@ -1,0 +1,84 @@
+---
+title: "Cortana VIP 2.0"
+description: "What Cortana VIP 2.0 can do for you inside your shared Slack channel and the in-app bug reporter: fix attribution, find tracking problems, work bug tickets, and answer questions about the platform."
+---
+
+{/* last-verified: 2026-09-10. Surfaces: the shared Slack support channel (the Cortana bot) and the in-app bug report widget. Source: AgentKong_App src/server/services/cs-session, src/server/services/support-agent/slack/case-session-gate.ts, src/server/services/cs-fix. This page is linked from the first reply Cortana VIP 2.0 posts on a thread. Keep it current: it is the live list of what the agent can do. */}
+
+## Overview
+
+Cortana VIP 2.0 is the engineer that lives in your shared Slack channel and behind the in-app bug reporter. Post what is wrong, in your own words, and it picks the case up, investigates with real access to your account, and replies in the same thread. A person on our team can step in at any moment, and when they do, Cortana VIP 2.0 goes quiet on that thread.
+
+This page is what it can do today. It grows as the agent does.
+
+## What it can do
+
+<Steps>
+  <Step title="Find problems in your attribution">
+    Tell it a lead, a booking or a sale is missing, untracked or credited to the wrong source. It walks your funnel the way a visitor would, checks every page and form against what your pixel recorded, and tells you exactly where the trail broke.
+
+    **Outcome:** a plain answer on where the data went, with the proof, not a guess.
+
+    **Try:** "Hey, my Meta leads from this week are showing as direct. Can you check the funnel at example.com/apply?"
+  </Step>
+  <Step title="Fix your attribution setup">
+    When the break is on your side of the setup, it tells you the exact change: the missing script, the form that does not pass the email, the URL parameter that is being dropped. When the fix is on our side, it opens the fix itself (next card).
+
+    **Outcome:** the specific change to make, in order, and a check that it worked once you have made it.
+
+    **Try:** "Our thank-you page is not counting purchases. What do we need to change?"
+  </Step>
+  <Step title="Work bug tickets and hand the fix to a human engineer">
+    Report a bug in the app, from Slack or from the in-app bug reporter. It reproduces the problem, and when the cause is in our code it writes the fix and submits it to a human engineer for review. Nothing ships without a person approving it. You get a note in the thread when the fix is live.
+
+    **Outcome:** a reproduced bug, a proposed fix under human review, and a "fixed, could you check" when it deploys.
+
+    **Try:** "The export button on the contacts page does nothing when I filter by tag."
+  </Step>
+  <Step title="Answer questions about the platform">
+    Ask how a feature works, what a setting does, or why a number looks the way it does. It answers from the live help docs and from your own account's data, so the answer is about your setup, not a generic one.
+
+    **Outcome:** a direct answer with the doc it came from, or the steps to do the thing.
+
+    **Try:** "How does Cortana decide which ad gets credit when someone clicks two ads before buying?"
+  </Step>
+</Steps>
+
+## Where it works
+
+- **Your shared Slack channel.** Post a new message, or reply in a thread it is already on. It handles attribution problems, bugs, hands-on setup, billing questions and feature requests. Anything else goes to a person as before.
+- **The in-app bug reporter.** Submit a bug from inside the app. Cortana VIP 2.0 picks it up, replies on the ticket, and the same review rules apply to any fix.
+
+## How to talk to it
+
+1. Say what is wrong and where. A URL, a contact email, or a date makes the first answer faster.
+2. Reply in the thread it opened. Each thread is one case. A new topic is a new message in the channel.
+3. If you want a person, say so. Anyone on our team replying in the thread takes it over, and the agent stays quiet from then on.
+
+The first time it replies on a thread it introduces itself with a link back to this page. It does that once per thread, not on every message.
+
+<AccordionGroup>
+  <Accordion title="What it will never do">
+    - Pretend to be a human, or speak for our founders.
+    - Change anything in your account without telling you in the thread.
+    - Ship code without a human engineer reviewing and approving the fix.
+    - Reply on a thread once one of our team has stepped in.
+  </Accordion>
+  <Accordion title="Limits">
+    - It handles a bounded number of conversations per account per day. Past that, the case goes to a person and the thread says so.
+    - If it cannot make progress within a reasonable time, it hands the case to a person with everything it found, and tells you.
+    - Payments and refunds are answered by a person.
+  </Accordion>
+</AccordionGroup>
+
+## FAQ
+
+**Do I need to tag it?** No. A new message in your shared channel is enough. Tagging the bot works too.
+
+**Can I still talk to a real person?** Yes, always. Ask in the thread, or a teammate of ours can jump in on their own. Either way the agent goes quiet on that thread.
+
+**It said it is fixing something in your code. When will I see it?** When a human engineer approves the fix and it deploys, you get a message in the same thread asking you to check.
+
+**Why did it introduce itself with a link?** Once per thread, so anyone reading can see what it can do. It will not repeat it.
+
+**Does it see my data?** It reads your account the way our support team does, to investigate your case. It never edits your tracking or your contacts without saying so in the thread.
