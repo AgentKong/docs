@@ -1,94 +1,62 @@
 ---
-title: "3) Design And Endings"
+title: "3) Design and endings"
 description: "Pick one of twelve looks, set your own colours and writing, and choose what people see at the end."
 ---
 
-{/* TODO: verify. No Loom walkthrough was supplied for this page. Add the embed + a
-    verbatim transcript inside an <Accordion title="Video transcript"> here once recorded,
-    matching the pattern used on platform/business/appointments.mdx. */}
-
-## Overview
+{/* last-verified: 2026-09-10 · route: /business/[businessId]/forms/[formId] */}
 
 Two jobs live here, and both change what a visitor sees.
 
-The **Form** tab on the right sets the look. Colours, writing, how pages move, and whether a progress bar shows.
+The **Form** tab on the right sets the look: colours, writing, how pages move, and whether a progress bar shows. The **Ending rules** card at the bottom left sets what happens after someone presses the button.
 
-The **Ending rules** card at the bottom left sets what happens after someone presses the button.
-
-Everything on this page changes in the middle column as you set it, so you never have to guess.
+Everything changes in the middle column as you set it, so you never have to guess.
 
 <Note>
-  **Before you start**
+  **Before you start.** You need a form with at least one question. See [Build your form](/forms-build).
 
-  - You need a form with at least one question. See [Building Your Form](/forms-build).
-  - Ending rules can only test answers, so write your questions before you write your rules.
-  - Sending people to a page of your own? Have that page's web address ready. It has to start with `http://` or `https://`.
+  Ending rules can only test answers, so write your questions before you write your rules. Sending people to a page of your own? Have that page's web address ready. It has to start with `http://` or `https://`.
 </Note>
 
----
+## 1. Pick a look
 
-## 1. Pick A Look
+The right column has two tabs. Click **Form**, the left one. Four sections appear, one under the other: **Theme**, **Colors**, **Typography** and **Behaviour**. The panel scrolls, so the last two are below what you see at first.
 
-<Steps>
-  <Step title="Open the Form tab">
-    The right column has two tabs. Click **Form**, the left one.
+<Frame caption="The Form tab sets the look of the whole form. Field settings is one question only.">
+  <img className="block dark:hidden" src="/images/forms/design/01-form-tab.png" alt="The form builder with the Form tab highlighted at the top of the right column. Below it the panel shows the Theme tiles in a Light Mode row and a Dark Mode row, then the start of the Colors rows, with the rest of the panel below the fold." />
+  <img className="hidden dark:block" src="/images/forms/design/01-form-tab-dark.png" alt="The form builder with the Form tab highlighted at the top of the right column. Below it the panel shows the Theme tiles in a Light Mode row and a Dark Mode row, then the start of the Colors rows, with the rest of the panel below the fold." />
+</Frame>
 
-    Four sections appear, one under the other: **Theme**, **Colors**, **Typography** and **Behaviour**.
+**Theme** gives you twelve ready-made looks, in two rows.
 
-    The panel scrolls, so the last two are below what you see at first.
+Six light ones: **Sage**, **Snow**, **Cream**, **Azure**, **Blush** and **Lavender**. Six dark ones: **Midnight**, **Royal**, **Obsidian**, **Forest**, **Ember** and **Rose**.
 
-    <Frame caption="The Form tab sets the look of the whole form. Field settings is one question only.">
-      <img className="block dark:hidden" src="/images/forms/design/01-form-tab.png" alt="The form builder with the Form tab highlighted at the top of the right column. Below it the panel shows the Theme tiles in a Light Mode row and a Dark Mode row, then the start of the Colors rows, with the rest of the panel below the fold." />
-      <img className="hidden dark:block" src="/images/forms/design/01-form-tab-dark.png" alt="The form builder with the Form tab highlighted at the top of the right column. Below it the panel shows the Theme tiles in a Light Mode row and a Dark Mode row, then the start of the Colors rows, with the rest of the panel below the fold." />
-    </Frame>
-  </Step>
+Each tile is a tiny drawing of your form in that look, so you can pick by eye rather than by name. Click one and the middle column repaints straight away.
 
-  <Step title="Click a theme tile">
-    **Theme** gives you twelve ready-made looks, in two rows.
-
-    Six light ones: **Sage**, **Snow**, **Cream**, **Azure**, **Blush** and **Lavender**.
-
-    Six dark ones: **Midnight**, **Royal**, **Obsidian**, **Forest**, **Ember** and **Rose**.
-
-    Each tile is a tiny drawing of your form in that look, so you can pick by eye rather than by name.
-
-    Click one and the middle column repaints straight away.
-
-    <Frame caption="Twelve looks. Six light on the top row, six dark on the bottom.">
-      <img className="block dark:hidden" src="/images/forms/design/02-theme.png" alt="The Theme section of the Form tab highlighted, showing a Light Mode row of six colour tiles named Sage, Snow, Cream, Azure, Blush and Lavender, and a Dark Mode row of six named Midnight, Royal, Obsidian, Forest, Ember and Rose." />
-      <img className="hidden dark:block" src="/images/forms/design/02-theme-dark.png" alt="The Theme section of the Form tab highlighted, showing a Light Mode row of six colour tiles named Sage, Snow, Cream, Azure, Blush and Lavender, and a Dark Mode row of six named Midnight, Royal, Obsidian, Forest, Ember and Rose." />
-    </Frame>
-  </Step>
-</Steps>
+<Frame caption="Twelve looks. Six light on the top row, six dark on the bottom.">
+  <img className="block dark:hidden" src="/images/forms/design/02-theme.png" alt="The Theme section of the Form tab highlighted, showing a Light Mode row of six colour tiles named Sage, Snow, Cream, Azure, Blush and Lavender, and a Dark Mode row of six named Midnight, Royal, Obsidian, Forest, Ember and Rose." />
+  <img className="hidden dark:block" src="/images/forms/design/02-theme-dark.png" alt="The Theme section of the Form tab highlighted, showing a Light Mode row of six colour tiles named Sage, Snow, Cream, Azure, Blush and Lavender, and a Dark Mode row of six named Midnight, Royal, Obsidian, Forest, Ember and Rose." />
+</Frame>
 
 <Note>
   **A brand new form has no theme picked.**
 
-  No tile is ringed until you click one. Until then the form uses the **Sage** colours.
+  No tile is ringed until you click one, and until then the form uses the **Sage** colours.
 
   So pick a tile even if you like what you see. It makes the choice yours instead of a leftover.
 </Note>
 
----
+## 2. Set your own colours
 
-## 2. Set Your Own Colours
+**Colors** has five rows: **Background**, **Text**, **Accent**, **Button** and **Button Text**. Each row has a small box and a coloured square.
 
-<Steps>
-  <Step title="Type a colour code, or use the picker">
-    **Colors** has five rows: **Background**, **Text**, **Accent**, **Button** and **Button Text**.
+Type a colour code into the box, such as `#2563EB`, or click the square and pick a colour by eye.
 
-    Each row has a small box and a coloured square.
+A theme tile fills all five in for you. Change one afterwards and the tile stops being ringed, because the look is now yours.
 
-    Type a colour code into the box, such as `#2563EB`. Or click the square and pick a colour by eye.
-
-    A theme tile fills all five in for you. Change one afterwards and the tile stops being ringed, because the look is now yours.
-
-    <Frame caption="Five colours. A theme fills them all in, then you can change any of them.">
-      <img className="block dark:hidden" src="/images/forms/design/03-colors.png" alt="The Colors section of the Form tab highlighted, showing five rows labelled Background, Text, Accent, Button and Button Text, each with a small colour code box and a coloured square." />
-      <img className="hidden dark:block" src="/images/forms/design/03-colors-dark.png" alt="The Colors section of the Form tab highlighted, showing five rows labelled Background, Text, Accent, Button and Button Text, each with a small colour code box and a coloured square." />
-    </Frame>
-  </Step>
-</Steps>
+<Frame caption="Five colours. A theme fills them all in, then you can change any of them.">
+  <img className="block dark:hidden" src="/images/forms/design/03-colors.png" alt="The Colors section of the Form tab highlighted, showing five rows labelled Background, Text, Accent, Button and Button Text, each with a small colour code box and a coloured square." />
+  <img className="hidden dark:block" src="/images/forms/design/03-colors-dark.png" alt="The Colors section of the Form tab highlighted, showing five rows labelled Background, Text, Accent, Button and Button Text, each with a small colour code box and a coloured square." />
+</Frame>
 
 <Warning>
   **The card, the lines and the answer boxes follow your Background.**
@@ -98,116 +66,64 @@ Everything on this page changes in the middle column as you set it, so you never
   That does mean a dark **Background** with dark **Text** is unreadable. Watch the middle column after every change.
 </Warning>
 
----
-
-## 3. Pick The Writing
+## 3. Pick the writing
 
 **Typography** sits under **Colors**. It sets the font and the size for the whole form.
 
-<Steps>
-  <Step title="Choose a font">
-    **Font** offers seven: **Inter**, **Roboto**, **Open Sans**, **Lato**, **Poppins**, **Montserrat** and **System**.
+**Font** offers seven: **Inter**, **Roboto**, **Open Sans**, **Lato**, **Poppins**, **Montserrat** and **System**. **System** is the visitor's own device font, the one their phone or computer uses everywhere. A new form uses **Inter**.
 
-    **System** is the visitor's own device font. It is the one their phone or computer uses everywhere.
+**Size** is a slider. It runs from 12px to 24px, and a new form sits at 16px. Its hint reads *Sets the base size for the whole form. Default is 16px. Inputs never go below 16px, so phones do not zoom on them.*
 
-    A new form uses **Inter**.
-  </Step>
+This is the base size, not the size of one heading. Questions stay bigger than their help text as you drag, and the middle column moves with the handle.
 
-  <Step title="Set the size">
-    **Size** is a slider. It runs from 12px to 24px, and a new form sits at 16px.
-
-    Its hint reads *Sets the base size for the whole form. Default is 16px. Inputs never go below 16px, so phones do not zoom on them.*
-
-    This is the base size, not the size of one heading. Questions stay bigger than their help text as you drag.
-
-    The middle column moves with the handle, so you can judge it by eye.
-
-    <Frame caption="Typography sets the font and the size for the whole form.">
-      <img className="block dark:hidden" src="/images/forms/design/04-typography.png" alt="The Form tab of the form builder with the Typography block highlighted, showing a Font dropdown, a Size slider with its pixel readout, the hint about the default size and inputs never going below 16px, and a Reset theme and typography link underneath." />
-      <img className="hidden dark:block" src="/images/forms/design/04-typography-dark.png" alt="The Form tab of the form builder with the Typography block highlighted, showing a Font dropdown, a Size slider with its pixel readout, the hint about the default size and inputs never going below 16px, and a Reset theme and typography link underneath." />
-    </Frame>
-  </Step>
-</Steps>
-
-<Note>
-  **A theme tile never changes your writing.**
-
-  Clicking a tile sets the five colours. Your font and your size stay exactly as you left them.
-
-  So pick the font once, then try as many looks as you like.
-</Note>
+<Frame caption="Typography sets the font and the size for the whole form.">
+  <img className="block dark:hidden" src="/images/forms/design/04-typography.png" alt="The Form tab of the form builder with the Typography block highlighted, showing a Font dropdown, a Size slider with its pixel readout, the hint about the default size and inputs never going below 16px, and a Reset theme and typography link underneath." />
+  <img className="hidden dark:block" src="/images/forms/design/04-typography-dark.png" alt="The Form tab of the form builder with the Typography block highlighted, showing a Font dropdown, a Size slider with its pixel readout, the hint about the default size and inputs never going below 16px, and a Reset theme and typography link underneath." />
+</Frame>
 
 <Tip>
-  **Reset theme and typography puts the shipped look back.**
+  **A theme tile never changes your writing, and Reset puts the shipped look back.**
 
-  The link sits under the slider. It returns the five colours, the font and the size in one click.
+  Clicking a tile sets the five colours only. Your font and your size stay exactly as you left them, so pick the font once and try as many looks as you like.
 
-  A light form comes back to **Sage** and a dark one to **Midnight**. **Transition** and **Progress band** are left alone.
-
-  A message appears with **Undo** on it. You have ten seconds to change your mind.
+  **Reset theme and typography**, under the slider, returns the five colours, the font and the size in one click. A light form comes back to **Sage** and a dark one to **Midnight**. **Transition** and **Progress band** are left alone. A message appears with **Undo** on it, and you have ten seconds to change your mind.
 </Tip>
 
----
+## 4. Set how it behaves
 
-## 4. Set How It Behaves
+**Transition** decides how one page gives way to the next. **Vertical** *slides up from the bottom*, **Horizontal** *slides in from the right*. It changes nothing about what you collect.
 
-<Steps>
-  <Step title="Choose the transition">
-    **Transition** decides how one page gives way to the next.
+**Progress band** is *the form name and how far along they are, above the questions*. It is on to start with. Turn it off for a one-page form, where a progress bar tells people nothing.
 
-    **Vertical** *slides up from the bottom*. **Horizontal** *slides in from the right*.
+<Frame caption="Transition and Progress band. Both change what a visitor sees, not what you collect.">
+  <img className="block dark:hidden" src="/images/forms/design/05-behaviour.png" alt="The Behaviour section of the Form tab with the Transition row highlighted above its dropdown set to Vertical, and the Progress band switch row highlighted underneath with the line The form name and how far along they are, above the questions." />
+  <img className="hidden dark:block" src="/images/forms/design/05-behaviour-dark.png" alt="The Behaviour section of the Form tab with the Transition row highlighted above its dropdown set to Vertical, and the Progress band switch row highlighted underneath with the line The form name and how far along they are, above the questions." />
+</Frame>
 
-    It changes nothing about what you collect. Pick whichever you prefer.
-  </Step>
-
-  <Step title="Decide about the progress band">
-    **Progress band** is *the form name and how far along they are, above the questions*.
-
-    It is on to start with. Turn it off for a one-page form, where a progress bar tells people nothing.
-
-    <Frame caption="Transition and Progress band. Both change what a visitor sees, not what you collect.">
-      <img className="block dark:hidden" src="/images/forms/design/05-behaviour.png" alt="The Behaviour section of the Form tab with the Transition row highlighted above its dropdown set to Vertical, and the Progress band switch row highlighted underneath with the line The form name and how far along they are, above the questions." />
-      <img className="hidden dark:block" src="/images/forms/design/05-behaviour-dark.png" alt="The Behaviour section of the Form tab with the Transition row highlighted above its dropdown set to Vertical, and the Progress band switch row highlighted underneath with the line The form name and how far along they are, above the questions." />
-    </Frame>
-  </Step>
-</Steps>
-
----
-
-## 5. Set The Default Ending
+## 5. Set the default ending
 
 The ending is the screen after someone presses the button. Every form has one, and you can change it.
 
-<Steps>
-  <Step title="Open Ending rules">
-    The **Ending rules** card sits at the bottom of the left column, under **Endings**.
+The **Ending rules** card sits at the bottom of the left column, under **Endings**. Its second line is a summary: **No rules · Message** means no rules and a message at the end, **2 rules · Redirect** means two rules and a redirect.
 
-    Its second line is a summary. **No rules · Message** means no rules and a message at the end. **2 rules · Redirect** means two rules and a redirect at the end.
+Click the card. A panel slides in from the right, headed **Ending rules**, with the line *Rules run top to bottom; the first match wins. If none match, the Default screen shows.*
 
-    Click the card. A panel slides in from the right, headed **Ending rules**, with the line *Rules run top to bottom; the first match wins. If none match, the Default screen shows.*
+<Frame caption="The Ending rules card. Its second line summarises what you have set.">
+  <img className="block dark:hidden" src="/images/forms/design/06-endings-card.png" alt="The bottom of the builder's left column with the Ending rules card highlighted, under an Endings heading, showing a summary line reading one rule and Message." />
+  <img className="hidden dark:block" src="/images/forms/design/06-endings-card-dark.png" alt="The bottom of the builder's left column with the Ending rules card highlighted, under an Endings heading, showing a summary line reading one rule and Message." />
+</Frame>
 
-    <Frame caption="The Ending rules card. Its second line summarises what you have set.">
-      <img className="block dark:hidden" src="/images/forms/design/06-endings-card.png" alt="The bottom of the builder's left column with the Ending rules card highlighted, under an Endings heading, showing a summary line reading one rule and Message." />
-      <img className="hidden dark:block" src="/images/forms/design/06-endings-card-dark.png" alt="The bottom of the builder's left column with the Ending rules card highlighted, under an Endings heading, showing a summary line reading one rule and Message." />
-    </Frame>
-  </Step>
+Scroll to the bottom of the panel. **Default** is *what people see after submitting when no rule matches*. Under **Screen after submitting** you pick one of two things.
 
-  <Step title="Set the Default screen">
-    Scroll to the bottom of the panel. **Default** is *what people see after submitting when no rule matches*.
+- **Show a message**: a **Headline** and a **Body**. A new form starts with `Thank you` and `Your answers have been received.`
+- **Redirect to a URL**: your own page. Section 6 covers that.
 
-    Under **Screen after submitting** you pick one of two things.
+Click **Save** at the bottom. **Cancel** throws away everything you changed in the panel.
 
-    - **Show a message**: a **Headline** and a **Body**. A new form starts with `Thank you` and `Your answers have been received.`
-    - **Redirect to a URL**: your own page. Section 6 covers that.
-
-    Click **Save** at the bottom. **Cancel** throws away everything you changed in the panel.
-
-    <Frame caption="The Default screen catches everyone no rule matches. It cannot be removed.">
-      <img className="block dark:hidden" src="/images/forms/design/07-endings-default.png" alt="The Ending rules panel with the Default block highlighted at the bottom, showing the heading Screen after submitting, the Redirect to a URL and Show a message choices, and Headline and Body boxes filled in with a thank you message." />
-      <img className="hidden dark:block" src="/images/forms/design/07-endings-default-dark.png" alt="The Ending rules panel with the Default block highlighted at the bottom, showing the heading Screen after submitting, the Redirect to a URL and Show a message choices, and Headline and Body boxes filled in with a thank you message." />
-    </Frame>
-  </Step>
-</Steps>
+<Frame caption="The Default screen catches everyone no rule matches. It cannot be removed.">
+  <img className="block dark:hidden" src="/images/forms/design/07-endings-default.png" alt="The Ending rules panel with the Default block highlighted at the bottom, showing the heading Screen after submitting, the Redirect to a URL and Show a message choices, and Headline and Body boxes filled in with a thank you message." />
+  <img className="hidden dark:block" src="/images/forms/design/07-endings-default-dark.png" alt="The Ending rules panel with the Default block highlighted at the bottom, showing the heading Screen after submitting, the Redirect to a URL and Show a message choices, and Headline and Body boxes filled in with a thank you message." />
+</Frame>
 
 <Warning>
   **The Default screen is what most people will see.**
@@ -217,102 +133,31 @@ The ending is the screen after someone presses the button. Every form has one, a
   A message needs a **Headline** or a **Body**. Empty both and saving stops with **A message screen needs a headline or body.**
 </Warning>
 
----
-
-## 6. Send Different People To Different Endings
+## 6. Send different people to different endings
 
 A rule looks at an answer. If it matches, that rule's screen shows instead of the Default.
 
-<Steps>
-  <Step title="Click Add rule">
-    **Add rule** sits above the **Default** block. Each rule you add is numbered, so you can see the order.
+**Add rule** sits above the **Default** block. Each rule you add is numbered, so you can see the order. Rules run from the top down and the first match wins, so put your narrowest rule first. The bin at the top right of a rule removes it.
 
-    Rules run from the top down and the first match wins. Put your narrowest rule first.
+Under **When**, pick the question, then how to compare it, then type the value. Click **Add condition** for a second test. Two or more tests give you **Match all** and **Match any** to choose between.
 
-    The bin at the top right of a rule removes it.
-  </Step>
+A rule with no test cannot be saved. You see **Rule 1: A rule needs at least one condition.**
 
-  <Step title="Say when the rule should fire">
-    Under **When**, pick the question, then how to compare it, then type the value.
+<Frame caption="A rule reads left to right: the question, the test, the value.">
+  <img className="block dark:hidden" src="/images/forms/design/08-endings-rule.png" alt="The Ending rules panel with Rule 1's When row highlighted, showing a question chosen from a dropdown, the test Equals, a value box, and an Add condition button underneath." />
+  <img className="hidden dark:block" src="/images/forms/design/08-endings-rule-dark.png" alt="The Ending rules panel with Rule 1's When row highlighted, showing a question chosen from a dropdown, the test Equals, a value box, and an Add condition button underneath." />
+</Frame>
 
-    Click **Add condition** for a second test. Two or more tests give you **Match all** and **Match any** to choose between.
+Under **Then show**, pick **Show a message** or **Redirect to a URL**. Pick **Redirect to a URL** and a **Redirect URL** box appears. It must start with `http://` or `https://`.
 
-    <Frame caption="A rule reads left to right: the question, the test, the value.">
-      <img className="block dark:hidden" src="/images/forms/design/08-endings-rule.png" alt="The Ending rules panel with Rule 1's When row highlighted, showing a question chosen from a dropdown, the test Equals, a value box, and an Add condition button underneath." />
-      <img className="hidden dark:block" src="/images/forms/design/08-endings-rule-dark.png" alt="The Ending rules panel with Rule 1's When row highlighted, showing a question chosen from a dropdown, the test Equals, a value box, and an Add condition button underneath." />
-    </Frame>
+Underneath sits **URL parameters**, folded up, with a count of how many are on. Open it to pass answers over to your own page. Each row shows what it sends and the `?name=` it uses. There is also **Add custom parameter** for a fixed pair of your own.
 
-    A rule with no test cannot be saved. You'll see **Rule 1: A rule needs at least one condition.**
-  </Step>
+Click **Save**.
 
-  <Step title="Say what they should see">
-    Under **Then show**, pick **Show a message** or **Redirect to a URL**.
-
-    Pick **Redirect to a URL** and a **Redirect URL** box appears. It must start with `http://` or `https://`.
-
-    Underneath sits **URL parameters**, folded up, with a count of how many are on. Open it to pass answers over to your own page. Each row shows what it sends and the `?name=` it uses. There is also **Add custom parameter** for a fixed pair of your own.
-
-    <Frame caption="A redirect can carry answers over to your own page as URL parameters.">
-      <img className="block dark:hidden" src="/images/forms/design/09-endings-redirect.png" alt="The Ending rules panel with the Default screen set to Redirect to a URL, a Redirect URL box below it, and the URL parameters row highlighted showing how many are switched on." />
-      <img className="hidden dark:block" src="/images/forms/design/09-endings-redirect-dark.png" alt="The Ending rules panel with the Default screen set to Redirect to a URL, a Redirect URL box below it, and the URL parameters row highlighted showing how many are switched on." />
-    </Frame>
-
-    Click **Save**.
-  </Step>
-</Steps>
-
-<Note>
-  **The middle column never shows a rule's ending.**
-
-  Finish the form in the middle column and you always get the **Default** screen, even when a rule would have matched.
-
-  Open the form's own page to see a rule really fire. [Sharing Your Form](/forms-share) shows you how.
-</Note>
-
-<Warning>
-  **Use a redirect when people need to go somewhere next.**
-
-  A message ending has two boxes, **Headline** and **Body**, and shows plain wording.
-
-  **Redirect to a URL** is the one that moves people on to a page of your own.
-</Warning>
-
----
-
-## Settings Reference
-
-### The Form tab
-
-| Setting | What it does | Default | We recommend | Watch out for |
-| --- | --- | --- | --- | --- |
-| **Theme** | Twelve ready-made looks. Clicking one fills in all five colours. | None picked. The form looks like **Sage** until you choose | Pick one, then change a colour or two. | It carries colours only. Your font and size are never touched. No tile is ringed on a new form, even though it already looks like Sage. |
-| **Background** | The colour behind the card. | Comes from the theme | Keep it light unless your brand is dark. | The card, the lines and the answer boxes are worked out from this. You cannot set them. |
-| **Text** | The colour of the words. | Comes from the theme | Leave it as the theme set it. | Set this and **Background** too close together and the form is unreadable. |
-| **Accent** | Highlights, such as the star on a required question. | Comes from the theme | Use your brand colour. | Not the same as **Button**, though a theme sets both the same. |
-| **Button** | The fill of the round continue button. | Comes from the theme | Keep it the same as **Accent**. | |
-| **Button Text** | The colour of anything drawn on the button. | Comes from the theme | White on a dark button, dark on a light one. | Change **Button** and this does not follow. Check it. |
-| **Font** | The writing for the whole form. Seven to pick from, including **System**, the visitor's own device font. | Inter | Pick the one nearest your own website. | **System** looks different on an iPhone and on Windows. |
-| **Size** | The base text size for the whole form, from 12 to 24. | 16px | Leave it at 16 unless the form is very short. | It moves everything together, so it is not the size of one heading. |
-| **Reset theme and typography** | Puts the shipped look back: all five colours, the font and the size. | Not applicable | Use it when a form has got away from you. | **Transition** and **Progress band** are left alone. A message offers **Undo** for ten seconds. |
-| **Transition** | How one page gives way to the next. **Vertical** or **Horizontal**. | Vertical | Either. It is taste. | Nothing about what you collect changes. |
-| **Progress band** | Shows the form name and how far along they are, above the questions. | On | Off for a one-page form. | On a long form it is what stops people giving up. |
-
-### Ending rules
-
-| Setting | What it does | Default | We recommend | Watch out for |
-| --- | --- | --- | --- | --- |
-| **Add rule** | Adds a numbered rule above the Default. | No rules | Put your narrowest rule at the top. | Rules run top to bottom and the first match wins. |
-| **When** | The question, the test and the value the rule looks for. | Empty | Use **Equals** with a choice question. It cannot be mistyped. | A rule with no test refuses to save. |
-| **Match all** / **Match any** | Whether every test must pass, or just one. | Match all | Match all, unless you really mean "or". | Only appears once a rule has two or more tests. |
-| **Add condition** | Adds another test to the same rule. | Not applicable | Keep rules to one or two tests. | |
-| **Then show** | The screen this rule's people see. | Show a message | A message for a polite decline, a redirect for a next step. | Every rule needs a screen. It is not optional. |
-| **Headline**, **Body** | The wording of a message screen. | Empty on a rule. `Thank you` and `Your answers have been received.` on the Default | Say what happens next and when. | One of the two must be filled in. |
-| **Redirect URL** | The page to send people to. | Empty | Send people to a real page you control. | Must start with `http://` or `https://`. Anything else refuses to save. |
-| **URL parameters** | Passes answers to that page as `?name=value`. | Nothing on. The row reads **URL parameters · 0 on** | Only switch on what the other page actually reads. | Only on a redirect. A message screen has none. |
-| **Add custom parameter** | Sends a fixed name and value of your own. | None | Use it to tag where the visitor came from. | |
-| **Default** | The screen for everyone no rule matches. | **Show a message** reading `Thank you` | Rewrite it before you share the link. | It always exists. You cannot delete it. |
-| **Cancel** | Closes the panel and throws away every change in it. | Not applicable | | It really does throw them away, including new rules. |
-| **Save** | Stores every rule and the Default together. | Not applicable | | The panel stays open if anything is wrong, with the problem written at the bottom. |
+<Frame caption="A redirect can carry answers over to your own page as URL parameters.">
+  <img className="block dark:hidden" src="/images/forms/design/09-endings-redirect.png" alt="The Ending rules panel with the Default screen set to Redirect to a URL, a Redirect URL box below it, and the URL parameters row highlighted showing how many are switched on." />
+  <img className="hidden dark:block" src="/images/forms/design/09-endings-redirect-dark.png" alt="The Ending rules panel with the Default screen set to Redirect to a URL, a Redirect URL box below it, and the URL parameters row highlighted showing how many are switched on." />
+</Frame>
 
 A rule can use fourteen tests.
 
@@ -320,143 +165,103 @@ A rule can use fourteen tests.
 
 The last two need no value.
 
----
+<Note>
+  **The middle column never shows a rule's ending.**
 
-## Troubleshooting
+  Finish the form in the middle column and you always get the **Default** screen, even when a rule would have matched.
+
+  Open the form's own page to see a rule really fire. [Share your form](/forms-share) shows you how.
+</Note>
 
 <AccordionGroup>
-  <Accordion title="My theme tile is no longer ringed">
-    You changed one of the five colours by hand. The look is now yours rather than the tile's.
-
-    Click the tile again to put all five back.
+  <Accordion title="Settings reference: the Form tab">
+    | Setting | What it does | Default | We recommend | Watch out for |
+    | --- | --- | --- | --- | --- |
+    | **Theme** | Twelve ready-made looks. Clicking one fills in all five colours. | None picked. The form looks like **Sage** until you choose | Pick one, then change a colour or two. | It carries colours only. Your font and size are never touched. No tile is ringed on a new form, even though it already looks like Sage. |
+    | **Background** | The colour behind the card. | Comes from the theme | Keep it light unless your brand is dark. | The card, the lines and the answer boxes are worked out from this. You cannot set them. |
+    | **Text** | The colour of the words. | Comes from the theme | Leave it as the theme set it. | Set this and **Background** too close together and the form is unreadable. |
+    | **Accent** | Highlights, such as the star on a required question. | Comes from the theme | Use your brand colour. | Not the same as **Button**, though a theme sets both the same. |
+    | **Button** | The fill of the round continue button. | Comes from the theme | Keep it the same as **Accent**. | |
+    | **Button Text** | The colour of anything drawn on the button. | Comes from the theme | White on a dark button, dark on a light one. | Change **Button** and this does not follow. Check it. |
+    | **Font** | The writing for the whole form. Seven to pick from, including **System**, the visitor's own device font. | Inter | Pick the one nearest your own website. | **System** looks different on an iPhone and on Windows. |
+    | **Size** | The base text size for the whole form, from 12 to 24. | 16px | Leave it at 16 unless the form is very short. | It moves everything together, so it is not the size of one heading. |
+    | **Reset theme and typography** | Puts the shipped look back: all five colours, the font and the size. | Not applicable | Use it when a form has got away from you. | **Transition** and **Progress band** are left alone. A message offers **Undo** for ten seconds. |
+    | **Transition** | How one page gives way to the next. **Vertical** or **Horizontal**. | Vertical | Either. It is taste. | Nothing about what you collect changes. |
+    | **Progress band** | Shows the form name and how far along they are, above the questions. | On | Off for a one-page form. | On a long form it is what stops people giving up. |
   </Accordion>
 
-  <Accordion title="My form is unreadable after I changed a colour">
-    Almost always a dark **Background** with dark **Text**, or the other way round.
-
-    Click a theme tile to reset all five colours, then change one at a time and watch the middle column.
+  <Accordion title="Settings reference: Ending rules">
+    | Setting | What it does | Default | We recommend | Watch out for |
+    | --- | --- | --- | --- | --- |
+    | **Add rule** | Adds a numbered rule above the Default. | No rules | Put your narrowest rule at the top. | Rules run top to bottom and the first match wins. |
+    | **When** | The question, the test and the value the rule looks for. | Empty | Use **Equals** with a choice question. It cannot be mistyped. | A rule with no test refuses to save. |
+    | **Match all** / **Match any** | Whether every test must pass, or just one. | Match all | Match all, unless you really mean "or". | Only appears once a rule has two or more tests. |
+    | **Add condition** | Adds another test to the same rule. | Not applicable | Keep rules to one or two tests. | |
+    | **Then show** | The screen this rule's people see. | Show a message | A message for a polite decline, a redirect for a next step. | Every rule needs a screen. It is not optional. |
+    | **Headline**, **Body** | The wording of a message screen. | Empty on a rule. `Thank you` and `Your answers have been received.` on the Default | Say what happens next and when. | One of the two must be filled in. |
+    | **Redirect URL** | The page to send people to. | Empty | Send people to a real page you control. | Must start with `http://` or `https://`. Anything else refuses to save. |
+    | **URL parameters** | Passes answers to that page as `?name=value`. | Nothing on. The row reads **URL parameters · 0 on** | Only switch on what the other page actually reads. | Only on a redirect. A message screen has none. |
+    | **Add custom parameter** | Sends a fixed name and value of your own. | None | Use it to tag where the visitor came from. | |
+    | **Default** | The screen for everyone no rule matches. | **Show a message** reading `Thank you` | Rewrite it before you share the link. | It always exists. You cannot delete it. |
+    | **Cancel** | Closes the panel and throws away every change in it. | Not applicable | | It really does throw them away, including new rules. |
+    | **Save** | Stores every rule and the Default together. | Not applicable | | The panel stays open if anything is wrong, with the problem written at the bottom. |
   </Accordion>
 
-  <Accordion title="The size slider will not go any smaller or bigger">
-    It stops at 12px and at 24px. Those are the two ends.
+  <Accordion title="Troubleshooting">
+    **My theme tile is no longer ringed.** You changed one of the five colours by hand, so the look is now yours rather than the tile's. Click the tile again to put all five back.
 
-    To make one question stand out beyond that, use **Text size** in **Field settings**. [Building Your Form](/forms-build) covers it.
-  </Accordion>
+    **My form is unreadable after I changed a colour.** Almost always a dark **Background** with dark **Text**, or the other way round. Click a theme tile to reset all five, then change one at a time.
 
-  <Accordion title="My answer boxes look bigger than the size I picked">
-    Below 16px the answer boxes stay at 16px. Everything else follows your size.
+    **The size slider will not go any smaller or bigger.** It stops at 12px and at 24px. To make one question stand out beyond that, use **Text size** in **Field settings**.
 
-    That is on purpose. A phone zooms in on any box under 16px, which throws the visitor out of the form.
-  </Accordion>
+    **My answer boxes look bigger than the size I picked.** Below 16px the answer boxes stay at 16px, on purpose. A phone zooms in on any box under 16px, which throws the visitor out of the form.
 
-  <Accordion title="I clicked Reset theme and typography by mistake">
-    A message appears with **Undo** on it. Click that within ten seconds and everything comes back.
+    **I clicked Reset theme and typography by mistake.** A message appears with **Undo** on it. Click that within ten seconds and everything comes back.
 
-    After that, click a theme tile and set your font and size again.
-  </Accordion>
+    **Saving says A message screen needs a headline or body.** One of your message screens is completely empty. The message names which one, either a rule number or **Default**.
 
-  <Accordion title="Saving the ending rules says A message screen needs a headline or body">
-    One of your message screens is completely empty. The message names which one, either a rule number or **Default**.
+    **Saving says A redirect screen needs a URL.** You chose **Redirect to a URL** and left the box empty. Type the page's address, starting with `https://`.
 
-    Fill in a **Headline** or a **Body** and save again.
-  </Accordion>
+    **Saving says The redirect must be an http or https address.** Copy the address out of your browser's address bar rather than typing it.
 
-  <Accordion title="Saving says A redirect screen needs a URL">
-    You chose **Redirect to a URL** and left the box empty. Type the page's address, starting with `https://`.
-  </Accordion>
+    **Saving says A rule needs at least one condition.** You added a rule and then removed its only test. Add one back, or delete the rule with the bin at its top right.
 
-  <Accordion title="Saving says The redirect must be an http or https address">
-    The address is there but Cortana will not use it. It has to start with `http://` or `https://`.
+    **My rule never fires.** Three things to check, in order. 1) You are testing in the middle column, which always shows the Default: open the form's own page. 2) The value does not match exactly: `Sales` is not `Sales question`. 3) An earlier rule matched first: drag your narrower rule higher.
 
-    Copy the address out of your browser's address bar rather than typing it.
-  </Accordion>
-
-  <Accordion title="Saving says A rule needs at least one condition">
-    You added a rule and then removed its only test. Add one back, or delete the rule with the bin at its top right.
-  </Accordion>
-
-  <Accordion title="My rule never fires">
-    Three things to check, in order.
-
-    1. **You are testing in the middle column.** It always shows the Default. Open the form's own page.
-    2. **The value does not match exactly.** `Sales` is not `Sales question`. Copy the wording from the question's choices.
-    3. **An earlier rule matched first.** Rules run top to bottom and the first match wins. Drag your narrower rule higher.
-  </Accordion>
-
-  <Accordion title="I clicked Cancel and lost my rules">
-    **Cancel** throws away everything you changed while the panel was open.
-
-    There is no undo. Add the rules again, and click **Save** this time.
+    **I clicked Cancel and lost my rules.** **Cancel** throws away everything you changed while the panel was open, and there is no undo. Add the rules again, and click **Save** this time.
   </Accordion>
 </AccordionGroup>
-
----
 
 ## FAQ
 
 <AccordionGroup>
   <Accordion title="How do I make the form look like my brand?">
-    Set the five colours under **Colors**, starting from whichever **Theme** tile is closest.
-
-    **Accent** and **Button** are the two that carry your brand colour furthest.
-
-    Then pick your **Font** under **Typography**, so the writing matches your website too.
+    Set the five colours under **Colors**, starting from whichever **Theme** tile is closest. **Accent** and **Button** carry your brand colour furthest. Then pick your **Font** under **Typography**.
   </Accordion>
 
   <Accordion title="Can I make the writing bigger?">
-    Yes. Drag **Size** under **Typography**. The whole form grows together.
-
-    To change one question on its own, use **Text size** in **Field settings**.
+    Yes. Drag **Size** under **Typography** and the whole form grows together. To change one question on its own, use **Text size** in **Field settings**.
   </Accordion>
 
   <Accordion title="What do visitors see if their phone is in dark mode?">
-    Exactly what you picked. Your form looks the same to everyone.
-
-    So choose the look you want them to see, rather than leaving it to their phone.
+    Exactly what you picked. Your form looks the same to everyone, so choose the look you want them to see.
   </Accordion>
 
   <Accordion title="Can I send someone to a different page depending on their answer?">
-    Yes. That is exactly what a rule does.
-
-    Add a rule, set **When** to the answer you care about, and set **Then show** to **Redirect to a URL**.
+    Yes. Add a rule, set **When** to the answer you care about, and set **Then show** to **Redirect to a URL**.
   </Accordion>
 
   <Accordion title="Can I pass an answer to my own thank-you page?">
-    Yes, on a redirect. Open **URL parameters** and switch on the answers you want.
-
-    Each row shows the `?name=` it will use, so whoever built your page knows what to read.
+    Yes, on a redirect. Open **URL parameters** and switch on the answers you want. Each row shows the `?name=` it will use, so whoever built your page knows what to read.
   </Accordion>
 
   <Accordion title="Can I turn people away politely?">
-    Yes. Add a rule for the answer you do not want, and give it a message screen that says so.
-
-    Their answers are still recorded. The rule only changes what they see.
-  </Accordion>
-
-  <Accordion title="What can a rule test?">
-    An answer from any question on the form.
-
-    The Settings Reference on this page lists the fourteen tests you can compare it with.
+    Yes. Add a rule for the answer you do not want, and give it a message screen that says so. Their answers are still recorded. The rule only changes what they see.
   </Accordion>
 </AccordionGroup>
 
----
+## Next step
 
-## Next Steps
-
-<CardGroup cols={2}>
-  <Card title="4) Sharing Your Form" icon="share-nodes" href="/forms-share">
-    Turn the form on, copy the link, and paste the form into your own website.
-  </Card>
-  <Card title="5) Where Your Answers Go" icon="inbox" href="/forms-answers">
-    What happens after someone presses the button, and what you can see afterwards.
-  </Card>
-  <Card title="2) Building Your Form" icon="list-check" href="/forms-build">
-    Back to the questions, pages and rules that decide what you ask.
-  </Card>
-  <Card title="1) Creating Your Form" icon="file-plus" href="/forms-create">
-    Back to adding, copying and archiving whole forms.
-  </Card>
-</CardGroup>
-
-If any of this does not match what you see on screen, message the support team using the button in the bottom right.
+<Card title="4) Share your form" icon="share-nodes" href="/forms-share">
+  Turn the form on, get the link, and paste the form into your own website.
+</Card>

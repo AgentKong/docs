@@ -240,22 +240,13 @@
         "icon": "file-lines",
         "groups": [
           {
-            "group": "Getting Started",
+            "group": "A-Z Guide",
+            "icon": "rocket",
             "pages": [
               "forms-overview",
-              "forms-create"
-            ]
-          },
-          {
-            "group": "Building Your Form",
-            "pages": [
+              "forms-create",
               "forms-build",
-              "forms-design"
-            ]
-          },
-          {
-            "group": "Going Live",
-            "pages": [
+              "forms-design",
               "forms-share",
               "forms-answers"
             ]
