@@ -13,9 +13,9 @@ Sources live at **Tracking → Conversion Setup**. You open (or create) a conver
 
 ### Available vs locked sources
 
-The **Integration** dropdown lists all 28 source types. Four are always available because they do not depend on an outside tool:
+The **Integration** dropdown lists all 29 source types. Five are always available because they do not depend on an outside tool:
 
-**Forms / Appointments** · **Webhook** · **CSV Upload** · **Pixel**
+**Forms / Appointments** · **Webhook** · **CSV Upload** · **Pixel** · **Cortana CRM**
 
 The other 24 require their integration to be connected to this business first. Until it is connected, the entry is greyed out with a **padlock icon** and sorts to the bottom of the list. Clicking a locked entry does not select it. It shows an error toast such as `Please connect Stripe first. Go to Settings → Integrations to connect.`
 
@@ -328,7 +328,7 @@ Every source is added the same way. Follow these six steps, then open your sourc
       </Step>
 
       <Step title="Decide on revenue (opportunity events only)">
-        **Track revenue from opportunity** is a checkbox. When on, the opportunity's `value` is captured as one-time cash collected. Uncheck to record the stage change with no revenue attached.
+        **Revenue** is a dropdown. **Off** records the stage change with no revenue attached. **Opportunity value** captures the opportunity's `value` as one-time cash collected. **Custom field** captures a number custom field on the opportunity instead, and a blank field counts as 0.
 
         The form notes that for recurring revenue you should connect Stripe or Whop instead.
       </Step>
@@ -342,6 +342,30 @@ Every source is added the same way. Follow these six steps, then open your sourc
       **Contact Updated** is the one event that shows neither extra configuration nor the "no additional configuration required" note, so it tracks every contact update in the connected Close organisation.
 
       If Close.io is connected but the form says *"Close.io is not connected"*, the integration has been disconnected on that business even though old Close sources still exist. Reconnect it at **Settings → Integrations**.
+    </Note>
+  </Accordion>
+
+  <Accordion title="Cortana CRM">
+    **What it tracks:** deals moving through stages on Cortana's own pipelines, the deal board under **Sales Dashboard → CRM Pipelines**. Deal events can carry revenue.
+
+    **Prerequisite integration:** none. This is Cortana's built-in CRM, so nothing needs connecting. You do need at least one pipeline with stages.
+
+    <Steps>
+      <Step title="Pick the pipeline and stages">
+        **Select Pipeline** (required), then the stages to track.
+      </Step>
+
+      <Step title="Decide on revenue">
+        **Revenue** is a dropdown: **Off** (count only), the **deal value**, or a **number custom field** on the deal. A blank field counts as 0.
+      </Step>
+
+      <Step title="Save">
+        Click **Submit**.
+      </Step>
+    </Steps>
+
+    <Note>
+      Full documentation for Cortana CRM is coming. Until then, the source works like the GoHighLevel and HubSpot opportunity events above.
     </Note>
   </Accordion>
 
@@ -630,13 +654,13 @@ Every source is added the same way. Follow these six steps, then open your sourc
       </Step>
 
       <Step title="Opportunity Stage Changed: revenue, dedup, pipeline, stages">
-        - **Track revenue from opportunity** is a checkbox. When ticked, a currency picker appears (defaults to **USD**).
+        - **Revenue** is a dropdown with three choices. **Off — count only, no dollar value** records the stage change with no money attached. **Opportunity value** uses the deal's own monetary value. **Custom field — pick a number field** lets you choose a number custom field on the opportunity and uses whatever is typed there. A blank field counts as 0. With either revenue option on, a currency picker appears (defaults to **USD**).
         - **Only one entry per stage, per contact** is a checkbox. When on, a contact moved into the same stage more than once is recorded once. Leave off to log every stage entry separately.
         - **Select Pipeline** (required), then **Select Stages to Track** (required) with Select All / Deselect All.
       </Step>
 
       <Step title="Opportunity Status Changed: revenue, pipeline, statuses">
-        - **Track revenue from opportunity** is a checkbox, with the same currency picker.
+        - **Revenue** is the same three-way dropdown: off, opportunity value, or a number custom field, with the same currency picker.
         - **Select Pipeline** (required).
         - **Track Status Changes** (required) as chips: **Open** · **Won** · **Lost** · **Abandoned**. Pick **Won** for closed deals.
       </Step>
@@ -645,6 +669,14 @@ Every source is added the same way. Follow these six steps, then open your sourc
         Click **Submit**.
       </Step>
     </Steps>
+
+    <Frame caption="The Revenue dropdown on an opportunity event: off, the opportunity's value, or a number custom field on the deal.">
+      <img src="/images/ad-tracking/conversion-sources/gohighlevel/02-opportunity-revenue.png" alt="Create Conversion Source dialog for GoHighLevel with Event Type set to Opportunity Stage Changed and the Revenue dropdown open, showing Off count only no dollar value, Opportunity value default, and Custom field pick a number field" />
+    </Frame>
+
+    <Tip>
+      Feed two conversions from the same pipeline with two different dollar figures. Point a **Deal closed — new revenue** conversion at a custom field your team fills in on close, and an **LTV Revenue** conversion at the opportunity value. Each conversion reports the number that fits it.
+    </Tip>
 
     <Warning>
       There is no **Contact Tag Added** event in the picker. Tag tracking is deliberately disabled because GoHighLevel's webhook sends the contact's *entire* tag list rather than the tag that was just added, which caused phantom conversions whenever any unrelated tag was touched. To convert on a tag, use a **Webhook** source fired from a GoHighLevel workflow instead.
@@ -682,7 +714,7 @@ Every source is added the same way. Follow these six steps, then open your sourc
       </Step>
 
       <Step title="Deal Stage Changed: revenue, pipeline, stages">
-        - **Track revenue from deal** is a checkbox.
+        - **Revenue** is a dropdown: **Off** (count only), the **deal amount**, or a **number custom field** on the deal. A blank field counts as 0.
         - **Pipeline**. The placeholder is **"Select pipeline"**. If none: *"No deal pipelines found. Create a pipeline in HubSpot CRM first."*
         - **Stages** (required) is a checkbox list of that pipeline's stages.
       </Step>
@@ -1797,10 +1829,14 @@ These settings appear on more than one source. Where a source uses one, its acco
 
 ### Revenue tracking
 
-- **What it does:** attaches money to the conversion. Appears as **Track revenue from opportunity** (GoHighLevel, Close.io), **Track revenue from deal** (HubSpot), **Track revenue (capture order value & currency)** (body pixel), or a revenue field picker (Salesforce).
+- **What it does:** attaches money to the conversion. On CRM opportunity and deal events (GoHighLevel, HubSpot, Close.io, Cortana CRM) it is a **Revenue** dropdown with three choices: **Off** (count only, no dollar value), the **opportunity or deal value**, or a **custom field** where you pick a number field on the deal and its value becomes the revenue. A blank custom field counts as 0. Salesforce has a similar revenue field picker. On the body pixel it is **Track revenue (capture order value & currency)**.
 - **Default:** off for GoHighLevel, Close.io, HubSpot, and the body pixel. Payment sources like Stripe, PayPal, Whop, Shopify, WooCommerce, Shopier, and Fanbasis always carry revenue.
 - **Recommendation:** on for anything that represents money changing hands, off for leads and bookings.
 - **Caveat:** CRM opportunity values are one-time cash collected, not recurring revenue. For subscription revenue use Stripe or Whop as the source of truth.
+
+<Tip>
+  The custom field option is how one CRM feeds two different numbers. A common setup is a **Deal closed — new revenue** conversion that reads a custom field your closers fill in with the cash collected, alongside an **LTV Revenue** conversion on the same pipeline that reads the opportunity value. Works the same in GoHighLevel, HubSpot, Close.io, and Cortana CRM.
+</Tip>
 
 ### Currency
 
@@ -2000,7 +2036,8 @@ These settings appear on more than one source. Where a source uses one, its acco
   </Accordion>
 
   <Accordion title="Revenue is missing or wrong">
-    - **Revenue is zero on a CRM source**: the **Track revenue** checkbox is off. It is off by default on GoHighLevel, Close.io, and HubSpot.
+    - **Revenue is zero on a CRM source**: the **Revenue** dropdown is set to **Off**. It is off by default on GoHighLevel, Close.io, and HubSpot.
+    - **Revenue is zero on some deals only**: the source reads a **custom field** and that field is blank on those deals. A blank field counts as 0. Fill it in on the deal, or switch the source to the opportunity value.
     - **Revenue is zero on a body pixel**: **Track revenue (capture order value & currency)** is off, or your page does not expose purchase data for auto-detection. Pass value and currency manually in the snippet.
     - **Revenue is in the wrong currency**: check the source's currency setting, which defaults to **USD**. This is separate from the Attribution Table's display currency.
     - **WooCommerce revenue far too low**: your **Count orders with status** list is missing the status your gateway parks orders in.
@@ -2035,6 +2072,9 @@ These settings appear on more than one source. Where a source uses one, its acco
     Whop, like the other 19 integration-backed sources, stays greyed out with a padlock until Whop is connected to this business. Connect it at **Dashboard → Integrations** and the entry unlocks and moves up into the A-Z list. This is the same reason any source shows a padlock.
   </Accordion>
 
+  <Accordion title="Can I track new revenue and lifetime value separately from my CRM?">
+    Yes. Create two conversions on the same pipeline and stage. Set one's **Revenue** dropdown to a **custom field**, for example a "Cash collected" number field your team fills in when the deal closes. Set the other's to the **opportunity value**. Available on GoHighLevel, HubSpot, Close.io, and Cortana CRM.
+  </Accordion>
   <Accordion title="Can one conversion have two sources?">
     Yes, and it is the normal setup. A *Purchase* conversion is often fed by Stripe, Shopify, and a CSV import at the same time. Everything written by any of those sources lands in the same conversion.
 
