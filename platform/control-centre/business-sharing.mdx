@@ -1,79 +1,59 @@
 ---
 title: "Business Sharing"
-description: "Share a business with another Cortana account — like your agency — while you keep ownership, billing, and control."
+description: "Give another Cortana account, such as your agency or a client, access to one of your businesses without sharing logins. To get access to a client's business, they share it with you."
 ---
 
-## What is Business Sharing?
+{/* last-verified: 2026-09-10 · Settings → Users → Sharing */}
 
-Business Sharing lets you give **another Cortana account** access to one of your businesses. The classic use case: you run your own Cortana account, and your marketing agency runs theirs. Share the business with the agency's account and they can work inside it — dashboards, ad tracking, contacts, AI agents, Control Centre analytics — exactly as if it were one of their own.
+Business Sharing gives **another Cortana account** access to one of your businesses. No shared passwords, no extra seat. The business stays in your account on your subscription, and you can revoke any time.
 
-You stay in control the whole time:
+It works one way: **the business owner sends the invite**. If you are an agency that needs into a client's business, the client shares it with you. There is no way to request access from your side.
 
-- **You keep ownership.** The business stays in your account, on your subscription.
-- **You can revoke at any time.** Access ends immediately.
-- **They can't touch your money.** Billing, subscriptions, and wallet purchases stay with your account only.
+<Frame caption="Settings → Users → Sharing. Enter the other account owner's email, tick the acknowledgement, send.">
+  <img src="/images/settings/business-sharing/01-sharing-tab.png" alt="Business Sharing card on the Sharing sub-tab of Settings → Users, with an email field for the other account owner, a Send Invite button, an acknowledgement checkbox, and an empty state reading No shares yet" />
+</Frame>
 
-## Who gets access on the other side
+## Share a business
 
-A share targets an **account**, not a person. Once accepted:
+1. Pick the business in the dropdown at the top of the left nav.
+2. Go to **Settings → Users → Sharing**.
+3. Enter the **email of the other account's owner**. Not a manager or teammate. The owner.
+4. Tick the acknowledgement and click **Send Invite**.
 
-- The other account's **owner** and their **Admin** users can access the shared business.
-- Their **Manager** users cannot see it at all.
-- They cannot re-share the business or invite anyone else into it.
+The invite shows as **Pending** and expires after 7 days. The other owner opens the email, logs in **as owner with that same email**, and clicks **Accept**. The business appears in their account at once under **Shared with you**. Their account must be active and paid.
 
-## Requirements
+## Who gets in
 
-- The invite must go to the **account owner's email** of the receiving account.
-- The receiving account must be an **active, paid Cortana account**. No subscription, no share.
+A share goes to an **account**, not a person. Their **owner and Admin users** get full working access. Their **Manager** users see nothing.
 
-## How to share a business
-
-1. Open the business you want to share from the dropdown at the top of the left-hand navigation bar.
-2. Click **Settings**, then the **Users** tab.
-3. Open the **Sharing** sub-tab.
-4. Enter the **email address of the other account's owner**.
-5. Tick the acknowledgement checkbox. This confirms you understand that every admin user of that account will be able to see and work inside your business, and that activity they run (including AI) is billed to this business.
-6. Click **Send invite**.
-
-The invite email goes out immediately and the share appears in your Sharing table with a **Pending** status. Invites expire after 7 days — you can resend from the same screen.
-
-## How the other side accepts
-
-1. The account owner opens the invite link from their email.
-2. They log in to Cortana **as the account owner** — the email on their account must match the email you invited. Managers can't accept, and a mismatched email is rejected.
-3. They review what accepting means and click **Accept**.
-
-That's it. The business appears in their account right away.
-
-## What the recipient sees
-
-- **Business selector:** the shared business sits in its own **"Shared with you"** group, marked with a link icon and a "Shared by" tooltip.
-- **Control Centre:** the business shows a **Shared** badge in the Businesses table, appears in the business selector, and flows through the **Unified Attribution** table with the same numbers you see. They can also add it to their business groups.
-- Shared businesses never count against the recipient's own plan limits.
-
-## What the recipient can and can't do
-
-| Can do | Can't do |
+| They can | They cannot |
 | --- | --- |
-| Use everything in the business — dashboards, tracking, contacts, conversations, AI agents | Delete the business |
-| See it in their Control Centre and Unified Attribution | Manage your billing, subscriptions, or wallet |
-| Use it through the API and MCP integrations | Re-share it or invite others |
-| Leave the share on their own | Manage the share itself |
+| Use everything in the business, including the API and MCP | Delete the business |
+| See it in their Control Centre and Unified Attribution | Touch your billing, subscription, or wallet |
+| Leave the share themselves | Re-share it or invite anyone else |
 
-<Note>
-Usage inside the business (AI runs, messages, and similar) is billed to the business it runs on — that's your account. This is stated in the consent acknowledgement when you share.
-</Note>
+Activity they run inside the business, including AI, is billed to the business, which means to you.
 
-## Revoking access
+## Revoke or leave
 
-1. Go back to **Settings → Users → Sharing** on the business.
-2. Click **Revoke** next to the share and confirm.
+- **You revoke:** **Settings → Users → Sharing**, then **Revoke**. Access ends on their next request, in the app, the API, and MCP.
+- **They leave:** **Control Centre → Settings → Account → Shared with me → Leave**.
 
-Access ends on the recipient's very next request — the app, the API, and any connected MCP tools all lose the business immediately.
+If either subscription lapses, access pauses until it is active again.
 
-The recipient can also walk away on their own from **Control Centre → Settings → Account → Shared with me → Leave**.
+## FAQ
 
-## Subscription rules
-
-- If **your** subscription lapses, the recipient sees a "subscription inactive" wall on the shared business until your account is active again. Your data is never exposed through a lapsed account.
-- If **their** account stops being active, they lose access to shared businesses until they're back.
+<AccordionGroup>
+  <Accordion title="How do I get access to my client's business?">
+    Ask the client to share it with you. In that business they go to **Settings → Users → Sharing** and enter **your account owner's email**. You accept from the invite email, logged in as owner. It then shows under **Shared with you**.
+  </Accordion>
+  <Accordion title="How do I share my account with another Cortana user?">
+    You share a **business**, not the account. Follow the steps above with the other account owner's email. If the person is on your own team and just needs a login, invite them under **Settings → Users** instead. See [Users](/platform/control-centre/users).
+  </Accordion>
+  <Accordion title="They clicked the invite but were rejected.">
+    They are logged in as a Manager, or their account email does not match the one you invited. They must log in as the owner with that exact email. If the invite is over 7 days old, resend it.
+  </Accordion>
+  <Accordion title="Can I share with one person instead of a whole account?">
+    No. Every Admin on the other account gets in. They control who is an Admin.
+  </Accordion>
+</AccordionGroup>
