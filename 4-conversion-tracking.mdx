@@ -3,6 +3,8 @@ title: "4.2) Conversion Sources"
 description: "Add conversion sources to track sales and leads in Cortana. Connect Stripe, PayPal, Shopify, Kajabi, GoHighLevel, Meta Ads, LinkedIn Ads, Meta and Instagram DMs, Calendly, CallRail, webhooks, pixels, CSV and 14 other source types to any conversion."
 ---
 
+{/* last-verified: 2026-09-10 (Revenue dropdown on CRM pipeline sources). App route: Tracking, Conversions, Add Source / Edit Source dialogs. */}
+
 ## <u>Conversion Sources</u>
 
 A **conversion source** is what tells Cortana that an event has happened. A conversion (like *Lead*, *Booked Call*, or *Purchase*) is the bucket; a source is the pipe that fills it.
@@ -328,9 +330,13 @@ Every source is added the same way. Follow these six steps, then open your sourc
       </Step>
 
       <Step title="Decide on revenue (opportunity events only)">
-        **Track revenue from opportunity** is a checkbox. When on, the opportunity's `value` is captured as one-time cash collected. Uncheck to record the stage change with no revenue attached.
+        **Revenue** is a dropdown with three options:
 
-        The form notes that for recurring revenue you should connect Stripe or Whop instead.
+        - **Off**: the stage change is counted with no dollar value.
+        - **Opportunity value (default)**: the opportunity's `value` is captured as one-time cash collected.
+        - **Custom field**: a **Revenue field** picker appears and opens right away, listing the number custom fields on your Close opportunities. Pick the one that holds the amount you want as revenue, for example a "Cash collected" field. Only number fields are offered, and **Submit** stays blocked until you pick one.
+
+        See [Revenue from a custom field](#revenue-from-a-custom-field) for how a blank field is handled. The form notes that for recurring revenue you should connect Stripe or Whop instead.
       </Step>
 
       <Step title="Save">
@@ -630,13 +636,14 @@ Every source is added the same way. Follow these six steps, then open your sourc
       </Step>
 
       <Step title="Opportunity Stage Changed: revenue, dedup, pipeline, stages">
-        - **Track revenue from opportunity** is a checkbox. When ticked, a currency picker appears (defaults to **USD**).
+        - **Revenue** is a dropdown: **Off**, **Opportunity value (default)**, or **Custom field**. With **Custom field**, a **Revenue field** picker opens and lists the sub-account's number and monetary opportunity custom fields (monetary ones first, under **Currency**). **Submit** stays blocked until you pick one. With several sub-accounts connected, pick the account first: the field list belongs to one sub-account.
+        - **Deal currency** appears whenever revenue is on (defaults to **USD**).
         - **Only one entry per stage, per contact** is a checkbox. When on, a contact moved into the same stage more than once is recorded once. Leave off to log every stage entry separately.
         - **Select Pipeline** (required), then **Select Stages to Track** (required) with Select All / Deselect All.
       </Step>
 
       <Step title="Opportunity Status Changed: revenue, pipeline, statuses">
-        - **Track revenue from opportunity** is a checkbox, with the same currency picker.
+        - **Revenue** is the same dropdown (**Off**, **Opportunity value**, **Custom field**), with the same **Deal currency** picker.
         - **Select Pipeline** (required).
         - **Track Status Changes** (required) as chips: **Open** · **Won** · **Lost** · **Abandoned**. Pick **Won** for closed deals.
       </Step>
@@ -682,7 +689,7 @@ Every source is added the same way. Follow these six steps, then open your sourc
       </Step>
 
       <Step title="Deal Stage Changed: revenue, pipeline, stages">
-        - **Track revenue from deal** is a checkbox.
+        - **Revenue** is a dropdown: **Off**, **Deal amount (default)**, or **Custom field**. With **Custom field**, a **Revenue field** picker opens and lists the portal's number deal properties: currency-typed ones under **Currency**, the rest under **Other number fields**. Hover a custom property to see its internal name; typing either the label or the internal name finds it. **Submit** stays blocked until you pick one.
         - **Pipeline**. The placeholder is **"Select pipeline"**. If none: *"No deal pipelines found. Create a pipeline in HubSpot CRM first."*
         - **Stages** (required) is a checkbox list of that pipeline's stages.
       </Step>
@@ -1797,10 +1804,31 @@ These settings appear on more than one source. Where a source uses one, its acco
 
 ### Revenue tracking
 
-- **What it does:** attaches money to the conversion. Appears as **Track revenue from opportunity** (GoHighLevel, Close.io), **Track revenue from deal** (HubSpot), **Track revenue (capture order value & currency)** (body pixel), or a revenue field picker (Salesforce).
-- **Default:** off for GoHighLevel, Close.io, HubSpot, and the body pixel. Payment sources like Stripe, PayPal, Whop, Shopify, WooCommerce, Shopier, and Fanbasis always carry revenue.
-- **Recommendation:** on for anything that represents money changing hands, off for leads and bookings.
+- **What it does:** attaches money to the conversion. On CRM pipeline sources (GoHighLevel, Close.io, HubSpot, Cortana CRM deals) it is the **Revenue** dropdown: **Off**, the CRM's standard value (**Deal amount** for HubSpot, **Opportunity value** for Close.io and GoHighLevel, **Deal value** for Cortana CRM), or **Custom field**. On the body pixel it is **Track revenue (capture order value & currency)**; Salesforce has its own revenue field picker.
+- **Default:** the standard deal value for a new CRM pipeline source; off for the body pixel. A source created before the dropdown existed keeps what its old checkbox said. Payment sources like Stripe, PayPal, Whop, Shopify, WooCommerce, Shopier, and Fanbasis always carry revenue.
+- **Recommendation:** the deal value for anything that represents money changing hands, **Custom field** when your team keeps the real amount somewhere else on the deal, **Off** for leads and bookings.
 - **Caveat:** CRM opportunity values are one-time cash collected, not recurring revenue. For subscription revenue use Stripe or Whop as the source of truth.
+
+### Revenue from a custom field
+
+Use **Custom field** when the number you want as revenue is not the CRM's standard deal value. The usual case: the deal amount holds the total contract value, and a separate field such as "Cash collected" holds what was actually paid.
+
+1. In the source form, set **Revenue** to **Custom field**.
+2. The **Revenue field** picker opens and shows *"Loading options via API. May take a minute if the API is slow or is sending a large volume of data."* until your CRM returns its field list.
+3. Search and pick the field. Only number fields are offered, currency-typed ones first where the CRM tells them apart. If nothing matches your search the picker says *"No matching number field."*
+4. Save. From now on the source reads that field on every deal or opportunity it records.
+
+How values are handled:
+
+- **The field has a number:** that number is the conversion's revenue. The standard deal value is ignored for this source.
+- **The field is blank:** the conversion is recorded with no revenue. Cortana never substitutes the deal value, because it is a different number. Once your team enters a value the conversion is updated on its own: HubSpot within about 5 minutes, Close.io and GoHighLevel when the edit reaches Cortana (webhook, or the periodic replay), Cortana CRM deals the moment the field is saved.
+- **The field holds zero or a negative number:** recorded as no revenue.
+- **The value is edited later:** the conversion follows the field, the same way a standard source follows the deal value.
+- **Changing a source's Revenue setting:** applies to deals recorded from then on, plus any deal that is edited or re-synced afterwards. A conversion that already has revenue is never cleared because the field is blank.
+- **Field list could not load:** the form shows *"Could not load fields from ..."* and keeps your current selection, so an existing source can still be saved. Check the integration connection and try again.
+- **Cortana CRM deals:** a field that a source reads revenue from cannot be archived until you change that source's **Revenue** setting; the error names the source. Only fields of type **Number** are offered.
+
+Where the picker loads from: HubSpot deal properties of type number, Close.io opportunity custom fields of type number, GoHighLevel opportunity custom fields of type numerical or monetary (for the sub-account chosen on the source), Cortana CRM deal fields of type Number.
 
 ### Currency
 
@@ -1933,6 +1961,10 @@ These settings appear on more than one source. Where a source uses one, its acco
     - **Forms / Appointments**: *"No booking forms yet. Create an event type first."*
 
     Create the missing object in the source platform, then reopen the dialog. If it still does not appear, reconnect the integration: a token that has partially expired can return an empty list rather than an error.
+  </Accordion>
+
+  <Accordion title="My deal has an amount but the conversion shows no revenue">
+    Open the source and check **Revenue**. If it is **Custom field**, the conversion reads that field, not the deal amount, and a blank field records no revenue on purpose. Enter the value on the deal or opportunity and the conversion updates on its own (see [Revenue from a custom field](#revenue-from-a-custom-field)). If **Revenue** is **Off**, the source never attaches money; switch it to the deal value or a custom field, which applies to future deals.
   </Accordion>
 
   <Accordion title="It says all available events have already been added">

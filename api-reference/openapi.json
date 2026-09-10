@@ -11389,6 +11389,16 @@
             "type": "boolean",
             "description": "Opportunity events: record the opportunity value as revenue."
           },
+          "revenueField": {
+            "type": "object",
+            "nullable": true,
+            "description": "Opportunity events with trackRevenue: read revenue from this number custom field instead of monetaryValue. name = the GoHighLevel opportunity custom field id (see GET /locations/{id}/customFields, model opportunity); label is display only. A blank field records no value, never monetaryValue. Omit = opportunity value; on update, null clears the mapping.",
+            "properties": {
+              "name": { "type": "string" },
+              "label": { "type": "string" }
+            },
+            "required": ["name"]
+          },
           "dedupOneEntryPerStage": {
             "type": "boolean",
             "description": "OpportunityStageUpdate: one conversion per opportunity and stage; re-entries collapse."
@@ -11574,6 +11584,16 @@
           "trackRevenue": {
             "type": "boolean",
             "description": "Opportunity events: record the opportunity value as revenue."
+          },
+          "revenueField": {
+            "type": "object",
+            "nullable": true,
+            "description": "Opportunity events with trackRevenue: read revenue from this number custom field instead of monetaryValue. name = the GoHighLevel opportunity custom field id (see GET /locations/{id}/customFields, model opportunity); label is display only. A blank field records no value, never monetaryValue. Omit = opportunity value; on update, null clears the mapping.",
+            "properties": {
+              "name": { "type": "string" },
+              "label": { "type": "string" }
+            },
+            "required": ["name"]
           },
           "dedupOneEntryPerStage": {
             "type": "boolean",
@@ -11904,6 +11924,16 @@
             "type": "boolean",
             "default": true,
             "description": "Opportunity events: record the opportunity value as revenue."
+          },
+          "revenueField": {
+            "type": "object",
+            "nullable": true,
+            "description": "Opportunity events with trackRevenue: read revenue from this number custom field instead of value. name = the Close custom field id (cf_...); label is display only. A blank field records no value, never the opportunity value. Omit = opportunity value; on update, null clears the mapping.",
+            "properties": {
+              "name": { "type": "string" },
+              "label": { "type": "string" }
+            },
+            "required": ["name"]
           }
         },
         "example": {
@@ -11968,6 +11998,16 @@
             "type": "boolean",
             "default": true,
             "description": "Opportunity events: record the opportunity value as revenue."
+          },
+          "revenueField": {
+            "type": "object",
+            "nullable": true,
+            "description": "Opportunity events with trackRevenue: read revenue from this number custom field instead of value. name = the Close custom field id (cf_...); label is display only. A blank field records no value, never the opportunity value. Omit = opportunity value; on update, null clears the mapping.",
+            "properties": {
+              "name": { "type": "string" },
+              "label": { "type": "string" }
+            },
+            "required": ["name"]
           }
         },
         "description": "Merge patch over the stored event: omitted fields are kept, then the event is re-validated and the source renamed as on create."
@@ -12456,7 +12496,18 @@
             }
           },
           "trackRevenue": {
-            "type": "boolean"
+            "type": "boolean",
+            "description": "DealStageChange: record the deal amount as revenue."
+          },
+          "revenueField": {
+            "type": "object",
+            "nullable": true,
+            "description": "DealStageChange with trackRevenue: read revenue from this number deal property instead of amount. name = the HubSpot property internal name; label is display only. A blank property records no value, never the amount. Omit = deal amount; on update, null clears the mapping.",
+            "properties": {
+              "name": { "type": "string" },
+              "label": { "type": "string" }
+            },
+            "required": ["name"]
           },
           "meetingLinkIds": {
             "type": "array",
@@ -12582,7 +12633,18 @@
             }
           },
           "trackRevenue": {
-            "type": "boolean"
+            "type": "boolean",
+            "description": "DealStageChange: record the deal amount as revenue."
+          },
+          "revenueField": {
+            "type": "object",
+            "nullable": true,
+            "description": "DealStageChange with trackRevenue: read revenue from this number deal property instead of amount. name = the HubSpot property internal name; label is display only. A blank property records no value, never the amount. Omit = deal amount; on update, null clears the mapping.",
+            "properties": {
+              "name": { "type": "string" },
+              "label": { "type": "string" }
+            },
+            "required": ["name"]
           },
           "meetingLinkIds": {
             "type": "array",
