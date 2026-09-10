@@ -1,0 +1,165 @@
+---
+title: "Run your deals in CRM Pipelines"
+description: "CRM Pipelines is a deal board inside Cortana: import pipelines from GoHighLevel, HubSpot or Close, drag deals through stages, assign owners, fill in custom fields, and keep everything in two-way sync with GoHighLevel."
+---
+
+{/* last-verified: 2026-09-09 · /business/<businessId>/crm-pipelines · DRAFT: the sidebar entry ships with the CRM Pipelines launch; publish this page with it. Open product decision FA-1 in the fidelity sprint doc may change the paused-sync FAQ answer. */}
+
+CRM Pipelines gives every business a deal board that reads like your CRM and knows what your ads did. At the end of this page you will have your pipelines imported, your team assigned, your custom fields on every deal, and two-way sync running with GoHighLevel.
+
+<Frame caption="The board: one column per stage, a value and owner on every card, and the next appointment as a pill.">
+  <img src="/images/sales-dashboard/crm-pipelines/01-board.png" alt="CRM Pipelines board with stage columns New Lead, Contacted, Call Booked, Offer Made and Negotiation, deal cards showing value, source, owner and an appointment pill, and the toolbar with search, Filters, view switcher, Import and New deal" />
+</Frame>
+
+## Open CRM Pipelines
+
+1. In the sidebar, click **CRM Pipelines**.
+2. The first pipeline opens. To switch, click the pipeline name at the top left and pick another one.
+3. To start a fresh one, open the same menu and click **New pipeline**. Give it a name and click **Create pipeline**. It starts with sensible stages you can rename anytime.
+
+The number next to the pipeline name is the count and total value of the deals you can see right now. Filters change it.
+
+## Bring your deals over from your CRM
+
+The import brings pipelines, stages and deals across as native Cortana pipelines. Re-running it never duplicates a deal.
+
+1. Click **Import** at the top right.
+2. Pick where your deals live today: **GoHighLevel**, **HubSpot** or **Close**. A source that is not connected yet says **Connect it in Integrations first**.
+3. Turn on **Continuous sync** for the source if you want changes to keep flowing both ways after the import. You can change this later in CRM settings.
+4. Tick the pipelines you want and click **Import**.
+5. Watch the tally: **Imported**, **Already here**, **Needs contact** and **Failed**. Click **Stop after this page** if you need to pause. Everything that already landed stays, and re-running skips it.
+6. The **Done** step states the outcome in numbers and lists anything that needs a hand, such as deals whose owner is not matched to a teammate yet. Click **View the board**.
+
+<Frame caption="Import pipelines: choose the source, then the pipelines, then watch the tally.">
+  <img src="/images/sales-dashboard/crm-pipelines/08-import.png" alt="Import pipelines dialog with step pills Source, Pipelines, Import and Done, a list of sources GoHighLevel, HubSpot and Close with their connection state, and a Continuous sync switch per source" />
+</Frame>
+
+## Work the board
+
+- **Move a deal**: drag its card to another stage. While you drag, **Won**, **Lost** and **Abandoned** drop zones appear at the bottom. Dropping on Lost or Abandoned asks for a reason.
+- **Assign an owner**: click the owner chip at the bottom of a card (it says **Unassigned** until someone owns the deal) and pick a teammate. On a GoHighLevel-synced deal the change goes to GoHighLevel too, and a teammate GoHighLevel does not know is greyed out with the note **not in your CRM**.
+- **See the next appointment**: cards show the next appointment as a pill with its date and time. Click it to open the appointment.
+- **Read the age**: every card shows how long the deal has been open. An orange dot means it has gone stale.
+- **Search and filter**: type in **Search deals**, or click **Filters** to narrow by status, value, time in stage, unassigned only, or the source and campaign that acquired the contact. Click **Save view** to keep a filter set for the whole team.
+- **Change the view**: the three icons next to Filters switch between **Board view**, **List view** and **Pipeline by source**, which rolls your deals up by the ad source or campaign that created them.
+- **Customize cards**: the sliders icon lets you hide the value, the source or the attribution chip, and choose whether the age counter shows **Days old**, **Days in stage** or nothing.
+
+## Open a deal
+
+Click a card to open it. The left column holds every property, the middle is the conversation with the contact, and the right rail switches between **Activity**, **Notes**, **Tasks**, **Appointments**, **Recordings** and **Journey**.
+
+<Frame caption="The deal card: properties on the left, the conversation in the middle, activity on the right.">
+  <img src="/images/sales-dashboard/crm-pipelines/06-deal-card.png" alt="Deal card for a deal named Pierre Bouin | SaaS Offer, with Deal, Pipeline and People sections, custom fields Plan interest and Monthly ad spend under a Qualification heading, the contact conversation in the middle, and the activity timeline on the right" />
+</Frame>
+
+Every property edits in place and saves as soon as you leave it:
+
+1. **Deal**: the name, the value with its billing period (**One-time**, **Monthly** or **Annual**) and the source.
+2. **Pipeline**: the stage, and the status **open**, **won**, **lost** or **abandoned**. Marking lost or abandoned asks for a reason.
+3. **People**: the **Deal owner** and who follows the deal.
+4. **Your fields**: every custom field, grouped by folder. Fields you have not created yet live under **Manage fields**, which opens CRM settings.
+
+## Reschedule or update an appointment from the board
+
+You do not have to leave the board to move a call.
+
+1. Click the appointment pill on a card.
+2. Click the pencil next to the time to reschedule. Set **Date and time** and **Duration**, then click **Done**.
+3. Change the status at the bottom: **Booked**, **Rescheduled**, **Completed**, **Showed**, **No-show** or **Cancelled**.
+4. Edit the title, the location or meeting link, the notes or what the meeting is about. Everything saves automatically.
+
+<Frame caption="An appointment opened from the board: reschedule, change the status or add notes without leaving the pipeline.">
+  <img src="/images/sales-dashboard/crm-pipelines/07-appointment.png" alt="Appointment modal titled Proposal review, showing the date, time and duration, the contact and host, fields for Where, About and Notes, the status set to Booked, and a footer saying edits save automatically" />
+</Frame>
+
+The contact gets the same reschedule or cancellation message they would get from the booking page.
+
+## Set up fields, lost reasons and sync
+
+Open the pipeline menu at the top left and click **CRM settings**. The settings are shared by every pipeline.
+
+<Frame caption="CRM settings, Fields tab: every field with its type, its folder and the CRM it is kept in sync with.">
+  <img src="/images/sales-dashboard/crm-pipelines/02-settings-fields.png" alt="CRM settings sheet on the Fields tab, listing fields grouped under Qualification, Commercials and Details, each with a type pill such as Pick one, Number or Text and a GoHighLevel sync pill, and an Add a field button" />
+</Frame>
+
+### Fields
+
+Fields are the questions your team answers on every deal. Imported fields arrive with their type, their folder and a **GoHighLevel** pill when they are kept in sync.
+
+1. Click **Add a field**.
+2. Answer **What's the field called?**
+3. Answer **What kind of answer?**: **Text**, **Pick one**, **Pick many**, **Number**, **Date**, **Email**, **Phone** or **Link**.
+4. For Pick one and Pick many, type each choice and press Enter.
+5. Choose the folder, then click **Add field**.
+
+Click a field name to rename it. Click **choices** under a pick field to add or remove options. The three dots on a row move the field to another folder or archive it. Archiving hides the field from every deal card; values already saved stay on their deals.
+
+### Lost reasons
+
+When a deal is marked lost, the rep picks one of these. Type a reason in **Add a reason** and click **Add**. Drag to reorder, click a reason to rename it, and archive the ones you no longer use. Keep the list short enough to answer honestly.
+
+### Sync
+
+One row per CRM. The switch turns two-way sync on or off for that CRM; while it is off, nothing moves in either direction. Under the status line, three gauges show the last check, when fields were last synced and when users were last matched.
+
+<Frame caption="CRM settings, Sync tab: the switch, the status line and the three gauges for a connected GoHighLevel account.">
+  <img src="/images/sales-dashboard/crm-pipelines/04-settings-sync.png" alt="CRM settings sheet on the Sync tab, with an intro explaining what flows both ways, a GoHighLevel row with a two-way sync switch turned on, a status line reading Received 4 minutes ago, sent 11 minutes ago, 2 waiting to push, gauges for Last check, Fields and Users, and a Sync fields now button" />
+</Frame>
+
+Click **Sync fields now** to pull field definitions from your CRM immediately; otherwise they refresh every 6 hours.
+
+<AccordionGroup>
+  <Accordion title="What syncs with GoHighLevel, and how fast">
+    With two-way sync on, deals, stages, status, value, name, owner and custom field values flow both ways. Stage and status changes made in GoHighLevel arrive in seconds. Owner, value and field edits made there are picked up by the next check, which runs on a rolling schedule; the Last check gauge shows when it last ran. Changes you make in Cortana are pushed within about a minute. If GoHighLevel refuses a push, the row keeps retrying every 15 minutes until it goes through.
+  </Accordion>
+  <Accordion title="HubSpot and Close">
+    Both import pipelines, stages and deals, and both keep deals in sync. Neither carries a deal owner, so owner changes on those deals stay in Cortana and the Unassign option remains available.
+  </Accordion>
+  <Accordion title="How owners are matched to your teammates">
+    A GoHighLevel user becomes a Cortana teammate through rep mapping on the Appointments page. A deal owned by a GoHighLevel user who is not matched yet shows as Unassigned here, and the Users gauge on the Sync tab counts it with a Match users link. Once matched, the owner fills in on the next check. Reassigning a synced deal in Cortana updates GoHighLevel; to unassign a synced deal, do it in GoHighLevel for now.
+  </Accordion>
+  <Accordion title="Field types and how they map">
+    Text, Number, Date, Email, Phone, Link, Pick one and Pick many map to the matching GoHighLevel field types. Renaming a field or editing its choices in Cortana updates GoHighLevel, and vice versa. Folders are managed in GoHighLevel while sync is on. A value that arrives for a field Cortana does not have yet counts as waiting for a field on the Sync tab; click Sync fields now, and it lands on the next check. A value in a shape Cortana cannot read counts as could not be read and is left untouched in your CRM.
+  </Accordion>
+  <Accordion title="What the Sync tab numbers mean">
+    Received and sent are the last time a change came in and went out. Waiting to push is how many deals have edits queued for your CRM. Retrying every 15 minutes means your CRM rejected those pushes and Cortana keeps trying. Failed checks means the periodic check could not reach your CRM: reconnect it under Integrations. Differences repaired counts drifts between the two systems that the check fixed.
+  </Accordion>
+  <Accordion title="Deal age and dates after an import">
+    Imported deals keep the dates your CRM carried, so their age and time in stage are real. When a CRM does not carry a full date history, the age starts from the nearest date it did carry, or from the import itself, and the Done step tells you how many deals that affected. Those approximate births never count as conversions in your attribution.
+  </Accordion>
+  <Accordion title="Limits">
+    An import walks as far back as the source API allows, about 10,000 deals; continuous sync picks up the rest as deals change. The first 500 field definitions come over per sync; run Sync fields now again for more. Deals whose contact is not in Cortana yet are counted under Needs contact and picked up by re-running the import once the contact syncs in.
+  </Accordion>
+</AccordionGroup>
+
+## FAQ
+
+<AccordionGroup>
+  <Accordion title="I changed a deal in GoHighLevel and it still shows the old value here.">
+    Stage and status changes arrive in seconds, but owner, value and field edits wait for the next check. Open CRM settings, Sync tab, and read the Last check gauge. If it says the last check failed, reconnect GoHighLevel under Integrations.
+  </Accordion>
+  <Accordion title="Why is a teammate greyed out when I try to assign a deal?">
+    The deal is synced with GoHighLevel and that teammate is not matched to a GoHighLevel user, so the assignment could not be pushed. Map them in rep mapping on the Appointments page first.
+  </Accordion>
+  <Accordion title="Why did my imported deals come in as Unassigned?">
+    Their GoHighLevel owner is not matched to a teammate yet. The Sync tab shows the count with a Match users link; once matched, the owners fill in on the next check.
+  </Accordion>
+  <Accordion title="I added a field here. Does it show up in GoHighLevel?">
+    Yes. With sync on, a new field is created in GoHighLevel with the same name, type and choices, and it shows a GoHighLevel pill in CRM settings once it is there.
+  </Accordion>
+  <Accordion title="Can I re-run the import without duplicating deals?">
+    Yes. Deals already here are skipped and counted under Already here. Re-running is the way to pick up deals that were waiting for a contact.
+  </Accordion>
+  <Accordion title="What happens if I turn sync off and edit deals?">
+    Nothing moves in either direction while sync is off. When you turn it back on, the next check reads your CRM as the source of truth for the deals it holds, so make edits in the CRM while paused.
+  </Accordion>
+  <Accordion title="Why does the Sync tab say values are waiting for a field?">
+    Your CRM sent values for a field Cortana has not created yet. Click Sync fields now to bring the field definitions over; the values land on the next check.
+  </Accordion>
+</AccordionGroup>
+
+## Next step
+
+<Card title="Read the Performance tab" icon="chart-line" href="/sales/6-performance">
+  See how the deals on this board turn into calls, closes and revenue.
+</Card>
