@@ -1822,9 +1822,10 @@ How values are handled:
 
 - **The field has a number:** that number is the conversion's revenue. The standard deal value is ignored for this source.
 - **The field is blank:** the conversion is recorded with no revenue. Cortana never substitutes the deal value, because it is a different number. Once your team enters a value the conversion is updated on its own: HubSpot within about 5 minutes, Close.io and GoHighLevel when the edit reaches Cortana (webhook, or the periodic replay), Cortana CRM deals the moment the field is saved.
+- **The field is cleared later:** the conversion mirrors the field. If a value was recorded from this field and your team then blanks it, the conversion's revenue is cleared too, and the change is kept in the value history. A value that came from the standard deal value is never cleared by an empty custom field.
 - **The field holds zero or a negative number:** recorded as no revenue.
 - **The value is edited later:** the conversion follows the field, the same way a standard source follows the deal value.
-- **Changing a source's Revenue setting:** applies to deals recorded from then on, plus any deal that is edited or re-synced afterwards. A conversion that already has revenue is never cleared because the field is blank.
+- **Changing a source's Revenue setting:** applies to deals recorded from then on, plus any deal that is edited or re-synced afterwards. A conversion recorded from the deal value keeps that value until the new field carries one; an empty custom field never wipes it.
 - **Field list could not load:** the form shows *"Could not load fields from ..."* and keeps your current selection, so an existing source can still be saved. Check the integration connection and try again.
 - **Cortana CRM deals:** a field that a source reads revenue from cannot be archived until you change that source's **Revenue** setting; the error names the source. Only fields of type **Number** are offered.
 
@@ -1964,7 +1965,7 @@ Where the picker loads from: HubSpot deal properties of type number, Close.io op
   </Accordion>
 
   <Accordion title="My deal has an amount but the conversion shows no revenue">
-    Open the source and check **Revenue**. If it is **Custom field**, the conversion reads that field, not the deal amount, and a blank field records no revenue on purpose. Enter the value on the deal or opportunity and the conversion updates on its own (see [Revenue from a custom field](#revenue-from-a-custom-field)). If **Revenue** is **Off**, the source never attaches money; switch it to the deal value or a custom field, which applies to future deals.
+    Open the source and check **Revenue**. If it is **Custom field**, the conversion reads that field, not the deal amount, and a blank field records no revenue on purpose. Enter the value on the deal or opportunity and the conversion updates on its own; clearing the field later clears the conversion's revenue as well (see [Revenue from a custom field](#revenue-from-a-custom-field)). If **Revenue** is **Off**, the source never attaches money; switch it to the deal value or a custom field, which applies to future deals.
   </Accordion>
 
   <Accordion title="It says all available events have already been added">
