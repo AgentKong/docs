@@ -237,8 +237,20 @@
               "sales/5-embedded-checkout",
               "sales/6-performance",
               "sales/7-commissions",
-              "sales/8-call-recordings",
-              "sales/9-crm-pipelines"
+              "sales/8-call-recordings"
+            ]
+          }
+        ]
+      },
+      {
+        "tab": "CRM",
+        "icon": "columns-3",
+        "groups": [
+          {
+            "group": "CRM",
+            "icon": "columns-3",
+            "pages": [
+              "crm/crm"
             ]
           }
         ]
@@ -579,6 +591,10 @@
     {
       "source": "/10",
       "destination": "/10-chrome-extension"
+    },
+    {
+      "source": "/sales/9-crm-pipelines",
+      "destination": "/crm/crm"
     }
   ],
   "footerSocials": {
