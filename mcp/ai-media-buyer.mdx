@@ -1,0 +1,126 @@
+---
+title: "AI Media Buyer in Claude and ChatGPT"
+description: "Connect Claude or ChatGPT to the Cortana AI Media Buyer once, get the morning ad review every day, and approve kills and scales, review creatives, and post by talking."
+---
+
+{/* last-verified: 2026-09-17 · app route /dashboard/integrations/connect-ai · consent screen /oauth/authorize */}
+
+The Cortana MCP connector gives your own Claude or ChatGPT a live line to the AI Media Buyer. Every morning it reads your ad accounts and tells you what needs you. During the day you answer in plain words: "approve the kills in Acme", "keep 1 and 3, retire 2", "make six more", "post the approved ones now", "run the review for Acme now".
+
+You will end up with one connection, one scheduled morning task, and a report for every business you run.
+
+<Note>
+  The analysis itself runs on Cortana's servers on Cortana's usage. Your assistant reads the results and carries your decisions back. It never sees how Cortana decides.
+</Note>
+
+## Before you start
+
+1. **The AI Media Buyer is switched on for your account.** Cortana staff enable it per business after implementation. If your **Integrations** page has no **Claude / ChatGPT** card, it is not on yet.
+2. **A media buyer Slack channel is connected** for any business you want to launch ads from. Launch instructions can only be saved once a channel exists, because the Go live and Undo buttons live on those Slack cards.
+3. **A paid Claude plan** if you want Claude to run the morning report on a schedule. ChatGPT scheduled tasks work with connected apps.
+
+## Connect once
+
+1. In Cortana, open **Integrations**. On the **Integrations** tab, click the **Claude / ChatGPT** card ("Talk to your media buyer. Connect once, get the morning review every day.").
+2. **Step 1 · Which assistant?** Pick **Claude** or **ChatGPT**. The steps below change to match.
+3. **Step 2 · Connect.** Copy the connector URL from the page and add it in your assistant: in Claude, **Settings**, then **Connectors**, then **Add custom connector**; in ChatGPT, **Settings**, then **Connectors**, then **Create**. Sign in with your Cortana login.
+4. On the Cortana consent screen, choose what the connection may reach:
+   - **All my businesses, including ones I add later** is one switch. Leave it on and every business you can access today, and every one you add later, is covered without reconnecting. Turn it off to pick businesses one by one.
+   - **Let Claude act on your media buyer decisions** (or ChatGPT) is on by default. With it on, the assistant can approve the kills and scales you ask for, manage creatives, edit your launch instructions, arm and post creatives, and start billed renders, generation runs and reviews when you ask. Turn it off for a read-only connection that reports and never acts.
+5. Click **Approve**. Back in Cortana the page updates by itself and lists the connection with its date and last use.
+
+On first connect the assistant presents your report once, unprompted, then tells you what it can do.
+
+## The morning report, every day
+
+**Step 3 · Every morning, unprompted** on the Connect page carries the recipe and the prompt.
+
+1. In your assistant, open **Scheduled tasks** (Claude) or **Tasks** (ChatGPT) and create a new task.
+2. Set it to repeat every morning at a time after your Cortana review time, so the report is fresh. The review time is in each business's media buyer settings.
+3. Paste the prompt from the Connect page (**Copy the morning prompt**) as the task's instructions and turn the Cortana connector on for the task. The prompt is:
+
+```text
+Call get_review_report for all my businesses and present it: what needs me first, then what's on watch, then one line per healthy business. Collapse healthy businesses after 8. If nothing needs me, say so in one line.
+```
+
+4. Save it. The first run lands the next morning. You can run the task once by hand to see it today.
+
+The report always reads in this order: what needs you (open kills, raises, trims, a judgment call, a failed action), then what was done and is undoable, then ads on watch, then one line per healthy business. A quiet morning is one line. Every report says what time it is "as of"; if it is older than your review cadence, the assistant says so and offers to run the review now.
+
+## What you can ask
+
+<AccordionGroup>
+  <Accordion title="Review and approve">
+    "What needs me?" gives the report for every business, or one business by name. "Why is that a kill?" opens the detail behind one card: the numbers and the reasoning. "What are my best ads and why?" lists the winners.
+
+    "Approve the kills", "reject the Beta scale", "undo the Acme raise" act at once on the items you name. Executed kills and scales can be undone for 72 hours. When the same request matches several businesses, the assistant asks which one first. A judgment call in the report (an Ask) takes one of its options or your own words, such as "set the target to $80".
+  </Accordion>
+  <Accordion title="Creatives">
+    Iterate an image with your assistant, then say "that one": it lands in the Review column of your production board. "What's new in review?" numbers the board so "keep 1, 3, kill 2" works. A note on one image ("make the headline bigger on 3") re-renders that image on Cortana's side; the previous version stays in the card's history.
+
+    "Make six more for Acme" first gives a quote: how many image concepts and scripts, the renders, the render cost at the published rate, and the minutes. On your yes the run starts; the concepts arrive within minutes and the images with the overnight batch. Rendering and generation are billed as usage, with no cap.
+  </Accordion>
+  <Accordion title="Posting">
+    "From now on, launch new ads into my CBO campaign, one ad per ad set, US and UK only" rewrites your **Launch** instructions; **Scaling** and **Kill** work the same way. The assistant reads the saved text back so you see exactly what is stored. "What's armed?" lists the board. "Post the approved ones now" runs the posting slot right away under your per-slot limit and counts as today's slot. If the ads would go live with real spend, the assistant tells you so first and posts only on your yes.
+  </Accordion>
+  <Accordion title="Run the review now">
+    "Run the review for Acme now" starts a full review on Cortana's side at the usual usage price. One review runs at a time per business. It takes a few minutes; ask "is it done?" for the status, the ads reviewed, and the cost line. Once done, the report is fresh.
+  </Accordion>
+</AccordionGroup>
+
+## What it will and won't do
+
+<AccordionGroup>
+  <Accordion title="Read-only connections">
+    With the acting switch off, the assistant reports, explains, lists the review board and the posting setup, and never approves, posts, renders or runs anything. Decisions stay in Slack or the app.
+  </Accordion>
+  <Accordion title="What the assistant can see">
+    Verdicts, costs against your targets, the reasoning behind each call, counts, names, your own instructions and settings, and image links. It has no access to how Cortana decides, and it says so if asked.
+  </Accordion>
+  <Accordion title="Slack and the app stay in step">
+    A decision made in chat updates the Slack card ("Approved by you via Claude") and the app. There is one record of every decision, whichever door you used.
+  </Accordion>
+  <Accordion title="Costs">
+    Talking to your assistant is on your assistant's plan. Renders, generation runs and reviews started from chat run on Cortana and are billed as usage, the same as from the app.
+  </Accordion>
+  <Accordion title="Disconnecting">
+    On the Connect page, click **Disconnect** on a connection and confirm. It loses access to every business it covered, and any scheduled morning review it runs stops. You can connect again from the same page.
+  </Accordion>
+</AccordionGroup>
+
+## FAQ
+
+<AccordionGroup>
+  <Accordion title="The morning report says it is older than my review cadence. What do I do?">
+    The last review ran before your cadence would expect a new one. Ask the assistant to run the review now, or move your scheduled task to a time after the review time in that business's media buyer settings.
+  </Accordion>
+  <Accordion title="Why did it ask me which business?">
+    The items you named exist in more than one business. Say the business and it acts at once.
+  </Accordion>
+  <Accordion title="Why won't it save my launch instructions?">
+    That business has no media buyer Slack channel yet. Launches need the channel for the Go live and Undo buttons, so connect one in the media buyer settings first.
+  </Accordion>
+  <Accordion title="Why did 'post now' refuse?">
+    Nothing is armed, no posting schedule exists for that business, a posting slot is already running, or the launch would be held anyway (a template import waiting for your confirmation, or a Slack channel that cannot be reached). The answer says which.
+  </Accordion>
+  <Accordion title="Can it spend money without asking?">
+    Kills and scales you approve execute at once and can be undone for 72 hours. A launch that would go live with real spend is read back for your yes first. Renders, generation and reviews start only when you ask and cost usage, not ad spend.
+  </Accordion>
+  <Accordion title="I added a new business. Do I need to reconnect?">
+    Not if you left **All my businesses, including ones I add later** on. It is covered on the next call. If you picked businesses one by one, connect again and add it.
+  </Accordion>
+  <Accordion title="It says it can't do something and will send it to Cortana's engineers.">
+    That is a real request filed with Cortana's team, with your words. It returns a reference; there is no promised date.
+  </Accordion>
+</AccordionGroup>
+
+## Next step
+
+<CardGroup cols={2}>
+  <Card title="Connector setup" icon="rocket" href="/mcp/setup">
+    Adding the Cortana connector in Claude, ChatGPT, Cursor, or VS Code.
+  </Card>
+  <Card title="Meta Ads MCP" icon="meta" href="/mcp/meta-ads">
+    Create and manage Meta ads from your assistant.
+  </Card>
+</CardGroup>
