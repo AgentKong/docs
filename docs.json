@@ -367,6 +367,8 @@
               "mcp/setup",
               "mcp/meta-ads",
               "mcp/ai-media-buyer",
+              "mcp/ai-media-buyer-schedule",
+              "mcp/ai-media-buyer-playbook",
               "mcp/tools",
               "mcp/ai-checkouts",
               "mcp/examples"

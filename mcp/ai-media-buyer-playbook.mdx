@@ -1,0 +1,69 @@
+---
+title: "Make ads in your own chat with the playbook"
+description: "Download Cortana's three playbook files into your Claude or ChatGPT project, and write ads there from your own account data: the plan, the winners, the sales calls. Cortana still judges, plans and keeps the books."
+---
+
+{/* last-verified: 2026-09-24 · app route /dashboard/media-buyer/connect-ai (Step 5) · download route /api/ads/media-buyer/playbook/<file> · sprint mcp-media-buyer-5 */}
+
+Ordering ads ([Make it your media buyer](/mcp/ai-media-buyer#make-it-your-media-buyer)) has Cortana write every hook and every prompt on Cortana's usage. The playbook is the other path: your assistant writes the ads itself, in your project, on your own subscription, from the same data the engine reads, and Cortana pays for nothing. You choose per batch; both paths post into the same ad account and are judged by the same review.
+
+You will end up with three files in your project's knowledge, and a chat that can take "plan 20 for Acme, lean on the warranty angle" from the plan to paused ads on Meta.
+
+<Note>
+  The playbook is how Cortana thinks about ads: the strategy, the image design, the video script. What stays on Cortana's side is what it decides: the review that kills and scales, the plan of what to make, the ledger of how past concepts played out. Your assistant reads those as answers, never as method.
+</Note>
+
+## Before you start
+
+1. The Cortana connector is in your Claude or ChatGPT, and the project with the instructions exists ([Connect once](/mcp/ai-media-buyer#connect-once) and [Make it your media buyer](/mcp/ai-media-buyer#make-it-your-media-buyer)).
+2. For ChatGPT, image rendering happens in the chat. For Claude, the assistant hands you the render prompts to render where you like. {/* TODO: verify: live test T3 on a ChatGPT project */}
+3. To post what it writes to Meta, the connection needs **Allow AI ad management** ticked on the consent screen (it is off by default). Without it the assistant still plans, reads and writes; it hands you the ad text and the render prompt instead of posting.
+
+## Add the playbook
+
+1. Open the Connect page: a business's media buyer page, the **Settings** tab, the **Delivery** tab, **Connect Claude / ChatGPT**. {/* TODO: verify the sidebar label that opens /business/{id}/media-buyer */}
+2. **Step 5 · Give it the playbook.** Click **Download** on each of the three files: the media buyer playbook, the image designer, the video scripter. Each file lands named with the playbook version, for example `dr-media-buyer-os-2026-09-24d.md`.
+3. In Claude, open your media buyer project, then **Project knowledge**, and add all three. In ChatGPT, open the project, then **Files**, and add all three. {/* TODO: verify both labels against the current apps */}
+4. When the Connect page shows a newer playbook version, download the files again and replace them in the project.
+
+## What a batch looks like
+
+Say what you want in the project's chat: "plan 20 for Acme, lean on the warranty angle". The assistant then:
+
+1. **Plans with Cortana.** It calls `plan_ads` and gets the engine's own slots for the order: which winner to recreate (named, with the priority it won on and its trend) and where to invent, in which format. Your direction rides along for the assistant to apply; the plan itself comes from your numbers.
+2. **Reads the account.** The winners as stamps (`get_winning_messaging`, and `get_ad_stamp` for one ad in full: the posted text, the image, Cortana's breakdown, cost per priority event against target, the judge's verdicts), what is working by angle, hook, format and offer (`get_conversion_snapshot`), and the prospect's own words from the sales calls, bank by bank (`get_prospect_voice`).
+3. **Writes to the plan with the playbook.** One concept per slot, the render prompt for each image.
+4. **Renders.** ChatGPT renders the images in the chat. Claude hands you the prompts.
+5. **Posts what you like, paused.** Through the Meta tools on the connector (the image first: ChatGPT sends the one it rendered, Claude takes the link you give it; then `create_creative`, then `create_ad`), always paused, never live and never onto the Ad Pipeline board. You launch it in Ads Manager or by asking. From that moment Cortana treats it like any ad on the account: the creative breakdown lands on it, the morning review judges it, and the next overnight batch learns from it if it wins.
+
+<Tip>
+  The plan reads the last 52 weeks of the account, like the winner pool and the conversion snapshot. The overnight batch plans over the account's whole life, so on an account with winners older than a year the two plans can differ.
+</Tip>
+
+## What it will and won't do
+
+- It writes the ads only when the three files are in the project. Without them it orders instead (`make_ads`) and Cortana writes.
+- It never posts live. A paused ad is yours to launch.
+- It never lists losers. The snapshot's kill figures are counts per angle, and any line of the review that names an ad to kill or cut by its ad name is withheld.
+- Every read is your own account's data, on the businesses the connection may reach.
+
+## FAQ
+
+<AccordionGroup>
+  <Accordion title="Does this cost Cortana usage?">
+    No. Planning, the reads and the posting are free on the connector; the writing and the rendering run on your assistant's subscription. Ordering with `make_ads` and rendering on Cortana stay the paid options.
+  </Accordion>
+  <Accordion title="Can I keep the overnight batch too?">
+    Yes. The scheduled order task and the overnight batch keep running exactly as before. Two writers, one account, one review.
+  </Accordion>
+  <Accordion title="What is in the three files?">
+    The media buyer playbook (how to read the account, pick angles and awareness levels, choose formats and hooks, mine the calls, iterate winners, spot fatigue), the image designer (the archetypes, the type system, the look library, how a render prompt is written) and the video scripter (five hooks, one body, one CTA, the frameworks, the re-hook). They name no third party.
+  </Accordion>
+  <Accordion title="Why does the plan sometimes differ from what the overnight batch made?">
+    The plan reads the last 52 weeks; the batch reads the whole account. A winner paused more than a year ago leads the batch's plan and is absent from yours.
+  </Accordion>
+</AccordionGroup>
+
+## Next step
+
+[Set up your AI media buyer in Claude or ChatGPT](/mcp/ai-media-buyer-schedule) for the scheduled tasks, or back to [AI Media Buyer in Claude and ChatGPT](/mcp/ai-media-buyer).
