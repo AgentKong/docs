@@ -1,0 +1,116 @@
+---
+title: "Set up your AI media buyer in Claude or ChatGPT"
+description: "The one-page setup for an AI media buyer that runs on a schedule: the project instructions, the three scheduled tasks (the morning review, making ads, rendering), the render setting, and what to say for each."
+---
+
+{/* last-verified: 2026-09-22 · app route /dashboard/media-buyer/connect-ai · in the nav under the main page (3.6 R5-F2) */}
+
+This page is the short version for someone who already has the Cortana connector in Claude or ChatGPT and wants the assistant to work like a media buyer on a schedule, without prompting it from scratch every day. It takes about ten minutes.
+
+You will end up with one project that knows how to be your media buyer, and three scheduled tasks that cover the three jobs a media buyer does: review and decide, make ads, and render.
+
+<Note>
+  Already connected? You do not need to connect again. Your existing connection covers everything on this page. Skip to step 2.
+</Note>
+
+## Step 1: Connect once
+
+Only if the Cortana connector is not in your assistant yet.
+
+1. In Cortana, open a business, then its media buyer page, then the **Settings** tab, then the **Delivery** tab. Under **Analysis & Notifications**, next to the Slack channel, click **Connect Claude / ChatGPT**.
+2. Follow the page: choose whose steps to show, copy the connector URL into your assistant, sign in with your Cortana login, and approve.
+
+The full walkthrough, with the consent screen explained, is on [AI Media Buyer in Claude and ChatGPT](/mcp/ai-media-buyer).
+
+## Step 2: Give the assistant its instructions
+
+This is the part that makes it a media buyer instead of a chatbot with a data connection.
+
+1. In your assistant, create a new project for your media buyer (a Claude project, or a ChatGPT project).
+2. In Cortana, open the connect page (Step 1 above, or **Manage connections** in the same block). Under **Step 1 · Show steps for**, pick your assistant; under **Step 4 · Make it your media buyer**, click **Copy**.
+3. Paste the text as the project's instructions.
+4. In each chat inside the project, turn the Cortana connector on before you ask. In Claude: the **+** button, then **Connectors**. In ChatGPT: the **+** menu, then **Developer mode**, then pick Cortana. {/* TODO: verify these menu labels in the live UIs */}
+
+What the instructions do: they tell the assistant to use the AI Media Buyer tools for what an ad is worth, what to kill, keep or scale, and what to make next (the same analysis as your Slack cards, never its own conclusions from the attribution or Meta insight tools, which answer plain numbers only), how to present the report, how to act on your decisions, how to order ads with your direction (Cortana reads it against your data first and writes every hook and prompt itself), and how to render on your own subscription.
+
+## Step 3: The three scheduled tasks
+
+A media buyer has three recurring jobs. Each one is its own scheduled task with its own prompt. Create them in **Scheduled tasks** (Claude) or **Tasks** (ChatGPT), turn the Cortana connector on for each, paste the prompt as the task's instructions, and fill in the placeholders. Every prompt is on the connect page under **Step 3 · Three scheduled tasks, unprompted** with a **Copy** button. {/* TODO: verify the task instruction box size in both clients; the prompts stay under 1,200 characters */}
+
+<Steps>
+  <Step title="Every morning: the review">
+    Set it to repeat every morning, at a time after your Cortana review time (the review time is in each business's media buyer settings). The prompt:
+
+    ```text
+    Call get_review_report for all my businesses and present it: what needs me first, then what's on watch, then one line per healthy business. Show each card's tables as tables, then the call. Collapse healthy businesses after 8. If nothing needs me, say so in one line. When I say kill, keep, approve or undo, do it at once, no confirmation.
+    ```
+
+    The report reads in one order: what needs you, what was done and is undoable, what is on watch, then one line per healthy business. A card that needs a call shows the same tables as your Slack card, then the call. Then you answer in the chat: "approve the kills in Acme", "kill this ad", "undo the Beta scale". A named kill runs at once, no confirmation.
+  </Step>
+  <Step title="On a schedule: make ads">
+    Set it to repeat as often as you want new ads written (weekly is usual), one task per business. Replace the placeholders with the business and the count. The prompt:
+
+    ```text
+    Call make_ads for {business} with count {count} and no direction. If it answers that a run is already going (alreadyRunning), do not wait on that run: say so and stop, and I will order in a chat. If it refuses in words, say its sentence and stop. Otherwise call wait_for_ads with its runId until done is true, telling me "N of M written" after every call and never asking whether to keep waiting. If wait_for_ads ends with an error or a note, say it with the count instead of a plain "N ready". When done, say "N ready" and where the images land: rendersBy in the make_ads answer says whether Cortana renders them (they land in Review with the overnight batch) or my render task does (they wait in In production). To steer a batch ("lean on the warranty angle"), order it in a chat instead: a direction needs my yes on Cortana's read before anything is written.
+    ```
+
+    If the task stops before "N ready", the order still finishes on Cortana's side; the cards land in Review or In production the same way. {/* TODO: verify: a scheduled task can call wait_for_ads repeatedly for the length of an order in both clients */}
+
+    A refusal in words (no priority event yet, no review yet, a review running) is said and the task stops; a run that ends with an error or a note (stalled, part of the order failed, skipped at the spend cap) is reported in those words with the count, never as a plain "N ready". If a run is already going for that business when the task fires (the nightly batch, or an order from a chat), the task says so and stops instead of waiting on the other run; order again in a chat, or move the task's time.
+
+    A scheduled order carries no direction on purpose: a direction ("lean on the warranty angle") gets Cortana's read against your account data and needs your yes before anything is written, and a task cannot say yes. Order with direction in a chat instead. Cortana writes every hook and every prompt; you never write ad copy.
+  </Step>
+  <Step title="Every day: render what waits (ChatGPT only)">
+    One task covers every business that renders on your own subscription; there is nothing to fill in. Set it to repeat daily. The prompt:
+
+    ```text
+    Call list_render_queue with allBusinesses true. For every entry: render its text EXACTLY as written (never reword, never add) at its aspectRatio, then get_upload_url with that entry's businessId, PUT the bytes, then confirm_upload with that entry's businessId and wrapId. An entry that fails to render or upload twice is skipped for this run: name its business, its cardCode and why in the report so I can retire it or ask for a new prompt, and pass every skipped wrapId as skipWrapIds on every later pull. Pull the queue again - when an answer carries nextBusinessId, pass it back as afterBusinessId - and keep going until it says nothing is waiting and carries no nextBusinessId; if you must stop early, say how many still wait. Then report in one message, grouped by business: how many landed and how many still wait, any business the answer says could not be read, every image you rendered shown inline, and each entry's boardUrl as the link to that business's board.
+    ```
+
+    ChatGPT renders every waiting prompt across your businesses exactly as written, uploads each image to its wrap under its business, and keeps going until nothing waits; the report is grouped by business, shows the images and links each business's board. A large agency is walked in pages: the answer tells the task where to resume, and it does. If a run stops early, the next run continues and the report says how many still wait. An entry that will not render or upload is skipped for that run and named in the report, so you can retire its card or ask for a new prompt; a business that could not be read is named too and tried again on the next run. {/* TODO: verify: live test T1/T2, a ChatGPT scheduled task rendering and uploading through the connector */}
+
+    Claude cannot render images, so it has no render task. Either add this task to a ChatGPT connection (same connector URL, same steps), or set **Who renders the images** to Cortana in the business's media buyer settings; from then on Cortana renders every order (cards already waiting stay In production until you ask your assistant to re-render one, by its card, or upload an image for it). {/* TODO: verify Claude has no image generation in scheduled tasks on the current plans */}
+  </Step>
+</Steps>
+
+## The render setting and the In production column
+
+**Who renders the images** is set once for all your businesses in Control Center, Media Buyer, Overview, above the fleet table; every business follows it unless its own row in the table's **Renders** column, or its own media buyer settings, says otherwise (the setting there shows **Use the agency setting** with what that means today). **Cortana renders** is the default: Cortana makes the images on its side (about $0.04 to $0.08 per image, billed as usage) and they land in **Review**. **Use my own ChatGPT subscription** means Cortana writes the prompts and your ChatGPT render task makes the images; the cards wait in the **In production** column of the Ad Pipeline with their prompts until the images come home, and the morning report says how many wait and nags when nothing has rendered for two days.
+
+## What to check before the first run
+
+1. **Each business has a priority event and an offer** in its media buyer settings. Without them the creative brief says it is not ready and the assistant tells you so.
+2. **Launch instructions and a Slack channel** for any business you want to post from. Without instructions the slot launches armed ads live as they are.
+3. **The acting switch was on** when you approved the connection. A read-only connection reports and never acts; connect again with it on to decide, order ads, render, or post from chat.
+4. **A wallet that can pay.** Orders, reviews and Cortana renders are billed as usage to the wallet that pays for the business. An order is checked against it before anything is written and refused with a top-up link when it cannot be covered; the overnight review skips a business whose wallet is suspended or empty and says so in the morning report.
+
+## FAQ
+
+<AccordionGroup>
+  <Accordion title="I connected weeks ago. Do I have to reconnect for the new tools?">
+    No. The connector serves the current list of tools on every call. Create the project and paste the instructions; that is all.
+  </Accordion>
+  <Accordion title="The assistant keeps using the attribution tables instead of the media buyer's analysis.">
+    It is missing the project instructions, or the chat is outside the project. Paste the instructions from **Step 4** on the connect page into the project and run your chats there. The instructions tell it to use the AI Media Buyer tools for every judgment about an ad, and the attribution and Meta insight tools for plain numbers only.
+  </Accordion>
+  <Accordion title="Can the scheduled task run inside the project?">
+    It does not have to. The connector's own instructions carry the report order, so the morning task presents the report the same way either way.
+  </Accordion>
+  <Accordion title="How many ads can it make at once?">
+    As many as you order. "Make me 50 ads for Acme" is one order: Cortana starts it at once, writes the concepts in parallel and reports "N of M written" as it goes. There is no cap on an order.
+  </Accordion>
+  <Accordion title="Can I give the order a direction?">
+    Yes, in a chat: "make 20 for Acme and lean on the warranty angle", or "use exactly this hook" for words to keep verbatim. Cortana reads the direction against your account data first (go, caution or stop, with the reason and a recommendation) and writes only on your yes. A scheduled order task carries no direction because a task cannot say yes.
+  </Accordion>
+</AccordionGroup>
+
+## Next step
+
+<CardGroup cols={2}>
+  <Card title="AI Media Buyer in Claude and ChatGPT" icon="sparkles" href="/mcp/ai-media-buyer">
+    The consent screen explained, everything you can ask, and the FAQ.
+  </Card>
+  <Card title="Connector tools" icon="wrench" href="/mcp/tools">
+    The attribution, CRM, Meta ads and checkout tools the connector serves.
+  </Card>
+</CardGroup>
