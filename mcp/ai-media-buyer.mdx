@@ -3,11 +3,11 @@ title: "AI Media Buyer in Claude and ChatGPT"
 description: "Connect Claude or ChatGPT to the Cortana AI Media Buyer once, get the morning ad review every day, order ads with your direction, render on your own subscription or on Cortana, and approve kills and scales, review creatives, and post by talking."
 ---
 
-{/* last-verified: 2026-09-22 · app route /dashboard/media-buyer/connect-ai (entry: Business > Media Buyer > Settings > Delivery > Claude / ChatGPT) · consent screen /oauth/authorize */}
+{/* last-verified: 2026-09-29 · app route /dashboard/media-buyer/connect-ai (entry: Business > Media Buyer > Settings > Delivery > Claude / ChatGPT; Step 4 the media buyer project, Step 5 the creative studio) · consent screen /oauth/authorize */}
 
 The Cortana MCP connector gives your own Claude or ChatGPT a live line to the AI Media Buyer. Every morning it reads your ad accounts and tells you what needs you. During the day you answer in plain words: "approve the kills in Acme", "keep 1 and 3, retire 2", "make six more", "post the approved ones now", "run the review for Acme now". And you make ads with it: brainstorm from what Cortana knows about your account, then order them ("make me 20 for Acme, lean on the warranty angle") and Cortana writes every hook and every prompt, reading your direction against the account data first.
 
-You will end up with one connection, three scheduled tasks (the morning review, an order, and rendering), one project that knows how to be your media buyer, and a report for every business you run.
+You will end up with one connection, three scheduled tasks (the morning review, an order, and rendering), one project that knows how to be your media buyer, and a report for every business you run. If you also want to write ads in the chat yourself, a second project, the creative studio, is on the same page.
 
 <Note>
   The analysis itself runs on Cortana's servers on Cortana's usage. Your assistant reads the results and carries your decisions back. It never sees how Cortana decides.
@@ -26,14 +26,14 @@ You will end up with one connection, three scheduled tasks (the morning review, 
 3. **Step 2 · Connect Claude** (or **Connect ChatGPT**). Copy the connector URL from the page and add it in your assistant: in Claude, **Settings**, then **Connectors**, then **Add custom connector** {/* TODO: verify; Claude's help centre today says Customize, then Connectors, then +, then Add custom connector */}; in ChatGPT, **Settings**, then **Connectors**, then **Create**. {/* TODO: verify ChatGPT's current labels (Connectors may now be labelled Apps or Plugins; OpenAI's developer-mode page links chatgpt.com/plugins and enables Developer mode under Settings, then Security and login) */} Sign in with your Cortana login.
 4. On the Cortana consent screen, choose what the connection may reach:
    - **All my businesses, including ones I add later** is one switch. Leave it on and every business you can access today, and every one you add later, is covered without reconnecting. Turn it off to pick businesses one by one.
-   - **Let Claude act on your media buyer decisions** (or ChatGPT) is on by default. With it on, the assistant can approve the kills and scales you ask for, manage creatives, order ads with your direction and wait for them, edit your launch instructions, arm and post creatives, and start billed renders, generation runs and reviews when you ask. Turn it off for a read-only connection that reports and never acts.
+   - **Let ... act on your media buyer decisions** (the box names your assistant) is on by default. With it on, the assistant can approve the kills and scales you ask for, manage creatives, order ads with your direction and wait for them, edit your launch instructions, arm and post creatives, and start billed renders, generation runs and reviews when you ask. Turn it off for a read-only connection that reports and never acts.
 5. Click **Approve**. Back in Cortana the page updates by itself and lists the connection with its date and last use.
 
 On first connect the assistant presents your report once, unprompted, then tells you what it can do.
 
 ## The scheduled tasks
 
-**Step 3 · Three scheduled tasks, unprompted** on the Connect page carries the recipe and the three prompts: the morning review, an order, and rendering (ChatGPT only). The one-page setup with every prompt is [Set up your AI media buyer in Claude or ChatGPT](/mcp/ai-media-buyer-schedule).
+**Step 3 · Three scheduled tasks, unprompted** on the Connect page carries the recipe and the three prompts: the morning review, an order, and rendering (ChatGPT only). The one-page setup with every prompt is [Your media buyer project](/mcp/ai-media-buyer-schedule).
 
 1. In your assistant, open **Scheduled tasks** (Claude) or **Tasks** (ChatGPT) and create a task for each prompt.
 2. Set the morning review to repeat every morning at a time after your Cortana review time, so the report is fresh. The review time is in each business's media buyer settings. Set the order task to the rhythm you want new ads written, one per business. Set the render task daily for a business that renders on your own subscription.
@@ -49,17 +49,17 @@ The report always reads in this order: what needs you (open kills, raises, trims
 
 ## Make it your media buyer
 
-**Step 4 · Make it your media buyer** on the Connect page carries the instructions that turn a plain assistant into your media buyer: how to present the morning report, how to act on your decisions, how to order ads with your direction, and how to render on your own subscription. No code, nothing to install.
+**Step 4 · Make it your media buyer** on the Connect page carries the media buyer project's instructions: how to present the morning report, how to act on your decisions, how to order ads with your direction, and how to render on your own subscription. No code, nothing to install. This is the automated machine; the one-page setup is [Your media buyer project](/mcp/ai-media-buyer-schedule).
 
 1. In your assistant, create a new project for your media buyer.
 2. On the Connect page, under **Step 4 · Make it your media buyer**, click **Copy** and paste the text as the project's instructions.
 3. In each chat, turn the Cortana connector on before you ask: in Claude, the **+** button, then **Connectors**; in ChatGPT, the **+** menu, then **Developer mode**, and pick Cortana. {/* TODO: verify in the live UIs; vendor wording as of 2026-09-20: Claude "enable connectors for individual conversations via the + button, then Connectors", OpenAI "Choose Developer mode from the Plus menu and select the apps for the conversation" */} Your chats there follow the instructions; the scheduled tasks keep working either way. On a Claude Team or Enterprise plan, connectors work in private projects only. {/* TODO: verify against Claude's current help centre */}
 
-The page shows the kit's version under the text. When a newer version appears, paste it again.
+The page shows the kits' version under the last card. When a newer version appears, paste them again.
 
-## Write the ads yourself with the playbook
+## Give it a creative studio
 
-**Step 5 · Give it the playbook** on the Connect page offers the three files Cortana writes with: the media buyer playbook, the image designer, the video scripter. Download them into your project's knowledge and the chat can write ads itself, on your own subscription, from the engine's plan (`plan_ads`), the winners as stamps, the conversion snapshot and the sales calls, then post the ones you like to Meta paused. The full walk is [Make ads in your own chat with the playbook](/mcp/ai-media-buyer-playbook). Ordering with `make_ads` stays the way to have Cortana write them.
+**Step 5 · Give it a creative studio** on the Connect page carries a second project's instructions, for writing ads in the chat yourself, on your own subscription: the assistant fetches Cortana's playbook from the connector one part at a time (`get_playbook`), takes the engine's plan (`plan_ads`), reads the winners as stamps, the conversion snapshot and the sales calls, writes to the plan, renders (ChatGPT in the chat; Claude through Cortana, from your wallet, after your yes), and posts the ones you like to Meta paused. Nothing to download. The full walk is [Your creative studio](/mcp/ai-media-buyer-playbook).
 
 ## What you can ask
 
@@ -69,14 +69,14 @@ The page shows the kit's version under the text. When a newer version appears, p
 
     "Approve the kills", "reject the Beta scale", "undo the Acme raise" act at once on the items you name. Executed kills and scales can be undone for 72 hours. When the same request matches several businesses, the assistant asks which one first. A judgment call in the report (an Ask) takes one of its options or your own words, such as "set the target to $80".
 
-    In Claude and ChatGPT the report can open as a panel: the same cards and tables, with a **Kill** / **Keep** button on each open card, **Undo** on an executed one, and the judgment call's options as buttons. A tap does exactly what the words do, at once, with no confirmation. Where your assistant does not show panels, the report is the same text and tables. The panel needs the acting switch on. {/* TODO: verify: live test, the panel rendering in claude.ai and in ChatGPT */}
+    In Claude and ChatGPT the report can open as a panel: the same cards and tables, with a **Kill** / **Keep** button on each open card, **Undo** on an executed one, and the judgment call's options as buttons. A tap does exactly what the words do, at once, with no confirmation. Where your assistant does not show panels, the report is the same text and tables. The panel needs the **Let ... act on your media buyer decisions** box ticked. {/* TODO: verify: live test, the panel rendering in claude.ai and in ChatGPT */}
   </Accordion>
   <Accordion title="Make ads with your assistant">
     Say "help me make ads" or "what should we make next". The assistant asks Cortana for the creative brief once: your offer as you wrote it, the ads that won and why, the angles Cortana has not covered lately, what prospects say on your sales calls, your launch rules, and how past concepts actually played out. It brainstorms with you from that. Every idea names its angle and the winner or prospect line it builds on.
 
     When you know what you want, order it: "make me 20 for Acme and lean on the warranty angle", or "use exactly this hook: ..." for words to keep verbatim. Cortana reads your direction against the account data first and answers go, caution or stop with the reason and a recommendation, plus the quote (how many image concepts and scripts, who renders); it writes only on your yes. Then the assistant waits with "N of M written" until the batch is done. Cortana writes every hook and every prompt; your words are the direction, never the copy. An order with no direction starts at once.
 
-    Where the images come from depends on **Who renders the images**. Set it once for all your businesses in Control Center, Media Buyer, Overview: every business follows it unless its own row in the fleet table, or its own media buyer settings, says otherwise. Cortana renders them on its side (about $0.04 to $0.08 per image, billed as usage) and they land in **Review**; on your own subscription the cards wait in **In production** with their prompts, and one ChatGPT render task (or you, by hand) renders and uploads them for every business at once. Once launched, its ads feed Cortana's ledger like any other ad.
+    Where the images come from depends on **Who renders the images**. Set it once for all your businesses in Control Center, Media Buyer, Overview: every business follows it unless its own row in the fleet table, or its own media buyer settings, says otherwise. Cortana renders them on its side (about $0.04 to $0.08 per image, paid from your wallet on the API's receipt) and they land in **Review**; on your own subscription the cards wait in **In production** with their prompts, and one ChatGPT render task (or you, by hand) renders and uploads them for every business at once. Once launched, its ads feed Cortana's ledger like any other ad.
   </Accordion>
   <Accordion title="Creatives">
     Iterate an image with your assistant, then say "that one": it lands in the **Review** column of your **Ad Pipeline**. "What's new in review?" numbers the board so "keep 1, 3, kill 2" works. A note on an image ("make the headline bigger on 3") depends on who renders for that business: where Cortana renders, it re-renders that image on Cortana's side and the previous version stays in the card's history; where the business renders on your own subscription, Cortana writes a new prompt and your render task (or you, with Claude) renders it again.
@@ -100,7 +100,7 @@ The page shows the kit's version under the text. When a newer version appears, p
 
 <AccordionGroup>
   <Accordion title="Read-only connections">
-    With the acting switch off, the assistant reports, explains, lists the review board and the posting setup, and never approves, posts, renders, orders or runs anything. Decisions stay in Slack or the app; ordering ads from chat needs the acting switch, so connect again with it on.
+    With the **Let ... act on your media buyer decisions** box (the box names your assistant) unticked, the assistant reports, explains, lists the review board and the posting setup, and never approves, renders, orders or runs anything. Decisions stay in Slack or the app; ordering ads or Cortana renders from chat need that box, so connect again with it ticked. Posting to Meta from chat is its own box, **Allow AI ad management**.
   </Accordion>
   <Accordion title="What the assistant can see">
     Verdicts, costs against your targets, the reasoning behind each call, counts, names, your own instructions and settings, and image links. It has no access to how Cortana decides, and it says so if asked.
@@ -109,7 +109,7 @@ The page shows the kit's version under the text. When a newer version appears, p
     A decision made in chat updates the Slack card ("Approved by you via Claude") and the app. There is one record of every decision, whichever door you used.
   </Accordion>
   <Accordion title="Costs">
-    Talking to your assistant is on your assistant's plan. Orders, renders, generation runs and reviews started from chat run on Cortana and are billed as usage to the wallet that pays for the business, the same as from the app: one usage line per run, naming what it wrote and rendered. On your own subscription no render is billed by Cortana: the writing is, the rendering is your assistant's.
+    Talking to your assistant is on your assistant's plan. Orders, renders, generation runs and reviews started from chat run on Cortana and are billed as usage to the wallet that pays for the business, the same as from the app: one usage line per run, naming what it wrote and rendered. On your own subscription no render is billed by Cortana: the writing is, the rendering is your assistant's. In the creative studio the writing is your assistant's; a Claude studio's renders are paid from your wallet on the API's receipt (about $0.04 to $0.08 per image), one "chat render" line per image carrying the charge, after your yes.
 
     The wallet is the only limit. An order is checked against it before anything is written: when the wallet cannot cover it, the assistant says "Your wallet is empty, no more Cortana usage credits until it is topped up" with the top-up link, and nothing runs. A review or a re-render is refused the same way. If the wallet runs out during an order, Cortana stops at the next step with what is already written and says why; nothing goes below zero. A business whose wallet is suspended or empty is skipped by the overnight review, and its morning report starts with "paused: wallet suspended" (or empty) and the top-up link; reviews and orders resume by themselves once it is topped up. A normal order shows no price; ask "what would six cost?" for the quote.
   </Accordion>

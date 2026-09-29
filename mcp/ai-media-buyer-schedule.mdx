@@ -1,13 +1,13 @@
 ---
-title: "Set up your AI media buyer in Claude or ChatGPT"
-description: "The one-page setup for an AI media buyer that runs on a schedule: the project instructions, the three scheduled tasks (the morning review, making ads, rendering), the render setting, and what to say for each."
+title: "Your media buyer project: the automated machine in Claude or ChatGPT"
+description: "The one-page setup for the media buyer project: its instructions, the three scheduled tasks (the morning review, making ads, rendering), the render setting, and what to say for each. Writing ads in the chat is the creative studio project, on its own page."
 ---
 
-{/* last-verified: 2026-09-22 · app route /dashboard/media-buyer/connect-ai · in the nav under the main page (3.6 R5-F2) */}
+{/* last-verified: 2026-09-29 · app route /dashboard/media-buyer/connect-ai (Step 4 the media buyer project, Step 5 the creative studio) · sprint mcp-media-buyer-6 (6.2) */}
 
 This page is the short version for someone who already has the Cortana connector in Claude or ChatGPT and wants the assistant to work like a media buyer on a schedule, without prompting it from scratch every day. It takes about ten minutes.
 
-You will end up with one project that knows how to be your media buyer, and three scheduled tasks that cover the three jobs a media buyer does: review and decide, make ads, and render.
+You will end up with one project that knows how to be your media buyer, and three scheduled tasks that cover the three jobs a media buyer does: review and decide, make ads, and render. This is the automated machine. Writing ads yourself in the chat is a second project, the creative studio, on [its own page](/mcp/ai-media-buyer-playbook).
 
 <Note>
   Already connected? You do not need to connect again. Your existing connection covers everything on this page. Skip to step 2.
@@ -22,7 +22,7 @@ Only if the Cortana connector is not in your assistant yet.
 
 The full walkthrough, with the consent screen explained, is on [AI Media Buyer in Claude and ChatGPT](/mcp/ai-media-buyer).
 
-## Step 2: Give the assistant its instructions
+## Step 2: The media buyer project
 
 This is the part that makes it a media buyer instead of a chatbot with a data connection.
 
@@ -31,7 +31,7 @@ This is the part that makes it a media buyer instead of a chatbot with a data co
 3. Paste the text as the project's instructions.
 4. In each chat inside the project, turn the Cortana connector on before you ask. In Claude: the **+** button, then **Connectors**. In ChatGPT: the **+** menu, then **Developer mode**, then pick Cortana. {/* TODO: verify these menu labels in the live UIs */}
 
-What the instructions do: they tell the assistant to use the AI Media Buyer tools for what an ad is worth, what to kill, keep or scale, and what to make next (the same analysis as your Slack cards, never its own conclusions from the attribution or Meta insight tools, which answer plain numbers only), how to present the report, how to act on your decisions, how to order ads with your direction (Cortana reads it against your data first and writes every hook and prompt itself), and how to render on your own subscription.
+What the instructions do: they tell the assistant to use the AI Media Buyer tools for what an ad is worth, what to kill, keep or scale, and what to make next (the same analysis as your Slack cards, never its own conclusions from the attribution or Meta insight tools, which answer plain numbers only), how to present the report, how to act on your decisions, how to order ads with your direction (Cortana reads it against your data first and writes every hook and prompt itself), and how to render on your own subscription. In this project Cortana writes the ads; when you ask it to write ads itself, it sends you to your creative studio project.
 
 ## Step 3: The three scheduled tasks
 
@@ -75,13 +75,13 @@ A media buyer has three recurring jobs. Each one is its own scheduled task with 
 
 ## The render setting and the In production column
 
-**Who renders the images** is set once for all your businesses in Control Center, Media Buyer, Overview, above the fleet table; every business follows it unless its own row in the table's **Renders** column, or its own media buyer settings, says otherwise (the setting there shows **Use the agency setting** with what that means today). **Cortana renders** is the default: Cortana makes the images on its side (about $0.04 to $0.08 per image, billed as usage) and they land in **Review**. **Use my own ChatGPT subscription** means Cortana writes the prompts and your ChatGPT render task makes the images; the cards wait in the **In production** column of the Ad Pipeline with their prompts until the images come home, and the morning report says how many wait and nags when nothing has rendered for two days.
+**Who renders the images** is set once for all your businesses in Control Center, Media Buyer, Overview, above the fleet table; every business follows it unless its own row in the table's **Renders** column, or its own media buyer settings, says otherwise (the setting there shows **Use the agency setting** with what that means today). **Cortana renders** is the default: Cortana makes the images on its side (about $0.04 to $0.08 per image, paid from your wallet on the API's receipt) and they land in **Review**. **Use my own ChatGPT subscription** means Cortana writes the prompts and your ChatGPT render task makes the images; the cards wait in the **In production** column of the Ad Pipeline with their prompts until the images come home, and the morning report says how many wait and nags when nothing has rendered for two days.
 
 ## What to check before the first run
 
 1. **Each business has a priority event and an offer** in its media buyer settings. Without them the creative brief says it is not ready and the assistant tells you so.
 2. **Launch instructions and a Slack channel** for any business you want to post from. Without instructions the slot launches armed ads live as they are.
-3. **The acting switch was on** when you approved the connection. A read-only connection reports and never acts; connect again with it on to decide, order ads, render, or post from chat.
+3. **The "Let ... act on your media buyer decisions" box was ticked** when you approved the connection. A read-only connection reports and never acts; connect again with it ticked to decide, order ads or render from chat. Posting to Meta from chat is its own box, **Allow AI ad management**.
 4. **A wallet that can pay.** Orders, reviews and Cortana renders are billed as usage to the wallet that pays for the business. An order is checked against it before anything is written and refused with a top-up link when it cannot be covered; the overnight review skips a business whose wallet is suspended or empty and says so in the morning report.
 
 ## FAQ
@@ -107,6 +107,9 @@ A media buyer has three recurring jobs. Each one is its own scheduled task with 
 ## Next step
 
 <CardGroup cols={2}>
+  <Card title="Your creative studio" icon="pen-nib" href="/mcp/ai-media-buyer-playbook">
+    The second project: write ads in the chat from Cortana's playbook, render them, post them paused.
+  </Card>
   <Card title="AI Media Buyer in Claude and ChatGPT" icon="sparkles" href="/mcp/ai-media-buyer">
     The consent screen explained, everything you can ask, and the FAQ.
   </Card>
