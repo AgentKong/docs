@@ -22,13 +22,31 @@ You can now select this group from the dropdown to instantly view data for only 
 
 ## 2. Customizing Data Columns
 
-You can customize the table view to display the specific KPIs relevant to your businesses, or use pre-built templates like "Sales Funnel (1 Call)" or "Low Ticket Funnel."
+You can customize the table view to display the specific KPIs relevant to your businesses, or start from a funnel template like "Sales Funnel (1 Call)" or "Low Ticket Funnel."
+
+A new agency account starts with no column preset: the button reads **Columns: Empty** and the table shows **No column preset yet** with a **Click here to create a column preset** button.
 
 1. Click the **Columns** button in the top right corner of the table.
 2. Select an existing preset or click **+ Create New Preset**.
-3. In the **Available Columns** list, click the **+** icon next to the metrics you want to track (e.g., Spend, ROI, Page Views).
-4. **Note on Custom Conversions:** The system will show you which businesses have a specific conversion event (e.g., "Webinar Showed"). If you select a conversion specific to one business, it will display as "0" for other businesses that do not use that conversion.
-5. Name your preset and click **Create Preset**.
+3. The **Which funnel is this?** window opens. Pick the template card that matches your funnel, or click **Start from scratch**.
+4. Picking a template creates the preset with its conversion columns and switches the table to it. Conversions no business in your account has are left out, and a short note lists them.
+5. With **Start from scratch**, drag columns from **Available Columns** into the exact spot you want in **Selected Columns** (a line shows where they land), or click the **+** on the left of a column to add it.
+6. **Note on Custom Conversions:** The system will show you which businesses have a specific conversion event (e.g., "Webinar Showed"). If you select a conversion specific to one business, it will display as "0" for other businesses that do not use that conversion.
+7. Name your preset and click **Create Preset**.
+
+Creating or editing presets needs permission to manage unified attribution.
+
+<AccordionGroup>
+  <Accordion title="What the templates add to your Control Center">
+    Every template shows the funnel from traffic to revenue: CPM, Spent, Reach, Frequency, Unique CTR, Page Views, Unique Visitors, Cost per Unique Visitor, Opt-in Rate, the template's conversions, Revenue, ROAS and ROI (the two sales funnel templates also add All Payments and LTV). The first time you pick a template, two agency custom metrics are created for you if you don't have them yet: **Cost per Unique Visitor** (spend ÷ unique visitors) and **Opt-in Rate** (leads ÷ unique visitors). A metric you deleted is not created again.
+  </Accordion>
+  <Accordion title="How conversions are counted in agency templates">
+    Conversion columns created from a template count every event. You can switch a column to count one per person (for example **Unique Per Attribution Fingerprint**) in the preset editor, but on the Control Center this makes the table slower to load, because every business in view is recalculated live.
+  </Accordion>
+  <Accordion title="Custom metrics across businesses">
+    An agency custom metric reads the same numbers the table shows: spend, page views, unique visitors, revenue, LTV revenue, refunds, refund rate, ROAS, ROI, the ad platform metrics and **Number of Businesses**. A conversion in a formula counts that conversion across every business in view, including businesses where it is turned off (they add nothing).
+  </Accordion>
+</AccordionGroup>
 
 ## 3. Display Settings (Currency & Timezone)
 
