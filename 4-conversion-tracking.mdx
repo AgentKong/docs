@@ -1,6 +1,6 @@
 ---
 title: "4.2) Conversion Sources"
-description: "Add conversion sources to track sales and leads in Cortana. Connect Stripe, PayPal, Shopify, Kajabi, GoHighLevel, Meta Ads, LinkedIn Ads, Meta and Instagram DMs, Calendly, CallRail, webhooks, pixels, CSV and 14 other source types to any conversion."
+description: "Add conversion sources to track sales and leads in Cortana, gross or after processor fees. Connect Stripe, PayPal, Shopify, Kajabi, GoHighLevel, Meta Ads, LinkedIn Ads, Meta and Instagram DMs, Calendly, CallRail, webhooks, pixels, CSV and 14 other source types to any conversion."
 ---
 
 ## <u>Conversion Sources</u>
@@ -511,6 +511,15 @@ Every source is added the same way. Follow these six steps, then open your sourc
         | **Subscription Created** | subscriptions |
         | **Subscription Renewed** | subscriptions |
         | **Subscription Canceled** | subscriptions |
+      </Step>
+
+      <Step title="Choose which revenue to track">
+        **Which revenue should this track?** appears as soon as you pick a payment event (**Payment Succeeded** or **First Fanbasis Purchase**). Two answers:
+
+        - **All revenue**: what the customer paid. This is the number you see today and it is preselected.
+        - **Revenue after fees**: what you keep once Fanbasis's fees are taken out, buy now pay later fees included.
+
+        Pick **Revenue after fees** to have this source book what lands in your account instead of what the customer paid. The source is named with **(after fees)** so you can tell it apart in the **Sources** table. The question is not shown for events that carry no fee, such as refunds, failed payments, or cancellations. See **Which revenue should this track?** in the settings reference below for what changes.
       </Step>
 
       <Step title="Set the Product filter">
@@ -1463,6 +1472,15 @@ Every source is added the same way. Follow these six steps, then open your sourc
         Once picked, a summary panel shows the raw event name and its description.
       </Step>
 
+      <Step title="Choose which revenue to track">
+        **Which revenue should this track?** appears as soon as you pick a payment event (**Payment Succeeded**, **First Stripe Purchase**, **Checkout Completed**, or **Subscription Payment**). Two answers:
+
+        - **All revenue**: what the customer paid. This is the number you see today and it is preselected.
+        - **Revenue after fees**: what you keep once Stripe's fees are taken out, buy now pay later fees included.
+
+        Pick **Revenue after fees** to have this source book what lands in your account instead of what the customer paid. The source is named with **(after fees)** so you can tell it apart in the **Sources** table. The question is not shown for events that carry no fee, such as refunds, failed payments, or cancellations. See **Which revenue should this track?** in the settings reference below for what changes.
+      </Step>
+
       <Step title="Filter to specific products (optional)">
         Shown only for events that carry product information. Leave it empty to track all products.
       </Step>
@@ -1647,6 +1665,15 @@ Every source is added the same way. Follow these six steps, then open your sourc
         | **Membership Updated** | A membership changes |
 
         Once picked, a summary panel shows the raw event name and description.
+      </Step>
+
+      <Step title="Choose which revenue to track">
+        **Which revenue should this track?** appears as soon as you pick a payment event (**Payment Succeeded** or **First Whop Purchase**). Two answers:
+
+        - **All revenue**: what the customer paid. This is the number you see today and it is preselected.
+        - **Revenue after fees**: what you keep once Whop's fees are taken out, buy now pay later fees included.
+
+        Pick **Revenue after fees** to have this source book what lands in your account instead of what the customer paid. The source is named with **(after fees)** so you can tell it apart in the **Sources** table. The question is not shown for events that carry no fee, such as refunds, failed payments, or cancellations. See **Which revenue should this track?** in the settings reference below for what changes.
       </Step>
 
       <Step title="Filter to specific products (optional)">
@@ -1837,6 +1864,14 @@ These settings appear on more than one source. Where a source uses one, its acco
 <Tip>
   The custom field option is how one CRM feeds two different numbers. A common setup is a **Deal closed — new revenue** conversion that reads a custom field your closers fill in with the cash collected, alongside an **LTV Revenue** conversion on the same pipeline that reads the opportunity value. Works the same in GoHighLevel, HubSpot, Close.io, and Cortana CRM.
 </Tip>
+
+### Which revenue should this track?
+
+- **What it does:** decides whether a Stripe, Whop, or Fanbasis payment source books the amount the customer paid (**All revenue**) or the amount you keep after the processor's fees (**Revenue after fees**). Fees include the extra charged on buy now pay later payments such as Affirm, Klarna, Afterpay, ClarityPay, or Splitit, so a source set to **Revenue after fees** shows the money that actually landed. The question appears right after you pick a payment event and is hidden for events with no fee (refunds, failed payments, subscription starts and cancellations).
+- **Default:** **All revenue**. Every source you already have keeps working exactly as before.
+- **Recommendation:** leave it on **All revenue** when you report gross sales or compare against your processor's dashboard. Choose **Revenue after fees** when your margins ride on fees, for example high ticket offers sold on buy now pay later, so ROAS and cost per sale reflect what you keep.
+- **Caveat:** the choice applies to payments recorded from the moment you save it. Earlier conversions are not rewritten. A source on **Revenue after fees** is named with **(after fees)** in the **Sources** table. Refunds are always booked at the full refunded amount, so a fully refunded sale on an after fees source nets out slightly negative by the fee the processor kept. When the fee is not known at the instant a payment arrives, the sale is recorded at the full amount first and corrected by the daily sync once the processor reports the fee, usually within a day; the conversion's value history shows the correction.
+- **Switching later:** open the source's edit dialog, change the answer, and save. Payments from then on use the new answer; earlier ones stay as they were booked. You cannot add a second source on the same event and products to get both numbers in one conversion; use two conversions instead.
 
 ### Currency
 
@@ -2054,6 +2089,12 @@ These settings appear on more than one source. Where a source uses one, its acco
 <AccordionGroup>
   <Accordion title="How do I track Stripe payments?">
     Connect Stripe at **Settings → Integrations**, then open your revenue conversion, click **Add Source**, pick **Stripe**, choose your **Stripe Account**, and pick a **Stripe Event**. For total revenue use **Payment Succeeded**; for new customers only use **First Stripe Purchase**. Optionally filter to specific products or add a minimum amount under **Payment Filters**, then click **Submit**.
+  </Accordion>
+
+  <Accordion title="Can I track revenue after Stripe, Whop, or Fanbasis fees instead of the full amount?">
+    Yes. When you add a Stripe, Whop, or Fanbasis source on a payment event, the form asks **Which revenue should this track?**. Pick **Revenue after fees** and the source books what lands in your account after the processor's fees, buy now pay later fees included. **All revenue** (the amount the customer paid) stays the default, and every existing source is untouched.
+
+    The setting applies to payments from the moment you save it; earlier conversions keep the number they were booked at. To change an existing source, open its edit dialog, change the answer, and save. The source name gains **(after fees)** so you can tell the two apart in the **Sources** table. Refunds are still booked at the full refunded amount. If the processor has not reported the fee by the time a payment arrives, the sale is recorded at the full amount and corrected by the daily sync, usually within a day.
   </Accordion>
 
   <Accordion title="How do I track PayPal payments?">
