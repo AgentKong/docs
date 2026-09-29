@@ -119,7 +119,6 @@
               "6-ai-ad-optimization",
               "7-customizing-your-dashboard",
               "8-customer-journey-views",
-              "9-how-to-set-up-shopify",
               "10-chrome-extension",
               "11-instagram-messenger-dms",
               "12-tracking-links"
@@ -595,6 +594,10 @@
     {
       "source": "/sales/9-crm-pipelines",
       "destination": "/crm/crm"
+    },
+    {
+      "source": "/9-how-to-set-up-shopify",
+      "destination": "/4-conversion-tracking"
     }
   ],
   "footerSocials": {

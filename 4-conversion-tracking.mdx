@@ -1011,11 +1011,11 @@ Every source is added the same way. Follow these six steps, then open your sourc
 
     **No revenue.** A DM is a lead, not a sale, so nothing is attached as money.
 
-    **Prerequisite integration:** Meta, with messaging access granted. When it is missing, the entry is locked and clicking it shows `Connect Meta and grant messaging access first. Go to Settings → Integrations.` Full connection setup is in [**11) Instagram & Messenger DMs**](/11-instagram-messenger-dms).
+    **Prerequisite integration:** Meta, with messaging access granted. When it is missing, the entry is locked and clicking it shows `Connect Meta and grant messaging access first. Go to Settings → Integrations.` Full connection setup is in [**10) Instagram & Messenger DMs**](/11-instagram-messenger-dms).
 
     <Steps>
       <Step title="Connect Meta and grant messaging access">
-        Do this once, in [**11) Instagram & Messenger DMs**](/11-instagram-messenger-dms). Connect Meta and grant the messaging permission.
+        Do this once, in [**10) Instagram & Messenger DMs**](/11-instagram-messenger-dms). Connect Meta and grant the messaging permission.
 
         Until that is done, **Meta / Instagram DM** sits at the bottom of the **Integration** list with a padlock and cannot be picked.
       </Step>
@@ -1388,46 +1388,286 @@ Every source is added the same way. Follow these six steps, then open your sourc
   </Accordion>
 
   <Accordion title="Shopify">
-    **What it tracks:** the whole Shopify funnel, from viewing a product through checkout, paid orders, fulfilment, cancellations, and refunds. Order events carry revenue.
+    **What it tracks:** what shoppers do in your Shopify store, and your paid orders with their value. Product views, adds to cart and checkout steps come from the pixel. Paid orders, fulfilments, cancellations and refunds come from webhooks.
 
-    **Refunds:** tracked automatically. Full and partial refunds are both picked up. You do not add a refund source — Cortana matches the refund to the original sale and files it in a companion refunds conversion named after it. See [Refunds](#refunds).
+    **How Shopify is different:** you do not start with **Add Source**. You connect your store once, from the **Shopify** card in **Settings → Integrations**. Cortana then creates five conversions and their Shopify sources for you. Use **Add Source** only to count an extra Shopify event, such as **Order Fulfilled**. See **Add another Shopify event** below.
 
-    **Prerequisite integration:** Shopify. When not connected: `Please connect Shopify first. Go to Settings → Integrations to connect.`
+    **Refunds:** tracked automatically, full and partial. You do not add a refund source. Cortana matches each refund to its sale and books it in a refunds conversion named after the purchase one. See [Refunds](#refunds).
 
-    <Frame caption="The Shopify source form: pick the event in customer-journey order.">
-      <img src="/images/ad-tracking/conversion-sources/shopify/01-shopify-form.png" alt="Create Conversion Source dialog with Integration set to Shopify, showing the Shopify Event dropdown listing events from View Product through Purchase (Paid) to Refund." />
+    **Prerequisite integration:** Shopify. Until your store is connected, the entry is locked: `Please connect Shopify first. Go to Settings → Integrations to connect.`
+
+    {/* last-verified: 2026-09-29 · app commit e617cd842 · routes: /business/<id>/settings?tab=integrations, /business/<id> · moved here from the retired page 9-how-to-set-up-shopify */}
+
+    ### Before you start
+
+    - Your Cortana business needs an **active Cortana plan**.
+    - You need permission to manage integrations in that business.
+    - You need to be able to install apps on your Shopify store.
+
+    There is nothing to paste and nothing to code.
+
+    <Tip>
+      Finish the Shopify steps within 30 minutes of pressing **Connect**. The connection link lasts 30 minutes and works once.
+    </Tip>
+
+    {/* TODO: verify: that a return after 30 minutes now shows "This Shopify connection expired" (fixed in b6f6d02a0, not yet seen live). */}
+
+    ### Connect your store
+
+    <Steps>
+      <Step title="Press Connect on the Shopify card">
+        In your business, open **Settings**. The **Integrations** tab opens first.
+
+        Find the **Shopify** card. It reads *"Connect your Shopify store to track all your e-commerce purchases and revenue with full attribution."* (Attribution means working out which ad, campaign or link brought each buyer to your store.)
+
+        Press **Connect**. Cortana does not ask for your store address.
+
+        <Frame caption="Settings, Integrations. A business with no store connected sees one button: Connect.">
+          <img className="block dark:hidden" src="/images/integrations/shopify/01-integrations-card.png" alt="The Integrations tab in Settings with the Shopify card highlighted and numbered 1. The card shows its description and a single Connect button." />
+          <img className="hidden dark:block" src="/images/integrations/shopify/01-integrations-card-dark.png" alt="The Integrations tab in Settings with the Shopify card highlighted and numbered 1. The card shows its description and a single Connect button." />
+        </Frame>
+      </Step>
+
+      <Step title="Install Cortana from the Shopify App Store">
+        The Cortana AI page on the Shopify App Store opens.
+
+        Press **Install**. If you have more than one store, Shopify asks which store to use. Pick the store you want to connect.
+
+        <Frame caption="The Cortana AI listing on the Shopify App Store. Press Install.">
+          <img src="/images/integrations/shopify/02-app-store-listing.png" alt="The Cortana AI page on the Shopify App Store with the Install button highlighted and numbered 2. The page shows pricing, rating, developer and a product screenshot." />
+        </Frame>
+      </Step>
+
+      <Step title="Approve the app's permissions">
+        Shopify shows an **Install app** window. It lists the app permissions (what the Cortana app is allowed to read in your store) under **This app needs access to:**
+
+        - **View customer data**
+        - **View staff and contributor data**
+        - **View and edit store data**
+
+        Press **Install**.
+
+        <Frame caption="Shopify's Install app window, with the three permission groups and the Install button.">
+          <img src="/images/integrations/shopify/03-shopify-install.png" alt="Shopify's Install app window for Cortana over the store's Apps settings. It lists View customer data, View staff and contributor data, and View and edit store data. The Install button is highlighted and numbered 3." />
+        </Frame>
+      </Step>
+
+      <Step title="Let the setup checks finish">
+        Shopify sends you back to Cortana. You land on the same **Integrations** page with the setup window open. Its title is **What do you want to track?**
+
+        For a moment the window reads **Checking your store**. Then the **Your store** panel shows three setup checks. They run in order. Each one waits for the one before it.
+
+        | Check | While it works | When it is done |
+        | --- | --- | --- |
+        | 1 | **Installing the pixel** | **Pixel installed**: *"Tracks visits, carts and checkouts on your storefront."* |
+        | 2 | **Connecting webhooks** | **Webhooks live**: *"Orders and refunds reach Cortana on their own."* |
+        | 3 | **See your first event** | **First event received**: *"Your store is sending events to Cortana."* |
+
+        A pixel is a small piece of tracking code. It tells Cortana what shoppers do in your store. A webhook is a message Shopify sends to Cortana the moment something happens, like a paid order. Cortana installs both for you. Your theme is not changed.
+
+        The first two checks finish on their own. When you arrive, **Pixel installed** may already be green. While the checks run, the switches below are still loading, and the footer reads **Setting up your store…**
+
+        <Frame caption="Seconds after you land: the pixel is in and the webhooks are connecting.">
+          <img className="block dark:hidden" src="/images/integrations/shopify/04-setup-installing.png" alt="The What do you want to track setup window while setup runs. Pixel installed has a green tick, Connecting webhooks shows a spinner, the third check and the five switch rows are still loading, and the footer reads Setting up your store. The store address is blurred." />
+          <img className="hidden dark:block" src="/images/integrations/shopify/04-setup-installing-dark.png" alt="The What do you want to track setup window while setup runs. Pixel installed has a green tick, Connecting webhooks shows a spinner, the third check and the five switch rows are still loading, and the footer reads Setting up your store. The store address is blurred." />
+        </Frame>
+
+        The third check needs you. It reads *"Open your store and view any product. It shows up here within a few seconds."* Press **Open your store**. Your store opens in a new tab. Look at any page. A visit to your home page is enough.
+
+        When the third check turns green, the window moves on to **History** by itself.
+
+        <Frame caption="Checks 1 and 2 are done. Check 3 waits for you to open your store.">
+          <img className="block dark:hidden" src="/images/integrations/shopify/05-setup-first-event.png" alt="The What do you want to track setup window. Pixel installed and Webhooks live have green ticks. See your first event is waiting, and its Open your store button is highlighted and numbered 4. The store address is blurred." />
+          <img className="hidden dark:block" src="/images/integrations/shopify/05-setup-first-event-dark.png" alt="The What do you want to track setup window. Pixel installed and Webhooks live have green ticks. See your first event is waiting, and its Open your store button is highlighted and numbered 4. The store address is blurred." />
+        </Frame>
+      </Step>
+
+      <Step title="Choose what to track">
+        Below the checks are five switches: **Purchases**, **Checkouts started**, **Payment details added**, **Adds to cart** and **Product views**. Each one is a conversion (something you want to count, like a purchase or an add to cart).
+
+        All five are on for a newly connected store. **Purchases** shows **Always on** and cannot be switched off.
+
+        A switch saves the moment you flip it. There is no Save button. See **Shopify settings** below for what each switch counts.
+
+        The footer shows how many events you track, for example **Tracking 5 of 5 events**. Press **Continue to history**.
+
+        <Frame caption="All three checks are green. The five switches decide what Cortana counts.">
+          <img className="block dark:hidden" src="/images/integrations/shopify/06-setup-done.png" alt="The setup window with Pixel installed, Webhooks live and First event received all ticked. The five tracking switches are highlighted and numbered 5, with Purchases marked Always on. The footer reads Tracking 5 of 5 events beside the Continue to history button." />
+          <img className="hidden dark:block" src="/images/integrations/shopify/06-setup-done-dark.png" alt="The setup window with Pixel installed, Webhooks live and First event received all ticked. The five tracking switches are highlighted and numbered 5, with Purchases marked Always on. The footer reads Tracking 5 of 5 events beside the Continue to history button." />
+        </Frame>
+      </Step>
+
+      <Step title="Pick how far back to look">
+        The title changes to **Bring in your store’s history**.
+
+        The **From your store** panel shows what Cortana copied from your store. This copy is the store sync: your orders, customers, products and abandoned carts, for your dashboard. Under the counts, a line shows when it last ran, for example **Synced just now**.
+
+        Open the range menu at the top right of the panel. It offers **Last 7 days**, **Last 30 days** and **Last 60 days**. **Last 60 days** is picked for you.
+
+        The counts change with the range:
+
+        - **Orders**: orders created in that range, not counting Shopify test orders.
+        - **Customers**: customers created in Shopify in that range.
+        - **Products**: your whole catalogue. The range does not change it.
+        - **Abandoned carts**: abandoned carts created in that range.
+
+        <Frame caption="The range menu offers the last 7, 30 or 60 days.">
+          <img className="block dark:hidden" src="/images/integrations/shopify/07-history-range.png" alt="The History step with its range menu open and highlighted, numbered 6. The menu lists Last 7 days, Last 30 days and Last 60 days, with Last 60 days ticked." />
+          <img className="hidden dark:block" src="/images/integrations/shopify/07-history-range-dark.png" alt="The History step with its range menu open and highlighted, numbered 6. The menu lists Last 7 days, Last 30 days and Last 60 days, with Last 60 days ticked." />
+        </Frame>
+      </Step>
+
+      <Step title="Import your past orders">
+        The store sync does not turn old orders into conversions. Past orders become conversions only when you press **Import orders**.
+
+        First decide on **Include orders without attribution**. It is off at first.
+
+        - **Off**: only orders Cortana can match to an ad, campaign or source come in.
+        - **On**: orders with no match come in too, as untracked (counted, but not credited to any ad).
+
+        Then press **Import orders**. The line beside it tells you how many orders the import can bring in, for example *"Brings in up to 1 order from the last 60 days with the ad, campaign or source behind each one."*
+
+        It says "up to" because some orders stay out. The import never brings in Shopify test orders. It takes only orders that are paid, partly refunded or refunded. With the switch off, it also leaves out orders it cannot match to an ad, campaign or source.
+
+        If there is nothing to bring in, the line reads *"No orders to bring in from the last 60 days. Test orders are never imported, and orders already in Cortana are skipped."*
+
+        The import sends nothing to Meta, TikTok or any other ad platform.
+
+        <Frame caption="History, ready to import. Include orders without attribution is off.">
+          <img className="block dark:hidden" src="/images/integrations/shopify/08-history-ready.png" alt="The History step showing Orders, Customers, Products and Abandoned carts counts and Synced just now. The Include orders without attribution switch is off, the line reads Brings in up to 1 order from the last 60 days, and the Import orders button is highlighted and numbered 7. The footer has Back and Open your dashboard." />
+          <img className="hidden dark:block" src="/images/integrations/shopify/08-history-ready-dark.png" alt="The History step showing Orders, Customers, Products and Abandoned carts counts and Synced just now. The Include orders without attribution switch is off, the line reads Brings in up to 1 order from the last 60 days, and the Import orders button is highlighted and numbered 7. The footer has Back and Open your dashboard." />
+        </Frame>
+      </Step>
+
+      <Step title="Let the import run">
+        While it runs, the line reads *"Importing: N so far. You can close this screen; it keeps going."* The button shows **Importing**.
+
+        You can close the window. The import keeps going.
+
+        When it finishes, the button changes to **Import again**. The line starts with **Last import:** and reads one of these:
+
+        - Switch off: *"Last import: N orders brought in with attribution, M had none and were left out, K were already in."*
+        - Switch on: *"Last import: N orders brought in, the ones without attribution as untracked, K were already in."*
+        - Nothing found: *"Last import: nothing came in from that range. Test orders are never imported."*
+
+        The switch goes back to off each time you open the window. The **Last import:** line still describes the import you ran.
+
+        Imported orders are dated at the time of the order, not the day you import them. Refunds are not imported.
+
+        <Frame caption="An import running. Include orders without attribution was switched on for this import.">
+          <img className="block dark:hidden" src="/images/integrations/shopify/09-history-importing.png" alt="The History step during an import. The line reads Importing: 0 so far. You can close this screen; it keeps going. The Importing button is greyed out." />
+          <img className="hidden dark:block" src="/images/integrations/shopify/09-history-importing-dark.png" alt="The History step during an import. The line reads Importing: 0 so far. You can close this screen; it keeps going. The Importing button is greyed out." />
+        </Frame>
+
+        <Frame caption="The import finished. It ran with Include orders without attribution on; the switch shows off again after reopening.">
+          <img className="block dark:hidden" src="/images/integrations/shopify/10-history-done.png" alt="The History step after an import. The Last import line is highlighted and numbered 8. It reads Last import: 1 order brought in, the ones without attribution as untracked, 2 were already in. Beside it is the Import again button." />
+          <img className="hidden dark:block" src="/images/integrations/shopify/10-history-done-dark.png" alt="The History step after an import. The Last import line is highlighted and numbered 8. It reads Last import: 1 order brought in, the ones without attribution as untracked, 2 were already in. Beside it is the Import again button." />
+        </Frame>
+
+        {/* TODO: verify: "were already in" also counts orders skipped because no buyer could be found (the 2 in the shot had no customer). Reported as a product issue on 2026-09-29. */}
+      </Step>
+
+      <Step title="Open your dashboard">
+        Press **Open your dashboard**. Your dashboard opens on the **E-Commerce** tab.
+
+        Cortana adds the **E-Commerce** tab once the store sync or an import has finished. It sits after your other tabs. If the tab was deleted or renamed, the button opens your dashboard's first tab instead.
+
+        <Frame caption="Open your dashboard lands on the E-Commerce tab, added after the tabs you already had.">
+          <img className="block dark:hidden" src="/images/integrations/shopify/11-dashboard-ecommerce.png" alt="The dashboard with the E-Commerce tab selected and highlighted, numbered 9. It is the last tab after Ad Tracking, AI Agents, Stripe Overview and New Dashboard. Tiles show Total Revenue, Average Order Value, Total Orders, Refunds, Revenue and Order Trends, Revenue by Source and more." />
+          <img className="hidden dark:block" src="/images/integrations/shopify/11-dashboard-ecommerce-dark.png" alt="The dashboard with the E-Commerce tab selected and highlighted, numbered 9. It is the last tab after Ad Tracking, AI Agents, Stripe Overview and New Dashboard. Tiles show Total Revenue, Average Order Value, Total Orders, Refunds, Revenue and Order Trends, Revenue by Source and more." />
+        </Frame>
+      </Step>
+    </Steps>
+
+    ### What Cortana creates for your store
+
+    #### Conversions and conversion sources
+
+    Each switch has its own conversion in **Conversion Setup**, and each conversion gets its own Shopify source.
+
+    | Switch | Conversion | Conversion source | Where the data comes from |
+    | --- | --- | --- | --- |
+    | **Purchases** | **New Deals Closed** | **Shopify - Purchase (Paid)** | Webhook, when an order is paid |
+    | **Checkouts started** | **Initiate Checkout** | **Shopify - Initiate Checkout** | Pixel |
+    | **Payment details added** | **Add Payment Info** | **Shopify - Add Payment Info** | Pixel |
+    | **Adds to cart** | **Add to Cart** | **Shopify - Add Product To Cart** | Pixel |
+    | **Product views** | **View Product** | **Shopify - View Product** | Pixel |
+
+    The purchase conversion may carry another name. If your business already had it, it keeps the name it had, for example **Purchase**. Stores connected in the past may use **Online Order**.
+
+    Refunds go to a second conversion named after the purchase one, for example **Purchase Refunds**. Refunds count as negative amounts there.
+
+    Cortana also adds:
+
+    - A tracking pixel named **Shopify Store**, in **Tracking Pixels**. It appears after the first visit to your store.
+    - A column preset named **Shopify** in the attribution table, set as the default.
+
+    {/* TODO: verify: whether the Shopify preset replaces a preset that was already the default. The test business had no other default preset. */}
+
+    <Frame caption="Conversion Setup, filtered to the Shopify preset.">
+      <img className="block dark:hidden" src="/images/integrations/shopify/12-conversions.png" alt="The Conversion Setup tab in Ad Tracking filtered by the Shopify preset. It lists Purchase, Online Order, Add to Cart, Initiate Checkout, View Product and Add Payment Info with their source counts." />
+      <img className="hidden dark:block" src="/images/integrations/shopify/12-conversions-dark.png" alt="The Conversion Setup tab in Ad Tracking filtered by the Shopify preset. It lists Purchase, Online Order, Add to Cart, Initiate Checkout, View Product and Add Payment Info with their source counts." />
+    </Frame>
+
+    <Frame caption="The Sources table of the purchase conversion, with the Shopify source highlighted.">
+      <img className="block dark:hidden" src="/images/integrations/shopify/13-conversion-sources.png" alt="The Edit Conversion dialog for the Purchase conversion. Its Sources table lists three sources, and the Shopify - Purchase (Paid) row is highlighted." />
+      <img className="hidden dark:block" src="/images/integrations/shopify/13-conversion-sources-dark.png" alt="The Edit Conversion dialog for the Purchase conversion. Its Sources table lists three sources, and the Shopify - Purchase (Paid) row is highlighted." />
+    </Frame>
+
+    #### The E-Commerce tab
+
+    Cortana adds the **E-Commerce** tab to your dashboard once. It happens after the store sync or an import finishes. If you delete the tab, Cortana does not add it again.
+
+    | Tile | Tile | Tile |
+    | --- | --- | --- |
+    | **Total Revenue** | **Average Order Value** | **Total Orders** |
+    | **Refunds** | **Revenue & Order Trends** | **Revenue by Source** |
+    | **New Customers** | **Repeat Customers** | **Customer LTV** |
+    | **Abandoned Carts** | **Abandoned Cart Value** | **Repeat Rate** |
+    | **Customer Segments (RFM)** | | |
+
+    To change the tiles, see [Customizing your dashboard](/7-customizing-your-dashboard).
+
+    ### Add another Shopify event
+
+    The five events above are ready once your store is connected. To count anything else, add a Shopify source to a conversion by hand. Follow the six steps at the top of this page and pick **Shopify** in the **Integration** dropdown. Then:
+
+    <Frame caption="The Shopify source form. Pick one Shopify event for this conversion.">
+      <img src="/images/ad-tracking/conversion-sources/shopify/01-shopify-form.png" alt="The Create Conversion Source dialog with Integration set to Shopify and an empty Shopify Event dropdown reading Select Shopify event, above the Cancel and Submit buttons." />
     </Frame>
 
     <Steps>
-      <Step title="Pick Shopify, then choose the Shopify Event">
-        Placeholder: **"Select Shopify event"**. Events are listed in the order a real customer experiences them. Each shows a description on the right and an **Example** in a hover tooltip.
+      <Step title="Choose the Shopify Event">
+        Open **Shopify Event**. Its placeholder reads **"Select Shopify event"**. Events are listed in the order a shopper meets them. Each shows a short description, and hovering one shows an **Example**. Pixel events carry a **Pixel** badge.
 
         | Event | Type | Notes |
         | --- | --- | --- |
-        | **View Product** | Pixel | |
-        | **Add Product To Cart** | Pixel | |
+        | **View Product** | Pixel | Already set up for you as **Product views** |
+        | **Add Product To Cart** | Pixel | Already set up for you as **Adds to cart** |
         | **Cart Created (Shopify Plus)** | Webhook | Plus only |
         | **Cart Updated (Shopify Plus)** | Webhook | Plus only |
-        | **Initiate Checkout** | Webhook | |
+        | **Checkout Started** | Pixel | Already set up for you as **Checkouts started** |
+        | **Payment Info Submitted** | Pixel | Already set up for you as **Payment details added** |
+        | **Initiate Checkout** | Webhook | An older checkout event. Cortana uses **Checkout Started** instead |
         | **Checkout Updated** | Webhook | |
         | **Abandoned Cart** | Webhook | |
-        | **Order Created** | Webhook | Fires before payment confirms |
-        | **Purchase (Paid)** | Webhook | The usual choice for a revenue conversion |
+        | **Order Created** | Webhook | Fires before payment is confirmed |
+        | **Purchase (Paid)** | Webhook | Already set up for you as **Purchases** |
         | **Order Fulfilled** | Webhook | |
         | **Order Cancelled** | Webhook | |
-        | **Refund** | Webhook | |
+        | **Refund** | Webhook | Not needed for refunds on your purchases. Those are booked for you |
 
-        Events marked **Plus** are hidden unless your store is on Shopify Plus. Events already used are disabled and show why, either *"Already added to this conversion"* or *"Already added to conversion: &lt;name&gt;"*.
+        Events marked **Plus** show only when your store is on Shopify Plus.
 
-        If every event is taken: *"All available Shopify events have already been added to this conversion. Create a new conversion to track additional events."*
+        An event that is already used is greyed out and says why: *"Already added to this conversion"* or *"Already added to conversion: &lt;name&gt;"*. Once your store is connected, the five events Cortana set up show this way.
+
+        If every event is taken, it reads: *"All available Shopify events have already been added to this conversion. Create a new conversion to track additional events."*
       </Step>
 
-      <Step title="Follow whichever setup panel appears">
-        What happens next depends on the event type and how your store is connected:
-
-        - **Pixel events** (View Product, Add Product To Cart): a green panel confirms that no setup is needed, because your Custom Pixel already streams this event to Cortana. Click **Submit** and conversions start counting.
-        - **Webhook events on an OAuth-connected store**: a green panel confirms *"Cortana will install this webhook in your Shopify admin automatically when you click Save."*
-        - **Webhook events on a manually-connected store**: a three-step setup card appears with the webhook URL and secret to copy into your Shopify admin. It then listens for a test event, and **Save** stays gated until one arrives.
+      <Step title="Check the panel under the event">
+        - **Pixel events**: a green panel says no setup is needed, because the pixel already sends this event to Cortana.
+        - **Webhook events, store connected through the app**: a green panel reads *"Cortana will install this webhook in your Shopify admin automatically when you click Save."*
+        - **Webhook events, store set up the old way**: a three-step card shows a webhook address and a secret to copy into your Shopify admin. It then waits for a test event. You cannot save until one arrives.
       </Step>
 
       <Step title="Save">
@@ -1436,8 +1676,213 @@ Every source is added the same way. Follow these six steps, then open your sourc
     </Steps>
 
     <Warning>
-      **Order Created** fires before payment is confirmed. **Purchase (Paid)** fires after. Putting both on one revenue conversion double-counts every order. Pick one, and pick **Purchase (Paid)** unless you have a specific reason not to.
+      **Order Created** fires before payment is confirmed. **Purchase (Paid)** fires after. Putting both on one revenue conversion counts every order twice. Pick **Purchase (Paid)**. It is the event your **Purchases** switch already uses.
     </Warning>
+
+    {/* TODO: verify: the pixel panel's own wording still says "your Custom Pixel" and "click Save" while the button reads Submit. Reported as product copy to fix. */}
+
+    ### Shopify settings
+
+    | Setting | What it does | Default | Our recommendation | Caveat |
+    | --- | --- | --- | --- | --- |
+    | **Purchases** | Counts every paid order, with its value. Refunds are booked against it. | On | Leave on. | Cannot be switched off. |
+    | **Checkouts started** | Counts a shopper reaching the checkout page. | On | Leave on. | Sent to ad platforms as **InitiateCheckout** when their Conversions API is set up. |
+    | **Payment details added** | Counts a shopper entering their payment method. | On | Leave on. | Sent to ad platforms as **AddPaymentInfo** when their Conversions API is set up. |
+    | **Adds to cart** | Counts every time a product goes into the cart. | On | Leave on. | Counts each add, so one shopper can add many. |
+    | **Product views** | Counts a shopper opening a product page. | On | Leave on unless the volume is too high for you. | Every product view becomes a conversion. With Meta set up, the ones with attribution also go to Meta as **ViewContent**. |
+    | **Range menu** (History) | Sets how far back the counts and the import go. | **Last 60 days** | **Last 60 days**, to bring in the most. | Offers 7, 30 or 60 days only. |
+    | **Include orders without attribution** | Also brings in orders with no match, as untracked. | Off | Off, so your ad numbers show only orders an ad can explain. | On also brings in orders no ad can explain. They come in as untracked. |
+    | **Import orders** | Turns past orders in the range into conversions. | Not run | Run it once after connecting. | Skips test orders, unpaid orders and orders with no buyer. Sends nothing to ad platforms. Cannot be undone. |
+
+    ### More Shopify options
+
+    <AccordionGroup>
+      <Accordion title="Reopen the setup window">
+        Once your store is connected, the Shopify card shows **Disconnect** and **Connected**.
+
+        Hover over **Connected** to see your store address, how many orders are tracked, and when the store last synced. For example: **3 orders tracked** and **Last sync: 15 minutes ago**.
+
+        Click **Connected** to open the setup window again. It opens on **Set up**. Press **Continue to history** to reach **History**.
+
+        <Frame caption="A connected Shopify card. Hovering Connected shows the store's order count and last sync.">
+          <img className="block dark:hidden" src="/images/integrations/shopify/14-card-connected.png" alt="The Shopify card with Disconnect and Connected buttons. A tooltip above Connected shows a blurred store address, 3 orders tracked and Last sync: 15 minutes ago." />
+          <img className="hidden dark:block" src="/images/integrations/shopify/14-card-connected-dark.png" alt="The Shopify card with Disconnect and Connected buttons. A tooltip above Connected shows a blurred store address, 3 orders tracked and Last sync: 15 minutes ago." />
+        </Frame>
+      </Accordion>
+
+      <Accordion title="Change what you track later">
+        Open the setup window with **Connected** on the Shopify card. Flip any switch. It saves at once.
+
+        Turning a switch off stops that event being counted. It also stops it going to Meta or TikTok. Reconnecting your store never changes a switch you already set.
+      </Accordion>
+
+      <Accordion title="Import past orders again later">
+        Open the setup window, press **Continue to history**, and press **Import again**.
+
+        You can also import from the conversion source itself, with the clock icon in its Sources table. See [Import your history](/4-backfill-history).
+
+        An import cannot be undone.
+      </Accordion>
+
+      <Accordion title="Install from the Shopify App Store first">
+        You can also start in Shopify instead of in Cortana. Install Cortana from the Shopify App Store and approve a Cortana plan in Shopify.
+
+        If your Shopify email is new to Cortana, Cortana makes an account for you. There is no sign-up form. Your business is named after your store, and your store is already connected. The **E-Commerce** tab is your first tab. You land in Cortana with the setup window open.
+
+        If your email already has a Cortana account, the page reads **This email already has a Cortana account**. It tells you to connect from Cortana instead, with **Connect** on the Shopify card. It also cancels the Shopify plan you approved there, so you are not charged for it.
+
+        {/* TODO: verify: how an owner who started in Shopify signs in to Cortana later (no password is shown to them). The code suggests opening Cortana from the Shopify admin, Apps, then Cortana. Confirm before writing it. Shopify's plan picker screens were not captured. */}
+      </Accordion>
+
+      <Accordion title="Billing">
+        When you press **Connect** in Cortana, you keep paying for Cortana the way you do today. Shopify shows no plan picker.
+
+        When you start from the Shopify App Store, Shopify bills you. Cortana's pricing page then reads **Your subscription is managed by Shopify**. To change plan, it says: *"To change your plan, go to your Shopify admin → Settings → Apps and sales channels → Cortana → Pricing plan."*
+      </Accordion>
+
+      <Accordion title="Send your store's events to Meta or TikTok">
+        Cortana can send your store's events back to Meta or TikTok through their Conversions API (how Cortana sends your sales back to an ad platform so its ads can learn).
+
+        Cortana sets this up for you only when that platform's Conversions API is already set up in Cortana. If you switch on Meta's Conversions API later, Cortana adds the Shopify events for Meta then. It does not do that for TikTok. Only conversions with attribution are sent.
+
+        Each switch maps to an ad platform event:
+
+        | Conversion | Meta and TikTok event |
+        | --- | --- |
+        | **New Deals Closed** | **Purchase** |
+        | **Initiate Checkout** | **InitiateCheckout** |
+        | **Add Payment Info** | **AddPaymentInfo** |
+        | **Add to Cart** | **AddToCart** |
+        | **View Product** | **ViewContent** |
+
+        Cortana does not set up Google Ads or LinkedIn for your Shopify events.
+
+        {/* TODO: verify: whether each Meta and TikTok mapping starts switched on for a new store. The test business kept mappings from an earlier connection, some on and some off. */}
+      </Accordion>
+
+      <Accordion title="Disconnect or uninstall">
+        **Disconnect** on the Shopify card opens **Disconnect Shopify Store?** It has a switch, **Delete All Shopify Data**, which is off at first.
+
+        - **Off**: the button reads **Disconnect Store**. Your orders, conversions, revenue, sessions and page views stay.
+        - **On**: the button reads **Disconnect & Delete All Data**. You must type your business name first. This cannot be undone.
+
+        Disconnect does not remove the Cortana app from Shopify. It does not cancel a plan billed by Shopify either.
+
+        To remove the app, uninstall it in your Shopify admin. Cortana then marks the store as disconnected. If Shopify bills you for Cortana, uninstalling ends that plan and switches tracking off.
+
+        <Frame caption="Disconnect Shopify Store? with Delete All Shopify Data switched off.">
+          <img className="block dark:hidden" src="/images/integrations/shopify/15-disconnect-dialog.png" alt="The Disconnect Shopify Store dialog. The Delete All Shopify Data switch is off, and a list under This action will says orders, conversions and revenue data are kept. The buttons are Cancel and Disconnect Store." />
+          <img className="hidden dark:block" src="/images/integrations/shopify/15-disconnect-dialog-dark.png" alt="The Disconnect Shopify Store dialog. The Delete All Shopify Data switch is off, and a list under This action will says orders, conversions and revenue data are kept. The buttons are Cancel and Disconnect Store." />
+        </Frame>
+      </Accordion>
+
+      <Accordion title="Stores set up the old way">
+        Stores connected before the Cortana app existed keep working. Their Shopify card opens the old setup instead of this window.
+
+        A store that has moved to the app may still have old webhooks, or an old pixel pasted in by hand. The setup window then shows a **Tidy up your old setup** card with what you can delete. Deleting them is optional. The card tells you when the old pixel must go, because it counts product views twice.
+
+        {/* TODO: verify: the steps for moving a store set up the old way onto the app. They are not clear from the code. Ask before writing them. */}
+      </Accordion>
+    </AccordionGroup>
+
+    ### Shopify troubleshooting
+
+    <AccordionGroup>
+      <Accordion title="A setup check keeps spinning">
+        The window checks again every 3 seconds, for up to 5 minutes.
+
+        If setup is still not done by then, the window reads *"Setup is taking longer than usual. Retry to run it again."* Press **Retry setup**.
+      </Accordion>
+
+      <Accordion title="What Retry setup does">
+        **Retry setup** runs the setup again. The window then reads *"Setup is running again. This screen updates as each step finishes."*
+
+        A check that fails shows red text. **Pixel not installed** reads *"Setup could not add it. Retry setup below."* **Webhooks not connected** reads *"Setup could not connect them. Retry setup below."*
+      </Accordion>
+
+      <Accordion title="The first event never arrives">
+        After 5 minutes with no visit, the third check reads *"Nothing yet. Open your store, view any product, then check again."* Open your store in a new tab, look at any page, then press **Check again**.
+
+        {/* TODO: verify: whether a storefront password page, a cookie consent banner or an ad blocker stops the first event. The test store had no password page and no consent banner, and no ad blocker was tested. */}
+      </Accordion>
+
+      <Accordion title="There is no Connect button on the Shopify card">
+        If the card shows **Disconnect** and **Connected**, a store is already connected to this business.
+
+        If you press **Connect** and a message appears instead, it tells you why:
+
+        - *"This business needs an active Cortana plan before a Shopify store can be connected."*
+        - *"This account is billed through Shopify. Add another store from the Shopify App Store instead."*
+        - *"Too many attempts. Wait a few minutes and try again."*
+        - *"Could not start the Shopify connection."*
+      </Accordion>
+
+      <Accordion title="An error page appears after Shopify">
+        - **This link has expired**: *"Connection links last 30 minutes and work once. Go back to Cortana and press Connect on Shopify again."*
+        - **This Shopify connection expired**: *"Connection links last 30 minutes. Go back to Cortana and press Connect on Shopify again."*
+        - **Signed in as someone else**: *"This connection was started by a different Cortana user. Sign in as that user, or press Connect again."*
+        - **That store is already connected**: the store belongs to another Cortana account. Disconnect it there first, or contact support.
+        - **This store has its own Cortana plan**: the store already pays for Cortana through Shopify. Cancel that plan in the Shopify admin first, or write to support@usecortana.ai.
+
+        If you were signed out of Cortana while on Shopify, Cortana asks you to sign in, then carries on.
+      </Accordion>
+
+      <Accordion title="The History counts are zero">
+        The store sync may still be running. While it runs, the panel reads **Syncing…**. After 5 minutes it reads *"Still syncing. A big store takes a while."* Press **Check again**.
+
+        If the panel reads **Sync failed**, press **Retry setup**. If it fails again, contact support.
+      </Accordion>
+
+      <Accordion title="The import brought in fewer orders than the count">
+        The **Orders** count shows orders created in the range, not counting test orders. The import can bring in fewer:
+
+        - It takes only orders that are paid, partly refunded or refunded.
+        - It skips orders it cannot tie to a buyer, for example an order with no customer.
+        - With **Include orders without attribution** off, it takes only orders it can match to an ad, campaign or source.
+
+        The **Last import:** line says how many came in and how many were left out.
+      </Accordion>
+
+      <Accordion title="The E-Commerce tab is missing">
+        The tab appears once the store sync or an import has finished. If the sync is still running, wait for it.
+
+        Cortana adds the tab once. If you deleted it, Cortana does not add it again.
+      </Accordion>
+    </AccordionGroup>
+
+    ### Shopify FAQ
+
+    <AccordionGroup>
+      <Accordion title="Do I need to paste any code into my theme?">
+        No. Cortana installs its pixel through Shopify and connects the webhooks itself. Your theme is not changed.
+      </Accordion>
+
+      <Accordion title="Why can I only go back 60 days?">
+        Shopify gives the Cortana app up to 60 days of orders. So the range menu stops at **Last 60 days**.
+      </Accordion>
+
+      <Accordion title="Will importing old orders send them to Facebook?">
+        No. The import sends nothing to Meta, TikTok or any other ad platform.
+      </Accordion>
+
+      <Accordion title="Why is my revenue in Cortana lower than in Shopify?">
+        Cortana counts only paid orders. The import skips test orders. By default it also leaves out orders it cannot match to an ad, campaign or source. For your full store revenue, check Shopify.
+      </Accordion>
+
+      <Accordion title="I closed the pop-up. How do I get it back?">
+        Go to **Settings**, then **Integrations**. On the Shopify card, click **Connected**.
+      </Accordion>
+
+      <Accordion title="Where do my purchases show up in Ad Tracking?">
+        In **Ad Tracking**, open **Conversion Setup**. Your purchases are in the purchase conversion, usually named **New Deals Closed**. See **What Cortana creates for your store** above.
+      </Accordion>
+
+      <Accordion title="Do I pay through Shopify or Cortana?">
+        If you pressed **Connect** in Cortana, you pay Cortana as before. If you started from the Shopify App Store, Shopify bills you. See **Billing** under **More Shopify options** above.
+      </Accordion>
+    </AccordionGroup>
+
+    **Next:** set up [URL parameters](/5-url-parameters), so your orders can be matched to the ad behind them.
   </Accordion>
 
   <Accordion title="Stripe">
