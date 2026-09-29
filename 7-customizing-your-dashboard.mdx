@@ -1,6 +1,9 @@
 ---
 title: "7) Customizing Your Dashboard"
+description: "Start your attribution table from a funnel template, drag columns into place, add conversion and ad platform columns, and use custom metrics like Opt-in Rate."
 ---
+
+{/* last-verified: 2026-09-29 against the app source (sprint column-preset-templates). Screenshots: TODO. */}
 
 <iframe src="https://www.loom.com/embed/b08959b957a3477f8a3ab8f8f11867f8" title="Loom video player" frameborder="0" className="w-full aspect-video rounded-xl" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen />
 
@@ -82,21 +85,74 @@ title: "7) Customizing Your Dashboard"
 
 Our attribution platform provides deep customization options, allowing you to tailor your data views to mirror your precise marketing funnel. This guide covers how to set up custom presets, define conversion logic, construct advanced formulas, and select your attribution models.
 
+The video above shows the four starter presets that accounts used to get automatically. New accounts now start with no preset and pick one from a template instead (see **Column Presets** below).
+
 ---
 
 ## Column Presets
 
 Column presets allow you to quickly pivot between different views of your data (e.g., comparing a "1-Call Close" funnel against a "Free Trial" funnel).
 
+### Starting with no preset
+
+A new account starts with no column preset. Until you create one:
+
+- The preset button at the top right of your Attribution Table reads **Empty**.
+- In place of the table you see **No column preset yet** and a **Click here to create a column preset** button, which opens the template picker described below.
+- A teammate who can't manage tracking sees **Ask someone who manages tracking on this account to create a column preset.** instead of the button.
+
 ### Creating a New Preset
 
-1. Click the **Column Presets** dropdown menu at the top right of your Attribution Table.
+1. Click the preset button at the top right of your Attribution Table (it shows your current preset's name, or **Empty**).
 2. Select **Create New Preset** from the menu.
-3. In the modal that appears, select your desired metrics from the **Available Columns** list on the left to move them to the **Selected Columns** list on the right.
-4. Provide a name in the **Preset Name** field at the bottom.
-5. Click **Save**.
+3. The **Which funnel is this?** window opens. Pick the template card that matches your funnel, or click **Start from scratch** to choose every column yourself.
+4. Picking a template creates the preset and switches your table to it right away. If your business doesn't have one of the template's conversions, the preset is created without that column and a short note lists what was left out.
+5. With **Start from scratch**, add columns (see **Arranging columns** below), type a name in the **Preset Name** field at the bottom, and click **Save**.
 
-> 💡 **Tip:** You can reorder columns at any time within your active preset by clicking and dragging them into your preferred layout order. Default presets can also be edited or deleted as needed.
+You can change any column afterwards. Presets you already have are never changed by the templates.
+
+### The four funnel templates
+
+| Template | Funnel steps |
+| :-- | :-- |
+| **Sales Funnel (1 Call)** | Lead, Call booked, Call shown, Qualified, Purchase |
+| **Sales Funnel (2 Call)** | Lead, Intro booked, Intro shown, Call booked, Call shown, Purchase |
+| **Low Ticket Funnel** | Lead, Order, Call booked, Call shown, Purchase |
+| **Free Trial Funnel** | Lead, Free trial, Purchase |
+
+Every template starts with your traffic columns and ends with revenue, so the table reads as one funnel from left to right.
+
+<AccordionGroup>
+  <Accordion title="The exact column order of every template">
+    1. Pixel, URL Params, Status, Budget
+    2. CPM, Spent, Reach, Frequency, Unique CTR
+    3. Page Views, Unique Visitors
+    4. Cost per Unique Visitor, Opt-in Rate (the two standard custom metrics, see **Creating Custom Metrics**)
+    5. The template's funnel steps, in the order shown in the table above
+    6. New Revenue, ROAS, ROI
+    7. The two sales funnel templates also add All Payments and LTV (Revenue) at the end.
+  </Accordion>
+  <Accordion title="How the templates count conversions">
+    In the two sales funnel templates, Lead and the booked and shown call steps (and Qualified) count one per person, using **Unique Per Attribution Fingerprint**. A rescheduled call from the same ad counts once, so your booked calls aren't inflated. Purchase always counts every sale. The Low Ticket and Free Trial templates count every event. You can change this on any conversion column afterwards (see **De-duplicating Conversions with "Show Unique"**).
+  </Accordion>
+</AccordionGroup>
+
+### Arranging columns
+
+The column window has **Available Columns** on the left and **Selected Columns** on the right.
+
+1. Drag any column from **Available Columns** into the exact spot you want in **Selected Columns**. A line shows where it will land.
+2. Or click the **+** on the left of a column's name to add it with one click.
+3. Drag columns up and down inside **Selected Columns** to reorder them.
+4. To remove a column, click the trash icon on it in **Selected Columns**.
+
+Custom metrics drag the same way from the **Custom Metrics** tab. A custom metric that is already in your preset shows a check instead of the **+**.
+
+<Accordion title="Arranging columns with the keyboard">
+  Tab to the grip handle on the right of an available column and press Space to pick it up. Use the arrow keys to move it into **Selected Columns**, one slot at a time, then press Space to drop it. Press Escape to cancel the move without closing the window.
+</Accordion>
+
+> 💡 **Tip:** Any preset can be edited, duplicated or deleted from the same menu.
 
 ---
 
@@ -143,7 +199,7 @@ If you need a localized KPI that isn't calculated out-of-the-box, you can write 
 | Field | Description |
 | :-- | :-- |
 | **Name** | The label that will display at the top of your column (e.g., `Show Rate`). |
-| **Formula** |  |
+| **Formula** | Pick metrics and conversions from **Select metric** and join them with the operator buttons. |
 | **Format** | Choose how the calculated value displays (`Numeric`, `Currency`, or `Percent`). |
 
 ### Example Formula: Show Rate
@@ -153,6 +209,41 @@ To display your rolling appointment attendance percentage, construct the followi
 $\text{Show Rate} = \frac{\text{Showed}}{\text{Schedule}}$
 
 _Set the output format to **Percent (%)** to see real-time updates directly in your attribution table._
+
+### Standard custom metrics: Cost per Unique Visitor and Opt-in Rate
+
+Every business comes with two ready-made custom metrics, and every funnel template shows them:
+
+| Metric | Formula | Format |
+| :-- | :-- | :-- |
+| **Cost per Unique Visitor** | Total Ad Spend ÷ Unique Visitors | Currency |
+| **Opt-in Rate** | Lead ÷ Unique Visitors | Percent |
+
+- **Opt-in Rate is blank until Lead is turned on.** The standard Lead conversion starts turned off. Turn it on in your conversion settings and Opt-in Rate starts showing. When you open the metric, the builder shows a note that the conversion isn't turned on yet.
+- **Change what it counts.** Opt-in Rate is a normal custom metric: open it in the **Custom Metrics** tab and swap Lead for another conversion (for example, Purchase for an e-commerce store).
+- **Deleting one is permanent.** A standard metric you delete stays deleted: picking a template later leaves its column out instead of bringing it back.
+
+---
+
+## FAQ
+
+<AccordionGroup>
+  <Accordion title="Why does my new account say Empty instead of showing presets?">
+    New accounts start with no column preset. Click **Click here to create a column preset** (or **Create New Preset** in the preset menu) and pick the funnel template that matches your business. It takes one click.
+  </Accordion>
+  <Accordion title="Why is Opt-in Rate blank?">
+    Opt-in Rate counts your Lead conversion, and the standard Lead conversion starts turned off. Turn Lead on and the column fills in. It also shows blank when there were no unique visitors in the date range.
+  </Accordion>
+  <Accordion title="I picked a template but some columns are missing">
+    Your business doesn't have those conversions yet, so the preset was created without them and a note listed what was left out. Add the conversion, then add its column from **Available Columns**.
+  </Accordion>
+  <Accordion title="How do I get the old four starter presets back?">
+    Pick each template from **Create New Preset**. They now include the full funnel: CPM, spend, reach, frequency, unique CTR, page views, unique visitors, cost per unique visitor and opt-in rate before your conversions.
+  </Accordion>
+  <Accordion title="Will picking a template change the presets I already have?">
+    No. A template always creates a new preset. If the name is taken, it gets a number, for example **Sales Funnel (1 Call) 2**.
+  </Accordion>
+</AccordionGroup>
 
 ---
 
