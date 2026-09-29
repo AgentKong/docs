@@ -350,7 +350,10 @@ Set this up if you want to spot your best enquiries at a glance. It also lets yo
   <Step title="Add a rule">
     Click **Add rule**. Each rule reads like a sentence.
 
-    - **When**: pick **Answer**, then which question, or pick **Lead score**. Then pick how to compare it, such as **Equals**, and type the value. Click **Add condition** to add more tests to the same rule.
+    - **When**: pick **Answer**, then which question, or pick **Lead score**. Then pick how to compare it, such as **Equals**, and type the value. Click **Add condition** to add more tests to the same rule. Two or more tests give you **Match all** and **Match any**.
+    - **Several answers to one question**: a choice question starts on **Is One Of**, and you tick the answers that count. "Grade **is one of** 9th, 10th" **and** "maths **is one of** Algebra, Geometry" is two tests and no group.
+    - **and** and **or** in one rule, across different questions: hover a test and click **Group** to give it its own **Any of these** or **All of these** (hover a group for **Ungroup**), or write the tests in a row and click the word between two of them to switch it; the tests on each side fold into their own groups. The word stays plain text where a switch would need a group inside a group. A new rule starts with no tests, just **Add condition** and **Add group**.
+    - **Add group**, next to **Add condition**, builds the same thing by hand: a set of tests inside the rule with its own **Any of these** or **All of these** switch. A group can hold answers and the lead score alike, and the rule's own **Match all** or **Match any** joins the group with the tests outside it. Taking the last test out of a group removes the group; remove every test and the rule is empty again, ready for **Add condition** or **Add group**, and cannot be saved until it has one.
     - **Then**: pick what happens. **Show the calendar** lets them book as normal. You can instead give the meeting to one chosen person, or to a group who take turns. You can also send them to a different meeting type, or turn them away.
     - **Screen after booking**: this one is optional. Leave it switched off and they see the Default screen.
   </Step>

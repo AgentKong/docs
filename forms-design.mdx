@@ -3,7 +3,7 @@ title: "3) Design and endings"
 description: "Pick one of twelve looks, set your own colours and writing, and choose what people see at the end."
 ---
 
-{/* last-verified: 2026-09-10 · route: /business/[businessId]/forms/[formId] */}
+{/* last-verified: 2026-09-17 · route: /business/[businessId]/forms/[formId] */}
 
 Two jobs live here, and both change what a visitor sees.
 
@@ -139,9 +139,17 @@ A rule looks at an answer. If it matches, that rule's screen shows instead of th
 
 **Add rule** sits above the **Default** block. Each rule you add is numbered, so you can see the order. Rules run from the top down and the first match wins, so put your narrowest rule first. The bin at the top right of a rule removes it.
 
-Under **When**, pick the question, then how to compare it, then type the value. Click **Add condition** for a second test. Two or more tests give you **Match all** and **Match any** to choose between.
+Under **When**, pick the question, then how to compare it, then type the value. Click **Add condition** for a second test. Two or more tests give you **Match all** and **Match any** to choose between. The small word between two tests, **and** or **or**, tells you which one is on.
 
-A rule with no test cannot be saved. You see **Rule 1: A rule needs at least one condition.**
+Often you do not need a group at all. A choice question starts on **Is One Of**, and its value is a list you tick: "grade **is one of** 9th, 10th" **and** "maths class **is one of** Algebra, Geometry" is two tests, no group.
+
+Sometimes you do need both in one rule across different questions: "the plan is Pro, and the country is either the UK or Ireland". Hover a test and click **Group** to turn it into a group with its own **Any of these** or **All of these**; hover a group and click **Ungroup** to put its tests back. You can also write the tests in a row, then click the little **or** between two of them and switch it to **and**. The tests on each side fold into their own group, and the rule now reads *any of: grade 9th, grade 10th* **and** *any of: maths Algebra, maths Geometry*. Switch the same word back and the rows are flat again. The word between two tests is a button whenever a switch there makes sense; where it would need a group inside a group, it stays plain text and says so when you hover it.
+
+You can also build a group by hand: click **Add group**, next to **Add condition**. A group is a set of tests indented under its own line, with its own **Any of these** or **All of these** switch once it holds two tests. The rule's own **Match all** or **Match any** then joins the group with the tests outside it. Read it top to bottom and it says exactly what it does: *plan Equals Pro* **and** *any of: country Equals UK, country Equals Ireland*. Inside a group whose setting differs from the rule's, the **or** or **and** between two tests can be switched the same way, and the group splits there.
+
+Inside a group, **Add condition** adds a test to that group. Hover over a group to see **Ungroup** and the cross that removes it. Taking the last test out of a group removes the group. A new rule starts with no tests, just **Add condition** and **Add group**; remove every test and it is back in that state. A rule with no tests cannot be saved.
+
+A rule with no test cannot be saved. You see **Rule 1: Add at least one condition.**
 
 <Frame caption="A rule reads left to right: the question, the test, the value.">
   <img className="block dark:hidden" src="/images/forms/design/08-endings-rule.png" alt="The Ending rules panel with Rule 1's When row highlighted, showing a question chosen from a dropdown, the test Equals, a value box, and an Add condition button underneath." />
@@ -194,9 +202,13 @@ The last two need no value.
     | Setting | What it does | Default | We recommend | Watch out for |
     | --- | --- | --- | --- | --- |
     | **Add rule** | Adds a numbered rule above the Default. | No rules | Put your narrowest rule at the top. | Rules run top to bottom and the first match wins. |
-    | **When** | The question, the test and the value the rule looks for. | Empty | Use **Equals** with a choice question. It cannot be mistyped. | A rule with no test refuses to save. |
-    | **Match all** / **Match any** | Whether every test must pass, or just one. | Match all | Match all, unless you really mean "or". | Only appears once a rule has two or more tests. |
-    | **Add condition** | Adds another test to the same rule. | Not applicable | Keep rules to one or two tests. | |
+    | **When** | The question, the test and the value the rule looks for. | Empty | Pick the answers on a choice question: it starts on **Is One Of** and the values cannot be mistyped. | A rule with no test refuses to save. |
+    | **Match all** / **Match any** | Whether every test and group in the rule must pass, or just one of them. | Match all | Match all, unless you really mean "or". | Only appears once a rule has two or more tests or groups. |
+    | **Add condition** | Adds another test to the same rule, or to the group whose button you pressed. | Not applicable | Keep rules to one or two tests. | |
+    | **and** / **or** between two tests | Switching the word between two tests folds the tests on each side into their own groups, joined by the new word. | The rule's setting | Write the tests in a row, then switch the one word that should differ. | Plain text, not a button, where the switch would need a group inside a group. |
+    | **Group** / **Ungroup** (on hover) | **Group** turns one test into a group with its own **Any of these** or **All of these**, with a blank test beside it; **Ungroup** puts a group's tests back at the rule's level. | Not applicable | Use **Is One Of** for several answers to one question; group only across different questions. | Two levels only: a test inside a group has no **Group**. |
+    | **Add group** | Adds a set of tests with its own **Any of these** or **All of these**, so one rule can say "this and (that or the other)". | No groups. A new group starts with one empty test and the opposite setting to the rule's | Same as **Group**. | Two levels only: a group cannot hold another group. |
+    | **Any of these** / **All of these** | How the tests inside one group combine. | The opposite of the rule's setting | Leave it. The contrast is the point of the group. | Only appears once the group has two tests. |
     | **Then show** | The screen this rule's people see. | Show a message | A message for a polite decline, a redirect for a next step. | Every rule needs a screen. It is not optional. |
     | **Headline**, **Body** | The wording of a message screen. | Empty on a rule. `Thank you` and `Your answers have been received.` on the Default | Say what happens next and when. | One of the two must be filled in. |
     | **Redirect URL** | The page to send people to. | Empty | Send people to a real page you control. | Must start with `http://` or `https://`. Anything else refuses to save. |
@@ -224,7 +236,9 @@ The last two need no value.
 
     **Saving says The redirect must be an http or https address.** Copy the address out of your browser's address bar rather than typing it.
 
-    **Saving says A rule needs at least one condition.** You added a rule and then removed its only test. Add one back, or delete the rule with the bin at its top right.
+    **Saving says Add at least one condition.** You added a rule and then removed its only test. Add one back, or delete the rule with the bin at its top right.
+
+    **My rule with a group never fires.** Check the two switches separately. The rule's **Match all** or **Match any** joins the group with the tests outside it; the group's **Any of these** or **All of these** only governs the tests inside it. "Match all" with a group set to "All of these" means every single test must pass.
 
     **My rule never fires.** Three things to check, in order. 1) You are testing in the middle column, which always shows the Default: open the form's own page. 2) The value does not match exactly: `Sales` is not `Sales question`. 3) An earlier rule matched first: drag your narrower rule higher.
 
