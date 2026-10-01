@@ -1,0 +1,74 @@
+---
+title: "Your creative studio: write ads in your own chat"
+description: "A second Claude or ChatGPT project that writes ads itself, on your own subscription, from Cortana's playbook and your own account data: the plan, the winners, the sales calls. ChatGPT renders in the chat; Claude renders through Cortana from your wallet. Cortana still judges, plans and keeps the books."
+---
+
+{/* last-verified: 2026-09-29 · app route /dashboard/media-buyer/connect-ai (Step 5 · Give it a creative studio) · connector tools get_playbook, render_ad_image · sprint mcp-media-buyer-6 (6.2) */}
+
+Your media buyer project ([the automated machine](/mcp/ai-media-buyer-schedule)) has Cortana write every hook and every prompt on Cortana's usage. The creative studio is the other room: a second project where your assistant writes the ads itself, on your own subscription, from the same craft and the same data the engine uses. You choose per batch which room to work in; both post into the same ad account and are judged by the same review.
+
+There is nothing to install. The studio's instructions tell the assistant to fetch the playbook from the connector when it writes, one part at a time: the media buyer playbook first, the image designer before a render prompt, the video scripter before a video script.
+
+The one thing that differs by assistant is who draws the picture. **ChatGPT** renders the images in the chat, on your subscription. **Claude** cannot draw, so Cortana renders for it: the assistant says how many images and roughly what they cost, waits for your yes once per batch, then renders each one on Cortana (about $0.04 to $0.08 per image, paid from your wallet on the API's receipt) and shows it to you.
+
+<Note>
+  The playbook is how Cortana thinks about ads: the strategy, the image design, the video script. What stays on Cortana's side is what it decides: the review that kills and scales, the plan of what to make, the ledger of how past concepts played out. Your assistant reads those as answers, never as method.
+</Note>
+
+## Set up the studio
+
+1. The Cortana connector is in your Claude or ChatGPT ([Connect once](/mcp/ai-media-buyer#connect-once)).
+2. In your assistant, create a second project: your creative studio. On the Connect page, under **Step 5 · Give it a creative studio**, click **Copy** and paste the text as the project's instructions. Turn the Cortana connector on in its chats the same way as in the media buyer project. {/* TODO: verify: live test T1 (ChatGPT) and T2 (Claude) */}
+3. For Claude, Cortana rendering needs the **Let ... act on your media buyer decisions** box ticked on the consent screen (the box names your assistant; it is on by default). Without it the assistant still writes; it hands you the prompts instead of rendering.
+4. To post what it writes to Meta, the connection needs **Allow AI ad management** ticked on the consent screen (it is off by default). Without it the assistant still plans, reads, writes and renders; it hands you the ad and the image instead of posting.
+
+The page shows the kits' version under the studio text. When a newer version appears, paste it again.
+
+## What a batch looks like
+
+Say what you want in the studio's chat: "write 20 for Acme, lean on the warranty angle". The assistant then:
+
+1. **Fetches the playbook.** It calls `get_playbook` for the media buyer part and follows it for the session; it fetches the image designer before it writes a render prompt, and the video scripter before a script. Each part is about 8,000 tokens on your subscription, fetched only when the session needs it.
+2. **Plans with Cortana.** It calls `plan_ads` and gets the engine's own slots for the order: which winner to recreate (named, with the priority it won on and its trend) and where to invent, in which format. Your direction rides along for the assistant to apply; the plan itself comes from your numbers.
+3. **Reads the account.** The winners as stamps (`get_winning_messaging`, and `get_ad_stamp` for one ad in full: the posted text, the image, Cortana's breakdown, cost per priority event against target, the judge's verdicts), what is working by angle, hook, format and offer (`get_conversion_snapshot`), and the prospect's own words from the sales calls, bank by bank (`get_prospect_voice`).
+4. **Writes to the plan with the playbook.** One concept per slot, the render prompt for each image.
+5. **Renders.** ChatGPT renders the images in the chat. Claude asks once per batch, with the count and the rough cost (20 images, about $0.80 to $1.60 at the receipt), then calls `render_ad_image` for each one: Cortana renders the prompt exactly as written, and the answer carries the image's URL and the receipt. The same prompt again within ten minutes gives the same image, never a second bill. If the wallet is empty or paused, Cortana refuses with the top-up link and the assistant hands you the prompt instead.
+6. **Posts what you like, paused.** Through the Meta tools on the connector (the image first: ChatGPT sends the one it rendered, Claude sends the rendered image's URL; then `create_creative`, then `create_ad`), always paused, never live and never onto the Ad Pipeline board. You launch it in Ads Manager or by asking. From that moment Cortana treats it like any ad on the account: the creative breakdown lands on it, the morning review judges it, and the next overnight batch learns from it if it wins.
+
+<Tip>
+  The plan reads the last 52 weeks of the account, like the winner pool and the conversion snapshot. The overnight batch plans over the account's whole life, so on an account with winners older than a year the two plans can differ.
+</Tip>
+
+## What it will and won't do
+
+- It writes the ads itself only with the playbook in hand. When the playbook cannot be fetched it says so and stops; ordering from Cortana (`make_ads`) is the media buyer project's job, never the studio's.
+- It never posts live. A paused ad is yours to launch.
+- It never lists losers. The snapshot's kill figures are counts per angle, and any line of the review that names an ad to kill or cut by its ad name is withheld.
+- Every read is your own account's data, on the businesses the connection may reach. The playbook is the same for every account.
+
+## FAQ
+
+<AccordionGroup>
+  <Accordion title="Does this cost Cortana usage?">
+    The playbook, the planning, the reads and the posting are free on the connector, and the writing runs on your assistant's subscription. Rendering is the one difference: on ChatGPT it is your subscription; on Claude each image Cortana renders is paid from your wallet on the API's receipt (about $0.04 to $0.08 per image), and the wallet's history shows it as a "chat render" line carrying the charge. Ordering with `make_ads` stays the paid path in the media buyer project.
+  </Accordion>
+  <Accordion title="Claude timed out and asked again. Did I pay twice?">
+    No. The same prompt at the same size within ten minutes answers the image that already landed, and nothing is billed for it. A render that is still in progress answers "ask again in a minute".
+  </Accordion>
+  <Accordion title="Can I keep the overnight batch too?">
+    Yes. The scheduled order task and the overnight batch keep running exactly as before. Two writers, one account, one review.
+  </Accordion>
+  <Accordion title="What is in the playbook?">
+    Three parts. The media buyer playbook (how to read the account, pick angles and awareness levels, choose formats and hooks, mine the calls, iterate winners, spot fatigue), the image designer (the archetypes, the type system, the look library, how a render prompt is written) and the video scripter (five hooks, one body, one CTA, the frameworks, the re-hook). They name no marketer, book or brand; the render engine, device conventions and font names stay because a render prompt needs them.
+  </Accordion>
+  <Accordion title="Can I read the playbook myself?">
+    Yes. Ask your assistant for a part by name and it shows you the text it fetched. It is Cortana's craft, not your account's data.
+  </Accordion>
+  <Accordion title="Why does the plan sometimes differ from what the overnight batch made?">
+    The plan reads the last 52 weeks; the batch reads the whole account. A winner paused more than a year ago leads the batch's plan and is absent from yours.
+  </Accordion>
+</AccordionGroup>
+
+## Next step
+
+[Your media buyer project](/mcp/ai-media-buyer-schedule) for the automated machine and its scheduled tasks, or back to [AI Media Buyer in Claude and ChatGPT](/mcp/ai-media-buyer).
