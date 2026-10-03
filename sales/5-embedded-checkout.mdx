@@ -3,7 +3,7 @@ title: "Embedded checkout"
 description: "Sell on your own landing pages by pasting one Cortana checkout snippet. The embedded checkout carries attribution, rep credit, and commissions by itself, and tracks views, opens, and revenue."
 ---
 
-{/* last-verified: 2026-09-04 · Payment Links tab, Embedded Checkout sub-tab · consent certificate + journey event */}
+{/* last-verified: 2026-09-04 · Payment Links tab, Embedded Checkout sub-tab · consent certificate + journey event; 2026-10-02 · On the page step, After they pay, a booking right after payment lands on the buyer (Sprint 35) */}
 
 An embedded checkout lets you sell directly on your own page. You build it once, paste a single snippet where the checkout should appear, and Cortana handles attribution, rep credit, and commissions with no extra tracking code.
 
@@ -40,6 +40,15 @@ Order bumps, free trials, and discounts are Stripe features; a Whop or Fanbasis 
 3. **Order bump.** Turn this on to offer an add-on the buyer can tick at checkout, the low-ticket upsell classic. Pick the add-on price. You can also apply a **Discount** here.
 
 Name the checkout (just for you, buyers never see it), pick the **Stripe account** that gets paid, then click **Create checkout**.
+
+### After they pay
+
+On the **On the page** step, **After they pay** decides where the buyer goes the moment the payment goes through:
+
+1. **Stay on the page**: a success message replaces the checkout. Write your own in **Success message (optional)**.
+2. **Send them somewhere**: paste the page in **Where do they land?**, for example a thank-you page, your onboarding, or your next offer.
+
+To book an onboarding call right after payment, send them to your Cortana booking page. The call then lands on the person who paid, whoever fills in the booking form. See **Booking a call right after payment** below.
 
 ## Intro offer: switch price after the first billing period
 
@@ -157,6 +166,16 @@ Each checkout shows its own funnel: **Viewed**, **Clicked**, **Opened**, **Email
 
     Closing the checkout popup or leaving the page reports the abandon right away. Otherwise it is reported when the 1-hour session expires. A visitor who merely scrolls past the checkout without typing anything is never captured, and a visitor who pays is never counted as an abandon.
   </Accordion>
+  <Accordion title="Booking a call right after payment">
+    When **Where do they land?** is a Cortana booking page in the same business, the page knows which checkout the buyer just paid in: Cortana adds the checkout to the page link after payment. The call is booked on the buyer's contact, whoever fills in the form. That covers an assistant booking for the buyer, a teammate, or the buyer typing a different email.
+
+    - **Another email typed in the form** is kept as an extra email on the buyer's contact, never as a separate contact.
+    - **An email that already belongs to another contact** merges that contact into the buyer. The buyer always stays. Every merge is listed in the contact's merge log and can be undone there.
+    - **Never merged automatically**: a contact that is a paying customer in its own right, and an email shared by many contacts. Those stay as they are.
+    - **The booking never fails because of this.** When the checkout cannot be read (a bank transfer that has not cleared yet, or a Whop or Fanbasis checkout), the booking is matched by the typed email as usual.
+
+    The booking page has to be the page they land on. A redirect in between drops the checkout from the link. Anyone the buyer forwards that link to also books for the buyer.
+  </Accordion>
   <Accordion title="Why the snippet needs a tracking pixel">
     The snippet is built from your business's tracking pixel so it can attribute the sale. If your business has no pixel yet, create one under Ad Tracking, then Tracking Pixels, then build the checkout.
   </Accordion>
@@ -203,6 +222,12 @@ Each checkout shows its own funnel: **Viewed**, **Clicked**, **Opened**, **Email
   </Accordion>
   <Accordion title="Can a certificate be edited or faked?">
     Not without detection. The verification code is derived from Cortana's immutable record of the consent. Regenerating the certificate from that record reproduces the same code, so an edited PDF will not match. If a processor or buyer questions it, regenerate and compare.
+  </Accordion>
+  <Accordion title="My client's assistant booked the onboarding call with her own email. Whose contact is it on?">
+    Your client's. When the checkout sends buyers to your Cortana booking page, the call lands on the person who paid, whoever fills in the form. The assistant's email is kept as an extra email on your client's contact. See **Booking a call right after payment** above.
+  </Accordion>
+  <Accordion title="Why were two contacts merged after someone booked a call?">
+    The email typed in the booking form already belonged to another contact, so that contact was merged into the buyer who paid, keeping one contact per customer. Open the buyer's contact and use its merge log to see the merge and undo it if it was wrong.
   </Accordion>
   <Accordion title="How do reps send this page to one contact?">
     Do not send a payment link. Save the page URL as a tracking link, then send that tracking link for the selected contact. Same motion as the payment URL builder. See [Send a sales page](/sales/send-a-sales-page).
