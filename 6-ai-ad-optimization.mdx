@@ -65,13 +65,19 @@ Google doesn't always send a `gclid`. On iOS and other privacy-restricted traffi
 
 <Accordion title="Meta CAPI" icon="facebook">
 
+{/* last-verified: 2026-10-06 against src/components/tracking/meta-capi-config-form.tsx, meta-pixel-picker.tsx, meta-capi-managed-toggle.tsx (sprint meta-pixel-capi-autoconnect) */}
+
 ### Step 1: Connect Meta CAPI
 
 Head over to the **AI Ad Optimization** page and select **Connect Meta CAPI**.
 
-1. **Configuration Name:** Give it a name you'll recognize (e.g., "Main Website").
-2. **Meta Pixel ID:** Go to your Facebook Events Manager and grab your **Dataset ID** (previously known as Pixel ID).
-3. **Access Token:** In Events Manager, go to **Settings**, scroll down to **Conversions API**, and click **Generate access token**. Copy and paste that token into the system.
+1. **Configuration Name (Optional):** Give it a name you'll recognize, for example "Main Website".
+2. **Meta Pixel:** Click **Choose a pixel** and pick yours from the list. Cortana reads your pixels straight from Meta: the ones on your selected ad account come first, under **On your ad account**, then the other pixels your Meta business owns, under **Other pixels in your Meta business**. Search by name or by ID. On a new setup a pixel is already picked for you, marked **Picked for you**: the one on your ad account that fired most recently. Change it if it isn't the right one.
+   - **No pixel yet?** Click **Create a new pixel**, type a **New pixel name**, and click **Create pixel**. This is offered for an ad account that has no pixel: Meta allows one pixel created per ad account, and a pixel can't be deleted.
+   - **Your pixel isn't in the list?** Click **Enter a pixel ID by hand** and paste the **Dataset ID** from Meta Events Manager (previously called Pixel ID).
+3. **Let Cortana manage the token:** Leave this on. Cortana sends your conversions with your Meta connection, so there's no access token to paste, and it keeps working when you reconnect Meta. When you save, Cortana sends a test event to the pixel to make sure your Meta connection can use it.
+   - **Prefer your own token?** Turn **Let Cortana manage the token** off. In Events Manager, go to **Settings**, scroll down to **Conversions API**, click **Generate access token**, and paste the token into **Access Token**.
+4. Click **Save Configuration**.
 
 ### Step 2: Event Filtering & Compliance
 
@@ -93,6 +99,24 @@ If Meta doesn't have a standard event that fits your needs (like "Appointment Sh
 1. Click **Create New Custom Event** and name it.
 2. Follow the prompts to send a **Test Event** to Meta.
 3. **Crucial Step:** Go back to your Meta Events Manager, click **Overview**, and look for **Confirm custom events that belong to you**. You must click **Review Events** and **Confirm** before Meta will allow you to use that custom event for ad optimization.
+
+### What the Meta CAPI card tells you
+
+Once saved, the Meta CAPI card on the **AI Ad Optimization** page shows how your setup is doing, read live from Meta:
+
+- **Managed by Cortana · uses your Meta connection:** Cortana sends your conversions with your Meta connection. Nothing to renew.
+- **Match quality (Cortana’s events):** Meta's Event Match Quality, out of 10, for the events Cortana sends, best three first (for example `Lead 7.4`). Until Meta has scored Cortana's own events, the card shows **Match quality** for everything the pixel receives.
+- **This pixel isn’t on your selected ad account, so your ads may optimize on a different pixel.** Pick the pixel your ads use, or share this pixel with your ad account in Meta Business Settings.
+- **Another integration already sends server events to this pixel.** Another tool, for example your funnel builder or CRM, sends Conversions API events to the same pixel. If it sends the same conversions as Cortana, both must send the same `event_id`, or Meta counts each conversion twice. You see the same line the moment you pick such a pixel in Step 1.
+
+<AccordionGroup>
+  <Accordion title="How Cortana manages the token">
+    With **Let Cortana manage the token** on, Cortana stores no access token for this setup. Every event goes out with your business's Meta connection, the same one Cortana uses to read your ads, so a reconnect is picked up automatically. If that connection is missing or expired, sends fail with "This CAPI setup sends with your Meta connection, which is missing or expired. Reconnect Meta in Integrations." Reconnect Meta and sending resumes. A token you paste yourself is stored encrypted and never shown back to anyone: the field shows dots, and **Test Connection** checks the saved token from Cortana's servers.
+  </Accordion>
+  <Accordion title="How the other-integration check works">
+    Meta counts the server events a pixel received in the last 7 days but never says who sent them. Cortana only says another integration is sending when none of your Cortana setups sent to that pixel in those 7 days, so the events can't be Cortana's own. When Cortana also sends to the pixel, the two can't be told apart and the card says nothing.
+  </Accordion>
+</AccordionGroup>
 
 ### Advanced "Hack World" Settings
 
@@ -180,3 +204,33 @@ Click **Manage** to map your conversion events to Whop's event types.
 </AccordionGroup>
 
 <Tip>Once everything is set up, use the **Monitoring** tab to see exactly which events are being sent back to your platforms in real-time.</Tip>
+
+## Meta CAPI FAQ
+
+### Do I need a Conversions API access token for Meta?
+
+No. With **Let Cortana manage the token** on, Cortana sends your conversions through the Meta account you connected in Cortana, so there is nothing to generate or paste. If you prefer your own token, turn **Let Cortana manage the token** off and paste it into **Access Token**.
+
+### I already pasted a CAPI token before. Do I need to change anything?
+
+No. Your setup keeps working as it is, and your token stays stored encrypted. To stop managing a token yourself, click **Manage** on the Meta CAPI card and turn **Let Cortana manage the token** on.
+
+### Why can't I find my pixel in the list?
+
+The list shows the pixels on your selected Meta ad account and the pixels your Meta business owns. A pixel shared to you from another business may not appear. Click **Enter a pixel ID by hand** and paste the **Dataset ID** from Meta Events Manager.
+
+### Why don't I see "Create a new pixel"?
+
+Meta allows one pixel created per ad account, so **Create a new pixel** only appears when your selected ad account has no pixel yet. If your ad account already has one, pick it from the list.
+
+### The CAPI card says another integration sends server events to my pixel. What do I do?
+
+Another tool, often a funnel builder or CRM, sends Conversions API events to the same pixel. If it sends the same sales or leads as Cortana, both must send the same `event_id`, or Meta counts each conversion twice. If you don't need that tool's conversions, turn them off in that tool.
+
+### My Meta CAPI stopped sending after someone on my team lost access to Meta.
+
+With **Let Cortana manage the token** on, Cortana sends through the Meta connection of the person who connected Meta in Cortana. If that person loses access to your Meta business or pixel, go to **Settings** and select **Integrations**, reconnect Meta with someone who has access, and sending resumes.
+
+### Does turning Meta CAPI off and on reset my settings?
+
+No. Switching Meta CAPI off and on from the card keeps **Event Filtering**, **Forward Page Views to Meta** and **Enable Limited Data Use (LDU)** exactly as you set them.

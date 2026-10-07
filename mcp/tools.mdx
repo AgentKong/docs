@@ -553,6 +553,8 @@ New. These tools let the assistant create and manage Meta ads. They require the 
 | --- | --- |
 | `list_ad_accounts` | Connected ad accounts the assistant can read or manage. |
 | `get_ad_insights` | Platform-level ad performance pulled straight from the ad account. |
+| `list_ad_pixels` | Your Meta pixels: the ones on your ad account and the others your Meta business owns, which one Cortana would pick, and which one your Conversions API setup uses. |
+| `get_capi_setup` | Your Meta Conversions API setup and how healthy it is: the pixel, whether Cortana manages the token, Event Match Quality, and whether another integration also sends to the pixel. |
 
 ## Build and edit
 
@@ -565,6 +567,8 @@ New. These tools let the assistant create and manage Meta ads. They require the 
 | `update_entity` | Edit an existing campaign, ad set, creative, or ad. |
 | `activate_entity` | Set a campaign, ad set, or ad live. Requires your confirmation. |
 | `pause_entity` | Pause a campaign, ad set, or ad. |
+| `create_ad_pixel` | Create a Meta pixel on an ad account that has none. Meta allows one per ad account, so it never makes a second. |
+| `connect_capi` | Connect your Meta Conversions API with Cortana managing the token, on your default pixel or one you name. It sends a test event first, then turns sending on. |
 
 ## Bring your own media
 
