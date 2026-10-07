@@ -57,7 +57,55 @@ A few examples:
 
 ## Read by default, manage by opt-in
 
-Read tools are available as soon as you connect. Ad management tools (anything that creates, launches, or spends) require a separate opt-in checkbox on the consent screen. Everything is created paused, and going live or changing budgets always requires your confirmation.
+Read tools are available as soon as you connect (the Ad Tracking license tools below are the exception: they sit under the media buyer opt-in). Ad management tools (anything that creates, launches, or spends) require a separate opt-in checkbox on the consent screen. Everything is created paused, and going live or changing budgets always requires your confirmation.
+
+## Manage Ad Tracking licenses from chat
+
+{/* last-verified: 2026-10-06 · tools: get_ad_tracking_licenses, set_ad_tracking */}
+
+Your assistant can check how many Ad Tracking licenses your plan has left and switch Ad Tracking on or off for your businesses, so new client accounts get rolling without opening Cortana.
+
+1. Make sure the connection is allowed to act. On the Cortana consent screen, keep **Let (your assistant) act on your media buyer decisions** ticked (it is on by default). On an API key, tick **Act on media buyer decisions**.
+2. Ask your assistant, for example "How many tracking licenses do I have left?" or "Turn Ad Tracking on for Acme Windows and Bolt Roofing."
+3. The assistant answers with one line per business: on, already on, off, already off, or the reason it could not.
+
+<AccordionGroup>
+  <Accordion title="How Ad Tracking licenses are counted">
+    A business uses one license while its Ad Tracking is on. Your plan sets how many licenses you have. The count covers your whole account, not only the businesses on this connection. When the plan is full, the assistant tells you the limit is reached and that you can add licenses in Billing. Adding licenses is done in Billing, not from chat.
+  </Accordion>
+
+  <Accordion title="What switching Ad Tracking off does">
+    Switching Ad Tracking off frees the license. It also switches that business's AI Media Buyer off, because the media buyer cannot run without tracking. Cortana asks your assistant to tell you this and get your yes before it switches anything off. Nothing already tracked is deleted.
+  </Accordion>
+
+  <Accordion title="Who can switch Ad Tracking from chat">
+    The connection needs the opt-in from step 1, and your Cortana login needs the **Manage ad tracking** permission (account owners always have it). Each business must be on this connection and be one you can open in Cortana. One request can switch up to 100 businesses.
+  </Accordion>
+
+  <Accordion title="Businesses shared with you">
+    A business shared with you from another account uses the owner's plan, so its license comes from the owner's count, not yours.
+  </Accordion>
+</AccordionGroup>
+
+### FAQ
+
+<AccordionGroup>
+  <Accordion title="My assistant says the Ad Tracking limit is reached">
+    Every license on your plan is in use. Add licenses in Billing, or ask your assistant to switch Ad Tracking off on a business you no longer track.
+  </Accordion>
+
+  <Accordion title="My assistant says I need the Manage ad tracking permission">
+    Your account admin turned it off for your login. They can turn it on from **Control Centre** > **Users** > your name > **Manage Permissions** > **Ad Tracking**.
+  </Accordion>
+
+  <Accordion title="My assistant says I have no Ad Tracking subscription">
+    Your plan has no Ad Tracking licenses, so no business can be switched on. Add an Ad Tracking plan in Billing, then ask again.
+  </Accordion>
+
+  <Accordion title="Why did my AI Media Buyer turn off when I switched tracking off?">
+    The AI Media Buyer needs Ad Tracking to run, so switching tracking off switches it off too and frees its license. Switch Ad Tracking back on first, then switch the AI Media Buyer back on in Cortana.
+  </Accordion>
+</AccordionGroup>
 
 <Card title="Connect" icon="rocket" href="/mcp/setup">
   Add the connector in Claude, ChatGPT, Cursor, or VS Code in about two minutes.

@@ -89,6 +89,18 @@ https://app.usecortana.ai/business/cf3383a0-55f6-45d8-ab57-484edd63770c/tracking
 
 The UUID after `/business/` is your Business ID.
 
+## When your admin turns off API and AI tools
+
+{/* last-verified: 2026-10-06 · permission key apiAccess (Control Centre > Users > Manage Permissions) */}
+
+Your account admin can switch off **API & AI tools** for your login. While it is off:
+
+- Every API key you made stops working. Requests answer `403` with "Your account admin has turned off API and AI tools for you."
+- You cannot generate a new API key. Your **API Keys** page shows the same sentence in place of the button.
+- Your Claude or ChatGPT connection to Cortana stops working (each call is refused with `401`, as for a disconnected app), and you cannot connect a new one.
+
+Nothing is deleted. When your admin switches it back on, your API keys work again straight away. A Claude or ChatGPT connection may ask you to reconnect once. Account owners are never affected, and the Cortana Chrome extension keeps working when it is connected with **Sign in with Cortana AI**.
+
 ## Connecting an AI assistant (MCP)
 
 To use Cortana inside Claude, ChatGPT, or Codex, add the MCP connector. This path uses OAuth, so there is no API key to copy or store.

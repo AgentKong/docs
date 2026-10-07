@@ -58,3 +58,57 @@ You can also manage which users have access to a single, specific business. This
 2. Click on **Settings**.
 3. Navigate to the **Users** tab.
 4. Here, you will see a list of all users who currently have access to *this business only*. You can also add a new user to this business by clicking "Add User"
+
+## Turning off API and AI tools for one person
+
+{/* last-verified: 2026-10-06 · app: Control Centre > Users > user > Manage Permissions (permission key apiAccess) */}
+
+You can stop one team member from using the Cortana API and AI assistants (Claude, ChatGPT) without removing them from your account. Their API keys and AI connections stop working on their next request. Nothing is deleted, so you can switch it back on at any time.
+
+1. Go to the **Control Centre** and click **Users**.
+2. Click the **edit icon** (a pencil) next to the team member.
+3. On their **User Details** page, click **Manage Permissions**.
+4. Find **API & AI tools** and switch it off. You can also untick **Use API keys and AI tools** inside it: either one turns it off.
+5. Click **Save Permissions**.
+
+You can also change it from **Settings** > **Users** inside any business the person belongs to. Either way, it applies to the person everywhere, not to one business.
+
+<AccordionGroup>
+  <Accordion title="What stops when API and AI tools is off">
+    From the person's next request:
+
+    - Every API key they made stops working. The Cortana API answers with "Your account admin has turned off API and AI tools for you."
+    - Their Claude and ChatGPT connections to Cortana stop working, and they cannot connect a new one. The Cortana sign-in screen shows the same sentence.
+    - They cannot create a new API key. Their **API Keys** page and the AI connection screens show the sentence instead of the create and connect buttons. Their existing keys and connections stay listed, and they can still remove them.
+
+    Logging in to the Cortana dashboard is not affected.
+  </Accordion>
+
+  <Accordion title="Who it applies to">
+    It applies to team members (Managers and Admins). The account owner always keeps API and AI tools, and you cannot change your own permissions.
+  </Accordion>
+
+  <Accordion title="The Chrome extension keeps working">
+    When the person signs in to the Cortana Chrome extension with **Sign in with Cortana AI**, the extension uses its own key, which is not affected: the Ads Manager overlay, tracking links and payment links keep working. If they connected the extension with **Connect with API Key** instead, that pasted key is one they created, so it stops with the rest. They can reconnect with **Sign in with Cortana AI**, which works while the switch is off.
+  </Accordion>
+
+  <Accordion title="Switching it back on">
+    Switch **API & AI tools** back on and click **Save Permissions**. Their API keys work again straight away. A Claude or ChatGPT connection may ask them to reconnect once, because the assistant drops a connection that was refused while the switch was off.
+  </Accordion>
+</AccordionGroup>
+
+### FAQ
+
+<AccordionGroup>
+  <Accordion title="My teammate's Zapier stopped working and says the account admin turned off API and AI tools">
+    Their **API & AI tools** permission is off. An admin can switch it back on from **Control Centre** > **Users** > the person > **Manage Permissions**.
+  </Accordion>
+
+  <Accordion title="Does turning this off delete their API keys?">
+    No. The keys stay, they just stop working until the switch is back on. The person can still delete them from their **API Keys** page.
+  </Accordion>
+
+  <Accordion title="Can I turn off AI tools but keep the Chrome extension?">
+    Yes, when the extension is connected with **Sign in with Cortana AI**: it keeps working while API and AI tools is off. An extension connected with a pasted API key stops, so reconnect it with **Sign in with Cortana AI**.
+  </Accordion>
+</AccordionGroup>
