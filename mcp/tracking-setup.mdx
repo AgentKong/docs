@@ -1,0 +1,108 @@
+---
+title: "Set up tracking from your AI"
+description: "Ask your AI assistant to create conversions, connect what feeds them down to the exact form or pipeline stage, and send them to Meta through the Conversions API, all from a chat."
+---
+
+{/* last-verified: 2026-10-07 · tools: get_conversion_setup, list_source_options, save_conversion, save_conversion_source, get_capi_setup, update_capi_settings, save_capi_mapping, send_capi_test_event (src/lib/mcp/conversion-tools-mcp.ts and siblings) */}
+
+Your AI assistant can set up your tracking for you, the same way you would on the **Ad Tracking** pages. Tell it what you want to count and where it comes from, and it creates the conversion, connects the right integration and event, and sends it to Meta. At the end you have conversions recording in Cortana and reaching Meta, without clicking through the setup screens.
+
+## Before you start
+
+1. Connect Cortana to your assistant. See [Connect](/mcp/setup).
+2. Make sure your Cortana user has the **Manage ad tracking** permission (**Ad Tracking** section of your team permissions). Without it the assistant can read your setup but every change is refused.
+3. Connect the integrations you want to track from in Cortana first (**Integrations**). The assistant uses what is connected; it does not connect new integrations.
+
+## 1. See what you have
+
+Ask: *"Show me how my conversions are set up."*
+
+The assistant lists every conversion, what feeds it, and where it goes in Meta. Start here so it works from your real setup.
+
+## 2. Create a conversion
+
+Ask: *"Create a conversion called Booked call, counting each contact only once."*
+
+The assistant creates it and tells you the settings it set. A new conversion records nothing until something feeds it.
+
+## 3. Choose what feeds it
+
+Ask: *"Count my GoHighLevel form Strategy Call as a Booked call."*
+
+1. The assistant lists what the integration offers (your real forms, surveys, calendars, pipelines and stages, products, or payment events).
+2. It picks the one you named and adds it as the source, with any filters you ask for (for example only one pipeline stage, or only one product).
+3. If there is a step only you can take, it tells you exactly what to do:
+   - a **webhook** source gives you a URL to paste into the other tool;
+   - a **URL parameter** gives you a parameter to add to your link;
+   - a **body pixel** gives you a snippet to put on your thank-you page.
+
+## 4. Send it to Meta
+
+Ask: *"Send Booked call to Meta as Schedule."*
+
+The assistant adds the mapping on your Meta Conversions API setup. From then on, new Booked calls are sent to Meta as **Schedule** events. Nothing recorded before is sent.
+
+If you have no Conversions API setup yet, connect one first: the assistant can do it when ad management is on for the connection, otherwise connect it in Cortana on the **AI Ad Optimization** page.
+
+## 5. Check it reaches Meta
+
+Ask: *"Send a test Schedule event to Meta."*
+
+The assistant sends one test event to your pixel. It shows in Meta Events Manager under **Test Events** and never counts as a conversion.
+
+<AccordionGroup>
+  <Accordion title="What the assistant can change">
+    - **Conversions:** name, description, on or off, count new contacts only, revenue category (cash collected or lifetime value only), counts as a close, value required, and inherit attribution from another conversion.
+    - **Sources:** every integration you can add on the **Ad Tracking** pages: payment platforms, CRMs, booking tools, form tools, generic webhooks, Meta and LinkedIn lead forms, Messenger and Instagram DMs, Cortana forms, booking calendars, Cortana CRM deals, the URL parameter, and the body pixel. For each: the exact event, its filters and qualification rules, and on or off.
+    - **Meta Conversions API:** on or off, test event code, Limited Data Use (with its country and state), send only conversions from Meta ads, forward page views, the event source URLs, which conversion goes to which Meta event, custom events, and custom conversions.
+  </Accordion>
+
+  <Accordion title="What stays in Cortana">
+    - **Imports** (CSV uploads, CRM deal imports, historical imports) run from the app only.
+    - **Your Meta access token** never passes through a chat. The assistant uses your Meta connection (Cortana-managed), or you paste a token in the app.
+    - **Connecting a new integration** happens on the **Integrations** page.
+    - Google Ads lead sources and the Conversions APIs of Google, TikTok, Bing, and LinkedIn are not available from the assistant yet.
+  </Accordion>
+
+  <Accordion title="Your history is safe">
+    The assistant never deletes recorded conversions. It can only remove a conversion or a source that has recorded nothing yet. To stop one that has history, it switches it off: it stops counting, and everything it recorded stays.
+  </Accordion>
+
+  <Accordion title="Test events and Meta's Test Events tab">
+    Every event the assistant sends to Meta carries a test code, so it never counts as a conversion. Meta's **Test Events** tab only shows a test under the code that tab gives you. To watch one arrive, copy the code from the **Test Events** tab into your Conversions API setup's test event code (ask the assistant to set it), then send the test again.
+
+    A custom event the assistant creates appears in Events Manager after its first real conversion is sent.
+  </Accordion>
+
+  <Accordion title="Permissions and the change log">
+    Every change checks the **Manage ad tracking** permission of the person behind the connection, every time. A teammate without it can ask the assistant to read the setup, never to change it. Every change is logged in Cortana with who made it and that it came through the AI connection, and the assistant tells you exactly what changed, before and after.
+  </Accordion>
+</AccordionGroup>
+
+## FAQ
+
+<AccordionGroup>
+  <Accordion title="Why does the assistant say I don't have permission to change the tracking setup?">
+    Your Cortana user lacks **Manage ad tracking** (**Ad Tracking** section of your team permissions). An admin of the business can turn it on. Nothing was changed.
+  </Accordion>
+
+  <Accordion title="I added a source but nothing is recording">
+    Check the step the assistant gave you when it added it. A webhook needs the other tool to send to its URL, a URL parameter needs to be on your link, and a body pixel needs its snippet on the page. Integration sources such as Stripe or GoHighLevel connect themselves.
+  </Accordion>
+
+  <Accordion title="Why won't the assistant delete my old conversion?">
+    It has recorded conversions, and the assistant never deletes history. Ask it to switch the conversion off instead: it stops counting and keeps what it recorded. To remove it with its history, use the **Ad Tracking** pages.
+  </Accordion>
+
+  <Accordion title="I don't see the assistant's test event in Meta">
+    Meta shows a test only under the code from its **Test Events** tab. Copy that code into your Conversions API setup's test event code, then ask the assistant to send the test again.
+  </Accordion>
+
+  <Accordion title="Will the assistant send my past conversions to Meta when I add a mapping?">
+    No. A mapping sends new conversions from the moment it is saved.
+  </Accordion>
+</AccordionGroup>
+
+<Card title="All the tools" icon="wrench" href="/mcp/tools">
+  The full list of tracking setup tools, with what each one does.
+</Card>

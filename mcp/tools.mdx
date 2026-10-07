@@ -554,7 +554,7 @@ New. These tools let the assistant create and manage Meta ads. They require the 
 | `list_ad_accounts` | Connected ad accounts the assistant can read or manage. |
 | `get_ad_insights` | Platform-level ad performance pulled straight from the ad account. |
 | `list_ad_pixels` | Your Meta pixels: the ones on your ad account and the others your Meta business owns, which one Cortana would pick, and which one your Conversions API setup uses. |
-| `get_capi_setup` | Your Meta Conversions API setup and how healthy it is: the pixel, whether Cortana manages the token, Event Match Quality, and whether another integration also sends to the pixel. |
+| `get_capi_setup` | Your Meta Conversions API setups and how healthy they are: the pixel, whether Cortana manages the token, Event Match Quality, whether another integration also sends to the pixel, every setting of each setup, which conversion goes to which Meta event, and the Meta event names you can use. |
 
 ## Build and edit
 
@@ -579,6 +579,43 @@ New. These tools let the assistant create and manage Meta ads. They require the 
 | `upload_ad_video` | Upload a video to the ad account. |
 | `create_video_upload` | Start a resumable video upload session. |
 | `get_video_status` | Check whether an uploaded video is ready to use. |
+
+---
+
+# Tracking setup tools
+
+New. These tools let the assistant set up your tracking the way you would on the **Ad Tracking** pages: create conversions, choose what feeds them (down to the exact form, pipeline stage, calendar, or payment event), and decide what goes to Meta through the Conversions API. There is no extra checkbox on the consent screen: every change checks that the person behind the connection has the **Manage ad tracking** permission in Cortana. See [Set up tracking from your AI](/mcp/tracking-setup) for the walkthrough.
+
+<Note>
+  History is never deleted from here. A conversion or source that has recorded anything can be switched off, not removed. Every change is logged and the assistant tells you exactly what changed.
+</Note>
+
+## See your setup
+
+| Tool | What it does |
+| --- | --- |
+| `get_conversion_setup` | Every conversion with its settings, the sources that feed it (with the exact event and its filters), and where it goes in Meta. |
+| `list_source_options` | What an integration can feed a conversion: whether it is connected, and its real forms, surveys, calendars, pipelines and stages, products, and event types. Also your enabled Meta and LinkedIn lead forms, the Facebook pages for Messenger and Instagram DMs, your Cortana forms, booking calendars, and CRM pipelines. |
+
+## Conversions and their sources
+
+| Tool | What it does |
+| --- | --- |
+| `save_conversion` | Create a conversion, or change its name, description, and settings: on or off, count new contacts only, revenue category, counts as a close, value required, and inherit attribution from another conversion. |
+| `delete_conversion` | Remove a conversion that has recorded nothing yet. One with history is switched off instead. |
+| `save_conversion_source` | Add what feeds a conversion, or edit it: the integration, the exact event inside it, its filters and qualification rules, and on or off. When the user has a step to take (a webhook URL for another tool, a URL parameter for a link, a pixel snippet for a page), the reply says so. |
+| `delete_conversion_source` | Remove a source that has recorded nothing yet. One with history is switched off instead. |
+
+## Meta Conversions API
+
+| Tool | What it does |
+| --- | --- |
+| `update_capi_settings` | Change a setup's settings: on or off, test event code, Limited Data Use, send only conversions from Meta ads, forward page views, and the event source URLs. Never the token or the pixel. |
+| `save_capi_mapping` | Send a conversion to Meta as an event (a standard event or one of your custom events), or change what is sent: on or off, all conversions or only ad-attributed ones, and a value override. |
+| `remove_capi_mapping` | Stop sending a conversion to Meta as an event. What was already sent stays in the sent-events log. |
+| `create_meta_custom_event` | Create your own Meta event name, such as `BookedCall`. |
+| `create_meta_custom_conversion` | Create a custom conversion in your Meta ad account on a pixel you can use, for a standard or custom event. Refuses a name the account already has. |
+| `send_capi_test_event` | Send one test event to your pixel to check the connection. It appears in Meta's **Test Events** and never counts as a conversion. |
 
 <Card title="Examples" icon="comments" href="/mcp/examples">
   See real prompts that combine these tools across domains.

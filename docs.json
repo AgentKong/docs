@@ -365,6 +365,7 @@
               "mcp/overview",
               "mcp/setup",
               "mcp/meta-ads",
+              "mcp/tracking-setup",
               "mcp/tools",
               "mcp/ai-checkouts",
               "mcp/examples"
