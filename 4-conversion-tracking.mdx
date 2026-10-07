@@ -694,6 +694,10 @@ Every source is added the same way. Follow these six steps, then open your sourc
     <Tip>
       Turn on **Only one entry per stage, per contact** unless you specifically want to count re-entries. Deals that bounce between stages are the most common cause of inflated pipeline conversion counts.
     </Tip>
+
+    <Tip>
+      Building clients from one GoHighLevel snapshot? A business template can connect these sources by name for you. See [Using a GoHighLevel snapshot with templates](#using-a-gohighlevel-snapshot-with-templates).
+    </Tip>
   </Accordion>
 
   <Accordion title="HubSpot">
@@ -2200,6 +2204,89 @@ Every source is added the same way. Follow these six steps, then open your sourc
     <Warning>
       The status filter is the single biggest source of missing WooCommerce revenue. If your gateway parks orders in a status you did not tick, those orders silently never convert. If your WooCommerce numbers look far too low, check this list first and confirm it matches the statuses your payment gateway actually uses.
     </Warning>
+  </Accordion>
+</AccordionGroup>
+
+## Using a GoHighLevel snapshot with templates
+
+{/* last-verified: 2026-10-07 against the app source (sprint template-ghl-auto-match, phases 2.1 to 2.5). Screens: Control Center → Templates; the Sources list of a conversion; the red banner. Screenshots: TODO. */}
+
+If you build every client from the same GoHighLevel snapshot, a business template can connect each new client's GoHighLevel conversions for you. The template remembers the **names** of the forms, surveys, calendars, pipelines and stages each GoHighLevel source was set up with. When the new client's GoHighLevel is connected, Cortana finds the same names in their account and switches each source on by itself.
+
+### What the template remembers
+
+When you save a template (**Save as Template**) or update one (**Control Center → Templates**, the template's menu, **Re-save from Source**), every GoHighLevel conversion source keeps:
+
+- its event type (Form Submission, Survey Submission, Appointment Booked, Appointment Status Changed, Opportunity Stage Changed or Opportunity Status Changed)
+- the form or survey name, the calendar names (or "all calendars"), and the pipeline and stage names
+- the settings that belong to no single account: the appointment or opportunity statuses, revenue on or off, the currency, and **Only one entry per stage, per contact**
+- its **Lead Filter** rules, with each custom field named by its label, and the label of the custom field revenue is read from
+
+It never keeps an ID or a sub-account. A template saved before this feature was released does not have these names yet: re-save it once with **Re-save from Source**.
+
+### When matching runs
+
+Matching runs by itself:
+
+1. when GoHighLevel is connected to the business: a first connection, another sub-account, a reconnect, or a Private Integration Token added
+2. when a template is applied to a business, including a business created from a template
+
+The order does not matter. Apply the template and connect GoHighLevel later, or connect first and apply later: the sources connect themselves once both have happened. Until GoHighLevel is connected, the template's sources wait, switched off, and nothing needs fixing.
+
+### The matching rules
+
+Cortana switches a source on only when it is certain. A wrong match would count the wrong leads with no error, so anything uncertain is left for you, with the reason.
+
+- **Exact names.** Capital letters and extra spaces are ignored. Nothing else is: "Book a Call" and "Book a Call!" are different names.
+- **Exactly one.** If two forms, calendars, pipelines or stages have the same name, the source is left for you to pick.
+- **One sub-account per source.** All the names of one source must be in the same GoHighLevel sub-account. With several sub-accounts connected, a name that exists in more than one of them is left for you, and so is a source that tracks all calendars.
+- **Stages inside their pipeline.** A stage is only looked for inside the matched pipeline.
+- **All or nothing.** If one calendar, stage or Lead Filter field cannot be found, the whole source stays off. It never switches on with fewer calendars than the template had.
+- **Lead Filter fields and the revenue field** are found by their label in the new account, with the same rules.
+
+### When a source is not matched
+
+Once matching has run, every GoHighLevel source it handled shows a line under its name in the conversion's **Sources** list:
+
+- **Matched to form "Book a Call" automatically**: the source is on and counting.
+- **Not matched:** and the reason, for example *2 forms are named "Book a Call"* (it asks you to pick one), or *no form named "Book a Call Now" in GoHighLevel*. The source is off.
+
+The red banner at the top of the app reads **Conversions not set up properly** and says how many GoHighLevel conversions need a form, calendar or stage picked. Click it to open the business's **Conversions** tab. When other issues are listed too, click **Open conversions** in the list. In the Control Center the business is listed with how many GoHighLevel conversions are not set up.
+
+To fix a source, do one of these:
+
+1. Fix the cause in GoHighLevel (rename one of the two forms, for example), then click **Match again**. It matches every unmatched source of the business and switches each matched one on. The banner clears once none are left.
+2. Open the source, pick the form, calendar or stage yourself (with several sub-accounts, pick the sub-account first) and save. Then switch the source on in the **Sources** list: a source you set up by hand stays off until you do. The banner clears once every source is set up.
+
+A source that has not been tried yet shows a **Match with GoHighLevel** button instead of **Match again**.
+
+<AccordionGroup>
+  <Accordion title="Why didn't my GoHighLevel conversions connect after I applied the template?">
+    Check these in order:
+
+    1. **GoHighLevel isn't connected yet.** The sources wait until it is, then connect themselves.
+    2. **The template was saved before this feature was released.** It has no names to match. Re-save it with **Re-save from Source**: businesses you build from it from now on connect themselves. A business already built from the old template keeps its sources as they were, with no **Match again** button. Open each source, pick the form, calendar or stage, save, then switch it on.
+    3. **A name is different in the new account.** The reason is on each source, in the **Sources** list of its conversion.
+  </Accordion>
+
+  <Accordion title="Why does a source say two forms have the same name?">
+    The new account has two forms (or calendars, pipelines or stages) with exactly the name the template remembered. Cortana never guesses between them. Rename one in GoHighLevel and click **Match again**, or open the source and pick the right one.
+  </Accordion>
+
+  <Accordion title="It says Cortana could not read my GoHighLevel forms (or fields) just now">
+    GoHighLevel did not answer for one of the connected sub-accounts. After a connect or a template apply, Cortana tries again a few times by itself. If the message stays, check that sub-account's connection in **Settings → Integrations**, then click **Match again**.
+  </Accordion>
+
+  <Accordion title="Does matching change sources I set up myself?">
+    No. Matching only touches sources that came from a template and were never set up. A source you set up or fixed by hand is never changed, and running matching twice changes nothing twice.
+  </Accordion>
+
+  <Accordion title="Can I just switch a template source on?">
+    Switching it on does not make it count. A source counts only once it knows its form, calendar or stage and is on. Matching does both. When you pick it yourself, save and then switch it on.
+  </Accordion>
+
+  <Accordion title="What happens to my Lead Filter rules?">
+    They travel with the template. A rule on a standard field such as email or phone stays as it is. A rule on a custom field is matched to the custom field with the same label in the new account. If that label is missing, or two fields share it, the source stays off and names the field.
   </Accordion>
 </AccordionGroup>
 
