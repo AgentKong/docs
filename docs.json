@@ -413,6 +413,7 @@
                 "group": "Businesses",
                 "pages": [
                   "api-reference/endpoint/create-business",
+                  "api-reference/endpoint/update-business",
                   "api-reference/endpoint/list-business-templates"
                 ]
               },
