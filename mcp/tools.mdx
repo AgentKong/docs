@@ -617,6 +617,21 @@ New. These tools let the assistant set up your tracking the way you would on the
 | `create_meta_custom_conversion` | Create a custom conversion in your Meta ad account on a pixel you can use, for a standard or custom event. Refuses a name the account already has. |
 | `send_capi_test_event` | Send one test event to your pixel to check the connection. It appears in Meta's **Test Events** and never counts as a conversion. |
 
+---
+
+# Business Info
+
+These tools read and update a business's company profile, the details under **Settings → Business Info**. For example, the assistant can add a new city when a client starts serving it. There is no extra checkbox on the consent screen: every change checks that the person behind the connection has the **Manage general settings** permission in Cortana.
+
+| Tool | What it does |
+| --- | --- |
+| `get_business_info` | Read the company profile: name, owner, industry, timezone, website, contact details and service area. |
+| `update_business_info` | Change the name, owner, industry, website, contact email, phone, address or service area. Only the fields it passes change, and the reply lists each change with its old and new value. |
+
+<Note>
+  The timezone is changed in the app, under Settings → Business Info, because a change re-buckets every report. Every change made from the assistant is logged.
+</Note>
+
 <Card title="Examples" icon="comments" href="/mcp/examples">
   See real prompts that combine these tools across domains.
 </Card>

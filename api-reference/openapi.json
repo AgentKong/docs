@@ -303,6 +303,153 @@
         }
       }
     },
+    "/api/v1/businesses/{businessId}": {
+      "patch": {
+        "tags": [
+          "Businesses"
+        ],
+        "operationId": "updateBusinessInfo",
+        "summary": "Update business info",
+        "description": "Changes a business's company profile, the details under **Settings → Business Info**: name, owner, industry, website, contact email, phone, address and service area. Only the fields you send change. Send `null` or `\"\"` to clear an optional field; `name` and `industry` cannot be cleared.\n\n**Authentication:** Bearer API key with the **`businesses:write`** scope (**Businesses → Write** when generating the key). A key limited to chosen businesses can update only those.\n\n**Who may call:** the key's owner needs access to the business and the **Manage general settings** permission, the same rule as saving Business Info in the app. Agency owners always have it.\n\n**Timezone:** not editable here. A timezone change re-buckets every report, so it is changed in the app under Settings → Business Info. A body with `timezone` is refused with 400.\n\n**Response:** the business info after the change, and `changes`: each changed field with its value before and after. A body that changes nothing returns `changes: []` and writes nothing.",
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "businessId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            },
+            "description": "The business ID"
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateBusinessInfoRequest"
+              },
+              "examples": {
+                "serviceArea": {
+                  "summary": "New service area",
+                  "value": {
+                    "serviceArea": "Raleigh, Durham and Chapel Hill"
+                  }
+                },
+                "several": {
+                  "summary": "Several fields, one cleared",
+                  "value": {
+                    "website": "https://acme-windows.example",
+                    "ownerName": "Dana Lee",
+                    "phone": null
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Business info updated (or already held these values)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "$ref": "#/components/schemas/BusinessInfo"
+                    },
+                    "changes": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/BusinessInfoChange"
+                      }
+                    }
+                  }
+                },
+                "example": {
+                  "data": {
+                    "businessId": "00000000-0000-4000-8000-000000000001",
+                    "name": "Acme Windows",
+                    "ownerName": "Dana Lee",
+                    "industry": "CONSTRUCTION_HOME_SERVICES",
+                    "industryOther": null,
+                    "timezone": "America/New_York",
+                    "website": "https://acme-windows.example",
+                    "email": "hello@acme-windows.example",
+                    "phone": "",
+                    "address": "1 Main St",
+                    "serviceArea": "Raleigh, Durham and Chapel Hill",
+                    "updatedAt": "2026-10-09T13:00:00.000Z"
+                  },
+                  "changes": [
+                    {
+                      "field": "serviceArea",
+                      "before": "Raleigh",
+                      "after": "Raleigh, Durham and Chapel Hill"
+                    }
+                  ]
+                }
+              }
+            },
+            "headers": {
+              "X-RateLimit-Limit": {
+                "schema": {
+                  "type": "integer"
+                },
+                "description": "Request limit per window"
+              },
+              "X-RateLimit-Remaining": {
+                "schema": {
+                  "type": "integer"
+                },
+                "description": "Remaining requests in window"
+              },
+              "X-RateLimit-Reset": {
+                "schema": {
+                  "type": "integer"
+                },
+                "description": "Unix timestamp when window resets"
+              },
+              "X-Request-Id": {
+                "schema": {
+                  "type": "string"
+                },
+                "description": "Unique request id for support"
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "description": "Missing the businesses:write scope, or the key's owner lacks access or the Manage general settings permission on this business",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "429": {
+            "$ref": "#/components/responses/RateLimited"
+          }
+        }
+      }
+    },
     "/api/v1/businesses/{businessId}/contacts": {
       "get": {
         "tags": [
@@ -13474,6 +13621,173 @@
           }
         },
         "description": "Settings are editable; the trigger is fixed. A trackRevenue change re-subscribes with the right CallRail event set. Delete unsubscribes first, then removes the source."
+      },
+      "UpdateBusinessInfoRequest": {
+        "type": "object",
+        "additionalProperties": false,
+        "minProperties": 1,
+        "description": "Send only the fields to change. `null` or `\"\"` clears an optional field. `timezone` is not accepted.",
+        "properties": {
+          "name": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 191,
+            "description": "Business display name. Cannot be cleared."
+          },
+          "ownerName": {
+            "type": "string",
+            "nullable": true,
+            "maxLength": 255,
+            "description": "The owner's name"
+          },
+          "industry": {
+            "type": "string",
+            "enum": [
+              "DIGITAL_MARKETING_AGENCY",
+              "COACHING_CONSULTING",
+              "INFO_PRODUCT",
+              "SAAS",
+              "ECOMMERCE",
+              "REAL_ESTATE_MORTGAGE",
+              "CONSTRUCTION_HOME_SERVICES",
+              "HEALTH_MEDICAL",
+              "BEAUTY_SPA_WELLNESS",
+              "AUTOMOTIVE",
+              "OTHER"
+            ],
+            "description": "Cannot be cleared. `OTHER` needs `industryOther`."
+          },
+          "industryOther": {
+            "type": "string",
+            "nullable": true,
+            "maxLength": 191,
+            "description": "The industry in words. Required when the industry is OTHER."
+          },
+          "website": {
+            "type": "string",
+            "nullable": true,
+            "maxLength": 500,
+            "format": "uri",
+            "description": "Starts with http:// or https://"
+          },
+          "email": {
+            "type": "string",
+            "nullable": true,
+            "maxLength": 191,
+            "format": "email",
+            "description": "Business contact email"
+          },
+          "phone": {
+            "type": "string",
+            "nullable": true,
+            "maxLength": 191,
+            "description": "Business contact phone"
+          },
+          "address": {
+            "type": "string",
+            "nullable": true,
+            "maxLength": 191,
+            "description": "Business address"
+          },
+          "serviceArea": {
+            "type": "string",
+            "nullable": true,
+            "maxLength": 500,
+            "description": "Where the business serves, e.g. \"Greater Toronto Area\""
+          }
+        }
+      },
+      "BusinessInfo": {
+        "type": "object",
+        "properties": {
+          "businessId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "name": {
+            "type": "string"
+          },
+          "ownerName": {
+            "type": "string",
+            "nullable": true
+          },
+          "industry": {
+            "type": "string",
+            "nullable": true,
+            "enum": [
+              "DIGITAL_MARKETING_AGENCY",
+              "COACHING_CONSULTING",
+              "INFO_PRODUCT",
+              "SAAS",
+              "ECOMMERCE",
+              "REAL_ESTATE_MORTGAGE",
+              "CONSTRUCTION_HOME_SERVICES",
+              "HEALTH_MEDICAL",
+              "BEAUTY_SPA_WELLNESS",
+              "AUTOMOTIVE",
+              "OTHER"
+            ]
+          },
+          "industryOther": {
+            "type": "string",
+            "nullable": true
+          },
+          "timezone": {
+            "type": "string",
+            "description": "IANA timezone. Read-only here."
+          },
+          "website": {
+            "type": "string",
+            "nullable": true
+          },
+          "email": {
+            "type": "string",
+            "description": "Empty string when not set"
+          },
+          "phone": {
+            "type": "string",
+            "description": "Empty string when not set"
+          },
+          "address": {
+            "type": "string",
+            "description": "Empty string when not set"
+          },
+          "serviceArea": {
+            "type": "string",
+            "nullable": true
+          },
+          "updatedAt": {
+            "type": "string",
+            "format": "date-time"
+          }
+        }
+      },
+      "BusinessInfoChange": {
+        "type": "object",
+        "properties": {
+          "field": {
+            "type": "string",
+            "enum": [
+              "name",
+              "ownerName",
+              "industry",
+              "industryOther",
+              "website",
+              "email",
+              "phone",
+              "address",
+              "serviceArea"
+            ]
+          },
+          "before": {
+            "type": "string",
+            "nullable": true
+          },
+          "after": {
+            "type": "string",
+            "nullable": true
+          }
+        }
       }
     },
     "responses": {
