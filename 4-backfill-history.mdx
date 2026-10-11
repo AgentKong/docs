@@ -1,6 +1,6 @@
 ---
 title: "4.3) Import your history"
-description: "Import your last 30, 60 or 90 days of leads and sales into Cortana from Meta lead forms, LinkedIn lead forms, GoHighLevel, Typeform, Tally, ClickFunnels, WooCommerce, Close, Stripe or Shopify, so your old conversions get matched to the ads that created them."
+description: "Import your last 30, 60 or 90 days of leads, calls, bookings and sales into Cortana from Meta lead forms, LinkedIn lead forms, GoHighLevel, Typeform, Tally, ClickFunnels, WooCommerce, Close, Stripe, Shopify, CallRail, Whop, Cal.com or Kajabi, so your old conversions get matched to the ads that created them."
 ---
 
 {/* TODO: verify. No Loom walkthrough was supplied for this page. When one is recorded, embed it
@@ -16,7 +16,11 @@ A **historical import** goes back and gets them.
 
 Cortana asks the connected tool for your old records. For each one it works out where that person came from. Then it imports the ones it is sure about.
 
-## It does not import everything it finds
+## Two kinds of import, and the window tells you which one you are getting
+
+What happens to a record with no answer depends on the tool, and the window says so in plain words before you confirm. Read the top of it.
+
+### Most tools: only what Cortana can explain is imported
 
 For every old record, Cortana asks one question: **where did this person come from?**
 
@@ -26,7 +30,25 @@ If the only answer is "we do not know", the record is **unresolvable**, and Cort
 
 Throwing it away sounds harsh, but it is the right call. A record with no answer still counts in your totals. It lands in your **untracked** number, which is the share of your conversions Cortana cannot explain. Importing a pile of unknowns makes that number worse, not better. You would end up with more rows and less clarity.
 
-So a historical import gives you history you can actually use, not just a bigger pile of data.
+So on these tools a historical import gives you history you can actually use, not just a bigger pile of data.
+
+### Whop, Cal.com and Kajabi: everything is imported, and it shows as untracked
+
+Three tools do not tell us where a past sale or booking came from at all. Whop only carries that information when your checkout link had it, Cal.com keeps it in a place its API does not share, and Kajabi does not send it.
+
+There is no point asking a question the tool cannot answer, so these imports work differently:
+
+- **Every record is imported.** Nothing is thrown away, and there is no switch to change that.
+- **They count in your totals.** Your revenue and your booking numbers will be right.
+- **They show as untracked**, not as direct. Untracked means "Cortana has no page views for this person", which is the honest answer. Filing them as direct would claim they came straight to your site, which nobody knows.
+
+The window says this before you start, with the tool's name in it: *"These won't include attribution details."* If you see that notice, this is the kind of import you are running.
+
+<Note>
+  **Your untracked number will go up, on purpose.**
+
+  That is the trade. You get the sale or the booking counted, and you keep an honest view of what Cortana can and cannot explain. If you would rather not raise it, do not run the import on these three tools.
+</Note>
 
 You will find it in **Ad Tracking → Conversion Setup**, on the source's own row.
 
@@ -40,27 +62,40 @@ You will find it in **Ad Tracking → Conversion Setup**, on the source's own ro
 
 ## Which sources can be imported
 
-Ten tools can be imported. How far back you can go depends on how much history each tool will give us.
+Fourteen tools can be imported. How far back you can go depends on how much history each tool will give us.
 
-| Tool | Furthest back you can go |
-| --- | --- |
-| Meta lead forms | 90 days |
-| LinkedIn lead forms | 90 days |
-| GoHighLevel | 90 days |
-| Typeform | 90 days |
-| Tally | 90 days |
-| ClickFunnels | 90 days |
-| WooCommerce | 90 days |
-| Stripe | 90 days |
-| Shopify | 60 days |
-| Close | 30 days |
+| Tool | Furthest back you can go | What arrives |
+| --- | --- | --- |
+| Meta lead forms | 90 days | Only what Cortana can explain |
+| LinkedIn lead forms | 90 days | Only what Cortana can explain |
+| GoHighLevel | 90 days | Only what Cortana can explain |
+| Typeform | 90 days | Only what Cortana can explain |
+| Tally | 90 days | Only what Cortana can explain |
+| ClickFunnels | 90 days | Only what Cortana can explain |
+| WooCommerce | 90 days | Only what Cortana can explain |
+| Stripe | 90 days | Only what Cortana can explain |
+| CallRail | 90 days | Only what Cortana can explain |
+| Shopify | 60 days | Only what Cortana can explain |
+| Close | 30 days | Only what Cortana can explain |
+| Whop | Back to the day you connected Whop | Everything, shown as untracked |
+| Cal.com | 90 days | Everything, shown as untracked |
+| Kajabi | 90 days | Everything, shown as untracked |
+
+**CallRail** imports calls: the ones that completed, and the ones CallRail marked a good lead. Form submissions to CallRail cannot be imported yet.
+
+**Whop** reads the payments Cortana already stored when Whop sent them, rather than asking Whop again, because that stored copy keeps information Whop's own history does not. That is why Whop's limit is the day you connected it: there is nothing older to read. If your window reaches back further, the import says so rather than pretending that was all there was.
+
+**Cal.com** imports bookings that were created. Cancellations and reschedules cannot be imported, because Cal.com does not record when either actually happened.
+
+**Kajabi** imports payments and purchases. Orders and form submissions cannot be imported: an order is not money yet, and a form submission carries no date to file the conversion under.
 
 ### Why 90 days does not always mean 90 days
 
-Every source shows the same three buttons, so you can always click **90 days**. But two tools will not give us that much history:
+Every source shows the same three buttons, so you can always click **90 days**. But three tools will not give us that much history:
 
 - **Shopify** only hands over 60 days of orders.
 - **Close** only keeps 30 days of the record Cortana reads.
+- **Whop** goes back to the day you connected it, however old your Whop account is.
 
 On those two, Cortana asks for as much as the tool allows and imports that. You do not get an error, and nothing fails. You simply get less history than the button says.
 
@@ -69,7 +104,7 @@ On those two, Cortana asks for as much as the tool allows and imports that. You 
 
   The button keeps reading **Preview my last 90 days**, and the line at the top of the window still says *"Import your last 90 days"*. Only the import itself is shortened.
 
-  So on a Shopify source, 90 days on screen means 60 days of orders. On a Close source, it means 30 days. Everywhere else, 90 days really is 90 days.
+  So on a Shopify source, 90 days on screen means 60 days of orders. On a Close source, it means 30 days. On a Whop source it means back to your connection date, and the import tells you in its notes when your window started earlier than that. Everywhere else, 90 days really is 90 days.
 </Warning>
 
 **Meta lead forms** and **LinkedIn lead forms** mean the lead ads you run on Facebook, Instagram and LinkedIn, where someone fills in a form without leaving the platform. These are separate from your ad spend and performance figures, which Cortana already brings in on its own.
@@ -213,7 +248,7 @@ On those two, Cortana asks for as much as the tool allows and imports that. You 
   <Step title="Choose what to do with records Cortana cannot answer for">
     Click **Advanced settings**. One more setting appears: **Also import conversions we can't attribute**. It is **off**, and it warns you *"These will show as untracked and will raise your untracked %."*
 
-    - **Off** is what this page has described so far. Records Cortana cannot answer for are thrown away.
+    - **Off** is what this page has described so far. Records Cortana cannot answer for are thrown away. On Whop, Cal.com and Kajabi this switch is not shown at all, because everything is imported there.
     - **On** imports them anyway. They arrive labelled **untracked**, and your untracked percentage goes up.
 
     **We recommend leaving it off.** Only turn it on if you want a full count of your past volume inside Cortana and you are happy for your untracked number to rise to match.
@@ -348,6 +383,8 @@ On those two, Cortana asks for as much as the tool allows and imports that. You 
   </Accordion>
 
   <Accordion title="What happens to records Cortana cannot answer for">
+    This depends on which of the two kinds of import you are running. On Whop, Cal.com and Kajabi every record is imported and shown as untracked, and none of what follows applies. On every other tool:
+
     They are not imported as conversions. Cortana checks them, finds nothing solid, and leaves them out rather than filing them as untracked.
 
     A record has a real answer when Cortana can tie it to something specific: a matching ad, campaign or ad set, a click ID such as `fbclid` or `gclid` still attached to it, or a genuine traffic source.
@@ -363,6 +400,12 @@ On those two, Cortana asks for as much as the tool allows and imports that. You 
     </Warning>
 
     Turning on **Also import conversions we can't attribute** changes this. Then the conversions are kept, and shown as untracked.
+
+    <Note>
+      **Kept-but-unexplained conversions show as untracked, never as direct.**
+
+      This is true whether they were kept by that switch or because you imported from Whop, Cal.com or Kajabi. Direct would mean the person typed your address in; untracked means Cortana has no page views for them. Only the second one is known to be true, so that is what it says, even if that person has visited your site since.
+    </Note>
   </Accordion>
 
   <Accordion title="What an import does to conversions you already had">
@@ -427,11 +470,14 @@ On those two, Cortana asks for as much as the tool allows and imports that. You 
   </Accordion>
 
   <Accordion title="The clock icon is missing from the row">
-    Three reasons, most likely first.
+    Four reasons, most likely first.
 
     1. **That kind of source cannot be imported.** See the table near the top of this page.
-    2. **It is a Shopify source built on something other than orders/paid or orders/create.** Those cannot be imported.
-    3. **You do not have permission to manage tracking for this business.** The icon is hidden rather than greyed out, so ask whoever runs your account.
+    2. **The source watches something that cannot be imported, even though the tool can be.** The icon follows the trigger, not just the tool. A Cal.com source watching cancellations or reschedules has no icon, while one watching bookings does. A Kajabi source watching orders or form submissions has none, while payments and purchases do. The same is true of a Shopify source built on anything other than orders/paid or orders/create, and of a CallRail source watching form submissions.
+    3. **The source has no trigger set at all.** Cortana cannot work out what to fetch, so it offers nothing.
+    4. **You do not have permission to manage tracking for this business.** The icon is hidden rather than greyed out, so ask whoever runs your account.
+
+    The icon is hidden in these cases rather than shown and refused. If an import cannot run, clicking would only produce an error, so there is nothing to click.
   </Accordion>
 
   <Accordion title="The preview says zero, or will not run">
@@ -441,8 +487,8 @@ On those two, Cortana asks for as much as the tool allows and imports that. You 
 
     | Message | What to do |
     | --- | --- |
-    | **"This source has no form configured — nothing to backfill"** | Open the source's settings and pick the form it should watch. |
-    | **"This source has no trigger configured — nothing to backfill"** | Open the source's settings and pick what it should watch. |
+    | **"This source has no form configured, so there is nothing to import"** | Open the source's settings and pick the form it should watch. |
+    | **"This source has no trigger configured, so there is nothing to import"** | Open the source's settings and pick what it should watch. |
     | **"This source has no pipeline configured"** | A GoHighLevel opportunity source needs its pipeline set. |
     | **"This source has no calendar configured"** | A GoHighLevel appointment source needs its calendar set. |
     | **"The [trigger] trigger is not backfillable yet"** | That kind of event cannot be imported yet. Your live tracking still works as normal. |
@@ -508,9 +554,19 @@ On those two, Cortana asks for as much as the tool allows and imports that. You 
   </Accordion>
 
   <Accordion title="Why did it only import a small part of my records?">
-    Because Cortana only imports the records it can trace. The rest were either impossible to trace, or already in your account.
+    Because on most tools Cortana only imports the records it can trace. The rest were either impossible to trace, or already in your account.
 
     A small number is not a failure. Importing records Cortana cannot explain would push your untracked percentage up and teach you nothing, which is exactly what this feature is built to avoid.
+
+    This does not apply to Whop, Cal.com or Kajabi. Those import everything, so a small number there means Cortana genuinely found few records in your window, not that it left any out.
+  </Accordion>
+
+  <Accordion title="Why did my untracked number go up after importing from Whop, Cal.com or Kajabi?">
+    Because that is what those imports do, and the window told you so before you started.
+
+    Those three tools do not tell us where a past sale or booking came from. Rather than drop your history, Cortana imports all of it and marks it untracked, which means "no page views recorded for this person". Your revenue and booking totals are now right. The untracked share is the honest cost of that.
+
+    It is not a mistake to fix, and there is no setting to change it. If you would rather keep the smaller untracked number, do not import from those three.
   </Accordion>
 
   <Accordion title="Will my team get emails, or will this set off my automations?">
