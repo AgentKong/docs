@@ -1,0 +1,429 @@
+---
+title: "1) Connect Zoom"
+description: "Connect the Zoom user who hosts your webinars with your own Zoom app, so Cortana can sign people up and see who joined."
+---
+
+{/* last-verified: 2026-10-11 · route: /business/[businessId]/settings?tab=integrations, Zoom Integration dialog */}
+
+{/* When Zoom approves the Cortana app, a "Sign in with Zoom" choice appears here. Add it then. */}
+
+## Overview
+
+Cortana runs your webinars through Zoom. So the first job is to connect Zoom.
+
+You connect one Zoom user: the person who hosts your webinars. You do it with your own Zoom app. That is an app you make inside your Zoom account, so Cortana can talk to it.
+
+This page walks you through it, start to finish.
+
+<Note>
+  **Before you start.** Read the [Cortana Webinars overview](/webinars-overview) first.
+
+  In Zoom, you need an admin role, or the permission to build Server-to-Server apps. In Cortana, your role needs **Manage integrations**.
+</Note>
+
+---
+
+## 1. Open the Zoom card
+
+<Steps>
+  <Step title="Open Settings">
+    In your business, click **Settings** in the menu on the left.
+  </Step>
+  <Step title="Open the Integrations tab">
+    Click the **Integrations** tab. It is the first tab.
+  </Step>
+  <Step title="Find the Zoom card">
+    Type `Zoom` in the **Search integrations...** box. The Zoom card appears.
+  </Step>
+  <Step title="Click Connect">
+    Click **Connect** on the Zoom card. A box called **Zoom Integration** opens.
+  </Step>
+</Steps>
+
+The card says *Connect Zoom to run webinars through Cortana: register signups, track who showed up and how long they stayed, and send it all to your ad platforms.*
+
+<Frame caption="The Zoom card before anything is connected. Connect opens the Zoom box.">
+  <img className="block dark:hidden" src="/images/webinars/connect-zoom/01-zoom-card.png" alt="The Integrations tab of a business's Settings, showing the Zoom card with its description and a wide Connect button, which is marked 4." />
+  <img className="hidden dark:block" src="/images/webinars/connect-zoom/01-zoom-card-dark.png" alt="The Integrations tab of a business's Settings, showing the Zoom card with its description and a wide Connect button, which is marked 4." />
+</Frame>
+
+---
+
+## 2. Build your own Zoom app
+
+You build this app inside Zoom, not inside Cortana. You only do it once.
+
+You need a Zoom admin role, or Zoom's permission to build Server-to-Server apps. Admin-level permissions need an admin role.
+
+<Steps>
+  <Step title="Open the Zoom App Marketplace">
+    Go to `https://marketplace.zoom.us`. Sign in with the Zoom account that hosts your webinars.
+  </Step>
+  <Step title="Start a new app">
+    Click **Develop**, then **Build App**. On Zoom's newer screens, click **Developers** at the bottom left, then **+**, then **Build an app**.
+  </Step>
+  <Step title="Pick Server-to-Server OAuth">
+    Pick **Server-to-Server OAuth app**, then click **Create**. Zoom opens your new app.
+  </Step>
+  <Step title="Fill in Information">
+    On the **Information** page, add a name and a developer contact email. Zoom needs both before the app can be turned on.
+  </Step>
+  <Step title="Add the permissions">
+    On the **Scopes** page, click **Add Scopes**. Add every permission in the list below.
+  </Step>
+  <Step title="Turn the app on">
+    On the **Activation** page, activate the app. If Zoom lists anything missing, fix it first.
+  </Step>
+  <Step title="Keep this tab open">
+    Leave your app open in this tab. You copy four details from it in section 3.
+  </Step>
+</Steps>
+
+{/* TODO: verify: the Zoom screens above follow Zoom's own guide (developers.zoom.us/docs/internal-apps/create, read 2026-10-12). They were not clicked through live. */}
+
+<AccordionGroup>
+  <Accordion title="The permissions your Zoom app needs">
+    Add all 17. Zoom calls them scopes. Each name below is on Zoom's own list of permissions for these apps.
+
+    For webinars:
+
+    - `webinar:read:list_webinars:admin`
+    - `webinar:read:webinar:admin`
+    - `webinar:write:webinar:admin`
+    - `webinar:update:webinar:admin`
+    - `webinar:write:registrant:admin`
+    - `webinar:read:list_registrants:admin`
+    - `webinar:read:list_past_instances:admin`
+    - `webinar:read:list_past_participants:admin`
+
+    For meetings:
+
+    - `meeting:read:list_meetings:admin`
+    - `meeting:read:meeting:admin`
+    - `meeting:write:meeting:admin`
+    - `meeting:update:meeting:admin`
+    - `meeting:write:registrant:admin`
+    - `meeting:read:list_registrants:admin`
+    - `meeting:read:list_past_instances:admin`
+    - `meeting:read:list_past_participants:admin`
+
+    For the host:
+
+    - `user:read:user:admin`
+
+    Using only Zoom meetings? You still add the webinar ones. Cortana reads both kinds.
+
+    When you add the events in section 4, Zoom may ask for one more permission. Add whatever it asks for there.
+
+    {/* TODO: verify: the permission Zoom asks for when the 10 events are added. Not on Zoom's scope list; seen only on Zoom's Event Subscriptions screen. */}
+  </Accordion>
+
+  <Accordion title="Where each detail lives in your Zoom app">
+    Cortana needs five things from your Zoom app.
+
+    | Detail | Where you find it |
+    | --- | --- |
+    | **Account ID** | Your app, **App Credentials** page. |
+    | **Client ID** | Your app, **App Credentials** page. |
+    | **Client Secret** | Your app, **App Credentials** page. |
+    | **Secret Token** | Your app, **Feature** page. |
+    | **Host email** | The email the host signs in to Zoom with. |
+
+    These match the hints under each box in Cortana.
+  </Accordion>
+</AccordionGroup>
+
+---
+
+## 3. Paste your app's details into Cortana
+
+Go back to Cortana. The **Zoom Integration** box from section 1 should still be open.
+
+<Steps>
+  <Step title="Find Use your own Zoom app">
+    In the **Zoom Integration** box, find the row **Use your own Zoom app**.
+  </Step>
+  <Step title="Click Set up">
+    Click **Set up** on that row. A box called **Connect your own Zoom app** opens.
+  </Step>
+  <Step title="Paste the Account ID">
+    Paste it into **Account ID**. It is on your app's **App Credentials** page.
+  </Step>
+  <Step title="Type the host's email">
+    Type the host's Zoom email into **Host email**. The host must be a user in this same Zoom account.
+  </Step>
+  <Step title="Paste the Client ID">
+    Paste it into **Client ID**. It is on the **App Credentials** page too.
+  </Step>
+  <Step title="Paste the Client Secret">
+    Paste it into **Client Secret**. It is on the **App Credentials** page too.
+  </Step>
+  <Step title="Paste the Secret Token">
+    Paste it into **Secret Token**. It is on your app's **Feature** page.
+  </Step>
+  <Step title="Click Connect">
+    Click **Connect**. The button reads *Verifying with Zoom* while Cortana checks the details. Nothing is saved until Zoom says yes.
+  </Step>
+</Steps>
+
+<Frame caption="The empty Zoom box. Your own Zoom app is the way in.">
+  <img className="block dark:hidden" src="/images/webinars/connect-zoom/02-zoom-dialog-empty.png" alt="The Zoom Integration box with the line No Zoom user is connected yet, and a row called Use your own Zoom app marked 1, with its Set up button marked 2." />
+  <img className="hidden dark:block" src="/images/webinars/connect-zoom/02-zoom-dialog-empty-dark.png" alt="The Zoom Integration box with the line No Zoom user is connected yet, and a row called Use your own Zoom app marked 1, with its Set up button marked 2." />
+</Frame>
+
+<Frame caption="The five boxes, filled with example values. Each hint says where to look in your Zoom app.">
+  <img className="block dark:hidden" src="/images/webinars/connect-zoom/03-own-app-form.png" alt="The Connect your own Zoom app box with five boxes filled with example values: Account ID marked 3, Host email marked 4, Client ID marked 5, Client Secret marked 6 and Secret Token marked 7, and the Connect button marked 8." />
+  <img className="hidden dark:block" src="/images/webinars/connect-zoom/03-own-app-form-dark.png" alt="The Connect your own Zoom app box with five boxes filled with example values: Account ID marked 3, Host email marked 4, Client ID marked 5, Client Secret marked 6 and Secret Token marked 7, and the Connect button marked 8." />
+</Frame>
+
+The box explains itself at the top: *For a Zoom account with its own Server-to-Server app. We check the details with Zoom before saving anything.*
+
+**Connect** stays grey until all five boxes are filled.
+
+---
+
+## 4. Give Zoom the link it needs
+
+When Zoom says yes, the box changes. It says *Connected. Add the webhook URL below to your Zoom app to finish.* A green line reads **Host connected**.
+
+Under **Webhook URL for your Zoom app** is your link. Zoom uses it to tell Cortana when people join and leave, as it happens.
+
+The link looks like this. Yours ends with its own long code:
+
+```text
+https://app.usecortana.ai/api/webhook/zoom/s2s/s2s_0123456789abcdef0123456789abcdef0123456789abcdef
+```
+
+<Frame caption="After Connect: your link, and the 10 events Zoom must send to it. The link here is an example.">
+  <img className="block dark:hidden" src="/images/webinars/connect-zoom/04-own-app-connected.png" alt="The Connect your own Zoom app box after connecting. It reads Host connected, then shows the Webhook URL for your Zoom app with a copy button, marked 1, the instructions, the 10 event names, marked 7, and the Done button, marked 9." />
+  <img className="hidden dark:block" src="/images/webinars/connect-zoom/04-own-app-connected-dark.png" alt="The Connect your own Zoom app box after connecting. It reads Host connected, then shows the Webhook URL for your Zoom app with a copy button, marked 1, the instructions, the 10 event names, marked 7, and the Done button, marked 9." />
+</Frame>
+
+Steps 2 to 8 happen in Zoom. Steps 1 and 9 happen in Cortana.
+
+<Steps>
+  <Step title="Copy the link">
+    In Cortana, click the copy button next to the link. A message says *Webhook URL copied*.
+  </Step>
+  <Step title="Open your app in Zoom">
+    Go back to your app in the Zoom App Marketplace.
+  </Step>
+  <Step title="Open the Feature page">
+    Click **Feature** in your app's menu.
+  </Step>
+  <Step title="Turn on Event Subscriptions">
+    Turn on **Event Subscriptions**. Then click **Add New Event Subscription**.
+  </Step>
+  <Step title="Paste the link">
+    Paste your link into **Event notification endpoint URL**.
+  </Step>
+  <Step title="Click Validate">
+    Click **Validate**. Cortana answers Zoom's check with your **Secret Token**, and Zoom marks the link as validated.
+  </Step>
+  <Step title="Add the 10 events">
+    Pick the 10 events listed below, and nothing else. Then click **Done**.
+  </Step>
+  <Step title="Save in Zoom">
+    Click **Save**. Zoom only lets you save once the link is validated.
+  </Step>
+  <Step title="Click Done in Cortana">
+    Back in Cortana, click **Done**. You are finished.
+  </Step>
+</Steps>
+
+{/* TODO: verify: the Zoom labels in steps 2 to 8 follow Zoom's own guide (developers.zoom.us/docs/api/webhooks, read 2026-10-12). They were not clicked through live. */}
+
+The 10 events, exactly as Cortana lists them:
+
+- `webinar.started`
+- `webinar.ended`
+- `webinar.participant_joined`
+- `webinar.participant_left`
+- `meeting.started`
+- `meeting.ended`
+- `meeting.participant_joined`
+- `meeting.participant_left`
+- `recording.completed`
+- `recording.transcript_completed`
+
+<Warning>
+  **Copy the link before you click Done.**
+
+  The Zoom box does not show it again later. To see it again, click **Set up** and enter the same app details once more. You get the same link back.
+</Warning>
+
+{/* TODO: verify live: that a second Set up with the same app details shows the same link again. The source code says so; it was not run. */}
+
+The box also says *Until then, attendance still arrives after each Zoom webinar or meeting ends.* So nothing is lost if you do this step later. You wait for Zoom's final report instead of seeing people live.
+
+---
+
+## 5. Check the connection
+
+<Steps>
+  <Step title="Open the Zoom box again">
+    On the Zoom card, click **Manage**. The card shows **Manage** once a Zoom user is connected.
+  </Step>
+  <Step title="Read the Zoom Accounts table">
+    The table lists each connected Zoom user. **Status** reads **Connected** when all is well.
+  </Step>
+  <Step title="Add another Zoom user if you need one">
+    Under the table, click **Set up** on **Add your own Zoom app**. Each webinar picks one Zoom user as its host.
+  </Step>
+</Steps>
+
+<Frame caption="The Zoom box once a Zoom user is connected.">
+  <img className="block dark:hidden" src="/images/webinars/connect-zoom/05-zoom-dialog-connected.png" alt="The Zoom Integration box showing the Zoom Accounts table with the columns Zoom user, Status and Default marked 2, one row reading host at example dot com, Connected and Default, and the Add your own Zoom app row with its Set up button marked 3." />
+  <img className="hidden dark:block" src="/images/webinars/connect-zoom/05-zoom-dialog-connected-dark.png" alt="The Zoom Integration box showing the Zoom Accounts table with the columns Zoom user, Status and Default marked 2, one row reading host at example dot com, Connected and Default, and the Add your own Zoom app row with its Set up button marked 3." />
+</Frame>
+
+The table reads *The Zoom users connected to this workspace. Webinars pick one of them as the host.*
+
+A user connected with your own Zoom app shows *Your own Zoom app* under their email.
+
+<AccordionGroup>
+  <Accordion title="Make one Zoom user the default">
+    The default user is picked for you when you make a new webinar. You can still change it there.
+
+    To change the default, click **Make default** on another row. The badge **Default** moves to that row.
+
+    You cannot make a user the default while it reads **Needs reconnect**.
+  </Accordion>
+
+  <Accordion title="Reconnect a Zoom user">
+    A row that reads **Needs reconnect** has a **Reconnect** button.
+
+    For a user connected with your own Zoom app, **Reconnect** opens the same **Connect your own Zoom app** box. **Host email** is filled in for you. Paste the other four details again, then click **Connect**.
+  </Accordion>
+
+  <Accordion title="Disconnect a Zoom user">
+    Click the unlink icon at the end of the row. Two buttons appear on the same row: **Disconnect** and **Keep**.
+
+    Click **Disconnect** to remove the user. Click **Keep** to change your mind.
+
+    The **Disconnect** button on the Zoom card itself only opens this box. It does not disconnect anything by itself.
+  </Accordion>
+</AccordionGroup>
+
+### This Zoom is not the Zoom in My Profile
+
+There are two Zoom connections in Cortana, and they do different jobs.
+
+The Zoom card on the **Integrations** tab is for the whole business. It runs your webinars.
+
+Each person can also connect Zoom under **Settings**, **Users**, **My Profile**. That one is only theirs. It makes video links for their own bookings.
+
+---
+
+## Settings Reference
+
+| Setting | What it does | Default | We recommend | Watch out for |
+| --- | --- | --- | --- | --- |
+| **Connect** (Zoom card) | Opens the **Zoom Integration** box. | Shown until a Zoom user is connected | Use it once, to connect your host. | It opens the box. It does not connect anything by itself. |
+| **Manage** (Zoom card) | Opens the **Zoom Integration** box. | Shown once a Zoom user is connected | Open it to check the **Status** column. | None. |
+| **Reconnect** (Zoom card) | Opens the box when no connection works. | Shown when a connection broke | Fix the row that reads **Needs reconnect**. | New sign-ups wait, marked **Waiting for Zoom to be reconnected**, until it is fixed. |
+| **Disconnect** (Zoom card) | Opens the **Zoom Integration** box. | Shown once connected | Use the unlink icon on the row instead. | It does not disconnect by itself. |
+| **Set up** | Opens the **Connect your own Zoom app** box. | Not applicable | Have your Zoom app open in another tab. | None. |
+| **Account ID** | Tells Cortana which Zoom account to use. | Empty | Copy it, never type it. | Required. |
+| **Host email** | The Zoom user who hosts your webinars. | Empty | Use the email the host signs in to Zoom with. | One Zoom user can belong to one business only. |
+| **Client ID** | Part of your Zoom app's details. | Empty | Copy it, never type it. | Required. |
+| **Client Secret** | Part of your Zoom app's details. | Empty | Copy it, never type it. | Required. It is hidden as you paste it. |
+| **Secret Token** | Lets Cortana check that a message really came from your Zoom app. | Empty | Copy it from the **Feature** tab. | Required. It is hidden as you paste it. |
+| **Connect** (in the box) | Checks the details with Zoom, then saves them. | Grey until all five boxes are filled | Click it once and wait. | Nothing is saved if Zoom says no. |
+| **Webhook URL for your Zoom app** | The link Zoom uses to tell Cortana what happened. | Made for you | Copy it before you click **Done**. | It is shown only once. |
+| **Make default** | Makes this user the one a new webinar picks first. | The first user you connect | Make your main host the default. | Not offered on a row that needs reconnecting. |
+| **Reconnect** (row) | Opens the box to enter the app details again. | Shown on a broken row only | Paste the details from the same Zoom app. | **Host email** is filled in. The rest you paste again. |
+| **Disconnect** / **Keep** (row) | Removes the Zoom user, or cancels. | Hidden until you click the unlink icon | Keep a user that still hosts live webinars. | The row asks right there. No pop-up opens. |
+
+---
+
+## Troubleshooting
+
+<AccordionGroup>
+  <Accordion title="It says: Could not verify that Zoom app">
+    The full message is *Could not verify that Zoom app. Check the Account ID, Client ID and Secret, the host email, and the app scopes.*
+
+    Copy each detail again from your Zoom app. Check that the app is activated. Check the permissions in section 2. Check that the host email is a user in that same Zoom account.
+  </Accordion>
+
+  <Accordion title="It says: That Zoom user is already connected to another workspace">
+    One Zoom user can belong to one Cortana business only. Disconnect it in the other business first, or use a different Zoom user as the host.
+  </Accordion>
+
+  <Accordion title="It says: That Zoom user is still held by a workspace that was deleted">
+    The full message is *That Zoom user is still held by a workspace that was deleted. Contact Cortana support to release it.* Click the support button and we will free it for you.
+  </Accordion>
+
+  <Accordion title="It says: You do not have permission to manage integrations">
+    Your Cortana role cannot change integrations. Ask an owner of the business to connect Zoom, or to give you that permission.
+  </Accordion>
+
+  <Accordion title="A row says Needs reconnect">
+    Zoom stopped accepting that connection. The row may say *Zoom stopped accepting this connection. Reconnect it to keep webinars running.*
+
+    For your own Zoom app it may say *Zoom stopped accepting your Zoom app's credentials. Check that the Server-to-Server app is still activated, then reconnect it with its Account ID, Client ID and Client Secret.*
+
+    Check the app in Zoom, then click **Reconnect** on the row.
+  </Accordion>
+
+  <Accordion title="The Connect button stays grey">
+    All five boxes must be filled in. Look for an empty one.
+  </Accordion>
+
+  <Accordion title="Validate fails in Zoom">
+    Zoom shows that the link failed to validate. Cortana answers Zoom with the **Secret Token** you pasted, so the two must match.
+
+    Copy the **Secret Token** again from your app's **Feature** page. In Cortana, click **Set up**, enter all five details again, and click **Connect**. Then click **Validate** in Zoom again.
+  </Accordion>
+
+  <Accordion title="Live updates stopped after working before">
+    Zoom checks the link again every 72 hours. After 6 failed checks in a row, Zoom turns the subscription off and emails your Zoom account owner.
+
+    In your app's **Feature** page, turn **Event Subscriptions** back on. Click **Validate**, then **Save**.
+  </Accordion>
+
+  <Accordion title="People only show up after my webinar ends">
+    Zoom is not sending live updates yet. Do section 4: paste the link and add the 10 events in your Zoom app. Until then, the numbers arrive when Zoom sends its final report.
+  </Accordion>
+</AccordionGroup>
+
+---
+
+## FAQ
+
+<AccordionGroup>
+  <Accordion title="Do I really have to build a Zoom app?">
+    Yes, for now. Your own Zoom app is the only way to connect Zoom today. You build it once.
+  </Accordion>
+
+  <Accordion title="Can I connect more than one Zoom user?">
+    Yes. Click **Set up** on **Add your own Zoom app** for each one. Each webinar picks one of them as its host.
+  </Accordion>
+
+  <Accordion title="I lost the link Zoom needs. Where do I find it again?">
+    The Zoom box does not show it again. Click **Set up** and enter the same app details once more. Cortana shows you the same link.
+  </Accordion>
+
+  <Accordion title="Does this also give my bookings Zoom links?">
+    Each person connects their own Zoom for bookings, under **Settings**, **Users**, **My Profile**. If a person has not done that, a booking can use the business's default Zoom user instead.
+  </Accordion>
+
+  <Accordion title="Is my Client Secret safe?">
+    Cortana checks it with Zoom, then stores it for your business. It never shows it on screen again.
+  </Accordion>
+</AccordionGroup>
+
+---
+
+## Next Steps
+
+<CardGroup cols={2}>
+  <Card title="2) Create Your Webinar" icon="video" href="/webinars-create">
+    Make your first webinar or meeting, and pick the form people sign up with.
+  </Card>
+  <Card title="Cortana Webinars overview" icon="book-open" href="/webinars-overview">
+    The whole journey on one page.
+  </Card>
+</CardGroup>
+
+Stuck on a step? Click the support button at the bottom right of Cortana and we will help.

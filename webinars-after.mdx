@@ -1,0 +1,456 @@
+---
+title: "4) After Your Webinar"
+description: "See who joined your webinar, how long each person stayed, your show rate, where people left, and what Cortana records."
+---
+
+{/* last-verified: 2026-10-11 · route: /business/[businessId]/webinars/[webinarId]?tab=attendance and ?tab=insights */}
+
+## Overview
+
+When an event ends, Zoom sends Cortana its final report. Cortana then shows who joined, how long each person stayed, and how much they watched.
+
+You read it on the webinar's **Attendance** and **Insights** tabs. The card on the **Webinars** page shows the main counts too.
+
+At the bottom, this page lists everything Cortana records.
+
+<Note>
+  **Before you start.** People need to sign up through the webinar's own link. See [3) How People Sign Up](/webinars-registration).
+
+  To see people as they join, finish section 4 of [1) Connect Zoom](/webinars-connect-zoom). Without it, the numbers arrive after the event ends.
+</Note>
+
+---
+
+## 1. Open the Attendance tab
+
+<Steps>
+  <Step title="Open the webinar">
+    On the **Webinars** page, click the webinar's name.
+  </Step>
+  <Step title="Click Attendance">
+    Click the **Attendance** tab at the top.
+  </Step>
+  <Step title="Pick the event">
+    For a webinar that repeats, pick the event in the dropdown at the top right. A one-off webinar has no dropdown.
+  </Step>
+</Steps>
+
+The tab has three parts, top to bottom: **Who stayed**, **From registered to bought** and **Everyone in the room**. Sections 2 to 4 explain each one.
+
+<AccordionGroup>
+  <Accordion title="The event dropdown">
+    It shows when a webinar has two or more events that have started. It opens on the event running now. Otherwise it opens on the latest one that ran.
+
+    Each event shows its date and time, then a note:
+
+    - **(live now)**: the event is running.
+    - **(not started)**: its start time has passed, but the host has not started it in Zoom.
+    - **(ended, final numbers pending)**: it ended, and Zoom's final report is not in yet.
+    - **(2 attended)**: the final number of people who joined.
+    - **(no report from Zoom)**: Zoom never sent a usable report.
+    - **(reconnect Zoom)**: Zoom was disconnected, so the numbers could not be read.
+  </Accordion>
+
+  <Accordion title="This event and All events">
+    A webinar where people register once for every event shows two buttons: **This event** and **All events**. They show once two or more events have run.
+
+    **All events** lists every event of the series, oldest first, drawn to one scale. It says *Every event of this series, oldest first, drawn to one scale. Pick one to open it.*
+
+    Each event shows how many signed up and how many turned up, the most people at once (**peak**), and a small chart. **Still running** marks an event that is on now. Click an event to open it in **This event**.
+
+    {/* TODO: verify live: the All events view was not seen. No series in the test business had two events that ran. Read from the source code. */}
+  </Accordion>
+</AccordionGroup>
+
+---
+
+## 2. Read Who stayed
+
+The chart shows how many people were in the room at each minute. It counts from the real start: the moment the host started the event in Zoom. The host is never counted.
+
+<Steps>
+  <Step title="Read the line above the chart">
+    The coloured line says whether these are the final numbers. Green means final.
+  </Step>
+  <Step title="Read along the bottom">
+    The bottom shows minutes from the real start. The side shows how many people were in the room.
+  </Step>
+  <Step title="Point at the line">
+    Point at any spot on the line. A small box shows that minute and how many were in the room.
+  </Step>
+  <Step title="Find the Pitch line">
+    A dashed line marked **Pitch** shows your pitch minute. It only shows if you set one.
+  </Step>
+  <Step title="See the exact numbers">
+    Click **Show the numbers** for a table of every minute.
+  </Step>
+</Steps>
+
+<Frame caption="Who stayed. Point at the line to see how many were in the room at that minute.">
+  <img className="block dark:hidden" src="/images/webinars/after/18-who-stayed.png" alt="The Who stayed chart of a finished meeting. The green line reading Final numbers is marked 1. The minutes along the bottom, from 1 min to 33 min, are marked 2. A small box reading 18 min in, In the room 1, is marked 3. The dashed Pitch line at minute 10 is marked 4. The Show the numbers button is marked 5." />
+  <img className="hidden dark:block" src="/images/webinars/after/18-who-stayed-dark.png" alt="The Who stayed chart of a finished meeting. The green line reading Final numbers is marked 1. The minutes along the bottom, from 1 min to 33 min, are marked 2. A small box reading 18 min in, In the room 1, is marked 3. The dashed Pitch line at minute 10 is marked 4. The Show the numbers button is marked 5." />
+</Frame>
+
+**How to read the line.** When it goes up, people joined. When it goes down, people left. A flat stretch means nobody came or went.
+
+In the example above, 2 people were in the room from minute 1. One left right after the pitch, at minute 10. The last person left at minute 33.
+
+Past the first hour, the minutes read like `1h` and `1h 5m`.
+
+<Frame caption="Show the numbers: every minute, with the busiest moment and the pitch marked.">
+  <img className="block dark:hidden" src="/images/webinars/after/18c-who-stayed-numbers.png" alt="The minute-by-minute table under the chart, with the Hide the numbers button above it. Its columns are Minute and In the room. The row 1 min in, with 2 people, is labelled Busiest, marked 1." />
+  <img className="hidden dark:block" src="/images/webinars/after/18c-who-stayed-numbers-dark.png" alt="The minute-by-minute table under the chart, with the Hide the numbers button above it. Its columns are Minute and In the room. The row 1 min in, with 2 people, is labelled Busiest, marked 1." />
+</Frame>
+
+The table has two columns: **Minute** and **In the room**. A third column marks two rows:
+
+- **Busiest**: the minute with the most people in the room.
+- **Pitch**: your pitch minute.
+
+It lists every minute for the first hour. After that it lists every fifth minute, and always keeps the first, the busiest, the pitch and the last. Click **Hide the numbers** to close it.
+
+<AccordionGroup>
+  <Accordion title="What the line above the chart means">
+    - *Live: these numbers grow as people join and leave.* The event is on now.
+    - *The event is over. The final numbers arrive once Zoom releases its report, usually within minutes.* Wait for Zoom.
+    - *Final numbers. 2 in the room at the busiest moment.* Done. The number changes with your event.
+    - *Final numbers. Zoom never sent the end of this event, so its length comes from Zoom's own record of it.* Done, using Zoom's record.
+    - *Not started in Zoom yet.* The start time passed, but the host has not started it.
+    - *This event never took place in Zoom.* Nobody started it.
+    - *Zoom was disconnected when this event was reconciled. Reconnect it and the attendance will fill in.*
+    - *Cortana could not get the attendance report from Zoom for this event. What you see is only what Cortana saw live.*
+
+    While the numbers can still change, the line ends with the time it was last updated, such as *Updated 7:42 PM.*
+
+    Other lines say the report came in only partly. Treat those numbers as incomplete.
+  </Accordion>
+
+  <Accordion title="When there is no chart">
+    - *The curve is drawn once the event ends.* The event is still on.
+    - *The curve is drawn once the event has run.* It has not started yet.
+    - *The curve is drawn once Zoom's report is in.* Wait for Zoom's final report.
+    - *Zoom's report never arrived for this event, so there is no curve to draw.*
+    - *Nobody joined this event.*
+    - *No event has run yet. Attendance appears here as people join.* No event of this webinar has started.
+  </Accordion>
+</AccordionGroup>
+
+---
+
+## 3. Read From registered to bought
+
+This is your funnel. It follows people from signing up to buying, one row per step.
+
+<Steps>
+  <Step title="Read the note">
+    The note under the heading says how the bars are drawn.
+  </Step>
+  <Step title="Find your show rate">
+    Under **Turned up**, the small line reads *67% of registered*. That is your show rate.
+  </Step>
+  <Step title="Check who bought">
+    **Bought** counts buyers, *credited to their last webinar*.
+  </Step>
+</Steps>
+
+<Frame caption="From registered to bought. The line under Turned up is your show rate.">
+  <img className="block dark:hidden" src="/images/webinars/after/19-funnel.png" alt="The From registered to bought section. The note about how bars are drawn is marked 1. Bars for Registered 3, Turned up 2 with 67% of registered marked 2, Watched 25% 2 and 100%, Watched 50% 1 and 50%, Watched 75% 1 and 50%, Saw the pitch 2 and 100%, and Bought 0 and 0% credited to their last webinar marked 3." />
+  <img className="hidden dark:block" src="/images/webinars/after/19-funnel-dark.png" alt="The From registered to bought section. The note about how bars are drawn is marked 1. Bars for Registered 3, Turned up 2 with 67% of registered marked 2, Watched 25% 2 and 100%, Watched 50% 1 and 50%, Watched 75% 1 and 50%, Saw the pitch 2 and 100%, and Bought 0 and 0% credited to their last webinar marked 3." />
+</Frame>
+
+**How to read one row.** The big number on the right is how many people. The small percentage after it is a share of the people who turned up. The bar is drawn against everyone who signed up, so **Registered** is always the longest.
+
+The note says it word for word: *Bars are drawn against everyone who registered. Each percentage beside a bar is a share of the people who turned up.*
+
+Here is the example above, row by row:
+
+| Row | Shows | What it means |
+| --- | --- | --- |
+| **Registered** | 3 | 3 people signed up for this event. |
+| **Turned up** | 2, *67% of registered* | 2 of the 3 joined. Your show rate is 67%. |
+| **Watched 25%** | 2, 100% | Both people who joined watched at least a quarter. |
+| **Watched 50%** | 1, 50% | 1 of the 2 watched at least half. |
+| **Watched 75%** | 1, 50% | 1 of the 2 watched at least three quarters. |
+| **Saw the pitch** | 2, 100% | Both were still in the room at the pitch minute. |
+| **Bought** | 0, 0% | Nobody has bought yet. |
+
+"Watched" is measured against the event's real length, from when the host started it to when it ended.
+
+<AccordionGroup>
+  <Accordion title="Notes you may see under a row">
+    - **once the host starts**: under **Turned up**, before the event starts.
+    - **67% of registered so far**: under **Turned up**, while the event is on.
+    - **1 not registered for this event**: under **Turned up**. People in the room who did not sign up for this event.
+    - **final once reconciled**: under the **Watched** rows. The number becomes final when Zoom sends its final report.
+    - **no report from Zoom**: Zoom never sent a usable report.
+    - **reconnect Zoom to fill in**: Zoom was disconnected. Reconnect it and the number fills in.
+    - **ended before minute 45**: under **Saw the pitch**. The event ended before your pitch minute.
+
+    A dash instead of a number means it is not known yet. **Saw the pitch** is hidden when you set no pitch minute.
+  </Accordion>
+
+  <Accordion title="More people came than signed up">
+    Then the bars are drawn against everyone who turned up. The note changes to *Bars are drawn against everyone who turned up, since more people came than registered.*
+  </Accordion>
+
+  <Accordion title="How the show rate is worked out">
+    Show rate is people in the room who had signed up for that event, divided by people who signed up.
+
+    The host is never counted. People who joined without signing up are not counted either.
+
+    Someone who signs up after the event ended does not count for that event.
+  </Accordion>
+
+  <Accordion title="How Bought is counted">
+    **Bought** counts people from this event who bought. A purchase counts for the last webinar the buyer joined.
+
+    So an earlier event in a series can show fewer buyers than were in its room. The later event they joined gets the credit.
+  </Accordion>
+
+  <Accordion title="When the funnel is empty">
+    - *Nobody has registered for this event yet.* Before or during the event.
+    - *Nobody registered for this event.* After the event.
+  </Accordion>
+</AccordionGroup>
+
+---
+
+## 4. See everyone in the room
+
+<Steps>
+  <Step title="Read Time in room">
+    **Time in room** is how long each person stayed in total.
+  </Step>
+  <Step title="Read Watched">
+    **Watched** is how much of the event they saw, as a percentage.
+  </Step>
+  <Step title="Read Matched by">
+    **Matched by** says how Cortana knew who they were.
+  </Step>
+</Steps>
+
+<Frame caption="Everyone in the room, longest stay first.">
+  <img className="block dark:hidden" src="/images/webinars/after/20-everyone-in-room.png" alt="The Everyone in the room table with two example people. Its columns are Who, When they were there, Time in room marked 1, Watched marked 2, and Matched by marked 3. Each person has a Saw the pitch label, a bar showing when they were there, and Personal link under Matched by." />
+  <img className="hidden dark:block" src="/images/webinars/after/20-everyone-in-room-dark.png" alt="The Everyone in the room table with two example people. Its columns are Who, When they were there, Time in room marked 1, Watched marked 2, and Matched by marked 3. Each person has a Saw the pitch label, a bar showing when they were there, and Personal link under Matched by." />
+</Frame>
+
+The table says *The bar shows when each person was there. Longest stay first.* Click a name to open that person's contact.
+
+| Column | What it shows |
+| --- | --- |
+| **Who** | Their name and email. **Saw the pitch** shows if they were in the room then. |
+| **When they were there** | A bar across the whole event, filled where they were in the room. Under it, the times. |
+| **Time in room** | Their total time, such as **31m**, **45s** or **1h 5m**. |
+| **Watched** | How much of the event they saw. **live** while the event is on, and a dash until the final report is in. |
+| **Matched by** | **Personal link**, **Zoom login email** or **Not matched**. |
+
+**How to read the times under the bar.** *5:28 PM to 6:00 PM, joined 1 min in* means they first joined at 5:28 PM, left for good at 6:00 PM, and arrived 1 minute after the real start.
+
+Someone who left and came back has a bar in several pieces. The times then end with the number of visits, such as *3 visits*.
+
+<AccordionGroup>
+  <Accordion title="Personal link, Zoom login email, Not matched">
+    - **Personal link**: they joined with the join link they got when they signed up. This is the best match.
+    - **Zoom login email**: they joined some other way, but their Zoom login email matches a sign-up.
+    - **Not matched**: Cortana could not tell who they were.
+  </Accordion>
+
+  <Accordion title="The Guest and Not for this event labels">
+    **Guest** means they were in the room without signing up. Click it to read why: *They were in the room without a registration: the room link was shared, forwarded, or they joined on a Zoom login that is not on the list. Share only the form and keep the room link private.*
+
+    **Not for this event** means their sign-up was for another event. Click it to read: *They joined on a personal link, but its registration does not count for this event: it is for another event of the series, was moved or cancelled, or was completed after this event ended.*
+
+    **Unnamed guest** means Zoom gave no name for that person.
+  </Accordion>
+
+  <Accordion title="Large rooms">
+    The table shows 100 people at first. A button under it, such as **Show 100 more**, adds the next people.
+
+    Above 1,000 people, the table keeps the 1,000 longest stays. It says so above the table.
+  </Accordion>
+</AccordionGroup>
+
+---
+
+## 5. Check where people left
+
+<Steps>
+  <Step title="Click Insights">
+    On the webinar, click the **Insights** tab.
+  </Step>
+  <Step title="Read each drop">
+    Under **Where people left**, each card is one of the biggest drops, biggest first.
+  </Step>
+  <Step title="Skip the empty boxes">
+    **Top questions** and **Past analyses** stay empty today.
+  </Step>
+</Steps>
+
+<Frame caption="Insights. Each card is a moment when people left.">
+  <img className="block dark:hidden" src="/images/webinars/after/21-insights.png" alt="The Insights tab. Where people left is marked 1, and its first card reading 1 person left at minute 10, 50% of the room is marked 2. Each card has What was being said and Asked in this window boxes saying they have not been imported. Below are Top questions marked 3 and Past analyses marked 4." />
+  <img className="hidden dark:block" src="/images/webinars/after/21-insights-dark.png" alt="The Insights tab. Where people left is marked 1, and its first card reading 1 person left at minute 10, 50% of the room is marked 2. Each card has What was being said and Asked in this window boxes saying they have not been imported. Below are Top questions marked 3 and Past analyses marked 4." />
+</Frame>
+
+Each card reads like *1 person left at minute 10, 50% of the room*, then *2 in the room before, 1 after.*
+
+<Accordion title="Why the transcript and question boxes are empty">
+  Each card has two more boxes: **What was being said** and **Asked in this window**. **Top questions** sits below the cards.
+
+  Today they say *The transcript for this event has not been imported yet.* and *The questions for this event have not been imported yet.* Cortana does not bring in Zoom transcripts or questions, so these stay empty.
+
+  **Past analyses** says *No analysis has been run for this event yet.* It stays empty too.
+</Accordion>
+
+---
+
+## 6. Read the counts on the webinar card
+
+<Frame caption="The counts on a webinar's card on the Webinars page.">
+  <img className="block dark:hidden" src="/images/webinars/after/22-card-counts.png" alt="One webinar card showing its name, an on switch, Zoom meeting · Register once, every event, No upcoming event, then 4 registered, 2 attendances, 1 watched 50% and 7 views, and the webinar's own link." />
+  <img className="hidden dark:block" src="/images/webinars/after/22-card-counts-dark.png" alt="One webinar card showing its name, an on switch, Zoom meeting · Register once, every event, No upcoming event, then 4 registered, 2 attendances, 1 watched 50% and 7 views, and the webinar's own link." />
+</Frame>
+
+| Count | What it means |
+| --- | --- |
+| **4 registered** | People signed up, across all events. Click it to open the **Registrants** tab. |
+| **2 attended** | People who joined. Shown for a webinar where people sign up for each event. |
+| **2 attendances** | Visits across the series. Shown when people register once for every event. One person who joined three events counts three. |
+| **1 watched 50%** | People who watched at least half. It shows once an event has its final report. |
+| **7 views** | How many times the sign-up page was seen. Click it for details. |
+
+---
+
+## What Cortana records
+
+This is everything Cortana keeps about a webinar, in plain words.
+
+**For each person who signed up:**
+
+- Their name and email.
+- Which event they signed up for, and when.
+- Where they came from, such as an ad.
+- Their personal Zoom join link. Cortana stores it locked away.
+- Whether Zoom signed them up, and why not if it failed.
+- Which emails went to them, and whether emails can still reach them.
+- Their calendar invite, and their answer to it.
+- How many events they missed.
+
+**For each person who joined:**
+
+- Every time they joined and left.
+- Their total time in the room.
+- How much of the event they watched.
+- Whether they were in the room at your pitch minute.
+- How Cortana matched them: personal link, Zoom login email, or not at all.
+
+People who joined without signing up are kept too. They show as guests.
+
+**For each event:**
+
+- When it was planned, and when it really started and ended.
+- How many people were in the room, and the most at one time.
+- How many of them had signed up, which gives the show rate.
+- Who stayed, minute by minute.
+
+**On each contact:**
+
+Cortana fills two contact fields when someone signs up: **Webinar Join Link** and **Webinar Name**. You find them under **Contacts**, on the **Contact Custom Fields** tab. They hold the person's latest webinar only.
+
+Cortana also sends these two fields to a connected GoHighLevel, HubSpot or Close account.
+
+{/* TODO: verify: that the two fields arrive in a connected GoHighLevel, HubSpot and Close account. The source code sends them; it was not seen live. */}
+
+---
+
+## Settings Reference
+
+| Setting | What it does | Default | We recommend | Watch out for |
+| --- | --- | --- | --- | --- |
+| Event dropdown | Picks which event to show. | The event running now, else the latest one | Pick the one you want to study. | Only shows when there are two or more events. |
+| **This event** / **All events** | One event, or the whole series. | **This event** | **All events** to compare a series. | Only for webinars where people register once. |
+| **Show the numbers** / **Hide the numbers** | Opens the minute-by-minute table. | Closed | Use it to find exact moments. | None. |
+| **Guest** / **Not for this event** | Opens a short explanation. | Not applicable | Read it once. | None. |
+| **Show 100 more** | Shows more people in the room. | 100 shown | Use it for big rooms. | None. |
+| A person's name | Opens their contact. | Not applicable | Check their journey. | Only when they have a contact. |
+| **registered** / **attended** / **views** (card) | Opens the matching tab or details. | Not applicable | A quick way in. | None. |
+
+---
+
+## Troubleshooting
+
+<AccordionGroup>
+  <Accordion title="The event ended but there are no numbers yet">
+    The line reads *The event is over. The final numbers arrive once Zoom releases its report, usually within minutes.* Wait, then refresh the page.
+  </Accordion>
+
+  <Accordion title="It says Zoom was disconnected">
+    The line reads *Zoom was disconnected when this event was reconciled. Reconnect it and the attendance will fill in.* Reconnect Zoom, as [1) Connect Zoom](/webinars-connect-zoom) shows.
+  </Accordion>
+
+  <Accordion title="It says Zoom never produced a usable report">
+    Zoom did not send a full report for this event. What you see is what Cortana saw live. The line may say *Zoom never produced a usable attendance report for this event, so these numbers are what Cortana saw live.*
+  </Accordion>
+
+  <Accordion title="People only appear after the event ends">
+    Zoom is not sending live updates. Finish section 4 of [1) Connect Zoom](/webinars-connect-zoom).
+  </Accordion>
+
+  <Accordion title="Watched shows a dash">
+    **Watched** needs the event's full length. It fills in once Zoom sends its final report.
+  </Accordion>
+
+  <Accordion title="Lots of people show as Guest">
+    The Zoom room link was shared. Share only the webinar's own sign-up link, and keep the room link private.
+  </Accordion>
+</AccordionGroup>
+
+---
+
+## FAQ
+
+<AccordionGroup>
+  <Accordion title="Why is show rate different from what Zoom says?">
+    Cortana only counts people who signed up for that event. It never counts the host, or guests who did not sign up. Zoom counts everyone who was in the room.
+  </Accordion>
+
+  <Accordion title="Someone joined from a different email. Did it count?">
+    If they used their personal join link, yes. **Matched by** reads **Personal link**, whatever email they joined with. If not, Cortana tries their Zoom login email. If that does not match a sign-up either, they show as a **Guest**.
+  </Accordion>
+
+  <Accordion title="Why does my card say 4 registered when the funnel says 3?">
+    They count different things. The card counts every sign-up for the webinar, across all events, at any time. The funnel counts people who signed up for this event before it ended.
+
+    So someone who signs up after the event shows on the card, but not in that event's funnel.
+  </Accordion>
+
+  <Accordion title="Why does my card say attendances, not attended?">
+    For a webinar where people register once for every event, Cortana counts visits. One person at three events is three attendances.
+  </Accordion>
+
+  <Accordion title="Can I see the Zoom chat, questions or recording in Cortana?">
+    No. Cortana does not bring in Zoom chat, questions, transcripts or recordings. The boxes for them on the **Insights** tab stay empty.
+  </Accordion>
+
+  <Accordion title="Where do I see someone's join link on their contact?">
+    In the **Webinar Join Link** contact field. It holds the link for their latest webinar.
+  </Accordion>
+
+  <Accordion title="How is a buyer credited to a webinar?">
+    A purchase counts for the last webinar the buyer joined. So an earlier event in a series can show fewer buyers than were in its room.
+  </Accordion>
+</AccordionGroup>
+
+---
+
+## Next Steps
+
+<CardGroup cols={2}>
+  <Card title="5) Count Webinars As Conversions" icon="bullseye" href="/webinars-conversions">
+    Count sign-ups, visits and watch time, and send them to your ad platforms.
+  </Card>
+  <Card title="6) Manage Your Webinars" icon="sliders" href="/webinars-manage">
+    Turn a webinar off, archive it, and handle repeating webinars.
+  </Card>
+</CardGroup>
+
+Stuck on a step? Click the support button at the bottom right of Cortana and we will help.

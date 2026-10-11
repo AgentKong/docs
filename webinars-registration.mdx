@@ -1,0 +1,436 @@
+---
+title: "3) How People Sign Up"
+description: "Share your webinar's own link or website code so people sign up, get their personal Zoom join link, and show on the Registrants tab."
+---
+
+{/* last-verified: 2026-10-11 · route: /business/[businessId]/webinars/[webinarId]?tab=registrants and ?tab=emails */}
+
+## Overview
+
+People sign up for a webinar by filling in a form. Each webinar has its own link to that form. Only that link, or its website code, signs people up.
+
+When someone signs up, Zoom gives them a personal join link. Cortana then shows them on the **Registrants** tab.
+
+This page shows you where to get the link, what people get, and where to check who signed up.
+
+<Note>
+  **Before you start.** Make the webinar first: see [2) Create Your Webinar](/webinars-create).
+
+  The form must be on. A form that is off has no address to share. See [Share your form](/forms-share).
+</Note>
+
+<Warning>
+  **Share the webinar's own link. Never the form's plain link.**
+
+  The app says it word for word: *You must use this link, or this embed, for Cortana to know who signed up, who joined, who watched, and for how long. The form's plain link, or the form on your site without this embed, signs nobody up for this webinar.*
+</Warning>
+
+---
+
+## 1. Copy your webinar's own link
+
+<Steps>
+  <Step title="Open the webinar">
+    On the **Webinars** page, click the webinar's name.
+  </Step>
+  <Step title="Stay on the Registrants tab">
+    The webinar opens on the **Registrants** tab. The **Opt-in form** box is at the top.
+  </Step>
+  <Step title="Read the red note">
+    The red note says only this link, or this embed, signs people up.
+  </Step>
+  <Step title="Copy the link">
+    Click **Copy** next to the link. It reads **Copied** for a moment.
+  </Step>
+  <Step title="Or copy the code for your website">
+    Under **Embed on your site**, click the code box. It copies all of the code.
+  </Step>
+</Steps>
+
+<Frame caption="The Opt-in form box on the Registrants tab. This link and this code are the only ones that sign people up.">
+  <img className="block dark:hidden" src="/images/webinars/registration/13-optin-block.png" alt="The top of a webinar's Registrants tab. The Opt-in form box shows a red note marked 3, the webinar's own link with a Copy button marked 4 and an Open button, and the Embed on your site code box marked 5. Share and View form buttons sit at the top right." />
+  <img className="hidden dark:block" src="/images/webinars/registration/13-optin-block-dark.png" alt="The top of a webinar's Registrants tab. The Opt-in form box shows a red note marked 3, the webinar's own link with a Copy button marked 4 and an Open button, and the Embed on your site code box marked 5. Share and View form buttons sit at the top right." />
+</Frame>
+
+Paste the code into a custom HTML block on your website. The helper says *Paste it into a custom HTML block. The height follows the form.*
+
+**Open** opens the sign-up page in a new tab. **View form** at the top right does the same.
+
+<AccordionGroup>
+  <Accordion title="Why the plain form link signs nobody up">
+    One form can serve many webinars, and your website too. So Cortana needs to know which webinar a person meant.
+
+    The webinar's own link is the form's link plus a short marker for that webinar. Only a sign-up that came through it signs the person up for that webinar.
+
+    It looks like this, with your own business id, form and webinar names:
+
+    ```text
+    https://app.usecortana.ai/f/6f1c2d3e-4b5a-4c7d-8e9f-0a1b2c3d4e5f/webinar-signup?ak_w=spring-launch
+    ```
+
+    **How to tell the two apart:** the webinar's own link ends with `?ak_w=` and the webinar's name. A link without that ending is the plain form link.
+
+    A sign-up through the plain link is still saved as a normal form answer. It does not sign anyone up, and the **Registrants** tab shows nothing for it.
+  </Accordion>
+
+  <Accordion title="Which forms can sign people up">
+    You pick them on the **Gate** step, or later on the **Settings** tab under **Registration**.
+
+    - A Cortana form. Cortana gives you the link and the code for it.
+    - A Cortana calendar. A sent form or a booking counts.
+    - GoHighLevel forms and surveys.
+    - Typeform, Tally, HubSpot and ClickFunnels forms.
+
+    Tags, stages, appointments and custom webhooks do not count.
+
+    For forms in other tools, Cortana gives you no link. The box says *This webinar registers people through your connected forms, not a Cortana form. Tracking only works for people who register through those forms, so share them, never the Zoom join link.*
+
+    So share that form the usual way, from its own tool. Each time it is sent, the person is signed up. Forms sent before you made the webinar do not count.
+  </Accordion>
+
+  <Accordion title="The note changes when the webinar is not signing people up">
+    The red note is replaced by one of these:
+
+    - *This webinar is off, so nobody is signed up until you turn it on from the Webinars list.*
+    - *This webinar is archived, so nobody is signed up. Restore it in Settings to take registrations again.*
+    - *The Zoom meeting was deleted, so registrations are stopped and nobody is signed up.*
+  </Accordion>
+</AccordionGroup>
+
+---
+
+## 2. Use the share box for a QR code or another layout
+
+<Steps>
+  <Step title="Open the share box">
+    Click **Share** at the top right of the webinar. **More share options** in the **Opt-in form** box opens it too.
+  </Step>
+  <Step title="Copy the link">
+    Under **Form link**, click the copy icon. The hint says *Signs people up for this webinar. The plain form link signs nobody up.*
+  </Step>
+  <Step title="Get the QR code">
+    Under **QR code**, click the download icon to save it as a picture.
+  </Step>
+  <Step title="Pick how the form sits on your site">
+    Under **Embed on your site**, pick **Inline**, **Fixed card**, **Popup button** or **Full page**. Then click the code box to copy it.
+  </Step>
+</Steps>
+
+<Frame caption="The share box for a webinar: the link, a QR code and website code, all carrying the webinar's marker.">
+  <img className="block dark:hidden" src="/images/webinars/registration/14-share-dialog.png" alt="A box titled Share with the form's name. It shows a Domain picker, the Form link marked 2 with the hint Signs people up for this webinar, a QR code marked 3, and the Embed on your site section marked 4 with four layout choices." />
+  <img className="hidden dark:block" src="/images/webinars/registration/14-share-dialog-dark.png" alt="A box titled Share with the form's name. It shows a Domain picker, the Form link marked 2 with the hint Signs people up for this webinar, a QR code marked 3, and the Embed on your site section marked 4 with four layout choices." />
+</Frame>
+
+The share box for a webinar has no short link and no single-use link. Those cannot carry the webinar's marker, so they would sign nobody up.
+
+<AccordionGroup>
+  <Accordion title="Two links, one webinar">
+    The **Opt-in form** box shows the long address with your business id in it. The share box may show a shorter one, with your handle or your own domain.
+
+    Both carry the same webinar marker, and both sign people up. Use whichever looks best to you.
+
+    When you have your own domain, pick it under **Domain** at the top of the share box.
+  </Accordion>
+
+  <Accordion title="The four website layouts">
+    - **Inline**: *Sits in the page and grows with the form. No inner scrollbar.*
+    - **Fixed card**: *A centred box at exactly the size you set. The form scrolls inside it.*
+    - **Popup button**: *A button on your page. The form opens over it, and stays open on the thank-you screen.*
+    - **Full page**: *Fills the screen height. Good for a dedicated form page.*
+
+    Some layouts let you set **Width (px)** and **Height (px)**. **Popup button** also asks for a **Button label**.
+  </Accordion>
+</AccordionGroup>
+
+---
+
+## 3. Test your sign-up page
+
+Always sign up once yourself, before you share the link.
+
+<Steps>
+  <Step title="Open the link privately">
+    Paste the webinar's own link into a private browser window.
+  </Step>
+  <Step title="Fill in the form">
+    Answer the questions with your own name and email.
+  </Step>
+  <Step title="Send it">
+    Press the round button at the bottom to send the form.
+  </Step>
+  <Step title="Watch the page">
+    The page says **Saving your spot** while Zoom signs you up. Then it shows the webinar and your join link.
+  </Step>
+  <Step title="Check the Registrants tab">
+    Back in Cortana, refresh the **Registrants** tab. Your row should read **Registered**.
+  </Step>
+</Steps>
+
+<Frame caption="The sign-up page, opened through the webinar's own link.">
+  <img className="block dark:hidden" src="/images/webinars/registration/17a-signup-form.png" alt="A public sign-up form with First name, Last name, Email and Phone number filled in with example details, a progress line, and a round button to send it." />
+  <img className="hidden dark:block" src="/images/webinars/registration/17a-signup-form-dark.png" alt="A public sign-up form with First name, Last name, Email and Phone number filled in with example details, a progress line, and a round button to send it." />
+</Frame>
+
+When Zoom answers, the page reads **You're registered**, with a button **Open your join link**. While the event is on, the button reads **Join now**.
+
+<Frame caption="Here Zoom had not answered within a minute, so the page says You're on the list. The join link still comes by email.">
+  <img className="block dark:hidden" src="/images/webinars/registration/17-thank-you.png" alt="The page after sending the form. It reads Thank you, then You're on the list, the webinar's name, its day, time and length, the line Your personal join link is on its way to your inbox, and a recap of the answers." />
+  <img className="hidden dark:block" src="/images/webinars/registration/17-thank-you-dark.png" alt="The page after sending the form. It reads Thank you, then You're on the list, the webinar's name, its day, time and length, the line Your personal join link is on its way to your inbox, and a recap of the answers." />
+</Frame>
+
+<AccordionGroup>
+  <Accordion title="Every message the page can show after sending">
+    - **Saving your spot**, with *Getting your personal join link*: Zoom is still signing them up.
+    - **You're registered**, with **Open your join link** or **Join now**: done.
+    - *This link is yours alone. It is on its way to your inbox too.*: they also get it by email.
+    - *This link is yours alone, so keep it somewhere safe.*: no email is set to send it.
+    - **You're on the list**: Zoom took longer than a minute. The link comes by email.
+    - **Already registered**: *This email is already registered. Your join link is in the confirmation you got the first time.*
+    - **Not confirmed yet**: *We could not confirm your spot yet. The host has your details and will follow up.*
+
+    The join link only shows to the person who signed up, in that same browser.
+  </Accordion>
+
+  <Accordion title="What a person gets after signing up">
+    - **A personal Zoom join link.** It is theirs alone, so Cortana knows who they are when they join.
+    - **Zoom's confirmation email.** On unless you turn it off on the **Emails** tab.
+    - **Cortana's reminders.** A day before, an hour before and at the start. These go only once your business has a verified sending domain.
+    - **A calendar invite** from the host's own calendar. Only when the host has a connected calendar.
+  </Accordion>
+</AccordionGroup>
+
+---
+
+## 4. See who signed up
+
+<Steps>
+  <Step title="Open the Registrants tab">
+    On the webinar, click **Registrants**. Scroll past the **Opt-in form** box.
+  </Step>
+  <Step title="Read each row">
+    Each row is one person who signed up. **Status** tells you if Zoom signed them up.
+  </Step>
+  <Step title="Retry a failed row">
+    On a row that did not finish, click the round-arrow button at the end of the row.
+  </Step>
+</Steps>
+
+<Frame caption="The Registrants table. Each row is one person who signed up.">
+  <img className="block dark:hidden" src="/images/webinars/registration/15-registrants-table.png" alt="The Registrants table with four example people. The columns are Who, Event, Status marked 2, Time in room, Came from, Link, Invite and Registered. Each Status reads Registered." />
+  <img className="hidden dark:block" src="/images/webinars/registration/15-registrants-table-dark.png" alt="The Registrants table with four example people. The columns are Who, Event, Status marked 2, Time in room, Came from, Link, Invite and Registered. Each Status reads Registered." />
+</Frame>
+
+The table says *Each one holds their own Zoom link. Failures say why and can be retried.* With nobody yet, it says *Nobody has registered yet. Share the form, never the room link.*
+
+| Column | What it shows |
+| --- | --- |
+| **Who** | Their name and email. Click the name to open their contact. |
+| **Event** | The event they signed up for. **Every event** for a sign-up that covers the whole series. |
+| **Status** | Whether Zoom signed them up. See the list below. |
+| **Time in room** | Their longest stay and how much they watched. **No show** if they never joined. **Saw the pitch** if they were in the room then. |
+| **Came from** | Where they came from, such as an ad or **Direct/Organic**. |
+| **Link** | **Personal link ready** once they have a join link. It never shows the link itself. |
+| **Invite** | What happened to their calendar invite. |
+| **Registered** | When they signed up, and how: **via form**, **via a person** or **via a re-invite**. |
+
+Under **Time in room** you may see a line like **3 conversions fired**. Click it to see what was counted for that person.
+
+50 rows show per page. Use **Newer** and **Older** to move between pages.
+
+<AccordionGroup>
+  <Accordion title="What each status means">
+    - **Registered**: Zoom signed them up. They have their join link.
+    - **Registering**: Zoom is still working on it.
+    - **Waiting for Zoom to be reconnected**: your Zoom connection broke. Reconnect it, and they are signed up then.
+    - **Turn automatic approval back on in Zoom, then Retry**: someone turned on manual approval in Zoom.
+    - **Failed: no upcoming event**: there was no event left to sign up for.
+    - **Moved to another event**: this sign-up was moved to a different event.
+    - **Stuck, Retry**: it stopped part way. Click retry.
+    - **Failed:** followed by a code: Zoom refused it. Click retry, or click the support button.
+  </Accordion>
+
+  <Accordion title="What the Invite column means">
+    - **Invite sent**: the host's calendar sent the invite.
+    - **Accepted**, **Declined**, **Maybe**: their answer to the invite.
+    - **No invite: host has no calendar**: the host has not connected a calendar.
+    - **No invite: no host**: nobody is set as host on the **Settings** tab.
+    - **No invite**: no invite has gone out yet.
+  </Accordion>
+
+  <Accordion title="Re-invite people from an earlier webinar">
+    This button only shows for a webinar where people sign up for each event.
+
+    Click **Re-invite**, then pick a webinar under **Pick a previous webinar**. The box says *Everyone who registered for the webinar you pick is registered for this one and gets a new personal link.* Click **Re-invite** with the number of people on it.
+  </Accordion>
+</AccordionGroup>
+
+---
+
+## 5. Choose who sends the emails
+
+<Steps>
+  <Step title="Open the Emails tab">
+    On the webinar, click **Emails**.
+  </Step>
+  <Step title="Check your sending domain">
+    An orange note means Cortana cannot send its own emails yet. Click **Set up a sending domain**. **Settings**, **Sending Emails** opens in a new tab.
+  </Step>
+  <Step title="Pick who sends what">
+    Under **Who sends what?**, turn each switch on or off.
+  </Step>
+  <Step title="Set the reply-to address">
+    Type an address in **Reply-to**. Leave it empty to use your sending address.
+  </Step>
+  <Step title="Change the reminders">
+    Under **Reminders**, change when each one is sent and what it says.
+  </Step>
+  <Step title="Save">
+    Click **Save changes**. Only future emails change.
+  </Step>
+</Steps>
+
+<Frame caption="The Emails tab: who sends each email, the reminders, and a log of every email.">
+  <img className="block dark:hidden" src="/images/webinars/registration/16-emails-tab.png" alt="The Emails tab. The Sending section shows an orange note about a sending domain with a Set up a sending domain link marked 2, the Who sends what switches marked 3, and Reply-to marked 4. The Reminders section lists three reminders marked 5, with an Add a reminder button. The Save changes button is marked 6. The Send log section lists planned emails." />
+  <img className="hidden dark:block" src="/images/webinars/registration/16-emails-tab-dark.png" alt="The Emails tab. The Sending section shows an orange note about a sending domain with a Set up a sending domain link marked 2, the Who sends what switches marked 3, and Reply-to marked 4. The Reminders section lists three reminders marked 5, with an Add a reminder button. The Save changes button is marked 6. The Send log section lists planned emails." />
+</Frame>
+
+Without a verified domain the note says *Verify a sending domain to send reminders from your own address. Until then Zoom sends the confirmation and Cortana emails are skipped.* [Sending Email](/cal-sending-email) shows how to add and verify your domain.
+
+| Switch | What it does | Starts |
+| --- | --- | --- |
+| **Zoom sends the confirmation email** | Zoom emails each person their join link when they sign up. | On |
+| **Zoom sends its own reminders** | Zoom sends its own reminder emails. | Off |
+| **Cortana sends the reminders** | Cortana sends the reminders listed below. Greyed out until your domain is verified. | On |
+| **Calendar invite from the host's calendar** | The host's calendar invites each person. It reads *(pick a host first)* with no host. | On |
+
+<AccordionGroup>
+  <Accordion title="Change a reminder">
+    Each reminder has an on and off switch, a time and its own subject and body.
+
+    Set the time with a number, a unit (minutes, hours or days), **before** or **after**, and **the start** or **the end**. A reminder can be at most 30 days away.
+
+    The body can use these fields: `{{first_name}}`, `{{webinar_name}}`, `{{session_time}}`, `{{join_link}}` and `{{host_name}}`. `{{session_time}}` is the event's start time.
+
+    Use the arrows to reorder, and the bin to remove one. **Add a reminder** adds a new one, an hour before the start.
+  </Accordion>
+
+  <Accordion title="Read the Send log">
+    The **Send log** lists *Every email planned for this webinar, who it is for and what happened to it.*
+
+    Its columns are **To**, **Email**, **When** and **Status**. The status reads **Scheduled**, **Sending**, **Sent**, **Skipped** or **Failed**, with a reason after it.
+
+    **Skipped: no verified sending domain** means your domain is not set up yet. **Resend** shows on a skipped or failed email.
+  </Accordion>
+
+  <Accordion title="A warning that nobody gets the join link">
+    If you turn off both confirmations, the tab warns you. With nothing else on, it says *Nobody sends registrants their join link with these settings. Turn on a confirmation, Zoom's reminders or the calendar invite.*
+  </Accordion>
+</AccordionGroup>
+
+---
+
+## Settings Reference
+
+| Setting | What it does | Default | We recommend | Watch out for |
+| --- | --- | --- | --- | --- |
+| **Copy** (Opt-in form) | Copies the webinar's own link. | Not applicable | Share this link only. | The form's plain link signs nobody up. |
+| **Open** / **View form** | Opens the sign-up page in a new tab. | Not applicable | Test it once yourself. | Greyed out while the form is off. |
+| **Embed on your site** (code box) | Click to copy the website code. | Not applicable | Paste it exactly as copied. | A plain form embed signs nobody up. |
+| **Share** / **More share options** | Opens the share box. | Not applicable | Use it for a QR code or a layout. | **Share** is greyed out while the form is off. |
+| **Domain** | Picks which address the share box uses. | Not applicable | Your own domain, if you have one. | Only shows when you have more than one address. |
+| **Form link** copy icon | Copies the link in the share box. | Not applicable | Either link works. | It may look different from the **Opt-in form** link. |
+| **QR code** download | Saves the QR code as a picture. | Not applicable | Use it on printed things. | None. |
+| **Inline** / **Fixed card** / **Popup button** / **Full page** | How the form sits on your website. | **Inline** | **Inline** for most pages. | Copy the code again after you change it. |
+| **Width (px)** / **Height (px)** / **Button label** | Size and button text for some layouts. | Full width, grows with the form | Leave them alone unless you need a set size. | Sizes snap into an allowed range. |
+| Retry (row button) | Tries a failed sign-up again. | Shown on rows not **Registered** | Fix the cause first. | None. |
+| **Re-invite** | Signs up everyone from an earlier webinar. | Hidden for **Register once** webinars | Use it for a follow-up event. | They each get a new personal link. |
+| **Zoom sends the confirmation email** | Zoom emails the join link on sign-up. | On | Keep it on. | With it off, make sure something else sends the link. |
+| **Zoom sends its own reminders** | Zoom sends reminder emails. | Off | Off when Cortana sends reminders. | People may get two sets. |
+| **Cortana sends the reminders** | Cortana sends your reminders. | On, greyed out until your domain is verified | Verify your domain. | Without a domain, every reminder is skipped. |
+| **Calendar invite from the host's calendar** | The host's calendar invites each person. | On | Keep it on. | Needs a host with a connected calendar. |
+| **Reply-to** | Where replies to Cortana's emails go. | Empty, which means your sending address | A real inbox. | None. |
+| Reminder switch, time and copy | When each reminder goes, and what it says. | A day, an hour, and at the start | Keep all three. | At most 30 days away. |
+| **Add a reminder** | Adds another reminder. | An hour before the start | Add one for a long lead time. | Every reminder needs a subject and a body. |
+| **Save changes** | Saves the email settings. | Not applicable | Save before you leave the tab. | Only future emails change. |
+| **Resend** (Send log) | Sends a skipped or failed email again. | Shown on skipped or failed rows | Fix the reason first. | None. |
+
+---
+
+## Troubleshooting
+
+<AccordionGroup>
+  <Accordion title="People filled in my form but nobody shows as registered">
+    They most likely used the form's plain link, or the form's own website code. That saves their answers but signs nobody up.
+
+    Share the webinar's own link from the **Opt-in form** box instead. People who used the plain link need to sign up again through it.
+  </Accordion>
+
+  <Accordion title="Share and View form are greyed out">
+    The form is off, so it has no address yet. The **Opt-in form** box says the form *is not on yet, so it has no public address. Turn it on in the form builder, then come back for the link.* Click **Open the builder** and turn it on.
+  </Accordion>
+
+  <Accordion title="A row says Waiting for Zoom to be reconnected">
+    Your Zoom connection broke. Reconnect it, as [1) Connect Zoom](/webinars-connect-zoom) shows. Waiting sign-ups go through after that.
+  </Accordion>
+
+  <Accordion title="A row says Turn automatic approval back on in Zoom, then Retry">
+    Someone set the Zoom meeting or webinar to approve people by hand. Turn automatic approval back on in Zoom. Then click retry on the row.
+  </Accordion>
+
+  <Accordion title="A row says Failed: followed by a code">
+    Zoom refused the sign-up. Click retry on the row. If it fails again, click the support button and send us the row.
+  </Accordion>
+
+  <Accordion title="The Send log says Skipped: no verified sending domain">
+    Cortana only sends its own emails from your verified domain. Click **Set up a sending domain** on the **Emails** tab. Zoom still sends its confirmation in the meantime.
+  </Accordion>
+
+  <Accordion title="Nobody gets a calendar invite">
+    Check the **Invite** column. **No invite: host has no calendar** means the host must connect a calendar. **No invite: no host** means you need to pick a host on the **Settings** tab.
+  </Accordion>
+</AccordionGroup>
+
+---
+
+## FAQ
+
+<AccordionGroup>
+  <Accordion title="Why does it say nobody registered when people filled my form?">
+    Because they used the form's plain link. *The form's plain link, or the form on your site without this embed, signs nobody up for this webinar.* Share the webinar's own link from the **Opt-in form** box.
+  </Accordion>
+
+  <Accordion title="Can I use the same form on my website and for my webinar?">
+    Yes. One form can serve your website and several webinars. Only each webinar's own link, or its code, signs people up for that webinar.
+  </Accordion>
+
+  <Accordion title="Does Cortana send the reminder emails, or Zoom?">
+    Both can. By default Zoom sends the confirmation, and Cortana sends three reminders. Cortana's reminders only go once your business has a verified sending domain. You choose on the **Emails** tab.
+  </Accordion>
+
+  <Accordion title="Can I copy someone's join link from the Registrants tab?">
+    No. The **Link** column only says **Personal link ready**. Each person gets their own link by email, on the thank-you page and in their calendar invite.
+  </Accordion>
+
+  <Accordion title="Can I use a short link or a single-use link?">
+    No. They cannot carry the webinar's marker, so they would sign nobody up. The share box for a webinar does not offer them.
+  </Accordion>
+
+  <Accordion title="Can I share the Zoom join link instead?">
+    No. Share the form, never the room link. Only the form tells Cortana who each person is.
+  </Accordion>
+</AccordionGroup>
+
+---
+
+## Next Steps
+
+<CardGroup cols={2}>
+  <Card title="4) After Your Webinar" icon="chart-line" href="/webinars-after">
+    See who joined, how long they stayed, and what Cortana records.
+  </Card>
+  <Card title="5) Count Webinars As Conversions" icon="bullseye" href="/webinars-conversions">
+    Count sign-ups and visits, and send them to your ad platforms.
+  </Card>
+</CardGroup>
+
+Stuck on a step? Click the support button at the bottom right of Cortana and we will help.

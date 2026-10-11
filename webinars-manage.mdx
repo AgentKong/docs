@@ -1,0 +1,345 @@
+---
+title: "6) Manage Your Webinars"
+description: "Turn a webinar off or on, change its settings, run a repeating webinar, duplicate or archive one, and fix Changed in Zoom or Deleted in Zoom."
+---
+
+{/* last-verified: 2026-10-11 · route: /business/[businessId]/webinars and /business/[businessId]/webinars/[webinarId]?tab=settings */}
+
+## Overview
+
+Once a webinar is made, you look after it from two places. The card on the **Webinars** page has the switch and a three-dot menu. The webinar's **Settings** tab has everything else.
+
+This page covers turning a webinar off, changing its settings, repeating webinars, copying and archiving. It ends with what each warning on the webinar page means.
+
+<Note>
+  **Before you start.** You need a webinar: see [2) Create Your Webinar](/webinars-create).
+</Note>
+
+<Warning>
+  **You cannot change the day, the time or the repeat rule in Cortana.**
+
+  Change them in Zoom. Cortana follows Zoom.
+</Warning>
+
+---
+
+## 1. Turn a webinar off or on
+
+On means the webinar takes sign-ups. Off means nobody new can sign up.
+
+<Steps>
+  <Step title="Find the webinar's card">
+    Open the **Webinars** page and find the webinar.
+  </Step>
+  <Step title="Click its switch">
+    Click the switch at the top right of the card.
+  </Step>
+  <Step title="Read the box">
+    If people signed up, a box asks first. It is titled with the webinar's name.
+  </Step>
+  <Step title="Choose">
+    Click **Turn off** to turn it off. Click **Keep it on** to leave it.
+  </Step>
+</Steps>
+
+<Frame caption="Turning off a webinar that has sign-ups. Cortana asks first.">
+  <img className="block dark:hidden" src="/images/webinars/manage/26-turn-off-dialog.png" alt="A box titled Turn off Spring launch: how we doubled bookings?, marked 3, explaining what happens while it is off, with the buttons Keep it on and Turn off, Turn off marked 4." />
+  <img className="hidden dark:block" src="/images/webinars/manage/26-turn-off-dialog-dark.png" alt="A box titled Turn off Spring launch: how we doubled bookings?, marked 3, explaining what happens while it is off, with the buttons Keep it on and Turn off, Turn off marked 4." />
+</Frame>
+
+The box says, for example: *4 people are registered. While it is off nobody new can register, and reminders that come due are not sent, even after you turn it back on. Their registrations and the Zoom webinar or meeting stay as they are.*
+
+<Warning>
+  **A webinar with no sign-ups turns off at once.** No box asks first.
+</Warning>
+
+While a webinar is off, its card looks faded. The webinar page shows **Off, not taking registrations**. Click the switch again to turn it back on.
+
+---
+
+## 2. Change a webinar's settings
+
+<Steps>
+  <Step title="Open the Settings tab">
+    Click **Edit** on the webinar's card. Or open the webinar and click **Settings**.
+  </Step>
+  <Step title="Change the name or the host">
+    Under **Basic details**, edit **What is the webinar called?** or **Who hosts?**
+  </Step>
+  <Step title="Change the form">
+    Under **Registration**, change **What form feeds into this?**
+  </Step>
+  <Step title="Change the pitch minute">
+    Under **Pitch**, change **When does the pitch start?**
+  </Step>
+  <Step title="Set the emails and series rules">
+    Under **Emails and series**, turn the switches on or off.
+  </Step>
+  <Step title="Save">
+    Scroll down and click **Save changes**.
+  </Step>
+</Steps>
+
+<Frame caption="The top of the Settings tab: name and host, the form, the pitch minute, and the email and series switches.">
+  <img className="block dark:hidden" src="/images/webinars/manage/29-settings-tab.png" alt="The Settings tab of a webinar, showing Basic details with What is the webinar called marked 2 and Who hosts, Registration with What form feeds into this marked 3 and a list of forms, Pitch with When does the pitch start marked 4, and Emails and series marked 5 with three email switches." />
+  <img className="hidden dark:block" src="/images/webinars/manage/29-settings-tab-dark.png" alt="The Settings tab of a webinar, showing Basic details with What is the webinar called marked 2 and Who hosts, Registration with What form feeds into this marked 3 and a list of forms, Pitch with When does the pitch start marked 4, and Emails and series marked 5 with three email switches." />
+</Frame>
+
+<Frame caption="The bottom of the Settings tab: the events, Archive and Save changes.">
+  <img className="block dark:hidden" src="/images/webinars/manage/29b-settings-events.png" alt="The bottom of the Settings tab. The Events section reads One event, with its timezone and the line Change the time in Zoom; Cortana follows it. Below are an Archive button and the Save changes button, marked 6." />
+  <img className="hidden dark:block" src="/images/webinars/manage/29b-settings-events-dark.png" alt="The bottom of the Settings tab. The Events section reads One event, with its timezone and the line Change the time in Zoom; Cortana follows it. Below are an Archive button and the Save changes button, marked 6." />
+</Frame>
+
+The **Conversions** section on this tab has its own **Save conversions** button. **Save changes** does not save it. See [5) Count Webinars As Conversions](/webinars-conversions).
+
+<AccordionGroup>
+  <Accordion title="The email switches on this tab">
+    **Emails and series** says *Who sends the confirmation and reminders. The copy of each reminder lives on the Emails tab.*
+
+    - **Zoom confirmation email**: on at first.
+    - **Zoom reminder emails**: off at first.
+    - **Cortana reminders and follow-ups**: on at first.
+
+    The helper says *Zoom sends its own confirmation; Cortana reminders need a verified sending domain (Emails tab).* These are the same switches as on the **Emails** tab.
+  </Accordion>
+
+  <Accordion title="The series rules">
+    These show only for a webinar where people register once for every event. They sit under **Series**.
+
+    - **Invite registrants to the next event automatically**: on at first. Each person is invited to the next event in turn.
+    - **Stop inviting once they attended**: on at first. Someone who came once is not invited again.
+    - **Stop after this many no-shows**: 3 at first, from 1 to 20. Someone who misses this many events stops getting invites.
+  </Accordion>
+
+  <Accordion title="Change how people register">
+    For a repeating webinar, **How do people register?** shows under **Registration**. Pick **Register for each event individually** or **Register once, invited to every event**.
+
+    Saving sends the change to Zoom. If Zoom refuses it, nothing is saved and you see Zoom's reason.
+  </Accordion>
+</AccordionGroup>
+
+---
+
+## 3. Run a repeating webinar
+
+The **Events** section lists every event. It also says how the series runs.
+
+<Frame caption="A series that never ends. Cortana adds more events in Zoom while it is on.">
+  <img className="block dark:hidden" src="/images/webinars/manage/30-series-events.png" alt="The Events section of a weekly webinar reading Repeats as set in Zoom, never ends, with its timezone and an explanation, next to a list of weekly events, each 75 minutes long." />
+  <img className="hidden dark:block" src="/images/webinars/manage/30-series-events-dark.png" alt="The Events section of a weekly webinar reading Repeats as set in Zoom, never ends, with its timezone and an explanation, next to a list of weekly events, each 75 minutes long." />
+</Frame>
+
+For a series that never ends, it says *Repeats as set in Zoom, never ends · America/New_York. While this webinar is on and its Zoom account is connected, Cortana adds more events in Zoom before the series runs out. Change the time in Zoom; Cortana follows it.*
+
+<AccordionGroup>
+  <Accordion title="How a series keeps going">
+    Zoom holds up to 50 events in one series. Cortana adds more before they run out.
+
+    It only does that while three things are true:
+
+    - The webinar is on.
+    - Its Zoom account is connected.
+    - People register once for every event.
+
+    If you set an end date in Zoom, Cortana removes it the next time it adds events.
+
+    Cortana waits while an upcoming event was moved or changed in Zoom. It carries on once that event has passed.
+  </Accordion>
+
+  <Accordion title="When a series stops">
+    A series stops getting new events when you turn the webinar off or archive it. It also stops if Zoom is disconnected.
+
+    With **Register for each event individually**, the series stops after its last event in Zoom. Cortana adds no more, because adding events would drop people's sign-ups. The tab tells you: *It stops after its last event: with a registration for each event, Cortana adds no more.*
+  </Accordion>
+
+  <Accordion title="When you change the time in Zoom">
+    Cortana checks Zoom about once an hour, and each time you open the **Settings** tab. It shows *Checking Zoom for changes…* while it looks.
+
+    A moved event moves in Cortana too. Cortana moves its reminders and updates the calendar invites.
+
+    An event you deleted in Zoom is dropped. The **Events** section then says how many were removed in Zoom.
+  </Accordion>
+</AccordionGroup>
+
+---
+
+## 4. Copy a link, duplicate or archive a webinar
+
+<Steps>
+  <Step title="Open the card's menu">
+    On the webinar's card, click the three-dot menu.
+  </Step>
+  <Step title="Duplicate it">
+    Click **Duplicate** to make a new webinar with the same setup.
+  </Step>
+  <Step title="Or archive it">
+    Click **Archive** to take it off the list.
+  </Step>
+</Steps>
+
+<Frame caption="The card's menu: Edit, Copy Link, Duplicate and Archive.">
+  <img className="block dark:hidden" src="/images/webinars/manage/27-card-menu.png" alt="The Webinars page with one card's three-dot menu open, listing Edit, Copy Link, Duplicate marked 2, and Archive marked 3 in red." />
+  <img className="hidden dark:block" src="/images/webinars/manage/27-card-menu-dark.png" alt="The Webinars page with one card's three-dot menu open, listing Edit, Copy Link, Duplicate marked 2, and Archive marked 3 in red." />
+</Frame>
+
+**Edit** opens the **Settings** tab. **Copy Link** copies the webinar's own sign-up link.
+
+<AccordionGroup>
+  <Accordion title="What Duplicate copies">
+    **Duplicate** opens the **New webinar** box, titled **Duplicate webinar**. It says *Everything is copied from* the old webinar. *Pick the new day and time, then check the rest.*
+
+    It copies the name with *(copy)* at the end, the time of day, the timezone and the length. It also copies the Zoom account, webinar or meeting, the host, the form and the pitch minute. Email and series settings come too.
+
+    It does not copy the day, the repeat rule or the conversions. You pick those again.
+
+    When you finish, Cortana makes a new webinar or meeting in Zoom.
+  </Accordion>
+
+  <Accordion title="Archive a webinar">
+    Click **Archive** in the menu. A box asks first: *It leaves the Webinars list and registers nobody. Its registrants and numbers are kept, and the Zoom meeting is not touched. To only pause it, use its switch instead.*
+
+    Click **Archive** to go ahead, or **Keep it** to stop.
+
+    A message reads **Webinar archived**, with **Undo**. Undo works for a few seconds only.
+  </Accordion>
+</AccordionGroup>
+
+<Frame caption="Archive asks first. Your sign-ups and numbers are kept.">
+  <img className="block dark:hidden" src="/images/webinars/manage/28-archive-dialog.png" alt="A box titled Archive Spring launch: how we doubled bookings?, marked 3, explaining that it leaves the list and registers nobody, with the buttons Keep it and Archive." />
+  <img className="hidden dark:block" src="/images/webinars/manage/28-archive-dialog-dark.png" alt="A box titled Archive Spring launch: how we doubled bookings?, marked 3, explaining that it leaves the list and registers nobody, with the buttons Keep it and Archive." />
+</Frame>
+
+<Warning>
+  **There is no list of archived webinars.**
+
+  To bring one back after Undo is gone, open the webinar's own page from a saved link. On its **Settings** tab, click **Restore webinar**.
+</Warning>
+
+Neither the switch nor **Archive** touches Zoom. To remove the meeting or webinar from Zoom, delete it in Zoom yourself.
+
+---
+
+## 5. What the labels on a webinar page mean
+
+A coloured label can show under the webinar's name. Here is what each one means and what to do.
+
+<AccordionGroup>
+  <Accordion title="Off, not taking registrations">
+    The webinar is switched off. Turn it on with its switch on the **Webinars** page.
+  </Accordion>
+
+  <Accordion title="Deleted in Zoom, registrations stopped">
+    The meeting or webinar was deleted in Zoom. The **Settings** tab says *The Zoom meeting was deleted. Registrations are stopped until it exists again.*
+
+    Make a new webinar if you still need one.
+  </Accordion>
+
+  <Accordion title="Changed in Zoom">
+    Someone changed the sign-up settings of the meeting or webinar in Zoom. The **Settings** tab explains: *Registration settings were changed in Zoom* … *Saving here sets them back.*
+
+    Click **Save changes** on the **Settings** tab. Cortana puts the settings back in Zoom.
+  </Accordion>
+
+  <Accordion title="Reconnect Zoom">
+    The webinar's Zoom user needs reconnecting. Click the label. It takes you to **Settings**, **Integrations**. Then follow [1) Connect Zoom](/webinars-connect-zoom).
+  </Accordion>
+
+  <Accordion title="Archived">
+    The webinar is archived. The **Settings** tab says *This webinar is archived: it is off the Webinars list and registers nobody. Restore it to track its Zoom meeting again.* Click **Restore webinar** to bring it back.
+  </Accordion>
+</AccordionGroup>
+
+---
+
+## Settings Reference
+
+| Setting | What it does | Default | We recommend | Watch out for |
+| --- | --- | --- | --- | --- |
+| Switch (card) | Turns sign-ups on or off. | On | Turn it off to pause sign-ups. | With no sign-ups, it turns off at once. |
+| **Turn off** / **Keep it on** | Confirms or cancels turning off. | Not applicable | Read the box first. | Reminders due while off are never sent. |
+| **Edit** (card) | Opens the **Settings** tab. | Not applicable | Use it to change settings. | None. |
+| **Copy Link** | Copies the webinar's own sign-up link. | Not applicable | Share this link only. | Greyed out while the form is off. |
+| **Duplicate** | Starts a new webinar with the same setup. | Not applicable | Use it for a new run of the same webinar. | It makes a new Zoom item when you finish. |
+| **Archive** (menu) / **Keep it** | Takes the webinar off the list, or cancels. | Not applicable | Archive old webinars you are done with. | No archived list. Keep the webinar's link. |
+| **Undo** | Brings back a webinar you archived a moment ago. | Shown for a few seconds | Use it straight away if you slipped. | Gone after a few seconds. |
+| **What is the webinar called?** | The webinar's name in Cortana. | The name you gave it | A name your people know. | None. |
+| **Who hosts?** | Whose calendar sends the invites. | The host you picked | Someone with a connected calendar. | No host means no calendar invites. |
+| **What form feeds into this?** | The form people sign up with. | The form you picked | One Cortana form. | The webinar's link changes with the form. |
+| **How do people register?** | How far one sign-up goes. | Your choice at create | **Register once, invited to every event**. | Saving sends it to Zoom. |
+| **When does the pitch start?** | The minute your offer starts. | Your choice at create | Set it if you pitch. | Counted from the real start. |
+| **Zoom confirmation email** | Zoom emails the join link on sign-up. | On | Keep it on. | Same switch as on the **Emails** tab. |
+| **Zoom reminder emails** | Zoom sends its own reminders. | Off | Off when Cortana sends reminders. | Same switch as on the **Emails** tab. |
+| **Cortana reminders and follow-ups** | Cortana sends your reminders. | On | Verify your sending domain. | Skipped without a verified domain. |
+| **Invite registrants to the next event automatically** | Invites each person to the next event. | On | Keep it on. | Register-once webinars only. |
+| **Stop inviting once they attended** | Stops invites after someone came. | On | Keep it on. | Register-once webinars only. |
+| **Stop after this many no-shows** | Stops invites after this many missed events. | 3 | 2 or 3. | From 1 to 20. |
+| **Save changes** | Saves this tab. | Not applicable | Save before you leave. | It does not save **Conversions**. |
+| **Archive** (Settings tab) | Archives the webinar. | Not applicable | Use the card's menu if you may want Undo. | This one has no Undo. |
+| **Restore webinar** | Brings an archived webinar back. | Shown when archived | Use it from the webinar's page. | None. |
+
+---
+
+## Troubleshooting
+
+<AccordionGroup>
+  <Accordion title="It says the webinar is archived when I click its switch">
+    The message is *This webinar is archived. Restore it from its Settings first.* Open the webinar's page, then click **Restore webinar** on its **Settings** tab.
+  </Accordion>
+
+  <Accordion title="It says the reminders could not be updated yet">
+    The message is *Saved, but the reminders for people already registered could not be updated yet. Cortana retries within a few minutes.* Your change is saved. Nothing else to do.
+  </Accordion>
+
+  <Accordion title="It says the email plan could not be updated">
+    The message is *Saved, but the email plan for people already registered could not be updated or kept for a retry. Contact support with a link to this webinar.* Click the support button and send us the webinar's link.
+  </Accordion>
+
+  <Accordion title="Saving fails with a Zoom message">
+    Changing how people register, or the Zoom email switches, goes to Zoom first. If Zoom says no, nothing is saved. Read Zoom's reason, fix it in Zoom, then save again.
+  </Accordion>
+
+  <Accordion title="I cannot find a webinar I archived">
+    Archived webinars are not listed. Open its page from a link you saved, or from your browser's history. Then click **Restore webinar** on its **Settings** tab.
+  </Accordion>
+</AccordionGroup>
+
+---
+
+## FAQ
+
+<AccordionGroup>
+  <Accordion title="My weekly webinar stopped after a year. Why?">
+    People sign up for each event, so Cortana cannot add more events. Zoom holds 50 at most, which is about a year of weekly events. Pick **Register once, invited to every event** to keep a series going.
+  </Accordion>
+
+  <Accordion title="Can I change the webinar time in Cortana?">
+    No. Change the day, the time or the repeat rule in Zoom. Cortana follows Zoom.
+  </Accordion>
+
+  <Accordion title="Does turning off or archiving delete the webinar in Zoom?">
+    No. Neither one touches Zoom. Delete it in Zoom yourself if you want it gone there.
+  </Accordion>
+
+  <Accordion title="If I turn a webinar back on, do the missed reminders go out?">
+    No. Reminders that came due while it was off are not sent, even after you turn it back on.
+  </Accordion>
+
+  <Accordion title="What happens to sign-ups when I archive a webinar?">
+    They are kept, and so are the numbers. The webinar signs nobody new up.
+  </Accordion>
+</AccordionGroup>
+
+---
+
+## Next Steps
+
+<CardGroup cols={2}>
+  <Card title="Cortana Webinars overview" icon="book-open" href="/webinars-overview">
+    The whole journey on one page.
+  </Card>
+  <Card title="4) After Your Webinar" icon="chart-line" href="/webinars-after">
+    See who joined and how long they stayed.
+  </Card>
+</CardGroup>
+
+Stuck on a step? Click the support button at the bottom right of Cortana and we will help.

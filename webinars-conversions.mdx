@@ -1,0 +1,345 @@
+---
+title: "5) Count Webinars As Conversions"
+description: "Choose which webinar sign-ups, visits and watch times count as conversions, add a show rate metric, and send them to your ad platforms."
+---
+
+{/* last-verified: 2026-10-11 · route: /business/[businessId]/webinars/[webinarId]?tab=settings (Conversions) and /business/[businessId]/tracking?tab=conversions */}
+
+## Overview
+
+A conversion is something Cortana counts and can send to your ads, like a sign-up. Webinars give you seven of them, from signing up to seeing your pitch.
+
+Nothing is counted on its own. You choose, per webinar, or once for all your webinars.
+
+This page shows both ways, how to add a show rate to your reports, and what goes to your ad platforms.
+
+<Note>
+  **Before you start.** Make a webinar first: see [2) Create Your Webinar](/webinars-create).
+
+  To send results to your ads, connect your ad platforms. See [Connect integrations](/1-connect-integrations).
+</Note>
+
+---
+
+## The seven webinar events
+
+Each event can count into a conversion. The panel shows the short name on the left. The conversion Cortana makes for it has the full name.
+
+| In the panel | Conversion name | What it means |
+| --- | --- | --- |
+| **Registered** | Webinar Registered | *Someone registered for a webinar through its form.* |
+| **Accepted the calendar invite** | Webinar Invite Accepted | *A registrant accepted the calendar invite.* |
+| **Attended** | Webinar Attended | *A registrant joined the live event.* |
+| **Watched 25%** | Webinar Watched 25% | *Watched at least a quarter of the live event.* |
+| **Watched 50%** | Webinar Watched 50% | *Watched at least half of the live event.* |
+| **Watched 75%** | Webinar Watched 75% | *Watched at least three quarters of the live event.* |
+| **Saw the pitch** | Webinar Saw The Pitch | *Was still in the room at the pitch minute.* |
+
+Missing a webinar is never a conversion. No-shows only show on the **Registrants** tab.
+
+---
+
+## 1. Choose conversions for one webinar
+
+You can do this on the **Done** step of **New webinar**, under **Which conversions count**. Or at any time on the webinar's **Settings** tab:
+
+<Steps>
+  <Step title="Open the Settings tab">
+    Open the webinar, then click the **Settings** tab.
+  </Step>
+  <Step title="Find Conversions">
+    Scroll to **Conversions**. It says *Which conversion each of these counts into.*
+  </Step>
+  <Step title="Open an event's dropdown">
+    Each event has a dropdown on the right. Click the one for **Registered**.
+  </Step>
+  <Step title="Pick a conversion">
+    Pick **Create “Webinar Registered”**, one of your own conversions, or **Do not track**.
+  </Step>
+  <Step title="Do the same for each event">
+    Pick a conversion, or **Do not track**, for each of the seven events.
+  </Step>
+  <Step title="Save">
+    Click **Save conversions**. Nothing counts until you save.
+  </Step>
+</Steps>
+
+<Frame caption="The Conversions section with one event's dropdown open. In this business every webinar is already counted, so the top choice reads Counted for every webinar.">
+  <img className="block dark:hidden" src="/images/webinars/conversions/23-event-mapping.png" alt="The Conversions section of a webinar's Settings tab, marked 2, listing seven events. The Registered row, marked 3, has its dropdown open, showing Counted for every webinar, then a Your conversions group with conversions such as Webinar Attended, Booking Page Conversion and Lead." />
+  <img className="hidden dark:block" src="/images/webinars/conversions/23-event-mapping-dark.png" alt="The Conversions section of a webinar's Settings tab, marked 2, listing seven events. The Registered row, marked 3, has its dropdown open, showing Counted for every webinar, then a Your conversions group with conversions such as Webinar Attended, Booking Page Conversion and Lead." />
+</Frame>
+
+On the **Done** step the helper reads *Each webinar is tracked on its own. Pick the conversion each of these counts into, then save.*
+
+<AccordionGroup>
+  <Accordion title="Every choice in the dropdown">
+    - **Create “Webinar Registered”** (and so on): shows until Cortana has made that conversion. Saving makes it.
+    - **Webinar Registered** (and so on), on its own: Cortana's conversion, once it exists. Your next webinar uses it too, so you never get two.
+    - **Your conversions**: any other conversion in your business.
+    - **Counted for every webinar**: only shows when your business already counts that event for every webinar.
+    - **Do not track**: nothing is counted for that event on this webinar.
+
+    A conversion marked *(a Cortana Webinars source already counts this)* is greyed out. That stops one event counting twice. See section 2.
+  </Accordion>
+
+  <Accordion title="What is picked for you">
+    Until Cortana has made a webinar conversion, every event starts on **Create**. Once it has, a new webinar starts on Cortana's existing conversions.
+
+    Once a webinar has saved, an event you left alone starts on **Do not track**.
+
+    The line above **Save conversions** tells you where you stand. It reads *Nothing is tracked for this webinar until you save.*, then a count of changes not saved yet, then **Saved.**
+  </Accordion>
+
+  <Accordion title="The note about Meta">
+    With Meta connected, you may see *A conversion created here is sent to Meta as well.* It shows while an event is on **Create**.
+
+    It means Cortana sets up the Meta event for the conversion it makes.
+  </Accordion>
+
+  <Accordion title="Notes that can show under an event">
+    - *Paused in Settings > Conversions, so nothing counts until it is on again.* The conversion is switched off.
+    - *Its source on that conversion was removed. Save to connect it again.*
+    - *Its conversion was deleted. Pick another, or leave it untracked.*
+  </Accordion>
+</AccordionGroup>
+
+---
+
+## 2. Count every webinar at once with Cortana Webinars
+
+The panel above works one webinar at a time. A **Cortana Webinars** source counts one event for every webinar and meeting in your business.
+
+<Steps>
+  <Step title="Open Ad Tracking">
+    Click **Ad Tracking** in the menu on the left.
+  </Step>
+  <Step title="Open Conversion Setup">
+    Click the **Conversion Setup** tab. **Conversion Events** opens.
+  </Step>
+  <Step title="Open a conversion">
+    Click the name of the conversion you want to count into. **Edit Conversion** opens. No conversion yet? Click **Add Custom Event** to make one first.
+  </Step>
+  <Step title="Click Add Source">
+    Under **Sources**, click **Add Source**. **Create Conversion Source** opens.
+  </Step>
+  <Step title="Pick Cortana Webinars">
+    Under **Integration**, pick **Cortana Webinars**.
+  </Step>
+  <Step title="Pick the event">
+    Under **What counts as a conversion?**, pick one event.
+  </Step>
+  <Step title="Pick which ones count">
+    Under **Which Zoom webinars and meetings count?**, pick an answer.
+  </Step>
+  <Step title="Click Submit">
+    Click **Submit**. The message *Cortana Webinars source created* confirms it.
+  </Step>
+</Steps>
+
+{/* TODO: verify live: Submit was not pressed while writing this page; the confirmation message comes from the source code. */}
+
+<Frame caption="Cortana Webinars picked, with the list of events open. Each source counts one event.">
+  <img className="block dark:hidden" src="/images/webinars/conversions/24-cortana-webinars-source.png" alt="The Create Conversion Source box with Integration set to Cortana Webinars and the What counts as a conversion list open, marked 6, showing Registered, Accepted the calendar invite, Attended, Watched 25%, Watched 50%, Watched 75% and Saw the pitch." />
+  <img className="hidden dark:block" src="/images/webinars/conversions/24-cortana-webinars-source-dark.png" alt="The Create Conversion Source box with Integration set to Cortana Webinars and the What counts as a conversion list open, marked 6, showing Registered, Accepted the calendar invite, Attended, Watched 25%, Watched 50%, Watched 75% and Saw the pitch." />
+</Frame>
+
+<Frame caption="The second question: which of your Zoom webinars and meetings count.">
+  <img className="block dark:hidden" src="/images/webinars/conversions/24b-cortana-webinars-scope.png" alt="The Create Conversion Source box with Integration marked 5 set to Cortana Webinars, What counts as a conversion marked 6 set to Registered, and Which Zoom webinars and meetings count marked 7 with its list open showing Webinars and meetings, Zoom webinars only and Zoom meetings only." />
+  <img className="hidden dark:block" src="/images/webinars/conversions/24b-cortana-webinars-scope-dark.png" alt="The Create Conversion Source box with Integration marked 5 set to Cortana Webinars, What counts as a conversion marked 6 set to Registered, and Which Zoom webinars and meetings count marked 7 with its list open showing Webinars and meetings, Zoom webinars only and Zoom meetings only." />
+</Frame>
+
+The helper says *Each source tracks one event. Registrations come from the form that registers people for the webinar.*
+
+| Choice | What counts |
+| --- | --- |
+| **Webinars and meetings** | Every Zoom webinar and every Zoom meeting. This is the default. |
+| **Zoom webinars only** | Only Zoom webinars. |
+| **Zoom meetings only** | Only Zoom meetings. |
+
+To count a second event, add a second source. You can change **Which Zoom webinars and meetings count?** later, but not the event.
+
+---
+
+## 3. Add Webinar show rate to your Ad Tracking table
+
+The **Webinar show rate** metric is **Attended** divided by **Registered**. Your business has one at most.
+
+<Steps>
+  <Step title="Create the metric">
+    In the **Conversions** panel, tick *Also create a “Webinar show rate” metric (Attended / Registered)*. Then click **Save conversions**.
+  </Step>
+  <Step title="Open Ad Tracking">
+    Click **Ad Tracking**. The **Attribution Table** tab opens.
+  </Step>
+  <Step title="Open your preset's menu">
+    Click the button with your column preset's name, above the table.
+  </Step>
+  <Step title="Edit the preset">
+    Click the pencil next to a preset. **Customize Columns** opens.
+  </Step>
+  <Step title="Open Custom Metrics">
+    Click **Custom Metrics**. **Webinar show rate** is in the list.
+  </Step>
+  <Step title="Add it">
+    Press **+** next to it, or drag it into place.
+  </Step>
+  <Step title="Save">
+    Click **Save** at the bottom of the box.
+  </Step>
+</Steps>
+
+<Frame caption="Webinar show rate in Customize Columns, ready to add to your table.">
+  <img className="block dark:hidden" src="/images/webinars/conversions/25-show-rate.png" alt="The Customize Columns box. The Custom Metrics tab is marked 5, Webinar show rate with Format: percent is marked 6, and the Save button is marked 7." />
+  <img className="hidden dark:block" src="/images/webinars/conversions/25-show-rate-dark.png" alt="The Customize Columns box. The Custom Metrics tab is marked 5, Webinar show rate with Format: percent is marked 6, and the Save button is marked 7." />
+</Frame>
+
+The column then shows a percentage for each row, such as 42.3%.
+
+{/* TODO: verify live: the column was not added and saved while writing this page, so the value in the table was not seen. */}
+
+<Accordion title="When the show rate box is greyed out or missing">
+  The box only shows when your business has no **Webinar show rate** metric yet.
+
+  It is greyed out with *Track Registered and Attended to create it.* when either is on **Do not track**. It says *Registered and Attended need two different conversions to create it.* when both count into one conversion.
+
+  The hint *One metric for the whole workspace, with your custom metrics.* means it is ready.
+</Accordion>
+
+---
+
+## 4. Send webinar conversions to your ad platforms
+
+A webinar conversion goes to Meta, Google Ads and TikTok, like any other conversion. Each platform must be connected on the **AI Ad Optimization** tab first.
+
+<Steps>
+  <Step title="Open AI Ad Optimization">
+    Click **Ad Tracking** in the menu on the left. Then click the **AI Ad Optimization** tab.
+  </Step>
+  <Step title="Connect the platform">
+    If a platform is not connected yet, connect it there. [AI Ad Optimization](/6-ai-ad-optimization) walks you through each one.
+  </Step>
+  <Step title="Open its event mapping">
+    On the platform's card, click **Manage**. You see your conversions in a list.
+  </Step>
+  <Step title="Turn on your webinar conversions">
+    Find your webinar conversions, such as **Webinar Registered**. Turn on each one you want to send.
+  </Step>
+  <Step title="Pick what it counts as">
+    For Meta, pick the event type. For Google Ads, pick the conversion action. For TikTok, pick the event.
+  </Step>
+</Steps>
+
+{/* TODO: verify live: these mapping steps follow the AI Ad Optimization page and the source code. They were not walked through with a webinar conversion. */}
+
+<AccordionGroup>
+  <Accordion title="Meta: Cortana sets it up for you">
+    When Cortana makes a webinar conversion and Meta is connected, it also adds it to your Meta mapping. You see it turned on under **Manage**.
+
+    It goes to Meta as a custom event named after the conversion, for example `WebinarRegistered` or `WebinarAttended`. Meta only lets your ads use a custom event once you confirm it. See **Step 4: Creating & Confirming Custom Events** under Meta CAPI on [AI Ad Optimization](/6-ai-ad-optimization).
+
+    A conversion you picked from **Your conversions** keeps its own Meta mapping. Cortana does not change it.
+  </Accordion>
+
+  <Accordion title="Google Ads and TikTok: you map it">
+    Cortana does not map webinar conversions to Google Ads or TikTok for you.
+
+    For Google Ads, the conversion action must exist in Google Ads first. [AI Ad Optimization](/6-ai-ad-optimization) shows where to make it.
+  </Accordion>
+</AccordionGroup>
+
+LinkedIn and Microsoft Ads do not get webinar conversions.
+
+{/* TODO: verify: which webinar sign-ups Meta receives. The Meta event Cortana sets up is attributed-only in the source code; check what the Meta settings card calls that mode before explaining it here. */}
+
+<Accordion title="Send webinar events to your own tools">
+  You can also send webinar events to Zapier, Make, n8n or your own endpoint.
+
+  Go to **Settings**, then **Automations**. Click **Add endpoint**. Under **Events**, turn on **Webinars**: *Registrations, attendance and engagement, with the personal join link.*
+</Accordion>
+
+{/* TODO: verify: GoHighLevel workflow triggers for webinars (Webinar Registered, Webinar Engagement in the source code). They live inside GoHighLevel and were not seen during this run. */}
+
+---
+
+## Settings Reference
+
+| Setting | What it does | Default | We recommend | Watch out for |
+| --- | --- | --- | --- | --- |
+| Event dropdown (one per event) | Picks the conversion an event counts into. | **Create** at first; later Cortana's conversion | Count **Registered** and **Attended** at least. | Nothing counts until you save. |
+| **Do not track** | Counts nothing for that event on this webinar. | After a first save, for events you left alone | Use it for events you do not care about. | Hidden when every webinar is already counted. |
+| *Also create a “Webinar show rate” metric* | Makes the **Webinar show rate** metric. | Ticked on the **Done** step's first save | Keep it ticked once. | One per business. |
+| **Save conversions** | Saves the choices for this webinar. | Greyed out until something changed | Save before you leave. | The **Settings** tab's **Save changes** does not save these. |
+| **Integration**: **Cortana Webinars** | Adds a source that counts every webinar. | **Webhook** | Use it to count all webinars the same way. | One event per source. |
+| **What counts as a conversion?** | The one event the source counts. | Nothing picked | One source per event. | Cannot be changed later. |
+| **Which Zoom webinars and meetings count?** | Webinars, meetings, or both. | **Webinars and meetings** | Keep the default. | Can be changed later. |
+| **Custom Metrics** (Customize Columns) | Lists your custom metrics, including **Webinar show rate**. | Not applicable | Add it to your main preset. | Click **Save** in the box. |
+| **Webinars** (Add a webhook endpoint) | Sends webinar events to your endpoint. | Off | Turn it on for your automation tools. | Events include the personal join link. Keep the endpoint private. |
+
+---
+
+## Troubleshooting
+
+<AccordionGroup>
+  <Accordion title="My webinar conversions stay at zero">
+    Check the webinar's **Settings** tab, **Conversions**. If the line says *Nothing is tracked for this webinar until you save.*, pick conversions and click **Save conversions**.
+
+    Also check the people signed up through the webinar's own link. See [3) How People Sign Up](/webinars-registration).
+  </Accordion>
+
+  <Accordion title="A conversion in the list is greyed out">
+    It reads *(a Cortana Webinars source already counts this)*. A source already counts that event into it for every webinar. Pick another, or leave the event on **Do not track**.
+  </Accordion>
+
+  <Accordion title="It says a Cortana Webinars source already counts this event">
+    The full message is *A Cortana Webinars source already counts this event into that conversion. Pick another, or remove that source in Settings > Conversions.* The source lives under **Ad Tracking**, **Conversion Setup**, on that conversion.
+  </Accordion>
+
+  <Accordion title="It says every name for the conversion is taken">
+    The message starts *Every name for the "Webinar Registered" conversion is taken by another conversion.* Rename one of your own conversions, then save again.
+  </Accordion>
+
+  <Accordion title="It says I do not have permission">
+    The message is *You do not have permission to manage webinars.* Your role cannot change conversions. Ask an owner.
+  </Accordion>
+</AccordionGroup>
+
+---
+
+## FAQ
+
+<AccordionGroup>
+  <Accordion title="Does Cortana count webinar conversions on its own?">
+    No. Nothing is counted until you choose a conversion for an event and save.
+  </Accordion>
+
+  <Accordion title="Do I set this up again for every webinar?">
+    For the panel, yes, but it is quick. A new webinar starts on the conversions Cortana already made. Or use a **Cortana Webinars** source to count every webinar at once.
+  </Accordion>
+
+  <Accordion title="Will my next webinar make duplicate conversions?">
+    No. Cortana makes each webinar conversion once. Later webinars count into the same one.
+  </Accordion>
+
+  <Accordion title="Can I count no-shows as a conversion?">
+    No. A no-show is never a conversion and is never sent to your ads. You see no-shows on the **Registrants** tab.
+  </Accordion>
+
+  <Accordion title="Why is Settings > Conversions mentioned when I cannot find it?">
+    Some messages say *Settings > Conversions*. Your conversions live under **Ad Tracking**, then **Conversion Setup**.
+  </Accordion>
+</AccordionGroup>
+
+---
+
+## Next Steps
+
+<CardGroup cols={2}>
+  <Card title="6) Manage Your Webinars" icon="sliders" href="/webinars-manage">
+    Turn a webinar off, archive it, and handle repeating webinars.
+  </Card>
+  <Card title="Conversion tracking" icon="bullseye" href="/4-conversion-tracking">
+    How conversions and sources work across Cortana.
+  </Card>
+</CardGroup>
+
+Stuck on a step? Click the support button at the bottom right of Cortana and we will help.

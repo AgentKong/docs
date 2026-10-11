@@ -304,6 +304,25 @@
         ]
       },
       {
+        "tab": "Webinars",
+        "icon": "video",
+        "groups": [
+          {
+            "group": "A-Z Guide",
+            "icon": "rocket",
+            "pages": [
+              "webinars-overview",
+              "webinars-connect-zoom",
+              "webinars-create",
+              "webinars-registration",
+              "webinars-after",
+              "webinars-conversions",
+              "webinars-manage"
+            ]
+          }
+        ]
+      },
+      {
         "tab": "Cortana Claw",
         "icon": "user-robot",
         "groups": [
