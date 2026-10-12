@@ -3501,7 +3501,7 @@
             "$ref": "#/components/responses/RateLimited"
           }
         },
-        "description": "Removes the source. Conversion entries it created are kept and stay counted under their conversion; they are detached from the removed source."
+        "description": "Removes the source. Conversion entries it created are kept and stay counted under their conversion; they are detached from the removed source. A Google Local Services Ads source is the exception: the call answers 204 and turns the source off instead of removing it, so the leads it already counted are never counted twice when it comes back. To turn it back on, update it with isActive set to true."
       }
     },
     "/api/v1/businesses/{businessId}/conversions/source-options/{integration}": {

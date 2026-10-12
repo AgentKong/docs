@@ -186,6 +186,34 @@ LinkedIn Ads connects with a normal login, but unlike Meta or Google it does not
   Connecting LinkedIn brings in your spend and LinkedIn's own reported conversions, and clicks are credited to **LinkedIn Ads** straight away. Breaking that down by campaign, ad set, and ad needs one more step: tagging your LinkedIn URLs, covered in [**5) URL Parameters**](/5-url-parameters) under **LinkedIn Ads**. Read that section before you judge your LinkedIn reporting, because it starts by asking you to check which naming your Campaign Manager account uses, and the template you need depends on the answer.
 </Note>
 
+### Connecting Google Local Services Ads
+
+Local Services Ads leads (calls, messages and bookings) come in through your **Google Ads** connection. There is no separate login: connect Google Ads, select the account that runs your Local Services Ads, then add Google LSA to a conversion event. The full walkthrough, with screenshots, is in [Google Local Services Ads](/13-google-local-services-ads).
+
+<Steps>
+  <Step title="Connect Google Ads">
+    If Google Ads is not connected yet, the **Google Local Services Ads** card shows a **Connect Google Ads** button. Connect Google Ads and select your ad accounts as usual.
+  </Step>
+
+  <Step title="Select the account that runs Local Services Ads">
+    If the card shows **Choose LSA account**, none of your selected Google Ads accounts runs Local Services Ads yet. Click it and select the account that does.
+  </Step>
+
+  <Step title="Add Google LSA to a conversion event">
+    Once an account is found, the card shows **Manage**. Click it to see your **LSA accounts**. The dialog then says **Next: count these leads**: click **Add to a conversion event**, open the conversion your leads should count toward, click **Add Source** and choose **Google LSA**. The full walkthrough is in [**4.2) Conversion Sources**](/4-conversion-tracking) under **Google Local Services Ads**.
+  </Step>
+</Steps>
+
+<AccordionGroup>
+  <Accordion title="What the Google Local Services Ads card tells you">
+    - **Manage** with an amber tone: connected, but no conversion event counts these leads yet.
+    - **Manage**, or **Manage (2)** with several accounts: Cortana is reading leads from your LSA accounts.
+    - **Manage** in red: an account cannot be read, or Google Ads needs reconnecting. Open it to see which account, and click **Reconnect Google Ads** when asked.
+
+    Each account in **Manage** shows when Cortana last read it, for example **Read 2 minutes ago**, and its campaign type. A new account shows **Waiting for first read** until its first check. An account Cortana cannot read shows **Can't be read**, the line *We keep retrying. If it stays like this, check your Google login can still open this account.*, and the error Google gave. Use **Change accounts** to pick other Google Ads accounts.
+  </Accordion>
+</AccordionGroup>
+
 ## What if my app isn't listed?
 
 If we don't have a native integration for your specific platform yet, don't worry. You can still get everything connected using **Webhooks**.

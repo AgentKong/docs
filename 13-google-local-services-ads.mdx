@@ -1,0 +1,305 @@
+---
+title: "12) Google Local Services Ads"
+description: "Track Google Local Services Ads leads in Cortana: connect through Google Ads, choose the account that runs your Local Services Ads, add Google LSA as a conversion source, import older leads, and see every call, message and booking credited to your Local Services Ads campaign."
+---
+
+{/* last-verified: 2026-10-12 · app routes: Settings → Integrations (Google Local Services Ads card) · Tracking → Conversion Setup → Conversion Events (Add Source → Google LSA) · contact → Journey (Google LSA card) */}
+
+# Google Local Services Ads
+
+Google Local Services Ads (LSA) are the **Google Guaranteed** and **Google Screened** ads at the top of a Google search. People call, message or book you straight from Google, and Google charges you per lead.
+
+Cortana reads those leads from Google every 5 minutes and turns each one into a conversion, credited to your Local Services Ads campaign inside **Google Ads**. Your LSA spend is already in Cortana, so once the leads arrive you see your real cost per lead, and every caller gets a contact with their calls and messages on it.
+
+At the end of this page you will have Google LSA counting into a conversion event, your older leads imported, and your LSA leads in your reports.
+
+<Note>
+  **Before you start**
+
+  - **Google Ads must be connected.** There is no separate Google LSA login: LSA leads come through your Google Ads connection. See [Connect Integrations](/1-connect-integrations).
+  - **You need the Google Ads account that runs your Local Services Ads.** If you are not sure which one it is, open Google Ads and look for the account with a campaign of type **Local Services**.
+  - **A conversion event to count the leads in.** Most businesses use their **Lead** event. See [Conversion Tracking](/4-conversion-tracking).
+</Note>
+
+## What Cortana does with an LSA lead
+
+| What happens | Detail |
+| --- | --- |
+| The lead becomes a conversion | One conversion per lead, in the conversion event you choose. By default only the leads Google charges you for count. |
+| It is credited to your LSA campaign | Source **Google Ads**, campaign **Local Services Ads · 123-456-7890** (your Google Ads customer ID). That is the same row your LSA spend sits on, so cost per lead is real. |
+| It is dated when the lead came in | Never the day Cortana read it, and never the day it was marked booked. |
+| The caller gets a contact | Matched by their phone number (and email when Google includes one), or created new. |
+| Calls and messages are saved | Each call's length and recording link, and each message, show on the contact's **Journey** tab. |
+| A refund comes off again | When Google credits a lead back, its conversion is removed on the next check. |
+| Nothing is sent back to Google | LSA leads are never uploaded to Google Ads as conversions. Google already counts them. |
+
+<Warning>
+  **LSA leads are not instant.** Google has no webhook for Local Services Ads, so Cortana checks for new leads every 5 minutes. A call from a minute ago may not be in Cortana yet.
+</Warning>
+
+## Step 1: Find the Google Local Services Ads card
+
+1. In your business, open **Settings** and select the **Integrations** tab.
+2. Find the card named **Google Local Services Ads**. Its description reads *"Count the calls, messages and bookings from your Local Services Ads as conversions, credited to the LSA campaign. Uses your Google Ads connection."* Type `local` into the search box at the top to jump to it.
+3. Read the button on the card. It tells you what to do next:
+
+| Button | What it means | What to do |
+| --- | --- | --- |
+| **Connect Google Ads** | Google Ads is not connected. | Click it and connect Google Ads first. |
+| **Choose LSA account** | Google Ads is connected, but none of your selected accounts runs Local Services Ads. | Go to [Step 2](#step-2-select-the-account-that-runs-local-services-ads). |
+| **Manage** (amber) | Cortana found your LSA account, but no conversion event counts its leads yet. | Go to [Step 3](#step-3-check-your-lsa-accounts). |
+| **Manage** or **Manage (2)** | Cortana is reading your LSA leads. The number shows how many LSA accounts it reads. | Nothing. Open it any time to check on your accounts. |
+| **Manage** (red) | Google Ads needs reconnecting, or an LSA account cannot be read. | Open it. It names the account and the fix. |
+
+<Frame caption="Settings → Integrations. The Google Local Services Ads card runs on your Google Ads connection.">
+  <img className="block dark:hidden" src="/images/integrations/google-local-services-ads/lsa-01-card.png" alt="The Integrations tab filtered to the Google Local Services Ads card. Badge 1 marks the Integrations tab, badge 2 the search box with local typed in, and badge 3 the Choose LSA account button on the card." />
+  <img className="hidden dark:block" src="/images/integrations/google-local-services-ads/lsa-01-card-dark.png" alt="The Integrations tab filtered to the Google Local Services Ads card. Badge 1 marks the Integrations tab, badge 2 the search box with local typed in, and badge 3 the Choose LSA account button on the card." />
+</Frame>
+
+## Step 2: Select the account that runs Local Services Ads
+
+Skip this step if the card already shows **Manage**.
+
+1. On the **Google Local Services Ads** card, click **Choose LSA account**. Your **Google Ads Integration** account list opens.
+2. Tick the Google Ads account that runs your Local Services Ads. Leave your other accounts as they are.
+3. Click **Save**. Cortana syncs the account.
+4. Close the list. Once the account's campaigns have synced, the card shows **Manage**.
+
+<Frame caption="The Google Ads account list. Tick the account that runs your Local Services Ads, then click Save.">
+  <img className="block dark:hidden" src="/images/integrations/google-local-services-ads/lsa-02-choose-account.png" alt="The Google Ads Integration dialog listing ad accounts with checkboxes. Badge 1 marks the ticked Local Services Ads account and badge 2 marks the Save button." />
+  <img className="hidden dark:block" src="/images/integrations/google-local-services-ads/lsa-02-choose-account-dark.png" alt="The Google Ads Integration dialog listing ad accounts with checkboxes. Badge 1 marks the ticked Local Services Ads account and badge 2 marks the Save button." />
+</Frame>
+
+<Tip>
+  This is the same account list as your **Google Ads** card. Ticking an account here also syncs its spend into your Google Ads reports, which is what lets Cortana show cost per lead.
+</Tip>
+
+## Step 3: Check your LSA accounts
+
+1. On the **Google Local Services Ads** card, click **Manage**. The **Google Local Services Ads** dialog opens.
+2. Under **LSA accounts**, check that every account you expect is listed. Each one shows its name, its Google Ads customer ID and its campaign type, for example **Local Services campaign**.
+3. Read the status on the right of each account:
+   - **Waiting for first read**: Cortana has not checked this account yet. It checks once a Google LSA source exists (Step 4).
+   - **Read 3 minutes ago**: Cortana is reading this account's leads.
+   - **Can't be read**: Google refused the read. The account shows the error Google gave. See [Troubleshooting](#troubleshooting).
+4. While the dialog says **Connected, not counting leads yet**, no conversion event counts these leads. Click **Add to a conversion event** to go to your conversion events.
+
+To change which accounts are listed, click **Change accounts**. It opens the same Google Ads account list as Step 2.
+
+<Frame caption="The Google Local Services Ads dialog: your LSA accounts, and the next step.">
+  <img className="block dark:hidden" src="/images/integrations/google-local-services-ads/lsa-03-manage-dialog.png" alt="The Google Local Services Ads dialog with the status Connected, not counting leads yet. Badge 1 marks the LSA accounts list with two accounts. Badge 2 marks the Add to a conversion event button." />
+  <img className="hidden dark:block" src="/images/integrations/google-local-services-ads/lsa-03-manage-dialog-dark.png" alt="The Google Local Services Ads dialog with the status Connected, not counting leads yet. Badge 1 marks the LSA accounts list with two accounts. Badge 2 marks the Add to a conversion event button." />
+</Frame>
+
+## Step 4: Add Google LSA to a conversion event
+
+1. Go to **Tracking → Conversion Setup → Conversion Events**. (The **Add to a conversion event** button in Step 3 takes you there.)
+2. Open the conversion your LSA leads should count toward with its gear icon. Most businesses use **Lead**.
+3. In the **Sources** section, click **Add Source**.
+4. In the **Integration** dropdown, choose **Google LSA**.
+
+<Frame caption="Add Source → Integration → Google LSA.">
+  <img className="block dark:hidden" src="/images/integrations/google-local-services-ads/lsa-04-add-source.png" alt="The Create Conversion Source dialog over the Edit Conversion dialog, with the Integration dropdown open and Google LSA highlighted and marked with badge 4." />
+  <img className="hidden dark:block" src="/images/integrations/google-local-services-ads/lsa-04-add-source-dark.png" alt="The Create Conversion Source dialog over the Edit Conversion dialog, with the Integration dropdown open and Google LSA highlighted and marked with badge 4." />
+</Frame>
+
+5. Answer the questions. Every one has a default, so you can click **Submit** straight away:
+
+| # | Question | Default | What it does |
+| --- | --- | --- | --- |
+| 1 | **Which leads count** | **Calls**, **Messages** and **Bookings** all on | Click a tile to stop counting that lead type. |
+| 1 | **Skip short calls** | Off | Turn it on to ignore calls shorter than a number of seconds. It starts at 30. |
+| 2 | **When a lead counts** | **When Google charges for it** | **Every lead** counts the leads Google does not charge for too. **When it's marked booked** counts only leads you mark **Booked** in Local Services Ads. |
+| 3 | **Count every LSA account** | On | Only shown when you have more than one LSA account. Turn it off and tick the accounts this event counts. |
+| 4 | **Give each lead a value** | Off | Turn it on to give every lead a fixed value, in your Google Ads account's currency. |
+
+<Frame caption="The Google LSA source with its default settings.">
+  <img className="block dark:hidden" src="/images/integrations/google-local-services-ads/lsa-05-source-form.png" alt="The Create Conversion Source dialog with Google LSA selected. Badge 1 marks Which leads count with the Calls, Messages and Bookings tiles and the Skip short calls switch, badge 2 the When a lead counts options with When Google charges for it selected, badge 3 the Count every LSA account switch, and badge 4 the Give each lead a value switch." />
+  <img className="hidden dark:block" src="/images/integrations/google-local-services-ads/lsa-05-source-form-dark.png" alt="The Create Conversion Source dialog with Google LSA selected. Badge 1 marks Which leads count with the Calls, Messages and Bookings tiles and the Skip short calls switch, badge 2 the When a lead counts options with When Google charges for it selected, badge 3 the Count every LSA account switch, and badge 4 the Give each lead a value switch." />
+</Frame>
+
+<Frame caption="Optional settings switched on: short calls skipped, one account ticked, and a value per lead.">
+  <img className="block dark:hidden" src="/images/integrations/google-local-services-ads/lsa-06-source-options.png" alt="The Google LSA source with Skip short calls on at 30 seconds, Count every LSA account off with one account ticked, and Give each lead a value on at 150." />
+  <img className="hidden dark:block" src="/images/integrations/google-local-services-ads/lsa-06-source-options-dark.png" alt="The Google LSA source with Skip short calls on at 30 seconds, Count every LSA account off with one account ticked, and Give each lead a value on at 150." />
+</Frame>
+
+6. Click **Submit**. Within about 5 minutes Cortana counts your Local Services Ads leads from the last 30 days, and from then on it checks for new ones every 5 minutes.
+
+<Note>
+  **One Google LSA source per conversion event.** To count LSA leads in a second event as well, add Google LSA to that event too. Each event keeps its own settings.
+</Note>
+
+## Step 5: Import your older leads (optional)
+
+Right after you click **Submit**, the **Backfill your history** dialog opens.
+
+1. Under **How far back?**, pick **30 days**, **60 days** or **90 days**. Your last 30 days are already counted, so **30 days** finds next to nothing. Pick **60 days** or **90 days**.
+2. Click **Preview my last 90 days** (the button names the window you picked). Cortana shows how many leads it can import before anything is imported. Check the numbers, then confirm.
+3. You can close the dialog while it runs. The import keeps going.
+
+Not ready? Click **Skip for now**. You can run the import later from the clock icon on the source's row.
+
+Imported leads follow the same settings as the source, and each one is dated when the lead came in. For the full import guide, see [Backfill History](/4-backfill-history).
+
+<Frame caption="The import offer that opens after you save the source.">
+  <img className="block dark:hidden" src="/images/integrations/google-local-services-ads/lsa-07-import-offer.png" alt="The Backfill your history dialog for Google LSA: the How far back? choices of 30, 60 and 90 days, the note that leads from the last 30 days are added automatically within minutes, and the Skip for now and Preview my last 90 days buttons." />
+  <img className="hidden dark:block" src="/images/integrations/google-local-services-ads/lsa-07-import-offer-dark.png" alt="The Backfill your history dialog for Google LSA: the How far back? choices of 30, 60 and 90 days, the note that leads from the last 30 days are added automatically within minutes, and the Skip for now and Preview my last 90 days buttons." />
+</Frame>
+
+<Warning>
+  **Already counting LSA leads another way?** If a webhook, Zapier or your CRM already sends LSA leads into this conversion event, switch that source off before you import, or every lead counts twice. See [I already track LSA leads with a webhook](#i-already-track-lsa-leads-with-a-webhook-or-zapier) in the FAQ.
+</Warning>
+
+## Step 6: See your LSA leads
+
+**In your reports.** LSA leads sit inside **Google Ads**, as a campaign named **Local Services Ads · 123-456-7890**, where the number is your Google Ads customer ID. Your LSA spend is on the same row, so conversions, cost per lead and return on ad spend all line up. Drill down from **Google Ads** to see the campaign.
+
+**On the contact.** Open a contact who came from Local Services Ads and select the **Journey** tab. A **Google LSA** card lists each of their leads with its type, its status, whether Google charged for it, and when it came in. Click a lead to see:
+
+- its calls, with the length and an **Open recording in Google** link (it opens in Google Ads, where you are signed in), and
+- its messages, marked **Customer** or **You**.
+
+<Frame caption="A contact's Journey tab: the Google LSA card with one lead opened.">
+  <img className="block dark:hidden" src="/images/integrations/google-local-services-ads/lsa-08-journey-card.png" alt="A contact's Journey tab with the Google LSA card. A Call lead is open, showing Active and Charged, a call with its length and an Open recording in Google link, and a Message lead below it." />
+  <img className="hidden dark:block" src="/images/integrations/google-local-services-ads/lsa-08-journey-card-dark.png" alt="A contact's Journey tab with the Google LSA card. A Call lead is open, showing Active and Charged, a call with its length and an Open recording in Google link, and a Message lead below it." />
+</Frame>
+
+That is the whole setup. The rest of this page explains how counting works, every setting, and what to do when something looks off.
+
+## How it works
+
+<AccordionGroup>
+  <Accordion title="How often Cortana checks, and how far back">
+    Every 5 minutes Cortana reads the leads created in the last 48 hours for each of your LSA accounts. Once an hour it reads the last 30 days instead, so a lead whose status or charge changed later is caught too. Each lead is watched for 30 days after it came in.
+
+    Google can take a little while to list a new lead, so the first check after a call does not always have it yet. The next one will.
+  </Accordion>
+
+  <Accordion title="Which leads count: charged, every lead, or booked">
+    - **When Google charges for it** (the default): only the leads Google bills you for. This matches your Google invoice, so your cost per lead is honest. A lead Google credits back comes off again, like a refund.
+    - **Every lead**: every call, message and booking, including the ones Google does not charge for, such as short or repeat calls.
+    - **When it's marked booked**: only leads you mark **Booked** inside Local Services Ads. Use it for an event like "Job booked". It depends on you, or your team, marking leads in Google.
+
+    A message lead counts exactly like a call. Follow-up messages inside the same conversation are history on the contact, not new conversions.
+  </Accordion>
+
+  <Accordion title="Credits: when Google refunds a lead">
+    With **When Google charges for it**, a lead Google credits back is removed from this source on the next check. It moves to the **Deleted Audit Log** sub-tab, and hovering the row says Google credited it. Restoring it there only brings it back until the next check. To keep credited leads, set the source to **Every lead**. A send already made to Meta, TikTok or LinkedIn stays sent, as with any refund.
+  </Accordion>
+
+  <Accordion title="The date of an LSA conversion">
+    Every LSA conversion is dated when the lead came in. Cortana reads Google's time in your Google Ads account's time zone, so the date is right wherever you view it. That holds for booked leads too: Google does not say when a lead was marked booked, so a lead booked three days later still counts on the day the customer called.
+  </Accordion>
+
+  <Accordion title="Where LSA leads show up in your reports">
+    LSA leads sit inside **Google Ads**, in a campaign named **Local Services Ads · 123-456-7890** (your Google Ads customer ID), with the ad set **Local Services Ads · 123-456-7890 (campaign total)**. That is exactly where your LSA spend already sits, so leads and spend share one row.
+
+    If your Local Services Ads run as a **Performance Max** campaign, that campaign keeps its own name, and each lead lands on the asset group that serves its category.
+
+    Under **Last Click** and **Paid Priority**, an LSA lead is always credited to its own LSA campaign: the call or message is the ad interaction itself. **First Click** can still show an earlier touch if the caller visited your website before they called.
+  </Accordion>
+
+  <Accordion title="Contacts: how leads are matched">
+    Each lead is matched to a contact by the caller's real phone number, and by their email when Google includes one. If no contact matches, Cortana creates one. A lead never creates two contacts, even when several conversion events count it.
+
+    If Google ever hides a caller's number behind a tracking number, the lead gets a contact with the name only, so it can never merge into someone else by mistake.
+
+    New LSA contacts reach your connected CRM the same way CallRail callers do.
+  </Accordion>
+
+  <Accordion title="Credit a later booking or sale to the LSA campaign">
+    If your CRM marks the job booked or sold later (for example GoHighLevel or HubSpot), open that conversion's settings and set **Mirror Attribution** to the conversion that counts your Google LSA leads. The booking or sale then credits the same Local Services Ads campaign as the lead.
+
+    It works even when the CRM booking reaches Cortana before the lead does: the booking picks up the lead's campaign as soon as the lead arrives.
+  </Accordion>
+
+  <Accordion title="Sending LSA leads to Meta, TikTok and LinkedIn">
+    LSA leads are never uploaded to Google Ads as conversions: Google already counts its own Local Services Ads leads, and an upload would credit them to your Search campaigns instead.
+
+    Meta, TikTok and LinkedIn follow the settings of the conversion event the source belongs to, for leads less than 7 days old. Older leads, including imported ones, are never sent to an ad platform.
+  </Accordion>
+
+  <Accordion title="Turning the source off, and paused events">
+    To stop counting, switch the Google LSA source off in the conversion's **Sources** list. It is never deleted: adding **Google LSA** to the same event again turns that source back on with your new settings.
+
+    A Google LSA source in a paused conversion event counts nothing. When you turn the event back on, Cortana counts the leads it missed, as long as they are less than 30 days old.
+  </Accordion>
+
+  <Accordion title="Settings reference">
+    | Setting | Default | Our recommendation |
+    | --- | --- | --- |
+    | **Calls** / **Messages** / **Bookings** | All on | Keep all on. Messages are real leads and Google charges for them. |
+    | **Skip short calls** | Off, 30 seconds when on | Most useful with **Every lead**: Google already leaves many short calls uncharged. |
+    | **When a lead counts** | **When Google charges for it** | Keep the default for a "Lead" event. Use **When it's marked booked** for a "Booked" event. |
+    | **Count every LSA account** | On | Turn it off when one Google login runs LSA for several businesses, and tick only this business's account. |
+    | **Give each lead a value** | Off | Set your average lead value if you report on return on ad spend. |
+  </Accordion>
+</AccordionGroup>
+
+## Troubleshooting
+
+<AccordionGroup>
+  <Accordion title="The card says Choose LSA account, but I connected Google Ads">
+    None of the Google Ads accounts you selected runs Local Services Ads. Click **Choose LSA account** and tick the account that does. If you are not sure which one it is, open Google Ads and look for the account with a campaign of type **Local Services**.
+  </Accordion>
+
+  <Accordion title="An account says Can't be read">
+    Google refused the read. The dialog shows *We keep retrying. If it stays like this, check your Google login can still open this account.* and the error Google gave. Check that the Google login you connected Cortana with can still open the account in Google Ads. If the card asks you to, click **Reconnect Google Ads**.
+  </Accordion>
+
+  <Accordion title="The dialog says Google Ads needs reconnecting">
+    Google stopped accepting Cortana's connection, so new LSA leads may not arrive. Click **Reconnect Google Ads** in the dialog and sign in to Google again. Leads from the last 30 days are picked up once the connection works again.
+  </Accordion>
+</AccordionGroup>
+
+## FAQ
+
+<AccordionGroup>
+  <Accordion title="Why don't I see a call that just happened?">
+    Cortana checks Google every 5 minutes, and Google can take a little while to list a new lead, so give it a few checks. Also, under **When Google charges for it** a lead only counts once Google has charged for it.
+  </Accordion>
+
+  <Accordion title="Why are some of my LSA calls not counted?">
+    With the default **When Google charges for it**, only leads Google bills you for count. Google does not charge for every call, for example short calls or repeat callers. To count every call, set the source to **Every lead**. If **Skip short calls** is on, calls under that length do not count either.
+  </Accordion>
+
+  <Accordion title="Why did an LSA lead disappear from my conversions?">
+    Google credited it back to you. Under **When Google charges for it**, a credited lead is removed, like a refund, and listed in the **Deleted Audit Log**. Set the source to **Every lead** if you want credited leads kept.
+  </Accordion>
+
+  <Accordion title="Why don't my numbers match the Local Services Ads dashboard?">
+    Check three things. Your source may count charged leads only, while the dashboard shows every lead. Cortana dates each lead when it came in, not when it was charged or booked. And both screens must cover the same dates.
+  </Accordion>
+
+  <Accordion title="Why is my LSA campaign called Local Services Ads with a number?">
+    Google gives Local Services Ads campaigns a machine name. Cortana names the campaign **Local Services Ads** plus your Google Ads customer ID, so it is readable and never changes, even if you rename the account in Google.
+  </Accordion>
+
+  <Accordion title="I already track LSA leads with a webhook or Zapier">
+    Switch to Google LSA in one sitting so nothing counts twice:
+
+    1. Add **Google LSA** to the same conversion event.
+    2. Switch off the old webhook source, and the Zap or automation that feeds it.
+    3. Within 5 minutes Google LSA counts your last 30 days of leads. The old webhook conversions from those 30 days are now the same leads twice: select them in the event's conversions and delete them. Each deletion lands in the **Deleted Audit Log** and can be restored.
+    4. Skip the history import, or the older leads count twice as well.
+  </Accordion>
+
+  <Accordion title="Are LSA leads sent to Google Ads as conversions?">
+    No. Google already counts its own Local Services Ads leads, so Cortana never uploads them. Meta, TikTok and LinkedIn follow your conversion event's settings, for leads less than 7 days old.
+  </Accordion>
+
+  <Accordion title="Can I count LSA leads from several Google Ads accounts?">
+    Yes. Select every account in your Google Ads account list. The source counts all of them by default; turn off **Count every LSA account** to choose which ones count in each conversion event.
+  </Accordion>
+</AccordionGroup>
+
+## Next step
+
+<CardGroup cols={2}>
+  <Card title="Backfill History" icon="clock-rotate-left" href="/4-backfill-history">
+    Import older leads for Google LSA and your other sources.
+  </Card>
+  <Card title="Customer Journey Views" icon="route" href="/8-customer-journey-views">
+    Read a contact's journey, including their Google LSA calls and messages.
+  </Card>
+</CardGroup>

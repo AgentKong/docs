@@ -62,7 +62,7 @@ You will find it in **Ad Tracking → Conversion Setup**, on the source's own ro
 
 ## Which sources can be imported
 
-Fourteen tools can be imported. How far back you can go depends on how much history each tool will give us.
+Fifteen tools can be imported. How far back you can go depends on how much history each tool will give us.
 
 | Tool | Furthest back you can go | What arrives |
 | --- | --- | --- |
@@ -77,6 +77,7 @@ Fourteen tools can be imported. How far back you can go depends on how much hist
 | CallRail | 90 days | Only what Cortana can explain |
 | Shopify | 60 days | Only what Cortana can explain |
 | Close | 30 days | Only what Cortana can explain |
+| Google Local Services Ads | 90 days | Only what Cortana can explain |
 | Whop | Back to the day you connected Whop | Everything, shown as untracked |
 | Cal.com | 90 days | Everything, shown as untracked |
 | Kajabi | 90 days | Everything, shown as untracked |
@@ -88,6 +89,8 @@ Fourteen tools can be imported. How far back you can go depends on how much hist
 **Cal.com** imports bookings that were created. Cancellations and reschedules cannot be imported, because Cal.com does not record when either actually happened.
 
 **Kajabi** imports payments and purchases. Orders and form submissions cannot be imported: an order is not money yet, and a form submission carries no date to file the conversion under.
+
+**Google Local Services Ads** imports leads older than 30 days. Your last 30 days are counted on their own within minutes of saving the source, so the import only has to bring in the older ones.
 
 ### Why 90 days does not always mean 90 days
 
@@ -432,6 +435,8 @@ On those two, Cortana asks for as much as the tool allows and imports that. You 
     **Shopify.** Only sources built on the **orders/paid** and **orders/create** events can be imported. Other Shopify events cannot. Shopify reaches back 60 days.
 
     **Close.** Close reaches back 30 days, because Close itself only keeps 30 days of the record Cortana reads.
+
+    **Google Local Services Ads.** Your last 30 days of leads are counted on their own within minutes of saving the source, so the import brings in the leads older than that. The **30 days** button therefore finds next to nothing: pick **60 days** or **90 days**. The preview shows a lead count with no estimate of how many will import, because an LSA lead carries its own Google Ads attribution. With **Skip short calls** on, the preview says **At least**: it only knows the call lengths Cortana already holds, and the import reads the rest.
 
     **Stripe.** The preview gives you a record count but no estimate of how many will import, because checking a payment properly means running the full process on it. The import still leaves out anything it cannot answer for.
 

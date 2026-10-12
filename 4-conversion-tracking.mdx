@@ -724,6 +724,80 @@ Every source is added the same way. Follow these six steps, then open your sourc
     </Tip>
   </Accordion>
 
+  <Accordion title="Google Local Services Ads">
+    **What it tracks:** the leads your Local Services Ads bring in: phone calls, messages and bookings. Each lead becomes one conversion, credited to the Local Services Ads campaign it came from and dated when the lead came in. The full guide, from connecting to your reports, is [Google Local Services Ads](/13-google-local-services-ads).
+
+    **Prerequisite integration:** Google Ads, with a selected account that runs Local Services Ads. There is nothing separate to connect: LSA leads arrive through your Google Ads connection. When Google Ads is not connected, the form shows **Connect Google Ads first** with a **Connect Google Ads** button. When none of your selected accounts runs Local Services Ads, it shows **Choose the Google Ads account that runs your Local Services Ads** with a **Choose Google Ads accounts** button. See [Connecting Google Local Services Ads](/1-connect-integrations#connecting-google-local-services-ads).
+
+    <Steps>
+      <Step title="Pick Google LSA in the Integration dropdown">
+        The form asks its questions in order: which leads count, when a lead counts, which accounts, and what a lead is worth. Every question has a default, so you can save straight away.
+      </Step>
+
+      <Step title="Choose which leads count">
+        Under **Which leads count**, three tiles are on by default: **Calls**, **Messages** and **Bookings**. Untick any you do not want counted. A message lead counts exactly like a call.
+
+        With **Calls** on, a **Skip short calls** switch appears. It is off by default. Turn it on to set **Calls shorter than** a number of **seconds don't count.** It starts at 30 seconds.
+      </Step>
+
+      <Step title="Choose when a lead counts">
+        Under **When a lead counts**:
+
+        | Option | Counts |
+        | --- | --- |
+        | **When Google charges for it** (the default, recommended) | Leads Google bills you for. A lead Google credits back comes off again, like a refund |
+        | **Every lead** | Every lead, including the ones Google does not charge for |
+        | **When it's marked booked** | Only leads you mark **Booked** in Local Services Ads |
+      </Step>
+
+      <Step title="Choose the accounts (only when you have more than one)">
+        This question only appears when more than one of your selected Google Ads accounts runs Local Services Ads. **Count every LSA account** is on by default. Turn it off to tick the accounts this source counts.
+      </Step>
+
+      <Step title="Give each lead a value (optional)">
+        **Give each lead a value** is off by default. Turn it on and enter a fixed amount per lead, for example 150. The amount is in the Google Ads account's currency.
+      </Step>
+
+      <Step title="Save">
+        Click **Submit**. Cortana counts your last 30 days of Local Services Ads leads within about 5 minutes, then keeps checking every 5 minutes. Cortana then offers to [import your older leads](/4-backfill-history).
+      </Step>
+    </Steps>
+
+    <Note>
+      **LSA leads are not instant.** Google sends no webhook for Local Services Ads, so Cortana checks for new leads every 5 minutes. A lead from a minute ago may not be there yet.
+    </Note>
+
+    <AccordionGroup>
+      <Accordion title="Where LSA leads show up in your reports">
+        LSA leads sit inside **Google Ads**, as a campaign named **Local Services Ads · 123-456-7890** (your Google Ads customer id). Your Local Services Ads spend was already in Google Ads, so leads and spend now share the same row, and your cost per lead is real. A Performance Max campaign that runs Local Services Ads keeps its own name, and the lead lands on the asset group that serves its category.
+      </Accordion>
+
+      <Accordion title="Credits: a lead Google refunds">
+        With **When Google charges for it**, a lead Google credits back is removed from this source on the next check. It moves to the **Deleted Audit Log** sub-tab, where hovering the row says Google credited it. Restoring it there only brings it back until the next check. To keep credited leads, set the source to **Every lead**. A send already made to Meta, TikTok or LinkedIn stays sent, as with any refund.
+      </Accordion>
+
+      <Accordion title="Booked leads and their date">
+        **When it's marked booked** counts a lead once you mark it **Booked** inside Local Services Ads. Every LSA conversion, booked or not, is dated when the lead came in, never the day it was marked booked: Google does not say when a lead was booked.
+      </Accordion>
+
+      <Accordion title="Contacts and masked phone numbers">
+        Each lead is matched to a contact by its real phone number, and by its email when Google includes one. When Google hides the caller's number behind a tracking number, the lead gets a contact with the name only, so it never merges into someone else by mistake. A booking or sale that arrives later from your CRM cannot be tied to that lead by phone.
+      </Accordion>
+
+      <Accordion title="Credit a later booking or sale to the LSA campaign">
+        If your CRM marks the job as booked or sold later (for example GoHighLevel or HubSpot), open that conversion's settings and set **Mirror Attribution** to the conversion that counts your Google LSA leads. The booking or sale then credits the same Local Services Ads campaign as the lead. It works even when the CRM booking arrives before Cortana reads the lead: the booking picks up the lead's campaign as soon as the lead arrives.
+      </Accordion>
+
+      <Accordion title="Sending LSA leads to ad platforms">
+        LSA leads are never uploaded to Google Ads as conversions: Google already counts its own Local Services Ads leads, and an upload would credit them to your Search campaigns instead. Meta, TikTok and LinkedIn follow the settings of the conversion this source belongs to, for leads less than 7 days old.
+      </Accordion>
+
+      <Accordion title="Calls and messages on the contact">
+        Open a contact who came from Local Services Ads: a **Google LSA** card sits at the top of their journey. It lists each lead with its type, its status, and whether Google charged for it or credited it back. Open a lead to see its calls, with their length and an **Open recording in Google** link (it opens in Google Ads, signed in), and its messages.
+      </Accordion>
+    </AccordionGroup>
+  </Accordion>
+
   <Accordion title="HubSpot">
     **What it tracks:** form submissions, meetings, deal stage changes, and contact property changes in HubSpot. Deal events can carry revenue.
 
