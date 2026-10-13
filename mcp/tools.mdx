@@ -619,6 +619,33 @@ New. These tools let the assistant set up your tracking the way you would on the
 
 ---
 
+# Slack tools
+
+{/* last-verified: 2026-10-13 · src/lib/mcp/media-buyer-mcp-slack.ts */}
+
+New. These tools let the assistant work in the Slack workspace connected to a business: list and create channels, choose the channel where the AI Media Buyer posts its proposals, and add your teammates to a channel. They need the media buyer opt-in on the consent screen (**Let (your assistant) act on your media buyer decisions**), Slack connected for the business in Cortana, and the AI Media Buyer switched on for it. See [Run your Slack channels from chat](/mcp/overview#run-your-slack-channels-from-chat) for the walkthrough.
+
+## Channels
+
+| Tool | What it does |
+| --- | --- |
+| `list_slack_channels` | The channels Cortana can see in the business's workspace, with which one the AI Media Buyer posts into, which ones another business's AI Media Buyer already uses, and whether Cortana's Slack app is in each. Filter by part of a name; page with the cursor. |
+| `create_slack_channel` | Create a public channel. With `connectMediaBuyer` it also becomes the business's AI Media Buyer channel, named from your agency's naming template when no name is given. A name that already exists answers that channel instead of making a copy. A business whose AI Media Buyer already has a channel keeps it unless `replaceExisting` is set. |
+| `connect_slack_channel` | Make an existing channel (by name or ID) the AI Media Buyer's channel. Cortana's Slack app joins a public channel on its own. The reply says where the AI Media Buyer posted before and where it posts now. |
+
+## People
+
+| Tool | What it does |
+| --- | --- |
+| `list_slack_teammates` | The people in the workspace: Slack ID, full name, display name, username, and whether they are a guest. Deleted accounts and bots are left out. |
+| `invite_to_slack_channel` | Add up to 50 people to a public channel by name or Slack ID. The reply has one line per person: invited, already in the channel, a guest Slack keeps out, several people match, not found, or not attempted (with the reason). |
+
+<Note>
+  Every channel created or connected and every invite is logged. Inviting people into private channels is not available yet.
+</Note>
+
+---
+
 # Business Info
 
 These tools read and update a business's company profile, the details under **Settings → Business Info**. For example, the assistant can add a new city when a client starts serving it. There is no extra checkbox on the consent screen: every change checks that the person behind the connection has the **Manage general settings** permission in Cortana.
