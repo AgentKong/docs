@@ -1,0 +1,131 @@
+---
+title: "iMessage in Conversations"
+description: "What an iMessage thread shows in the Cortana inbox and what you can do from it: delivered and read receipts, tapbacks, voice notes, photos and files, and calling a lead from your iMessage line."
+---
+
+{/* last-verified: 2026-10-12 · app route: /business/<businessId>/conversations (an iMessage thread) */}
+
+# iMessage in Conversations
+
+An iMessage thread sits in **Conversations** next to your SMS, WhatsApp and email threads. It looks like a phone: delivered and read marks under your bubbles, tapbacks on messages, voice notes you can play, photos and files, and a call button that rings you first and then the lead from the same number they text with.
+
+Everything here works for a line that is **Live**. If the business has no live line yet, the controls say so, for example *This business has no live iMessage line yet.*
+
+## Delivered and read
+
+Under each message you or your agent sent, the thread shows what iMessage reported:
+
+- **Delivered**, once the lead's phone received it.
+- **Read**, with the time, when the lead has read receipts on.
+- **Not delivered**, when iMessage refused it.
+- Nothing yet, right after sending or while a message is held by the daily cap. See [Today's caps](/platform/business/imessage-line#todays-caps).
+
+A message that went out as a green-bubble SMS, because the lead's number is not on iMessage, cannot show these marks.
+
+## Tapbacks
+
+A tapback is the small reaction iMessage puts on a bubble: a heart, a thumbs-up, a thumbs-down, a laugh, emphasis or a question mark.
+
+**When a lead tapbacks your message**, the badge appears on your bubble and the thread reads it as **Loved**, **Liked**, **Disliked**, **Laughed at**, **Emphasized** or **Questioned**.
+
+**To tapback a lead's message yourself**, hover over the bubble, click the button labelled **React to this message**, and pick one in the **Tapbacks** menu. The thread notes *Your line reacted with a heart* (or a thumbs-up, a laugh, and so on). Picking the same one again removes it, exactly as on a phone.
+
+**To let your agent tapback**, turn on **Mirror the lead's tone** on [your line's card](/platform/business/imessage-line#the-two-switches). Your agent may then react with a heart, a laugh or a thumbs-up when a lead's message calls for it, at most once a day per contact. It is off by default.
+
+## Voice notes
+
+There are two kinds, and both arrive on the lead's phone as a native iMessage voice note they tap to play.
+
+**A spoken reply.** Type your words in the composer and turn on **Send as voice note**. An AI voice speaks the text and sends it as a voice note. The switch is only available on a live line, from the second message to a contact onward, and for up to 600 characters (about a minute). When one of those does not hold, the words go out as text and the thread says why: *Sent as text: the first message to a contact is always text.*, *Sent as text: too long for a voice note.*, or *Sent as text: voice notes are unavailable right now.*
+
+**A recorded voice note.** Attach an audio file (MP3, M4A or WAV) and send. It is delivered as a voice note, not as a file.
+
+To let your agent reply in voice, turn on **Reply with voice notes** on [your line's card](/platform/business/imessage-line#the-two-switches). Your agent's text replies are then spoken by the line's voice. The first message to a new contact always stays text, and so does any reply over 600 characters.
+
+## Photos and files
+
+From the composer you can attach up to **two files per message**, each up to **25 MB**: photos (PNG, JPEG, GIF, WebP, HEIC), videos (MP4, MOV) or audio (MP3, M4A, WAV). The lead sees them inline.
+
+The first message to a new contact is text only. That is one of the iMessage rules, and Cortana enforces it: a file on a first message is held and the words go out as text. From the lead's first reply on, files go through.
+
+Photos and files a lead sends you appear in the thread. When a lead sends a burst of photos at once, the first ones appear immediately and the rest follow within a couple of minutes.
+
+## Calling a lead from your iMessage line
+
+You can call a lead from the same number they text with. The call is a bridge: your phone rings first, and when you pick up, the lead's phone rings and you are connected. The recording lands in the thread when the call ends.
+
+<Steps>
+  <Step title="Open the thread and click Call from the iMessage line">
+    In an iMessage thread, open the conversation actions at the top and click **Call from the iMessage line**. The dialog is titled **Call &lt;the lead's name&gt;** and reads *We call you, then connect the lead.*
+  </Step>
+  <Step title="Choose which number rings first">
+    Under **Which number should ring first?**, enter **Your phone number (US or Canada)**. The dialog repeats it back: *Your phone will ring first, then we connect &lt;name&gt;.* Calls are US and Canada only.
+  </Step>
+  <Step title="Pick up, then talk">
+    Click the call button. Your phone rings within a few seconds. Pick up, and the lead's phone rings from your iMessage number. Hang up on either side to end the call.
+  </Step>
+  <Step title="Find the call in the thread">
+    A call row appears in the thread with the time and the duration. Click **Play recording** to listen. While the recording is still being prepared the row says *Loading recording…*, and a call nobody answered reads *No recording for this call*.
+  </Step>
+</Steps>
+
+If a line is not yet enabled for calling, the dialog says *This iMessage line is not set up for calls yet.* Reply to any of our emails and we will switch it on. If a call to the same lead is already running, you see *A call to this contact is already in progress.*
+
+<AccordionGroup>
+  <Accordion title="What the daily cap does to a message">
+    A line sends at most 150 messages a day and reaches at most 50 new contacts a day. A message past the cap is accepted and held, then delivered after midnight UTC. Its bubble sits without a **Delivered** mark until then. It is never dropped.
+  </Accordion>
+  <Accordion title="What your agent does on an iMessage thread">
+    The same agent that handles your other channels handles iMessage. When a lead writes, the agent reads the whole thread, including photos and voice notes the lead sent, and replies within its usual delay. Turn on **Reply with voice notes** for spoken replies and **Mirror the lead's tone** for tapbacks. Take a thread over at any time with the usual AI or human switch.
+  </Accordion>
+  <Accordion title="Voice note limits">
+    - 600 characters at most, about a minute of audio. Longer replies go out as text.
+    - Never on the first message to a contact. That message is always text.
+    - Audio files you attach (MP3, M4A, WAV) are delivered as voice notes; the lead taps to play.
+    - Spoken replies cost a small per-note fee from your wallet. If the wallet cannot cover it, the words go out as text and the thread says *Sent as text: the voice-note budget is used up.*
+  </Accordion>
+  <Accordion title="Call limits">
+    - Your phone and the lead's must be US or Canadian numbers.
+    - One call per lead at a time.
+    - The line must be enabled for calling. New lines are enabled on request.
+    - Calls use the line's monthly calling minutes. When they are used up, the dialog says *This line has used this month's calling minutes.* and the call is not placed.
+    - Recordings stay in the thread with the call row.
+  </Accordion>
+  <Accordion title="Why a message went out as SMS">
+    The lead's number is not on iMessage, or iMessage could not reach it. The message falls back to a carrier SMS, green bubble, and its delivery is not guaranteed. The weekly **SMS fallback** count on your line's card tracks how often this happens.
+  </Accordion>
+</AccordionGroup>
+
+## FAQ
+
+<AccordionGroup>
+  <Accordion title="Why did my voice note go out as text?">
+    One of three reasons, and the thread names it: it was the first message to that contact, it was over 600 characters, or voice notes were unavailable at that moment. Shorten it or wait for the lead's reply and send again.
+  </Accordion>
+  <Accordion title="Why can't I attach a photo to my first message?">
+    Apple treats a photo, link or voice note from a number the lead has never heard from as spam. The first message is text only, always. Once the lead replies, attach anything.
+  </Accordion>
+  <Accordion title="The lead sent me seven photos and I only see five.">
+    Large bursts arrive in two waves: the first photos right away, the rest within a couple of minutes. If some never arrive, reply to any of our emails with the thread and we will look.
+  </Accordion>
+  <Accordion title="Can my AI agent make or answer calls?">
+    Not yet. Calls from the line are human calls: your phone rings first, then the lead's. AI calling is on the roadmap.
+  </Accordion>
+  <Accordion title="Why don't I see Read under my message?">
+    The lead has read receipts turned off, or has not opened it yet. **Delivered** means it reached their phone.
+  </Accordion>
+  <Accordion title="Can I remove a tapback I sent by mistake?">
+    Yes. Open **React to this message** on the same bubble and pick the same tapback again. It is removed on the lead's phone too.
+  </Accordion>
+</AccordionGroup>
+
+## Next step
+
+<CardGroup cols={2}>
+  <Card title="Your iMessage line" icon="phone" href="/platform/business/imessage-line">
+    The card with the status, today's caps and the two switches.
+  </Card>
+  <Card title="iMessage in GoHighLevel workflows" icon="diagram-project" href="/platform/business/imessage-ghl-workflows">
+    Send a text, a voice memo, a spoken note or place a call from a workflow step.
+  </Card>
+</CardGroup>

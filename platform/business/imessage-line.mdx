@@ -1,0 +1,127 @@
+---
+title: "Your iMessage line"
+description: "The iMessage line page in Cortana: where to find it, what the status means, today's caps, the last 7 days, the voice note and tapback switches, invoices and how to cancel."
+---
+
+{/* last-verified: 2026-10-12 · app route: /business/<businessId>/imessage (also Settings → Phone / iMessage → iMessage / Blue Bubble) */}
+
+# Your iMessage line
+
+Your iMessage line is a real phone number that sends blue-bubble iMessages to your leads. Your AI agent and your reps text from it, and every thread lands in **Conversations** like any other channel. This page shows you one card: the number, whether it is live, how much of today's allowance is used, how the last week went, and the two switches that change how your agent behaves on the line.
+
+If you do not have a line yet, the same page offers **Get an iMessage line**. That flow is covered in [Get an iMessage line](/platform/business/imessage-get-a-line).
+
+## Where to find it
+
+1. Open your business and click **Settings** in the left menu.
+2. Open the **Phone / iMessage** tab.
+3. Pick **iMessage / Blue Bubble** at the top. The other option, **SMS / Green Bubble**, is your ordinary SMS numbers.
+
+The card is titled **Your iMessage line**.
+
+## What the card shows
+
+| Part of the card | What it tells you |
+| --- | --- |
+| The number and the sender | The phone number your leads see, and the name of the person who texts from it. |
+| Status pill | One word for the line's health: **Setting up**, **Ready**, **Live**, **Needs attention**, **Down**, **Getting a new number** or **Ended**. A sentence under it says what, if anything, you should do. See [What each status means](#what-each-status-means). |
+| **New contacts today** | How many new people the line has texted today, out of 50. |
+| **Messages today** | How many messages went out today, out of 150. Both counters show **Resets at midnight UTC**. |
+| **Last 7 days** | Sent, delivered, read and replied counts for the week, plus how many failed or went out as SMS. |
+| **Reply with voice notes** | A switch. Off by default. See [The two switches](#the-two-switches). |
+| **Mirror the lead's tone** | A switch. Off by default. See [The two switches](#the-two-switches). |
+| **Invoices** | Appears only if automatic billing ever fails. Otherwise it reads **No invoices yet**. |
+| **Cancel my line** | Ends the line at the end of the current billing period. |
+
+## What each status means
+
+Every status comes with a sentence written for you, not a technical code. These are the sentences you can see and what to do about each.
+
+| Status | The sentence on the card | What to do |
+| --- | --- | --- |
+| **Setting up** | *The carrier is activating your number. Usually 24–48 hours.* | Nothing. We email you the moment it is live. |
+| **Ready** | *Your number is active and being switched on.* | Nothing. Your agent is being moved onto the line. The card also says *We are switching your agent over.* |
+| **Live** | The number and the sender's name. | Text away. |
+| **Needs attention** | *More messages than usual are failing. Cut new contacts in half for 24 hours.* or *Many recent messages did not reach iMessage. Text only people who opted in.* | Slow down for a day. Text only people who gave you their number. |
+| **Down** | *Messages from this number are failing. We are checking the line.* or *Apple or the carrier stopped this number. We are on it, no action needed unless we email you.* | Nothing. We are already on it. Sending is not paused by this status, but delivery will be poor until it clears. |
+| **Getting a new number** | The pill alone, while a replacement number is on its way. | Nothing. The replacement rules are in [The rules](/platform/business/imessage-get-a-line#step-2-the-rules). |
+| **Ended** | *Your line has ended.* | Buy a new line if you want one. An ended number cannot come back. |
+
+The status is checked every ten minutes. The card shows **Last checked** with how long ago, or **Not checked yet** right after an order.
+
+## Today's caps
+
+Each line can reach **50 new contacts a day** and send **150 messages a day**. These are the carrier's limits that keep the number healthy, and they are never lifted. Both counters reset at midnight UTC.
+
+When a cap is reached, a message you or your agent send is accepted and held, then delivered after the reset. In the thread the bubble sits without a **Delivered** mark until then. Nothing is lost.
+
+## The two switches
+
+Both switches live on the card and are **off** until you turn them on. They apply only to your AI agent. Your reps can always send a voice note or a tapback by hand from the inbox.
+
+**Reply with voice notes.** *Your agent's replies go out as spoken voice notes in the line's voice.* With this on, your agent's text replies are spoken by an AI voice and sent as native iMessage voice notes. Two cases always go out as text instead: the first message to a new contact (that is an iMessage rule), and a reply longer than 600 characters, which is about a minute of audio.
+
+**Mirror the lead's tone.** *Your agent may react with a tapback (love, laugh, thumbs-up) when a lead's message calls for it, at most once a day per contact.* With this on, your agent can tap back on a lead's message the way a person would, never more than once per contact per day.
+
+Both are described in more detail in [iMessage in Conversations](/platform/business/imessage-in-the-inbox).
+
+## Billing
+
+A line costs a one-time setup fee of **\$497** and **\$297 a month per line**. The monthly fee is its own subscription on your card. If a card payment fails, the subscription retries like any other, and if it never recovers the line ends. Invoices appear in the **Invoices** section of the card only when automatic billing fails.
+
+To cancel, click **Cancel my line** on the card. The dialog **Cancel your iMessage line?** says *Ends at the end of your current billing period*. Choose **Cancel my line** to confirm or **Keep my line** to go back. Setup and subscription fees are non-refundable. If the button is not available for your line, the card says *To cancel this line, reply to any of our emails and we will sort it out.*
+
+<AccordionGroup>
+  <Accordion title="What the last 7 days counts">
+    The week's numbers come from Cortana's own delivery records for the line, not from the carrier.
+
+    - **Sent**: every message that left the line, from your agent, your reps and your GoHighLevel workflow steps.
+    - **Delivered** and **Read**: what iMessage reported back. A read receipt only arrives when the lead has read receipts on.
+    - **Replied**: threads where the lead wrote back.
+    - **Failed**: messages iMessage refused.
+    - **SMS fallback**: messages that went out as a green-bubble SMS because the number was not on iMessage. SMS delivery is not guaranteed.
+  </Accordion>
+  <Accordion title="How the status is decided">
+    The status is Cortana's own reading of the line, refreshed every ten minutes from the carrier's line record and from the last 24 hours of your own sends.
+
+    - **Needs attention** switches on when 5 percent or more of the last day's messages failed, or more than 20 percent were refused or fell back to SMS. No judgement is made under 10 sends.
+    - **Down** switches on after 7 failures in a row, or when more than 15 percent of the last day's messages failed, or when the carrier reports the number as stopped.
+    - **Ready** sits between **Setting up** and **Live**: the number is active and we are moving your agent onto it.
+
+    When a line goes **Live**, **Needs attention** or **Down**, our team is emailed once. You receive the **Live** email and a **Down** email.
+  </Accordion>
+  <Accordion title="Why you see SMS / Green Bubble next to iMessage / Blue Bubble">
+    The **Phone / iMessage** tab holds both kinds of number. **SMS / Green Bubble** is your ordinary SMS numbers and their registration. **iMessage / Blue Bubble** is this page. A business can have both; they do not share caps.
+  </Accordion>
+</AccordionGroup>
+
+## FAQ
+
+<AccordionGroup>
+  <Accordion title="Why does my line say Needs attention when I did not change anything?">
+    Too many of yesterday's messages failed or were refused. The usual cause is texting people who did not give you their number, or a lead marking a message as junk. Cut new contacts in half for a day and text only opted-in people. The status clears on its own when the next day looks healthy.
+  </Accordion>
+  <Accordion title="My message shows no Delivered mark. Is it lost?">
+    No. If the line hit its daily cap, the message is held and delivered after midnight UTC. If the lead is not on iMessage, it went out as an SMS and iMessage cannot confirm it. If the line is **Down**, delivery is poor until the status clears.
+  </Accordion>
+  <Accordion title="Can I raise the 50 contacts or 150 messages a day?">
+    No. The caps protect the number from being flagged, and they are not lifted. If you need more volume, buy a second line.
+  </Accordion>
+  <Accordion title="How do I change the name or photo on my line?">
+    Reply to any of our emails and ask. The sender must stay a real person with a real photo. That is one of the rules you agreed to when you bought the line.
+  </Accordion>
+  <Accordion title="Where do I see my monthly charge?">
+    On your card statement and in your billing portal, as its own subscription. The card on this page shows invoices only when a charge failed.
+  </Accordion>
+</AccordionGroup>
+
+## Next step
+
+<CardGroup cols={2}>
+  <Card title="Get an iMessage line" icon="phone" href="/platform/business/imessage-get-a-line">
+    The four things to know, the seven rules, the form and the payment.
+  </Card>
+  <Card title="iMessage in Conversations" icon="message" href="/platform/business/imessage-in-the-inbox">
+    Delivered and read, tapbacks, voice notes, files and calls from the line.
+  </Card>
+</CardGroup>
