@@ -1,0 +1,111 @@
+---
+title: "iMessage in GoHighLevel workflows"
+description: "The four Cortana iMessage steps you can add to a GoHighLevel workflow: Send Message, Voice Memo, AI Voice Note and Call Contact, what each field does, what the step logs when it cannot run, and the iMessage rules that apply."
+---
+
+{/* last-verified: 2026-10-12 · GoHighLevel marketplace actions → /api/ghl-action/imessage/{send,voice-memo,ai-voice-note,call} */}
+
+# iMessage in GoHighLevel workflows
+
+If your business runs on GoHighLevel, you can text, voice-note or call a contact from your iMessage line as a step in any workflow. The steps appear in the workflow builder once the Cortana app is installed on your location. Every step sends from the business's live iMessage line and mirrors what it sent into the contact's GoHighLevel conversation, so your GoHighLevel inbox and your Cortana inbox show the same thread.
+
+<Note>
+  **Before you start**
+
+  - A **Live** iMessage line on the Cortana business connected to this GoHighLevel location. See [Get an iMessage line](/platform/business/imessage-get-a-line). Without one, every iMessage step logs *This business has no live iMessage line* and does nothing.
+  - **GoHighLevel connected** to the business in Cortana, under **Settings → Integrations**.
+  - The contact in the workflow must have a **mobile number**. The step texts the contact's phone.
+</Note>
+
+## The four steps
+
+{/* TODO: verify the field labels as they appear in the GoHighLevel workflow builder (the marketplace action versions name them); the keys are imessageContent, imessageAttachment, voiceId, repPhone. */}
+
+| Step | What it does | Fields |
+| --- | --- | --- |
+| **iMessage - Send Message** | Sends a text, and optionally one file, from your line. | The message text (up to 5,000 characters). An optional attachment. |
+| **iMessage - Voice Memo** | Sends an audio file you provide as a native voice note. | The audio attachment. |
+| **iMessage - AI Voice Note** | Speaks the text you write with an AI voice and sends it as a voice note. | The message text (up to 600 characters). An optional voice. |
+| **iMessage - Call Contact** | Rings a rep, then dials the contact from your line. | An optional rep phone number. |
+
+All four follow the iMessage rules: the first message to a contact is text only, files are allowed from the second message on, and the line's daily caps apply (50 new contacts and 150 messages a day).
+
+## iMessage - Send Message
+
+Sends the text from your iMessage line to the contact's mobile number, then mirrors the text into the contact's GoHighLevel conversation once.
+
+- **Message**: the text. Use GoHighLevel custom values as you would in an SMS step. Up to 5,000 characters.
+- **Attachment** (optional): one file. On a first message to a contact the file is held and the words go out as text, per rule 5. From the second message on, the file is delivered inline.
+
+If the contact's number is not on iMessage, the message goes out as a carrier SMS. Delivery of an SMS fallback is not guaranteed.
+
+## iMessage - Voice Memo
+
+Sends an audio file as a native iMessage voice note. The contact taps to play it, exactly like a voice note from a friend.
+
+- **Attachment**: the audio file (MP3, M4A or WAV). Record it once, store it in your media library, and reference it here.
+
+The step refuses a first message to a contact, since a voice note is an attachment. Send a text first. When the step cannot run, the workflow log shows *iMessage voice memos need an active iMessage line*.
+
+## iMessage - AI Voice Note
+
+Writes nothing to a file: you type the words, an AI voice speaks them, and the contact receives a voice note. Use it for a personal-sounding follow-up without recording anything.
+
+- **Message**: the words to speak. Up to 600 characters, about a minute of audio. Custom values work here too, so the note can say the contact's first name.
+- **Voice** (optional): the voice to use. Leave it blank for the line's default voice.
+
+Rules that apply: never on the first message to a contact (the step sends the words as text instead), and over 600 characters the step sends text. Each spoken note costs a small fee from your wallet. When the step cannot run, the log shows *iMessage voice notes need an active iMessage line*.
+
+## iMessage - Call Contact
+
+Places a bridged call: a rep's phone rings first, and when they pick up, the contact's phone rings from your iMessage number. The call and its recording land in the contact's thread in Cortana.
+
+- **Rep phone** (optional): the US or Canadian number that should ring first. Leave it blank and the step rings the phone of the GoHighLevel user the contact is assigned to.
+
+The contact must be a US or Canadian number and must exist in Cortana (any contact who has ever been texted from the line does). When the step cannot run, the log shows the reason in plain words: no rep phone, a number outside the US or Canada, no live line, a call already in progress with this contact, the line's minutes used up, or a contact Cortana does not know. If GoHighLevel itself does not answer, the log reads *GoHighLevel did not answer; this step will be retried.* and GoHighLevel retries the step.
+
+<AccordionGroup>
+  <Accordion title="How a step is matched to your line">
+    Each GoHighLevel location is connected to one Cortana business. The step looks up that business's live iMessage line and sends from it. If the business has two lines, the step sends from the first one that went live. The contact is matched by their GoHighLevel id first, then by their phone number inside that business.
+  </Accordion>
+  <Accordion title="Retries never double-send">
+    GoHighLevel retries a step whose response it did not receive. Cortana keys every send on the step itself, so a retry of the same step for the same contact within 24 hours is one message, one voice note or one call, never two. A workflow built to send the identical text to the same contact twice in one day would send it once.
+  </Accordion>
+  <Accordion title="What the workflow log shows">
+    A step that could not run logs a sentence, not a code, for example *This business has no live iMessage line*, *iMessage voice memos need an active iMessage line*, or the call step's reasons listed above. A step GoHighLevel should retry (GoHighLevel was unreachable at that moment) logs *this step will be retried.*
+  </Accordion>
+  <Accordion title="Caps and timing">
+    Workflow sends count against the line's 50 new contacts and 150 messages a day, the same counters you see on your line's card. A send past the cap is held and goes out after midnight UTC. A workflow that enrolls hundreds of contacts at once will therefore trickle out over several days. Space your enrollments.
+  </Accordion>
+</AccordionGroup>
+
+## FAQ
+
+<AccordionGroup>
+  <Accordion title="Why did my workflow's voice memo go out as text?">
+    It was the first message to that contact. Attachments are allowed from the second message on. Put a **Send Message** step with a plain text before the voice memo, with a wait for the reply.
+  </Accordion>
+  <Accordion title="The step says This business has no live iMessage line but I have one.">
+    Check which Cortana business this GoHighLevel location is connected to under **Settings → Integrations**, and that its line is **Live** on [Your iMessage line](/platform/business/imessage-line). A line that is **Setting up** or **Ready** cannot send yet.
+  </Accordion>
+  <Accordion title="Can the call step have the AI talk to the contact?">
+    Not yet. The call step is a human bridge: a rep's phone rings first, then the contact's. AI calling is on the roadmap.
+  </Accordion>
+  <Accordion title="Where do I see what the step sent?">
+    In the contact's conversation in GoHighLevel, mirrored once, and in the thread in Cortana's **Conversations**, with delivered and read marks.
+  </Accordion>
+  <Accordion title="My workflow enrolled 300 contacts and only 50 got the message.">
+    That is the daily cap of 50 new contacts per line. The rest are held and go out over the following days after each midnight UTC reset. Enroll in batches of 50 a day, or buy a second line.
+  </Accordion>
+</AccordionGroup>
+
+## Next step
+
+<CardGroup cols={2}>
+  <Card title="iMessage in Conversations" icon="message" href="/platform/business/imessage-in-the-inbox">
+    What the thread shows and what your reps can do from it.
+  </Card>
+  <Card title="Your iMessage line" icon="phone" href="/platform/business/imessage-line">
+    Status, today's caps and the two agent switches.
+  </Card>
+</CardGroup>

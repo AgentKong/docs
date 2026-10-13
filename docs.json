@@ -93,7 +93,17 @@
                   "platform/business/follow-ups",
                   "platform/business/appointments",
                   "platform/business/ad-tracking",
-                  "platform/business/settings"
+                  "platform/business/settings",
+                  {
+                    "group": "iMessage line",
+                    "icon": "comment",
+                    "pages": [
+                      "platform/business/imessage-line",
+                      "platform/business/imessage-get-a-line",
+                      "platform/business/imessage-in-the-inbox",
+                      "platform/business/imessage-ghl-workflows"
+                    ]
+                  }
                 ]
               }
             ]
