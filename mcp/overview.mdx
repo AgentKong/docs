@@ -57,7 +57,7 @@ A few examples:
 
 ## Read by default, manage by opt-in
 
-Read tools are available as soon as you connect (the Ad Tracking license tools below are the exception: they sit under the media buyer opt-in). Ad management tools (anything that creates, launches, or spends) require a separate opt-in checkbox on the consent screen. Everything is created paused, and going live or changing budgets always requires your confirmation.
+Read tools are available as soon as you connect (the Ad Tracking license tools and the Slack tools below are the exception: they sit under the media buyer opt-in). Ad management tools (anything that creates, launches, or spends) require a separate opt-in checkbox on the consent screen. Everything is created paused, and going live or changing budgets always requires your confirmation.
 
 ## Manage Ad Tracking licenses from chat
 
@@ -104,6 +104,67 @@ Your assistant can check how many Ad Tracking licenses your plan has left and sw
 
   <Accordion title="Why did my AI Media Buyer turn off when I switched tracking off?">
     The AI Media Buyer needs Ad Tracking to run, so switching tracking off switches it off too and frees its license. Switch Ad Tracking back on first, then switch the AI Media Buyer back on in Cortana.
+  </Accordion>
+</AccordionGroup>
+
+## Run your Slack channels from chat
+
+{/* last-verified: 2026-10-13 · tools: list_slack_channels, create_slack_channel, connect_slack_channel, list_slack_teammates, invite_to_slack_channel */}
+
+Your assistant can create Slack channels for a business, choose the channel where the AI Media Buyer posts its proposals, and add your teammates to a channel, all by asking. At the end the business has its channel with the right people in it, without opening Slack's settings.
+
+1. Make sure the connection is allowed to act. On the Cortana consent screen, keep **Let (your assistant) act on your media buyer decisions** ticked. On an API key, tick **Act on media buyer decisions**. The business needs Slack connected in Cortana and the AI Media Buyer switched on.
+2. Ask for a channel, for example "Make Acme a Slack channel and put the media buyer in it" or "Create a channel called acme-creative." The assistant answers with the channel's name as Slack saved it.
+3. To use a channel you already have, ask "Connect the media buyer to #acme-ads." The assistant says where the media buyer posted before and where it posts now.
+4. Ask it to add people, for example "Add Sarah and Mike to #acme-ai-media-buyer." It answers one line per person: added, already in the channel, a guest Slack keeps out, several people with that name, or not found.
+
+<AccordionGroup>
+  <Accordion title="What the assistant can do in Slack">
+    List the business's channels and see which one the AI Media Buyer posts into. Create public channels. Make a new or existing channel the AI Media Buyer's channel. List the people in the workspace. Add up to 50 people to a public channel in one request, by name or Slack ID.
+  </Accordion>
+
+  <Accordion title="How names are matched">
+    A name matches a person's full name, display name, or username, ignoring capitals. If nobody matches exactly, a first name works ("Sarah" finds "Sarah Connor"). When several people match, nobody is added for that name: the assistant lists them and asks which one you mean. Cortana never reads email addresses from Slack.
+  </Accordion>
+
+  <Accordion title="The AI Media Buyer's channel">
+    Each business has one AI Media Buyer channel, and a channel can belong to only one business. A channel another business's AI Media Buyer already uses cannot be picked. Creating a new channel does not move the AI Media Buyer off the channel it already has unless you ask to replace it. Connecting an existing channel does move it.
+  </Accordion>
+
+  <Accordion title="Channel names">
+    Slack channel names are lowercase, use dashes instead of spaces, and are at most 80 characters, so "Acme Creative" becomes `acme-creative`. A channel created for the AI Media Buyer without a name uses your agency's naming template, the same one the **Create Slack channel** button uses in the media buyer settings.
+  </Accordion>
+
+  <Accordion title="Private channels">
+    The assistant creates public channels and adds people to public channels only. To use a private channel as the AI Media Buyer's channel, add the Cortana app to it in Slack first, then ask the assistant to connect it. Add people to a private channel in Slack.
+  </Accordion>
+</AccordionGroup>
+
+### FAQ
+
+<AccordionGroup>
+  <Accordion title="My assistant says to reconnect Slack">
+    Your Slack was connected before Cortana could create channels and add people. Reconnect Slack once on the business's **Integrations** page, then ask again.
+  </Accordion>
+
+  <Accordion title="My assistant says Slack is not connected for this business">
+    Connect Slack on the business's **Integrations** page in Cortana, then ask again.
+  </Accordion>
+
+  <Accordion title="Why won't it add someone to my private channel?">
+    Adding people to private channels is not available yet. Add them in Slack, or use a public channel.
+  </Accordion>
+
+  <Accordion title="It says several people match the name">
+    More than one person in your workspace has that name. Tell the assistant which one you mean (it shows each person's full name, display name, and username) and it adds that person.
+  </Accordion>
+
+  <Accordion title="It says to invite the Cortana app to the channel">
+    The channel is private and Cortana's Slack app is not in it. In Slack, add the Cortana app to the channel, then ask again.
+  </Accordion>
+
+  <Accordion title="It says Slack is busy">
+    Slack limits how fast apps can work. Wait a minute and ask again.
   </Accordion>
 </AccordionGroup>
 
