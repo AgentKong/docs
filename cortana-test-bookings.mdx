@@ -1,0 +1,112 @@
+---
+title: "Cortana test bookings on your calendar"
+description: "Why a booking named Cortana Test (please ignore) appears on your calendar, how Cortana cancels it within minutes, how often it happens, and what to do if one stays."
+---
+
+{/* last-verified: 2026-10-12. No app route: this page describes Cortana's own test visits to a customer's funnel. Source: AgentKong_App sprints/cs-machine/51-THE-LIVING-REPAIR.md (the walker's booking rules in src/server/services/cs-walker/walker-fire.ts, the once-a-day rule in walk-booking.ts). */}
+
+# Cortana test bookings on your calendar
+
+To prove your tracking works from the ad all the way to the booking, Cortana regularly goes through your funnel the way a real lead would. It opens your ad's landing page, fills in your forms and books your calendar, using a clearly named test identity.
+
+The booking is cancelled within minutes, so it leaves your calendar on its own. At most one test booking is made per account per day.
+
+## What you will see
+
+1. A new booking named **Cortana Test (please ignore)**, made with an email address ending in `@walk.usecortana.ai`.
+2. Within a few minutes, the same booking is cancelled. It drops off your calendar like any other cancelled booking.
+3. From the form step, a test lead named **Cortana Walk** may appear in your own CRM or form tool. You can delete it.
+
+Nothing from the test counts as a lead or a conversion in your Cortana dashboard, and nothing from it is sent to your ad platforms.
+
+## How often it happens
+
+Cortana goes through your funnel:
+
+- when a new ad landing page starts getting traffic;
+- again about every 30 days for each landing page;
+- once a day while our team is working with you on a tracking issue, and again soon after a fix goes in.
+
+However many visits there are, **Cortana books your calendar at most once a day per account**. The other visits that day fill in your forms but do not book.
+
+## How the booking is cancelled
+
+Cortana cancels its test booking in two ways, so it leaves your calendar:
+
+1. **From the confirmation email, the same way a lead would.** Each test visit has its own email inbox. Cortana opens the booking's confirmation, follows its cancel link and cancels the booking.
+2. **Through your connected calendar.** When the booking lands on a calendar connected to Cortana (a Cortana calendar, GoHighLevel or Calendly), Cortana also cancels it directly through that connection.
+
+Some booking tools send no cancel link that can be used. When a test booking cannot be cancelled either way, it stays on your calendar, and **Cortana makes no new test booking on that business until our team has confirmed it is deleted.**
+
+## If a test booking is still on your calendar
+
+1. Open the booking named **Cortana Test (please ignore)** on your calendar.
+2. Cancel or delete it the way you would any booking.
+3. Our team may also reach out to ask you to delete it. Once it is gone and confirmed, test bookings resume on the next visit.
+
+## More detail
+
+<AccordionGroup>
+  <Accordion title="The test identity Cortana uses">
+    Every test visit uses the same recognizable details, so your team can spot it at a glance:
+
+    - **Email:** a unique address ending in `@walk.usecortana.ai` for each visit
+    - **Phone:** +1 555 555 0142
+    - **Name:** Cortana Walk, or **Cortana Test (please ignore)** on a booking
+    - **Browser:** a user agent containing `CortanaFunnelWalker`
+
+    Cortana never uses a real person's details for a test.
+  </Accordion>
+
+  <Accordion title="Your own automations and notifications">
+    Your booking tool and CRM treat the test booking like any booking for the few minutes it exists. Confirmation messages, reminders, rep notifications and cancellation notices you have set up may fire for it.
+
+    To keep them quiet, add a filter to those automations that skips contacts whose email ends in `@walk.usecortana.ai`, or whose name is **Cortana Test (please ignore)**.
+  </Accordion>
+
+  <Accordion title="What Cortana keeps from a test visit">
+    The test proves each step of your funnel: the page loads Cortana's pixel, the page view reaches Cortana, each form and booking carries the visitor's identity to Cortana, and the lead stitches to the visit that produced it.
+
+    After the visit, Cortana removes the test lead, its visits and its conversions from your Cortana data. The test is never sent to your ad platforms (Meta, Google Ads, LinkedIn) as a conversion.
+  </Accordion>
+
+  <Accordion title="Why Cortana books instead of only looking">
+    A booking widget is one of the most common places for tracking to break: the booking happens on another tool's page, and the lead's identity or the ad it came from can get lost on the way. Only a real booking proves the booking reaches your dashboard with the right ad attached.
+  </Accordion>
+</AccordionGroup>
+
+## FAQ
+
+<AccordionGroup>
+  <Accordion title="Who is Cortana Test (please ignore) on my calendar?">
+    It is Cortana testing your funnel. Cortana booked your calendar as a test lead to prove your tracking works end to end, and cancels the booking within minutes. You do not need to do anything.
+  </Accordion>
+
+  <Accordion title="Why did Cortana book a call with me?">
+    To check that a booking made from your ads reaches your Cortana dashboard with the right ad attached. Cortana books at most once a day per account and cancels the booking right away.
+  </Accordion>
+
+  <Accordion title="The Cortana test booking is still on my calendar">
+    Some booking tools send no cancel link Cortana can use. Cancel or delete the booking like any other. Cortana makes no new test booking on that business until our team has confirmed it is gone, and our team may reach out to ask you to delete it.
+  </Accordion>
+
+  <Accordion title="My rep got a notification for a Cortana test booking">
+    Your booking tool sends its usual notifications for the few minutes the test booking exists. Filter out contacts whose email ends in `@walk.usecortana.ai` in that automation to keep your reps from seeing them.
+  </Accordion>
+
+  <Accordion title="There is a lead called Cortana Walk in my CRM">
+    That lead came from Cortana filling in your form during a test. It is safe to delete it. It never counts as a lead in your Cortana dashboard.
+  </Accordion>
+
+  <Accordion title="Will the test booking show up in my ad reporting?">
+    No. Cortana removes the test from your Cortana data after the visit and never sends it to your ad platforms as a conversion.
+  </Accordion>
+
+  <Accordion title="Can I stop Cortana from making test bookings?">
+    There is no setting to turn test bookings off. If a test booking causes a problem for your team, tell us in your [Cortana VIP](/platform/cortana-vip) channel.
+  </Accordion>
+</AccordionGroup>
+
+## Next step
+
+See the [Tracking Checklist](/Tracking-Checklist) for everything Cortana checks in your setup.
