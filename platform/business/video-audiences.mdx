@@ -1,0 +1,222 @@
+---
+title: "Video audiences"
+description: "Build an audience of the people who watched your videos, by how much they watched and how recently, see who is in it, and send it to Meta, including the viewers who never filled a form."
+last-verified: "2026-10-13"
+---
+
+{/* App route: /business/[businessId]/video-tracking?tab=audiences (and Contacts: /business/[businessId]/contacts?audience=<id>).
+    Labels verified against AgentKong_App video-billing @ 420428818 and a local walkthrough on 2026-10-13.
+    Screenshots: fictional data (Sales VSL, example.com contacts) on a test copy, light mode. */}
+
+# Video audiences
+
+A video audience is a list of the people who watched one of your videos, for example *everyone who watched 75% of your sales video in the last 45 days*. Cortana keeps it up to date on its own: people join as they watch and leave when they no longer match.
+
+Each audience holds two kinds of people:
+
+- **Contacts**: viewers you know, with a name, an email or a phone number.
+- **Visitors**: viewers who watched but have not filled a form or booked yet.
+
+Turn on **Sync with ads** and both reach Meta, so you can retarget everyone who watched, not only the people who gave you their email.
+
+<Note>
+  **Before you start**
+
+  - **Video Tracking is in beta.** If you don't see **Video Tracking** in your sidebar, it isn't switched on for your account yet.
+  - Your videos need viewers. Audiences count what people watched in your Cortana videos.
+  - To send an audience to Meta: Meta connected and your ad account selected in **Integrations**.
+  - To also send the viewers who never filled a form: your Meta pixel connected in [AI Ad Optimization](/6-ai-ad-optimization), and that pixel shared with the same ad account in Meta Events Manager.
+</Note>
+
+## Create a video audience
+
+<Steps>
+  <Step title="Open the Audiences tab">
+    In your business, open **Video Tracking** and click the **Audiences** tab, next to **Library** and **Analytics**.
+
+    The first time, you see **No video audiences yet**. Click **New audience**.
+
+    <Frame caption="Video Tracking, Audiences tab, before your first audience.">
+      <img src="/images/video-tracking/video-audiences/01-open-audiences-tab.png" alt="The Video Tracking page with the Audiences tab selected (1) and the New audience button in the empty state (2)." />
+    </Frame>
+  </Step>
+
+  <Step title="Answer the three questions">
+    The **Watched a video** panel asks, in order:
+
+    1. **Which video?** Pick one video, or leave **Any video**.
+    2. **How much of it?** **25%**, **50%**, **75%** or **95%**. A person qualifies when they watched at least that much.
+    3. **When?** **Any time**, **In the last 7 days**, **In the last 30 days**, **In the last 90 days**, **In the last year**, or **Custom number of days**.
+    4. With **Custom number of days**, type the number in **How many days back?**: any whole number from 1 to 3,650.
+    5. Click **Add to filter**.
+
+    <Frame caption="The video questions: Sales VSL, 75% or more, in the last 45 days.">
+      <img src="/images/video-tracking/video-audiences/02-answer-the-video-questions.png" alt="The Watched a video panel with Which video set to Sales VSL (1), How much of it set to 75% (2), When set to Custom number of days (3), How many days back set to 45 (4), and the Add to filter button (5)." />
+    </Frame>
+  </Step>
+
+  <Step title="Name it and save">
+    **Name this audience** opens with a name written from your answers, for example *Watched 75%+ of Sales VSL, last 45 days*. Keep it or type your own, then click **Save audience**.
+
+    <Frame caption="Name the audience. The line under the title repeats the rule.">
+      <img src="/images/video-tracking/video-audiences/03-name-the-audience.png" alt="The Name this audience dialog with the name field (1) and the Save audience button (2)." />
+    </Frame>
+  </Step>
+
+  <Step title="Wait for the first count">
+    The new audience shows **Counting** while Cortana finds everyone who matches. This takes up to 15 minutes.
+
+    <Frame caption="A new audience counting its members.">
+      <img src="/images/video-tracking/video-audiences/04-counting.png" alt="The Audiences tab listing the new audience, Sales VSL: watched most of it, with its rule Watched 75%+ of Sales VSL, last 45 days and the status Counting." />
+    </Frame>
+  </Step>
+</Steps>
+
+## Read your audience
+
+Each audience shows its rule and how many people are in it.
+
+1. The count: contacts first, then visitors, for example **5 contacts · 27 visitors**.
+2. **See who** opens Contacts with this audience already chosen.
+3. **Sync with ads** sends it to Meta. Once it is on, the button reads **Syncing to Meta**.
+
+The **⋯** menu holds **Archive audience**.
+
+<Frame caption="An audience with 5 contacts and 27 visitors, syncing to Meta.">
+  <img src="/images/video-tracking/video-audiences/05-your-video-audience.png" alt="An audience row with the count 5 contacts and 27 visitors (1), the See who button (2) and the Syncing to Meta button (3)." />
+</Frame>
+
+## See who is in it
+
+<Steps>
+  <Step title="Open the contacts">
+    Click **See who**. Contacts opens with the audience chosen in the audience menu (1). The switch next to it (2) shows **contacts** first: the people you know, in the usual contacts table.
+
+    <Frame caption="Contacts, filtered to the audience. The switch moves between contacts and visitors.">
+      <img src="/images/video-tracking/video-audiences/07-see-who-contacts.png" alt="The Contacts page with the audience Sales VSL: watched most of it chosen in the audience menu (1) and the switch reading 5 contacts and 27 visitors (2), above a table of five contacts." />
+    </Frame>
+  </Step>
+
+  <Step title="Open the visitors">
+    Click **visitors** in the switch. Each visitor shows as **Anonymous visitor** with a short code, their device, browser and system, up to three videos with how far they got in each, and when they were first and last seen.
+
+    <Frame caption="The visitors: people who watched but have not been identified yet.">
+      <img src="/images/video-tracking/video-audiences/08-see-who-visitors.png" alt="The visitors list of the audience, opened with the visitors side of the switch (1). Each row reads Anonymous visitor with a short code, a device such as Desktop, Chrome, macOS, video chips such as Sales VSL 95%, and Last seen and First seen times." />
+    </Frame>
+  </Step>
+</Steps>
+
+When a visitor fills a form or books, they move to the contacts side at the next daily count.
+
+## Send it to Meta
+
+<Steps>
+  <Step title="Turn on the Meta switch">
+    Click **Sync with ads**, then turn on **Meta** (1). If you have more than one ad account, pick the one to use.
+  </Step>
+
+  <Step title="Check both lines">
+    Two lines tell you how it stands:
+
+    - **Synced … ago** (2): your contacts, sent to Meta as a customer list. Meta can take up to a day to show changes.
+    - **Anonymous viewers** (3): Cortana also creates a second Meta audience, named after yours with *(anonymous viewers)* at the end, that fills from your video events. Meta keeps people in it for up to 180 days.
+
+    <Frame caption="The Meta sync with both lines: the contact list and the anonymous viewers.">
+      <img src="/images/video-tracking/video-audiences/06-sync-with-meta.png" alt="The Send this audience to your ad accounts panel with the Meta switch on (1), the line Synced 6 minutes ago (2), and the line Anonymous viewers: a second Meta audience fills from your video events, Meta keeps them up to 180 days (3)." />
+    </Frame>
+  </Step>
+</Steps>
+
+In Ads Manager you then target the two audiences together, or each on its own.
+
+## Details
+
+<AccordionGroup>
+  <Accordion title="How the video rule works">
+    - Cortana notes when each viewer first passes **25%, 50%, 75% and 95%** of a video. These are the only amounts a rule can ask for.
+    - **Any video** counts a viewer who passed the amount on any of your videos.
+    - The window counts back from today. Change it later and the audience re-counts within 15 minutes: people come back in or leave.
+    - The same question, **Watched a video**, is in the **Filter** on the Contacts page. There you can combine it with webinars, conversions and tags, then click **Save as audience**. Every window there (video, webinar, conversion) takes the same **Custom number of days**.
+  </Accordion>
+
+  <Accordion title="Contacts and visitors: who counts as what">
+    - A **contact** is in the audience when one of their own watches passed the amount in the window.
+    - A **visitor** is a person Cortana knows only by their browsers. Someone who watched on their phone and their laptop counts once when Cortana could tie the two together.
+    - A person who is already a contact is never also counted as a visitor. When a visitor becomes a contact, they move sides at the next daily count, so for up to a day the same person can show on both.
+    - Tags, conversions and webinars only exist for contacts. An audience that needs one of them with **Match all** has contacts and no visitors. With **Match any**, visitors are judged on the video questions alone.
+    - Bots never count.
+  </Accordion>
+
+  <Accordion title="What reaches Meta, and when">
+    - **Your contacts**: hashed emails, phone numbers and names, as a customer list. Only when **Sync with ads** is on for that audience.
+    - **Video events**: every time a viewer passes 25, 50, 75 or 95% of a video, Cortana sends a video event to each Meta pixel connected in [AI Ad Optimization](/6-ai-ad-optimization), within about 5 minutes. An event is sent only when Meta can recognize the viewer: their browser carries Meta's cookie, or they are a contact with an email or a phone. These events are sent for all your videos, whether or not an audience uses them.
+    - **The anonymous viewers' audience**: built in Meta from those video events, on a pixel that your ad account can use. Cortana updates it when you change the rule, the window or the video. A window longer than 180 days is capped at 180 there, Meta's limit.
+  </Accordion>
+
+  <Accordion title="When there is no anonymous viewers' audience">
+    The **Anonymous viewers** line says why, in words:
+
+    - *Anonymous viewers are not sent: this audience's rule needs something only contacts have (a tag, a conversion or a webinar).* The rule uses **Match all** with a tag, conversion or webinar.
+    - *Anonymous viewers are not sent: Cortana does not send two video rules joined by "match all" to Meta yet, so only contacts are sent.* Use **Match any**, or one video question.
+    - *Anonymous viewers are not sent yet: none of this workspace's Meta pixels is shared with this ad account.* Share your pixel with the ad account in Meta Events Manager. Cortana tries again an hour later.
+
+    When Meta refuses a change (for example, the connection lost access), the line turns amber with Meta's words and Cortana tries again an hour later.
+  </Accordion>
+
+  <Accordion title="When the numbers change">
+    | What | When |
+    |---|---|
+    | A new or edited audience | counted within 15 minutes |
+    | New viewers | added every 15 minutes |
+    | A window running out, a visitor becoming a contact | the daily count |
+  </Accordion>
+
+  <Accordion title="Archive, pause and limits">
+    - **Archive audience** (in the **⋯** menu) stops counting and syncing. The contact list stays in Meta as it was; remove it in Ads Manager if you no longer need it. The anonymous viewers' audience is removed from Meta once no ad set uses it.
+    - If a video named in a rule is deleted, the audience shows **Paused: a video in its rule was deleted**. Nobody joins or leaves until you change the rule. **Any video** never pauses.
+    - Up to 50 audiences per workspace, video or not.
+  </Accordion>
+</AccordionGroup>
+
+## FAQ
+
+<AccordionGroup>
+  <Accordion title="Why does my video audience say 0 visitors?">
+    Either nobody unidentified watched that far in the window yet, or the rule also asks for a tag, conversion or webinar with **Match all**. Those only exist for contacts, so the audience has contacts only. Use **Match any** if you want visitors judged on the video alone.
+  </Accordion>
+
+  <Accordion title="My audience has said Counting for a long time">
+    A new or edited audience is counted within 15 minutes. If it still says **Counting** after half an hour, contact support from the chat in the app.
+  </Accordion>
+
+  <Accordion title="Why don't contacts plus visitors match my video's view count?">
+    An audience only holds people who passed the amount you chose, within the window you chose. A person counts once even with several watches or devices, bots never count, and someone who watched without reaching the milestone is not in it.
+  </Accordion>
+
+  <Accordion title="The anonymous viewers audience in Meta is empty">
+    Check the **Anonymous viewers** line in **Sync with ads** first: it says if the audience could not be made, and why. If it says the audience fills from your video events, check that your pixel is connected in [AI Ad Optimization](/6-ai-ad-optimization) and shared with that ad account. Meta also needs to recognize the viewers: people who watched in a browser Meta knows. Give it time; Meta shows a size once enough people are in it.
+  </Accordion>
+
+  <Accordion title="Can I use 60% instead of 75%?">
+    No. Cortana notes 25%, 50%, 75% and 95%, so a rule picks one of those. Pick the one just below what you had in mind: 50% includes everyone who watched 60%.
+  </Accordion>
+
+  <Accordion title="Can one audience use two videos?">
+    Yes, from the **Filter** on the Contacts page: add a **Watched a video** question for each video, then **Save as audience**. With **Match any**, both your contacts and your visitors go to Meta. With **Match all**, only the contacts go for now.
+  </Accordion>
+
+  <Accordion title="What happens in Meta when I archive an audience?">
+    The contact list stays in Meta as it was, so a running ad keeps its audience. The anonymous viewers' audience is removed from Meta once no ad set uses it.
+  </Accordion>
+</AccordionGroup>
+
+## Next step
+
+<CardGroup cols={2}>
+  <Card title="Contacts" icon="user" href="/platform/business/contacts">
+    Find any contact, their tags and custom fields.
+  </Card>
+  <Card title="AI Ad Optimization" icon="bolt" href="/6-ai-ad-optimization">
+    Connect your Meta pixel so video events reach Meta.
+  </Card>
+</CardGroup>
