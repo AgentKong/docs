@@ -93,6 +93,7 @@
                   "platform/business/follow-ups",
                   "platform/business/appointments",
                   "platform/business/ad-tracking",
+                  "platform/business/video-audiences",
                   "platform/business/settings",
                   {
                     "group": "iMessage line",
