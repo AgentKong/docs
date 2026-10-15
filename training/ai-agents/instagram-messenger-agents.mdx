@@ -1,0 +1,127 @@
+---
+title: "Run your AI agent on Instagram and Messenger"
+description: "Let your Cortana AI agent send and receive Instagram and Facebook Messenger DMs through your own Meta connection, start it from a new DM or a comment, and see why a message was not delivered."
+---
+
+{/* last-verified: 2026-10-14 against AgentKong_App sprint agents-native-meta-dm (e2ceb20c1). App routes: Agent Hub channel node, Agent Trigger > Add Trigger, Settings > Integrations > Instagram & Messenger DMs. Screenshots: TODO capture after the feature is live. */}
+
+## Overview
+
+Your AI agent can talk to people on Instagram and Facebook Messenger through the same Meta connection Cortana already uses for your DMs, with no GoHighLevel step in between. It answers a DM on a conversation that has no agent yet, or it reaches out after someone comments on your post or reel, and every message it could not send shows you why.
+
+At the end of this page your agent's Instagram or Messenger channel sends through Cortana, and a trigger starts the agent on its own.
+
+<Note>
+  **Before you start**
+
+  - **Instagram & Messenger DMs** is connected in **Settings → Integrations**, and the Instagram account or Facebook Page you want is **Subscribed**. See [Instagram & Messenger DMs](/11-instagram-messenger-dms).
+  - You have an agent with an **Instagram** or **Messenger** channel and an active objective on it. See [Train your AI and connect channels](/training/ai-agents/train-ai-connect-channels).
+</Note>
+
+## 1. Set the channel's provider to Cortana
+
+1. Open your agent in the **Agent Hub**.
+2. Click the **Instagram** or **Messenger** node on the canvas.
+3. In the provider dropdown, choose **Cortana (your Instagram)** or **Cortana (your Messenger)**.
+4. Save the channel.
+
+Under the dropdown you will read: *"Replies go out through your own Instagram. Start this agent from a Cortana trigger (a new DM or a comment), not a GoHighLevel workflow."*
+
+If the option reads **disconnected**, your Instagram & Messenger DMs connection is not set up for that platform yet. The hint tells you to connect it in **Integrations** first.
+
+{/* TODO screenshot: the channel node's provider dropdown with the Cortana option picked and the hint below it. */}
+
+## 2. Add a trigger that starts the agent
+
+1. Click the **Agent Trigger** node, then **Add Trigger**. {/* TODO: verify the exact click path from Add Trigger to the source list on the live UI. */}
+2. Pick one of the four Meta triggers:
+
+| Trigger | When it starts the agent | What the agent sends first |
+| --- | --- | --- |
+| **Instagram DM** | Someone DMs your Instagram and no agent is on that conversation yet. | An answer to what they wrote. |
+| **Messenger DM** | Someone messages your Facebook Page and no agent is on that conversation yet. | An answer to what they wrote. |
+| **Instagram comment** | Someone comments on your Instagram post or reel. | Its opener, as the comment's private reply. |
+| **Facebook comment** | Someone comments on your Facebook Page post. | Its opener, in Messenger, as the comment's private reply. |
+
+3. For a comment trigger, you can fill **Only comments containing (optional)**: type the keywords separated by commas, for example `price, info, link`. Leave it empty to answer every comment.
+4. Click **Create Trigger**.
+
+The trigger needs that agent's channel to be Cortana's. If it is not, Cortana tells you so and nothing is created: go back to step 1, pick Cortana, save, then add the trigger.
+
+When you create a comment trigger, Cortana turns on comments for your connected Pages. If Meta refuses for a Page, a message names the Page and the reason.
+
+{/* TODO screenshot: the Add Trigger list with the four Meta triggers, then the comment trigger form with the keywords field. */}
+
+## 3. What happens next
+
+- **A new DM:** the agent replies to the person's message, through your own Instagram or Messenger. If they sent a few messages in a row, the agent answers them together.
+- **A comment:** the agent sends its opener as a **private reply** to that comment. Meta allows one private reply per comment, within 7 days, before the person writes to you. If the person already wrote to you, the agent simply answers them instead.
+- **Their reply:** when the person answers, the agent hears it and keeps the conversation going, on that channel.
+
+Every message the agent sends, and every message it could not send, appears in **Conversations**.
+
+## 4. When a message was not delivered
+
+A message Meta refused shows **Not delivered** and the reason under it in the conversation, for example *"Not delivered: outside Instagram's 24-hour window."* Open the message's details to read the full reason.
+
+If the reason is about your Page's connection (it expired, it was revoked, or a permission is missing), the Page also reads **Needs attention** with the reason in **Settings → Integrations → Instagram & Messenger DMs → Manage**. Reconnect it there. The badge clears on its own the next time a message goes out.
+
+{/* TODO screenshot: a conversation with a "Not delivered" note under a message, and the Manage dialog with a "Needs attention" Page. */}
+
+<AccordionGroup>
+  <Accordion title="Meta's 24-hour window and the private reply">
+    Meta lets a business message a person within 24 hours of that person's last message. Outside that window nothing can be sent until they write again, and Cortana shows the message as **Not delivered** with that reason.
+
+    A comment gives you one extra message: the **private reply**. It can be sent once per comment, within 7 days of the comment, and only before the person has written to you. The agent uses it for its opener. Because it is one message, the agent's opener is sent as one message: if it would be longer than Meta's limit (1,000 characters on Instagram, 2,000 on Messenger), the agent sends the parts that fit and the conversation notes what was left out.
+  </Accordion>
+
+  <Accordion title="Which comments start the agent">
+    Every comment by someone else on any post or reel of a connected Page, replies included, unless you set keywords. With keywords, only a comment that contains one of them starts the agent, ignoring capitals: `price` matches "What's the PRICE?". Your own replies, edits and removed comments never start it. Up to 20 keywords of up to 100 characters each.
+  </Accordion>
+
+  <Accordion title="Who the agent starts, and who it leaves alone">
+    A DM trigger only starts the agent on a conversation that has no agent on it, with auto-reply on. A comment trigger works like your other Cortana triggers: it starts its agent on that person's conversation, stopping whatever agent was on it, even if the conversation had finished or a teammate had taken it over. That includes the same agent: a comment restarts a chat the agent is already having, and its opener goes out again. The one exception is a conversation where the agent is switched off. If the same person comments twice within a couple of minutes, the agent answers both from the first start.
+
+    If two agents have the same kind of trigger, the oldest active trigger answers.
+  </Accordion>
+
+  <Accordion title="Facebook commenters and their Messenger conversation">
+    A Facebook comment does not tell Cortana who the person is on Messenger, so the commenter becomes a new contact named by their Facebook name. When the agent's private reply goes out, Meta names their Messenger account and their replies reach that contact, where the agent is. If that person is already talking with your team or another agent in an existing Messenger conversation, their replies stay there. If their Messenger account belonged to an older contact with no live conversation, Cortana merges that older contact into the commenter's contact, so you keep one contact with their whole history. The merge shows on the contact's **Merges** tab, where **Undo** reverses it.
+  </Accordion>
+
+  <Accordion title="Retrying a message that was not delivered">
+    Open the message's details and click **Retry**. Cortana sends it again through your own Meta connection first. Retry is hidden while Meta's 24-hour window is closed, because Meta would refuse it again.
+  </Accordion>
+</AccordionGroup>
+
+## FAQ
+
+<AccordionGroup>
+  <Accordion title="Why did my agent not DM someone who commented on my post?">
+    Check four things: the agent's Instagram or Messenger channel is set to **Cortana (your Instagram)** or **Cortana (your Messenger)**; it has an **Instagram comment** or **Facebook comment** trigger; the comment contains one of the trigger's keywords, if you set any; and the agent is not switched off on that person's conversation. If the same person commented twice within a couple of minutes, the second comment is answered by the first start. The conversation's activity log says when a comment did not start the agent.
+  </Accordion>
+
+  <Accordion title="Why does my message say Not delivered: outside the 24-hour window?">
+    The person has not written to you in the last 24 hours, and Meta blocks new messages until they do. When they write again, the agent can answer. If they commented recently, the agent's first message can still go as the comment's private reply.
+  </Accordion>
+
+  <Accordion title="My Page says Needs attention, what do I do?">
+    Its connection to Cortana expired, was revoked, or is missing a messaging permission, so Meta is refusing messages from it. Reconnect it in **Settings → Integrations → Instagram & Messenger DMs**. The badge clears the next time a message goes out.
+  </Accordion>
+
+  <Accordion title="Can I still use GoHighLevel for Instagram?">
+    Yes. Pick your GoHighLevel connection as the channel's provider and start the agent from your GoHighLevel workflow as before. Cortana's own triggers only work with the Cortana provider.
+  </Accordion>
+
+  <Accordion title="Why can't I create an Instagram DM trigger?">
+    The trigger needs the agent's Instagram channel to send through Cortana. Open the agent's Instagram channel, choose **Cortana (your Instagram)**, save, then add the trigger.
+  </Accordion>
+
+  <Accordion title="Does the agent only answer a person's very first DM?">
+    It starts on a DM in any conversation that has no agent on it yet, with auto-reply on. Once it is on a conversation, it keeps answering that person there.
+  </Accordion>
+</AccordionGroup>
+
+## Next step
+
+Watch the agent's conversations and session logs in [Troubleshoot with session logs](/training/ai-agents/troubleshoot-session-logs).
