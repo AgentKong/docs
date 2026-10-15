@@ -161,6 +161,16 @@ When someone sends a DM to a subscribed Page or Instagram account:
 ## Sub-features
 
 <AccordionGroup>
+  <Accordion title="Knowing when someone read your message">
+    Once the person opens the conversation, Cortana shows **Read** and the time under your message, for example **Read 3:41 PM**, or **Read Oct 12** for an earlier day. It appears once per channel, under the newest message they have read, the way Instagram shows Seen. Messages your AI agent sent are marked the same way, and a message that was not delivered never shows Read.
+
+    Meta tells Cortana when the person reads, so nothing is guessed. If they have not opened the conversation since your message, nothing shows under it yet.
+
+    <Frame caption="Read appears under the newest message the person has read, with the time they read it.">
+      <img src="/images/integrations/instagram-messenger-dms/dm-12-read-mark.png" alt="An Instagram conversation in Cortana. Under the business's last message, a small grey line reads Read 6:56 PM; the customer's reply sits below it." />
+    </Frame>
+  </Accordion>
+
   <Accordion title="How ad attribution shows up">
     When a DM starts from a click-to-message ad, Meta attaches the ad's ID to the first message. Cortana records it against the contact, and it appears in three places:
 
@@ -354,12 +364,16 @@ When someone sends a DM to a subscribed Page or Instagram account:
     Meta only allows a business to message someone within 24 hours of that person's last message. Once that window closes, Cortana greys out the composer instead of letting the send fail. It reopens the moment they message you again.
   </Accordion>
 
+  <Accordion title="Why does my Instagram message not say Read?">
+    The person has not opened the conversation since you sent it, or they just did and the mark has not appeared yet: it shows within about a minute. Cortana only learns about a read when it happens, so a conversation they read before read marks reached your account shows Read the next time they open it.
+  </Accordion>
+
   <Accordion title="Can I send a photo or a file in a DM reply?">
     No. Replies from Cortana are text only, and there is no attachment button. Use the Instagram or Facebook app to send media in that conversation.
   </Accordion>
 
   <Accordion title="Can my AI agent answer Instagram DMs automatically?">
-    Not yet. Treat Instagram and Messenger DMs as a channel your team replies to by hand. {/* TODO: verify with engineering before publishing — native agent sending was a follow-up sprint and the agent send path does not run through this feature's reply-window guard. */}
+    Yes. Set your agent's Instagram or Messenger channel to Cortana and add an **Instagram DM**, **Messenger DM**, **Instagram comment** or **Facebook comment** trigger. The agent then answers DMs, and opens with a private reply to comments, through this same connection and the same 24-hour rule. See [Run your AI agent on Instagram and Messenger](/training/ai-agents/instagram-messenger-agents).
   </Accordion>
 
   <Accordion title="Do organic DMs use up my contact allowance?">

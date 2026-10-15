@@ -225,6 +225,7 @@
             "icon": "sliders",
             "pages": [
               "training/ai-agents/triggering-agent",
+              "training/ai-agents/instagram-messenger-agents",
               "training/ai-agents/stopping-agent",
               "training/ai-agents/troubleshoot-session-logs",
               "training/ai-agents/editing-agent"
