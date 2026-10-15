@@ -1,0 +1,174 @@
+---
+title: "Fix my tracking"
+description: "Let Cortana make the tracking fix it agreed with you in your own browser with the Cortana AI Chrome extension, either asking before each step or making the changes and keeping a record of each one."
+---
+
+{/* last-verified: 2026-10-08 · app route: /business/<businessId>/tracking?tab=pixels · extension 4.40
+    Source: AgentKong_App src/lib/crm/tracking-repairs/customer-fix.ts (FIX_COPY), src/components/tracking/funnels/fix-my-tracking-card.tsx,
+    src/components/tracking-repairs/run-mode-choice.tsx, fix-link.ts; extension src/sidepanel/SidePanelApp.tsx, src/agent/run-controller.ts. */}
+
+{/* TODO: verify: no Loom walkthrough was supplied for this page. When one is recorded, embed it
+    here with a verbatim transcript inside an <Accordion title="Video transcript"> for the KB. */}
+
+## What Fix my tracking does
+
+When Cortana finds a problem with your tracking and agrees the fix with you, a **Fix my tracking** card appears on your tracking page. One click and Cortana makes the change in your own browser, through the Cortana AI Chrome extension, in the accounts you are already logged into. Then it walks your funnel again to check the fix worked.
+
+You choose how it works: Cortana asks before every step, or it makes the changes on its own and keeps a record of what was there before.
+
+This page documents extension version **4.40**.
+
+<Note>
+  **Before you start**
+
+  - **A computer with Chrome, Brave, Edge or Arc.** The extension does not run in Safari, in Firefox or on a phone.
+  - **The Cortana AI extension, installed and signed in** with the same Cortana account you use in the web app. See [Install and connect](/extension/install-and-connect).
+  - **The account the fix happens in, logged in in that same browser.** The card names it, for example your GoHighLevel sub-account.
+</Note>
+
+{/* TODO: screenshot: capture once Fix my tracking is switched on for a business:
+    images/extension/fix-my-tracking/01-card-ready.png (the card with the account line, the mode question and the button). */}
+
+## Find the Fix my tracking card
+
+1. In the Cortana web app, open the business and click **Ad Tracking** in the sidebar.
+2. Open the **Tracking Pixels** tab.
+3. When a fix is waiting for you, a card at the top reads **Cortana has the fix for your tracking**, followed by how many changes were agreed with you.
+
+If Cortana emailed you a message titled **Cortana has the fix for your tracking**, its **Open Fix my tracking** link takes you straight to this card.
+
+No card means there is no agreed fix waiting for this business right now.
+
+## Get your browser ready
+
+1. Open the card in Chrome, Brave, Edge or Arc on a computer. In any other browser the card reads **Cortana's extension runs in Chrome, Brave, Edge or Arc on a computer. Open this page in one of them to fix your tracking.**
+2. If the card reads **Cortana makes the change with its Chrome extension.**, Cortana cannot see your extension yet. Click **Install the Cortana extension** to add it from the Chrome Web Store, or open the extension and sign in if it is already installed.
+3. Click **Try again**. The card shows **Waiting for the extension to check in…** and starts the fix as soon as your extension checks in, asking before each step. If the extension has not checked in after 3 minutes, the **Try again** button comes back.
+4. Log into the account the card names. The card says, for example, **Before you start, log into GoHighLevel sub-account Acme Fitness in this browser.**
+
+## Choose how Cortana makes the change
+
+The card asks **How should Cortana make the change?**
+
+- **Ask me before each step** is selected by default. You approve every change in the Cortana panel.
+- **Make the changes, then show me what changed**: Cortana goes step by step on its own and keeps what was there before, so any change can be put back. It still stops and asks before anything sensitive. See [What Cortana always asks about](#what-cortana-always-asks-about).
+
+## Start the fix
+
+1. Click **Fix my tracking**.
+2. Chrome shows a notification: **Cortana started a task in your browser**. Click it to open the **Cortana Agent** panel and follow along.
+3. The card now reads **Cortana is making the change in your browser. Follow along in the Cortana panel, and approve any step it asks about.**
+
+Keep the browser open until the fix finishes.
+
+## Approve each step
+
+When Cortana is about to change something and needs your OK, the **Cortana Agent** panel shows **Approve this action?** with the step it is about to take. Chrome also shows a **Cortana needs your OK** notification.
+
+- Click **Allow** to let Cortana take that step.
+- Click **Deny** to stop the fix. Cortana does not take that step, and the fix ends there.
+
+Reading a page and taking a screenshot never ask; only steps that change something do. If nobody answers for 30 minutes, the fix stops on its own.
+
+## When Cortana needs your help
+
+Some pages show a check only a person can pass, like a captcha. The panel then shows **Cortana needs your help**, and Chrome shows a **Cortana needs you** notification.
+
+1. Solve the check in the page.
+2. Click **Resume** in the panel.
+
+If nobody clears the check for 30 minutes, the fix stops on its own.
+
+## Stop the fix
+
+Click **STOP** in the **Cortana Agent** panel at any time. Cortana stops before its next step.
+
+## After the fix
+
+When Cortana finishes, the card reads **Done in your browser. Cortana is checking your funnel again.** Cortana walks your funnel again to confirm the fix worked.
+
+If the fix did not finish (you clicked **Deny** or **STOP**, nobody answered, or something on the page got in the way), the card offers **Fix my tracking** again so you can run it once more.
+
+## Reference
+
+<AccordionGroup>
+  <Accordion title="What Cortana always asks about">
+    Even in **Make the changes, then show me what changed**, Cortana stops and asks for your OK before it:
+
+    - **types into a password field**;
+    - **enters payment details**, like a card number;
+    - **types into a field it could not read**, for example a field inside a payment form that another site shows on the page;
+    - **uploads a file from your computer**;
+    - **acts on a sensitive site**: banking or payment sites, email, sign-in pages, admin consoles, or a sensitive area of a site such as billing, payments, checkout, passwords, security or API keys.
+
+    The **Approve this action?** card says why it is asking.
+  </Accordion>
+
+  <Accordion title="What Cortana keeps a record of">
+    For every step of a fix, Cortana keeps a record: what it did, on which page, and what was there before and after. That record is what lets a change be put back.
+
+    - Passwords, payment details and anything typed into a field Cortana could not read are saved as **(hidden)**, never as the value.
+    - Sign-in codes and tokens are removed from the page links it saves.
+    - Tracking code, like a pixel snippet, is saved exactly as it was, so it can be restored.
+  </Accordion>
+
+  <Accordion title="The two ways Cortana can make the change">
+    | Option | What happens | Default |
+    |---|---|---|
+    | **Ask me before each step** | Every step that changes something waits for **Allow** or **Deny** in the Cortana Agent panel. | Yes |
+    | **Make the changes, then show me what changed** | Cortana takes each step on its own, keeps what was there before, and still asks before anything in [What Cortana always asks about](#what-cortana-always-asks-about). | No |
+
+    A fix started from **Try again** asks before each step.
+  </Accordion>
+
+  <Accordion title="Who can use Fix my tracking">
+    Anyone on your account who can open the business and has the **Manage ad tracking** permission sees the card and can start the fix. The fix runs in the browser of the person who clicks **Fix my tracking**, with that person's extension.
+  </Accordion>
+
+  <Accordion title="Every message the card can show">
+    - **Cortana has the fix for your tracking**: the card's title. A fix agreed with you is waiting.
+    - **Before you start, log into … in this browser.**: the account the fix happens in.
+    - **Cortana makes the change with its Chrome extension.**: Cortana cannot see your extension. Install it or sign in, then click **Try again**.
+    - **Waiting for the extension to check in…**: after **Try again**, for up to 3 minutes.
+    - **Cortana's extension runs in Chrome, Brave, Edge or Arc on a computer. Open this page in one of them to fix your tracking.**: you are in a browser the extension does not support.
+    - **Cortana is making the change in your browser. Follow along in the Cortana panel, and approve any step it asks about.**: a fix is running.
+    - **Done in your browser. Cortana is checking your funnel again.**: the fix finished and Cortana is checking it.
+    - **There's no fix waiting here right now.**: the fix is no longer waiting, for example it was already made.
+    - **Something changed while you clicked. Try again in a moment.**: the fix changed state while you clicked.
+    - **This is with the engineers right now and the eng team will be in touch shortly.**: the fix cannot start from the card right now; the Cortana team follows up with you.
+  </Accordion>
+</AccordionGroup>
+
+## FAQ
+
+<AccordionGroup>
+  <Accordion title="Why don't I see the Fix my tracking card?">
+    The card only shows when Cortana has a tracking fix agreed with you and waiting for this business. Fix my tracking is also rolling out to businesses gradually. If Cortana told you a fix is ready and you do not see the card, check that you are on the **Tracking Pixels** tab of the right business, and that you have the **Manage ad tracking** permission.
+  </Accordion>
+
+  <Accordion title="The card says to install the extension but I already have it installed">
+    The card looks for an extension signed in with the same Cortana account you are using in the web app. Open the Cortana AI extension, make sure it is signed in with that account, then click **Try again** on the card. Use the same browser for both.
+  </Accordion>
+
+  <Accordion title="Will Cortana type my password or my card number?">
+    Never without asking. Cortana stops and asks before it types into a password field, enters payment details or acts on a sensitive site, even in **Make the changes, then show me what changed**. Those values are never saved in its record of the fix: they are kept as **(hidden)**.
+  </Accordion>
+
+  <Accordion title="Cortana stopped halfway through the fix">
+    A fix stops when a step is denied, when **STOP** is clicked, when nobody answers a step or a page check for 30 minutes, or when something on the page gets in the way. The card offers **Fix my tracking** again so you can run it once more.
+  </Accordion>
+
+  <Accordion title="Can I undo a change Cortana made?">
+    Yes. Cortana keeps what was there before each change it makes. Ask the Cortana team and they will put it back.
+  </Accordion>
+
+  <Accordion title="Can I run the fix from my phone or from Safari?">
+    No. The fix runs through the Cortana AI Chrome extension, which works in Chrome, Brave, Edge and Arc on a computer.
+  </Accordion>
+</AccordionGroup>
+
+## Next step
+
+<Card title="Install and connect the extension" icon="chrome" href="/extension/install-and-connect">
+  Install the Cortana AI extension and sign in, so it is ready the next time Cortana has a fix for you.
+</Card>

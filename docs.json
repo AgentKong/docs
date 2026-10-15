@@ -161,6 +161,13 @@
             ]
           },
           {
+            "group": "Tracking fixes",
+            "icon": "wrench",
+            "pages": [
+              "extension/fix-my-tracking"
+            ]
+          },
+          {
             "group": "Meta Ads Manager",
             "icon": "crosshairs",
             "pages": [
