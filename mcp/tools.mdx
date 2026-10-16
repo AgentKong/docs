@@ -553,6 +553,7 @@ New. These tools let the assistant create and manage Meta ads. They require the 
 | --- | --- |
 | `list_ad_accounts` | Connected ad accounts the assistant can read or manage. |
 | `get_ad_insights` | Platform-level ad performance pulled straight from the ad account. |
+| `list_page_posts` | Recent posts from your Facebook Page or Instagram account, with likes, comments, and whether Meta allows each one to run as an ad. |
 | `list_ad_pixels` | Your Meta pixels: the ones on your ad account and the others your Meta business owns, which one Cortana would pick, and which one your Conversions API setup uses. |
 | `get_capi_setup` | Your Meta Conversions API setups and how healthy they are: the pixel, whether Cortana manages the token, Event Match Quality, whether another integration also sends to the pixel, every setting of each setup, which conversion goes to which Meta event, and the Meta event names you can use. |
 
@@ -562,7 +563,7 @@ New. These tools let the assistant create and manage Meta ads. They require the 
 | --- | --- |
 | `create_campaign` | Create a new campaign (paused). |
 | `create_ad_set` | Create an ad set with targeting, budget, and schedule (paused). |
-| `create_creative` | Create an ad creative from uploaded media. |
+| `create_creative` | Create an ad creative from uploaded media, or from one of your existing Facebook or Instagram posts. |
 | `create_ad` | Assemble a creative and ad set into an ad (paused). |
 | `update_entity` | Edit an existing campaign, ad set, creative, or ad. |
 | `activate_entity` | Set a campaign, ad set, or ad live. Requires your confirmation. |
@@ -579,6 +580,34 @@ New. These tools let the assistant create and manage Meta ads. They require the 
 | `upload_ad_video` | Upload a video to the ad account. |
 | `create_video_upload` | Start a resumable video upload session. |
 | `get_video_status` | Check whether an uploaded video is ready to use. |
+
+## Run your own posts as ads
+
+Turn an organic Facebook or Instagram post into an ad. The ad keeps the post's likes and comments, which makes it a strong retargeting ad.
+
+1. Ask the assistant to list your posts. It calls `list_page_posts` for your Facebook Page or your Instagram account.
+2. Pick the posts you want. The assistant skips any post Meta does not allow as an ad.
+3. The assistant calls `create_creative` with the post, then `create_ad` into an ad set. The ad is created paused.
+
+<AccordionGroup>
+  <Accordion title="Which posts can run as ads">
+    Only posts from your ad identity: the page chosen under **Ad identity (Facebook Page)** in the **Deployment** section of your AI Media Buyer settings, and the Instagram account linked to it. A post from any other Page or account is refused before anything is sent to Meta.
+
+    Meta decides which posts are eligible. `list_page_posts` shows Meta's answer for each post. Some Facebook photo posts and posts with music not licensed for ads are not eligible.
+
+    Instagram posts need a real Instagram account linked to your Facebook Page.
+  </Accordion>
+  <Accordion title="What you can and cannot change">
+    The post runs with its own image or video and caption. To change the copy, make a new ad from uploaded media instead.
+
+    An Instagram post can get a button, such as Learn More, that links to your site. A Facebook post keeps its own link and button.
+
+    Cortana tracking is added to every ad, so clicks and sales are still attributed.
+  </Accordion>
+  <Accordion title="Instagram posts fail with a permission error">
+    Reconnect Meta in Cortana: go to **Integrations**, then **Meta**, then **Connect**, and log in again. Connections made before March 10, 2026 do not include permission to read Instagram posts.
+  </Accordion>
+</AccordionGroup>
 
 ---
 
