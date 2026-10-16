@@ -1,0 +1,444 @@
+---
+title: "Use WebinarJam"
+sidebarTitle: "Use WebinarJam"
+description: "Run Cortana Webinars on WebinarJam: connect your account with an API key, bring in a webinar you scheduled there, and track sign-ups, attendance, replays and in-room purchases."
+---
+
+{/* last-verified: 2026-10-16 against the component source (AgentKong_App, branch claude/webinarjam-host) · routes: /business/[businessId]/settings?tab=integrations (WebinarJam), /business/[businessId]/webinars (New webinar, WebinarJam) */}
+
+## Overview
+
+Cortana Webinars works with WebinarJam as well as Zoom. You connect your WebinarJam account once, with its API key. Then you bring in a webinar you already scheduled in WebinarJam.
+
+Cortana then tracks each sign-up, who came live and for how long, who watched the replay, and who bought from the webinar room. You can count each of these as a conversion and send it to your ad platforms.
+
+This page replaces [1) Connect Zoom](/webinars-connect-zoom) and [2) Create Your Webinar](/webinars-create) for WebinarJam. Pages 3 to 6 work the same for both. They say where WebinarJam is different.
+
+<Note>
+  **Before you start.** Schedule your webinar in WebinarJam first. Cortana brings in webinars that already exist there. It never creates or moves a WebinarJam webinar.
+</Note>
+
+---
+
+## 1. Find your WebinarJam API key
+
+<Steps>
+  <Step title="Open your webinars in WebinarJam">
+    Sign in to WebinarJam and open the **Webinars** dashboard.
+  </Step>
+  <Step title="Open Advanced">
+    Click **Advanced** on any webinar. The **Advanced integration** box opens.
+  </Step>
+  <Step title="Copy the key">
+    Click **API custom integration**, then copy the **API Key**.
+  </Step>
+</Steps>
+
+<Frame caption="In WebinarJam: Advanced, then API custom integration. Every value is replaced in this picture.">
+  <img src="/images/webinars/webinarjam/01-find-api-key.png" alt="WebinarJam's Advanced integration box on its API custom integration tab, with the Member ID, Webinar ID, Webinar Hash and API Key fields, and a round blue button beside the API Key. Every value is replaced in this picture." />
+</Frame>
+
+One key covers your whole WebinarJam account. Every webinar in that account can come into Cortana with it.
+
+<Warning>
+  **Do not click the round blue button next to the API Key.** It makes a new key, and the old one stops working at once. Cortana then shows **Needs a new key** until you paste the new one.
+</Warning>
+
+---
+
+## 2. Connect WebinarJam in Cortana
+
+<Steps>
+  <Step title="Open Integrations">
+    In Cortana, click **Settings**, then **Integrations**.
+  </Step>
+  <Step title="Open the WebinarJam card">
+    Find the **WebinarJam** card and click **Connect**.
+  </Step>
+  <Step title="Paste the key">
+    Paste the key into **WebinarJam API key**.
+  </Step>
+  <Step title="Click Connect WebinarJam">
+    Cortana checks the key with WebinarJam straight away.
+  </Step>
+</Steps>
+
+<Frame caption="The WebinarJam box before your first account: one key field, and where to find the key.">
+  <img className="block dark:hidden" src="/images/webinars/webinarjam/02-connect.png" alt="The WebinarJam accounts box with the WebinarJam logo, the heading Connect your account, the WebinarJam API key field, the line saying where to find the key in WebinarJam, and the Connect WebinarJam button." />
+  <img className="hidden dark:block" src="/images/webinars/webinarjam/02-connect-dark.png" alt="The WebinarJam accounts box with the WebinarJam logo, the heading Connect your account, the WebinarJam API key field, the line saying where to find the key in WebinarJam, and the Connect WebinarJam button." />
+</Frame>
+
+The account now shows as **Connected**. Under it, a line says how many webinars use it. The card's button now reads **Manage**.
+
+<Frame caption="A connected account. Connect another account adds a second WebinarJam account.">
+  <img className="block dark:hidden" src="/images/webinars/webinarjam/03-connected.png" alt="The WebinarJam accounts box listing one account marked Connected, with the line No webinars use this account, the Faster replay and purchase tracking link, a Disconnect button, and the Connect another account button at the bottom." />
+  <img className="hidden dark:block" src="/images/webinars/webinarjam/03-connected-dark.png" alt="The WebinarJam accounts box listing one account marked Connected, with the line No webinars use this account, the Faster replay and purchase tracking link, a Disconnect button, and the Connect another account button at the bottom." />
+</Frame>
+
+<AccordionGroup>
+  <Accordion title="Is my API key safe in Cortana?">
+    Yes. Cortana stores the key encrypted and never shows it again. It is never sent back to your browser.
+  </Accordion>
+
+  <Accordion title="More than one WebinarJam account">
+    Click **Connect another account** and paste that account's key. Each account shows on its own row.
+
+    One WebinarJam account can belong to one Cortana business only.
+  </Accordion>
+
+  <Accordion title="What the account states mean">
+    - **Connected**: WebinarJam accepts the key.
+    - **Needs a new key**: WebinarJam stopped accepting the key, usually because it was regenerated. Click **Paste a new key** and paste the current one.
+    - **Disconnected**: you disconnected it. Click **Paste a new key** to bring it back.
+  </Accordion>
+
+  <Accordion title="Disconnect an account">
+    Click **Disconnect** on the account's row. Cortana asks first and says how many webinars use it.
+
+    Disconnecting deletes the key in Cortana. Sign-ups and attendance stop for its webinars until you connect it again. Their history stays.
+  </Accordion>
+</AccordionGroup>
+
+---
+
+## 3. Add your WebinarJam webinar
+
+<Steps>
+  <Step title="Open New webinar">
+    Click **Webinars** in the menu on the left, then **New webinar**.
+  </Step>
+  <Step title="Pick WebinarJam">
+    Under **Where does it run?**, click **WebinarJam**.
+  </Step>
+  <Step title="Pick the account">
+    Under **Which WebinarJam account?**, pick the account. With one account, it is picked for you. You can also connect one here.
+  </Step>
+  <Step title="Pick the webinar">
+    Under **Which webinar?**, pick the webinar you scheduled in WebinarJam. Each one shows its next date in its own timezone.
+  </Step>
+  <Step title="Click Set webinar details">
+    This takes you to the details.
+  </Step>
+</Steps>
+
+<Frame caption="Where does it run? The first question in New webinar.">
+  <img className="block dark:hidden" src="/images/webinars/webinarjam/04-where-does-it-run.png" alt="The New webinar box asking Where does it run, with two cards: WebinarJam, Bring in a webinar you've already scheduled, and Zoom, Create a webinar or meeting, or use an existing one." />
+  <img className="hidden dark:block" src="/images/webinars/webinarjam/04-where-does-it-run-dark.png" alt="The New webinar box asking Where does it run, with two cards: WebinarJam, Bring in a webinar you've already scheduled, and Zoom, Create a webinar or meeting, or use an existing one." />
+</Frame>
+
+<Frame caption="Pick the WebinarJam account, then the webinar.">
+  <img className="block dark:hidden" src="/images/webinars/webinarjam/05-pick-webinar.png" alt="The New webinar box on its WebinarJam setup step, showing Which WebinarJam account with one account, and Which webinar with a scheduled webinar picked, its next date and timezone shown, and the Set webinar details button." />
+  <img className="hidden dark:block" src="/images/webinars/webinarjam/05-pick-webinar-dark.png" alt="The New webinar box on its WebinarJam setup step, showing Which WebinarJam account with one account, and Which webinar with a scheduled webinar picked, its next date and timezone shown, and the Set webinar details button." />
+</Frame>
+
+<Steps>
+  <Step title="Check the name">
+    **What is the webinar called?** starts on the name from WebinarJam. People see this name.
+  </Step>
+  <Step title="Set how long it runs">
+    Pick a length in **How long does it run?** WebinarJam does not share one, so Cortana asks.
+  </Step>
+  <Step title="Pick who hosts">
+    Pick a team member under **Who hosts?** Calendar invites come from this person's calendar.
+  </Step>
+  <Step title="Click Set up registration">
+    This takes you to where people register.
+  </Step>
+</Steps>
+
+<Frame caption="The details: the name, the length and who hosts.">
+  <img className="block dark:hidden" src="/images/webinars/webinarjam/06-details.png" alt="The New webinar box on its details step, with What is the webinar called filled in from WebinarJam, How long does it run with the note that WebinarJam does not provide a length, Who hosts with a team member, and the Set up registration button." />
+  <img className="hidden dark:block" src="/images/webinars/webinarjam/06-details-dark.png" alt="The New webinar box on its details step, with What is the webinar called filled in from WebinarJam, How long does it run with the note that WebinarJam does not provide a length, Who hosts with a team member, and the Set up registration button." />
+</Frame>
+
+<Warning>
+  **WebinarJam keeps the schedule.**
+
+  You cannot pick a day, a time or a repeat in Cortana for a WebinarJam webinar. Change them in WebinarJam, and Cortana follows.
+</Warning>
+
+<AccordionGroup>
+  <Accordion title="Which webinars show in the list">
+    Your scheduled WebinarJam webinars, newest first. A webinar marked **Repeats** has more than one date.
+
+    A webinar already in Cortana shows **Already in Cortana**, and opens instead of being added twice. One you archived shows **Archived in Cortana**, and opens so you can restore it.
+
+    "Right Now" and "Always On" webinars do not show. Cortana needs a scheduled date to track.
+  </Accordion>
+
+  <Accordion title="My webinar is not in the list">
+    Check that it is scheduled in WebinarJam, with a date still to come. If the account has no scheduled webinar, the box says *Create a scheduled webinar in WebinarJam first*.
+  </Accordion>
+
+  <Accordion title="Who hosts, and calendar invites">
+    This works the same as for Zoom. See **Who hosts, and calendar invites** in [2) Create Your Webinar](/webinars-create#3-host-zoom-account-type-and-host).
+  </Accordion>
+</AccordionGroup>
+
+---
+
+## 4. Choose where people register
+
+Under **Where do people register?**, pick one answer.
+
+### With a Cortana form or one of my connected forms
+
+People sign up on your own form. Cortana registers each of them in WebinarJam, with their own personal join link.
+
+<Steps>
+  <Step title="Pick the form">
+    Under **What form feeds into this?**, pick the form. It can be a Cortana form, or a GoHighLevel, Typeform, Tally, HubSpot or ClickFunnels form you connected.
+  </Step>
+  <Step title="Answer the rest">
+    The rest is the same as for Zoom: how people register for a repeating webinar, and the pitch minute. See section 4 of [2) Create Your Webinar](/webinars-create#4-gate-the-form-people-sign-up-with).
+  </Step>
+  <Step title="Click Add webinar">
+    Cortana adds the webinar and shows **Your webinar is ready**.
+  </Step>
+</Steps>
+
+<Frame caption="Where do people register? With your own form, Cortana registers each person in WebinarJam.">
+  <img className="block dark:hidden" src="/images/webinars/webinarjam/07-register-form.png" alt="The New webinar box asking Where do people register, with With a Cortana form or one of my connected forms picked, the form list under What form feeds into this, and the Add webinar button." />
+  <img className="hidden dark:block" src="/images/webinars/webinarjam/07-register-form-dark.png" alt="The New webinar box asking Where do people register, with With a Cortana form or one of my connected forms picked, the form list under What form feeds into this, and the Add webinar button." />
+</Frame>
+
+### On WebinarJam's own registration page
+
+People sign up on WebinarJam's page. Your Cortana pixel tracks them there.
+
+<Steps>
+  <Step title="Copy the pixel">
+    Click **Copy pixel**.
+  </Step>
+  <Step title="Open the webinar in WebinarJam">
+    In WebinarJam, click **Edit** on the webinar. Click **Next** until you reach the **Integrations** step.
+  </Step>
+  <Step title="Turn on tracking">
+    Next to **3rd party tracking systems**, click the pencil. Pick **Embed a 3rd party tracking token**.
+  </Step>
+  <Step title="Paste it five times">
+    Paste the same pixel into all five boxes: **Registration page tracking**, **Registration form tracking**, **Post-registration Thank You page tracking**, **Webinar live room tracking** and **Replay page tracking**.
+  </Step>
+  <Step title="Save in WebinarJam">
+    Click **Save**, then finish the webinar's steps in WebinarJam.
+  </Step>
+  <Step title="Set the pitch minute">
+    Back in Cortana, type the minute your offer starts in **When does the pitch start?** Leave it empty if there is none.
+  </Step>
+  <Step title="Click Add webinar">
+    Cortana adds the webinar and shows **Your webinar is ready**.
+  </Step>
+</Steps>
+
+<Frame caption="WebinarJam's own registration page: copy the pixel, then paste it into the five boxes in WebinarJam.">
+  <img className="block dark:hidden" src="/images/webinars/webinarjam/08-register-webinarjam-page.png" alt="The New webinar box with On WebinarJam's own registration page picked, showing your Cortana pixel code with a Copy pixel button, the five 3rd party tracking boxes to paste it into, and When does the pitch start." />
+  <img className="hidden dark:block" src="/images/webinars/webinarjam/08-register-webinarjam-page-dark.png" alt="The New webinar box with On WebinarJam's own registration page picked, showing your Cortana pixel code with a Copy pixel button, the five 3rd party tracking boxes to paste it into, and When does the pitch start." />
+</Frame>
+
+<Frame caption="In WebinarJam: 3rd party tracking systems, with Embed a 3rd party tracking token picked. The five boxes start below it.">
+  <img src="/images/webinars/webinarjam/09-third-party-tracking.png" alt="WebinarJam's webinar editor on its Integrations step. The 3rd party tracking systems panel has Embed a 3rd party tracking token picked, with Cancel and Save at the top, and the first two boxes below: Registration page tracking and Registration form tracking." />
+</Frame>
+
+<Note>
+  Cortana's own box names these five boxes in short: Registration page, Registration form, Thank you page, Live room and Replay room. They are the same five.
+</Note>
+
+<AccordionGroup>
+  <Accordion title="Which way should I pick?">
+    Pick your own form if you already have a sign-up page you like, or a form in another tool. Cortana then registers each person in WebinarJam itself, so you paste nothing into WebinarJam.
+
+    Pick WebinarJam's own page if you want to keep WebinarJam's sign-up page. Then the pixel in the five boxes is how Cortana sees those people.
+  </Accordion>
+
+  <Accordion title="Does Cortana keep the WebinarJam room password?">
+    No. WebinarJam puts a room password and private room links in its thank you page address. Cortana never stores them, from the pixel or anywhere else.
+  </Accordion>
+</AccordionGroup>
+
+---
+
+## 5. Done: your link and your conversions
+
+The box now reads **Your webinar is ready**. It works the same as for Zoom: copy your link, then pick what counts as a conversion. See section 5 of [2) Create Your Webinar](/webinars-create#5-done-your-link-and-your-conversions).
+
+WebinarJam webinars offer three more events than Zoom: **Webinar Replay Watched**, **Webinar Replay Watched 50%** and **Webinar In-Room Purchase**. [5) Count Webinars As Conversions](/webinars-conversions) explains each one.
+
+<Frame caption="Your webinar is ready: the ten events it can count, with the three WebinarJam ones at the bottom.">
+  <img className="block dark:hidden" src="/images/webinars/webinarjam/10-done.png" alt="The New webinar box titled Your webinar is ready, scrolled to the Which conversions count list: Registered, Accepted the calendar invite, Attended, Watched 25%, 50% and 75%, Saw the pitch, then Watched the replay, Watched 50% of the replay and Bought in the room, each with a conversion picked beside it." />
+  <img className="hidden dark:block" src="/images/webinars/webinarjam/10-done-dark.png" alt="The New webinar box titled Your webinar is ready, scrolled to the Which conversions count list: Registered, Accepted the calendar invite, Attended, Watched 25%, 50% and 75%, Saw the pitch, then Watched the replay, Watched 50% of the replay and Bought in the room, each with a conversion picked beside it." />
+</Frame>
+
+---
+
+## 6. Get replays and purchases within minutes (optional)
+
+After each session, Cortana checks WebinarJam every 6 hours for 7 days for replay views and in-room purchases. WebinarJam's **Custom Webhook** tells Cortana to check right away.
+
+<Steps>
+  <Step title="Open the WebinarJam box">
+    In Cortana, click **Settings**, **Integrations**, then **Manage** on the **WebinarJam** card.
+  </Step>
+  <Step title="Open Faster replay and purchase tracking">
+    Click **Faster replay and purchase tracking** under the account, then **Set up the webhook**.
+  </Step>
+  <Step title="Add the webhook in WebinarJam">
+    In WebinarJam, open **Profile**, **Integrations**, **Autoresponder**, and pick **Custom Webhook**.
+  </Step>
+  <Step title="Paste the URL">
+    Copy the **Webhook URL** from Cortana and paste it as the webhook URL.
+  </Step>
+  <Step title="Paste the token">
+    For authentication, choose **Bearer token**. Copy the **Bearer token** from Cortana and paste it. Cortana shows it only once.
+  </Step>
+  <Step title="Turn on the rules">
+    In each webinar's rules in WebinarJam, send **Attends replay** and **Purchases** to this webhook.
+  </Step>
+</Steps>
+
+<Frame caption="The webhook URL and token, with where each one goes in WebinarJam. Both are hidden here.">
+  <img className="block dark:hidden" src="/images/webinars/webinarjam/11-webhook.png" alt="The WebinarJam accounts box with the Faster replay and purchase tracking panel open, showing the Webhook URL and the Bearer token, each with a Copy button, in four numbered steps saying where they go in WebinarJam." />
+  <img className="hidden dark:block" src="/images/webinars/webinarjam/11-webhook-dark.png" alt="The WebinarJam accounts box with the Faster replay and purchase tracking panel open, showing the Webhook URL and the Bearer token, each with a Copy button, in four numbered steps saying where they go in WebinarJam." />
+</Frame>
+
+The account now shows **Webhook on**. To replace the token, click **Make a new webhook token**. The old token stops working.
+
+---
+
+## How WebinarJam differs from Zoom
+
+<AccordionGroup>
+  <Accordion title="When attendance shows up">
+    Zoom tells Cortana as people join and leave. WebinarJam does not, so Cortana asks WebinarJam once the room has certainly closed: about 4 hours after the start. WebinarJam closes a live room after 4 hours at most.
+
+    Until then, the **Attendance** tab says *Attendance arrives once WebinarJam's room has closed, about four hours after the start.*
+
+    Each person's time in the room comes from WebinarJam. Watched percentages use the session's real length: from the start to the last person leaving.
+  </Accordion>
+
+  <Accordion title="Replay views and in-room purchases">
+    Only WebinarJam webinars have these. After a session, Cortana checks WebinarJam every 6 hours for 7 days, or within minutes with the webhook in section 6.
+
+    - **Webinar Replay Watched**: watched any of the replay.
+    - **Webinar Replay Watched 50%**: watched at least half of the replay, measured against the session's length.
+    - **Webinar In-Room Purchase**: bought from the webinar room, live or on the replay.
+
+    Each counts once per person per session. The **Registrants** tab shows *Watched the replay* and *Bought in the room*.
+  </Accordion>
+
+  <Accordion title="Why the in-room purchase has no dollar value">
+    WebinarJam says someone bought, not what they paid. Stripe, or your checkout, stays the record of the money. So **Webinar In-Room Purchase** carries no value, and never counts the same sale twice.
+  </Accordion>
+
+  <Accordion title="Questions, polls and chat">
+    WebinarJam does not share them with Cortana. A WebinarJam webinar shows attendance but no questions.
+  </Accordion>
+
+  <Accordion title="Emails">
+    WebinarJam sends its own confirmation and reminder emails. Set them up in WebinarJam. Zoom's email switches do not show for a WebinarJam webinar. Cortana's own calendar invites work the same.
+  </Accordion>
+
+  <Accordion title="Meetings and past sessions">
+    WebinarJam webinars only, no meetings. Cortana tracks a webinar from the moment you add it. Past sessions are not brought in.
+  </Accordion>
+</AccordionGroup>
+
+---
+
+## Settings Reference
+
+| Setting | What it does | Default | We recommend | Watch out for |
+| --- | --- | --- | --- | --- |
+| **WebinarJam API key** | Connects your WebinarJam account. | Empty | Copy it from **Advanced**, **API custom integration**. | One account belongs to one Cortana business. |
+| **Paste a new key** | Brings back an account that needs a new key, or one you disconnected. | Not applicable | Paste the key from the same WebinarJam account. | A key from another account is refused. |
+| **Disconnect** | Deletes the key in Cortana. | Not applicable | Only when you stop using the account. | Sign-ups and attendance stop for its webinars. |
+| **Where does it run?** | Picks WebinarJam or Zoom for a new webinar. | Nothing picked | **WebinarJam** for this page. | None. |
+| **Which WebinarJam account?** | The account the webinar lives in. | Your only account | Your main account. | Only connected accounts show. |
+| **Which webinar?** | The WebinarJam webinar to bring in. | Nothing picked | One with a date still to come. | Right Now and Always On webinars do not show. |
+| **What is the webinar called?** | The webinar's name in Cortana. | The name from WebinarJam | Keep it. | None. |
+| **How long does it run?** | The length Cortana uses until the real end is known. | 60 minutes | The real length of your webinar. | WebinarJam does not share one. |
+| **Who hosts?** | The team member whose calendar sends invites. | Nothing picked | Someone with a connected calendar. | No calendar means no calendar invites. |
+| **Where do people register?** | Your own form, or WebinarJam's own page. | Nothing picked | Your own form, if you have one. | WebinarJam's page needs the pixel in five boxes. |
+| **Copy pixel** | Copies your Cortana pixel for WebinarJam's boxes. | Not applicable | Paste it into all five boxes. | A box without it is a page Cortana cannot see. |
+| **When does the pitch start?** | The minute your offer starts. | Empty | Set it if you pitch. | Counted from the start. |
+| **Faster replay and purchase tracking** | Shows the webhook URL and token for WebinarJam. | Off | Turn it on if you use replays or room offers. | The token shows only once. |
+
+---
+
+## Troubleshooting
+
+<AccordionGroup>
+  <Accordion title="It says WebinarJam refused this key">
+    The message is *WebinarJam refused this key. Copy it again from WebinarJam: Webinars dashboard, Advanced, API custom integration.* Copy the whole key again, with no spaces, and paste it.
+  </Accordion>
+
+  <Accordion title="It says that does not look like a WebinarJam API key">
+    The message is *That does not look like a WebinarJam API key.* You pasted something else. Copy the key from **API custom integration**.
+  </Accordion>
+
+  <Accordion title="The account says Needs a new key">
+    WebinarJam stopped accepting the key, usually because someone regenerated it. Click **Paste a new key** and paste the current key.
+
+    Sign-ups that came in meanwhile are sent to WebinarJam once the key works again.
+  </Accordion>
+
+  <Accordion title="It says WebinarJam is busy">
+    The messages are *WebinarJam is busy. Try again in a minute.* and *WebinarJam did not answer as expected. Try again in a minute.* Wait a minute and try again.
+  </Accordion>
+
+  <Accordion title="It says the account is held by a deleted workspace">
+    The message is *This WebinarJam account is still held by a workspace that was deleted. Contact Cortana support to release it.* Click the support button and we will release it.
+  </Accordion>
+
+  <Accordion title="A sign-up shows Failed on the Registrants tab">
+    The **Registrants** tab shows WebinarJam's reason. A common one is a field WebinarJam requires that your form does not ask, such as a last name. Turn off that requirement in WebinarJam's registration settings, or add the question to your form.
+  </Accordion>
+
+  <Accordion title="Attendance is empty after my webinar">
+    Attendance arrives about 4 hours after the start, once WebinarJam's room has closed. If WebinarJam lists nobody a day later, the **Attendance** tab says *WebinarJam listed nobody as attending this event within a day of it, so no attendance is recorded.*
+  </Accordion>
+</AccordionGroup>
+
+---
+
+## FAQ
+
+<AccordionGroup>
+  <Accordion title="Does Cortana use OAuth for WebinarJam?">
+    No. WebinarJam only offers an API key. You paste it once. Zoom uses a sign-in instead.
+  </Accordion>
+
+  <Accordion title="Is the API key for one webinar or the whole account?">
+    The whole account. One key brings in any webinar in that WebinarJam account.
+  </Accordion>
+
+  <Accordion title="Can I change the webinar's date in Cortana?">
+    No. WebinarJam keeps the schedule. Change dates and repeats in WebinarJam, and Cortana follows.
+  </Accordion>
+
+  <Accordion title="Do I need to paste the pixel if people sign up with my own form?">
+    No. With your own form, Cortana registers people in WebinarJam itself. The five boxes are only for WebinarJam's own registration page.
+  </Accordion>
+
+  <Accordion title="Why does a replay view not show up right away?">
+    Without the webhook, Cortana checks every 6 hours for a week after the session. Set up the webhook in section 6 to see it within minutes.
+  </Accordion>
+
+  <Accordion title="Can I bring in my past WebinarJam webinars?">
+    No. Cortana tracks a webinar from the moment you add it, the same as for Zoom.
+  </Accordion>
+</AccordionGroup>
+
+---
+
+## Next Steps
+
+<CardGroup cols={2}>
+  <Card title="3) How People Sign Up" icon="user-plus" href="/webinars-registration">
+    Share the webinar's own link, and see who signed up.
+  </Card>
+  <Card title="5) Count Webinars As Conversions" icon="bullseye" href="/webinars-conversions">
+    Choose what each sign-up, visit, replay and purchase counts as.
+  </Card>
+</CardGroup>
+
+Stuck on a step? Click the support button at the bottom right of Cortana and we will help.

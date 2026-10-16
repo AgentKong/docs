@@ -1,6 +1,6 @@
 ---
 title: "3) How People Sign Up"
-description: "Share your webinar's own link or website code so people sign up, get their personal Zoom join link, and show on the Registrants tab."
+description: "Share your webinar's own link or website code so people sign up, get their personal join link, and show on the Registrants tab."
 ---
 
 {/* last-verified: 2026-10-11 · route: /business/[businessId]/webinars/[webinarId]?tab=registrants and ?tab=emails */}
@@ -12,6 +12,10 @@ People sign up for a webinar by filling in a form. Each webinar has its own link
 When someone signs up, Zoom gives them a personal join link. Cortana then shows them on the **Registrants** tab.
 
 This page shows you where to get the link, what people get, and where to check who signed up.
+
+<Tip>
+  **On WebinarJam, it works the same.** WebinarJam gives the join link and sends its own emails. Section 6 lists every difference.
+</Tip>
 
 <Note>
   **Before you start.** Make the webinar first: see [2) Create Your Webinar](/webinars-create).
@@ -324,6 +328,34 @@ Without a verified domain the note says *Verify a sending domain to send reminde
 
   <Accordion title="A warning that nobody gets the join link">
     If you turn off both confirmations, the tab warns you. With nothing else on, it says *Nobody sends registrants their join link with these settings. Turn on a confirmation, Zoom's reminders or the calendar invite.*
+  </Accordion>
+</AccordionGroup>
+
+---
+
+## 6. On WebinarJam
+
+A WebinarJam webinar signs people up the same way: share the webinar's own link, and check the **Registrants** tab. These parts differ.
+
+<AccordionGroup>
+  <Accordion title="Who gives the join link">
+    WebinarJam gives each person their own personal join link. Cortana registers them in WebinarJam as soon as they send your form, and keeps the link so it knows who they are when they join.
+
+    If WebinarJam answers that the email is already signed up, Cortana finds that sign-up instead of making a second one.
+  </Accordion>
+
+  <Accordion title="Statuses on the Registrants tab">
+    The statuses read the same, with WebinarJam in place of Zoom. For example **Waiting for WebinarJam to be reconnected** when the account needs a new key. The sign-ups go through once the key works again.
+
+    After the webinar, a person can also show *Watched the replay* or *Bought in the room*.
+  </Accordion>
+
+  <Accordion title="Emails">
+    WebinarJam sends its own confirmation and reminder emails. Set them up in WebinarJam. The **Emails** tab does not show Zoom's email switches for a WebinarJam webinar. Cortana's own reminders and the calendar invite work the same.
+  </Accordion>
+
+  <Accordion title="People who sign up on WebinarJam's own page">
+    If you picked WebinarJam's own registration page, people sign up there, not on your form. There is no Cortana link to share. Your Cortana pixel in WebinarJam's five tracking boxes is how Cortana sees them. See section 4 of [Use WebinarJam](/webinars-webinarjam#4-choose-where-people-register).
   </Accordion>
 </AccordionGroup>
 

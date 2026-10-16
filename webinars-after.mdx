@@ -19,6 +19,10 @@ At the bottom, this page lists everything Cortana records.
   To see people as they join, finish section 4 of [1) Connect Zoom](/webinars-connect-zoom). Without it, the numbers arrive after the event ends.
 </Note>
 
+<Tip>
+  **On WebinarJam, the tabs are the same, but the numbers come later.** Attendance arrives about 4 hours after the start, once WebinarJam's room has closed. Replay views and in-room purchases follow. Section 7 explains it all.
+</Tip>
+
 ---
 
 ## 1. Open the Attendance tab
@@ -317,6 +321,51 @@ Each card reads like *1 person left at minute 10, 50% of the room*, then *2 in t
 | **2 attendances** | Visits across the series. Shown when people register once for every event. One person who joined three events counts three. |
 | **1 watched 50%** | People who watched at least half. It shows once an event has its final report. |
 | **7 views** | How many times the sign-up page was seen. Click it for details. |
+
+---
+
+## 7. On WebinarJam
+
+The **Attendance** and **Insights** tabs look the same for a WebinarJam webinar. What changes is when the numbers arrive, and where they come from.
+
+<Steps>
+  <Step title="Wait about 4 hours after the start">
+    WebinarJam does not tell Cortana when people join or leave. Cortana reads WebinarJam's attendance list once the room has certainly closed: about 4 hours after the start.
+  </Step>
+  <Step title="Open the Attendance tab">
+    Each person's time in the room comes from WebinarJam. **Watched** runs from the start to the last person leaving.
+  </Step>
+  <Step title="Check replays and purchases over the next week">
+    For 7 days after the session, Cortana checks WebinarJam every 6 hours for replay views and in-room purchases. With WebinarJam's webhook, it checks within minutes. See section 6 of [Use WebinarJam](/webinars-webinarjam#6-get-replays-and-purchases-within-minutes-optional).
+  </Step>
+</Steps>
+
+<AccordionGroup>
+  <Accordion title="What the Attendance tab says on a WebinarJam webinar">
+    The line under each event reads one of these:
+
+    - *Attendance arrives once WebinarJam's room has closed, about four hours after the start.* The webinar is still on, or its room has not closed yet.
+    - *The event is over. The final numbers arrive once WebinarJam's attendance list is read.* Cortana reads it on its next check.
+    - *Final numbers. WebinarJam sends no end-of-event signal, so the length runs to the last person who left.* Done.
+    - *WebinarJam listed nobody as attending this event within a day of it, so no attendance is recorded.* Nobody came, or nobody was listed.
+    - *Cortana could not read the attendance from WebinarJam for this event.* Check that the account still says **Connected**.
+    - *WebinarJam's attendance list for this event was longer than Cortana reads, or held rows it could not read, so these numbers are partial and no no-shows were recorded.* Click the support button and we will look.
+  </Accordion>
+
+  <Accordion title="How Cortana knows who each person is">
+    **Matched by** reads **Personal link** when they used the join link Cortana got for them. Otherwise it reads **WebinarJam registration email** when their WebinarJam email matches a sign-up.
+
+    A **Guest** was in the room without a Cortana sign-up. Click it to read why: *They were in the room without a Cortana registration: they registered on WebinarJam's own page, or with an email other than the one they gave your form.*
+  </Accordion>
+
+  <Accordion title="Replay views and in-room purchases">
+    The **Registrants** tab shows *Watched the replay* and *Bought in the room* for those people. They can also count as conversions: **Webinar Replay Watched**, **Webinar Replay Watched 50%** and **Webinar In-Room Purchase**. See [5) Count Webinars As Conversions](/webinars-conversions).
+  </Accordion>
+
+  <Accordion title="Questions, chat and transcripts">
+    WebinarJam does not share them with Cortana. Those boxes on the **Insights** tab stay empty for a WebinarJam webinar.
+  </Accordion>
+</AccordionGroup>
 
 ---
 
