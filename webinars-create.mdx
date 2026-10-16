@@ -3,11 +3,11 @@ title: "2) Create Your Webinar"
 description: "Make a Zoom webinar or meeting in Cortana: name it, pick a time, choose the host and the form people sign up with."
 ---
 
-{/* last-verified: 2026-10-11 · route: /business/[businessId]/webinars, New webinar dialog */}
+{/* last-verified: 2026-10-16 · route: /business/[businessId]/webinars, New webinar dialog */}
 
 ## Overview
 
-The **Webinars** page lists every webinar in your business. **New webinar** asks four short questions: **Basics**, **Host**, **Gate** and **Done**.
+The **Webinars** page lists every webinar in your business. **New webinar** first asks **Where does it run?** For Zoom, it then asks four short questions: **Basics**, **Host**, **Gate** and **Done**.
 
 Cortana then makes the Zoom webinar or meeting for you. It also turns on Zoom sign-ups, so each person gets their own join link.
 
@@ -18,6 +18,10 @@ In Cortana, a webinar can be a Zoom webinar or a Zoom meeting. Both work the sam
 
   Have a form ready for people to sign up with. It must ask for an email, and it must be turned on. See [Create your form](/forms-create) and [Share your form](/forms-share).
 </Note>
+
+<Tip>
+  **Hosting on WebinarJam?** Follow [Use WebinarJam](/webinars-webinarjam) instead. It walks the WebinarJam side of **New webinar**.
+</Tip>
 
 ---
 
@@ -30,6 +34,9 @@ In Cortana, a webinar can be a Zoom webinar or a Zoom meeting. Both work the sam
   <Step title="Click New webinar">
     Click **New webinar** at the top right. On an empty page you can also click **Create your first webinar**.
   </Step>
+  <Step title="Pick Zoom">
+    Under **Where does it run?**, click **Zoom**. The four steps below follow.
+  </Step>
 </Steps>
 
 <Frame caption="The Webinars page before your first webinar.">
@@ -37,7 +44,12 @@ In Cortana, a webinar can be a Zoom webinar or a Zoom meeting. Both work the sam
   <img className="hidden dark:block" src="/images/webinars/create/06-webinars-empty-dark.png" alt="The Webinars page with the line No webinars yet, a short explanation, and a Create your first webinar button marked 2. The New webinar button sits at the top right." />
 </Frame>
 
-The empty page says *Pick a Zoom account, choose the form that registers people, and Cortana tracks every registration, every minute watched and every no-show.*
+The empty page says *Pick where it runs (WebinarJam or Zoom), choose the form that registers people, and Cortana tracks every registration, every minute watched and every no-show.*
+
+<Frame caption="Where does it run? Pick Zoom for this page, or WebinarJam for Use WebinarJam.">
+  <img className="block dark:hidden" src="/images/webinars/webinarjam/04-where-does-it-run.png" alt="The New webinar box asking Where does it run, with two cards: WebinarJam, Bring in a webinar you've already scheduled, and Zoom, Create a webinar or meeting, or use an existing one." />
+  <img className="hidden dark:block" src="/images/webinars/webinarjam/04-where-does-it-run-dark.png" alt="The New webinar box asking Where does it run, with two cards: WebinarJam, Bring in a webinar you've already scheduled, and Zoom, Create a webinar or meeting, or use an existing one." />
+</Frame>
 
 <Frame caption="The Webinars page with webinars on it. Each card is one webinar.">
   <img className="block dark:hidden" src="/images/webinars/create/07-webinars-list.png" alt="The Webinars page showing eight webinar cards in a grid, a Search webinars box, and the New webinar button at the top right marked 2. Each card shows a name, an on and off switch, the type, the next event, counts, the webinar's own link, an Edit button, a link icon and a three-dot menu." />
@@ -47,7 +59,7 @@ The empty page says *Pick a Zoom account, choose the form that registers people,
 <Accordion title="What each card on the list shows">
   - **The name.** Click it to open the webinar.
   - **The switch.** On means the webinar takes sign-ups. See [6) Manage Your Webinars](/webinars-manage).
-  - **The type line.** For example *Zoom meeting · Register once, every event*.
+  - **The type line.** The host, then how people register. For example *Zoom meeting · Register once, every event*, or *WebinarJam webinar · Register for each event*.
   - **The next event.** For example *Next: Oct 21, 2026, 10:00 AM*. It reads **No upcoming event** when nothing is left.
   - **The counts.** How many people signed up, joined and watched. See [4) After Your Webinar](/webinars-after).
   - **Views.** How many times the sign-up page was seen.
@@ -297,7 +309,7 @@ Nothing counts as a conversion until you choose and save. [5) Count Webinars As 
 
 | Setting | What it does | Default | We recommend | Watch out for |
 | --- | --- | --- | --- | --- |
-| **New webinar** | Opens the four-step box. | Not applicable | Connect Zoom first. | None. |
+| **New webinar** | Asks **Where does it run?**, then opens the four-step box for Zoom. | Not applicable | Connect Zoom first. | For WebinarJam, see [Use WebinarJam](/webinars-webinarjam). |
 | **Search webinars** | Finds a webinar on the list by name. | Empty | Use it once you have many webinars. | Only shows when you have at least one webinar. |
 | **What is the webinar called?** | The webinar's name in Cortana and in Zoom. | Empty | A name your people will recognise. | None. |
 | **Which day?** | The day of the first event. | A week from today | Pick it with care. | You cannot change it in Cortana later. |

@@ -7,7 +7,7 @@ description: "Choose which webinar sign-ups, visits and watch times count as con
 
 ## Overview
 
-A conversion is something Cortana counts and can send to your ads, like a sign-up. Webinars give you seven of them, from signing up to seeing your pitch.
+A conversion is something Cortana counts and can send to your ads, like a sign-up. Webinars give you seven of them, from signing up to seeing your pitch. WebinarJam webinars add three more: two for the replay, and one for buying in the room.
 
 Nothing is counted on its own. You choose, per webinar, or once for all your webinars.
 
@@ -35,6 +35,18 @@ Each event can count into a conversion. The panel shows the short name on the le
 | **Watched 75%** | Webinar Watched 75% | *Watched at least three quarters of the live event.* |
 | **Saw the pitch** | Webinar Saw The Pitch | *Was still in the room at the pitch minute.* |
 
+### Three more on WebinarJam
+
+A WebinarJam webinar also offers these three. A Zoom webinar does not.
+
+| In the panel | Conversion name | What it means |
+| --- | --- | --- |
+| **Watched the replay** | Webinar Replay Watched | *Watched the replay.* |
+| **Watched 50% of the replay** | Webinar Replay Watched 50% | *Watched at least half of the replay.* |
+| **Bought in the room** | Webinar In-Room Purchase | *Bought from the webinar room, live or on the replay.* |
+
+Cortana checks WebinarJam for these every 6 hours for 7 days after each session, or within minutes with WebinarJam's webhook. **Webinar In-Room Purchase** has no dollar value: your checkout stays the record of the money. See [Use WebinarJam](/webinars-webinarjam).
+
 Missing a webinar is never a conversion. No-shows only show on the **Registrants** tab.
 
 ---
@@ -57,7 +69,7 @@ You can do this on the **Done** step of **New webinar**, under **Which conversio
     Pick **Create “Webinar Registered”**, one of your own conversions, or **Do not track**.
   </Step>
   <Step title="Do the same for each event">
-    Pick a conversion, or **Do not track**, for each of the seven events.
+    Pick a conversion, or **Do not track**, for each event: seven on a Zoom webinar, ten on a WebinarJam webinar.
   </Step>
   <Step title="Save">
     Click **Save conversions**. Nothing counts until you save.
@@ -129,7 +141,7 @@ The panel above works one webinar at a time. A **Cortana Webinars** source count
     Under **What counts as a conversion?**, pick one event.
   </Step>
   <Step title="Pick which ones count">
-    Under **Which Zoom webinars and meetings count?**, pick an answer.
+    Under **Which webinars and meetings count?**, pick an answer.
   </Step>
   <Step title="Click Submit">
     Click **Submit**. The message *Cortana Webinars source created* confirms it.
@@ -143,20 +155,22 @@ The panel above works one webinar at a time. A **Cortana Webinars** source count
   <img className="hidden dark:block" src="/images/webinars/conversions/24-cortana-webinars-source-dark.png" alt="The Create Conversion Source box with Integration set to Cortana Webinars and the What counts as a conversion list open, marked 6, showing Registered, Accepted the calendar invite, Attended, Watched 25%, Watched 50%, Watched 75% and Saw the pitch." />
 </Frame>
 
-<Frame caption="The second question: which of your Zoom webinars and meetings count.">
-  <img className="block dark:hidden" src="/images/webinars/conversions/24b-cortana-webinars-scope.png" alt="The Create Conversion Source box with Integration marked 5 set to Cortana Webinars, What counts as a conversion marked 6 set to Registered, and Which Zoom webinars and meetings count marked 7 with its list open showing Webinars and meetings, Zoom webinars only and Zoom meetings only." />
-  <img className="hidden dark:block" src="/images/webinars/conversions/24b-cortana-webinars-scope-dark.png" alt="The Create Conversion Source box with Integration marked 5 set to Cortana Webinars, What counts as a conversion marked 6 set to Registered, and Which Zoom webinars and meetings count marked 7 with its list open showing Webinars and meetings, Zoom webinars only and Zoom meetings only." />
+<Frame caption="The second question: which of your webinars and meetings count.">
+  <img className="block dark:hidden" src="/images/webinars/conversions/24b-cortana-webinars-scope.png" alt="The Create Conversion Source box with Integration marked 5 set to Cortana Webinars, What counts as a conversion marked 6 set to Registered, and Which webinars and meetings count marked 7 with its list of choices open." />
+  <img className="hidden dark:block" src="/images/webinars/conversions/24b-cortana-webinars-scope-dark.png" alt="The Create Conversion Source box with Integration marked 5 set to Cortana Webinars, What counts as a conversion marked 6 set to Registered, and Which webinars and meetings count marked 7 with its list of choices open." />
 </Frame>
 
 The helper says *Each source tracks one event. Registrations come from the form that registers people for the webinar.*
 
 | Choice | What counts |
 | --- | --- |
-| **Webinars and meetings** | Every Zoom webinar and every Zoom meeting. This is the default. |
-| **Zoom webinars only** | Only Zoom webinars. |
+| **Webinars and meetings** | Every webinar, on Zoom or WebinarJam, and every Zoom meeting. This is the default. |
+| **Webinars only** | Every webinar, on Zoom or WebinarJam. No meetings. |
 | **Zoom meetings only** | Only Zoom meetings. |
 
-To count a second event, add a second source. You can change **Which Zoom webinars and meetings count?** later, but not the event.
+The three WebinarJam events (replay and in-room purchase) are not offered here. A source counts across all your webinars, and most cannot produce them. Pick them per webinar instead, as section 1 shows.
+
+To count a second event, add a second source. You can change **Which webinars and meetings count?** later, but not the event.
 
 ---
 
@@ -271,7 +285,7 @@ LinkedIn and Microsoft Ads do not get webinar conversions.
 | **Save conversions** | Saves the choices for this webinar. | Greyed out until something changed | Save before you leave. | The **Settings** tab's **Save changes** does not save these. |
 | **Integration**: **Cortana Webinars** | Adds a source that counts every webinar. | **Webhook** | Use it to count all webinars the same way. | One event per source. |
 | **What counts as a conversion?** | The one event the source counts. | Nothing picked | One source per event. | Cannot be changed later. |
-| **Which Zoom webinars and meetings count?** | Webinars, meetings, or both. | **Webinars and meetings** | Keep the default. | Can be changed later. |
+| **Which webinars and meetings count?** | Webinars, meetings, or both. | **Webinars and meetings** | Keep the default. | Can be changed later. |
 | **Custom Metrics** (Customize Columns) | Lists your custom metrics, including **Webinar show rate**. | Not applicable | Add it to your main preset. | Click **Save** in the box. |
 | **Webinars** (Add a webhook endpoint) | Sends webinar events to your endpoint. | Off | Turn it on for your automation tools. | Events include the personal join link. Keep the endpoint private. |
 
