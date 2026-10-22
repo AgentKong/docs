@@ -1,0 +1,558 @@
+---
+title: "Meta Ads"
+description: "Read, build, and run Meta campaigns, ad sets, creatives, and ads from your AI."
+---
+
+These tools give your AI your Meta ad account: it can read what exists and how it performs, upload your images and videos, build campaigns, ad sets, creatives, and ads, and switch them on or off.
+
+<Note>
+  Needs Meta connected in Cortana. Reading needs the ads read permission on the connection; building and changing anything needs the **ads:manage** permission (the ad management box on the consent screen). See [Connect your AI](/mcp/setup).
+</Note>
+
+<Warning>
+  These tools can spend money. Everything is created **paused**. Nothing goes live until `activate_entity` runs, and your AI asks you first.
+</Warning>
+
+Every tool takes an optional `businessId` when your connection reaches more than one business.
+
+<Tip>
+  **Two things Cortana does for you on every ad:**
+
+  - **Tracking.** Every creative gets Cortana's URL parameters automatically, so every click and sale is attributed. You never add them yourself:
+    `utm_medium={{adset.name}}&utm_campaign={{campaign.name}}&utm_content={{ad.name}}&campaign_id={{campaign.id}}&medium_id={{adset.id}}&content_id={{ad.id}}`
+  - **The pixel lives on the ad set.** Meta sets the pixel on the ad set, not on the ad. To optimize for a conversion, `create_ad_set` takes `promotedObject` with a real pixel, for example `{ "pixel_id": "123…", "custom_event_type": "LEAD" }`. [`list_ad_pixels`](/mcp/tools/tracking) lists the pixels you can use. An ad runs with its ad set's pixel.
+</Tip>
+
+## Accounts & reads
+
+### `list_ad_accounts`
+
+The Meta ad accounts this business can use, with each account's currency and minimum daily budget (in cents).
+
+No parameters.
+
+**Returns:** each account's id, name, currency, and minimum daily budget.
+
+**Ask it:** "Which ad accounts are connected, and what's the minimum budget?"
+
+### `get_ad_insights`
+
+Ad performance straight from Meta: spend, impressions, clicks, CTR, CPC, conversions, and ROAS, at any level, with filters, sorting, and breakdowns.
+
+| Parameter | Type | Required | Description |
+| --- | --- | --- | --- |
+| `level` | enum | Yes | `account`, `campaign`, `adset`, or `ad` |
+| `fields` | string[] | Yes | Metrics and names to return, e.g. `["campaign_name","spend","ctr"]` |
+| `datePreset` | string | No | A Meta date preset, e.g. `last_7d`, `last_30d` |
+| `timeRange` | object | No | `{ since, until }` in `YYYY-MM-DD` (instead of `datePreset`) |
+| `filtering` | object[] | No | e.g. `[{ field: "spend", operator: "GREATER_THAN", value: 100 }]` |
+| `sort` | string[] | No | e.g. `["spend_descending"]` |
+| `breakdowns` | string[] | No | e.g. `["age","gender"]` |
+| `limit` | number | No | Rows, default 25, max 500 |
+| `after` | string | No | Paging cursor from the previous page |
+
+**Returns:** one row per entity with the fields you asked for.
+
+**Ask it:** "Show my 5 worst ads by cost per lead in the last 7 days."
+
+### `list_campaigns`
+
+Every campaign in the account, including paused, scheduled, and never-delivered ones, with objective, budgets, bid strategy, and status.
+
+| Parameter | Type | Required | Description |
+| --- | --- | --- | --- |
+| `effectiveStatuses` | string[] | No | Only these statuses, e.g. `["ACTIVE","PAUSED"]` |
+| `limit` | number | No | Rows per page, default 25, max 100 |
+| `after` | string | No | Paging cursor |
+
+**Returns:** the campaigns, one page at a time.
+
+**Ask it:** "Which campaigns are paused?"
+
+### `list_ad_sets`
+
+Every ad set with its full setup: targeting, pixel and conversion event, optimization goal, budgets, and status. Optionally inside one campaign.
+
+| Parameter | Type | Required | Description |
+| --- | --- | --- | --- |
+| `campaignId` | string | No | Only ad sets in this campaign |
+| `effectiveStatuses` | string[] | No | Only these statuses |
+| `limit` | number | No | Rows per page, default 25, max 100 |
+| `after` | string | No | Paging cursor |
+
+**Returns:** the ad sets with their configuration.
+
+**Ask it:** "What audience and pixel does the Broad US ad set use?"
+
+### `list_ads`
+
+Every ad, including paused and never-delivered ones, with its status, its parents, and its creative. Optionally inside one ad set.
+
+| Parameter | Type | Required | Description |
+| --- | --- | --- | --- |
+| `adSetId` | string | No | Only ads in this ad set |
+| `effectiveStatuses` | string[] | No | Only these statuses |
+| `limit` | number | No | Rows per page, default 25, max 100 |
+| `after` | string | No | Paging cursor |
+
+**Returns:** the ads. `CAMPAIGN_PAUSED` or `ADSET_PAUSED` means a parent is paused, not the ad.
+
+**Ask it:** "Did the three ads I just made land in the right ad set?"
+
+### `get_ad_creative`
+
+What an ad actually runs: primary text, headline, description, link, button, and its URL parameters.
+
+| Parameter | Type | Required | Description |
+| --- | --- | --- | --- |
+| `adId` | string | Yes | The ad to read |
+
+**Returns:** a summary of the copy and link, plus the full creative.
+
+**Ask it:** "Check the link and tracking on the ad you just built."
+
+### `get_ad_identity`
+
+The Facebook Page and Instagram account your new ads post under. It comes from the business's ad identity (the Page picked in the AI Media Buyer's deployment settings).
+
+No parameters.
+
+**Returns:** the Page, the Instagram account, and where the Instagram identity comes from.
+
+**Ask it:** "Which Page will these ads post from?"
+
+### `list_page_posts`
+
+Recent posts from your Facebook Page or Instagram account, newest first, with likes, comments, and whether Meta allows each one to run as an ad.
+
+| Parameter | Type | Required | Description |
+| --- | --- | --- | --- |
+| `source` | enum | Yes | `facebook` or `instagram` |
+| `limit` | number | No | Rows per page, default 15, max 50 |
+| `after` | string | No | Paging cursor |
+
+**Returns:** each post's id, caption, media, link, engagement, and `eligibleForAds`.
+
+**Ask it:** "Show my last 10 Instagram posts that can run as ads."
+
+### `list_lead_forms`
+
+The instant (lead) forms on your Facebook Page. Use one of these for a lead ad; a draft form can't take leads.
+
+| Parameter | Type | Required | Description |
+| --- | --- | --- | --- |
+| `limit` | number | No | Rows per page, default 25, max 100 |
+| `after` | string | No | Paging cursor |
+
+**Returns:** each form's id, name, and status.
+
+**Ask it:** "Which lead forms can I use for a lead ad?"
+
+### `list_ad_images`
+
+Images already uploaded to the ad account, so the same file is reused instead of uploaded again.
+
+| Parameter | Type | Required | Description |
+| --- | --- | --- | --- |
+| `hashes` | string[] | No | Look up these image hashes (max 50) |
+| `limit` | number | No | Rows per page, default 25, max 100 |
+| `after` | string | No | Paging cursor |
+
+**Returns:** each image's hash, name, link, and size.
+
+**Ask it:** "Is this image already in the ad account?"
+
+### `get_ad_preview`
+
+A preview of an existing ad in one placement, as a link Meta hosts. The link expires; share it only with the person asking.
+
+| Parameter | Type | Required | Description |
+| --- | --- | --- | --- |
+| `adId` | string | Yes | The ad to preview |
+| `format` | enum | Yes | `DESKTOP_FEED_STANDARD`, `MOBILE_FEED_STANDARD`, `INSTAGRAM_STANDARD`, `INSTAGRAM_STORY`, `FACEBOOK_STORY_MOBILE`, or `INSTAGRAM_REELS` |
+
+**Returns:** a preview link.
+
+**Ask it:** "Show me how this ad looks in Instagram Stories."
+
+### `generate_creative_preview`
+
+A preview of a creative **before** it exists: the same fields as `create_creative`, plus a placement. Nothing is created in your account.
+
+| Parameter | Type | Required | Description |
+| --- | --- | --- | --- |
+| `previewFormat` | enum | Yes | A placement, as in `get_ad_preview` |
+| `format` | enum | Yes | `image`, `video`, `carousel`, or `existing_post` |
+| *(creative fields)* | | | The same fields as `create_creative` (below) |
+
+**Returns:** a preview link.
+
+**Ask it:** "Preview this ad on mobile feed before you build it."
+
+## Campaigns & ad sets
+
+### `create_campaign`
+
+Create a campaign, paused. Put the budget here for campaign budget (CBO), or leave it off and set it on each ad set (ABO). Money is in cents.
+
+Changes your account. Needs **ads:manage**.
+
+| Parameter | Type | Required | Description |
+| --- | --- | --- | --- |
+| `name` | string | Yes | The campaign name |
+| `objective` | enum | Yes | `OUTCOME_AWARENESS`, `OUTCOME_TRAFFIC`, `OUTCOME_ENGAGEMENT`, `OUTCOME_LEADS`, `OUTCOME_SALES`, or `OUTCOME_APP_PROMOTION` |
+| `buyingType` | enum | No | `AUCTION` or `RESERVED` |
+| `specialAdCategories` | enum[] | No | e.g. `HOUSING`, `EMPLOYMENT`, `CREDIT` |
+| `specialAdCategoryCountries` | string[] | No | Two-letter country codes, required with a special category |
+| `dailyBudgetCents` | number | No | Campaign daily budget (CBO) |
+| `lifetimeBudgetCents` | number | No | Campaign lifetime budget; needs `startTime` and `stopTime` |
+| `bidStrategy` | enum | No | `LOWEST_COST_WITHOUT_CAP`, `LOWEST_COST_WITH_BID_CAP`, `COST_CAP`, or `LOWEST_COST_WITH_MIN_ROAS` |
+| `bidAmountCents` | number | No | Required for a bid cap or cost cap |
+| `minRoasFloor` | number | No | Required for minimum ROAS (1000 = 1.0x) |
+| `spendCapCents` | number | No | A spend cap for the campaign |
+| `startTime` / `stopTime` | string | No | ISO-8601 |
+| `promotedObject` | object | No | What the campaign promotes |
+
+**Returns:** the new campaign's id.
+
+**Ask it:** "Create a paused leads campaign called Spring Promo at $100 a day."
+
+### `create_ad_set`
+
+Create an ad set, paused, with its targeting, budget, optimization, and pixel.
+
+Changes your account. Needs **ads:manage**.
+
+| Parameter | Type | Required | Description |
+| --- | --- | --- | --- |
+| `campaignId` | string | Yes | The parent campaign |
+| `name` | string | Yes | The ad set name |
+| `billingEvent` | enum | Yes | e.g. `IMPRESSIONS`, `LINK_CLICKS` |
+| `optimizationGoal` | enum | Yes | e.g. `OFFSITE_CONVERSIONS`, `LEAD_GENERATION`, `LINK_CLICKS` |
+| `targeting` | object | Yes | e.g. `{ geo_locations: { countries: ["US"] } }` |
+| `parentIsCbo` | boolean | Yes | `true` when the campaign holds the budget (then no ad set budget) |
+| `dailyBudgetCents` / `lifetimeBudgetCents` | number | No | The ad set budget (required under an ABO campaign) |
+| `bidStrategy` | enum | No | As in `create_campaign` |
+| `bidAmountCents` / `minRoasFloor` | number | No | For capped bid strategies |
+| `promotedObject` | object | No | The pixel and event, e.g. `{ pixel_id, custom_event_type: "LEAD" }`. Required for conversion, value, and lead goals |
+| `startTime` / `stopTime` | string | No | ISO-8601 |
+| `destinationType` | string | No | e.g. `MESSENGER` for click-to-Messenger |
+| `isDynamicCreative` | boolean | No | One ad whose creative carries copy variants Meta mixes |
+| `daypartWindows` | object[] | No | When it may deliver, in the ad account's timezone; needs a lifetime budget |
+| `frequencyCaps` | object[] | No | How often one person may see it |
+| `attributionWindows` | object[] | No | Changes what every number means; leave alone unless you mean it |
+| `disableAdvantageAudience` | boolean | No | Turn off Advantage+ audience |
+| `dsaBeneficiary` / `dsaPayor` | string | No | EU transparency fields |
+
+**Returns:** the new ad set's id.
+
+**Ask it:** "Add a paused ad set to Spring Promo targeting Texas, optimizing for leads on my main pixel."
+
+### `duplicate_ad_set`
+
+Copy an ad set, paused, with its targeting, optimization, and placements. The only way to keep a proven setup for a new launch or a scaled copy.
+
+Changes your account. Needs **ads:manage**.
+
+| Parameter | Type | Required | Description |
+| --- | --- | --- | --- |
+| `sourceAdSetId` | string | Yes | The ad set to copy |
+| `newName` | string | Yes | The copy's name |
+| `dailyBudgetCents` | number | No | A new budget; only applies when the campaign doesn't hold the budget |
+
+**Returns:** the copy's id, and `budgetApplied: false` with the reason when the campaign kept the budget.
+
+**Ask it:** "Duplicate my best ad set at $200 a day."
+
+### `duplicate_campaign`
+
+Copy a campaign, paused. Only the campaign by default; with `deepCopy` its ad sets and ads too (and every ad set budget inside it).
+
+Changes your account. Needs **ads:manage**.
+
+| Parameter | Type | Required | Description |
+| --- | --- | --- | --- |
+| `campaignId` | string | Yes | The campaign to copy |
+| `newName` | string | No | The copy's name |
+| `deepCopy` | boolean | No | Copy its ad sets and ads too |
+
+**Returns:** the copy's id.
+
+**Ask it:** "Copy last month's campaign with all its ad sets, paused."
+
+## Creatives & media
+
+### `upload_ad_image`
+
+Upload an image to the ad account from any public `https` link.
+
+Changes your account. Needs **ads:manage**.
+
+| Parameter | Type | Required | Description |
+| --- | --- | --- | --- |
+| `imageUrl` | string | Yes | A public `https` image link |
+
+**Returns:** an `imageHash` for `create_creative`.
+
+**Ask it:** "Upload this image to my ad account."
+
+### `upload_ad_image_data`
+
+Upload an image you already have as file data, for example one you dropped into the chat. Images only.
+
+Changes your account. Needs **ads:manage**.
+
+| Parameter | Type | Required | Description |
+| --- | --- | --- | --- |
+| `data` | string | Yes | The image as base64 (raw or a `data:` URL) |
+| `filename` | string | No | A file name |
+
+**Returns:** an `imageHash` for `create_creative`.
+
+**Ask it:** "Use the image I just attached for the new ad."
+
+### `upload_ad_video`
+
+Add a video to the ad account from any public `https` link. Meta fetches and processes it.
+
+Changes your account. Needs **ads:manage**.
+
+| Parameter | Type | Required | Description |
+| --- | --- | --- | --- |
+| `videoUrl` | string | Yes | A public `https` video link |
+
+**Returns:** a `videoId`. `create_creative` waits for it to be ready.
+
+**Ask it:** "Upload the video from this link."
+
+### `create_video_upload`
+
+Get a one-time upload link for a video you hold but can't share as a public link. Upload the file to it, then pass the returned link to `upload_ad_video`.
+
+Changes your account. Needs **ads:manage**.
+
+| Parameter | Type | Required | Description |
+| --- | --- | --- | --- |
+| `contentType` | string | Yes | `video/mp4`, `video/quicktime`, or `video/webm` |
+| `sizeBytes` | number | Yes | The file size in bytes |
+
+**Returns:** an upload link and the file link to use next.
+
+**Ask it:** "I have a 200 MB video on my computer, upload it for an ad."
+
+### `get_video_status`
+
+Whether an uploaded video is ready, still processing, or failed.
+
+| Parameter | Type | Required | Description |
+| --- | --- | --- | --- |
+| `videoId` | string | Yes | From `upload_ad_video` |
+
+**Returns:** `ready`, `processing`, or `error`.
+
+**Ask it:** "Is the video ready yet?"
+
+### `create_creative`
+
+Create an ad creative: an image, a video, a carousel, or one of your existing posts. The Page and Instagram account come from the business's ad identity, and Cortana's URL parameters are added automatically.
+
+Changes your account. Needs **ads:manage**.
+
+| Parameter | Type | Required | Description |
+| --- | --- | --- | --- |
+| `name` | string | Yes | The creative name |
+| `format` | enum | Yes | `image`, `video`, `carousel`, or `existing_post` |
+| `link` | string | Most formats | The landing page (not on an existing post) |
+| `primaryText` | string | Most formats | The main text (an existing post keeps its caption) |
+| `headline` / `description` | string | No | Headline and description |
+| `ctaType` | string | No | The button, e.g. `LEARN_MORE`, `SHOP_NOW`, `SIGN_UP` |
+| `imageHash` | string | Image | From `upload_ad_image` |
+| `videoId` | string | Video | From `upload_ad_video` |
+| `thumbnailImageHash` / `thumbnailUrl` | string | No | A video thumbnail |
+| `textOptions` | object[] | No | 2 to 5 copy variants Meta rotates; the first must match the main copy. Not on carousels |
+| `cards` | object[] | Carousel | 2 to 10 cards, each with an image or video |
+| `multiShareOptimized` / `multiShareEndCard` | boolean | No | Carousel options |
+| `facebookPostId` / `instagramMediaId` | string | Existing post | A post id from `list_page_posts` |
+| `destination` | enum | No | `messenger` for click-to-Messenger |
+| `pageWelcomeMessage` | string | No | Messenger welcome message |
+| `ctaLeadGenFormId` | string | No | An active form from `list_lead_forms`, for a lead ad |
+
+**Returns:** the new creative's id.
+
+**Ask it:** "Make an image creative with this headline, linking to my quote page, with a Get Quote button."
+
+### `update_ad_creative`
+
+Swap the creative an existing ad runs, keeping the ad and its history. On a live ad, people see the change right away.
+
+Changes your account. Needs **ads:manage**.
+
+| Parameter | Type | Required | Description |
+| --- | --- | --- | --- |
+| `adId` | string | Yes | The ad to change |
+| `creativeId` | string | Yes | The replacement creative |
+
+**Returns:** the ad with its new creative.
+
+**Ask it:** "Fix the typo: put the corrected creative on the Summer Hook ad."
+
+## Ads
+
+### `create_ad`
+
+Put a creative into an ad set as a new ad, paused.
+
+Changes your account. Needs **ads:manage**.
+
+| Parameter | Type | Required | Description |
+| --- | --- | --- | --- |
+| `name` | string | Yes | The ad name |
+| `adSetPlatformId` | string | Yes | The ad set |
+| `creativeId` | string | Yes | From `create_creative` |
+
+**Returns:** the new ad's id.
+
+**Ask it:** "Create the ad in the Broad US ad set with that creative."
+
+### `copy_ad_to_ad_set`
+
+Copy an ad into a different ad set, paused. Meta can't move ads: the copy is a new ad with no history, and the original keeps running until you pause it.
+
+Changes your account. Needs **ads:manage**.
+
+| Parameter | Type | Required | Description |
+| --- | --- | --- | --- |
+| `sourceAdId` | string | Yes | The ad to copy |
+| `targetAdSetId` | string | Yes | The ad set for the copy |
+| `newName` | string | No | The copy's name |
+
+**Returns:** the copy's id.
+
+**Ask it:** "Copy my winning ad into the scaling ad set."
+
+## Audiences & targeting
+
+### `list_ad_audiences`
+
+The custom, lookalike, and saved audiences in the ad account, with size and whether each is ready to use.
+
+No parameters.
+
+**Returns:** each audience's id, name, type, size, and status.
+
+**Ask it:** "Which audiences do I have?"
+
+### `search_ad_targeting`
+
+Look up a real Meta interest, behavior, demographic, or location to target.
+
+| Parameter | Type | Required | Description |
+| --- | --- | --- | --- |
+| `query` | string | Yes | e.g. `home renovation` |
+| `kind` | enum | Yes | `interest`, `behavior`, `demographic`, or `geo` |
+
+**Returns:** matching targeting options with their ids.
+
+**Ask it:** "Find the interest for home renovation."
+
+### `create_custom_audience`
+
+Create a custom audience from your website visitors (pixel) or page and video engagement. Customer lists aren't supported.
+
+Changes your account. Needs **ads:manage**.
+
+| Parameter | Type | Required | Description |
+| --- | --- | --- | --- |
+| `name` | string | Yes | The audience name |
+| `description` | string | No | A description |
+| `source` | enum | Yes | `WEBSITE` or `ENGAGEMENT` |
+| `retentionDays` | number | Yes | 1 to 180 days of history |
+| `rule` | object | Yes | Meta's audience rule, on a pixel or page you own |
+
+**Returns:** the new audience's id.
+
+**Ask it:** "Make an audience of everyone who visited my site in the last 30 days."
+
+### `create_lookalike_audience`
+
+Create a lookalike of one of your audiences, in one country.
+
+Changes your account. Needs **ads:manage**.
+
+| Parameter | Type | Required | Description |
+| --- | --- | --- | --- |
+| `name` | string | Yes | The audience name |
+| `sourceAudienceId` | string | Yes | An audience from `list_ad_audiences` |
+| `country` | string | Yes | A two-letter country code |
+| `ratioPercent` | number | Yes | 1 to 10; 1% is closest to the source |
+
+**Returns:** the new audience's id.
+
+**Ask it:** "Build a 1% US lookalike of my buyers."
+
+## Change status & edit
+
+### `update_entity`
+
+Change a campaign, ad set, or ad: its name, status, budget, targeting (a full replacement), or bid.
+
+Changes your account. Needs **ads:manage**.
+
+| Parameter | Type | Required | Description |
+| --- | --- | --- | --- |
+| `entityId` | string | Yes | The campaign, ad set, or ad |
+| `entityType` | enum | Yes | `campaign`, `ad_set`, or `ad` |
+| `fields` | object | Yes | Any of `name`, `status` (`ACTIVE`, `PAUSED`, `ARCHIVED`; never `DELETED`), `dailyBudgetCents`, `lifetimeBudgetCents`, `targeting`, `bidStrategy`, `bidAmountCents`, `minRoasFloor` |
+
+**Returns:** what changed.
+
+**Ask it:** "Raise the Broad US ad set to $150 a day."
+
+### `activate_entity`
+
+Set a campaign, ad set, or ad live. It starts spending. Your AI only does this when you ask.
+
+Changes your account. Needs **ads:manage**.
+
+| Parameter | Type | Required | Description |
+| --- | --- | --- | --- |
+| `entityId` | string | Yes | The campaign, ad set, or ad |
+| `entityType` | enum | Yes | `campaign`, `ad_set`, or `ad` |
+
+**Returns:** the new status.
+
+**Ask it:** "Turn the Spring Promo campaign on."
+
+### `pause_entity`
+
+Pause a campaign, ad set, or ad. It stops spending.
+
+Changes your account. Needs **ads:manage**.
+
+| Parameter | Type | Required | Description |
+| --- | --- | --- | --- |
+| `entityId` | string | Yes | The campaign, ad set, or ad |
+| `entityType` | enum | Yes | `campaign`, `ad_set`, or `ad` |
+
+**Returns:** the new status.
+
+**Ask it:** "Pause every ad with no leads this week."
+
+### `archive_entity`
+
+Archive a campaign, ad set, or ad. It stops delivering and leaves the default Ads Manager views; its spend and results are kept.
+
+Changes your account. Needs **ads:manage**.
+
+| Parameter | Type | Required | Description |
+| --- | --- | --- | --- |
+| `entityType` | enum | Yes | `campaign`, `ad_set`, or `ad` |
+| `entityId` | string | Yes | The campaign, ad set, or ad |
+
+**Returns:** the new status.
+
+**Ask it:** "Archive last year's test campaigns."
+
+<Card title="Run Meta ads from your AI" icon="meta" href="/mcp/meta-ads">
+  The walkthrough: from an image to a live ad, and running your own posts as ads.
+</Card>

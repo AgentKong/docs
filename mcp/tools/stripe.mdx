@@ -1,0 +1,97 @@
+---
+title: "Stripe"
+description: "Payments, subscriptions, customers, SaaS metrics and the rest of your Stripe account."
+---
+
+`get_stripe_financials` lets your AI read your Stripe data the way Cortana stores it: revenue, MRR and churn, customers with their lifetime value, and your products, prices and invoices. One tool, many modes: pick the mode for the question.
+
+<Note>
+  Needs Stripe connected in Cortana. Your Stripe integration's MCP permissions decide which modes your AI sees: a mode you switched off never appears. Every tool takes an optional `businessId` when your connection reaches more than one business.
+</Note>
+
+### `get_stripe_financials`
+
+| Parameter | Type | Required | Description |
+| --- | --- | --- | --- |
+| `mode` | enum | Yes | `payments`, `subscriptions`, `customers`, `metrics`, `products`, `invoices`, `disputes`, `payment_intents`, `payment_links`, `prices` or `promotion_codes` |
+| `from` / `to` | string | For `metrics` and `payments` | Date range, ISO 8601 |
+| `status` | string | No | Payments: `succeeded` or `failed`. Invoices: `draft`, `open`, `paid`, `uncollectible` or `void`. |
+| `isRecurring` | string | No | `true` for recurring payments only |
+| `stripeCustomerId` | string | No | Only this Stripe customer |
+| `customerId` | string | No | Invoices for this Stripe customer |
+| `hasActiveSubscription` | string | No | `true` or `false`, for customers |
+| `periodType` | enum | No | `daily` or `monthly`, for metrics |
+| `active` | string | No | `true` or `false`, for payment links, prices and promotion codes |
+| `productId` | string | No | Prices for this product |
+| `type` | enum | No | `recurring` or `one_time`, for prices |
+| `sort` | string | No | e.g. `-totalRevenue`, `-amount`, `-paymentDate` |
+| `limit` | number | No | Page size, max 100 |
+| `page` | number | No | Page number |
+
+## Revenue
+
+### `payments` mode
+
+Payment history with amounts, status and the customer. Ask for `status: "succeeded"` when you mean revenue.
+
+**Ask it:** "How much did we collect in Stripe last month?"
+
+### `payment_intents` mode
+
+Each payment intent: its id, amount, status and customer.
+
+**Ask it:** "Show me the failed payment attempts this week."
+
+### `invoices` mode
+
+Invoices with status, amounts and due dates. Filter by customer or status.
+
+**Ask it:** "Which invoices are still open?"
+
+### `disputes` mode
+
+Open and recent disputes with amounts, reasons and evidence deadlines.
+
+**Ask it:** "Do we have any disputes due soon?"
+
+## Subscriptions and SaaS metrics
+
+### `subscriptions` mode
+
+Active and past subscriptions, each with its MRR contribution.
+
+**Ask it:** "How many active subscriptions do we have on the annual plan?"
+
+### `metrics` mode
+
+Daily or monthly KPIs: MRR, ARR, churn, net and gross revenue retention, ARPU, LTV and quick ratio. Needs `from` and `to`.
+
+**Ask it:** "What was our MRR and churn each month this year?"
+
+## Customers
+
+### `customers` mode
+
+Your customer roster with lifetime value, MRR and churn dates.
+
+**Ask it:** "Who are our top 10 customers by lifetime value?"
+
+## Catalog
+
+### `products` mode
+
+Your product catalog with its pricing.
+
+### `prices` mode
+
+Prices with amounts, currencies, intervals and the product each belongs to.
+
+### `payment_links` mode
+
+Your payment links with their URLs and products.
+
+### `promotion_codes` mode
+
+Promotion codes and coupons with their discounts and usage.
+
+**Ask it:** "Which promo codes were used the most?"

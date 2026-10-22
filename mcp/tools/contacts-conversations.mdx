@@ -1,0 +1,62 @@
+---
+title: "Contacts & conversations"
+description: "Your CRM contacts with their full journey, and every conversation thread with its messages."
+---
+
+These tools let your AI look people up in your Cortana CRM, follow a contact's journey (every visit and touchpoint), and read your conversation threads.
+
+<Note>
+  Works on every connection. Every tool takes an optional `businessId` when your connection reaches more than one business.
+</Note>
+
+## Contacts
+
+### `get_contacts`
+
+Search your contacts, open one, or read a contact's tracked visits.
+
+| Parameter | Type | Required | Description |
+| --- | --- | --- | --- |
+| `mode` | enum | Yes | `list` (search), `get` (one contact) or `sessions` (that contact's visits) |
+| `contactId` | string | For `get` and `sessions` | The contact |
+| `search` | string | No | Search name, email and phone |
+| `email` | string | No | Exact email |
+| `phone` | string | No | Exact phone |
+| `tag` | string | No | Only contacts with this tag |
+| `include` | string | No | `tags`, `customFields` (comma-separated) |
+| `sort` | string | No | e.g. `-createdAt`, `name` |
+| `limit` | number | No | Page size, max 100 |
+| `page` | number | No | Page number |
+
+**Returns:** contacts with their details; for `sessions`, each visit with its pages, UTMs and click IDs.
+
+<Tip>
+  A full customer journey: `get` the contact, then `sessions` for their visits, then their conversations and conversions.
+</Tip>
+
+**Ask it:** "Show me the full journey for jane@example.com."
+
+## Conversations
+
+### `get_conversations`
+
+List your conversation threads, or read every message in one.
+
+| Parameter | Type | Required | Description |
+| --- | --- | --- | --- |
+| `mode` | enum | Yes | `list` (threads) or `messages` (one thread's messages) |
+| `conversationId` | string | For `messages` | The thread |
+| `contactId` | string | No | Only this contact's threads |
+| `starred` | string | No | `true` or `false` |
+| `replyMode` | string | No | `AUTO`, `MANUAL` or `HYBRID` |
+| `sort` | string | No | e.g. `-lastMessageAt`, `-createdAt` |
+| `limit` | number | No | Page size, max 100 |
+| `page` | number | No | Page number |
+
+**Returns:** threads with their last message and reply mode; in `messages` mode, every message in order.
+
+<Tip>
+  `list` first to find the thread, then `messages` to read it.
+</Tip>
+
+**Ask it:** "What are customers asking about refunds?"

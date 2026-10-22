@@ -1,0 +1,290 @@
+---
+title: "Tracking & Conversions API"
+description: "Set up what Cortana counts, what feeds it, and what it sends to Meta, from your AI."
+---
+
+These tools let your AI set up your tracking the way you would on the **Ad Tracking** pages: create conversions, choose exactly what feeds them (the form, pipeline stage, calendar, or payment event), pick your Meta pixel, and decide what goes to Meta through the Conversions API.
+
+<Note>
+  The conversion and Conversions API tools need no extra box on the consent screen: every change checks that the person behind the connection has the **Manage ad tracking** permission in Cortana. The pixel tools ride the Meta ad permissions: `list_ad_pixels` and `get_capi_setup` need the ads read permission, and `create_ad_pixel` and `connect_capi` need **ads:manage**. See [Connect your AI](/mcp/setup).
+</Note>
+
+Every tool takes an optional `businessId` when your connection reaches more than one business.
+
+<Note>
+  History is never deleted from here. A conversion or source that has recorded anything can be switched off, not removed. Every change is logged, and your AI tells you exactly what changed.
+</Note>
+
+## See your setup
+
+### `get_conversion_setup`
+
+Every conversion Cortana counts (a lead, a booked call, a purchase), with its settings, the sources that feed it (down to the exact event and its filters), and what it sends to Meta.
+
+| Parameter | Type | Required | Description |
+| --- | --- | --- | --- |
+| `conversionId` | string | No | One conversion. Omit for the whole setup |
+
+**Returns:** each conversion with its settings, its sources, and its Meta events.
+
+**Ask it:** "How is my tracking set up, and what gets sent to Meta?"
+
+### `list_source_options`
+
+What one integration can feed a conversion: whether it's connected, its accounts, and the real events inside it. For example GoHighLevel forms, surveys, calendars, and pipeline stages; Stripe accounts and events; Typeform and Tally forms; HubSpot and Close forms and pipelines; Calendly and Cal.com event types; your Meta and LinkedIn lead forms; the Facebook Pages for Messenger and Instagram DMs; your Cortana forms and booking calendars.
+
+| Parameter | Type | Required | Description |
+| --- | --- | --- | --- |
+| `integration` | enum | Yes | The integration to list |
+| `refresh` | boolean | No | Read it live instead of the stored copy |
+| `ghlConnectionId` | string | No | GoHighLevel only: one connection, when there are several |
+| `connectionId` | string | No | ClickFunnels only: also list that connection's products, pipelines, and funnels |
+
+**Returns:** the integration's connection status and its events.
+
+**Ask it:** "What can I track from GoHighLevel?"
+
+### `get_capi_setup`
+
+Your Meta Conversions API setups and how healthy each is, live from Meta: the pixel, whether sending is on, whether Cortana manages the token, the last test, the events Meta received in the last 7 days, whether another integration also sends to the pixel, Event Match Quality, every setting, which conversion goes to which Meta event, and the event names you can use.
+
+No parameters.
+
+**Returns:** each setup with its health and its mappings.
+
+**Ask it:** "Is my Conversions API working, and how good is the match quality?"
+
+## Conversions and their sources
+
+### `save_conversion`
+
+Create a conversion, or change one. Only the settings you pass change.
+
+Changes your setup. Needs **Manage ad tracking**.
+
+| Parameter | Type | Required | Description |
+| --- | --- | --- | --- |
+| `conversionId` | string | No | The conversion to edit. Omit to create one |
+| `name` | string | To create | e.g. `Booked call`. It can't change later |
+| `displayName` | string | No | The label shown in Cortana |
+| `description` | string | No | A description; `null` clears it |
+| `icon` | string | No | An emoji (custom conversions) |
+| `active` | boolean | No | On or off; switches its sources with it |
+| `trackNewOnly` | boolean | No | Count only each contact's first one |
+| `revenueCategory` | enum | No | `CASH_COLLECTED` (counts as revenue) or `LTV_ONLY` (lifetime value only) |
+| `countsAsClose` | boolean | No | Counts as a closed deal |
+| `valueRequired` | boolean | No | Refuse an entry without a value (custom conversions) |
+| `inheritAttributionFrom` | string | No | Another active conversion whose attribution this one borrows; `null` turns it off |
+
+**Returns:** the conversion and exactly what changed.
+
+**Ask it:** "Start tracking booked calls, and count only each contact's first one."
+
+### `delete_conversion`
+
+Delete a conversion that has recorded nothing yet, with its sources. One with history is switched off instead (`save_conversion` with `active: false`).
+
+Changes your setup. Needs **Manage ad tracking**.
+
+| Parameter | Type | Required | Description |
+| --- | --- | --- | --- |
+| `conversionId` | string | Yes | The conversion to delete |
+
+**Returns:** what was deleted.
+
+**Ask it:** "Remove the conversion I just made by mistake."
+
+### `save_conversion_source`
+
+Add what feeds a conversion, or edit a source: the integration, the exact event inside it, its settings and qualification rules, its name, and on or off. When you have a step to take (a webhook URL for another tool, a URL parameter for a link, a pixel snippet for a page), the answer says so.
+
+Changes your setup. Needs **Manage ad tracking**.
+
+| Parameter | Type | Required | Description |
+| --- | --- | --- | --- |
+| `conversionId` | string | Yes | The conversion this source feeds |
+| `sourceId` | string | No | The source to edit. Omit to add one |
+| `type` | enum | To add | The source type (from `list_source_options`) |
+| `name` | string | No | A label (webhook, URL parameter, and pixel sources) |
+| `active` | boolean | No | On or off |
+| `settings` | object | No | The source's event and filters |
+
+**Returns:** the saved source and what changed.
+
+**Ask it:** "Count my GoHighLevel booking form as a lead."
+
+### `delete_conversion_source`
+
+Remove a source that has recorded nothing. One with history is switched off instead.
+
+Changes your setup. Needs **Manage ad tracking**.
+
+| Parameter | Type | Required | Description |
+| --- | --- | --- | --- |
+| `conversionId` | string | Yes | The conversion it feeds |
+| `sourceId` | string | Yes | The source to remove |
+
+**Returns:** what was removed.
+
+**Ask it:** "Remove the test webhook source from Leads."
+
+## Pixels
+
+### `list_ad_pixels`
+
+The Meta pixels this business can use: the ones on its ad accounts and the others its Meta business owns, when each last fired, which one the Conversions API uses, and which one Cortana would pick by default.
+
+No parameters.
+
+**Returns:** each pixel's id, name, last fired time, and where it's used, plus the default pixel.
+
+**Ask it:** "Which pixels do I have, and which one should my ads use?"
+
+### `create_ad_pixel`
+
+Create a Meta pixel on an ad account that has none. Meta allows one per ad account and pixels can't be deleted, so if the account already has one, nothing is created and the existing ones come back.
+
+Changes your account. Needs **ads:manage**.
+
+| Parameter | Type | Required | Description |
+| --- | --- | --- | --- |
+| `name` | string | Yes | The pixel name shown in Meta, e.g. `Main website` |
+
+**Returns:** the new pixel, or the existing ones with `created: false`.
+
+**Ask it:** "This ad account has no pixel. Make one."
+
+## Meta Conversions API
+
+### `connect_capi`
+
+Connect the Meta Conversions API with Cortana managing the token: conversions go out with the business's own Meta connection, so there's no token to paste, and it keeps working when Meta is reconnected. A test event checks the connection before anything is saved; then sending turns on for that pixel.
+
+Changes your account. Needs **ads:manage**.
+
+| Parameter | Type | Required | Description |
+| --- | --- | --- | --- |
+| `pixelId` | string | No | A pixel from `list_ad_pixels`. Omit for the default pixel |
+
+**Returns:** the connected setup. Choose which conversions to send with `save_capi_mapping`.
+
+**Ask it:** "Set up the Conversions API on my main pixel."
+
+### `update_capi_settings`
+
+Change a Conversions API setup's settings. Only the settings you pass change. The token and the pixel aren't changed here (`connect_capi` does that).
+
+Changes your setup. Needs **Manage ad tracking**.
+
+| Parameter | Type | Required | Description |
+| --- | --- | --- | --- |
+| `setupId` | string | Yes | The setup (from `get_capi_setup`) |
+| `enabled` | boolean | No | Sending on or off |
+| `name` | string | No | The setup's name |
+| `testEventCode` | string | No | Meta's test event code |
+| `requireTestBeforeSave` | boolean | No | Require a test before saving changes |
+| `limitedDataUse` | boolean | No | Limited Data Use, with `limitedDataUseCountry` and `limitedDataUseState` |
+| `eventFilterMode` | enum | No | `ALL_EVENTS`, or `META_EVENTS_ONLY` (only conversions from Meta ads) |
+| `forwardPageViews` | boolean | No | Also send page views |
+| `systemGeneratedFallbackUrl` | string | No | The fallback URL for CRM events |
+| `eventSourceUrlOverride` | string | No | Override the event source URL |
+
+**Returns:** each change.
+
+**Ask it:** "Only send conversions that came from Meta ads."
+
+### `save_capi_mapping`
+
+Send a conversion to Meta as an event (a standard event or one of your custom events), or change what's sent. One conversion can send several events.
+
+Changes your setup. Needs **Manage ad tracking**.
+
+| Parameter | Type | Required | Description |
+| --- | --- | --- | --- |
+| `mappingId` | string | No | The mapping to edit. Omit to add one |
+| `setupId` | string | No | The setup; optional when there's one |
+| `conversionId` | string | To add | The conversion to send |
+| `metaEvent` | string | To add | The Meta event, e.g. `Lead`, `Schedule`, or a custom event |
+| `enabled` | boolean | No | On or off (on when adding) |
+| `sendMode` | enum | No | `ATTRIBUTED_ONLY` (default: only conversions Cortana tied to an ad) or `ALL` |
+| `actionSource` | enum | No | Where it happened, e.g. `website` (default), `phone_call`, `chat` |
+| `metaCustomConversionId` | string | No | A Meta custom conversion this event feeds |
+| `valueOverride` | object | No | `{ mode: "ALWAYS" or "FALLBACK", value, currency }` |
+
+**Returns:** the mapping and what changed.
+
+**Ask it:** "Send booked calls to Meta as Schedule."
+
+### `remove_capi_mapping`
+
+Stop sending a conversion to Meta as one event. What was already sent stays in the sent-events log, and Cortana's own numbers don't change. To pause instead, use `save_capi_mapping` with `enabled: false`.
+
+Changes your setup. Needs **Manage ad tracking**.
+
+| Parameter | Type | Required | Description |
+| --- | --- | --- | --- |
+| `mappingId` | string | Yes | The mapping (from `get_capi_setup`) |
+
+**Returns:** what was removed.
+
+**Ask it:** "Stop sending purchases to Meta."
+
+### `send_capi_test_event`
+
+Send one test event to a setup's pixel, to check the connection or an event name. It shows in Meta's **Test Events** and never counts as a conversion.
+
+Changes nothing. Needs **Manage ad tracking**.
+
+| Parameter | Type | Required | Description |
+| --- | --- | --- | --- |
+| `eventName` | string | Yes | A standard event or one of your custom events |
+| `setupId` | string | No | The setup; optional when exactly one is on |
+
+**Returns:** whether Meta accepted it.
+
+**Ask it:** "Send a test Lead event so I can see it in Meta."
+
+## Custom events & conversions
+
+### `create_meta_custom_event`
+
+Create your own Meta event name, such as `BookedCall`, so a conversion can be sent under it. When a setup is on, one test event is sent so you can see it in Meta's **Test Events**.
+
+Changes your setup. Needs **Manage ad tracking**.
+
+| Parameter | Type | Required | Description |
+| --- | --- | --- | --- |
+| `eventName` | string | Yes | The event name, e.g. `BookedCall` |
+| `displayName` | string | No | A label shown in Cortana |
+
+**Returns:** the new event.
+
+**Ask it:** "Create a BookedCall event for my booked calls."
+
+### `create_meta_custom_conversion`
+
+Create a custom conversion in your Meta ad account: a named conversion Meta counts when your pixel gets an event, usable as an ad set's optimization goal. Refuses a name the account already has.
+
+Changes your account. Needs **Manage ad tracking**.
+
+| Parameter | Type | Required | Description |
+| --- | --- | --- | --- |
+| `name` | string | Yes | The name shown in Meta |
+| `eventName` | string | Yes | The event it counts |
+| `pixelId` | string | No | The pixel (from `list_ad_pixels`) |
+| `adAccountId` | string | No | The ad account; defaults to the one ad sets are built on |
+| `description` | string | No | A description |
+| `defaultValue` | number | No | A value Meta assigns when the event has none |
+
+**Returns:** the new custom conversion.
+
+**Ask it:** "Make a custom conversion called Qualified Lead so my ads can optimize for it."
+
+<CardGroup cols={2}>
+  <Card title="Set up tracking from your AI" icon="route" href="/mcp/tracking-setup">
+    The walkthrough for conversions and their sources.
+  </Card>
+  <Card title="Set up the Meta Conversions API" icon="meta" href="/mcp/guides/conversions-api">
+    Connect CAPI and choose what goes to Meta.
+  </Card>
+</CardGroup>

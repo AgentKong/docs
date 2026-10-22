@@ -1,0 +1,61 @@
+---
+title: "Shopify"
+description: "Orders, customers, products, daily store analytics and abandoned carts."
+---
+
+`get_shopify_data` lets your AI read your Shopify store: orders, customers with their spend and RFM segment, products, daily analytics and abandoned carts.
+
+<Note>
+  Needs Shopify connected in Cortana. Every tool takes an optional `businessId` when your connection reaches more than one business.
+</Note>
+
+### `get_shopify_data`
+
+| Parameter | Type | Required | Description |
+| --- | --- | --- | --- |
+| `mode` | enum | Yes | `orders`, `customers`, `products`, `analytics` or `abandoned-carts` |
+| `from` / `to` | string | For `analytics` | Date range, ISO 8601 |
+| `financialStatus` | string | No | Orders: `paid`, `pending` or `refunded` |
+| `rfmSegment` | string | No | Customers: `Champions`, `Loyal`, `At Risk` or `New` |
+| `contactId` | string | No | Only this contact |
+| `status` | string | No | Products by status |
+| `productType` | string | No | Products by type |
+| `sort` | string | No | e.g. `-totalSpent`, `-totalRevenue`, `-orderCreatedAt` |
+| `limit` | number | No | Page size, max 100 |
+| `page` | number | No | Page number |
+
+## Sales
+
+### `orders` mode
+
+Your orders with amounts and financial status.
+
+**Ask it:** "How many refunded orders did we have last month?"
+
+### `analytics` mode
+
+Daily store analytics. Needs `from` and `to`.
+
+**Ask it:** "Show me daily revenue and orders for the last 30 days."
+
+### `abandoned-carts` mode
+
+Carts started and not completed.
+
+**Ask it:** "What's our cart abandonment this week?"
+
+## Customers
+
+### `customers` mode
+
+Customers with their total spend and RFM segment (Champions, Loyal, At Risk, New).
+
+**Ask it:** "List my Champions customers by total spend."
+
+## Catalog
+
+### `products` mode
+
+Your products, filterable by status and type.
+
+**Ask it:** "Which products sell the most?"

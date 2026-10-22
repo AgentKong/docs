@@ -1,0 +1,100 @@
+---
+title: "Sales calls & meetings"
+description: "Recorded sales calls and meetings, their transcripts, and what Cortana's call insights found across them."
+---
+
+These tools give your AI your recorded calls: the meetings you record (Fathom), Cortana's own voice-agent calls, full transcripts, and the patterns across them: pains, objections, questions, competitors and how each rep scores.
+
+<Note>
+  Recorded meetings and call insights need Fathom connected in Cortana. Every tool takes an optional `businessId` when your connection reaches more than one business.
+</Note>
+
+## Recorded meetings
+
+### `get_meetings`
+
+Your recorded meetings: the list, one meeting in full, its transcript, or a breakdown across many.
+
+| Parameter | Type | Required | Description |
+| --- | --- | --- | --- |
+| `mode` | enum | Yes | `list`, `get`, `transcript` or `insights` |
+| `meetingId` | string | For `get` and `transcript` | The meeting |
+| `contactId` | string | No | Only this contact's meetings |
+| `callTypeId` | string | No | Only this call type (e.g. Sales Call, Discovery) |
+| `salesRepEmail` | string | No | Only meetings this person recorded |
+| `outcome` | enum | No | `PURCHASED`, `VERBAL_COMMIT`, `PROPOSAL_REQUESTED`, `FOLLOW_UP_SCHEDULED`, `UNDER_REVIEW`, `STALLED`, `LOST` or `NO_DECISION` |
+| `isStructured` | string | No | `true` for meetings with structured insights extracted |
+| `fromDate` / `toDate` | string | No | Date range by meeting date, ISO 8601 |
+| `limit` | number | No | Page size for `list`. Default 20, max 50 |
+| `cursor` | string | No | The next page, for `list` |
+
+<Accordion title="The four modes">
+  - **list**: title, date, duration, attendees, outcome, call type, who recorded it, insight counts and tags (what Cortana's call insights found, e.g. "Objection", "Competitor: Acme", "Asked for the close"). Paged with `cursor`.
+  - **get**: one meeting in full: the conversation summary, problems, pain points, objections, prospect questions, next steps, action items, attendees, Cortana's AI summary, its topics (each with the second it starts and a link) and its tags.
+  - **transcript**: the full transcript, with the speaker, timestamp and text of each line. Up to 2 MB per meeting.
+  - **insights**: a breakdown across many meetings: the top problems, pain points, objections and prospect questions (how often each came up, with sample meetings), plus counts by call type, outcome and sales rep. Scans up to 5,000 meetings per call; use the date filters for longer histories.
+</Accordion>
+
+**Returns:** for `insights`, an example:
+
+```json
+{
+  "data": {
+    "totalMeetings": 156,
+    "structuredMeetings": 142,
+    "callTypeBreakdown": [{ "callType": "Sales Call", "count": 89 }],
+    "outcomeBreakdown": [{ "outcome": "FOLLOW_UP_SCHEDULED", "count": 62 }],
+    "salesRepBreakdown": [{ "email": "rep@acme.com", "name": "Sam Rep", "count": 87 }],
+    "aggregatedInsights": {
+      "problems": [{ "text": "Attribution tracking is broken", "frequency": 23, "sampleMeetingIds": ["..."] }],
+      "painPoints": [],
+      "objections": [],
+      "prospectQuestions": []
+    }
+  }
+}
+```
+
+<Tip>
+  Use `list` to find a meeting, `get` for its details and `transcript` for the conversation itself. Use `insights` for "what are prospects saying?" across many calls.
+</Tip>
+
+**Ask it:** "What objections came up most on sales calls last week?"
+
+### `get_call_insights`
+
+What Cortana's call insights found across all your recorded calls, by call group: Sales, Onboarding, Triage and any group you made.
+
+| Parameter | Type | Required | Description |
+| --- | --- | --- | --- |
+| `bank` | enum | No | Page through one of the five Sales banks: `PAIN`, `DREAM`, `OBJECTION`, `QUESTION` or `COMPETITOR` |
+| `bucketId` | string | No | Page through one counted bucket |
+| `skip` | number | No | Where the page starts: the previous page's `nextSkip` |
+
+**Returns:** the five Sales banks (pains, dreams, objections, questions, competitors) with the most-mentioned lines first, each with its mentions, calls and a few word-for-word quotes; and each call group with its buckets: counted items with quotes, moments as a rate ("asked for the close on 62% of the last 200 calls, around minute 38"), and scores as one card per person (average out of 10). A business with call insights off answers `insightsOn: false`.
+
+**Ask it:** "How often do my reps ask for the close, and how is each one scoring?"
+
+## Voice agent calls
+
+### `get_call_data`
+
+Calls handled by your Cortana voice agents, and their transcripts.
+
+| Parameter | Type | Required | Description |
+| --- | --- | --- | --- |
+| `mode` | enum | Yes | `list`, `get` or `transcript` |
+| `callId` | string | For `get` and `transcript` | The call |
+| `from` / `to` | string | No | Date range, ISO 8601 |
+| `agentId` | string | No | Only this voice agent's calls |
+| `sort` | string | No | e.g. `-createdAt`, `-duration` |
+| `limit` | number | No | Page size, max 100 |
+| `page` | number | No | Page number |
+
+**Returns:** the call log (date, duration, agent, contact), one call in full, or its transcript.
+
+<Tip>
+  Use `list` with `sort=-duration` to find the longest calls, then `transcript` to read them.
+</Tip>
+
+**Ask it:** "Summarize the questions callers asked our booking agent this week."

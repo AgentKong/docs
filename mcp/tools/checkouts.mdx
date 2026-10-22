@@ -1,0 +1,108 @@
+---
+title: "Checkouts & products"
+description: "Create Stripe products and Cortana embedded checkouts, and get their paste-ready snippets."
+---
+
+These tools let your AI build and manage Cortana embedded checkouts and create Stripe products on the fly. A Cortana embedded checkout carries attribution, rep credit and commissions by itself, so when your AI builds a page that sells, it should use one of these instead of a plain Stripe checkout. See [Add a Cortana checkout](/mcp/ai-checkouts) for the walkthrough.
+
+<Note>
+  Reading needs the `checkouts:read` permission (on by default). Creating and changing needs `checkouts:manage`: the manage checkbox on the consent screen. Every tool takes an optional `businessId` when your connection reaches more than one business.
+</Note>
+
+<Warning>
+  `create_embedded_checkout` makes a checkout that is live at once. The `livemode` flag in the answer says whether it can take real money.
+</Warning>
+
+## Read your checkouts
+
+### `get_embedded_checkouts`
+
+Your embedded checkouts with their settings, stats and snippets.
+
+| Parameter | Type | Required | Description |
+| --- | --- | --- | --- |
+| `id` | string | No | One checkout only |
+| `page` | integer | No | Page number |
+| `limit` | integer | No | Page size, max 100 |
+
+**Returns:** each checkout's settings, its stats (viewed, clicked, opened, completed, revenue), whether it's live, and its ready-to-paste embed snippet.
+
+**Ask it:** "How is my main checkout converting?"
+
+### `get_embedded_checkout_snippet`
+
+Just the paste-ready snippet for one checkout.
+
+| Parameter | Type | Required | Description |
+| --- | --- | --- | --- |
+| `id` | string | Yes | The checkout |
+
+**Returns:** `snippet` (a mount div plus one script tag that carries attribution by itself), `livemode` and `isActive`. Paste the snippet as it is where the checkout should show.
+
+**Ask it:** "Give me the embed code for my coaching checkout."
+
+## Build
+
+### `create_product`
+
+Create a product with one or more prices on a connected Stripe account. It shows up in Cortana right away. Changes your account.
+
+| Parameter | Type | Required | Description |
+| --- | --- | --- | --- |
+| `stripeAccountId` | string | Yes | The connected Stripe account (`acct_...`) |
+| `name` | string | Yes | The product name buyers see |
+| `description` | string | No | The product description |
+| `prices` | array | Yes | 1 to 10 prices. Each: `amount` in dollars (e.g. `49.99`), `currency` (optional, defaults to `usd`), and `recurring` (optional: `interval` of `day`, `week`, `month` or `year`, plus `intervalCount`, e.g. month and 3 for quarterly). Leave out `recurring` for a one-time price. |
+
+**Returns:** the product, its prices and `livemode`. Pass a price's Stripe id straight to `create_embedded_checkout`.
+
+**Ask it:** "Create a $997 one-time product called Growth Sprint on my Stripe account."
+
+### `create_embedded_checkout`
+
+Create an embedded checkout and get its snippet in the same answer. Live at once. Changes your account.
+
+| Parameter | Type | Required | Description |
+| --- | --- | --- | --- |
+| `stripeAccountId` | string | Yes | The connected Stripe account that gets paid |
+| `lineItems` | array | Yes | The prices to charge: each a `priceId` and a `quantity`. Any recurring price makes it a subscription. |
+| `displayMode` | enum | Yes | `popup` (a button that opens the checkout), `inline` (the form in the page) or `hosted` (a Stripe-hosted page) |
+| `title` | string | No | An internal name buyers never see |
+| `optionalItems` | array | No | Order bumps the buyer can tick: each a `priceId`, `quantity` and `label` |
+| `trialPeriodDays` | integer | No | 1 to 365. Needs a subscription price. |
+| `introSwitchPriceId` | string | No | An intro offer: after the first billing period, the subscription moves to this recurring price (same Stripe account and currency). `lineItems` must hold exactly one recurring price. Can't be combined with a trial. |
+| `buttonLabel` | string | No | The popup button's text, e.g. "Start now" |
+| `successMessage` | string | No | The message shown after payment |
+| `returnUrl` | string | No | Where buyers go after paying. Leave out to stay on the page. |
+
+**Returns:** the checkout, with the snippet to paste and the `livemode` flag.
+
+**Ask it:** "Make a popup checkout for the Growth Sprint product with a $49 order bump."
+
+## Change
+
+### `update_embedded_checkout`
+
+Change a checkout: send only what changes. Changes your account.
+
+| Parameter | Type | Required | Description |
+| --- | --- | --- | --- |
+| `id` | string | Yes | The checkout |
+| any field from `create_embedded_checkout` | | No | Send it to change it, leave it out to keep it, send `null` to clear it |
+| `isActive` | boolean | No | `false` pauses it, `true` resumes it (resuming checks the settings again) |
+
+**Returns:** the updated checkout.
+
+**Ask it:** "Change the button on my checkout to say Join now."
+
+### `deactivate_embedded_checkout`
+
+Turn a checkout off right now. Changes your account.
+
+| Parameter | Type | Required | Description |
+| --- | --- | --- | --- |
+| `id` | string | Yes | The checkout |
+
+**Returns:** `{ id, isActive: false }`. It always works, even if the prices were archived or Stripe can't be reached. The snippet stops showing at once and its history and stats stay. Turn it back on with `update_embedded_checkout` and `isActive: true`.
+
+**Ask it:** "Turn off the Black Friday checkout."

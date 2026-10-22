@@ -1,63 +1,76 @@
 ---
-title: "MCP Server"
-description: "Connect Claude, ChatGPT, Cursor, or any AI tool to your Cortana business data, and let it manage your Meta ads."
+title: "Overview"
+description: "Connect Claude, ChatGPT, Cursor, or any AI tool to your Cortana data, and let it run your Meta ads and your AI Media Buyer."
 ---
 
-The Cortana MCP connector gives an AI assistant a live connection to your business data across six domains, and it can now create and manage Meta ads too. Ask questions in natural language and the assistant picks the right tools automatically.
+The Cortana MCP connector gives an AI assistant a live connection to your business data, and lets it act for you: build and run Meta ads, set up tracking, and run your AI Media Buyer. Ask in plain English and the assistant picks the right tools.
 
 <Note>
   The standout: Cortana ties ad spend to actual revenue and closed customers, not just platform metrics. Your assistant can compare Meta spend to Stripe revenue in one conversation.
 </Note>
 
-<Card title="Featured: Meta Ads MCP" icon="meta" href="/mcp/meta-ads">
-  The standout of the connector. Manage your full Meta ad account and upload images and videos straight from your AI assistant. The first MCP that lets your LLM create and run ads end to end.
-</Card>
-
 ## What is MCP?
 
 MCP (Model Context Protocol) is an open standard that lets AI assistants connect to external data and tools. Instead of copy-pasting exports into Claude, the assistant queries your Cortana data directly, then acts on it.
 
-## The six domains
+## What your AI can use
 
 <CardGroup cols={2}>
-  <Card title="Marketing attribution" icon="chart-mixed">
-    ROAS, ROI, ad spend, and conversions by source, campaign, medium, or ad. Multi-model attribution.
+  <Card title="Attribution" icon="chart-mixed" href="/mcp/tools/attribution">
+    ROAS, ROI, ad spend, and conversions by source, campaign, medium, or ad.
   </Card>
-
-  <Card title="Revenue" icon="credit-card">
-    Stripe, Shopify, and Whop: payments, subscriptions, orders, MRR, ARR, churn, and LTV.
+  <Card title="Stripe" icon="stripe" href="/mcp/tools/stripe">
+    Payments, subscriptions, customers, MRR, ARR, and churn.
   </Card>
-
-  <Card title="Customers (CRM)" icon="address-book">
-    Contacts, tags, custom fields, conversations, call logs and transcripts, conversions, form submissions, and journeys.
+  <Card title="Shopify" icon="shopify" href="/mcp/tools/shopify">
+    Orders, products, and customers.
   </Card>
-
-  <Card title="Sales calls" icon="video">
-    Fathom meeting transcripts, AI summaries, objections, pain points, and prospect questions.
+  <Card title="Whop" icon="store" href="/mcp/tools/whop">
+    Memberships, payments, and products.
   </Card>
-
-  <Card title="YouTube analytics" icon="youtube">
-    Channel and video metrics, retention, traffic sources, transcripts, and AI insight narratives.
+  <Card title="Sales calls & meetings" icon="video" href="/mcp/tools/sales-calls">
+    Call logs, transcripts, meeting summaries, and what prospects say.
   </Card>
-
-  <Card title="Meta ad management" icon="meta">
-    New. Create campaigns, ad sets, creatives, and ads, upload your own media, and pause or launch with your confirmation.
+  <Card title="Contacts & conversations" icon="address-book" href="/mcp/tools/contacts-conversations">
+    CRM contacts, tags, custom fields, and message history.
+  </Card>
+  <Card title="Forms" icon="clipboard-list" href="/mcp/tools/forms">
+    Form submissions and what each one answered.
+  </Card>
+  <Card title="AI Media Buyer" icon="robot" href="/mcp/tools/ai-media-buyer">
+    The review, decisions, new ads, posting, schedules, and settings.
+  </Card>
+  <Card title="Meta Ads" icon="meta" href="/mcp/tools/meta-ads">
+    Build, edit, launch, and pause campaigns, ad sets, and ads.
+  </Card>
+  <Card title="Tracking & Conversions API" icon="crosshairs" href="/mcp/tools/tracking">
+    Conversions, their sources, pixels, and the Meta Conversions API.
+  </Card>
+  <Card title="Slack" icon="slack" href="/mcp/tools/slack">
+    Channels for the AI Media Buyer and the people in them.
+  </Card>
+  <Card title="Checkouts & products" icon="cart-shopping" href="/mcp/tools/checkouts">
+    Products and embedded Cortana checkouts.
+  </Card>
+  <Card title="YouTube" icon="youtube" href="/mcp/tools/youtube">
+    Channel and video metrics, retention, and transcripts.
+  </Card>
+  <Card title="Business & account" icon="building" href="/mcp/tools/business">
+    Your businesses, their details, and scheduled tasks.
   </Card>
 </CardGroup>
 
 ## The cross-domain superpower
 
-Each domain is useful on its own, but the value is combining them in a single question. Because Cortana already connects your ad platforms, revenue tools, and CRM, the assistant can answer things no single dashboard can, like which campaigns brought in customers who actually stuck around.
-
-A few examples:
+Each source is useful on its own, but the value is combining them in a single question. Because Cortana already connects your ad platforms, revenue tools, and CRM, the assistant can answer things no single dashboard can, like which campaigns brought in customers who actually stuck around.
 
 - Compare Meta ad spend to Stripe revenue this month, by campaign.
 - Find the ads that brought in your highest-LTV customers, then build more like them.
 - Pull the objections from last week's sales calls and the ad that sourced each lead.
 
-## Read by default, manage by opt-in
+## Read by default, act by opt-in
 
-Read tools are available as soon as you connect (the Ad Tracking license tools and the Slack tools below are the exception: they sit under the media buyer opt-in). Ad management tools (anything that creates, launches, or spends) require a separate opt-in checkbox on the consent screen. Everything is created paused, and going live or changing budgets always requires your confirmation.
+Read tools are available as soon as you connect. Tools that change things sit behind opt-ins on the consent screen: Meta ad management (anything that creates, launches, or spends) and the AI Media Buyer's actions (approvals, new ads, posting, settings, Slack, and licenses). Meta ads are created paused, and going live or changing budgets always needs your confirmation. See [Connect your AI](/mcp/setup).
 
 ## Manage Ad Tracking licenses from chat
 
@@ -168,6 +181,6 @@ Your assistant can create Slack channels for a business, choose the channel wher
   </Accordion>
 </AccordionGroup>
 
-<Card title="Connect" icon="rocket" href="/mcp/setup">
+<Card title="Connect your AI" icon="rocket" href="/mcp/setup">
   Add the connector in Claude, ChatGPT, Cursor, or VS Code in about two minutes.
 </Card>

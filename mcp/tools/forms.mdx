@@ -1,0 +1,62 @@
+---
+title: "Forms"
+description: "Every booking-form submission: what each lead answered and where they came from."
+---
+
+`get_form_submissions` lets your AI read your booking-form leads at every stage (started, submitted, booked), with the exact answers each person gave and their attribution: UTMs, click IDs and referrer.
+
+<Note>
+  Every tool takes an optional `businessId` when your connection reaches more than one business.
+</Note>
+
+## Submissions
+
+### `get_form_submissions`
+
+| Parameter | Type | Required | Description |
+| --- | --- | --- | --- |
+| `mode` | enum | Yes | `list` or `get` |
+| `submissionId` | string | For `get` | The submission |
+| `status` | enum | No | `PARTIAL` (started), `SUBMITTED` (completed the form), `BOOKED` (booked a slot), `POTENTIAL`, `QUALIFIED` or `DISQUALIFIED` |
+| `eventTypeId` | string | No | Only this booking form |
+| `contactId` | string | No | Only this contact |
+| `from` / `to` | string | No | Date range by submission date, ISO 8601 |
+| `sort` | string | No | `createdAt` or `-createdAt` (default: newest first) |
+| `limit` | number | No | Page size. Default 20, max 100 |
+| `page` | number | No | Page number |
+
+<Accordion title="The two modes">
+  - **list**: submissions matching your filters. Each has the name, email and phone, the answers (`formData`), the attribution, the status, and `convertedToAppointmentId` when the lead booked.
+  - **get**: one submission in full.
+</Accordion>
+
+**Returns:** an example row from `list`:
+
+```json
+{
+  "id": "a1b2c3d4-...",
+  "eventTypeName": "Discovery Call",
+  "status": "SUBMITTED",
+  "name": "Jane Doe",
+  "email": "jane@example.com",
+  "formData": {
+    "What's your monthly ad spend?": "$10k–$25k",
+    "Biggest challenge": "Attribution is broken"
+  },
+  "attribution": {
+    "utmSource": "facebook",
+    "utmMedium": "paid",
+    "utmCampaign": "q2-leadgen",
+    "fbclid": "IwAR...",
+    "landingPage": "https://acme.com/book"
+  },
+  "convertedToAppointmentId": null,
+  "createdAt": "2026-06-21T14:03:00.000Z"
+}
+```
+
+<Tip>
+  `status: "SUBMITTED"` (or `PARTIAL`) with no `convertedToAppointmentId` finds the leads who filled the form but never booked. Add `eventTypeId` to stay on one form.
+</Tip>
+
+**Ask it:** "Who filled out the Discovery Call form this week but didn't book?"

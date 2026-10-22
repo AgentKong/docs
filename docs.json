@@ -398,11 +398,41 @@
             "pages": [
               "mcp/overview",
               "mcp/setup",
-              "mcp/meta-ads",
-              "mcp/tracking-setup",
-              "mcp/tools",
-              "mcp/ai-checkouts",
-              "mcp/examples"
+              {
+                "group": "Tools",
+                "icon": "wrench",
+                "pages": [
+                  "mcp/tools/attribution",
+                  "mcp/tools/stripe",
+                  "mcp/tools/shopify",
+                  "mcp/tools/whop",
+                  "mcp/tools/sales-calls",
+                  "mcp/tools/contacts-conversations",
+                  "mcp/tools/forms",
+                  "mcp/tools/ai-media-buyer",
+                  "mcp/tools/meta-ads",
+                  "mcp/tools/tracking",
+                  "mcp/tools/slack",
+                  "mcp/tools/checkouts",
+                  "mcp/tools/youtube",
+                  "mcp/tools/business"
+                ]
+              },
+              {
+                "group": "Guides",
+                "icon": "book-open",
+                "pages": [
+                  "mcp/guides/new-ads-from-best-performers",
+                  "mcp/guides/launch-ad-library-ads",
+                  "mcp/guides/onboard-a-client",
+                  "mcp/guides/conversions-api",
+                  "mcp/tracking-setup",
+                  "mcp/guides/sales-calls",
+                  "mcp/meta-ads",
+                  "mcp/ai-checkouts",
+                  "mcp/examples"
+                ]
+              }
             ]
           },
           {
@@ -634,6 +664,10 @@
     {
       "source": "/9-how-to-set-up-shopify",
       "destination": "/4-conversion-tracking"
+    },
+    {
+      "source": "/mcp/tools",
+      "destination": "/mcp/tools/attribution"
     }
   ],
   "footerSocials": {

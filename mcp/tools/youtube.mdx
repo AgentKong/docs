@@ -1,0 +1,119 @@
+---
+title: "YouTube"
+description: "Your YouTube channels and videos: performance, retention, audiences, transcripts and search."
+---
+
+These tools read the YouTube data Cortana syncs from your connected channels: channel totals, each video's metrics by day, traffic source, device, country and demographics, retention, transcripts, and an AI-written performance summary per video.
+
+<Note>
+  Needs YouTube connected in Cortana. Every tool takes an optional `businessId` when your connection reaches more than one business.
+</Note>
+
+<Tip>
+  Start with `list_youtube_channels`: every other tool needs a channel or video id from Cortana (not YouTube's own `UC...` or 11-character id). For channel totals, use `get_youtube_channel_metrics` rather than adding up videos: some channel views don't belong to any one video.
+</Tip>
+
+## Channels
+
+### `list_youtube_channels`
+
+Your connected channels with a last-30-days summary.
+
+No parameters.
+
+**Returns:** each channel's subscribers, lifetime views, video count, sync status, and its last 30 days: views, minutes watched, subscribers gained and top traffic source.
+
+**Ask it:** "How did my YouTube channel do this month?"
+
+### `get_youtube_channel_metrics`
+
+Channel totals and a daily breakdown for any date range.
+
+| Parameter | Type | Required | Description |
+| --- | --- | --- | --- |
+| `channelId` | string | Yes | The channel id from `list_youtube_channels` |
+| `from` | string | No | `YYYY-MM-DD`. Default: 30 days ago |
+| `to` | string | No | `YYYY-MM-DD`. Default: yesterday |
+| `includeDaily` | boolean | No | Include the day-by-day series. Default: `true`. Use `false` for totals only. |
+
+**Returns:** the totals (views, minutes watched, likes, comments, shares, subscribers gained and lost, average view duration) and, unless turned off, the same per day.
+
+**Ask it:** "How many views and subscribers did we get in the last 7 days?"
+
+## Videos
+
+### `list_youtube_videos`
+
+A channel's videos, newest first or by recent performance.
+
+| Parameter | Type | Required | Description |
+| --- | --- | --- | --- |
+| `channelId` | string | Yes | The channel id |
+| `limit` | number | No | 1 to 100. Default: 20 |
+| `sort` | enum | No | `publishedAt` (newest first, default), `views30d` or `subscribersGained30d` |
+| `videoType` | enum | No | `VIDEO`, `SHORT` or `LIVE` |
+
+**Returns:** each video's title, thumbnail, publish date, type, length, hook, lifetime views, likes and comments, and its last 30 days.
+
+**Ask it:** "Which Shorts got the most views in the last 30 days?"
+
+### `get_youtube_video`
+
+One video in full.
+
+| Parameter | Type | Required | Description |
+| --- | --- | --- | --- |
+| `videoId` | string | Yes | The video id from Cortana |
+
+**Returns:** the video's details, its channel, its transcripts, its latest retention curve, its AI performance summary (when one has been written) and three windows: lifetime, last 30 days and last 7 days.
+
+**Ask it:** "Why did my latest video underperform?"
+
+### `get_youtube_metrics`
+
+One video's metrics, by day or broken out by a dimension.
+
+| Parameter | Type | Required | Description |
+| --- | --- | --- | --- |
+| `videoId` | string | Yes | The video id |
+| `dimension` | enum | Yes | `day`, `trafficSource`, `device`, `country` or `demographics` |
+| `from` | string | No | `YYYY-MM-DD`. Default: 30 days ago |
+| `to` | string | No | `YYYY-MM-DD`. Default: yesterday |
+
+<Accordion title="The dimensions">
+  - **day**: daily views, watch time, likes, comments and subscribers gained.
+  - **trafficSource**: where views came from, e.g. YouTube search, external links, suggested videos.
+  - **device**: desktop, mobile, tablet and TV.
+  - **country**: views by country, as a snapshot for the period.
+  - **demographics**: the share of viewers by age and gender, refreshed weekly.
+</Accordion>
+
+**Ask it:** "Where is the traffic for my last video coming from?"
+
+### `get_youtube_transcript`
+
+A video's full transcript with timestamped segments.
+
+| Parameter | Type | Required | Description |
+| --- | --- | --- | --- |
+| `videoId` | string | Yes | The video id |
+| `language` | string | No | A language code, e.g. `en`. Omit for the best one available. |
+
+**Returns:** the language, whether it was auto-generated, the full text, and each segment's start, length and text. Without a language it picks a human-written transcript over an auto-generated one, then English.
+
+**Ask it:** "What did I say about pricing in my last video?"
+
+## Search
+
+### `search_youtube_videos`
+
+Search across your videos' titles, descriptions, hooks, transcripts and AI summaries.
+
+| Parameter | Type | Required | Description |
+| --- | --- | --- | --- |
+| `query` | string | Yes | What to look for, at least 2 characters |
+| `limit` | number | No | 1 to 50. Default: 10 |
+
+**Returns:** the matching videos with title, channel, publish date and views, and where the match was found: the video's details, its transcript or its summary.
+
+**Ask it:** "Find my videos that mention Meta ads."
