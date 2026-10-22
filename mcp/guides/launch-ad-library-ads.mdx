@@ -1,0 +1,47 @@
+---
+title: "Launch your best Ad Library ads into a new client"
+description: "Ask your AI to take the best ads from your agency's Ad Library and launch them into one client, named the way you want."
+---
+
+Your AI can take the best ads from your agency's Ad Library (the ads your business template carries from your Google Drive folder) and launch them into a client's account in one go. At the end, the ads are built on Meta under that client's Launch instructions.
+
+<Note>
+  Needs the AI Media Buyer on for the client, the media buyer opt-in on the connection, and Launch instructions written for the client, so Cortana knows where new ads go (campaign, ad sets, budgets).
+</Note>
+
+## Steps
+
+<Steps>
+  <Step title="Ask for the launch">
+    Ask: *"Launch the 4 best ads from our Ad Library for Bluebonnet Exteriors."* Your AI picks them and queues them for the next posting slot.
+  </Step>
+  <Step title="Cortana picks the best">
+    Cortana ranks your Ad Library ads by how they did across your agency's other accounts and picks the best ones this client doesn't have yet. An ad that ran poorly elsewhere is never picked.
+  </Step>
+  <Step title="Some ads are skipped, with a reason">
+    An ad the client already has, one whose file is missing from the Drive folder, or one another client in the same market is running is skipped, and your AI says why. The next best ad takes its place.
+  </Step>
+  <Step title="It launches">
+    Your AI runs the posting slot right away. In Draft mode the ads are built paused and wait for your Go live tap in Slack. In Live mode they go live with real spend, and your AI asks for your yes first.
+  </Step>
+</Steps>
+
+<Tip>
+  Want to see the picks before they launch? Ask *"Show me the 4 you'd pick first."* Your AI lists them with how each did elsewhere, and launches them on your yes.
+</Tip>
+
+## Name each ad after its file
+
+Write the naming rule in the client's Launch instructions, for example *"Name each ad its file name."* Every ad Cortana launches for that client is then named that way, using the Ad Library file name without the extension. Ads Cortana wrote itself use their own title. With no naming rule, ads keep Cortana's default names.
+
+Ask your AI: *"Add to Acme's Launch instructions: name each ad its file name."*
+
+## What you get back
+
+- The ads picked, with how each did on your other accounts.
+- The ads skipped, each with its reason.
+- The launch: built paused for your tap, or live on your yes.
+
+## Tools it uses
+
+[`queue_roster_ads`](/mcp/tools/ai-media-buyer), [`post_now`](/mcp/tools/ai-media-buyer), [`set_launch_instructions`](/mcp/tools/ai-media-buyer), [`get_posting_setup`](/mcp/tools/ai-media-buyer).

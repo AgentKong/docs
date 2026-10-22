@@ -1,0 +1,47 @@
+---
+title: "Set up the Meta Conversions API from your AI"
+description: "Ask your AI to pick or create a pixel, connect the Conversions API, send your conversions to Meta, and test that they arrive."
+---
+
+Your AI can connect the Meta Conversions API for a business and decide which of your conversions reach Meta, under which event. At the end, your conversions are sent to Meta from the server, with a test event to prove it.
+
+<Note>
+  Needs Meta connected for the business in Cortana and the **Manage ad tracking** permission on your Cortana login. Creating a pixel and connecting the Conversions API also need the ad management opt-in on the connection (see [Connect your AI](/mcp/setup)). Set up the conversions themselves first (see [Set up tracking from your AI](/mcp/tracking-setup)).
+</Note>
+
+## Steps
+
+<Steps>
+  <Step title="See where you stand">
+    Ask: *"Show me Acme's Conversions API setup."* Your AI reads it live from Meta: the pixel, whether sending is on, the last connection test, events Meta received in the last 7 days, whether another tool also sends to that pixel, and Event Match Quality.
+  </Step>
+  <Step title="Pick the pixel">
+    Ask: *"Which pixels can Acme use?"* Your AI lists the pixels on the business's ad accounts, when each last fired, and the one Cortana would pick. No pixel yet? Ask *"Create a pixel on Acme's ad account."* Meta allows one created pixel per ad account and pixels can't be deleted, so if the account already has one, your AI uses it instead.
+  </Step>
+  <Step title="Connect it">
+    Ask: *"Connect the Conversions API on that pixel."* Cortana sends with the business's own Meta connection, so there is no token to paste and it keeps working when Meta is reconnected. A test event proves the connection before anything is saved, then sending turns on.
+  </Step>
+  <Step title="Send your conversions">
+    Ask: *"Send booked calls to Meta as Schedule, and sales as Purchase."* Each conversion is sent as the Meta event you name. Want your own event name? Ask *"Create a custom event called BookedCall and send booked calls under it."*
+  </Step>
+  <Step title="Test it">
+    Ask: *"Send a test event to Acme's pixel."* It shows in Meta's **Test Events** and never counts as a conversion.
+  </Step>
+  <Step title="Optional: optimize ads on it">
+    Ask: *"Create a custom conversion in Meta for BookedCall."* Your ad sets can then optimize for it.
+  </Step>
+</Steps>
+
+<Tip>
+  Other settings are a sentence away: *"Turn on Limited Data Use"*, *"Only send conversions that came from Meta ads"*, *"Forward page views"*, or *"Turn the Conversions API off."*
+</Tip>
+
+## What you get back
+
+- The setup, read live from Meta.
+- Each change, said back after it is saved.
+- A test event you can see in Meta.
+
+## Tools it uses
+
+[`get_capi_setup`](/mcp/tools/tracking), [`list_ad_pixels`](/mcp/tools/tracking), [`create_ad_pixel`](/mcp/tools/tracking), [`connect_capi`](/mcp/tools/tracking), [`save_capi_mapping`](/mcp/tools/tracking), [`create_meta_custom_event`](/mcp/tools/tracking), [`send_capi_test_event`](/mcp/tools/tracking), [`create_meta_custom_conversion`](/mcp/tools/tracking), [`update_capi_settings`](/mcp/tools/tracking).

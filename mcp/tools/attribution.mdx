@@ -1,0 +1,88 @@
+---
+title: "Attribution"
+description: "Which sources, campaigns and ads drive your conversions and revenue, and every conversion behind them."
+---
+
+These tools give your AI the same attribution table you see in Cortana: spend, conversions, revenue, ROAS and cost per conversion by source, campaign, medium or ad, plus every conversion and each contact's lifetime value.
+
+<Note>
+  Works on every connection. Every tool takes an optional `businessId` when your connection reaches more than one business.
+</Note>
+
+## The attribution table
+
+### `get_attribution`
+
+The full attribution table, grouped by source, campaign, medium or ad.
+
+| Parameter | Type | Required | Description |
+| --- | --- | --- | --- |
+| `startDate` | string | Yes | Start date, ISO 8601 (e.g. `2026-03-01T00:00:00Z`) |
+| `endDate` | string | Yes | End date, ISO 8601 |
+| `groupBy` | enum | No | `source`, `campaign`, `medium` or `ad`. Default: `source` |
+| `attributionModel` | enum | No | `last_click`, `first_click`, `paid_priority` or `scientific` |
+| `presetId` | string | No | A saved view from `get_presets`. Pass it to match your dashboard exactly: it applies the view's source, campaign and revenue scope and each column's de-duplication. Without it the numbers are raw and unscoped. |
+| `sources` | string | No | Only these sources, separated by three pipe characters, e.g. meta&#124;&#124;&#124;google |
+| `campaigns` | string | No | Only these campaigns, separated by three pipe characters |
+| `mediums` | string | No | Only these mediums, separated by three pipe characters |
+| `ads` | string | No | Only these ads, separated by three pipe characters |
+| `eventTypes` | string | No | Only these conversion events, separated by three pipe characters, e.g. purchase&#124;&#124;&#124;lead |
+| `dateBucketMode` | string | No | Which day a conversion counts on: `purchase` (default, the day it happened), `click` (the day of the ad click that earned it, like the dashboard's Date of Click toggle) or `conversion:<eventName>` |
+| `revenueEventTypes` | string | No | The conversion events New Revenue and LTV may count. Omit to use the view's own columns. |
+| `sourceScope` | string | No | A source allow-list for the whole table. Omit to use the view's. |
+| `adAccounts` | string | No | Only data tied to these ad accounts |
+| `include` | string | No | `creative` with `groupBy=ad` adds each ad's image or video, text, headline, button and link. Narrow to a few ads first. |
+| `currency` | string | No | Currency code. Default: `USD` |
+| `timezone` | string | No | IANA timezone. Default: the business's timezone |
+
+**Returns:** page views, leads, conversions per event (count and revenue), total revenue, total LTV, ROAS, ROI, cost per conversion and ad spend for each row.
+
+<Accordion title="Drill down from channel to ad">
+  1. Start with `groupBy=source` to see your channels.
+  2. Filter to one source and switch to `groupBy=campaign`.
+  3. Filter to one campaign and switch to `groupBy=ad` for each ad.
+</Accordion>
+
+**Ask it:** "Which Meta ads drove the most revenue last month, using my Main Funnel view?"
+
+### `get_presets`
+
+Your saved attribution views (funnel views) and the conversion columns each one shows.
+
+No parameters.
+
+**Returns:** each view's id, name and columns. Pass an id to `get_attribution` as `presetId`.
+
+**Ask it:** "Which funnel views do I have?"
+
+### `get_utms`
+
+Every UTM value Cortana has seen (sources, campaigns, mediums, ads) and how they nest.
+
+No parameters.
+
+**Returns:** the values and their hierarchy, so your AI knows what to filter `get_attribution` by.
+
+**Ask it:** "What campaigns are running under Facebook?"
+
+## Conversions and lifetime value
+
+### `get_conversion_events`
+
+Every conversion Cortana recorded, or your contacts ranked by lifetime value.
+
+| Parameter | Type | Required | Description |
+| --- | --- | --- | --- |
+| `mode` | enum | Yes | `list` (conversion entries) or `ltv` (contacts by lifetime value) |
+| `configName` | string | No | Only this conversion, e.g. `purchase` or `lead` |
+| `configId` | string | No | Only this conversion, by id |
+| `sourceId` | string | No | Only conversions from this source |
+| `contactId` | string | No | Only this contact |
+| `from` / `to` | string | No | Date range, ISO 8601 |
+| `sort` | string | No | e.g. `-occurredAt`, `-eventValue`, `-ltv` |
+| `limit` | number | No | Page size. Default 20, max 100 (200 for `ltv`) |
+| `page` | number | No | Page number |
+
+**Returns:** in `list` mode, each conversion with its contact, value and time; in `ltv` mode, contacts with their lifetime value.
+
+**Ask it:** "Who are my 20 highest-value customers?"

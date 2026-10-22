@@ -1,0 +1,93 @@
+---
+title: "Slack"
+description: "Create and connect Slack channels and add your team, from your AI."
+---
+
+These tools let your AI work in the Slack workspace connected to a business: list and create channels, choose the channel where the AI Media Buyer posts its proposals, and add your teammates to a channel.
+
+<Note>
+  Needs Slack connected for the business in Cortana, the AI Media Buyer switched on for it, and the media buyer permission on the connection (**Let (your assistant) act on your media buyer decisions** on the consent screen). See [Connect your AI](/mcp/setup).
+</Note>
+
+Every tool takes an optional `businessId` when your connection reaches more than one business.
+
+## Channels
+
+### `list_slack_channels`
+
+The channels Cortana can see in the business's workspace: which one the AI Media Buyer posts into, which ones another business's AI Media Buyer already uses, and whether Cortana's Slack app is in each.
+
+| Parameter | Type | Required | Description |
+| --- | --- | --- | --- |
+| `search` | string | No | Part of a channel name, e.g. `acme` |
+| `limit` | number | No | Rows per page, default 25, max 100 |
+| `cursor` | string | No | Paging cursor from the previous page |
+
+**Returns:** the channels, and the one the AI Media Buyer uses.
+
+**Ask it:** "Which channel does the media buyer post in?"
+
+### `create_slack_channel`
+
+Create a public channel. With `connectMediaBuyer` it also becomes the business's AI Media Buyer channel, named from your agency's naming template when you give no name. A name that already exists answers that channel instead of making a copy.
+
+Changes your workspace.
+
+| Parameter | Type | Required | Description |
+| --- | --- | --- | --- |
+| `name` | string | Unless connecting | The channel name, e.g. `acme-ai-media-buyer` |
+| `connectMediaBuyer` | boolean | No | Make it this business's AI Media Buyer channel |
+| `replaceExisting` | boolean | No | With `connectMediaBuyer`: move the AI Media Buyer off a channel it already has |
+
+**Returns:** the channel and, when connected, where the AI Media Buyer posted before.
+
+**Ask it:** "Make Acme a Slack channel and put the media buyer in it."
+
+### `connect_slack_channel`
+
+Make an existing channel the AI Media Buyer's channel. Cortana's Slack app joins a public channel on its own.
+
+Changes your workspace.
+
+| Parameter | Type | Required | Description |
+| --- | --- | --- | --- |
+| `channel` | string | Yes | The channel id (`C0123ABCD`) or name (`acme-ads` or `#acme-ads`) |
+
+**Returns:** where the AI Media Buyer posted before and where it posts now.
+
+**Ask it:** "Move Acme's proposals to the #growth channel."
+
+## People
+
+### `list_slack_teammates`
+
+The people in the workspace: Slack id, full name, display name, username, and whether they're a guest. Deleted accounts and bots are left out.
+
+| Parameter | Type | Required | Description |
+| --- | --- | --- | --- |
+| `search` | string | No | Part of a name, e.g. `sarah` |
+| `limit` | number | No | Rows per page, default 25, max 100 |
+| `cursor` | string | No | Paging cursor from the previous page |
+
+**Returns:** the matching people.
+
+**Ask it:** "Who's in our Slack?"
+
+### `invite_to_slack_channel`
+
+Add up to 50 people to a public channel by name or Slack id.
+
+Changes your workspace.
+
+| Parameter | Type | Required | Description |
+| --- | --- | --- | --- |
+| `channel` | string | Yes | The channel id or name |
+| `people` | string[] | Yes | Names (`Sarah Connor`, `sarah`, `@sconnor`) or Slack ids (`U0123ABCD`), up to 50 |
+
+**Returns:** one line per person: invited, already in the channel, a guest Slack keeps out, several people match (pick one), not found, or not attempted with the reason.
+
+**Ask it:** "Add Sarah and Mike to #acme-ai-media-buyer."
+
+<Note>
+  Every channel created or connected and every invite is logged. Inviting people into private channels isn't available yet.
+</Note>

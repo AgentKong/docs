@@ -1,0 +1,716 @@
+---
+title: "AI Media Buyer"
+description: "Run your AI Media Buyer from chat: the review, decisions, new ads, creative review, posting, schedules and settings."
+---
+
+These tools let your AI work your AI Media Buyer the way you would in Slack and in the app: read the review, approve or undo what it proposes, order new ads, review creatives, decide when ads post, and set up a new client. Everything your AI does here is the same action as the matching button in Slack or the app.
+
+<Note>
+  Needs the AI Media Buyer switched on for the business. Reading needs **AI Media Buyer** ticked on the connection. Anything that changes your account (approving, ordering ads, posting, settings) also needs **Let (your assistant) act on your media buyer decisions** ticked when you connect.
+</Note>
+
+Every tool takes an optional `businessId` when your connection reaches more than one business.
+
+## Reports & decisions
+
+### `get_review_report`
+The media buyer's review: what needs you (kills, budget raises and trims, a judgment call, a failed action, concepts waiting for an image), what it did and can still undo, what is on watch, and how each business is doing in your own event names.
+
+No parameters. Leave out `businessId` to get every business on the connection as a summary; pass one for that business in full, with every card's numbers and reasoning.
+
+**Returns:** the review, sorted by what needs you first.
+
+**Ask it:** "What happened overnight across my accounts?"
+
+### `approve_proposals`
+Approve open cards from the review by their ids. The action runs on Meta right away, exactly like the Approve button in Slack, and stays undoable for 72 hours. Changes your account.
+
+| Parameter | Type | Required | Description |
+| --- | --- | --- | --- |
+| `proposalIds` | string[] | Yes | The cards to approve, from `get_review_report` (up to 20 per call). |
+
+**Returns:** one line per card: executed, skipped (no longer waiting) or failed with the reason.
+
+**Ask it:** "Approve the two kills in Acme."
+
+### `reject_proposals`
+Reject open cards. Nothing runs and the card closes as rejected, like the Reject button in Slack. Changes your account.
+
+| Parameter | Type | Required | Description |
+| --- | --- | --- | --- |
+| `proposalIds` | string[] | Yes | The cards to reject (up to 20 per call). |
+
+**Returns:** rejected or skipped, per card.
+
+**Ask it:** "Don't kill Hook B, leave it running."
+
+### `undo_actions`
+Undo actions that already ran (a kill, a pause, a budget raise or trim) within 72 hours, like the Undo button in Slack. If the budget moved since, the undo declines and says so. Changes your account.
+
+| Parameter | Type | Required | Description |
+| --- | --- | --- | --- |
+| `proposalIds` | string[] | Yes | The executed actions to undo, from the report (up to 20 per call). |
+
+**Returns:** undone or declined, per action, with the reason.
+
+**Ask it:** "Undo the scale in Beta."
+
+### `answer_ask`
+Answer a judgment call from the review: kill on target, keep the winners, adjust the target, wait one cycle, or keep the target. Your own words work too. Changes your account.
+
+| Parameter | Type | Required | Description |
+| --- | --- | --- | --- |
+| `askId` | string | Yes | The judgment call, from `get_review_report`. |
+| `option` | enum | No | `KILL_ON_TARGET`, `KEEP_WINNERS`, `ADJUST_TARGET`, `WAIT_ONE_CYCLE` or `KEEP_TARGET`. |
+| `text` | string | No | Your answer in your own words, when you don't name an option. |
+| `newTarget` | number | No | With `ADJUST_TARGET`: the new target. Leave out to use the suggested one. |
+
+**Returns:** what was done. If your words can't be matched, the options to choose from.
+
+**Ask it:** "Keep the winners and wait a week on the rest."
+
+### `run_analysis_now`
+Run this business's review now instead of waiting for its scheduled time. It runs on Cortana, takes a few minutes and is billed as usage. One at a time per business.
+
+No parameters.
+
+**Returns:** the run's id, or the run already going.
+
+**Ask it:** "Run the review for Acme now."
+
+### `get_analysis_status`
+Where a review run is: queued, running, done, failed or stalled, with the ads reviewed and the cost once done.
+
+| Parameter | Type | Required | Description |
+| --- | --- | --- | --- |
+| `runId` | string | Yes | The run from `run_analysis_now`. |
+
+**Returns:** the run's status.
+
+**Ask it:** "Is the review I started done yet?"
+
+### `get_ad_detail`
+The full read behind one card or one ad: its numbers over time, its trend, where its budget lives, and the reasoning.
+
+| Parameter | Type | Required | Description |
+| --- | --- | --- | --- |
+| `proposalId` | string | No | A card from the review. |
+| `adId` | string | No | An ad from the review or from `get_top_ads`. |
+
+**Returns:** the ad's numbers and the media buyer's reasoning.
+
+**Ask it:** "Why is Hook B on watch?"
+
+### `get_top_ads`
+Your best-performing ads and why they won: the angle, the hook, the offer, who each one speaks to, and the script or transcript, for each priority.
+
+| Parameter | Type | Required | Description |
+| --- | --- | --- | --- |
+| `priority` | enum | No | `P0`, `P1`, `P2` or `P3`. Leave out for all. |
+| `limit` | number | No | Rows per page (default 25, max 100). |
+| `cursor` | string | No | The previous page's cursor. |
+
+**Returns:** your winners over the last year with what made them work.
+
+**Ask it:** "What do my best ads have in common?"
+
+### `get_creative_lab`
+The ad concepts the media buyer proposed, and the cards on your Ad Pipeline with their stage and images.
+
+| Parameter | Type | Required | Description |
+| --- | --- | --- | --- |
+| `status` | enum | No | Only concepts in this status. |
+| `stage` | enum | No | Only pipeline cards in this stage. |
+| `limit` | number | No | Rows per page (default 25, max 100). |
+| `cursor` | string | No | The previous page's cursor. |
+
+**Returns:** the concepts and the pipeline cards.
+
+**Ask it:** "What new concepts has it proposed?"
+
+### `get_ad_stamp`
+One ad in full: the text Meta posted, the image, Cortana's breakdown of the creative, its numbers over 4, 12 and 52 weeks and lifetime, and its recent verdicts.
+
+| Parameter | Type | Required | Description |
+| --- | --- | --- | --- |
+| `adId` | string | Yes | The ad, from `get_winning_messaging`, `get_top_ads` or the review. |
+
+**Returns:** everything about that ad.
+
+**Ask it:** "Break down the Summer Hook ad for me."
+
+### `get_winning_messaging`
+Your winning ads with the exact text Meta posted, the image, the breakdown, the numbers and why each won.
+
+| Parameter | Type | Required | Description |
+| --- | --- | --- | --- |
+| `priority` | enum | No | `P0`, `P1`, `P2` or `P3`. Leave out for all. |
+| `limit` | number | No | Rows per page (default 25, max 100). |
+| `cursor` | string | No | The previous page's cursor. |
+
+**Returns:** your winners as they ran, with what they said.
+
+**Ask it:** "Show me my best ads and what they say."
+
+### `get_conversion_snapshot`
+What is working on this account: the latest read on each angle, and your recent ads broken down by angle, hook, format, offer and awareness level, with spend and cost per result against your target.
+
+No parameters.
+
+**Returns:** what's working, by cross-section.
+
+**Ask it:** "Which angles are converting right now?"
+
+### `get_prospect_voice`
+Your prospects' own words from your sales calls: pains, dreams, objections, questions and competitors, each with how often it came up and the exact quotes behind it.
+
+| Parameter | Type | Required | Description |
+| --- | --- | --- | --- |
+| `bank` | enum | Yes | `pains`, `dreams`, `objections`, `questions` or `competitors`. |
+| `limit` | number | No | Lines per page (default 25, max 50). |
+| `cursor` | string | No | The previous page's cursor. |
+
+**Returns:** the lines, most mentioned first, with verbatim quotes.
+
+**Ask it:** "What objections come up on the calls?"
+
+## Ideas & playbook
+
+### `get_creative_brief`
+Everything to brainstorm ads from, for one business: the offer as you wrote it, your targets, your winning ads and why they won, the angles you've covered, your prospects' words, and how past concepts played out.
+
+No parameters.
+
+**Returns:** the brief to build ideas on.
+
+**Ask it:** "Help me come up with the next batch of ads."
+
+### `get_playbook`
+Cortana's ad-writing playbook, one part at a time, for when you want ads written in your chat instead of ordered from Cortana.
+
+| Parameter | Type | Required | Description |
+| --- | --- | --- | --- |
+| `part` | enum | Yes | `media-buyer`, `image-designer` or `video-scripter`. |
+
+**Returns:** that part of the playbook.
+
+**Ask it:** "Write the ads here in the chat, using Cortana's playbook."
+
+### `plan_ads`
+Cortana's plan for your next N concepts, without writing any: which past winners to bring back and where to try something new, and in which format.
+
+| Parameter | Type | Required | Description |
+| --- | --- | --- | --- |
+| `count` | number | Yes | How many concepts to plan (up to 200). |
+| `direction` | string | No | Your direction for the batch, handed back for writing. |
+
+**Returns:** the plan, slot by slot.
+
+**Ask it:** "Plan the next 20 ads for Acme."
+
+## Ordering new ads
+
+### `make_ads`
+Order new ads: Cortana writes N new concepts for the business, with your direction in your own words. If you give a direction, Cortana first reads it against your account and asks you to confirm before it starts. Billed as usage. Changes your account.
+
+| Parameter | Type | Required | Description |
+| --- | --- | --- | --- |
+| `count` | number | Yes | How many concepts. |
+| `direction` | string | No | Your direction for the batch, in your own words (up to 600 characters). |
+| `exactHook` | string | No | Only when the hook must be used word for word (up to 300 characters). |
+| `confirmed` | boolean | No | `true` once you said yes to Cortana's read. |
+| `readKey` | string | No | The key from the confirmation answer. |
+
+**Returns:** the run's id, or Cortana's read and the quote to confirm.
+
+**Ask it:** "Make 10 ads for R&G and lean on the warranty angle."
+
+### `quote_generation`
+What an order of N ads would make and take before you place it: the mix of formats, the images, and the time.
+
+| Parameter | Type | Required | Description |
+| --- | --- | --- | --- |
+| `count` | number | Yes | How many concepts. |
+
+**Returns:** the quote.
+
+**Ask it:** "What would 20 new ads take?"
+
+### `wait_for_ads`
+Wait on an order and report progress ("6 of 10 written") until it's done.
+
+| Parameter | Type | Required | Description |
+| --- | --- | --- | --- |
+| `runId` | string | Yes | The order from `make_ads`. |
+| `untilReadyToDraw` | boolean | No | Keep waiting until the image prompts are ready, for a business that renders its own images. |
+
+**Returns:** how far the order is, and where to review the ads once they land.
+
+**Ask it:** "Let me know when they're done."
+
+### `get_generation_status`
+Where an order is: its stage, the concepts and images done, and the cards it has made so far.
+
+| Parameter | Type | Required | Description |
+| --- | --- | --- | --- |
+| `runId` | string | Yes | The order from `make_ads`. |
+
+**Returns:** the order's progress.
+
+**Ask it:** "How's the ad order going?"
+
+### `render_ad_image`
+Render one image on Cortana from a prompt written in your chat, for assistants that can't make images themselves. Billed to the business's wallet per image. Changes your account.
+
+| Parameter | Type | Required | Description |
+| --- | --- | --- | --- |
+| `prompt` | string | Yes | The image prompt, exactly as written. |
+| `aspectRatio` | enum | Yes | `1:1`, `4:5`, `9:16`, `16:9` or `3:2`. |
+| `assetsToAttach` | string[] | No | Your logo or product photos to put in the image (up to 6), from `get_creative_brief`. |
+
+**Returns:** a permanent image link and the charge.
+
+**Ask it:** "Render these three ads we just wrote."
+
+### `list_render_queue`
+For a business that renders images on its own subscription: every image prompt still waiting for its image, oldest first.
+
+| Parameter | Type | Required | Description |
+| --- | --- | --- | --- |
+| `limit` | number | No | Prompts per answer (default 10, max 40). |
+| `runId` | string | No | Only one order's prompts. |
+| `allBusinesses` | boolean | No | One queue across every business on the connection. |
+| `afterBusinessId` | string | No | With `allBusinesses`: continue after this business. |
+| `skipWrapIds` | string[] | No | Prompts you couldn't render, left out so the rest show. |
+
+**Returns:** the prompts waiting, each with where its image goes.
+
+**Ask it:** "Render everything waiting across my businesses."
+
+### `rerender_wrap`
+Revise one image with a note, such as "make the headline bigger". Cortana edits the image itself and keeps the old one in the card's history. Billed like a Cortana image. Changes your account.
+
+| Parameter | Type | Required | Description |
+| --- | --- | --- | --- |
+| `cardId` | string | Yes | The card, from `list_review_cards` or `list_board`. |
+| `wrapKey` | string | Yes | The variation (A, B, …). |
+| `note` | string | No | What to change, in your words (up to 500 characters). |
+
+**Returns:** the new image link and the cost.
+
+**Ask it:** "Make the headline bigger on 2B."
+
+## Review your creatives
+
+### `list_review_cards`
+The ads waiting for your decision and the ones queued for the next posting slot, each with its variations and their images, plus links to review them in the app.
+
+| Parameter | Type | Required | Description |
+| --- | --- | --- | --- |
+| `limit` | number | No | Rows per page (default 25, max 100). |
+| `cursor` | string | No | The previous page's cursor. |
+
+**Returns:** each ad with its variations and review links.
+
+**Ask it:** "Show me the new creatives."
+
+### `decide_variation`
+Approve or deny one variation of an ad. Only approved variations launch, once every variation has a decision. Changes your account.
+
+| Parameter | Type | Required | Description |
+| --- | --- | --- | --- |
+| `cardId` | string | Yes | The ad, from `list_review_cards`. |
+| `wrapKey` | string | Yes | The variation (A, B, …). |
+| `decision` | enum | Yes | `approved` or `denied`. |
+| `seenUrl` | string | Yes | The image link you were shown (null for no image). |
+| `why` | string | No | Why, in your words (up to 200 characters). Kept to steer the next batch. |
+
+**Returns:** the decision and the link to that variation.
+
+**Ask it:** "Approve 1A, deny 1B, it's too salesy."
+
+### `iterate_variation`
+Ask for a change to one variation. The note is saved in that variation's thread and its image is edited; the new version needs approval. Changes your account.
+
+| Parameter | Type | Required | Description |
+| --- | --- | --- | --- |
+| `cardId` | string | Yes | The ad. |
+| `wrapKey` | string | Yes | The variation. |
+| `requestId` | string | Yes | Any id for this request; reuse it on a retry. |
+| `note` | string | Yes | What to change (up to 500 characters). |
+| `marks` | object[] | No | Marks drawn on the image, each with its own comment. |
+
+**Returns:** the new version, waiting for approval.
+
+**Ask it:** "Make B's background warmer."
+
+### `get_variation_thread`
+The saved change requests and earlier image versions for one variation.
+
+| Parameter | Type | Required | Description |
+| --- | --- | --- | --- |
+| `cardId` | string | Yes | The ad. |
+| `wrapKey` | string | Yes | The variation. |
+
+**Returns:** the thread and past images.
+
+**Ask it:** "What did we change on 1A so far?"
+
+### `decide_cards`
+Take whole ads off the review board, or queue an ad that has no variations. Changes your account.
+
+| Parameter | Type | Required | Description |
+| --- | --- | --- | --- |
+| `retire` | string[] | No | Ads to take off the board (up to 50). |
+| `keep` | string[] | No | Ads with no variations to queue for posting (up to 50). |
+| `why` | string | No | Why the retired ones are out, in your words. Kept to steer the next batch. |
+| `seen` | object[] | No | The images shown when you decided, per kept ad. |
+
+**Returns:** one line per ad: armed, retired, unchanged or skipped with the reason.
+
+**Ask it:** "Drop ad 2, it looks desperate."
+
+### `get_upload_url`
+Get a one-time upload link for an image you want on your review board (PNG, JPEG or WebP, up to 25 MB). Then `confirm_upload`. Changes your account.
+
+| Parameter | Type | Required | Description |
+| --- | --- | --- | --- |
+| `mimeType` | enum | Yes | `image/png`, `image/jpeg` or `image/webp`. |
+
+**Returns:** the upload link and its id.
+
+**Ask it:** "Put that image on my review board."
+
+### `confirm_upload`
+After the upload: Cortana checks the image and lands it as a card in Review. Changes your account.
+
+| Parameter | Type | Required | Description |
+| --- | --- | --- | --- |
+| `uploadId` | string | Yes | From `get_upload_url`. |
+| `note` | string | No | A line for the card (up to 500 characters). |
+| `wrapId` | string | No | When the image is the render of a waiting prompt. |
+
+**Returns:** the new card.
+
+**Ask it:** "Done uploading, add it."
+
+### `submit_creative`
+Send a small image (under 3 MB) straight in, without an upload link. It lands in Review. Changes your account.
+
+| Parameter | Type | Required | Description |
+| --- | --- | --- | --- |
+| `imageBase64` | string | Yes | The image. |
+| `mimeType` | enum | Yes | The image type. |
+| `note` | string | No | A line for the card. |
+| `wrapId` | string | No | When the image is the render of a waiting prompt. |
+
+**Returns:** the new card.
+
+**Ask it:** "Add this small image to Review."
+
+### `set_creative_rule`
+Add a standing rule for every ad Cortana writes, in your own words: "never mention competitors' prices", "always show the truck". Up to 30 per business. Changes your account.
+
+| Parameter | Type | Required | Description |
+| --- | --- | --- | --- |
+| `rule` | string | Yes | The rule (up to 300 characters). |
+
+**Returns:** the rule as saved.
+
+**Ask it:** "From now on, never say the competitor is overpriced."
+
+### `list_creative_rules`
+Your standing creative rules.
+
+No parameters.
+
+**Returns:** each rule with its id.
+
+**Ask it:** "What are my ad rules?"
+
+### `drop_creative_rule`
+Remove one standing rule. Changes your account.
+
+| Parameter | Type | Required | Description |
+| --- | --- | --- | --- |
+| `ruleId` | string | Yes | From `list_creative_rules`. |
+
+**Returns:** the rule removed.
+
+**Ask it:** "Drop the rule about the truck."
+
+## Posting & launches
+
+### `get_posting_setup`
+How this business posts and creates ads: the Launch, Scaling and Kill instructions in your words, Draft or Live, the posting days and next slot, the review and ad creation schedules, the floor, and how many ads each creation run makes.
+
+No parameters.
+
+**Returns:** the full posting setup.
+
+**Ask it:** "When do new ads go up next, and what's my floor?"
+
+### `set_launch_instructions`
+Write one instruction box in your own words. **Launch** decides where new ads go (campaign, ad sets, budgets) and can name a base ad to copy text from, or how to name the ads ("name each ad its file name"). **Scaling** says how winners are scaled. **Kill** adds your own stop rules. Replaces the whole box. Changes your account.
+
+| Parameter | Type | Required | Description |
+| --- | --- | --- | --- |
+| `box` | enum | Yes | `LAUNCH`, `SCALING` or `KILL`. |
+| `text` | string | Yes | The whole box in your words. Empty clears it. |
+
+**Returns:** the box as saved.
+
+**Ask it:** "From now on launch new ads into the Broad campaign and name each ad its file name."
+
+### `set_posting_schedule`
+Set when queued ads post: the days, the time, on or off, the most ads per slot, and Draft (paused drafts you switch on in Slack) or Live (real spend at the slot, no tap). Live is only saved after you confirm. Changes your account.
+
+| Parameter | Type | Required | Description |
+| --- | --- | --- | --- |
+| `days` | string[] | No | e.g. `["MON","THU"]`. |
+| `timeOfDay` | string | No | `HH:MM`, 24-hour. |
+| `timezone` | string | No | e.g. `America/Toronto`. |
+| `enabled` | boolean | No | Posting on or off. |
+| `maxPerSlot` | number | No | The most ads one slot posts (1–100), or null for no cap. |
+| `launchMode` | enum | No | `DRAFT` or `LIVE`. |
+| `confirmLive` | boolean | No | `true` once you confirmed Live. |
+
+**Returns:** the schedule as saved and what changed.
+
+**Ask it:** "Post Monday and Thursday at 8am, 3 ads a slot, Live. Confirmed."
+
+### `list_board`
+Your Ad Pipeline: every card with its stage, code, format and images, newest first.
+
+| Parameter | Type | Required | Description |
+| --- | --- | --- | --- |
+| `stage` | enum | No | Only one stage, e.g. `READY_TO_PUBLISH` or `PUBLISHED`. |
+| `limit` | number | No | Rows per page (default 25, max 100). |
+| `cursor` | string | No | The previous page's cursor. |
+
+**Returns:** the cards.
+
+**Ask it:** "What's queued to post?"
+
+### `arm_cards`
+Queue cards for the next posting slot. Changes your account.
+
+| Parameter | Type | Required | Description |
+| --- | --- | --- | --- |
+| `cardIds` | string[] | Yes | The cards to queue (up to 50). |
+
+**Returns:** queued, unchanged or skipped, per card.
+
+**Ask it:** "Queue the approved ones for posting."
+
+### `queue_roster_ads`
+Put your best ads from your agency's Ad Library into a client's pipeline, ranked by how they did across your other accounts. Ads the client already has, ads whose file is missing, and ads a client in the same market runs are skipped with the reason. Changes your account.
+
+| Parameter | Type | Required | Description |
+| --- | --- | --- | --- |
+| `top` | number | No | How many of the best (default 10, max 50). |
+| `adIds` | string[] | No | Exactly these Ad Library ads instead. |
+| `folderId` | string | No | Only one Ad Library folder. |
+| `to` | enum | Yes | `review` (a person approves) or `armed` (queued for the next slot). |
+| `preview` | boolean | No | Show the picks without adding them. |
+
+**Returns:** what was added and what was skipped, with reasons.
+
+**Ask it:** "Launch the 4 best ads from our Ad Library for Acme."
+
+### `post_now`
+Run the posting slot now instead of waiting. Queued ads go out under the business's Launch instructions. If they'd go live with real spend, your AI asks you first. Changes your account.
+
+| Parameter | Type | Required | Description |
+| --- | --- | --- | --- |
+| `confirmLive` | boolean | No | `true` once you confirmed the ads go live now. |
+
+**Returns:** that the slot started and how many ads are going out. Each launch shows on the board and in Slack.
+
+**Ask it:** "Post the approved ones now."
+
+## Schedules & output
+
+### `set_review_and_creation_schedule`
+Set when the media buyer reviews your ads, when it creates new ones, and the floor. Scheduled ad creation skips its run while at least the floor's number of ads wait in Ready to publish (ads in Review don't count). Changes your account.
+
+| Parameter | Type | Required | Description |
+| --- | --- | --- | --- |
+| `reviews` | object | No | `days`, `timeOfDay`, `timezone`, `enabled` for the review. |
+| `creatingAds` | object | No | The same, for ad creation. |
+| `floor` | number | No | 1–500, or null for the default (one week of posting). |
+
+**Returns:** the schedules and floor as they now run, and what changed.
+
+**Ask it:** "Create new ads Mondays at 9am, and set the floor to 5."
+
+### `set_creative_output`
+Set what each scheduled creation run makes: image ads and video scripts per batch, the longest a script runs, and how many image versions per concept. Changes your account.
+
+| Parameter | Type | Required | Description |
+| --- | --- | --- | --- |
+| `imageAds` | number | No | Image ads per batch (0–30). |
+| `videoScripts` | number | No | Video scripts per batch (0–30). 0 means no scripts. |
+| `maxScriptSeconds` | number | No | 10–180 seconds. |
+| `maxVariantsPerConcept` | number | No | 1–20 image versions per concept. |
+
+**Returns:** the output before and after.
+
+**Ask it:** "5 image ads per batch, no scripts."
+
+## Settings
+
+### `set_priority_target`
+Set the target cost for a priority (P1 is your main event). The next review judges against it. Changes your account.
+
+| Parameter | Type | Required | Description |
+| --- | --- | --- | --- |
+| `priority` | enum | Yes | `P1`, `P2` or `P3`. |
+| `targetCpa` | number | Yes | The target cost per event, in the account currency. |
+| `event` | string | No | Which event, when a priority covers several. |
+
+**Returns:** the old and new target.
+
+**Ask it:** "Set my appointment target to $80."
+
+### `set_local_pin`
+Put the service area on new ads: the copy names the area and each image carries a small location pin. Changes your account.
+
+| Parameter | Type | Required | Description |
+| --- | --- | --- | --- |
+| `enabled` | boolean | Yes | On or off. |
+| `text` | string | No | The area in your words (up to 120 characters). Leave out to use the business's service area. |
+
+**Returns:** the old and new setting, and the area the ads will carry.
+
+**Ask it:** "They serve Raleigh and Durham, put that on the ads."
+
+### `set_copy_bank`
+Set the ad copy Cortana attaches to ads it posts from your Ad Library. **Bank**: every ad carries your saved copy and Meta rotates it. **AI**: Cortana writes each ad's copy. **Empty**: ads land in Review for your team to write. The button is always Learn More. Changes your account.
+
+| Parameter | Type | Required | Description |
+| --- | --- | --- | --- |
+| `mode` | enum | No | `BANK`, `AI` or `EMPTY`. |
+| `primaryText` | string | No | One primary text, used with `headlines`. |
+| `headlines` | string[] | No | Up to 5 headlines for that primary text. |
+| `descriptions` | string[] | No | Up to 5 descriptions. |
+| `entries` | object[] | No | Instead: up to 5 sets, each its own primary text, headline and description. |
+
+**Returns:** the bank as saved and the one it replaced.
+
+**Ask it:** "Here's the primary text and 5 headlines for Acme."
+
+### `get_copy_bank`
+Read the business's copy bank: the mode, every saved set, and what Meta is sent.
+
+No parameters.
+
+**Returns:** the copy bank.
+
+**Ask it:** "What copy goes on Acme's Ad Library ads?"
+
+### `confirm_brand_asset`
+Add an uploaded image as a brand asset (a logo, a product photo, the founder) that Cortana's designer puts in your ads. Upload it with `get_upload_url` first. Changes your account.
+
+| Parameter | Type | Required | Description |
+| --- | --- | --- | --- |
+| `uploadId` | string | Yes | From `get_upload_url`. |
+| `assetType` | enum | Yes | e.g. `logo_light`, `logo_dark`, `product_photo`, `creator_face`, `team_member`. |
+| `label` | string | No | A short name. |
+| `usageHint` | string | No | When to use it, e.g. "on dark backgrounds". |
+
+**Returns:** the new asset.
+
+**Ask it:** "Here's Acme's logo, white version."
+
+### `set_destination_url`
+Set the landing page new ads send people to. Empty clears it. Changes your account.
+
+| Parameter | Type | Required | Description |
+| --- | --- | --- | --- |
+| `url` | string | Yes | The full `https://` address. |
+
+**Returns:** the old and new address.
+
+**Ask it:** "Send Acme's ads to acmewindows.com/free-quote."
+
+### `set_ad_page`
+Pick the Facebook Page new ads post under, from the Pages connected to the business; its linked Instagram account comes with it. If the name matches several Pages or none, your AI lists them and asks. A client's first batch waits until a Page is picked. Changes your account.
+
+| Parameter | Type | Required | Description |
+| --- | --- | --- | --- |
+| `page` | string | Yes | The Page name, or its id. |
+
+**Returns:** the Page before and after.
+
+**Ask it:** "Post Acme's ads from the Acme Windows Tampa page."
+
+## Onboarding & licenses
+
+### `list_business_templates`
+Your agency's business templates: the saved setups a new client starts from.
+
+No parameters.
+
+**Returns:** each template with its id.
+
+**Ask it:** "Which templates do we have?"
+
+### `create_business`
+Create a new client business from a template: its tracking setup, media buyer setup and Ad Library ads come with it (the ads wait in Review). Changes your account.
+
+| Parameter | Type | Required | Description |
+| --- | --- | --- | --- |
+| `name` | string | Yes | The client's business name. |
+| `templateId` | string | Yes | From `list_business_templates`. |
+| `ownership` | enum | Yes | `client` or `us`. |
+| `industry` | enum | Yes | The closest industry. |
+| `industryOther` | string | No | The industry in words, when it's `OTHER`. |
+| `timezone` | string | Yes | e.g. `America/Toronto`. |
+| `website` | string | No | The client's website. |
+| `serviceArea` | string | No | Where they serve, e.g. "Greater Toronto Area" or a ZIP list. |
+| `turnOn` | boolean | Yes | Switch on ad tracking and the AI Media Buyer. |
+| `destinationUrl` | string | No | The landing page new ads send people to. |
+
+**Returns:** the new business and what came with it.
+
+**Ask it:** "Onboard Acme Windows from our main template."
+
+### `get_ad_tracking_licenses`
+Your plan's Ad Tracking and AI Media Buyer licenses (total, in use, free) and which businesses have each on.
+
+| Parameter | Type | Required | Description |
+| --- | --- | --- | --- |
+| `limit` | number | No | Rows per page (default 25, max 100). |
+| `cursor` | string | No | The previous page's cursor. |
+
+**Returns:** the license counts and each business's status.
+
+**Ask it:** "How many media buyer licenses are free?"
+
+### `set_ad_tracking`
+Switch Ad Tracking on or off for up to 100 businesses. Switching off also switches the AI Media Buyer off for that business. Changes your account.
+
+| Parameter | Type | Required | Description |
+| --- | --- | --- | --- |
+| `businessIds` | string[] | No | Businesses to switch (up to 100). |
+| `businessId` | string | No | One business instead. |
+| `on` | boolean | Yes | On or off. |
+
+**Returns:** one line per business.
+
+**Ask it:** "Switch tracking on for these three clients."
+
+### `set_ai_media_buyer`
+Switch the AI Media Buyer on or off for up to 100 businesses (switching on turns tracking on too, where it's off), and set who's emailed when Meta disables an ad account (up to 5 addresses). Changes your account.
+
+| Parameter | Type | Required | Description |
+| --- | --- | --- | --- |
+| `businessIds` | string[] | No | Businesses to switch (up to 100). |
+| `businessId` | string | No | One business instead. |
+| `on` | boolean | No | On or off. Leave out to change only the emails. |
+| `billingAlertEmails` | string[] | No | Who gets the payment and disabled-account alerts. Replaces the list; empty clears it. |
+
+**Returns:** one line per business.
+
+**Ask it:** "Turn the media buyer on for Acme and send payment alerts to billing@acme.com."

@@ -1,0 +1,50 @@
+---
+title: "Onboard a new client from chat"
+description: "Create a client from your agency template, set its targets, copy, Page, schedules and Slack channel, and order its first ads, all by asking."
+---
+
+Your AI can set up a new client end to end from a form or a ClickUp card: create the business from your agency's template, set what the AI Media Buyer needs, and order the first ads. At the end the client is live in Cortana with its tracking, its media buyer settings and its first batch in Review.
+
+<Note>
+  Needs the media buyer opt-in on the connection, and a connection that reaches all your businesses (so it can create new ones). A person still connects the client's Meta account and tracking.
+</Note>
+
+## Steps
+
+<Steps>
+  <Step title="Create the business">
+    Ask: *"Onboard Acme Windows from our main template: acmewindows.com, they serve 75001, 75002 and 75024, Central time, send ads to acmewindows.com/free-quote, and switch it on."* Your AI lists your templates, creates the business from the one you name and switches Ad Tracking and the AI Media Buyer on. The template brings your tracking setup, your media buyer playbook and your Ad Library ads (they wait in Review; nothing goes live).
+  </Step>
+  <Step title="Set the targets">
+    Ask: *"Set the booked call target to $80 and the sale target to $900."* Your AI sets each priority's target cost and says which event each one judges.
+  </Step>
+  <Step title="Set the ad copy and the local pin">
+    Ask: *"Use this copy on the library ads: [your primary text] with these headlines: ..."* Your AI shows the copy back, saves it, then turns on the local pin so ads name the service area.
+  </Step>
+  <Step title="Set the Slack channel">
+    Ask: *"Make Acme a Slack channel for the media buyer and add Sarah and Mike."*
+  </Step>
+  <Step title="Connect Meta, then pick the Page">
+    A person connects the client's Meta account and tracking in Cortana. Then ask: *"Acme's ad Page is Acme Windows."* Your AI picks that Page from the ones connected; the first batch waits until a Page is picked.
+  </Step>
+  <Step title="Set when things run">
+    Ask: *"Post new ads Monday and Thursday at 8am, 3 per slot, as drafts. Review the ads Monday and Thursday at 9. Create new ads Mondays at 10, and set the floor to 5."* Then: *"Make 5 image ads per batch, no video scripts."*
+  </Step>
+  <Step title="Order the first ads">
+    Ask: *"Make the first batch for Acme."* If something is still missing, your AI says exactly what.
+  </Step>
+</Steps>
+
+<Tip>
+  Only ask for what the client needs. Launch instructions, creative rules and a logo are optional at this point.
+</Tip>
+
+## What you get back
+
+- The new business, and whether its switches turned on.
+- Each setting read back after it is saved.
+- The first batch, or the one thing still missing.
+
+## Tools it uses
+
+[`list_business_templates`](/mcp/tools/ai-media-buyer), [`create_business`](/mcp/tools/ai-media-buyer), [`set_priority_target`](/mcp/tools/ai-media-buyer), [`set_copy_bank`](/mcp/tools/ai-media-buyer), [`set_local_pin`](/mcp/tools/ai-media-buyer), [`create_slack_channel`](/mcp/tools/slack), [`invite_to_slack_channel`](/mcp/tools/slack), [`set_ad_page`](/mcp/tools/ai-media-buyer), [`set_posting_schedule`](/mcp/tools/ai-media-buyer), [`set_review_and_creation_schedule`](/mcp/tools/ai-media-buyer), [`set_creative_output`](/mcp/tools/ai-media-buyer), [`make_ads`](/mcp/tools/ai-media-buyer).

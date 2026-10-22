@@ -1,0 +1,110 @@
+---
+title: "Business & account"
+description: "Your businesses, their company profile and products, your AI's schedules, and feature requests."
+---
+
+These tools cover the basics around every other tool: which businesses your connection reaches, each one's company profile and products, the schedules your AI set up, and sending a request to Cortana's team.
+
+<Note>
+  Every tool takes an optional `businessId` when your connection reaches more than one business.
+</Note>
+
+## Businesses
+
+### `list_businesses`
+
+The businesses this connection can reach.
+
+No parameters.
+
+**Returns:** each business's id and name. Your AI calls it when you name a business it doesn't know yet.
+
+**Ask it:** "Switch to Acme Windows."
+
+## Company profile
+
+### `get_business_info`
+
+The company profile under Settings → Business Info.
+
+No parameters.
+
+**Returns:** the name, owner, industry, timezone, website, contact details and service area.
+
+**Ask it:** "What area does this business serve?"
+
+### `update_business_info`
+
+Change the company profile. Only the fields you give change. Needs the **Manage general settings** permission in Cortana for the person behind the connection.
+
+| Parameter | Type | Required | Description |
+| --- | --- | --- | --- |
+| `name` | string | No | The business name, as it reads in reports and Slack |
+| `ownerName` | string | No | The owner's name |
+| `industry` | enum | No | The closest industry. `OTHER` needs `industryOther`. |
+| `industryOther` | string | No | The industry in words, when it's `OTHER` |
+| `website` | string | No | The website, starting with `http://` or `https://` |
+| `email` | string | No | The business contact email |
+| `phone` | string | No | The business contact phone |
+| `address` | string | No | The business address |
+| `serviceArea` | string | No | Where the business serves, in any form: "Greater Toronto Area", "Raleigh, Durham and Chapel Hill", or a ZIP list |
+
+Send `null` or `""` to clear an optional field (the name and industry can't be cleared).
+
+**Returns:** each change with its old and new value, and the profile after.
+
+<Note>
+  The timezone is changed in the app, under Settings → Business Info, because a change re-buckets every report. Every change made from your AI is logged.
+</Note>
+
+**Ask it:** "They now serve Raleigh and Durham too."
+
+## Products and services
+
+### `get_products`
+
+The products and services saved for this business.
+
+| Parameter | Type | Required | Description |
+| --- | --- | --- | --- |
+| `mode` | enum | No | `list` (names and ids, the default) or `get` (one product's full brief) |
+| `productServiceId` | string | No | The product, for `get`. Defaults to the first one. |
+
+**Returns:** in `get` mode, the offer, pricing, ideal customer, objections, FAQs and testimonials.
+
+**Ask it:** "What objections do we have written down for window replacement?"
+
+## Your AI's schedules
+
+### `list_my_schedules`
+
+The recurring tasks this AI set up for you, with their cadence, next run and status.
+
+No parameters.
+
+**Ask it:** "What have you got scheduled?"
+
+### `cancel_schedule`
+
+Cancel one of this AI's schedules. It can only cancel its own.
+
+| Parameter | Type | Required | Description |
+| --- | --- | --- | --- |
+| `scheduleId` | string | Yes | The schedule, from `list_my_schedules` |
+
+**Ask it:** "Stop the Monday report."
+
+## Requests
+
+### `request_feature`
+
+Send a request to Cortana's team when you ask for something no tool can do.
+
+| Parameter | Type | Required | Description |
+| --- | --- | --- | --- |
+| `request` | string | Yes | Your request, in your words |
+| `context` | string | No | One line on what the conversation was about |
+
+**Returns:** a reference number to keep.
+
+**Ask it:** "Can you send the team a request for a weekly PDF report?"

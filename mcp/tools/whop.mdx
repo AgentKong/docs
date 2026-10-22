@@ -1,0 +1,55 @@
+---
+title: "Whop"
+description: "Whop payments, customers, memberships and your connected Whop accounts."
+---
+
+`get_whop_data` lets your AI read your Whop marketplace data: payments, customers with their lifetime value, and the membership lifecycle.
+
+<Note>
+  Needs Whop connected in Cortana. Your Whop integration's MCP permissions decide which modes your AI sees. Every tool takes an optional `businessId` when your connection reaches more than one business.
+</Note>
+
+### `get_whop_data`
+
+| Parameter | Type | Required | Description |
+| --- | --- | --- | --- |
+| `mode` | enum | Yes | `payments`, `connections`, `customers` or `memberships` |
+| `from` / `to` | string | No | Date range, ISO 8601 |
+| `eventType` | string | No | Payments by event type, e.g. `payment.succeeded` or `membership.went_valid` |
+| `contactId` | string | No | Only this contact |
+| `status` | string | No | `active` or `canceled` |
+| `hasActiveMembership` | string | No | Customers with an active membership (`true` or `false`) |
+| `whopProductId` | string | No | Memberships for this product |
+| `sort` | string | No | e.g. `-totalRevenue`, `-paidAt`, `-canceledAt` |
+| `limit` | number | No | Page size, max 100 |
+| `page` | number | No | Page number |
+
+## Revenue
+
+### `payments` mode
+
+Whop payment events with the product, the buyer and whether Cortana attributed them.
+
+**Ask it:** "How much did Whop bring in this month?"
+
+## Customers and memberships
+
+### `customers` mode
+
+Your Whop customers with lifetime value, membership status and churn dates.
+
+**Ask it:** "Who churned from Whop last month?"
+
+### `memberships` mode
+
+The membership lifecycle: active, canceled and the plan details.
+
+**Ask it:** "How many active memberships do we have per product?"
+
+## Accounts
+
+### `connections` mode
+
+The Whop marketplace accounts connected to Cortana.
+
+**Ask it:** "Which Whop accounts are connected?"
