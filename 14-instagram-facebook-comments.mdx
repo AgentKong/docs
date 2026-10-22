@@ -1,0 +1,166 @@
+---
+title: "13) Instagram & Facebook comments"
+description: "Turn Instagram comments into attribution: every commenter becomes a contact, a comment on an ad is credited to the exact ad that ran it, each post becomes its own row in your reports, and commenters can count as conversions."
+---
+
+{/* last-verified: 2026-10-22 against the app source (sprints/comment-attribution, PR #2881). App routes: Settings → Integrations → Instagram & Messenger DMs → Manage (Instagram tab, Record comments column) · Ad Tracking → Attribution Table → Ads · Ad Tracking → Conversion Setup → Conversion Events → Add Source → Instagram / Facebook comments · contact → Journey. Screenshots: TODO after the release. */}
+
+# Instagram & Facebook comments
+
+When someone comments on your Instagram post or reel, Cortana now knows who it was and where they came from. **A comment on an ad is matched to the exact ad that ran it**, with its ad set and campaign. A comment on an organic post is credited to that post.
+
+Each post becomes its own row in your reports, with its caption, its thumbnail, a link to it, and a play button for a reel. So a reel reads like an ad: how many people commented, how many of them booked, and what they paid.
+
+<Note>
+  **Before you start**
+
+  - **Instagram & Messenger DMs** connected, with your Instagram account subscribed. See [10) Instagram & Messenger DMs](/11-instagram-messenger-dms). Comments use the same Meta connection.
+  - Your Instagram account must be a **Professional** account linked to the Facebook Page you connected.
+</Note>
+
+<Warning>
+  **Comments count from the moment you switch recording on.**
+
+  Meta does not send old comments. Cortana sees every comment that arrives after you turn **Record comments** on for an account, and an import can only bring in comments Cortana has already recorded.
+</Warning>
+
+## What Cortana does with a comment
+
+| What happens | Detail |
+| --- | --- |
+| A contact is created or matched | The commenter becomes a contact, or joins the contact they already have. |
+| The comment is credited | Like a visit to your site: **Instagram Organic**, your account, **Post Comments**, then the post. On a promoted post, it is credited to the ad itself. |
+| The journey shows it | On the contact's customer journey: **Commented on Instagram**, the comment, the post's caption and thumbnail, the time, and **View post**. |
+| A later DM inherits it | A DM the same person starts within 7 days after their comment, and that did not come from an ad of its own, carries the comment's attribution. |
+| The post gets its own row | In your attribution table, under **Instagram Organic**, labelled by the post's caption. |
+
+## Turn on comment recording
+
+<Steps>
+  <Step title="Open the Instagram & Messenger DMs settings">
+    In your business, open **Settings** and select the **Integrations** tab. On the card named **Instagram & Messenger DMs**, click **Manage**. The **Instagram & Messenger DMs** dialog opens.
+
+    {/* TODO screenshot after the release: the Instagram tab with the Record comments column. */}
+  </Step>
+  <Step title="Subscribe the Instagram account">
+    Stay on the **Instagram** tab. The account you want to track must show as subscribed in the **Status** column. If it does not, subscribe it first, as in [10) Instagram & Messenger DMs](/11-instagram-messenger-dms).
+  </Step>
+  <Step title="Switch on Record comments">
+    In the **Record comments** column, turn the switch on for every Instagram account you want to track.
+
+    If the switch will not turn on, hover over it to see why: **Subscribe this account to DMs first**, or **Link an Instagram account to this Page first**.
+  </Step>
+</Steps>
+
+That is all attribution needs. From now on, every comment on that account's posts and reels is recorded and credited.
+
+## See comments in your reports
+
+Go to **Ad Tracking**, open the **Attribution Table** tab, and select **Ads**. Each commented post is its own row, labelled by its caption, under **Instagram Organic** → your account → **Post Comments**.
+
+- **The thumbnail.** On a reel, it shows a play mark: select it to watch the reel right in Cortana. On any other post, it opens the post on Instagram.
+- **The counts.** Select a count in the row, such as visits or a conversion, to see exactly who it was.
+- **Promoted posts.** A comment on a post one of your ads runs sits on **that ad's row**, not on a post row.
+
+The same post rows appear in **Control Center**.
+
+{/* TODO screenshot after the release: the Ads tab with a post row (caption, thumbnail, play mark). */}
+
+## Count commenters as conversions (optional)
+
+A comment is a touch, not a conversion, until you choose otherwise. To count every commenter as a conversion, for example in a **Commented** conversion next to your leads:
+
+<Steps>
+  <Step title="Open the conversion">
+    Go to **Ad Tracking**, open the **Conversion Setup** tab, and stay on **Conversion Events**. Open the conversion with its settings icon, scroll to **Sources** and click **Add Source**.
+  </Step>
+  <Step title="Pick Instagram / Facebook comments">
+    In the **Integration** dropdown, choose **Instagram / Facebook comments**.
+
+    If it shows a padlock, Meta messaging is not connected yet. Clicking it says **Connect Meta and grant messaging access first. Go to Settings → Integrations.**
+  </Step>
+  <Step title="Choose whose comments count">
+    Under **Whose comments count?**, pick **Instagram and Facebook commenters**, **Instagram commenters** or **Facebook commenters**.
+
+    Below it, **Record comments on** lists each Instagram account with its **Record comments** switch, so you can turn recording on right there. Then click **Submit**.
+  </Step>
+  <Step title="Import the comments Cortana already recorded">
+    After you save, Cortana offers to import history. You can also start it later from the **clock** icon on the source's row (**Import history**). The import counts the comments Cortana has recorded, from when comment recording was switched on. See [Backfill History](/4-backfill-history).
+  </Step>
+</Steps>
+
+<AccordionGroup>
+  <Accordion title="How a comment is attributed">
+    An organic comment is credited as **source** Instagram Organic, **campaign** your Instagram account, **medium** Post Comments, and **ad** the post. It is dated at the moment of the comment, and it counts like a page view in every attribution model.
+  </Accordion>
+  <Accordion title="Comments on ads">
+    When the comment is on a post that one of your Meta ads runs, Cortana credits that exact ad, its ad set and its campaign, instead of Instagram Organic. This works for Instagram posts used as ads. If several of your ads run the same post, the newest active one is credited.
+  </Accordion>
+  <Accordion title="A DM after a comment">
+    If the same person starts an Instagram DM within 7 days after their comment, and the DM did not come from an ad of its own, the DM carries the comment's attribution: the ad when the comment was on an ad, otherwise the post. A DM that came from a click-to-message ad keeps its own ad. A DM sent before the comment is never changed.
+  </Accordion>
+  <Accordion title="Commenters as conversions">
+    Each person counts once per comments source, on their first comment, and is credited to that comment's post or ad. Later comments by the same person do not add more. A conversion cannot have two comments sources for the same platform, so nobody is counted twice. These conversions are not sent to Meta on their own; they reach Meta only if you map the conversion to a Meta event.
+  </Accordion>
+  <Accordion title="Importing comment history">
+    The import replays the comments Cortana recorded since recording was switched on. It never reaches earlier, because Meta does not send old comments. A recorded comment whose attribution cannot be resolved is skipped. Imported conversions are not sent to Meta unless sending is turned on and the comment is under 7 days old.
+  </Accordion>
+  <Accordion title="Facebook comments">
+    Facebook does not tell Cortana who wrote a comment today. Facebook comments are recorded and counted on their post, and a Facebook commenter joins a contact only when Cortana identifies them another way, such as a later DM. **Facebook commenters** in a comments source start counting once Facebook comment recording is available.
+  </Accordion>
+  <Accordion title="Settings reference">
+    | Setting | Where | What it does | Default | Our recommendation |
+    | --- | --- | --- | --- | --- |
+    | **Record comments** | Instagram & Messenger DMs → Instagram tab, and the comments source | Records every comment on that account's posts and reels, and turns each commenter into a contact | Off | On for every account you run ads or post reels from |
+    | **Whose comments count?** | The Instagram / Facebook comments source | Which platforms' commenters count as conversions | Instagram and Facebook commenters | Leave it on both |
+  </Accordion>
+</AccordionGroup>
+
+## Troubleshooting
+
+<AccordionGroup>
+  <Accordion title="The Record comments switch will not turn on">
+    Hover over it. **Subscribe this account to DMs first** means the account is not subscribed on the Instagram tab: subscribe it, then switch recording on. **Link an Instagram account to this Page first** means the Facebook Page has no Instagram account linked in Meta Business Suite.
+  </Accordion>
+  <Accordion title="Instagram / Facebook comments has a padlock in Add Source">
+    Meta messaging is not connected for this business. Connect it in [10) Instagram & Messenger DMs](/11-instagram-messenger-dms), then come back to **Add Source**.
+  </Accordion>
+  <Accordion title="The source says it could not check my Instagram accounts">
+    The message **Could not check your Instagram accounts. Close this and open it again to retry.** means Cortana could not read your accounts at that moment. Close the dialog and open it again.
+  </Accordion>
+  <Accordion title="The source says no Instagram account is linked">
+    None of this business's Facebook Pages has an Instagram account linked. Link one in Meta Business Suite, then come back to switch recording on.
+  </Accordion>
+</AccordionGroup>
+
+## FAQ
+
+<AccordionGroup>
+  <Accordion title="Why don't I see comments from before I turned recording on?">
+    Meta never sends old comments. Cortana starts counting the moment **Record comments** is on for the account.
+  </Accordion>
+  <Accordion title="My post got 300 comments but the row shows fewer leads. Why?">
+    A row counts people, not comments: someone who commented five times is one person. And a comment counts as a lead only if you count commenters as a conversion (see above).
+  </Accordion>
+  <Accordion title="Why is a comment on my ad not on a post row?">
+    It is credited to the ad itself, on the ad's row, with its ad set and campaign.
+  </Accordion>
+  <Accordion title="Why can't I turn on the Record comments switch?">
+    The account must be subscribed for DMs first. Hover over the switch to see what is missing.
+  </Accordion>
+  <Accordion title="Why don't Facebook commenters show as contacts?">
+    Facebook does not share who wrote a comment with Cortana today. Their comments are still counted on the post.
+  </Accordion>
+  <Accordion title="Will commenters inflate my lead count?">
+    No. Comments only count as conversions if you add the **Instagram / Facebook comments** source to a conversion. Put it on its own conversion, such as **Commented**, to keep your lead numbers as they are.
+  </Accordion>
+</AccordionGroup>
+
+<CardGroup cols={2}>
+  <Card title="Instagram & Messenger DMs" icon="message" href="/11-instagram-messenger-dms">
+    Connect Meta messaging and subscribe your Instagram accounts.
+  </Card>
+  <Card title="Backfill History" icon="clock-rotate-left" href="/4-backfill-history">
+    Import the comments Cortana already recorded.
+  </Card>
+</CardGroup>

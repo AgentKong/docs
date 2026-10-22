@@ -132,7 +132,8 @@
               "10-chrome-extension",
               "11-instagram-messenger-dms",
               "12-tracking-links",
-              "13-google-local-services-ads"
+              "13-google-local-services-ads",
+              "14-instagram-facebook-comments"
             ],
             "expanded": true
           },
