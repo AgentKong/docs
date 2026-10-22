@@ -533,6 +533,18 @@ Run the posting slot now instead of waiting. Queued ads go out under the busines
 
 **Ask it:** "Post the approved ones now."
 
+### `get_posting_run`
+The latest posting run, as the Ad Pipeline's run panel shows it: how many ads went live, were built as drafts, held or failed, and every ad with its step and its newest lines. A held or failed ad says why. After `post_now`, your AI watches the run with it and tells you each ad's outcome.
+
+| Parameter | Type | Required | Description |
+| --- | --- | --- | --- |
+| `runId` | string | No | A past run. Leave it out for the latest. |
+| `waitSeconds` | number | No | Wait up to this many seconds (0–50) for the run to finish before answering. |
+
+**Returns:** the run's counts and each ad's step and newest lines, and whether the run is done.
+
+**Ask it:** "Did my ads go out? Why was that one held?"
+
 ## Schedules & output
 
 ### `set_review_and_creation_schedule`
