@@ -1,0 +1,279 @@
+---
+title: "Audiences"
+description: "Read, create, change and delete your Cortana audiences from your AI, and send them to Meta as customer lists with labels."
+---
+
+{/* last-verified: 2026-10-27 against AgentKong_App src/lib/mcp/audience-tools-mcp.ts and audience-tools-mcp-writes.ts (the Contacts page audiences, /business/<id>/contacts) */}
+
+These tools let your AI work with your audiences, the saved filters on the **Contacts** page. An audience keeps its members up to date on its own: people join when they match its rule and leave when they stop. Your AI can read your audiences and who is in them, test a rule before saving it, create and change audiences, and send them to Meta as customer lists, exactly as you would in the app.
+
+<Note>
+  Reading needs the `contacts:read` permission, which every connection has by default, and your own **View contacts** permission in Cortana. Creating, changing and deleting needs `audiences:manage`: the **Allow audience changes** checkbox on the consent screen (off by default), or the **Change audiences** option on an API key. It also needs your own **Edit contacts** permission. Every tool takes an optional `businessId` when your connection reaches more than one business.
+</Note>
+
+<Warning>
+  Sending an audience to Meta uploads your contacts' hashed details (email, phone, name, city, state, zip, country) to your Meta ad account. Your AI is told to confirm with you before it turns a sync on.
+</Warning>
+
+## Read your audiences
+
+### `list_audiences`
+
+Every audience on the business.
+
+| Parameter | Type | Required | Description |
+| --- | --- | --- | --- |
+| `businessId` | string | No | The business, when your connection has more than one |
+
+**Returns:** each audience's id, name, its rule in plain words, how many contacts and anonymous visitors it holds, whether it is still counting (a new audience counts its members within 15 minutes), and each place it syncs to: the Meta ad account, the list's id, the sync status, the last sync and the last error.
+
+**Ask it:** "What audiences do we have, and which ones sync to Meta?"
+
+### `get_audience`
+
+One audience in full.
+
+| Parameter | Type | Required | Description |
+| --- | --- | --- | --- |
+| `audienceId` | string | Yes | From `list_audiences` |
+
+**Returns:** everything `list_audiences` shows, plus the rule as JSON (the shape `create_audience` and `update_audience` take) and, for an audience that syncs to Meta, the list's name, labels and data source as Meta holds them now. If Meta can't be reached, the audience still comes back and the Meta part says so.
+
+**Ask it:** "What exactly is in the High value customers audience?"
+
+### `list_audience_members`
+
+The people in an audience right now, a page at a time.
+
+| Parameter | Type | Required | Description |
+| --- | --- | --- | --- |
+| `audienceId` | string | Yes | From `list_audiences` |
+| `limit` | integer | No | People per page, 1 to 200 (default 50) |
+| `cursor` | string | No | The `nextCursor` from the previous page |
+
+**Returns:** each member's id, name, email and phone, and a `nextCursor` while there are more. For one person's full record, use [`get_contacts`](/mcp/tools/contacts-conversations) with mode `get`.
+
+**Ask it:** "List everyone in the webinar no-shows audience."
+
+## Build a rule
+
+### `get_audience_rule_options`
+
+The things a rule can name on this business, with their ids, and the rule grammar. Your AI calls this first so it never guesses an id.
+
+| Parameter | Type | Required | Description |
+| --- | --- | --- | --- |
+| `paymentProcessor` | enum | No | `STRIPE`, `PAYPAL`, `WHOP`, `FANBASIS`, `SHOPIFY` or `WOOCOMMERCE`: also list that processor's products |
+| `adPlatform` | enum | No | `meta`, `google`, `tiktok`, `linkedin` or `bing`: also list that platform's campaigns, ad sets or ads |
+| `adLevel` | enum | No | With `adPlatform`: `campaign`, `adset` or `ad` |
+| `campaignId` | string | No | With `adLevel` `adset`: the campaign to look in |
+| `adSetId` | string | No | With `adLevel` `ad`: the ad set to look in |
+
+**Returns:** your webinars, conversions, tags, videos, calendars, forms, pipelines with their stages, custom fields with their answer options, which money number **Spent an amount** starts on, the grammar of every rule kind, and the products or ads you asked for.
+
+**Ask it:** "What can I build an audience from?"
+
+### `preview_audience_rules`
+
+Who a rule holds right now, before anything is saved. The same check the **Filter** on the Contacts page runs.
+
+| Parameter | Type | Required | Description |
+| --- | --- | --- | --- |
+| `rules` | object | Yes | A rule set: `match` (`ALL` or `ANY`) and `conditions`. See the rule reference below. |
+| `cursor` | string | No | The `nextCursor` from the previous answer, to keep looking |
+
+**Returns:** a page of up to 50 matching people and whether that is everyone (`exact`) or only the first ones found (`atLeast`, with how many contacts were checked). A saved audience always counts everyone. A **top spenders** rule on a large business may first answer `rankingSpenders`: ask again in a few seconds.
+
+**Ask it:** "How many people booked a call in the last 30 days but never bought?"
+
+## Create and change audiences
+
+### `create_audience`
+
+Create an audience from a rule, the same as **Create audience** on the Contacts page. Its members are counted within 15 minutes and kept up to date after that. Changes your account.
+
+| Parameter | Type | Required | Description |
+| --- | --- | --- | --- |
+| `name` | string | Yes | The audience's name, up to 255 characters |
+| `rules` | object | Yes | The rule set. Ids from `get_audience_rule_options`. |
+| `description` | string | No | Up to 500 characters |
+| `meta` | object | No | Send it to Meta in the same save: `adAccountId` (from `list_audience_ad_accounts`), `list` (see `set_audience_meta_sync`), `labels` and `valueSource` |
+
+**Returns:** the new audience's id and name. When Meta is included and Meta refuses, nothing is saved and the answer says why.
+
+**Ask it:** "Create an audience of the top 10% of spenders by lifetime value and send it to Meta as High value customers."
+
+### `update_audience`
+
+Change an audience's name, description or rule. Send only what changes. Changes your account.
+
+| Parameter | Type | Required | Description |
+| --- | --- | --- | --- |
+| `audienceId` | string | Yes | From `list_audiences` |
+| `name` | string | No | The new name. Its Meta list is renamed too while the list still carries the old name. |
+| `description` | string | No | The new description, or `null` to clear it |
+| `rules` | object | No | The whole new rule set. The audience counts its members again from the start: until that finishes (within about 15 minutes) it reads as counting and its Meta sync waits, then sends the changes. |
+
+**Returns:** the updated audience.
+
+**Ask it:** "Change the buyers audience to the last 60 days."
+
+### `delete_audience`
+
+Archive an audience, the same as **Delete** on the Contacts page. Changes your account.
+
+| Parameter | Type | Required | Description |
+| --- | --- | --- | --- |
+| `audienceId` | string | Yes | From `list_audiences` |
+
+**Returns:** `success` and `archived: true`. The audience stops counting and its syncs stop. A list already in Meta stays there with its last members: delete it in Meta's Audiences page if it should go.
+
+**Ask it:** "Delete the old Black Friday audience."
+
+## Send audiences to Meta
+
+### `list_audience_ad_accounts`
+
+The Meta ad accounts an audience can sync to: the ones selected under **Integrations**.
+
+| Parameter | Type | Required | Description |
+| --- | --- | --- | --- |
+| `businessId` | string | No | The business, when your connection has more than one |
+
+**Returns:** each account's id (pass it as `adAccountId`), its name and its Meta account id.
+
+**Ask it:** "Which ad accounts can my audiences go to?"
+
+### `list_audience_meta_lists`
+
+The customer lists already in a Meta ad account that an audience can sync into. Lists another audience already syncs into are left out. Needs `audiences:manage`.
+
+| Parameter | Type | Required | Description |
+| --- | --- | --- | --- |
+| `adAccountId` | string | Yes | From `list_audience_ad_accounts` |
+| `audienceId` | string | No | The audience it is for, so its own current list stays in the answer |
+| `valueBased` | boolean | No | `true` for value-based lists only. An audience that sends values can only go into a value-based list, and one that doesn't never can. |
+
+**Returns:** the lists, each with its id and name.
+
+**Ask it:** "What customer lists are already in my main ad account?"
+
+### `set_audience_meta_sync`
+
+Turn an audience's sync to a Meta ad account on or off. Changes your account.
+
+| Parameter | Type | Required | Description |
+| --- | --- | --- | --- |
+| `audienceId` | string | Yes | From `list_audiences` |
+| `adAccountId` | string | Yes | From `list_audience_ad_accounts` |
+| `enabled` | boolean | Yes | `true` to send, `false` to stop |
+| `list` | object | No | Where it goes: `{ "mode": "new", "name": "...", "dataSource": "..." }` for a new list made now (the name defaults to the audience's name), or `{ "mode": "existing", "id": "..." }` for one from `list_audience_meta_lists`. Leave out to keep the list it already has there. |
+| `labels` | array | No | Meta labels for the list (see below). Needs a `list`. |
+| `valueSource` | enum or null | No | `LIFETIME_VALUE` or `NEW_REVENUE` to send each person's value with them (a value-based list), or `null` for a plain list. Meta fixes this when the list is made. |
+
+**Returns:** the sync's new state. The first upload runs within 15 minutes, and changes follow on their own after that. Turning a sync off stops sending; the list stays in Meta.
+
+**Ask it:** "Send the VIP audience to my main ad account as a new list labeled High value customers."
+
+### `set_audience_meta_labels`
+
+Set the labels on an audience's Meta list, changed in place. Changes your account.
+
+| Parameter | Type | Required | Description |
+| --- | --- | --- | --- |
+| `audienceId` | string | Yes | An audience that syncs to Meta |
+| `labels` | array | Yes | The labels it should carry. `[]` clears them. |
+
+**Returns:** the labels Meta now holds. Labels you set in Ads Manager that Cortana doesn't offer are kept. The audience's anonymous visitors' audience, when it has one, gets the same labels.
+
+**Ask it:** "Label the at-risk customers list as At risk."
+
+### `set_audience_meta_data_source`
+
+Tell Meta where the people on an audience's list came from. Changed in place. Changes your account.
+
+| Parameter | Type | Required | Description |
+| --- | --- | --- | --- |
+| `audienceId` | string | Yes | An audience that syncs to Meta |
+| `dataSource` | enum | Yes | `USER_PROVIDED_ONLY` (you collected them), `PARTNER_PROVIDED_ONLY` (a partner collected them) or `BOTH_USER_AND_PARTNER_PROVIDED` (both) |
+
+**Returns:** the data source Meta now holds.
+
+**Ask it:** "Set the data source on the purchased leads list to partner provided."
+
+### `rename_audience_meta_list`
+
+Rename an audience's customer list in Meta. The audience keeps its own name. Changes your account.
+
+| Parameter | Type | Required | Description |
+| --- | --- | --- | --- |
+| `audienceId` | string | Yes | An audience that syncs to Meta |
+| `name` | string | Yes | The list's new name, up to 200 characters |
+
+**Returns:** the list's new name.
+
+**Ask it:** "Rename the Meta list for the VIP audience to VIP buyers 2026."
+
+## Reference
+
+<AccordionGroup>
+  <Accordion title="The rule grammar: every kind of condition">
+    A rule set is `{ "match": "ALL" | "ANY", "conditions": [...] }`. A condition can also be a group, `{ "logic": "ALL" | "ANY", "conditions": [...] }`, one level deep. A rule set holds up to 10 conditions and up to 5 groups. `withinDays` is how many whole days back to look (leave it out for any time). Ids always come from `get_audience_rule_options`; `"*"` means any webinar, video or calendar.
+
+    - **Webinar:** `{ "type": "WEBINAR", "webinarId", "predicate": "REGISTERED" | "ATTENDED" | "NO_SHOW" | "WATCHED_PERCENT_GTE", "value"?, "withinDays"? }`. `value` is the share watched, with `WATCHED_PERCENT_GTE`.
+    - **Video:** `{ "type": "VIDEO", "videoId", "percent": 25 | 50 | 75 | 95, "withinDays"? }`
+    - **Conversion:** `{ "type": "CONVERSION", "conversionConfigId", "has": true | false, "withinDays"? }`
+    - **Tag:** `{ "type": "TAG", "tagId", "has": true | false }`
+    - **Booked a call:** `{ "type": "CALENDAR", "calendarId", "has", "statuses"?: ["BOOKED" | "RESCHEDULED" | "CANCELLED" | "COMPLETED" | "SHOWED" | "NO_SHOW"], "withinDays"? }`
+    - **Filled out a form:** `{ "type": "FORM", "formId", "has", "withinDays"? }`
+    - **Bought something:** `{ "type": "PAYMENT", "processor", "productId"? or "productName"?, "has", "withinDays"? }`
+    - **Pipeline stage:** `{ "type": "PIPELINE", "pipelineId", "stageId"?, "status"?: "open" | "won" | "lost" | "abandoned", "has" }`
+    - **Custom field:** `{ "type": "CUSTOM_FIELD", "fieldId", "operator": "EQ" | "NEQ" | "CONTAINS" | "NOT_CONTAINS" | "EMPTY" | "NOT_EMPTY" | "GT" | "LT", "value"? }`. `value` is needed except with `EMPTY` and `NOT_EMPTY`.
+    - **Came from an ad:** `{ "type": "ATTRIBUTION", "platform": "meta" | "google" | "tiktok" | "linkedin" | "bing", "campaignId"? / "adSetId"? / "adId"?, "has", "withinDays"? }`
+    - **Spent an amount:** `{ "type": "TOTAL_SPENT", "source": "LIFETIME_VALUE" | "NEW_REVENUE", "operator": "AT_LEAST" | "UNDER", "amount": dollars, "withinDays"? }`. **Under** includes people who haven't paid anything.
+    - **Top spenders:** `{ "type": "TOTAL_SPENT", "source", "operator": "TOP_PERCENT", "percent": 1 to 99, "withinDays"? }`. Ranked against everyone who paid in that time, once a day. Everyone tied at the cut-off is in.
+    - **Visited a page:** `{ "type": "PAGE_VISIT", "contains": "text in the page address", "has", "withinDays": 1 to 360 }`. Matches the page's path in any case; query strings are not matched.
+  </Accordion>
+
+  <Accordion title="Meta labels">
+    Labels tell Meta who the people on a list are, so value rules in your campaigns can bid more for your best customers and less for people who already bought. A list can carry several. The ones Cortana offers:
+
+    - Customers: `HIGH_VALUE_CUSTOMERS` (High value), `LOW_VALUE_CUSTOMERS` (Low value), `AT_RISK` (At risk), `DISENGAGED` (Disengaged), `GENERAL_CUSTOMERS` (General customers).
+    - Engaged audiences: `QUALIFIED_LEADS` (Qualified leads), `DISQUALIFIED_LEADS` (Disqualified leads), `APP_USERS` (App users), `TRIAL_USERS` (Trial users), `ENGAGED_USERS` (Other engaged users).
+  </Accordion>
+
+  <Accordion title="Value-based lists">
+    With `valueSource`, each person goes to Meta with their value: **Lifetime value** (`LIFETIME_VALUE`) or **New revenue** (`NEW_REVENUE`), the same numbers as their contact card, refunds taken off. A value-based list's values are refreshed once a day. Meta fixes whether a list is value-based when it is made, so a plain list can't start sending values later: make a new list instead. Your ad account must have accepted Meta's value-based audience terms.
+  </Accordion>
+
+  <Accordion title="Limits">
+    - A business can keep up to 50 active audiences.
+    - A Meta list's name can be up to 200 characters.
+    - **Visited a page** looks back up to 360 days and counts the visits of people Cortana knows.
+    - A new or changed audience counts its members within 15 minutes; until then it reads as counting.
+  </Accordion>
+</AccordionGroup>
+
+## FAQ
+
+<AccordionGroup>
+  <Accordion title="Why can my AI read my audiences but not change them?">
+    Changing them needs the **Allow audience changes** checkbox on the consent screen, which is off by default. Disconnect and connect the Cortana connector again, and tick it. On an API key, turn on **Change audiences**. You also need the **Edit contacts** permission in Cortana.
+  </Accordion>
+
+  <Accordion title="My AI made an audience but it shows 0 members">
+    A new audience counts its members within 15 minutes. `list_audiences` shows it as counting until then. If it still shows 0 after that, ask your AI to run `preview_audience_rules` with the same rule to see who it holds.
+  </Accordion>
+
+  <Accordion title="Does deleting an audience delete the list in Meta?">
+    No. The sync stops and the list stays in Meta with its last members. Delete it from Meta's Audiences page if you don't want it there.
+  </Accordion>
+
+  <Accordion title="Why did Meta refuse to turn on the sync with values?">
+    A value-based list needs Meta's value-based audience terms accepted on that ad account. Meta's answer names the step; accept the terms in Meta and ask again. A list made without values can't start sending them later: make a new list.
+  </Accordion>
+
+  <Accordion title="Can my AI see the people in an audience?">
+    Yes, with `list_audience_members`: names, emails and phones, the same as the Contacts page shows you. It needs your **View contacts** permission.
+  </Accordion>
+</AccordionGroup>

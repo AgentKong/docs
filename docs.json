@@ -408,6 +408,7 @@
                   "mcp/tools/whop",
                   "mcp/tools/sales-calls",
                   "mcp/tools/contacts-conversations",
+                  "mcp/tools/audiences",
                   "mcp/tools/forms",
                   "mcp/tools/ai-media-buyer",
                   "mcp/tools/meta-ads",
