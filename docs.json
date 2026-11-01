@@ -265,6 +265,17 @@
             "pages": [
               "crm/crm"
             ]
+          },
+          {
+            "group": "Custom Audiences",
+            "icon": "users",
+            "pages": [
+              "crm/audiences-overview",
+              "crm/audiences-filter",
+              "crm/audiences-save",
+              "crm/meta-audience-settings",
+              "crm/audiences-manage"
+            ]
           }
         ]
       },
