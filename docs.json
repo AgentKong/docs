@@ -338,6 +338,46 @@
         ]
       },
       {
+        "tab": "Websites",
+        "icon": "globe",
+        "groups": [
+          {
+            "group": "A-Z Guide",
+            "icon": "rocket",
+            "pages": [
+              "websites-overview",
+              "websites-create",
+              "websites-studio",
+              "websites-elements",
+              "websites-test",
+              "websites-publish",
+              "websites-manage",
+              "websites-upload-or-connect",
+              "websites-your-ai"
+            ]
+          }
+        ]
+      },
+      {
+        "tab": "SEO",
+        "icon": "magnifying-glass-chart",
+        "groups": [
+          {
+            "group": "A-Z Guide",
+            "icon": "rocket",
+            "pages": [
+              "seo-overview",
+              "seo-search-console",
+              "seo-research",
+              "seo-rank-radar",
+              "seo-content",
+              "seo-blog",
+              "seo-blog-design"
+            ]
+          }
+        ]
+      },
+      {
         "tab": "Cortana Claw",
         "icon": "user-robot",
         "groups": [

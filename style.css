@@ -16,3 +16,25 @@
 /* Denser sidebar and table of contents */
 #sidebar { font-size: 0.875rem; }
 #table-of-contents { font-size: 0.8125rem; }
+
+/* Top tabs: one row, never a label on two lines. When they do not fit, the row scrolls sideways,
+   and a fade on the right edge says there is more (the end padding lets the last tab clear it); once
+   scrolled, the left edge fades too (nav-tabs-active.js sets data-scrolled and shows the open tab). */
+#navbar .nav-tabs {
+  overflow-x: auto;
+  overflow-y: hidden;
+  overscroll-behavior-x: contain;
+  scrollbar-width: none;
+  padding-right: 2.5rem;
+  -webkit-mask-image: linear-gradient(to right, #000 calc(100% - 2.5rem), transparent);
+  mask-image: linear-gradient(to right, #000 calc(100% - 2.5rem), transparent);
+}
+#navbar .nav-tabs[data-scrolled="true"] {
+  -webkit-mask-image: linear-gradient(to right, transparent, #000 2.5rem, #000 calc(100% - 2.5rem), transparent);
+  mask-image: linear-gradient(to right, transparent, #000 2.5rem, #000 calc(100% - 2.5rem), transparent);
+}
+#navbar .nav-tabs::-webkit-scrollbar { display: none; }
+#navbar .nav-tabs-item {
+  flex: 0 0 auto;
+  white-space: nowrap;
+}
