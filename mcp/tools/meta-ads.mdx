@@ -432,15 +432,36 @@ Changes your account. Needs **ads:manage**.
 
 ## Audiences & targeting
 
+<Note>
+  **Saved audiences are read-only to every app.** Meta's API can read a saved audience but cannot create, edit, or delete one, so changing a saved audience itself happens in [Ads Manager](https://adsmanager.facebook.com/adsmanager/audiences). A saved audience is a template: ad sets copy its targeting when they're made and don't follow later edits. To change who your ads reach, your AI changes the ad sets with `edit_ad_set_audiences`. See [Meta's saved audiences reference](https://developers.facebook.com/docs/marketing-api/reference/saved-audience/).
+</Note>
+
 ### `list_ad_audiences`
 
 The custom, lookalike, and saved audiences in the ad account, with size and whether each is ready to use.
 
-No parameters.
+| Parameter | Type | Required | Description |
+| --- | --- | --- | --- |
+| `nameContains` | string | No | Only audiences whose name holds this text, in any case. Searches up to 1,000 of each kind |
+| `kind` | enum | No | `custom`, `lookalike`, or `saved` |
 
-**Returns:** each audience's id, name, type, size, and status.
+With neither, it lists the first 100 of each kind.
 
-**Ask it:** "Which audiences do I have?"
+**Returns:** each audience's id, name, type, size, and status, and whether the list is complete.
+
+**Ask it:** "Which of my saved audiences have (26-27) in the name?"
+
+### `get_ad_audience`
+
+One audience in full. A custom or lookalike audience comes with its rule, retention, labels, size, and status; a saved audience comes with the whole targeting it stores: locations, ages, interests, and the audiences it includes and excludes.
+
+| Parameter | Type | Required | Description |
+| --- | --- | --- | --- |
+| `audienceId` | string | Yes | An audience from `list_ad_audiences` |
+
+**Returns:** the audience, and for a list Cortana syncs, the Cortana audience it comes from.
+
+**Ask it:** "What's in my Stoney (26-27) saved audience?"
 
 ### `search_ad_targeting`
 
@@ -457,7 +478,7 @@ Look up a real Meta interest, behavior, demographic, or location to target.
 
 ### `create_custom_audience`
 
-Create a custom audience from your website visitors (pixel) or page and video engagement. Customer lists aren't supported.
+Create a custom audience from your website visitors (pixel) or page and video engagement. A customer list of your contacts is a Cortana audience: see [Audiences](/mcp/tools/audiences).
 
 Changes your account. Needs **ads:manage**.
 
@@ -468,6 +489,7 @@ Changes your account. Needs **ads:manage**.
 | `source` | enum | Yes | `WEBSITE` or `ENGAGEMENT` |
 | `retentionDays` | number | Yes | 1 to 180 days of history |
 | `rule` | object | Yes | Meta's audience rule, on a pixel or page you own |
+| `labels` | array | No | Meta's audience labels, such as `HIGH_VALUE_CUSTOMERS` or `QUALIFIED_LEADS`: who these people are, so value rules can bid for them. [About audience labels](https://www.facebook.com/business/help/706325895111530) |
 
 **Returns:** the new audience's id.
 
@@ -490,11 +512,70 @@ Changes your account. Needs **ads:manage**.
 
 **Ask it:** "Build a 1% US lookalike of my buyers."
 
+### `update_custom_audience`
+
+Change a custom or lookalike audience: rename it, change its description, replace a website or engagement audience's rule, or add and remove Meta audience labels. Labels you don't name are kept. It reads the audience back from Meta after the change.
+
+Changes your account. Needs **ads:manage**.
+
+| Parameter | Type | Required | Description |
+| --- | --- | --- | --- |
+| `audienceId` | string | Yes | A custom or lookalike audience from `list_ad_audiences` |
+| `name` | string | No | The new name |
+| `description` | string | No | The new description; empty clears it |
+| `rule` | object | No | Meta's audience rule, replacing the current one. A website audience's look-back window lives inside its rule |
+| `addLabels` | array | No | Meta audience labels to add: `HIGH_VALUE_CUSTOMERS`, `LOW_VALUE_CUSTOMERS`, `AT_RISK`, `DISENGAGED`, `GENERAL_CUSTOMERS`, `QUALIFIED_LEADS`, `DISQUALIFIED_LEADS`, `APP_USERS`, `TRIAL_USERS`, `ENGAGED_USERS` |
+| `removeLabels` | array | No | Labels to take off |
+
+A change reaches every ad set using the audience at once. Saved audiences can't be edited by any app. A list Cortana syncs gets its people from its Cortana audience: change those with `update_audience` on the [Audiences](/mcp/tools/audiences) page.
+
+**Returns:** the audience as Meta holds it now, and what changed.
+
+**Ask it:** "Label my New Client list as general customers."
+
+### `delete_custom_audience`
+
+Delete a custom or lookalike audience for good.
+
+Changes your account. Needs **ads:manage**.
+
+| Parameter | Type | Required | Description |
+| --- | --- | --- | --- |
+| `audienceId` | string | Yes | A custom or lookalike audience from `list_ad_audiences` |
+
+<Warning>
+  Deleting can't be undone. Ads that target the audience stop and can't be restarted. Meta won't delete an audience that lookalikes are built from. A list Cortana syncs is refused: turn its sync off or delete the Cortana audience on the [Audiences](/mcp/tools/audiences) page.
+</Warning>
+
+**Returns:** the deleted audience's id and name.
+
+**Ask it:** "Delete my old 2024 retargeting audience."
+
+### `edit_ad_set_audiences`
+
+Include or exclude custom and lookalike audiences on up to 50 ad sets at once, keeping everything else in their targeting. For each ad set it reads the targeting, changes only the audience lists, saves it, and reads it back to confirm.
+
+Changes your account. Needs **ads:manage**.
+
+| Parameter | Type | Required | Description |
+| --- | --- | --- | --- |
+| `adSetIds` | array | Yes | 1 to 50 ad sets from `list_ad_sets` |
+| `addIncluded` | array | No | Audiences to target. Each must be ready |
+| `removeIncluded` | array | No | Audiences to stop targeting |
+| `addExcluded` | array | No | Audiences to keep out |
+| `removeExcluded` | array | No | Audiences to stop excluding |
+
+Up to 25 audiences per call. One audience can't be both included and excluded: to switch it, remove it from one list and add it to the other in the same call. On a live ad set the change applies straight away and can restart its learning phase, so your AI asks you first.
+
+**Returns:** one row per ad set: updated, unchanged, failed (with Meta's reason), or saved but not confirmed, plus each ad set's audiences after the change.
+
+**Ask it:** "Exclude my New Client list from every ad set in the Stoney and Adams campaigns."
+
 ## Change status & edit
 
 ### `update_entity`
 
-Change a campaign, ad set, or ad: its name, status, budget, targeting (a full replacement), or bid.
+Change a campaign, ad set, or ad: its name, status, budget, targeting (a full replacement), or bid. To include or exclude audiences, `edit_ad_set_audiences` keeps the rest of the targeting.
 
 Changes your account. Needs **ads:manage**.
 
