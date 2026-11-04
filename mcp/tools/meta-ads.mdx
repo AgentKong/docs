@@ -264,6 +264,28 @@ Changes your account. Needs **ads:manage**.
 
 **Ask it:** "Duplicate my best ad set at $200 a day."
 
+### `create_ad_set_from_saved_audience`
+
+Make a new ad set from one of your saved audiences, the way "use saved audience" works in Ads Manager. It copies an ad set you already have (its campaign, budget, optimization, placements, and Meta's advertiser verification), gives it the saved audience's targeting exactly, adds any audiences you want included or excluded, and reads it back to confirm. The new ad set is **paused** and has no ads yet.
+
+Changes your account. Needs **ads:manage**.
+
+| Parameter | Type | Required | Description |
+| --- | --- | --- | --- |
+| `savedAudienceId` | string | Yes | A saved audience from `list_ad_audiences` |
+| `baseAdSetId` | string | Yes | An ad set to copy everything but the audience from |
+| `newName` | string | Yes | The new ad set's name |
+| `campaignId` | string | No | Put it in another of your campaigns. Defaults to the base ad set's campaign |
+| `dailyBudgetCents` | number | No | A budget of its own, for campaigns without a campaign budget |
+| `addIncluded` | array | No | Audiences to target as well. Each must be ready |
+| `addExcluded` | array | No | Audiences to keep out, such as your customer list |
+
+If Meta refuses the targeting, the copy is removed again and you get Meta's reason. If Meta adjusts a setting when it saves (for example adding a location type), the answer names it.
+
+**Returns:** the new ad set's id, its locations, the audiences it includes and excludes, and whether the budget was applied.
+
+**Ask it:** "Build the Stoney 11 ad sets from my (26-27) saved audiences, like the Stoney 10 ones, excluding New Client."
+
 ### `duplicate_campaign`
 
 Copy a campaign, paused. Only the campaign by default; with `deepCopy` its ad sets and ads too (and every ad set budget inside it).
@@ -571,7 +593,7 @@ Changes your account. Needs **ads:manage**.
 
 Up to 25 audiences per call. One audience can't be both included and excluded: to switch it, remove it from one list and add it to the other in the same call. On a live ad set the change applies straight away and can restart its learning phase, so your AI shows you the dry run first and asks before it changes anything.
 
-**Returns:** one row per ad set: updated, unchanged, would change (on a dry run), failed (with Meta's reason), or saved but not confirmed, plus each ad set's audiences after the change.
+**Returns:** one row per ad set: updated, unchanged, would change (on a dry run), failed (with Meta's reason), or saved but not confirmed, plus each ad set's audiences after the change and any setting Meta adjusted when it saved.
 
 **Ask it:** "Exclude my New Client list from every ad set that's running."
 
