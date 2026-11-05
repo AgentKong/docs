@@ -3,7 +3,7 @@ title: "2) Set Up Your Player"
 description: "Set how your Cortana video starts and plays: smart autoplay, the sound prompt, resume, the Rapid Progress bar, player controls, colors, thumbnail and logo."
 ---
 
-{/* last-verified: 2026-11-04 · route: /business/[businessId]/video-tracking/[videoId] (Playback and Branding tabs) */}
+{/* last-verified: 2026-11-05 · route: /business/[businessId]/video-tracking/[videoId] (Playback and Branding tabs) */}
 
 ## Overview
 
@@ -76,8 +76,8 @@ The **Playback** tab has four groups, from top to bottom: **Autoplay**, **Resume
     | **Smart pause on tab switch** | Pauses when the viewer switches tabs. They press play when they return. | On | On |
     | **Play button** | The play and pause button. | On | On |
     | **Seekbar** | The progress bar under the video. | On | On |
-    | **Volume** | The sound button and its slider. | On | On |
-    | **Time display** | The time pill, for example *0:42 / 7:06*. | On | Off for sales videos |
+    | **Volume** | The sound button and its slider. Hidden with the **Performance** style. | On | On |
+    | **Time display** | The time pill, for example *0:42 / 7:06*. Hidden with the **Performance** style. | On | Off for sales videos |
     | **Fullscreen** | The fullscreen button. | On | On |
     | **Prevent skipping ahead** | Viewers can't drag the seekbar past what they have watched. Always on with **Rapid Progress**. | Off | On |
     | **Prevent pausing** | Hides the pause button while the video plays. | Off | Off |
@@ -90,13 +90,18 @@ The **Playback** tab has four groups, from top to bottom: **Autoplay**, **Resume
 
 ---
 
-## 3. Branding: thumbnail, colors and logo
+## 3. Branding: player style, thumbnail, colors and logo
+
+{/* TODO: retake 03-branding once Player style is live (PR AgentKong_App#3093), with Player style marked 1. */}
 
 <Frame caption="The Branding tab: the thumbnail 1, the colors 2 and the logo 3.">
   <img src="/images/video-tracking/player/03-branding.png" alt="The Branding tab. The Thumbnail group with the current thumbnail, an Upload thumbnail button and Use auto thumbnail is marked 1. The Colors group with Primary color, Background color and a Corner radius slider at 12px is marked 2. The Logo or watermark group with a Drag and drop or click box is marked 3." />
 </Frame>
 
 <Steps>
+  <Step title="Player style">
+    Pick **Performance** or **Sleek** under **Player style**. The live preview switches as you click.
+  </Step>
   <Step title="Thumbnail">
     Click **Upload thumbnail** and pick an image. 1280×720 (16:9) works best: JPG, PNG or WebP, up to 4 MB. It goes live as soon as it uploads, without **Save changes**. **Use auto thumbnail** goes back to a frame from your video.
   </Step>
@@ -108,9 +113,17 @@ The **Playback** tab has four groups, from top to bottom: **Autoplay**, **Resume
   </Step>
 </Steps>
 
+<Accordion title="Performance or Sleek: which player style to pick">
+  - **Performance**: a thick progress gauge along the bottom of the video that stays on screen the whole time, and a small play button at the bottom left. A soft dark shade sits behind it while the video is paused, and slides down once it plays. Fullscreen shows when the mouse is over the video. There are no sound or time buttons: viewers turn the sound on from the sound prompt. With **Rapid Progress**, the gauge fills fast at the start, which keeps people watching. New videos start on Performance.
+  - **Sleek**: rounded buttons in your primary color for play, sound, time and fullscreen, with a thin progress bar. They fade while the video plays and come back when the viewer moves the mouse or taps.
+
+  With **Performance**, the **Volume** and **Time display** switches under **Controls** are greyed out, because this style keeps them hidden. They come back if you switch to **Sleek**.
+</Accordion>
+
 <Accordion title="Every Branding setting and its default">
   | Setting | Default | Range |
   | --- | --- | --- |
+  | **Player style** | Performance for new videos. Videos uploaded before this style existed stay on Sleek until you switch. | Performance or Sleek |
   | **Primary color** | Blue, #3B82F6 | Any color |
   | **Background color** | Black, #000000 | Any color |
   | **Corner radius** | 12 px | 0 to 48 px |
@@ -133,11 +146,15 @@ The **Playback** tab has four groups, from top to bottom: **Autoplay**, **Resume
   </Step>
 </Steps>
 
+<Accordion title="What happens when a viewer right-clicks the video">
+  Instead of the browser's menu, a small box offers a link to Cortana. That also keeps **Save video as** out of reach, on both player styles.
+</Accordion>
+
 ## FAQ
 
 <AccordionGroup>
   <Accordion title="How do I hide the time on my video?">
-    Open the video, go to **Playback**, and turn off **Time display** under **Controls**. Click **Save changes**.
+    Open the video, go to **Playback**, and turn off **Time display** under **Controls**. Click **Save changes**. With the **Performance** player style, the time is already hidden.
   </Accordion>
 
   <Accordion title="Why does my video start without sound?">
