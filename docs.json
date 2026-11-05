@@ -329,6 +329,24 @@
         ]
       },
       {
+        "tab": "Video Tracking",
+        "icon": "circle-play",
+        "groups": [
+          {
+            "group": "A-Z Guide",
+            "icon": "rocket",
+            "pages": [
+              "video-overview",
+              "video-upload",
+              "video-player",
+              "video-conversions",
+              "video-share",
+              "video-analytics"
+            ]
+          }
+        ]
+      },
+      {
         "tab": "Webinars",
         "icon": "video",
         "groups": [
