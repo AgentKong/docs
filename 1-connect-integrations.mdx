@@ -1,225 +1,1104 @@
 ---
 title: "1) Connect Integrations"
+description: "How to connect every Cortana integration from Settings → Integrations: sign in, paste a key, or install, step by step for each tool."
 ---
+
+{/*
+  MAINTAINERS: every card on the app's Integrations page has ONE "### Connecting <name>" section here,
+  all in the same shape: a line on what it brings, "How it connects", <Steps>, optional depth in an
+  <AccordionGroup>, and a "Next" link. Never add a stand-alone section for one integration only.
+  The in-app list is src/data/channels.data.ts in AgentKong_App. When an integration ships or changes,
+  update its section here AND its entry in integrations-reference.mdx in the same docs change.
+  Headings are deep-link anchors for the support AI: do not rename an existing "### Connecting ..." heading.
+  last-verified: 2026-11-16 against AgentKong_App development 90eb47835.
+*/}
 
 <div style={{ position: 'relative', paddingBottom: '57.961783439490446%', height: 0 }}>
   <iframe src="https://www.loom.com/embed/dbf54cb0e5d34bc8bca96dc71efaedad" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%' }} />
 </div>
 
-<Expandable title=" ">
+<Expandable title=" ">
   Alright, so now that we have our account set up, we're going to go over to the settings and we're going to come over here to the integrations. And here we're basically going to start connecting our different data sources. Now you also see here that we have a HiROS data import, so if you're coming in from HiROS, you can always come in here, click this import button, and go ahead and start importing your data. But aside from that, guys, it's quite simple. You're going to come in here, check for any of the integrations that you have, right? There's going to be data providers like for conversions. There's also going to be data providers for ads, right? Meta ads, TikTok ads, Google ads, whatever that may be. And if there is no actual integration for you, that's also okay because when we get to the ad tracking section, you're going to see when you set up your conversion. Again, if we don't have a native integration, we can always set it up with the webhooks, so via zapiermake.com, n8n, or just native webhook if the platform using supports and provides webhooks. And that's pretty much it. So, first thing again, come in here, come to the integrations, set up your different integrations that you're using for your tech stack and also your marketing stack, and away you go.
 </Expandable>
 
 # Integrations Setup
 
-Alright, now that we have your account set up, let's get your data flowing. We’re going to head over to the **Settings** menu and select **Integrations**. This is where you’ll connect your different data sources to sync your conversions, ads, and customer info.
+Connect the tools you already use. Cortana then gets your sales, leads, bookings and ad data. Each tool has its own short guide below.
 
 ## Getting Started
 
-To access your integrations hub:
+<Steps>
+  <Step title="Open Settings">
+    In your business, click **Settings** in the menu on the left.
+  </Step>
+  <Step title="Open the Integrations tab">
+    Click the **Integrations** tab. It is the first tab.
+  </Step>
+  <Step title="Find your tool">
+    Type its name in the **Search integrations...** box. Its card appears.
+  </Step>
+  <Step title="Click Connect">
+    Click **Connect** on the card. Then follow that tool's guide below.
+  </Step>
+</Steps>
 
-1. Navigate to the sidebar on the left.
-2. Click on **Settings**.
-3. Select the **Integrations** tab at the top of the page.
+## How connecting works
 
-<CardGroup cols={2}>
-</CardGroup>
+Every card connects in one of three ways:
+
+- **Sign in.** You go to the tool's own website. You sign in and approve. Then you come back to Cortana.
+- **Paste a key.** You copy a key from the tool. You paste it into Cortana. Each guide says where the key lives.
+- **Install or paste a script.** A few stores need an app or a small script. The guide walks you through it.
+
+When a tool is connected, its button changes. It often says **Manage**. With several accounts it says, for example, **Manage (2)**.
+
+<Note>
+  Most tools then need one more step: tell Cortana what counts as a conversion. You do that in [**4.2) Conversion Sources**](/4-conversion-tracking). Each guide below links to its part.
+</Note>
 
 ## Connecting Your Data Sources
 
-It’s quite simple—just find the tool you use and click the **Connect** button. The full list of every integration and what it does lives in the [Integrations Reference](/integrations-reference). We support a wide range of platforms:
+Data sources bring in your leads, bookings and sales. Find your tool in the groups below:
 
-- **CRMs:** GoHighLevel, HubSpot, Salesforce.
-- **E-commerce & Courses:** Shopify, WooCommerce, Whop, Kajabi.
-- **Payments & Forms:** Stripe, PayPal, Typeform, Tally Forms.
-- **Scheduling:** Calendly, Cal.com.
-- **Call tracking:** CallRail.
+- **CRMs:** GoHighLevel, HubSpot, Salesforce, Close.io.
+- **Payments and stores:** Stripe, PayPal, Shopify, WooCommerce, Whop, Kajabi, Commas (Fanbasis), Shopier.
+- **Forms and funnels:** Typeform, Tally Forms, ClickFunnels, iClosed.
+- **Calendars, calls and meetings:** Calendly, Cal.com, CallRail, Fathom.
+- **Webinars:** Zoom, WebinarJam.
+- **Affiliates and imports:** FirstPromoter, Hyros Data Import.
 
 <Note>
-  **Coming from Hyros?** We have a specific **Hyros Data Import** tool. Just click **Import** to perform a one-time transfer of all your historical data and performance history.
+  **Coming from Hyros?** Use the **Hyros Data Import** card. It copies your past Hyros data into Cortana once. See [Connecting Hyros Data Import](#connecting-hyros-data-import).
 </Note>
+
+## CRMs
+
+### Connecting GoHighLevel
+
+GoHighLevel brings in contacts, messages, calendars and conversions from one sub-account.
+
+**How it connects:** sign in to GoHighLevel. Then paste one token.
+
+<Steps>
+  <Step title="Click Connect">
+    Click **Connect** on the **GoHighLevel** card. GoHighLevel opens.
+  </Step>
+  <Step title="Pick your sub-account">
+    Choose the sub-account for this business. Approve the access. You come back to Cortana.
+  </Step>
+  <Step title="Make a Private Integration Token">
+    A box opens. It says **Sorry, one last step.** The token keeps your connection steady.
+
+    In GoHighLevel, go to **Settings → Private Integrations → Create Private Integration**. Add all the scopes, or just the 36 required ones. Copy the token.
+  </Step>
+  <Step title="Paste the token and Location ID">
+    Paste the token. It starts with `pit-`.
+
+    Then fill in **Location ID**. It is in your GoHighLevel web address. It is also in **Settings → Business Profile**. Click **Connect**.
+  </Step>
+  <Step title="Invite your team">
+    Cortana reads your GoHighLevel users. Invite them, so their deals and bookings show as theirs. Then click **Done**.
+  </Step>
+</Steps>
+
+The card now shows **Manage (1)**. Click it to see your **GoHighLevel Subaccounts**.
+
+<AccordionGroup>
+  <Accordion title="The card button turns amber or red">
+    The connection needs attention. Open **Manage**. A sub-account may say the token is invalid. Click **Reconnect** on it and paste a fresh Private Integration Token.
+  </Accordion>
+</AccordionGroup>
+
+**Next:** count GoHighLevel events as conversions. See [**4.2) Conversion Sources**](/4-conversion-tracking) under **GoHighLevel**.
+
+### Connecting HubSpot
+
+HubSpot brings in form fills, meetings, deal stages and contact changes.
+
+**How it connects:** sign in to HubSpot.
+
+<Steps>
+  <Step title="Click Connect">
+    Click **Connect** on the **HubSpot** card. HubSpot opens.
+  </Step>
+  <Step title="Sign in and approve">
+    Sign in to HubSpot. Approve the access Cortana asks for. You come back to Cortana.
+  </Step>
+  <Step title="Check it worked">
+    You see **HubSpot connected successfully!** The card now shows **Manage**.
+  </Step>
+</Steps>
+
+<AccordionGroup>
+  <Accordion title="Household associations">
+    Two HubSpot contacts can be linked, like a parent and a student. Cortana then joins them into one contact. You can turn this off with the **Household associations** switch on the HubSpot card. It is on by default. More in the [Integrations Reference](/integrations-reference).
+  </Accordion>
+</AccordionGroup>
+
+**Next:** count HubSpot events as conversions. See [**4.2) Conversion Sources**](/4-conversion-tracking) under **HubSpot**.
+
+### Connecting Salesforce
+
+Salesforce brings in contacts, leads and opportunity stages.
+
+**How it connects:** sign in to Salesforce.
+
+<Steps>
+  <Step title="Click Connect">
+    Click **Connect** on the **Salesforce** card. Salesforce opens.
+  </Step>
+  <Step title="Sign in and approve">
+    Sign in to Salesforce. Approve the access Cortana asks for. You come back to Cortana.
+  </Step>
+  <Step title="Check it worked">
+    The card now shows **Manage**.
+  </Step>
+</Steps>
+
+**Next:** count Salesforce events as conversions. See [**4.2) Conversion Sources**](/4-conversion-tracking) under **Salesforce**.
+
+### Connecting Close.io
+
+Close brings in contacts, won deals, meetings and calls.
+
+**How it connects:** sign in to Close.
+
+<Steps>
+  <Step title="Click Connect">
+    Click **Connect** on the **Close.io** card. Close opens.
+  </Step>
+  <Step title="Sign in and approve">
+    Sign in to Close. Approve the access Cortana asks for. You come back to Cortana.
+  </Step>
+  <Step title="Check it worked">
+    You see **Close.io connected successfully!** The card now shows **Manage**.
+  </Step>
+</Steps>
+
+**Next:** count Close events as conversions. See [**4.2) Conversion Sources**](/4-conversion-tracking) under **Close.io**.
+
+## Payments and stores
+
+### Connecting Stripe
+
+Stripe brings in payments, subscriptions and refunds.
+
+**How it connects:** sign in to Stripe.
+
+<Steps>
+  <Step title="Click Connect">
+    Click **Connect** on the **Stripe** card. Stripe opens.
+  </Step>
+  <Step title="Sign in and approve">
+    Sign in to Stripe. Approve the access Cortana asks for. You come back to Cortana.
+  </Step>
+  <Step title="Check it worked">
+    You see **Stripe connected successfully!** The card now shows **Manage (1)**.
+  </Step>
+</Steps>
+
+**Next:** count Stripe payments as conversions. See [**4.2) Conversion Sources**](/4-conversion-tracking) under **Stripe**.
 
 ### Connecting PayPal
 
-PayPal is the one payment integration that is not a single-click login. PayPal offers no self-serve login that grants permission to read your transactions, so instead you create a REST app inside your own PayPal account and paste its two keys into Cortana. It takes about three minutes.
+PayPal brings in payments, subscription payments and refunds.
 
-Click **Connect** on the **PayPal** card and the **Connect PayPal** dialog opens. It tells you what the keys are for: *"Paste your PayPal REST app credentials. Cortana uses them to read your transactions for revenue attribution."*
+**How it connects:** paste two keys. PayPal has no sign-in button for this. So you make a small app in PayPal and copy its keys. It takes about three minutes.
+
+Click **Connect** on the **PayPal** card. The **Connect PayPal** box opens.
 
 <Steps>
   <Step title="Open the PayPal Developer dashboard on Live">
-    Go to [developer.paypal.com](https://developer.paypal.com/dashboard/applications/live). Check that it says **Live**, not **Sandbox**. Credentials from a Sandbox app will connect, but they read test data and no real payment will ever appear.
+    Go to [developer.paypal.com](https://developer.paypal.com/dashboard/applications/live). Check it says **Live**, not **Sandbox**. Sandbox keys connect, but no real payment ever shows.
   </Step>
-
   <Step title="Open your app, or create one">
-    Open an existing app, or click **Create App** and choose the type **Merchant**.
+    Open an app you have. Or click **Create App** and pick the type **Merchant**.
   </Step>
-
   <Step title="Tick Transaction Search, then Save">
-    In the app's list of features, tick **Transaction Search** and click **Save**. This step is required. It is the permission that lets Cortana read your transactions, and without it nothing at all imports.
+    In the app's features, tick **Transaction Search**. Click **Save**. This step is required. Without it, nothing imports.
   </Step>
-
   <Step title="Copy the Client ID and Secret into Cortana">
-    Copy the app's **Client ID** into the **Client ID** field, and its **Secret** into the **Secret** field. The secret is encrypted before it is stored and Cortana never displays it again.
+    Paste the **Client ID** into **Client ID**. Paste the **Secret** into **Secret**. Click **Connect PayPal**.
 
-    Click **Connect PayPal**. On success you see **"PayPal connected"**, and importing of your payment history starts straight away.
+    You see **PayPal connected**. Your payment history starts importing.
   </Step>
 </Steps>
 
-<Warning>
-  **If you see "PayPal connected, but a permission is missing"**, your keys are valid but **Transaction Search** is not on yet. Go back to the app, tick it, and save. PayPal can take **up to 9 hours** to activate the permission on an app that is already in use. You do not need to reconnect. The account sits in an **Enabling access** state and Cortana promotes it to **Connected** by itself once PayPal is ready.
-</Warning>
+<AccordionGroup>
+  <Accordion title="It says: PayPal connected, but a permission is missing">
+    Your keys work, but **Transaction Search** is not on yet. Tick it in your PayPal app and save. PayPal can take up to 9 hours to turn it on. You do not need to reconnect. The account shows **Enabling access** until PayPal is ready.
+  </Accordion>
+  <Accordion title="It says: These credentials can also take payments">
+    It still works. Cortana only reads your payments. A read-only app is just safer to share.
+  </Accordion>
+  <Accordion title="Some payments show up late">
+    Payments through a Cortana payment link show in seconds. Invoices and anything else paid inside PayPal take 20 minutes to 3 hours. That delay is PayPal's. Nothing is lost.
+  </Accordion>
+</AccordionGroup>
 
-<Tip>
-  **Use a read-only app if you can.** Cortana only ever reads your transactions. If the app you connect can also take payments, Cortana tells you so with *"These credentials can also take payments"*. It still works, but an app scoped to reading is the safer thing to hand over.
-</Tip>
+**Next:** count PayPal payments as conversions. See [**4.2) Conversion Sources**](/4-conversion-tracking) under **PayPal**.
 
-<Note>
-  **Payments taken inside PayPal are not instant.** Anything paid through a Cortana payment link appears in seconds. An invoice, a PayPal.me link, or a money request appears **20 minutes to 3 hours** later, because those never touch your REST app, and Cortana can only read them from PayPal's transaction reporting. That delay is PayPal's, and nothing is lost.
-</Note>
+### Connecting Shopify
 
-Once PayPal is connected, wire it to a conversion in [**4.2) Conversion Sources**](/4-conversion-tracking) under **PayPal**.
+Shopify brings in your store's orders, refunds and shopper steps.
+
+**How it connects:** install the Cortana AI app from the Shopify App Store. You do not paste any code.
+
+<Steps>
+  <Step title="Click Connect">
+    Click **Connect** on the **Shopify** card. Cortana does not ask for your store address. The Shopify App Store opens.
+  </Step>
+  <Step title="Install the app">
+    Click **Install**. Pick your store if Shopify asks. Approve the app's permissions. You come back to Cortana.
+  </Step>
+  <Step title="Finish the setup">
+    Cortana sets up your Shopify conversions for you. Follow the setup window to the end.
+  </Step>
+</Steps>
+
+The full guide, with every screen, is in [**4.2) Conversion Sources**](/4-conversion-tracking) under **Shopify**.
+
+### Connecting WooCommerce
+
+WooCommerce brings in your orders, carts and checkout steps.
+
+**How it connects:** paste your store keys, then paste a tracking script. No WordPress plugin from Cortana is needed.
+
+Click **Connect** on the **WooCommerce** card. Then click **Connect WooCommerce Store**. There are four steps: **Store**, **Keys**, **Pixel** and **Verify**.
+
+<Steps>
+  <Step title="Store">
+    Type your **Store URL**, like `https://yourstore.com`. Click **Continue**.
+  </Step>
+  <Step title="Keys">
+    In WordPress, go to **WooCommerce → Settings → Advanced → REST API**. Click **Add key**. Set permissions to **Read/Write**. Click **Generate**. Copy both values now. They show only once.
+
+    Paste them into **Consumer Key** and **Consumer Secret**. Click **Connect Store**.
+  </Step>
+  <Step title="Pixel">
+    Click **Copy pixel script**. In WordPress, install the free **WPCode Lite** plugin. Go to **Code Snippets → Header & Footer**. Paste the script into **Header**. Save.
+
+    Back in Cortana, click **I've installed it → Verify**.
+  </Step>
+  <Step title="Verify">
+    Open your store in a new tab. Cortana waits for the first visit. You can also click **Send test event**. When it all works, click **Finish**.
+  </Step>
+</Steps>
+
+**Next:** count WooCommerce orders as conversions. See [**4.2) Conversion Sources**](/4-conversion-tracking) under **WooCommerce**.
+
+### Connecting Whop
+
+Whop brings in your store's payments and memberships.
+
+**How it connects:** sign in to Whop. An API key also works.
+
+<Steps>
+  <Step title="Click Connect">
+    Click **Connect** on the **Whop** card. Whop opens.
+  </Step>
+  <Step title="Sign in and pick your store">
+    Sign in to Whop with the account that runs your store. Cortana asks **Which Whop store should Cortana track?** Pick it.
+  </Step>
+  <Step title="Install the Cortana AI app">
+    Click **Install Cortana AI on Whop**. Install it on Whop. Then click **I've installed it** in Cortana.
+  </Step>
+</Steps>
+
+The card now shows **Manage (1)**.
+
+<AccordionGroup>
+  <Accordion title="Connect with an API key instead">
+    Click **Use an API key instead**. Make a key in Whop. Tick every permission listed under **Tick these on the key**. Paste it into **Whop API key**. Click **Connect**.
+
+    Cortana may also ask for your **Company ID**. It starts with `biz_`. It is in your Whop dashboard address, like `whop.com/dashboard/biz_abc123xyz`.
+  </Accordion>
+</AccordionGroup>
+
+**Next:** count Whop payments as conversions. See [**4.2) Conversion Sources**](/4-conversion-tracking) under **Whop**.
+
+### Connecting Kajabi
+
+Kajabi brings in every payment on your site. Every offer is covered, even new ones.
+
+**How it connects:** paste two scripts, then paste two keys. You need a tracking pixel in Cortana first, under **Tracking → Pixels**.
+
+Click **Connect** on the **Kajabi** card. The **Connect Kajabi** box has three steps: **Scripts**, **API Keys** and **Verify**.
+
+<Steps>
+  <Step title="Scripts">
+    Copy **Paste 1: Site pages**. In Kajabi, go to **Settings → Site Details → Page Scripts (Header)**. Paste it.
+
+    Copy **Paste 2: Checkout pages**. In Kajabi, go to **Settings → Checkout → Checkout Tracking Code → Header tracking code**. Paste it. This one is required. Checkout pages do not get the first script.
+
+    Click **Next · API Keys**.
+  </Step>
+  <Step title="API Keys">
+    In Kajabi, go to **Settings → Public API → Create User API Key**. You must be the account **Owner**. You need the Pro plan, or the API add-on.
+
+    Paste the **Client ID** and **Client Secret**. Click **Connect & Create Webhooks**. If you have several Kajabi sites, pick one under **Which Kajabi site?**
+  </Step>
+  <Step title="Verify">
+    Load any page of your Kajabi site. Then make a test purchase. A 100% coupon works. Click **Re-check** to see both arrive. Click **Done**.
+  </Step>
+</Steps>
+
+**Next:** count Kajabi payments as conversions. See [**4.2) Conversion Sources**](/4-conversion-tracking) under **Kajabi**.
+
+### Connecting Commas (Fanbasis)
+
+Commas (Fanbasis) brings in payments, subscriptions, refunds and disputes.
+
+**How it connects:** paste one API key. Cortana sets up the webhook for you.
+
+<Steps>
+  <Step title="Click Connect">
+    Click **Connect** on the **Commas (Fanbasis)** card. The **Connect Commas (Fanbasis)** box opens.
+  </Step>
+  <Step title="Make an API key">
+    In Commas (Fanbasis), go to **Account → API Keys**. Make a key and copy it.
+  </Step>
+  <Step title="Paste it and connect">
+    Paste it into **API Key**. You can add an **Account label**, like `My Main Brand`. It helps if you connect more than one account. Click **Connect**.
+  </Step>
+</Steps>
+
+The card now shows **Manage (1)**.
+
+**Next:** count Commas (Fanbasis) payments as conversions. See [**4.2) Conversion Sources**](/4-conversion-tracking) under **Fanbasis**.
+
+### Connecting Shopier
+
+Shopier brings in your paid orders, with their value.
+
+**How it connects:** paste one API key. There is no webhook to set up.
+
+<Steps>
+  <Step title="Click Connect">
+    Click **Connect** on the **Shopier** card. The **Connect Shopier** box opens.
+  </Step>
+  <Step title="Make an API key">
+    In Shopier, go to **Settings → API**. Make a key with the **orders** scope. Copy it.
+  </Step>
+  <Step title="Paste it and connect">
+    Paste it into **API Key**. Click **Connect**. The card now says **Connected**.
+  </Step>
+</Steps>
+
+Cortana checks for new paid orders every few minutes. Only paid orders count.
+
+**Next:** count Shopier orders as conversions. See [**4.2) Conversion Sources**](/4-conversion-tracking) under **Shopier**.
+
+## Forms and funnels
+
+### Connecting Typeform
+
+Typeform brings in your form submissions.
+
+**How it connects:** sign in to Typeform.
+
+<Steps>
+  <Step title="Click Connect">
+    Click **Connect** on the **Typeform** card. Typeform opens.
+  </Step>
+  <Step title="Sign in and approve">
+    Sign in to Typeform. Approve the access Cortana asks for. You come back to Cortana.
+  </Step>
+  <Step title="Check it worked">
+    The card button now says **Reconnect**. That means it is connected.
+  </Step>
+</Steps>
+
+**Next:** count Typeform submissions as conversions. See [**4.2) Conversion Sources**](/4-conversion-tracking) under **Typeform**.
+
+### Connecting Tally Forms
+
+Tally brings in your form submissions.
+
+**How it connects:** paste one API key.
+
+<Steps>
+  <Step title="Click Connect">
+    Click **Connect** on the **Tally Forms** card. The **Connect Tally Forms** box opens.
+  </Step>
+  <Step title="Get your API key">
+    Click the **Tally API settings** link. No key yet? Click **Generate API key** in Tally. Copy the key.
+  </Step>
+  <Step title="Paste it and connect">
+    Paste the key. Click **Connect**. You see **Connected to Tally**. The card now shows **Manage**.
+  </Step>
+</Steps>
+
+**Next:** count Tally submissions as conversions. See [**4.2) Conversion Sources**](/4-conversion-tracking) under **Tally Forms**.
+
+### Connecting ClickFunnels
+
+ClickFunnels 2.0 brings in forms, bookings, orders and subscriptions.
+
+**How it connects:** sign in to ClickFunnels. Then pick a workspace.
+
+<Steps>
+  <Step title="Click Connect">
+    Click **Connect** on the **ClickFunnels** card. ClickFunnels opens.
+  </Step>
+  <Step title="Sign in and approve">
+    Sign in to ClickFunnels. Approve the access Cortana asks for. You come back to Cortana.
+  </Step>
+  <Step title="Pick your workspace">
+    Cortana asks you to **Pick your ClickFunnels workspace**. Choose one. Click **Continue**.
+  </Step>
+</Steps>
+
+**Next:** count ClickFunnels events as conversions. See [**4.2) Conversion Sources**](/4-conversion-tracking) under **ClickFunnels**.
+
+### Connecting iClosed
+
+iClosed brings in form fills, qualified leads, bookings and call outcomes.
+
+**How it connects:** paste one API key. There is no webhook to set up.
+
+<Steps>
+  <Step title="Click Connect">
+    Click **Connect** on the **iClosed** card. The **Connect iClosed** box opens.
+  </Step>
+  <Step title="Get your API key">
+    In iClosed, go to **Settings → Developers → API Keys**. Copy your key.
+  </Step>
+  <Step title="Paste it and connect">
+    Paste it into **API Key**. Click **Connect**. The card now says **Connected**.
+  </Step>
+</Steps>
+
+Cortana reads new iClosed data every 5 minutes.
+
+**Next:** count iClosed events as conversions. See [**4.2) Conversion Sources**](/4-conversion-tracking) under **iClosed**.
+
+## Calendars, calls and meetings
+
+### Connecting Calendly
+
+Calendly brings in meetings booked and cancelled on your links.
+
+**How it connects:** sign in to Calendly.
+
+<Steps>
+  <Step title="Click Connect">
+    Click **Connect** on the **Calendly** card. Calendly opens.
+  </Step>
+  <Step title="Sign in and approve">
+    Sign in to Calendly. Approve the access Cortana asks for. You come back to Cortana.
+  </Step>
+  <Step title="Check it worked">
+    The card now shows **Manage**. Click it to see **Overview**, **Accounts**, **Reps** and **Calendars**.
+  </Step>
+</Steps>
+
+**Next:** count Calendly bookings as conversions. See [**4.2) Conversion Sources**](/4-conversion-tracking) under **Calendly**.
+
+### Connecting Cal.com
+
+Cal.com brings in meetings booked, cancelled and moved.
+
+**How it connects:** sign in to Cal.com.
+
+<Steps>
+  <Step title="Click Connect">
+    Click **Connect** on the **Cal.com** card. Cal.com opens.
+  </Step>
+  <Step title="Sign in and approve">
+    Sign in to Cal.com. Approve the access Cortana asks for. You come back to Cortana.
+  </Step>
+  <Step title="Check it worked">
+    The card now shows **Manage**.
+  </Step>
+</Steps>
+
+**Next:** count Cal.com bookings as conversions. See [**4.2) Conversion Sources**](/4-conversion-tracking) under **Cal.com**.
 
 ### Connecting CallRail
 
-CallRail connects with a single API key instead of a login. You paste the key once, pick which CallRail company belongs to this business, and Cortana does the rest: it installs its webhooks into CallRail for you and switches on visitor cookie capture, which is what ties each phone call back to the ad that caused it. There is no manual webhook setup on CallRail's side.
+CallRail brings in phone calls, good leads and form fills.
+
+**How it connects:** paste one API key. Then pick your CallRail company. Cortana sets up CallRail's webhooks for you.
 
 <Steps>
   <Step title="Create an API key in CallRail">
-    In CallRail, go to **Settings → Integrations → API Keys** and create a key. Keys in CallRail belong to a user, so create it under a user who can see the company you want to track.
+    In CallRail, go to **Settings → Integrations → API Keys**. Make a key. A key belongs to a CallRail user. So use a user who can see the right company.
   </Step>
-
   <Step title="Paste the key into Cortana">
-    Click **Connect** on the **CallRail** card. The **Connect CallRail** dialog opens with a three-step tracker: **1 · API key → 2 · Company → 3 · Done**. Paste the key and click **Continue**. The key is stored encrypted and never shown again.
+    Click **Connect** on the **CallRail** card. The **Connect CallRail** box opens. It shows three steps: **1 · API key**, **2 · Company**, **3 · Done**.
 
-    If you see **"This key sees no CallRail accounts. Check it belongs to the right user."**, the key is valid but its user has no account access in CallRail.
+    Paste the key. Click **Continue**.
   </Step>
-
   <Step title="Pick the CallRail company">
-    The dialog asks **"Which CallRail company is this business?"** and lists every account and company the key can see. Calls and forms from the company you pick will land in this business as conversions. Select it and click **Connect**.
+    Cortana asks **Which CallRail company is this business?** Pick it. Click **Connect**.
   </Step>
-
   <Step title="Done">
-    The dialog confirms the company is wired up and that visitor cookie capture was installed. From here, add your triggers: open a conversion on the **Tracking** tab, click **Add Source**, choose **CallRail**, and pick **Phone Call**, **Call marked as Good Lead**, or **Form Submission**. Full walkthrough in [**4.2) Conversion Sources**](/4-conversion-tracking) under **CallRail**.
+    You see **CallRail connected**. Cortana also turned on visitor cookie capture. That ties each call to the ad behind it.
   </Step>
 </Steps>
 
-<Note>
-  **Reconnecting or disconnecting is safe.** Disconnecting removes Cortana's webhook URLs and cookie capture from your CallRail company and keeps every conversion already tracked. New calls and forms simply stop arriving until you reconnect.
-</Note>
+<AccordionGroup>
+  <Accordion title="It says: This key sees no CallRail accounts">
+    The key works, but its user cannot see any account. Make the key under a user with access to your company.
+  </Accordion>
+  <Accordion title="Disconnecting CallRail">
+    Disconnecting removes Cortana's webhooks and cookie capture from your CallRail company. Conversions you already have stay. New calls and forms stop until you reconnect.
+  </Accordion>
+</AccordionGroup>
+
+**Next:** add CallRail triggers to a conversion. See [**4.2) Conversion Sources**](/4-conversion-tracking) under **CallRail**.
+
+### Connecting Fathom
+
+Fathom brings your call recordings, transcripts and summaries onto your contacts.
+
+**How it connects:** sign in to Fathom.
+
+<Steps>
+  <Step title="Click Connect">
+    Click **Connect** on the **Fathom** card. Fathom opens.
+  </Step>
+  <Step title="Sign in and approve">
+    Sign in to Fathom. Approve the access Cortana asks for. You come back to Cortana.
+  </Step>
+  <Step title="Check it worked">
+    The card now shows **Manage**.
+  </Step>
+</Steps>
+
+**Next:** count Fathom recordings as conversions. See [**4.2) Conversion Sources**](/4-conversion-tracking) under **Fathom**.
+
+## Webinars
+
+### Connecting Zoom
+
+Zoom runs your webinars through Cortana. It tracks who signed up, who joined and for how long.
+
+**How it connects:** you make your own small app in Zoom. Then you paste its details into Cortana.
+
+<Steps>
+  <Step title="Click Connect">
+    Click **Connect** on the **Zoom** card. The **Zoom Integration** box opens.
+  </Step>
+  <Step title="Build your Zoom app">
+    In the Zoom App Marketplace, build a **Server-to-Server OAuth app**. You need a Zoom admin role.
+  </Step>
+  <Step title="Paste its details">
+    Paste the **Account ID**, the host's email, the **Client ID**, the **Client Secret** and the **Secret Token**. Click **Connect**.
+  </Step>
+  <Step title="Give Zoom the link">
+    Copy the link Cortana shows. Paste it into your Zoom app's event settings. Then click **Done**.
+  </Step>
+</Steps>
+
+The full guide, with every screen and permission, is in [1) Connect Zoom](/webinars-connect-zoom).
+
+### Connecting WebinarJam
+
+WebinarJam brings in sign-ups, attendance and replays from your webinars.
+
+**How it connects:** paste one API key.
+
+<Steps>
+  <Step title="Copy your WebinarJam key">
+    In WebinarJam, open **Advanced**. Copy your API key.
+  </Step>
+  <Step title="Paste it into Cortana">
+    Click **Connect** on the **WebinarJam** card. Paste the key into **WebinarJam API key**. Click **Connect WebinarJam**.
+  </Step>
+</Steps>
+
+The full guide is in [Use WebinarJam](/webinars-webinarjam).
+
+## Affiliates and imports
+
+### Connecting FirstPromoter
+
+FirstPromoter shows which affiliate brought each visitor. Promoter names appear in your attribution table.
+
+**How it connects:** paste an API key and your Account ID.
+
+<Steps>
+  <Step title="Click Connect">
+    Click **Connect** on the **FirstPromoter** card. The **Connect FirstPromoter** box opens.
+  </Step>
+  <Step title="Get both values">
+    In FirstPromoter, go to **Settings → Integrations → API Keys**. Copy your API key and your Account ID.
+  </Step>
+  <Step title="Paste them and connect">
+    Paste them into **API Key** and **Account ID**. Click **Connect**. The card now says **Connected**.
+  </Step>
+</Steps>
+
+Cortana refreshes your promoters every 6 hours. Referral links with `?fpr=` are tracked straight away.
+
+### Connecting Hyros Data Import
+
+Hyros Data Import copies your past Hyros leads, sales and calls into Cortana. It is a one-time transfer.
+
+**How it connects:** paste your Hyros API key. Then pick what to import.
+
+<Steps>
+  <Step title="Click Connect">
+    Click **Connect** on the **Hyros Data Import** card. The **Hyros Data Import** box opens.
+  </Step>
+  <Step title="Paste your Hyros key">
+    In Hyros, go to **Settings → API**. Copy your key. Paste it into the box. Click **Connect**.
+  </Step>
+  <Step title="Pick dates and data">
+    Pick a **Date Range**. It starts at the last year. One import covers up to 365 days. Tick **Leads**, **Sales** and **Calls** as you need. Click **Next: Map Conversions**.
+  </Step>
+  <Step title="Map and import">
+    Match each Hyros type to a Cortana conversion. Click **Start Import**. Wait for **Import Complete!**
+  </Step>
+</Steps>
 
 ## Setting Up Ad Tracking
 
-Once you’ve connected your conversion sources, you’ll want to connect your marketing stack. Scroll down to find your ad platforms:
+Next, connect your ad platforms. Cortana then sees your spend. It also sends conversions back, so your ads learn who buys.
 
 - **Meta Ads**
-- **TikTok Ads**
 - **Google Ads**
+- **Google Local Services Ads**
+- **TikTok Ads**
 - **Bing Ads**
 - **LinkedIn Ads**
 - **Whop Ads**
 
-Connecting these allows us to send conversion data back to the platforms, helping your ads perform better at a lower cost.
+After connecting, tag your ad links. That step is [**5) URL Parameters**](/5-url-parameters).
 
-<Note>
-  **Whop Ads** connects a little differently from the others. Instead of a login, you use a Whop **API key** and your **Company ID**. See the full setup steps in the [URL Parameters guide](/5-url-parameters) under the **Whop Ads** section.
-</Note>
+### Connecting Meta Ads
 
-### Connecting LinkedIn Ads
+Meta Ads brings in your Facebook and Instagram ad spend and results.
 
-LinkedIn Ads connects with a normal login, but unlike Meta or Google it does not start pulling everything the moment you connect. You choose which ad accounts to sync, and optionally which campaigns inside them, before any data arrives. Nothing syncs until you save that choice.
+**How it connects:** sign in to Facebook. Then pick your ad accounts.
 
 <Steps>
-  <Step title="Connect LinkedIn">
-    Click **Connect** on the **LinkedIn Ads** card. LinkedIn asks you to sign in and approve access. Cortana requests read-only access to your advertising reporting. It cannot create, edit, pause, or spend anything on your LinkedIn account.
+  <Step title="Click Connect">
+    Click **Connect** on the **Meta Ads** card. Facebook opens.
   </Step>
-
-  <Step title="Open the LinkedIn Ads settings">
-    After connecting, open the **LinkedIn Ads** panel from **Settings → Integrations**. It is titled **LinkedIn Ads** with the line *"Sync LinkedIn campaigns, spend & conversions for full attribution."*
-
-    You see a **LinkedIn Ads Accounts** table with the columns **Account Name**, **Account ID**, **Currency**, **Campaigns**, **Last Synced**, and **Status**. Every account starts as **Not Selected**.
+  <Step title="Sign in and approve">
+    Sign in to Facebook. Approve the access Cortana asks for. You come back to Cortana.
   </Step>
-
-  <Step title="Choose how far back to sync">
-    Use the dropdown at the top right of the table to pick a **Sync period**: **Last 7 days**, **Last 30 days**, **Last 3 months**, **Last 6 months**, or **Last 12 months**. The default is **Last 7 days**.
-
-    Pick the shortest range that covers the reporting you actually need. The longer ranges pull far more data from LinkedIn and can take several minutes to finish.
+  <Step title="Pick your ad accounts">
+    Click **Manage** on the card. The **Meta Ad Accounts** list opens. Tick each account to sync. Use **Search ad accounts...** to find one.
   </Step>
-
-  <Step title="Tick the ad accounts you want">
-    Tick the checkbox beside each ad account to sync. Use the search box (placeholder **"Search accounts..."**) to find one by name or ID. The checkbox in the table header selects or clears only the accounts currently visible under your search, so a search does not silently deselect the rest.
-
-    An account showing a **No analytics access** badge means the LinkedIn user you connected does not have an analytics role on it. You can still tick it, but it will return no performance data.
-  </Step>
-
-  <Step title="Narrow to specific campaigns (optional)">
-    The **Campaigns** column shows how many campaigns LinkedIn holds on that account. Click that number to open the **Select Campaigns** picker, tick the ones you want, and click **Save selection**. There is a search box (**"Search campaigns..."**) plus **Select all** and **Clear** buttons.
-
-    A dash instead of a number means Cortana could not read the count from LinkedIn, not that the account has zero campaigns.
-
-    You must tick the account and save it before a campaign choice can be stored. Until you do, the picker says *"Tick this account and save it first. Then your campaign choice can be stored."*
-  </Step>
-
-  <Step title="Save Changes">
-    Click **Save Changes**. The button is greyed out until something actually changes, and reads **Saved** when there is nothing to save.
-
-    The first sync runs immediately rather than waiting for the hourly schedule. When it finishes you get a confirmation counting the campaigns, ad groups, ads, and insights that were synced. On the longer date ranges this can take several minutes, so leave the panel open.
+  <Step title="Save">
+    Click **Save**. Cortana starts syncing in the background. Your spend shows up shortly.
   </Step>
 </Steps>
 
-<Note>
-  **After the first sync, LinkedIn refreshes every hour.** There is no manual sync button. Saving your account selection is what forces an immediate refresh, so if you need fresh numbers right now, change the sync period or re-save.
-</Note>
+<AccordionGroup>
+  <Accordion title="The card says Reconnect">
+    Facebook stopped accepting the saved login. Click **Reconnect** and sign in again.
+  </Accordion>
+  <Accordion title="An ad account is missing">
+    Open **Manage**. Click **Refresh Accounts**. Cortana asks Facebook again for your accounts.
+  </Accordion>
+</AccordionGroup>
 
-<Warning>
-  **LinkedIn connections expire and must be reconnected roughly once a year.** LinkedIn's permission lasts 365 days from when you first granted it and, unlike other platforms, it does not extend each time it renews. When it lapses the panel says **"Your LinkedIn connection has expired"** and *"LinkedIn is no longer accepting the saved connection. Reconnect LinkedIn Ads to see your accounts again. Your existing data is safe."* Reconnect and your history is untouched.
-</Warning>
+**Next:** count Meta lead forms as conversions. See [**4.2) Conversion Sources**](/4-conversion-tracking) under **Meta Ads**.
 
-<Tip>
-  **An amber banner across the top of the account list means the list is not a live picture of LinkedIn.** Some accounts failed to load, or Cortana is showing the last known good copy. Click **Reload list** before saving. Saving from a stale list risks storing a selection based on accounts that are not really there.
-</Tip>
+### Connecting Google Ads
 
-<Note>
-  **LinkedIn Lead Gen Forms can feed a conversion too.** Once LinkedIn is connected, switch your ad accounts and forms on under **Tracking → Conversion Setup → Lead Forms → LinkedIn**, then add a **LinkedIn Ads** source to any conversion. Full steps are in [**4.2) Conversion Sources**](/4-conversion-tracking) under **LinkedIn Ads**.
-</Note>
+Google Ads brings in your Google ad spend and results.
 
-<Note>
-  Connecting LinkedIn brings in your spend and LinkedIn's own reported conversions, and clicks are credited to **LinkedIn Ads** straight away. Breaking that down by campaign, ad set, and ad needs one more step: tagging your LinkedIn URLs, covered in [**5) URL Parameters**](/5-url-parameters) under **LinkedIn Ads**. Read that section before you judge your LinkedIn reporting, because it starts by asking you to check which naming your Campaign Manager account uses, and the template you need depends on the answer.
-</Note>
+**How it connects:** sign in to Google. Then pick your ad accounts.
+
+<Steps>
+  <Step title="Click Connect">
+    Click **Connect** on the **Google Ads** card. Google opens.
+  </Step>
+  <Step title="Sign in and approve">
+    Sign in to Google. Approve the access Cortana asks for. You come back to Cortana.
+  </Step>
+  <Step title="Pick your ad accounts">
+    Click **Manage** on the card. The **Google Ad Accounts** list opens. Tick each account to sync.
+  </Step>
+  <Step title="Pick how far back, then Save">
+    Pick a **Historical data range**: **Last 7 days**, **Past 3 months**, **Past 6 months** or **Past 12 months**. The default is **Last 7 days**. Click **Save**.
+  </Step>
+</Steps>
+
+<AccordionGroup>
+  <Accordion title="The card says Reconnect">
+    Google stopped accepting the saved login. Click **Reconnect** and sign in again.
+  </Accordion>
+</AccordionGroup>
 
 ### Connecting Google Local Services Ads
 
-Local Services Ads leads (calls, messages and bookings) come in through your **Google Ads** connection. There is no separate login: connect Google Ads, select the account that runs your Local Services Ads, then add Google LSA to a conversion event. The full walkthrough, with screenshots, is in [Google Local Services Ads](/13-google-local-services-ads).
+Local Services Ads brings in calls, messages and bookings from your LSA leads.
+
+**How it connects:** it uses your **Google Ads** connection. There is no separate sign-in.
 
 <Steps>
   <Step title="Connect Google Ads">
-    If Google Ads is not connected yet, the **Google Local Services Ads** card shows a **Connect Google Ads** button. Connect Google Ads and select your ad accounts as usual.
+    Not connected to Google Ads yet? The **Google Local Services Ads** card shows **Connect Google Ads**. Connect it and pick your ad accounts.
   </Step>
-
   <Step title="Select the account that runs Local Services Ads">
-    If the card shows **Choose LSA account**, none of your selected Google Ads accounts runs Local Services Ads yet. Click it and select the account that does.
+    The card shows **Choose LSA account**? Then none of your picked accounts runs LSA yet. Click it. Pick the account that does.
   </Step>
-
   <Step title="Add Google LSA to a conversion event">
-    Once an account is found, the card shows **Manage**. Click it to see your **LSA accounts**. The dialog then says **Next: count these leads**: click **Add to a conversion event**, open the conversion your leads should count toward, click **Add Source** and choose **Google LSA**. The full walkthrough is in [**4.2) Conversion Sources**](/4-conversion-tracking) under **Google Local Services Ads**.
+    The card now shows **Manage**. Click it to see your **LSA accounts**. Under **Next: count these leads**, click **Add to a conversion event**. Then click **Add Source** and pick **Google LSA**.
   </Step>
 </Steps>
 
 <AccordionGroup>
   <Accordion title="What the Google Local Services Ads card tells you">
-    - **Manage** with an amber tone: connected, but no conversion event counts these leads yet.
-    - **Manage**, or **Manage (2)** with several accounts: Cortana is reading leads from your LSA accounts.
-    - **Manage** in red: an account cannot be read, or Google Ads needs reconnecting. Open it to see which account, and click **Reconnect Google Ads** when asked.
+    - **Manage** in amber: connected, but no conversion counts these leads yet.
+    - **Manage**, or **Manage (2)** for two accounts: Cortana is reading your leads.
+    - **Manage** in red: an account cannot be read, or Google Ads needs reconnecting. Open it to see which. Click **Reconnect Google Ads** if asked.
 
-    Each account in **Manage** shows when Cortana last read it, for example **Read 2 minutes ago**, and its campaign type. A new account shows **Waiting for first read** until its first check. An account Cortana cannot read shows **Can't be read**, the line *We keep retrying. If it stays like this, check your Google login can still open this account.*, and the error Google gave. Use **Change accounts** to pick other Google Ads accounts.
+    Each account in **Manage** shows when Cortana last read it, like **Read 2 minutes ago**. A new account shows **Waiting for first read**. A broken one shows **Can't be read**, with the line *We keep retrying. If it stays like this, check your Google login can still open this account.* Use **Change accounts** to pick other Google Ads accounts.
   </Accordion>
 </AccordionGroup>
 
+The full guide, with screenshots, is in [Google Local Services Ads](/13-google-local-services-ads). The conversion steps are in [**4.2) Conversion Sources**](/4-conversion-tracking) under **Google Local Services Ads**.
+
+### Connecting TikTok Ads
+
+TikTok Ads brings in your TikTok campaigns, spend and results.
+
+**How it connects:** sign in to TikTok. Then pick your ad accounts.
+
+<Steps>
+  <Step title="Click Connect">
+    Click **Connect** on the **TikTok Ads** card. TikTok opens.
+  </Step>
+  <Step title="Sign in and approve">
+    Sign in to TikTok. Approve the access Cortana asks for. You come back to Cortana.
+  </Step>
+  <Step title="Pick your ad accounts">
+    Click **Manage** on the card. The **TikTok Ad Accounts** list opens. It may say **No Ad Accounts Synced Yet**. Then click **Sync Ad Accounts** first. Tick each account to sync.
+  </Step>
+  <Step title="Save">
+    Click **Save**. Cortana starts syncing in the background. Your spend shows up shortly.
+  </Step>
+</Steps>
+
+<AccordionGroup>
+  <Accordion title="The card says Reconnect">
+    TikTok stopped accepting the saved login. Click **Reconnect** and sign in again.
+  </Accordion>
+</AccordionGroup>
+
+### Connecting Bing Ads
+
+Bing Ads (Microsoft Advertising) brings in your Bing campaigns, spend and results.
+
+**How it connects:** sign in with Microsoft. Then pick your ad accounts.
+
+<Steps>
+  <Step title="Click Connect">
+    Click **Connect** on the **Bing Ads** card. Microsoft opens.
+  </Step>
+  <Step title="Sign in and approve">
+    Sign in with the account that runs your ads. Approve the access. You come back to Cortana.
+  </Step>
+  <Step title="Pick your ad accounts">
+    Click **Manage** on the card. The **Bing Ads Accounts** list opens. Tick each account to sync. Use **Search accounts...** to find one.
+  </Step>
+  <Step title="Pick how far back, then save">
+    Pick a **Sync period**, from **Last 7 days** to **Last 12 months**. Click **Save Changes**.
+  </Step>
+</Steps>
+
+### Connecting LinkedIn Ads
+
+LinkedIn Ads brings in your LinkedIn spend, results and Lead Gen Form leads.
+
+**How it connects:** sign in to LinkedIn. Then pick your ad accounts. Nothing syncs until you save that choice.
+
+<Steps>
+  <Step title="Connect LinkedIn">
+    Click **Connect** on the **LinkedIn Ads** card. Sign in to LinkedIn and approve. Cortana reads your ads, reports and lead forms. It also sends conversions back to LinkedIn. It cannot change your ads or spend money.
+  </Step>
+  <Step title="Open the LinkedIn Ads settings">
+    Click **Manage** on the card. The **LinkedIn Ads** panel opens. It shows a **LinkedIn Ads Accounts** table. Every account starts as **Not Selected**.
+  </Step>
+  <Step title="Choose how far back to sync">
+    Pick a **Sync period**: **Last 7 days**, **Last 30 days**, **Last 3 months**, **Last 6 months** or **Last 12 months**. The default is **Last 7 days**. Longer periods take a few minutes.
+  </Step>
+  <Step title="Tick the ad accounts you want">
+    Tick each account to sync. Use **Search accounts...** to find one.
+  </Step>
+  <Step title="Narrow to specific campaigns (optional)">
+    Click the number in the **Campaigns** column. The **Select Campaigns** box opens. Tick the ones you want. Click **Save selection**.
+  </Step>
+  <Step title="Save Changes">
+    Click **Save Changes**. The first sync starts right away. After that, LinkedIn refreshes every hour.
+  </Step>
+</Steps>
+
+<AccordionGroup>
+  <Accordion title="An account says No analytics access">
+    Your LinkedIn user has no analytics role on that account. You can tick it, but no results will come in.
+  </Accordion>
+  <Accordion title="The campaign picker says: Tick this account and save it first">
+    Tick the account. Click **Save Changes**. Then pick its campaigns.
+  </Accordion>
+  <Accordion title="A dash shows instead of a campaign count">
+    Cortana could not read the count from LinkedIn. It does not mean zero campaigns.
+  </Accordion>
+  <Accordion title="It says: Your LinkedIn connection has expired">
+    LinkedIn logins last 365 days. They do not renew by themselves. Reconnect LinkedIn Ads once a year. Your data stays safe.
+  </Accordion>
+  <Accordion title="An amber banner sits on the account list">
+    Some accounts did not load, or the list is an older copy. Click **Reload list** before you save.
+  </Accordion>
+  <Accordion title="Breaking LinkedIn down by campaign and ad">
+    Clicks count as **LinkedIn Ads** straight away. To split them by campaign and ad, tag your LinkedIn links. See [**5) URL Parameters**](/5-url-parameters) under **LinkedIn Ads**.
+  </Accordion>
+</AccordionGroup>
+
+**Next:** count LinkedIn Lead Gen Form leads as conversions. See [**4.2) Conversion Sources**](/4-conversion-tracking) under **LinkedIn Ads**.
+
+### Connecting Whop Ads
+
+Whop Ads brings in Meta ads you run through Whop: campaigns, spend and results.
+
+**How it connects:** paste your Whop Company ID and an API key.
+
+<Steps>
+  <Step title="Click Connect">
+    Click **Connect** on the **Whop Ads** card. Then click **Connect Whop Ads**.
+  </Step>
+  <Step title="Paste your Company ID">
+    It starts with `biz_`. It is in your Whop dashboard address, like `dash.whop.com/biz_abc123xyz`.
+  </Step>
+  <Step title="Paste your API key">
+    Make or edit a key in Whop. Give it the permissions `ad_campaign:read`, `ad_campaign:stats:read` and `event:create`. Paste it into **API Key**.
+
+    Already connected Whop for sales? Use the same key. Just add these ad permissions to it.
+  </Step>
+  <Step title="Pick how much past spend, then connect">
+    Choose how much past spend to bring in. Click **Connect**.
+  </Step>
+</Steps>
+
+Whop adds its own link tags. You paste no template. More in [**5) URL Parameters**](/5-url-parameters) under **Whop Ads**.
+
+## Search and video
+
+### Connecting Search Console
+
+Search Console shows the Google searches, clicks and rankings behind your free traffic.
+
+**How it connects:** sign in to Google. Then pick your site.
+
+<Steps>
+  <Step title="Click Connect">
+    Click **Connect** on the **Search Console** card. The **Google Search Console** box opens.
+  </Step>
+  <Step title="Sign in with Google">
+    Click **Connect Google Search Console**. Sign in with the Google account that owns your Search Console.
+  </Step>
+  <Step title="Pick your site">
+    Pick the verified site that belongs to this business. The card now shows **Manage**.
+  </Step>
+</Steps>
+
+<AccordionGroup>
+  <Accordion title="I have no Search Console site yet">
+    Cortana can make one for you. Click **Allow setup access**. Confirm your domain. Then add the **TXT record** Cortana shows at your DNS host. Cortana keeps checking while the box stays open.
+  </Accordion>
+</AccordionGroup>
+
+### Connecting Bing Webmaster Tools
+
+Bing Webmaster Tools shows the Bing searches, clicks and rankings for your site.
+
+**How it connects:** sign in to Bing Webmaster Tools. Then pick your site. Your business website must be set in **Business info** first.
+
+<Steps>
+  <Step title="Click Connect">
+    Click **Connect** on the **Bing Webmaster Tools** card. Then click **Connect Bing**.
+  </Step>
+  <Step title="Sign in">
+    Finish signing in in the Bing window.
+  </Step>
+  <Step title="Pick your site">
+    Cortana asks **Which one is your site?** Pick it.
+  </Step>
+</Steps>
+
+Searches come in once a week.
+
+<AccordionGroup>
+  <Accordion title="My site is not verified in Bing yet">
+    Add one of the two codes Cortana shows. Put the meta tag in your home page's head. Or add the CNAME record at your DNS host. Then check again. You can also let Bing import your site from Google Search Console.
+  </Accordion>
+</AccordionGroup>
+
+### Connecting YouTube Organic
+
+YouTube Organic brings in your channel's videos, transcripts and stats. Sales can then be linked to a video.
+
+**How it connects:** sign in to Google. Then pick your channels.
+
+<Steps>
+  <Step title="Click Connect">
+    Click **Connect** on the **YouTube Organic** card. Then click **Connect YouTube account**. Google opens.
+  </Step>
+  <Step title="Sign in and approve">
+    Sign in with the Google account that owns your channel. Approve the access. You come back to Cortana.
+  </Step>
+  <Step title="Pick your channels">
+    Under **Channels found on this Google account**, tick your channels. You can add a label. Click **Save & start sync**.
+  </Step>
+</Steps>
+
+## Messaging and AI
+
+### Connecting Instagram & Messenger DMs
+
+This lets you see which ads start DM chats. You can also reply to Instagram and Messenger from Cortana.
+
+**How it connects:** it uses your Meta connection. You add one more permission for messages.
+
+<Steps>
+  <Step title="Connect Meta Ads first">
+    The card says **Connect**? Then connect the **Meta Ads** card first.
+  </Step>
+  <Step title="Grant messaging permission">
+    The card now says **Grant access**. Click it. Facebook opens. Approve every permission it asks for. You come back to Cortana.
+  </Step>
+  <Step title="Subscribe your accounts">
+    The card now says **Manage**. Click it. Subscribe your Instagram accounts on the **Instagram** tab. Subscribe your Facebook Pages on the **Messenger** tab.
+  </Step>
+</Steps>
+
+The full guide is in [10) Instagram & Messenger DMs](/11-instagram-messenger-dms).
+
+### Connecting iMessage
+
+iMessage gives you your own blue-bubble line. You text customers from it.
+
+**How it connects:** you get a number. The card's button says **Get Number**.
+
+Click **Get Number**. Cortana opens **Settings → Phone** on the iMessage part. The full guide is in [Get an iMessage line](/platform/business/imessage-get-a-line).
+
+### Connecting WhatsApp
+
+WhatsApp is not ready yet. Its card says **Coming Soon**. The card also says it **Can connect through Go High Level**.
+
+### Connecting Twilio
+
+Twilio gives your agents calls, texts and more.
+
+**How it connects:** paste your Twilio Account SID and Auth Token.
+
+<Steps>
+  <Step title="Click Connect">
+    Click **Connect** on the **Twilio** card. The **Twilio Configuration** box opens.
+  </Step>
+  <Step title="Paste your details">
+    Paste your **Account SID**. It starts with `AC`. Paste your **Auth Token**.
+  </Step>
+  <Step title="Save">
+    Click **Save Configuration**. You see **Twilio configuration saved!**
+  </Step>
+</Steps>
+
+To take it off later, open the card again. Click **Remove Configuration**.
+
+### Connecting Email
+
+The **Email** card lets your AI agents send email to your customers.
+
+**How it connects:** paste your Nylas keys. Then sign in to your inbox.
+
+<Steps>
+  <Step title="Click Connect">
+    Click **Connect** on the **Email** card. The **Configure Nylas Credentials** box opens.
+  </Step>
+  <Step title="Paste your Nylas keys">
+    Paste your **Nylas Client ID** and **Nylas API Key**. The key starts with `nyk`. Click **Save**.
+  </Step>
+  <Step title="Connect your inbox">
+    Click **Connect Nylas OAuth**. Sign in to your email and approve.
+  </Step>
+</Steps>
+
+### Connecting Slack
+
+Slack lets your team hand tasks to your Cortana agent. Use **/cortana**, or mention it in a channel.
+
+**How it connects:** sign in to Slack.
+
+<Steps>
+  <Step title="Click Connect">
+    Click **Connect** on the **Slack** card. Slack opens.
+  </Step>
+  <Step title="Approve Cortana in your workspace">
+    Approve Cortana for your Slack workspace. You come back to Cortana.
+  </Step>
+</Steps>
+
+The full guide is in [Using Claw from Slack](/claw/slack).
+
+### Connecting OpenAI
+
+This card is optional. Add your own OpenAI key for this business. It is then used instead of the default key.
+
+**How it connects:** paste one API key.
+
+<Steps>
+  <Step title="Click Connect">
+    Click **Connect** on the **OpenAI (Primary AI)** card. The **Configure OpenAI API Key** box opens.
+  </Step>
+  <Step title="Paste your key">
+    Make a key at [platform.openai.com/api-keys](https://platform.openai.com/api-keys). It starts with `sk-`. Paste it.
+  </Step>
+  <Step title="Save">
+    Click **Update API Key**. The card button now says **Remove**.
+  </Step>
+</Steps>
+
+### Connecting Claude
+
+This card is optional. Add your own Claude key for this business. Claude is the backup AI.
+
+**How it connects:** paste one API key.
+
+<Steps>
+  <Step title="Click Connect">
+    Click **Connect** on the **Claude / Anthropic (Fallback AI)** card. The **Configure Claude API Key** box opens.
+  </Step>
+  <Step title="Paste your key">
+    Make a key at [console.anthropic.com/settings/keys](https://console.anthropic.com/settings/keys). It starts with `sk-ant-`. Paste it.
+  </Step>
+  <Step title="Save">
+    Click **Update API Key**. The card button now says **Remove**.
+  </Step>
+</Steps>
+
+### Connecting mem0
+
+mem0 gives this business's Cortana agents a long-term memory.
+
+**How it connects:** paste one API key.
+
+<Steps>
+  <Step title="Click Connect">
+    Click **Connect** on the **mem0 (Agent Memory)** card. The **Configure mem0** box opens.
+  </Step>
+  <Step title="Paste your key">
+    Make a key at [app.mem0.ai/dashboard/api-keys](https://app.mem0.ai/dashboard/api-keys). Paste it.
+  </Step>
+  <Step title="Save">
+    Click **Save API Key**. The card button now says **Remove**.
+  </Step>
+</Steps>
+
 ## What if my app isn't listed?
 
-If we don't have a native integration for your specific platform yet, don't worry. You can still get everything connected using **Webhooks**.
+No card for your tool? You can still send its data to Cortana with a **webhook**.
 
 <Tip>
-  You can set up your conversions via **Zapier**, **Make.com**, **n8n**, or even a native webhook if your platform supports it. This ensures no matter what your tech stack looks like, we can track it.
+  Use **Zapier**, **Make.com** or **n8n**. Or use your tool's own webhook, if it has one. See [**4.2) Conversion Sources**](/4-conversion-tracking) under **Webhook**.
 </Tip>
 
-Go ahead and get those integrations connected, and away you go!
+Connect your tools, and you are ready for [2) Setup Pixel](/2-setup-pixel).
