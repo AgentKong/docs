@@ -1,9 +1,11 @@
 ---
 title: "Payment links"
-description: "Build payment templates for Stripe, Whop, Fanbasis and PayPal in the Cortana extension, then send a tracked payment link to any contact without leaving the page."
+description: "Build payment templates for Stripe, Whop, Commas (Fanbasis) and PayPal in the Cortana extension by picking a product and then its price, then send a tracked payment link to any contact without leaving the page."
 ---
 
-{/* TODO: verify — no Loom walkthrough was supplied for this page. When one is recorded, embed it
+{/* last-verified: 2026-11-17 against the extension source (AgentKong-Chrome-Extension 4.58, sprint payment-link-product-price: src/popup/payment-builder/CreateLinkTab.tsx and product-price/) · surface: extension popup > Payment Link tab > Create Link */}
+
+{/* TODO: verify. No Loom walkthrough was supplied for this page. When one is recorded, embed it
     here with a verbatim transcript inside an <Accordion title="Video transcript"> for the KB. */}
 
 ## What this tab does
@@ -16,7 +18,7 @@ Templates are reusable. A link is made for one person at the moment you press se
   A payment link is a card form. If the buyer still needs testimonials or what's included, switch to the **Tracking Links** tab and send your sales page instead. Same contact picker. See [Send a sales page](/sales/send-a-sales-page).
 </Tip>
 
-This page documents extension version **4.20**.
+This page documents extension version **4.58**.
 
 <Note>
   **Before you start**
@@ -44,32 +46,38 @@ On a new business the list is empty until you make your first template.
 
 <Steps>
   <Step title="Open Create Link and choose a platform">
-    Click **Create Link**. Choose from the four supported platforms: **Stripe**, **Whop**, **Fanbasis** and **PayPal**.
+    Click **Create Link**. Under **Platform**, four tiles sit in one row, each with its logo and name: **Whop**, **Stripe**, **Commas** and **PayPal**. Click one and its fields appear below the row.
+
+    **Commas** is Fanbasis. The fields under the Commas tile say **Commas (Fanbasis)**.
 
     <Frame caption="Choosing the payment platform for a new template.">
-      <img src="/images/ad-tracking/chrome-extension-payment-links/03-create-platform-picker.png" alt="The Create Link view in the extension popup with a numbered badge marking the platform picker offering Stripe, Whop, Fanbasis and PayPal." />
+      <img src="/images/ad-tracking/chrome-extension-payment-links/03-create-platform-picker.png" alt="The Create Link view in the extension popup with a numbered badge marking the Platform row: four tiles in one row named Whop, Stripe, Commas and PayPal, and below them the line Pick a platform to create a reusable payment link." />
     </Frame>
 
-    Only platforms connected to this business will have anything to select underneath.
+    Until you pick one, the tab reads **Pick a platform to create a reusable payment link**. Switching to another tile clears what you had picked.
   </Step>
 
   <Step title="Fill in the platform's fields">
-    Each platform asks for what it needs.
+    Stripe, Whop and Commas work the same way: the account, then the **Product**, then its **Price**. Each field appears once the one above it is chosen, and **Price** lists only the prices of the product you picked. Picking another product clears the price. PayPal keeps its own fields.
 
     <AccordionGroup>
       <Accordion title="Stripe">
-        Pick the Stripe account, then the product and price. The product field searches, with the placeholder **Search or select product & price**.
+        1. **Stripe account**: the account to charge through. Each account shows **Live** or **Test** after its name. When the business has only one connected Stripe account, it is picked for you.
+        2. **Product**: open the list and pick the product. Type in **Search products** to filter a long list.
+        3. **Price**: pick one of that product's prices, for example **$397.00 USD / month**. When the product has only one price, it is picked for you.
 
-        <Frame caption="Building a Stripe template.">
-          <img src="/images/ad-tracking/chrome-extension-payment-links/04-create-stripe.png" alt="The Create Link view configured for Stripe, with numbered badges marking the account selector and the product and price search field." />
+        <Frame caption="Building a Stripe template: account, product, then price.">
+          <img src="/images/ad-tracking/chrome-extension-payment-links/04-create-stripe.png" alt="The Create Link view configured for Stripe, with numbered badges marking the Stripe account selector, the Product field and the Price field. The New product and New price links sit to the right of the Product and Price labels, and the Title field and the Save to Library button are below." />
         </Frame>
       </Accordion>
 
       <Accordion title="Whop">
-        Pick the Whop company, then the product, then the plan.
+        1. **Whop company**: pick the company.
+        2. **Product**: pick the product. Type in **Search products** to filter a long list.
+        3. **Price**: pick one of that product's plans. Each plan reads by what it charges, for example **$997.00 USD** or **$500.00 USD / month · 2 payments**. When the product has only one plan, it is picked for you.
 
-        <Frame caption="Building a Whop template.">
-          <img src="/images/ad-tracking/chrome-extension-payment-links/05-create-whop.png" alt="The Create Link view configured for Whop, with numbered badges marking the company selector, the product selector and the plan selector." />
+        <Frame caption="Building a Whop template, with the picked product's prices open.">
+          <img src="/images/ad-tracking/chrome-extension-payment-links/05-create-whop.png" alt="The Create Link view configured for Whop, with numbered badges marking the Whop company selector, the Product field, and the open Price list showing two prices for the picked product and a New price row at the bottom." />
         </Frame>
       </Accordion>
 
@@ -77,26 +85,76 @@ On a new business the list is empty until you make your first template.
         Pick the PayPal account and set the payment details.
 
         <Frame caption="Building a PayPal template.">
-          <img src="/images/ad-tracking/chrome-extension-payment-links/06-create-paypal.png" alt="The Create Link view configured for PayPal, with a numbered badge marking the account selector." />
+          <img src="/images/ad-tracking/chrome-extension-payment-links/06-create-paypal.png" alt="The Create Link view configured for PayPal, with numbered badges marking the PayPal account selector and the Amount field, beside the Currency selector." />
         </Frame>
       </Accordion>
 
-      <Accordion title="Fanbasis">
-        Pick the Fanbasis account and its offer.
+      <Accordion title="Commas (Fanbasis)">
+        1. **Commas (Fanbasis) account**: pick the account. A sandbox account shows **Sandbox** after its name.
+        2. **Product**: pick the product. Each product shows its Commas price after its name, when it has one.
+        3. **Price** and **Billing**: Commas keeps no list of prices, so you set this link's own price and billing under the product.
+           - **Price**, in the product's currency (for example **Price (USD)**): leave it empty to sell at the product's price, which the line under the field names. Type another amount to sell this link at a different price. A product with no price on Commas needs one typed here. Commas prices start at 1.00.
+           - **Billing**: **One-time**, **Weekly**, **Every 2 weeks**, **Every 4 weeks**, **Monthly**, **Every 3 months**, **Yearly** or **Custom** (every 1 to 365 days).
+           - **Stop after** and **Free trial**: on a recurring link only. **Stop after** ends it after 1 to 999 payments; empty means **Until canceled**. **Free trial** delays the first charge by 1 to 365 days; empty means **None**.
 
-        <Frame caption="Building a Fanbasis template.">
-          <img src="/images/ad-tracking/chrome-extension-payment-links/07-create-fanbasis.png" alt="The Create Link view configured for Fanbasis, with a numbered badge marking the account selector." />
+        A line under the fields says what the buyer pays, for example **Commas charges the buyer $797.00 USD every 30 days, 3 times in all.**
+
+        <Frame caption="Building a Commas (Fanbasis) template: account, product, then this link's price and billing.">
+          <img src="/images/ad-tracking/chrome-extension-payment-links/07-create-fanbasis.png" alt="The Create Link view configured for Commas, with numbered badges marking the Commas (Fanbasis) account selector, the Product field, and the Price, Billing, Stop after and Free trial fields, with the line Commas charges the buyer $797.00 USD every 30 days, 3 times in all." />
         </Frame>
+
+        In **My Links**, a template made here is tagged **fanbasis**.
       </Accordion>
     </AccordionGroup>
 
-    If a selector loads nothing, that platform is not connected to this business yet. Connect it in the web app.
+    If the account field says **No connected Stripe accounts.**, **No active Whop connections.**, **No active Commas (Fanbasis) connections.** or **No connected PayPal accounts.**, that platform is not connected to this business yet. Connect it in the web app.
+
+    The product or price you need is not there? Make it on the spot with **+ New product** or **+ New price**. See [New product and new price](#new-product-and-new-price).
   </Step>
 
   <Step title="Save the template">
-    Save, and it appears in **My Links** ready to send. Templates are per business.
+    Once the pick is complete (on Commas, once a product is picked), **Title (optional)** appears, filled with the product's name. Type your own to rename the template. Click **Save to Library**. The toast says **Payment link saved** and the template appears in **My Links** ready to send. Templates are per business.
+
+    On Commas, **Save to Library** opens as soon as a product is picked. If the price or billing is not finished, clicking it says what is missing, for example **Commas prices start at 1.00.**, and saves nothing.
   </Step>
 </Steps>
+
+## New product and new price
+
+Make a missing product, or a new price on a product, without leaving **Create Link**. **+ New product** works on Stripe, Whop and Commas. **+ New price** works on Stripe and Whop.
+
+Each one opens from two places:
+
+- The **+ New product** or **+ New price** link to the right of the field's label.
+- The last row of the open list, **New product** or **New price**.
+
+An empty list offers the same thing in its place: **No products yet** with **Create one**, or **No prices yet** with **Add one**.
+
+<Steps>
+  <Step title="Open New price">
+    Pick the product first. Then click **+ New price** beside **Price**, **New price** at the bottom of the price list, or **Add one** when the product has no prices yet. The popover names the product it adds to, for example **Adds a price to Coaching Program on your Stripe account, ready to sell immediately.** It never asks which product.
+  </Step>
+
+  <Step title="Set the price and billing">
+    Enter the **Price** and choose the **Billing**: **One-time**, **Weekly**, **Every 4 weeks**, **Monthly**, **Every 3 months**, **Yearly** or **Custom** (every so many **days**, **weeks** or **months**, up to a year). On Whop, a recurring price also has **More options**: **Stop after** (2 to 115 payments) and **Free trial** (1 to 365 days).
+  </Step>
+
+  <Step title="Click Create price">
+    The price is made on the platform, added to the product you picked, and selected for you. The toast says **New price on** and the product's name.
+  </Step>
+</Steps>
+
+<Frame caption="Adding a price to the picked product from the Price label.">
+  <img src="/images/ad-tracking/chrome-extension-payment-links/09-create-new-price.png" alt="The Create Link view for Stripe with the New price popover open above the Price field. Numbered badges mark the New price link beside the Price label, the popover's Price and Billing fields, and its Create price button. The popover reads Adds a price to Coaching Program on your Stripe account, ready to sell immediately." />
+</Frame>
+
+**+ New product** asks for a **Name**, a **Price** and, on Stripe and Whop, the **Billing**. Click **Create product** and the new product is selected for you, with its price.
+
+- **Stripe**: the product and its first price are made on your Stripe account, in the account's currency, ready to sell immediately.
+- **Whop**: the product is made on your Whop company with its priced plan, in USD. Names run up to 80 characters and prices start at $1.00.
+- **Commas**: nothing is made on Commas. The name and price become this link's own offer, created fresh on every checkout. Set how often it bills under **Billing**, below the product. Prices start at $1.00. The toast ends **ready: save the link to finish**.
+
+Commas has no **+ New price**: its price and billing are set on each link, under the product.
 
 ## Send a link to a contact
 
@@ -162,9 +220,13 @@ On a new business the list is empty until you make your first template.
 
 | Setting | What it does | Default | Our recommendation | Caveat |
 |---|---|---|---|---|
-| **Platform** | Which processor the template uses | None | Match where the business takes payment | Only connected platforms load options |
-| **Account** | Which connected account to charge through | First available | Check on multi-account businesses | Empty means not connected |
-| **Product and price** | What the customer pays for | None | Search rather than scroll | Comes from the platform, not Cortana |
+| **Platform** | Which processor the template uses: **Whop**, **Stripe**, **Commas** (Fanbasis) or **PayPal** | None | Match where the business takes payment | Only connected platforms load options |
+| **Account** | Which connected account to charge through | Stripe and PayPal: the only account, when there is one. Whop and Commas: none | Check on multi-account businesses | A "No connected" or "No active" line means not connected |
+| **Product** | What the customer buys (Stripe, Whop, Commas) | None | Type in **Search products** rather than scroll | Comes from the platform; **+ New product** makes one from the popup |
+| **Price** | Which of the picked product's prices the link charges (Stripe, Whop) | The product's only price, when it has one | Pick the product first: the list shows only its prices | **+ New price** adds one to the picked product |
+| **Price** and **Billing** (Commas) | This link's own amount and how often it charges | The product's price, **One-time** | Leave **Price** empty to sell at the product's price | Commas prices start at 1.00 |
+| **Stop after** and **Free trial** (Commas) | End a recurring link after 1 to 999 payments, and delay its first charge by 1 to 365 days | **Until canceled**, **None** | Set **Stop after** for a payment plan | Recurring billing only |
+| **Title (optional)** | The template's name in **My Links** | The product's name | Rename to tell two prices of one product apart | Stops following the product once you type |
 | **Send to** | The contact who receives the link | Empty | Always set before pressing Send | The link is made for this person |
 | **Import** | Brings existing Stripe links in as templates | Not applicable | Use it instead of rebuilding | Stripe only |
 | **Search…** | Filters your template list | Empty | Use past a screenful | Filters names |
@@ -177,7 +239,16 @@ On a new business the list is empty until you make your first template.
   </Accordion>
 
   <Accordion title="My platform's dropdown is empty">
-    That platform is not connected to this business. Connect it in the Cortana web app, then reopen the popup.
+    The account field reads **No connected Stripe accounts.**, **No active Whop connections.**, **No active Commas (Fanbasis) connections.** or **No connected PayPal accounts.** That platform is not connected to this business. Connect it in the Cortana web app, then reopen the popup.
+
+    If the account is there but its product list is empty, the field reads **No products yet**. Click **Create one** to make a product from the popup.
+  </Accordion>
+
+  <Accordion title="Create product or Create price says No answer from the server">
+    The request may have gone through before the answer was lost.
+
+    - After **Create price**, try again from the same form. It will not make a second price.
+    - After **Create product**, check your products on the platform first. The product may have been made, and a second try can make another.
   </Accordion>
 
   <Accordion title="Send fails or nothing happens">
@@ -205,7 +276,15 @@ On a new business the list is empty until you make your first template.
   </Accordion>
 
   <Accordion title="Which platforms are supported?">
-    Four: Stripe, Whop, Fanbasis and PayPal.
+    Four: Stripe, Whop, Commas and PayPal. Commas is Fanbasis: its tile says **Commas** and its fields say **Commas (Fanbasis)**.
+  </Accordion>
+
+  <Accordion title="I picked my product but the price I want is not in the list">
+    **Price** lists only the prices of the product you picked. Check the product, or add the price with **+ New price** beside **Price**. It is made on Stripe or Whop, added to that product, and selected for you. See [New product and new price](#new-product-and-new-price).
+  </Accordion>
+
+  <Accordion title="Why won't my Commas link save?">
+    Commas prices start at 1.00. Under that, the form says **Commas prices start at 1.00.** and **Save to Library** saves nothing, whether the amount is one you typed or the product's own. Type a price of 1.00 or more. A custom billing period, **Stop after** or **Free trial** outside its range stops the save the same way, with a line saying the allowed range.
   </Accordion>
 
   <Accordion title="Can I send without choosing a contact?">
