@@ -48,7 +48,7 @@ Your endpoint receives these events only when it names them. An endpoint subscri
     }
     ```
 
-    The key needs `webhooks:write`, and the read scope of each family it subscribes to: `appointments:read` for the `appointment.*` events, `deals:read` for the `deal.*` events. That is checked when you create the endpoint and on every change to it, a new URL or switching it back on included, against the events it holds. A key without it is refused with `403` "Insufficient scope. Required: appointments:read", and nothing is saved.
+    The key needs `webhooks:write`, the read scope of each family it subscribes to (`appointments:read` for the `appointment.*` events, `deals:read` for the `deal.*` events), and `contacts:read`, since every event carries the booking's or the deal's contact: their email, phone, tags and fields. That is checked when you create the endpoint and on every change to it, a new URL or switching it back on included, against the events it holds. A key without one of them is refused with `403` naming the first it lacks, such as "Insufficient scope. Required: contacts:read", and nothing is saved.
   </Tab>
 </Tabs>
 
