@@ -29,6 +29,8 @@ Don't see your tool? Any platform that can send a webhook (natively or via Zapie
   <Accordion title="HubSpot">
     Two-way contact sync with attribution for the events that matter: meetings booked, deal stage changes, deal values, form submissions, and custom property changes can all become conversions. Custom fields sync both ways.
 
+    **Meeting links as calendars:** each HubSpot meeting link becomes a Cortana calendar with its questions. Your Cortana page shows HubSpot's open times and books into HubSpot, and meetings booked on HubSpot's own page appear in Appointments. See [HubSpot calendars](/cal-calendar-sync#9-hubspot-calendars).
+
     **Household associations:** when two HubSpot contacts are associated with each other (for example a parent booking on behalf of a student), Cortana automatically merges them into one contact: sessions, conversions, and the whole timeline unify, and a booking made by the untracked person inherits the tracked person's ad attribution, retroactively too. The customer journey shows a "Household merged" entry explaining exactly what happened, and the Merge log keeps the undo. On by default; turn it off per business with the **Household associations** toggle on the HubSpot integration card.
   </Accordion>
   <Accordion title="Close.io">
@@ -43,13 +45,13 @@ Don't see your tool? Any platform that can send a webhook (natively or via Zapie
 
 <AccordionGroup>
   <Accordion title="Calendly">
-    Syncs appointments, tracks bookings as conversions, and lets your AI agents schedule meetings automatically.
+    Syncs appointments, tracks bookings as conversions, and lets your AI agents schedule meetings automatically. Event types come over as Cortana calendars with their questions, and answers from a Cortana page land on the Calendly booking.
   </Accordion>
   <Accordion title="Cal.com">
     Tracks bookings as conversions with full attribution and syncs scheduling data.
   </Accordion>
   <Accordion title="iClosed">
-    Tracks form submissions, qualified leads, and appointment bookings as conversions with full attribution.
+    Tracks form submissions, qualified leads, and appointment bookings as conversions with full attribution. Events come over as Cortana calendars with their questions. A Cortana page sends the answers onto the iClosed call, follows your iClosed disqualify and routing rules, and can route to a chosen closer. See [iClosed: who gets the call](/cal-calendar-sync#8-iclosed-who-gets-the-call).
   </Accordion>
   <Accordion title="CallRail">
     One API key connects call tracking: calls, good leads, and form submissions become attributed conversions. Cortana installs the webhooks for you.
@@ -200,5 +202,9 @@ Don't see your tool? Any platform that can send a webhook (natively or via Zapie
 
 | Date | Integration | What changed |
 | --- | --- | --- |
+| 2026-11-19 | HubSpot | **HubSpot calendars**: each meeting link becomes a Cortana calendar with its questions and after-booking page; the Cortana page shows HubSpot's open times and books into HubSpot with the answers; meetings booked on HubSpot's own page appear in Appointments; route to one rep with **Book a different event** to that rep's own link. [Read more](/cal-calendar-sync#9-hubspot-calendars). |
+| 2026-11-19 | iClosed | **iClosed routing**: **Book with a team member** and **Book with a team pool** work on iClosed calendars once reps are matched in **Manage reps**. **Your iClosed rules**: imported iClosed calendars follow your iClosed disqualify and routing rules (the lead becomes an iClosed contact, as on iClosed's own page). **Answers on the call**: answers from a Cortana page land on the iClosed call. [Read more](/cal-calendar-sync#8-iclosed-who-gets-the-call). |
+| 2026-11-19 | GoHighLevel, Calendly, iClosed | **Questions come with the calendar**: imported calendars bring their questions (wording, choices, order, required) and their after-booking page, and follow the other tool until you edit them in Cortana. **Import questions from** the tool on calendars that already took bookings. **Answers go back**: on the Calendly booking, the iClosed call, and the GoHighLevel appointment's description. [Read more](/cal-calendar-sync#3-what-comes-over-with-each-calendar). |
+| 2026-11-19 | Cortana Calendar | **Standard calendar type**: times first, then the questions. New calendars and calendars from GoHighLevel, Calendly and HubSpot start on it; iClosed calendars start on Application + Cal. On Standard, rep and pool rules are prioritized, not promised. [Read more](/cal-calendars#the-three-calendar-types). |
 | 2026-10-07 | Google Local Services Ads | **New source**: Local Services Ads leads (calls, messages, bookings) counted as conversions through the Google Ads connection, with charged / every lead / booked rules, credits taken off like refunds, the leads' calls and messages on the contact, and a history import. LSA leads sit inside Google Ads as the "Local Services Ads" campaign. |
 | 2026-08-28 | HubSpot | **Household associations**: HubSpot contact-to-contact associations now merge the two contacts in Cortana automatically: journeys and attribution unify (a parent's booking inherits the student's ad attribution, retroactively). Includes a per-business toggle on the HubSpot card (on by default), a "Household merged" entry in the customer journey, and a one-time backfill for households that existed before the feature. |
