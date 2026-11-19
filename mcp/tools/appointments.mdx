@@ -1,0 +1,248 @@
+---
+title: "Appointments & calendars"
+description: "Find open times, book, move and cancel appointments, mark how they went, and set up the calendars they go into."
+---
+
+These tools let your AI run your calendar the way your team does in Cortana. It finds the times a lead would see on your booking page, books, moves, cancels and hands off appointments, marks how they went, and creates and changes your calendars.
+
+Every change goes through the same steps as the app: the time is held, the lead gets their emails, Google, Outlook and GoHighLevel follow, and the appointment's **History** names who did it ("Rescheduled · Claude, for Sarah Lee").
+
+<Note>
+  On every connection, with nothing extra to tick on the consent screen. Each call uses your own access to the business in Cortana. Every tool takes an optional `businessId` when your connection reaches more than one business.
+</Note>
+
+## Finding a time and booking
+
+### `find_appointment_slots`
+
+A calendar's open times, day by day: exactly the times a lead sees on its booking page.
+
+| Parameter | Type | Required | Description |
+| --- | --- | --- | --- |
+| `calendarId` | string | Yes | The calendar, from `list_calendars` |
+| `from` | string | No | First day, `YYYY-MM-DD`. Default: today. |
+| `to` | string | No | Last day, `YYYY-MM-DD`. Needs `from`. |
+| `timezone` | string | No | The clock the times read on, such as `America/Toronto`. Default: the business's own. |
+| `repUserId` | string | No | Only the times this rep can take (a rep on the calendar's team) |
+
+Up to 14 days a call, 7 by default. A calendar that books into GoHighLevel, Calendly or iClosed is asked one day at a time, so a slow answer comes back with the days read so far and the date to ask from next.
+
+**Returns:** each day with its open times ("3:00 PM"), and a note when the calendar's own system did not answer.
+
+**Ask it:** "When can Jane come in next week?" · "Is Sarah free Thursday afternoon?"
+
+### `book_appointment`
+
+Book a contact into one of your calendars, as the **Book** button in the app does: the calendar's hours, notice and seats hold, a rep is picked (or the one you name), the time is held, the lead gets the confirmation, and Google, Outlook and your CRM follow.
+
+| Parameter | Type | Required | Description |
+| --- | --- | --- | --- |
+| `calendarId` | string | Yes | The calendar, from `list_calendars` |
+| `contactId` | string | Yes | The contact, from `get_contacts` |
+| `date` | string | Yes | `YYYY-MM-DD` |
+| `time` | string | Yes | As `find_appointment_slots` lists it ("3:00 PM"), or "15:00" |
+| `timezone` | string | No | The same clock you used to find the time. Default: the business's own. |
+| `repUserId` | string | No | A rep on the calendar's team. Leave out for the calendar's own pick. |
+| `customTime` | boolean | No | Book a time outside the open times (a Cortana calendar only). Your AI confirms with you first. |
+| `title` | string | No | Up to 255 characters. Default: the calendar's name. |
+| `description` | string | No | Up to 2,000 characters |
+| `idempotencyKey` | string | No | Makes each new booking distinct. Leave it out and a retried call never books twice. |
+
+**Returns:** a line such as "Booked Jane Doe for Wed Dec 2, 3:00 PM EST with Sarah Lee on Intro Call", and the appointment. A booking on a GoHighLevel, Calendly or iClosed calendar is made there first; its Cortana copy arrives with that system's next sync.
+
+**Ask it:** "Book Jane for Tuesday at 3 with Sarah." · "Put Bob on the intro call calendar tomorrow morning."
+
+## Your appointments
+
+### `list_appointments`
+
+Your appointments, a page at a time, soonest first.
+
+| Parameter | Type | Required | Description |
+| --- | --- | --- | --- |
+| `from` / `to` | string | No | A day (`YYYY-MM-DD`, on the business's clock) or an exact time. With no `from`, `to` or `contactId`, it lists from the start of today. |
+| `status` | array | No | Any of `BOOKED`, `RESCHEDULED`, `CANCELLED`, `COMPLETED`, `SHOWED`, `NO_SHOW` |
+| `calendarId` | string | No | One calendar's appointments |
+| `repUserId` | string | No | One rep's appointments |
+| `contactId` | string | No | One contact's appointments |
+| `order` | enum | No | `asc` (default) or `desc` |
+| `limit` | number | No | Up to 100, 25 by default |
+| `cursor` | string | No | The `nextCursor` of the previous page |
+| `timezone` | string | No | The clock to read times on |
+
+**Returns:** each appointment's time, contact, calendar, rep, status, title, location and meeting link, and `nextCursor` when there are more.
+
+**Ask it:** "What's booked this week?" · "Who no-showed in November?" · "Sarah's calls tomorrow."
+
+### `get_appointment`
+
+One appointment, with the notes it carries (the lead's booking answers).
+
+| Parameter | Type | Required | Description |
+| --- | --- | --- | --- |
+| `appointmentId` | string | Yes | From `list_appointments` |
+| `timezone` | string | No | The clock to read times on |
+
+**Returns:** who, when, the calendar, the rep, its status, where it happens, its description and notes.
+
+**Ask it:** "Tell me about Jane's call."
+
+### `reschedule_appointment`
+
+Move an appointment to a new date and time, as dragging it in the app's calendar does. The rep stays, the lead's reminders follow the new time, and its Google or Outlook event and GoHighLevel move with it.
+
+| Parameter | Type | Required | Description |
+| --- | --- | --- | --- |
+| `appointmentId` | string | Yes | From `list_appointments` |
+| `date` | string | Yes | `YYYY-MM-DD` |
+| `time` | string | Yes | "4:00 PM" or "16:00" |
+| `timezone` | string | No | Default: the business's own |
+
+A time the rep already has is refused, and so is a time in the past. A cancelled appointment is not moved: book it again. A booking that also lives in Calendly or iClosed moves only in Cortana; the answer tells you to move it there too.
+
+**Returns:** a line with the new time, and the appointment.
+
+**Ask it:** "Move Jane's call to Thursday at 4." · "Push Bob's demo an hour later."
+
+### `cancel_appointment`
+
+Cancel an appointment, as **Cancel** in the app does. The record stays, the time opens again, the lead gets the calendar's cancel email, and its Google or Outlook event and GoHighLevel follow. Nothing is deleted. Your AI confirms with you first.
+
+| Parameter | Type | Required | Description |
+| --- | --- | --- | --- |
+| `appointmentId` | string | Yes | From `list_appointments` |
+| `reason` | string | No | Up to 1,000 characters, kept on the appointment |
+
+A booking that also lives in Calendly or iClosed is cancelled only in Cortana; the answer tells you to cancel it there too. Asking again for one already cancelled says that it is.
+
+**Returns:** "Cancelled Jane Doe's appointment on Wed Dec 2, 3:00 PM EST. The time is open again."
+
+**Ask it:** "Cancel Jane's call on Tuesday." · "Bob can't make it, cancel it."
+
+### `set_appointment_status`
+
+Mark how an appointment went, as the status menu in the app does. The mark holds over your CRM's next sync, and the CRM is told where it can be.
+
+| Parameter | Type | Required | Description |
+| --- | --- | --- | --- |
+| `appointmentId` | string | Yes | From `list_appointments` |
+| `status` | enum | Yes | `SHOWED`, `NO_SHOW` or `COMPLETED`. `BOOKED` takes back an outcome marked by mistake. |
+
+To cancel, use `cancel_appointment`. A cancelled appointment is booked again with `book_appointment`, never here.
+
+**Ask it:** "Jane showed." · "Mark Bob as a no-show."
+
+### `reassign_appointment`
+
+Hand an appointment to another rep, as the reassign menu in the app does. The time moves to their calendar.
+
+| Parameter | Type | Required | Description |
+| --- | --- | --- | --- |
+| `appointmentId` | string | Yes | From `list_appointments` |
+| `repUserId` | string or null | Yes | A rep of the business (from `list_calendars`' teams), or `null` to take the rep off |
+
+A rep who already has that time is refused.
+
+**Ask it:** "Give Jane's call to Sarah." · "Mike is out, move his 3pm to Ana."
+
+## Your calendars
+
+### `list_calendars`
+
+The calendars a booking can go into.
+
+No parameters.
+
+**Returns:** each calendar's id, name, length, whether it is on, which system it books into (Cortana, or GoHighLevel, Calendly or iClosed, which then pick the rep and the times), and its team.
+
+**Ask it:** "What calendars do we have?"
+
+### `get_calendar`
+
+One calendar with everything you set on it.
+
+| Parameter | Type | Required | Description |
+| --- | --- | --- | --- |
+| `calendarId` | string | Yes | From `list_calendars` |
+
+**Returns:** its name and link, length, time between start times, buffers, minimum notice, daily and per-time limits, booking window, whether a lead may reschedule or cancel, its location, how bookings are shared, its weekly and dated hours, and its team. A calendar that books into GoHighLevel, Calendly or iClosed also says what that system sets, so you change those there.
+
+**Ask it:** "How is the Intro Call calendar set up?" · "Who is on the Sales calendar?"
+
+### `create_calendar`
+
+Make a new booking calendar, as **New calendar** in the app does. It opens Monday to Friday, 9 AM to 5 PM on the business's clock, sends the lead a confirmation and a reminder the day before, and gets its own booking page. Only `name` is required.
+
+| Parameter | Type | Required | Description |
+| --- | --- | --- | --- |
+| `name` | string | Yes | The calendar's name, up to 255 characters |
+| `link` | string | No | Its link, up to 255 characters, made lowercase with dashes. One already taken gets the next free one (`intro-call-2`). |
+| `description` | string | No | Shown on the booking page |
+| `durationMinutes` | number | No | How long a meeting is, 1 to 1,440 |
+| `minutesBetweenStarts` | number | No | Time between the start times offered, at least 1 |
+| `bufferBeforeMinutes` / `bufferAfterMinutes` | number | No | Free time kept before or after each meeting, 0 to 1,440 |
+| `minimumNoticeMinutes` | number | No | How soon before a time it can still be booked, 0 or more |
+| `maxBookingsPerDay` | number | No | At least 1, or `null` for no daily limit |
+| `bookingsPerTime` | number | No | How many people can book the same time, at least 1 |
+| `bookingWindowDays` | number | No | How many days ahead it can be booked, at least 1 |
+| `leadCanReschedule` / `leadCanCancel` | boolean | No | Whether a lead may reschedule or cancel from their email |
+| `locationType` | enum | No | `GOOGLE_MEET`, `ZOOM`, `MICROSOFT_TEAMS`, `PHONE_CALL_HOST`, `PHONE_CALL_INVITEE`, `IN_PERSON`, `CUSTOM` or `ASK_INVITEE` |
+| `location` | string | No | The address, phone number or meeting link, for the types that take one |
+| `locationLabel` | string | No | How the location reads on the booking page, up to 255 characters |
+
+**Returns:** a line naming its length, link and hours, and the calendar. Then set its team with `set_calendar_team`.
+
+**Ask it:** "Make a 30-minute Intro Call calendar."
+
+### `update_calendar`
+
+Change a calendar's settings, as its editor in the app does. Send only what changes, by the names above, with `calendarId`.
+
+A setting the calendar's own system sets (GoHighLevel, Calendly or iClosed) is refused with where to change it. A link another calendar or a form already uses is refused.
+
+**Ask it:** "Make the Intro Call 45 minutes." · "No bookings less than 2 hours ahead."
+
+### `set_calendar_hours`
+
+Set when a calendar can be booked, on the business's clock.
+
+| Parameter | Type | Required | Description |
+| --- | --- | --- | --- |
+| `calendarId` | string | Yes | From `list_calendars` |
+| `week` | array | No | The whole week: each open `day` (`monday` … `sunday`) with its `windows` (`{ "start": "09:00", "end": "17:00" }`; two windows for a break). A day left out is closed. |
+| `dates` | array | No | Replaces every dated exception: `{ "date": "2026-12-24", "open": false }` for a day off, or a date with its own `windows`. An empty list removes them all. |
+
+Send `week`, `dates` or both: up to 24 windows a day and 366 dates. A calendar whose hours come from GoHighLevel, Calendly or iClosed is refused.
+
+**Ask it:** "Weekdays 9 to 5." · "Closed on December 24."
+
+### `set_calendar_team`
+
+Set who a calendar books with: only the business's own people in Cortana. Name each person by their user id, email, full name, or a first name only one of them has.
+
+| Parameter | Type | Required | Description |
+| --- | --- | --- | --- |
+| `calendarId` | string | Yes | From `list_calendars` |
+| `add` | array | No | People to put on the team |
+| `remove` | array | No | People to take off the team |
+| `members` | array | No | The whole team instead (anyone not listed comes off): each `person`, `primary` for who a one-person calendar books first, and `active: false` to keep someone on the team without new bookings |
+| `sharing` | enum | No | `SINGLE` (the primary), `ROUND_ROBIN_AVAILABILITY` (whoever is free) or `ROUND_ROBIN_EQUAL` (evenly) |
+
+Send `members`, or `add` and `remove`, not both. A team holds up to 500 people. Each person keeps their round-robin count and their own meeting location.
+
+**Ask it:** "Add Ben to the Sales calendar." · "Sarah and Ben take the intro calls, round robin."
+
+### `set_calendar_active`
+
+Switch a calendar on or off. Off, its booking page takes no new bookings and the appointments already booked stay. Switching one on is refused when its link is a published blog post on one of your domains, which the calendar's page would take over. Calendars are never deleted: off is how you retire one, and you can switch it back on.
+
+| Parameter | Type | Required | Description |
+| --- | --- | --- | --- |
+| `calendarId` | string | Yes | From `list_calendars` |
+| `active` | boolean | Yes | `false` switches it off, `true` back on |
+
+**Ask it:** "Turn off the Demo calendar." · "Switch the webinar calendar back on."
+
+<Card title="Do the same from your own app" icon="code" href="/api-reference/endpoint/list-calendars">
+  Every one of these is also in the REST API, under Calendars and Appointments.
+</Card>

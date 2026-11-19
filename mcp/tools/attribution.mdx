@@ -1,9 +1,9 @@
 ---
 title: "Attribution"
-description: "Which sources, campaigns and ads drive your conversions and revenue, and every conversion behind them."
+description: "Which sources, campaigns and ads drive your conversions and revenue, every conversion behind them, and your custom metrics."
 ---
 
-These tools give your AI the same attribution table you see in Cortana: spend, conversions, revenue, ROAS and cost per conversion by source, campaign, medium or ad, plus every conversion and each contact's lifetime value.
+These tools give your AI the same attribution table you see in Cortana: spend, conversions, revenue, ROAS and cost per conversion by source, campaign, medium or ad, plus every conversion, each contact's lifetime value, and the custom metrics you build on top.
 
 <Note>
   Works on every connection. Every tool takes an optional `businessId` when your connection reaches more than one business.
@@ -86,3 +86,85 @@ Every conversion Cortana recorded, or your contacts ranked by lifetime value.
 **Returns:** in `list` mode, each conversion with its contact, value and time; in `ltv` mode, contacts with their lifetime value.
 
 **Ask it:** "Who are my 20 highest-value customers?"
+
+## Custom metrics
+
+Custom metrics are the formula columns of your Ad Tracking table, such as cost per booked call or your own ROAS. Your AI can read them, build and change them, check a formula, turn them off and on, and tell you what they add up to.
+
+<Note>
+  Reading and evaluating a metric needs your Ad Tracking **View** permission in Cortana; making, changing or turning one off needs **Manage ad tracking**, as in the app. Nothing here deletes a metric: off is the undo.
+</Note>
+
+### `list_custom_metrics`
+
+Your custom metrics, and every piece a formula can use.
+
+| Parameter | Type | Required | Description |
+| --- | --- | --- | --- |
+| `includeInactive` | boolean | No | Also list the metrics that are turned off |
+
+**Returns:** each metric's id, name, formula, format (`number`, `currency` or `percent`), whether it is on, what each piece of its formula is, and when it last changed. Also the formula's building blocks, written as they go in a formula: the standard metrics (`{ad-spend}`, `{unique-visitors}`, `{total-revenue}`, `{days}` and more), each of your conversions (its count, cost per and revenue), and another metric as `{custom:<id>}`. A business has at most 50 metrics on.
+
+**Ask it:** "Which custom metrics do we have?" · "What does my ROAS metric add up?"
+
+### `save_custom_metric`
+
+Make a custom metric, or change one, as the metric builder does.
+
+| Parameter | Type | Required | Description |
+| --- | --- | --- | --- |
+| `metricId` | string | No | The metric to change. Leave out to make a new one. |
+| `name` | string | For a new one | Up to 100 characters |
+| `formula` | string | For a new one | Up to 2,000 characters: the pieces from `list_custom_metrics` with `+ - * /` and parentheses, such as `{ad-spend} / {conversion-<id>-count}` |
+| `format` | enum | For a new one | `number`, `currency` or `percent` (a percent formula is a share, such as leads / visitors, shown ×100) |
+| `description` | string | No | Up to 191 characters |
+| `expectedUpdatedAt` | string | No | When the metric last changed, as `list_custom_metrics` showed it |
+| `dryRun` | boolean | No | Only check the formula; nothing is saved |
+
+Saving the same name, formula and format again answers the metric already there, never a second one. A name already used with another formula or format is refused: change that metric instead. With `expectedUpdatedAt`, a metric someone changed since is refused instead of written over.
+
+**Returns:** the metric, and any warning the builder would show (a division that can be zero, a conversion that is off). With `dryRun`, the check alone.
+
+**Ask it:** "Make a metric: cost per booked call = ad spend / booked calls, as currency." · "Change Cost per lead to count only paid leads."
+
+### `evaluate_custom_metric`
+
+What one or a few metrics add up to over some days: the same numbers as the metric's column in your table.
+
+| Parameter | Type | Required | Description |
+| --- | --- | --- | --- |
+| `metricIds` | array | Yes | Up to 10 metrics, from `list_custom_metrics` |
+| `startDate` | string | Yes | First day, `YYYY-MM-DD` |
+| `endDate` | string | Yes | Last day, `YYYY-MM-DD`, counted whole |
+| `groupBy` | enum | No | `source` (default), `campaign`, `medium` or `ad` |
+| `order` | enum | No | `desc` (default, highest first) or `asc` |
+| `presetId` | string | No | A saved view from `get_presets`, to read the metric as that view's column |
+| `sources` / `campaigns` | array | No | Only these sources or campaigns, up to 50 each |
+| `attributionModel` | enum | No | `last_click`, `first_click`, `paid_priority` or `scientific` |
+| `dateBucketMode` | string | No | `purchase` (default), `click` (the table's Date of Click) or `conversion:<configName>` |
+| `currency` | string | No | The display currency, such as `CAD`. Default: `USD` |
+| `timezone` | string | No | Default: the business's own |
+
+Days are whole calendar days, as the table's date picker counts them, up to 731 days a call ("this year vs last year" fits).
+
+**Returns:** each metric's total (the TOTAL row) and its value per row, ranked by value, blanks last, up to 100 rows a metric. A cut list says how many rows the table has.
+
+**Ask it:** "What was cost per booked call last month, by source?" · "Which campaign had the lowest cost per lead?"
+
+### `set_custom_metric_active`
+
+Turn a metric off (its column stops computing; nothing is deleted) or back on.
+
+| Parameter | Type | Required | Description |
+| --- | --- | --- | --- |
+| `metricId` | string | Yes | From `list_custom_metrics` (`includeInactive` lists the ones that are off) |
+| `active` | boolean | Yes | `false` turns it off, `true` back on |
+| `expectedUpdatedAt` | string | No | When the metric last changed, as you saw it |
+
+A metric another live metric uses cannot be turned off until that one changes or is off. One whose formula uses a metric that is off cannot come back on until that one does.
+
+**Ask it:** "Turn off the old CPL metric." · "Bring back Cost per lead."
+
+<Card title="Do the same from your own app" icon="code" href="/api-reference/endpoint/list-custom-metrics">
+  Custom metrics are also in the REST API, under Custom Metrics.
+</Card>

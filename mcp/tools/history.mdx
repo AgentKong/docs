@@ -1,0 +1,40 @@
+---
+title: "History"
+description: "Who changed what, and from where: a record's history, or everything that changed in your business lately."
+---
+
+Since History arrived in Cortana, every change to an appointment, a calendar, a deal, a pipeline or a custom metric is kept with who made it and from where: a teammate in the app, a lead on your booking page, your own app through an API key, Claude or ChatGPT acting for someone, or a CRM's sync. Changes made before then have no history, except a conversion's value, attribution and time edits, which Cortana already kept on each conversion. This tool reads it back in the same words as the **History** panel in Cortana.
+
+<Note>
+  On every connection, with nothing extra to tick on the consent screen. It reads what the connection's other tools read: appointments, calendars, deals and pipelines on a connection that reads your CRM contacts, custom metrics on one that reads attribution, and conversions on one that reads conversion events. Each is on every connection by default. A custom metric's or a conversion's history also needs your Ad Tracking **View** permission. Takes an optional `businessId` when your connection reaches more than one business.
+</Note>
+
+### `get_history`
+
+One record's history, or your business's recent changes. Newest first, 25 lines a page.
+
+| Parameter | Type | Required | Description |
+| --- | --- | --- | --- |
+| `record` | object | No | One record: `{ "kind": "deal", "id": "…" }`. `kind` is `appointment`, `calendar`, `deal`, `pipeline`, `custom_metric` or `conversion`. Leave out for your business's recent changes. |
+| `kind` | enum | No | Recent changes to one kind of record only |
+| `actorKind` | enum | No | Recent changes by one kind of actor only: `person` (a teammate in the app or the Chrome extension), `contact` (a lead on the booking page), `api_key` (an app using an API key), `ai` (Claude, ChatGPT or another AI, for a person), `crm_sync`, `automation`, `system` |
+| `cursor` | string | No | The `nextCursor` of the previous page, for older lines |
+
+**One record** reads its whole history. A pipeline's includes its stages' changes. A conversion's folds in its own value, attribution and time edits: who changed the value of a sale, its attribution, or its time.
+
+**Your business's recent changes** cover the last 30 days across every record you may see, each line naming its record so your AI can read that record's history next. A conversion's value, attribution and time edits are kept on each conversion, so ask about that conversion to see them.
+
+**Returns:** each line as the History panel reads it, with its time on the business's clock and each changed field before and after:
+
+```text
+Moved to Won · Sarah Lee, in the app
+Booked for Fri, Nov 20, 3:00 PM · Acme Scheduler, via API
+Value $4,000.00 → $3,500.00 · Shopify sync
+Rescheduled to Wed, Nov 25, 4:30 PM · Claude, for Sarah Lee
+```
+
+**Ask it:** "Who moved the Acme deal to Lost?" · "What did Claude change today?" · "Who edited the value of that $4,000 sale?" · "What changed on my 30-minute calendar this week?"
+
+<Card title="Read it from your own app" icon="code" href="/api-reference/endpoint/list-business-history">
+  The same history is in the REST API, and your app can be told about each change as it happens with [webhook events](/webhook-events).
+</Card>

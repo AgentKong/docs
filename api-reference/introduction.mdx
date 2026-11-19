@@ -5,7 +5,9 @@ description: "The Cortana AI Public REST API v1"
 
 # API Reference
 
-The Cortana AI Public API provides programmatic access to contacts, conversations, messages, agents, appointments, conversions, tracking sessions, tags, custom fields, financial data (Stripe, Shopify, Whop), voice call logs/transcripts, and **creating businesses** for automated agency onboarding.
+The Cortana AI Public API provides programmatic access to contacts, conversations, messages, agents, appointments and calendars, pipelines and deals, custom metrics, the history of who changed what, conversions, tracking sessions, tags, custom fields, financial data (Stripe, Shopify, Whop), voice call logs/transcripts, and **creating businesses** for automated agency onboarding.
+
+Bookings into a calendar, and every change to an appointment, a calendar, a deal, a stage or a custom metric, run the same steps as the same change in the app: a booking holds its time and emails the lead, a deal move tells your CRM, and the record's history names your key ("Moved to Proposal · Acme Scheduler, via API").
 
 ## Base URL
 
@@ -39,23 +41,90 @@ See [Authentication](/authentication) for creating and managing API keys.
 
 ## Response Format
 
+A list that pages answers `data` and `pagination`. Older lists page by number:
+
 ```json
 {
   "data": [...],
   "pagination": {
+    "total": 150,
     "page": 1,
     "limit": 20,
-    "total": 150,
-    "totalPages": 8
+    "hasMore": true
   }
 }
 ```
+
+Appointments, deals and history page by cursor: pass the `nextCursor` you got back as `cursor` for the next page. A booking made while you page never shifts a page of appointments, and a pipeline's deals come in a stable order a sync can follow. Appointments take both: a numbered page also answers `nextCursor`.
+
+```json
+{
+  "data": [...],
+  "pagination": {
+    "limit": 25,
+    "hasMore": true,
+    "nextCursor": "eyJ..."
+  }
+}
+```
+
+The calendars, pipelines and custom metrics lists do not page: each answers its whole list in `data`, with no `pagination`. Calendars come up to 500, with `truncated: true` when a business has more; pipelines come with the business's `lostReasons`.
+
+## Retrying safely
+
+`POST /appointments` and `POST /deals` take an `Idempotency-Key` header: any 1 to 255 visible characters, such as a UUID, one per new record. If a request times out, send it again with the same key. You get the record the first request made, with `200` and `Idempotent-Replayed: true`, never a second booking or deal. The same key sent with a different booking or deal is refused with `409`. Keys belong to the API key that sent them.
+
+A custom metric needs no key: the same name, formula and format again answers the metric already there. A stage of a name the pipeline already has is answered as it is.
+
+## Changes made since you read
+
+A deal or a custom metric can be changed by your teammates while your app holds an old copy. Send back what you read and Cortana refuses the change with `409` instead of writing over theirs:
+
+- `expectedUpdatedAt` on `PATCH /deals/{dealId}` and `PATCH /custom-metrics/{metricId}`: the `updatedAt` you read.
+- `fromStageId` and `fromStatus` on `POST /deals/{dealId}/move`: where you saw the deal.
+
+## Errors
+
+Every error answers `{ "error": { "code", "message", "details"? } }`. The `message` is written for a person: show it as it is.
+
+| Status | Code | When |
+| --- | --- | --- |
+| `400` | `VALIDATION_ERROR` | A value is missing or out of range, or the request names a field the route does not take. The calendar, pipeline, deal and custom metric routes refuse a body field they do not list, and the deal, custom metric and history lists a query parameter they do not list, rather than ignoring it. |
+| `401` | `UNAUTHORIZED` | The key is missing, wrong or expired |
+| `403` | `FORBIDDEN` | The key lacks the scope ("Insufficient scope. Required: deals:read"), or its owner lacks the permission in Cortana |
+| `404` | `NOT_FOUND` | The business, or the record, is not one your key can reach |
+| `405` | `METHOD_NOT_ALLOWED` | The path exists but not with this method. The `Allow` header lists the methods it takes. |
+| `409` | `CONFLICT` | The record changed since you read it, the time is taken, or the request clashes with what is there |
+| `413` | `PAYLOAD_TOO_LARGE` | The request body is over 1 MB |
+| `429` | `RATE_LIMITED` | Over 60 requests a minute for this API key. Wait `Retry-After` seconds. |
+| `500` | `INTERNAL_ERROR` | Something failed on our side. `details[0].requestId` names your request: quote it to support. |
+| `502` | `UPSTREAM_ERROR` | GoHighLevel, Calendly or iClosed refused a booking or did not answer |
+
+Nothing in this API deletes a calendar, a pipeline, a stage, a deal or a custom metric: a `DELETE` on a calendar, a stage, a deal or a custom metric answers `405`. Switch a calendar or a metric off, or mark a deal lost or abandoned, and you can undo it. `DELETE /appointments/{appointmentId}` cancels the appointment and answers it with `200`.
+
+`/businesses/{businessId}`, `/contacts/{contactId}/tags`, `/contacts/{contactId}/tags/{tagId}` and `/webhooks/{webhookId}/rotate-secret` also answer a method they do not take with `405` and `Allow`, where they used to answer `404`.
+
+<Note>
+  Calling from a browser: the API takes `GET`, `POST`, `PUT`, `PATCH` and `DELETE` from any origin, with the `Authorization`, `Content-Type` and `Idempotency-Key` headers. Every answer, an error included, lets your code read its status, its body and, when the answer carries them, the rate-limit headers, `X-Request-Id`, `Retry-After`, `Allow` and `Idempotent-Replayed`. Your API key opens your business's data: keep it on your server, or in a server function, and call the API from there, never from code that loads in a visitor's browser.
+</Note>
 
 ## Endpoint Groups
 
 <CardGroup cols={2}>
   <Card title="Businesses" icon="building" href="/api-reference/endpoint/create-business">
     Create a new client business (`POST /api/v1/businesses`) and list agency templates (`GET /api/v1/businesses/templates`) for `templateId`
+  </Card>
+  <Card title="Appointments & calendars" icon="calendar" href="/api-reference/endpoint/list-calendars">
+    Open times, booking, rescheduling and cancelling, and each calendar's settings, hours and team
+  </Card>
+  <Card title="Pipelines & deals" icon="columns-3" href="/api-reference/endpoint/list-pipelines">
+    Pipelines and stages, and deals added, changed, moved, won and lost
+  </Card>
+  <Card title="Custom metrics" icon="function" href="/api-reference/endpoint/list-custom-metrics">
+    The Ad Tracking table's formula columns, and their values
+  </Card>
+  <Card title="History" icon="clock-rotate-left" href="/api-reference/endpoint/list-business-history">
+    Who changed what, and from where. Get each change as it happens with [webhook events](/webhook-events).
   </Card>
   <Card title="Contacts" icon="address-book" href="/api-reference/endpoint/list-contacts">
     CRUD + tag management for CRM contacts

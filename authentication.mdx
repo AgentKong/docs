@@ -61,19 +61,26 @@ Instead of a preset, scroll the permission list and check the specific scopes yo
 | `messages:write` | Send messages |
 | `agents:read` | List and view agent configurations |
 | `agents:write` | Create, update, and delete agents |
-| `appointments:read` | List and view appointments |
-| `appointments:write` | Create, update, and delete appointments |
-| `conversions:read` | View conversion entries and configs |
+| `appointments:read` | List and view appointments, calendars and their open times, and read their history |
+| `appointments:write` | Book, change and cancel appointments; create calendars and change their settings, hours and team |
+| `deals:read` | List pipelines, their stages and deals, and read their history |
+| `deals:write` | Add, change, move, win, lose and reopen deals; add, rename and reorder stages |
+| `conversions:read` | View conversion entries and configs, and read a conversion's history |
 | `conversions:write` | Create conversion entries |
 | `tracking:read` | View tracking sessions |
 | `tags:read` / `tags:write` | Manage tags |
 | `custom_fields:read` / `custom_fields:write` | Manage custom fields |
 | `attribution:read` | Full attribution table, UTMs, presets, LTV |
+| `metrics:read` | List custom metrics, check a formula, and read their history. Their values also need `attribution:read`. |
+| `metrics:write` | Create and change custom metrics, and turn them off or back on |
 | `stripe:read` | Stripe payments, subscriptions, customers, metrics |
 | `shopify:read` | Shopify orders, customers, products, analytics |
 | `whop:read` | Whop payments, customers, memberships |
 | `meetings:read` | Read meetings and Fathom data |
 | `businesses:write` | Create businesses, list agency business templates, and update a business's Business Info |
+| `webhooks:read` / `webhooks:write` | Read, or add, change and remove, your webhook endpoints. Subscribing an endpoint to [appointment or deal events](/webhook-events) also needs `appointments:read` or `deals:read`. |
+| `embedded_checkouts:read` / `embedded_checkouts:write` | Read, or create and change, embedded checkouts. Write can sell on your connected Stripe. |
+| `stripe:write` | Create products and prices on your connected Stripe accounts (**Product Creation** on the key screen) |
 
 <Note>
   Programmatic onboarding (`businesses:write`) is included in All Access, or you can select it on its own a la carte.
@@ -116,12 +123,12 @@ To use Cortana inside Claude, ChatGPT, or Codex, add the MCP connector. This pat
     Choose which business or businesses the assistant is allowed to access.
   </Step>
   <Step title="Approve permissions">
-    Review the consent screen and approve. Ad analytics is granted by default.
+    Review the consent screen and approve. By default the assistant reads your data, books, moves and cancels appointments, edits your calendars, works your pipelines and deals, edits custom metrics, sets up conversions and Meta tracking, edits your Business Info and sees who changed what, each with your own permissions in Cortana.
   </Step>
 </Steps>
 
 <Warning>
-  Ad management (create, launch, and spend) is a separate opt-in checkbox on the consent screen. Leave it unchecked if you only want the assistant to read data.
+  Ad management (create, launch, and spend) is a separate opt-in checkbox on the consent screen. Leave it unchecked if you don't want the assistant to create or launch ads.
 </Warning>
 
 <Card title="MCP Server" icon="robot" href="/mcp/overview">
