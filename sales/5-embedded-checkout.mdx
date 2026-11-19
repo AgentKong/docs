@@ -232,6 +232,19 @@ Each checkout shows its own funnel: **Viewed**, **Clicked**, **Opened**, **Email
   <Accordion title="How do reps send this page to one contact?">
     Do not send a payment link. Save the page URL as a tracking link, then send that tracking link for the selected contact. Same motion as the payment URL builder. See [Send a sales page](/sales/send-a-sales-page).
   </Accordion>
+  <Accordion title="Can buyers pay with Klarna, Affirm, Afterpay or other financing?">
+    Yes. Cortana never limits a checkout to cards: the buyer sees every payment method you have turned on in the platform the checkout sells through.
+
+    - **Stripe:** in your Stripe dashboard, open **Settings**, then **Payment methods**, and turn on Klarna, Affirm or Afterpay / Clearpay. Your embedded checkout shows them right away. Nothing to change in Cortana.
+    - **Whop:** turn on the financing methods for that plan in Whop. The embedded checkout uses the plan's payment methods.
+    - **Commas (Fanbasis):** turn on the financing options in your Commas account, for example ClarityPay, Klarna, Sezzle or Zip. The embedded checkout is Commas's own checkout inside your page, so it shows them too.
+
+    Still only cards on the checkout? Check three things:
+
+    - The method is turned on in that platform's account.
+    - The price is a one-time payment. Financing options mostly work on one-time payments only; Affirm and Afterpay never work on subscriptions.
+    - The buyer's country, currency and the price are inside what that provider accepts. The provider hides itself when they are not.
+  </Accordion>
 </AccordionGroup>
 
 ## Next step
