@@ -4,15 +4,14 @@ sidebarTitle: "Overview"
 description: "Build a form, put it on its own web page or your own site, and see which ad brought each person in."
 ---
 
-{/* last-verified: 2026-09-10 · route: /business/[businessId]/forms */}
+{/* last-verified: 2026-11-16 · route: /business/[businessId]/forms */}
 
 Forms is where you build the forms people fill in. A form asks questions, someone answers them and presses a button.
 
 Every form can have its own web page, and you can paste the same form into your own website. Either way Cortana ties each answer to the ad that brought that person in, and files it on their contact record.
 
 <Frame caption="The Forms list. Each card is one form, with its own on and off switch.">
-  <img className="block dark:hidden" src="/images/forms/overview/01-forms-list.png" alt="The Forms area of a business, showing a grid of form cards. Each card has the form name, an on and off switch, a question count and the ending of its web address." />
-  <img className="hidden dark:block" src="/images/forms/overview/01-forms-list-dark.png" alt="The Forms area of a business, showing a grid of form cards. Each card has the form name, an on and off switch, a question count and the ending of its web address." />
+  <img src="/images/forms/overview/01-forms-list.png" alt="The Forms area of a business, showing a grid of form cards. Each card has the form name, an on and off switch, a question count and the ending of its web address." />
 </Frame>
 
 ## The two screens
@@ -29,8 +28,9 @@ Forms has two screens. Everything else opens on top of them.
 - **Ask 31 kinds of question.** Text, choices, star ratings, dates, file uploads and more.
 - **Split questions over pages.** People answer a few at a time instead of all at once.
 - **Show a question only sometimes.** Ask about budget only when someone picked "Sales question".
+- **Send each person down their own path.** After any page, send people to another page or to an ending of their own, based on what they answered.
 - **Take a payment.** Card details appear inside the form, on your own Stripe or Whop account.
-- **Let people book a call.** One of your booking calendars can sit inside the form.
+- **Let people book a call.** One of your booking calendars can sit inside the form. A path can send "book a call" people to the calendar and "pay now" people to the payment.
 - **Look like your brand.** Pick the colours, the font and the size of the writing.
 - **Change the ending.** Show a message, or send people to a page of your own.
 - **Save every answer onto the person.** Answers land on their contact record, under **Custom Fields**.
@@ -42,7 +42,7 @@ Each page below is one job, in the order you do it.
 | Step | What you get done |
 | --- | --- |
 | [1) Create your form](/forms-create) | Add a blank form, or bring one over from Typeform, Tally, HubSpot or GoHighLevel. |
-| [2) Build your form](/forms-build) | Write the questions, split them over pages, hide some until an earlier answer matches. |
+| [2) Build your form](/forms-build) | Write the questions, split them over pages, and send people down their own path. |
 | [3) Design and endings](/forms-design) | Pick the colours and the writing, and choose the screen people land on at the end. |
 | [4) Share your form](/forms-share) | Turn the form on, get the link, or paste the form into your own website. |
 | [5) Where your answers go](/forms-answers) | Read the answers, and count finished forms in your ad reports. |
@@ -60,7 +60,7 @@ Each page below is one job, in the order you do it.
     As many as you like. There is no limit, and no limit on questions either.
   </Accordion>
   <Accordion title="Where do the answers end up?">
-    On each person's contact record, under **Custom Fields**. There is no separate submissions table. [Where your answers go](/forms-answers) shows you how to read them.
+    On each person's contact record, under **Custom Fields**. Each form's card in the list also says how many submissions it has: click it to see each one, with the path the person took. [Where your answers go](/forms-answers) shows you how to read them.
   </Accordion>
 </AccordionGroup>
 

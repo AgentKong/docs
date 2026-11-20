@@ -1,9 +1,9 @@
 ---
 title: "2) Build your form"
-description: "Add questions, pick from 31 kinds, set what each one asks, split them over pages, and hide a question until an earlier answer matches."
+description: "Add questions, pick from 31 kinds, split them over pages, send each person down their own path, and take a payment or a booking inside the form."
 ---
 
-{/* last-verified: 2026-09-10 · route: /business/[businessId]/forms/[formId] */}
+{/* last-verified: 2026-11-16 · route: /business/[businessId]/forms/[formId] */}
 
 The builder is where you write the questions people answer. It has three columns: the list on the left, the real form in the middle, and the settings on the right.
 
@@ -12,20 +12,19 @@ You type straight into the middle column, and what you see there is what your vi
 <Note>
   **Before you start.** You need a form, so make one first on [Create your form](/forms-create). Keep it **Off** while you build, so nobody can fill in a half-finished one.
 
-  A **Payment** question needs Stripe or Whop connected in **Settings**. A **Scheduler** question needs a booking calendar. Nothing else is needed.
+  A **Payment** step needs Stripe or Whop connected in **Settings**. A **Calendar** block needs a booking calendar. Nothing else is needed.
 </Note>
 
 ## 1. Find your way around
 
-**The left column** lists your pages and questions. Every page is a block, every question a row inside it. Each row shows a small coloured tile for its kind, its number and its title. Hover a row and buttons appear: a bin on every row, and an eye on all but a page's first. Under each page sits **Add question**, under the last page sits **Add page**, and at the very bottom sits **Ending rules**.
+**The left column** lists your pages and questions. Every page is a block, every question a row inside it. Each row shows a small tile for its kind, its number and its title. Hover a row and buttons appear: a bin on every row, and an eye on all but a page's first. Under each page sits **Add question**, then a sentence that says where people go after that page. Under the last page sits **Add page**, and at the very bottom sits **Lead routing**: **Conditional logic** opens the Map of your paths, and **Ending rules & redirects** opens your ending rules.
 
-**The middle column** is your form, working. Type in it, press **Enter** in it, click through it. Nothing you type here is stored as an answer. You also edit here: click a question's title and type over it.
+**The middle column** is your form, working. **Preview** and **Map** sit above it: the Map draws your pages and paths. Type in the preview, press **Enter** in it, click through it. Nothing you type here is stored as an answer. You also edit here: click a question's title and type over it.
 
 **The right column** has two tabs. **Form** sets the look of the whole form, which is [Design and endings](/forms-design). **Field settings** sets everything about the one question you clicked. With nothing clicked it says **Nothing selected** and *Pick a question on the left to edit it*.
 
 <Frame caption="The three columns. Pages on the left, the real form in the middle, settings on the right.">
-  <img className="block dark:hidden" src="/images/forms/build/01-builder-columns.png" alt="The form builder with all three columns highlighted. The left column lists two pages and their questions with an Ending rules card at the bottom, the middle column shows the live form, and the right column shows Field settings for the selected question." />
-  <img className="hidden dark:block" src="/images/forms/build/01-builder-columns-dark.png" alt="The form builder with all three columns highlighted. The left column lists two pages and their questions with an Ending rules card at the bottom, the middle column shows the live form, and the right column shows Field settings for the selected question." />
+  <img src="/images/forms/build/01-builder-columns.png" alt="The form builder with all three columns highlighted. The left column lists two pages and their questions with the Lead routing card at the bottom, the middle column shows the live form, and the right column shows Field settings for the selected question." />
 </Frame>
 
 <Tip>
@@ -39,8 +38,7 @@ You type straight into the middle column, and what you see there is what your vi
 Each page has its own **Add question** button, under its list of questions. Click the one under the page you want the question on. An empty form says **No questions yet. Click Add question** in the left column instead.
 
 <Frame caption="Add question sits under each page, so the page you click decides where it lands.">
-  <img className="block dark:hidden" src="/images/forms/build/02-add-question.png" alt="The builder's left column with the Add question button under the first page highlighted, below the list of that page's questions." />
-  <img className="hidden dark:block" src="/images/forms/build/02-add-question-dark.png" alt="The builder's left column with the Add question button under the first page highlighted, below the list of that page's questions." />
+  <img src="/images/forms/build/02-add-question.png" alt="The builder's left column with the Add question button under the first page highlighted, below the list of that page's questions." />
 </Frame>
 
 A box opens, headed **Add a question**, with the line *Pick what you want to ask for. You can change it later.* Thirty-one kinds are grouped into nine sections, and each one says what it is for underneath its name.
@@ -48,15 +46,13 @@ A box opens, headed **Add a question**, with the line *Pick what you want to ask
 The search box at the top is already active, so just start typing. It searches the names and the descriptions, so `money` finds **Currency** and `NPS` finds **Opinion scale**. Click one and the box closes. The question is added at the bottom of that page.
 
 <Frame caption="The question picker. Type in the search box rather than scrolling nine sections.">
-  <img className="block dark:hidden" src="/images/forms/build/03-field-library.png" alt="The Add a question box with the search field highlighted at the top. Below it, question kinds are grouped under headings including Contact, Text, Choice, Rating and Numbers, each with a short description." />
-  <img className="hidden dark:block" src="/images/forms/build/03-field-library-dark.png" alt="The Add a question box with the search field highlighted at the top. Below it, question kinds are grouped under headings including Contact, Text, Choice, Rating and Numbers, each with a short description." />
+  <img src="/images/forms/build/03-field-library.png" alt="The Add a question box with the search field highlighted at the top. Below it, question kinds are grouped under headings, with Contact, Text and Choice in view, each kind with a short description." />
 </Frame>
 
 Your new question arrives with a stand-in title, such as **Your name** or **Choose one**. Click that title in the middle column and type your own. Hover the question and **+ Add description** appears beside the title, for a second line under the question.
 
 <Frame caption="The title in the middle column is a box. Type over the stand-in.">
-  <img className="block dark:hidden" src="/images/forms/build/04-question-title.png" alt="The middle column of the builder with the first question's title box highlighted, showing the plus Add description button beside it and the answer box underneath." />
-  <img className="hidden dark:block" src="/images/forms/build/04-question-title-dark.png" alt="The middle column of the builder with the first question's title box highlighted, showing the plus Add description button beside it and the answer box underneath." />
+  <img src="/images/forms/build/04-question-title.png" alt="The middle column of the builder with the first question's title box highlighted, showing the plus Add description button beside it and the answer box underneath." />
 </Frame>
 
 <Warning>
@@ -78,8 +74,7 @@ The top of the panel names the kind of question in capitals, such as **EMAIL**, 
 - **Placeholder**: *Greyed-out example text inside the box.* It appears on questions you type into.
 
 <Frame caption="Field settings is about one question only. Click another and it changes.">
-  <img className="block dark:hidden" src="/images/forms/build/05-field-settings.png" alt="The builder with the Field settings tab highlighted at the top of the right column. Below it the panel shows the question kind, a Change type button and the Question, Help text and Placeholder boxes." />
-  <img className="hidden dark:block" src="/images/forms/build/05-field-settings-dark.png" alt="The builder with the Field settings tab highlighted at the top of the right column. Below it the panel shows the question kind, a Change type button and the Question, Help text and Placeholder boxes." />
+  <img src="/images/forms/build/05-field-settings.png" alt="The builder with the Field settings tab highlighted at the top of the right column. Below it the panel shows the question kind, a Change type button and the Question, Help text and Placeholder boxes." />
 </Frame>
 
 ### Decide whether people must answer
@@ -91,8 +86,7 @@ Three switches sit at the bottom of the panel.
 - **Show on the form**: *Turn off to hide it without deleting anything.* On to start with.
 
 <Frame caption="Required is off to start with. Turn it on for anything you cannot follow up without.">
-  <img className="block dark:hidden" src="/images/forms/build/06-required.png" alt="The Field settings panel with the Required switch row highlighted, showing the line They cannot continue without answering, above the Hide until the previous field is completed and Show on the form rows." />
-  <img className="hidden dark:block" src="/images/forms/build/06-required-dark.png" alt="The Field settings panel with the Required switch row highlighted, showing the line They cannot continue without answering, above the Hide until the previous field is completed and Show on the form rows." />
+  <img src="/images/forms/build/06-required.png" alt="The Field settings panel with the Required switch row highlighted, showing the line They cannot continue without answering, above the Hide until the previous field is completed and Show on the form rows." />
 </Frame>
 
 ### Make one question bigger, or push it down
@@ -103,11 +97,10 @@ Three switches sit at the bottom of the panel.
 
 **Space above** sets the gap above the question, from 0px to 96px. It replaces the form's own gap rather than adding to it. Set it to 0 and the question sits right against the one before it, so two short questions read as one pair.
 
-Moving a slider is what creates the change. A link then appears underneath to put it back.
+Each is a box you type a number into. Under it, **Match form** means it is following the form. Type a number and it changes this question on its own; a link then appears underneath to put it back.
 
 <Frame caption="Text size and Space above start at Match form, so the question follows the whole form.">
-  <img className="block dark:hidden" src="/images/forms/build/07-question-typography.png" alt="The Field settings panel of the form builder with the Text size and Space above rows highlighted, each a slider reading Match form, sitting between the Placeholder box and the Logic block." />
-  <img className="hidden dark:block" src="/images/forms/build/07-question-typography-dark.png" alt="The Field settings panel of the form builder with the Text size and Space above rows highlighted, each a slider reading Match form, sitting between the Placeholder box and the Logic block." />
+  <img src="/images/forms/build/07-question-typography.png" alt="The Field settings panel of the form builder with the Text size and Space above rows highlighted, each a pixel box showing the size the form uses with Match form under it, sitting between the Placeholder box and the Logic block." />
 </Frame>
 
 <Note>
@@ -120,7 +113,7 @@ Moving a slider is what creates the change. A link then appears underneath to pu
 
 ## 4. Set the choices
 
-This section is for **Single choice**, **Multiple choice**, **Dropdown**, **Picture choice** and **Ranking**.
+This section is for **Single choice**, **Multiple choice**, **Dropdown** and **Ranking**. A **Picture choice** sets its choices with their pictures, in its own rows (see the note below).
 
 Two boxes do the same job, so use whichever you are nearer.
 
@@ -129,8 +122,7 @@ In the middle column, hover the question and click **Edit choices**. A box opens
 In **Field settings**, use the **Options** box. Its hint reads *One per line. Blank lines are ignored.* It stores when you click somewhere else.
 
 <Frame caption="Edit choices. One choice per line, and blank lines are ignored.">
-  <img className="block dark:hidden" src="/images/forms/build/08-edit-choices.png" alt="The Edit choices box with its text area highlighted, holding three choices on separate lines, above Cancel and Save choices buttons." />
-  <img className="hidden dark:block" src="/images/forms/build/08-edit-choices-dark.png" alt="The Edit choices box with its text area highlighted, holding three choices on separate lines, above Cancel and Save choices buttons." />
+  <img src="/images/forms/build/08-edit-choices.png" alt="The Edit choices box with its text area highlighted, holding three choices on separate lines, above Cancel and Save choices buttons." />
 </Frame>
 
 ### Buttons or a dropdown
@@ -140,17 +132,18 @@ Hover the question in the middle column and two small icons appear beside the ti
 Buttons suit two to five choices. A dropdown suits a long list, such as a country.
 
 <Frame caption="The same choices, shown two ways. Buttons for a few, a dropdown for many.">
-  <img className="block dark:hidden" src="/images/forms/build/09-choice-display.png" alt="A choice question in the middle column of the builder with the two small display icons highlighted beside its title, one for showing the choices as buttons and one for showing them as a dropdown." />
-  <img className="hidden dark:block" src="/images/forms/build/09-choice-display-dark.png" alt="A choice question in the middle column of the builder with the two small display icons highlighted beside its title, one for showing the choices as buttons and one for showing them as a dropdown." />
+  <img src="/images/forms/build/09-choice-display.png" alt="A choice question in the middle column of the builder with the two small display icons highlighted beside its title, one for showing the choices as buttons and one for showing them as a dropdown." />
 </Frame>
 
-<Warning>
-  **Two kinds are not finished yet.**
+<Note>
+  **Four kinds keep their settings in Field settings.**
 
-  **Picture choice** takes its choices, but there is nowhere yet to set the picture, so every choice shows a grey **No image** square. The **Image** and **Video** blocks are the same. Use **Single choice** instead, which does the same job today and looks finished to your visitor.
+  **Picture choice** lists its choices under **Choices & pictures**, one row each with its picture. Rename a row and its picture stays with it. Click **Add a choice** for another. A picture no choice uses is listed under **Pictures no choice uses**, so you can give it to a choice or remove it.
 
-  **Matrix** appears in the picker, but its rows and columns cannot be set, so it has nothing to ask. Pick another kind for now.
-</Warning>
+  **Matrix** has **Rows** and **Columns** under **Grid**, and **Allow more than one answer per row**.
+
+  **Image** takes an upload (**Drop an image or click to upload**) or a link, with **Describe the image** for people who cannot see it. **Video** takes a link (**Paste a video link**) or a file.
+</Note>
 
 ## 5. Show a question only sometimes
 
@@ -165,8 +158,7 @@ Swap **Show** for **Hide** to turn it around. Swap **all** for **any** when one 
 Click **Add a condition** for a second test on the same rule. Click **Always show** to drop the rule.
 
 <Frame caption="The rule reads as a sentence, so you can check it at a glance.">
-  <img className="block dark:hidden" src="/images/forms/build/10-logic.png" alt="The Logic box in Field settings highlighted, reading Show this when all of these are true, followed by a row naming an earlier question, the test is, and a value chosen from that question's own list." />
-  <img className="hidden dark:block" src="/images/forms/build/10-logic-dark.png" alt="The Logic box in Field settings highlighted, reading Show this when all of these are true, followed by a row naming an earlier question, the test is, and a value chosen from that question's own list." />
+  <img src="/images/forms/build/10-logic.png" alt="The Logic box in Field settings highlighted, reading Show this when all of these are true, followed by a row naming an earlier question, the test is, and a value chosen from that question's own list." />
 </Frame>
 
 A rule can use twelve tests.
@@ -190,8 +182,7 @@ A page is a screen. People answer the questions on it, press the round button, a
 Click **Add page** under the last page in the left column. The new page appears empty, at the bottom. Use its own **Add question** to fill it, or drag a question by the dotted handle on the left of its row to move it between pages.
 
 <Frame caption="Add page adds an empty page at the bottom. Drag questions into it.">
-  <img className="block dark:hidden" src="/images/forms/build/11-pages.png" alt="The builder's left column showing two page blocks with their questions, and the Add page button highlighted underneath them." />
-  <img className="hidden dark:block" src="/images/forms/build/11-pages-dark.png" alt="The builder's left column showing two page blocks with their questions, and the Add page button highlighted underneath them." />
+  <img src="/images/forms/build/11-pages.png" alt="The builder's left column showing two page blocks with their questions, and the Add page button highlighted underneath them." />
 </Frame>
 
 Each page block has a box beside its number, marked *Title (optional)*. Whatever you type shows to the visitor as a heading above that page's questions. Leave it empty and no heading appears. The small arrow beside it folds the page up in your list, which changes nothing for the visitor.
@@ -205,41 +196,110 @@ An empty page asks *The page is empty, so nothing else changes.* A page with que
 The bin only shows when there is more than one page, because a form must have at least one.
 
 <Frame caption="Deleting a page asks what to do with its questions.">
-  <img className="block dark:hidden" src="/images/forms/build/12-delete-page.png" alt="The delete page box, naming the page and explaining that its one question can either move to the page before or be deleted with it. The Keep the question button is highlighted, beside Cancel and Delete page and question." />
-  <img className="hidden dark:block" src="/images/forms/build/12-delete-page-dark.png" alt="The delete page box, naming the page and explaining that its one question can either move to the page before or be deleted with it. The Keep the question button is highlighted, beside Cancel and Delete page and question." />
+  <img src="/images/forms/build/12-delete-page.png" alt="The delete page box, naming the page and explaining that its one question can either move to the page before or be deleted with it. The Keep the question button is highlighted, beside Cancel and Delete page and question." />
 </Frame>
 
-## 7. Check it in the preview
+## 7. Send people down different paths
+
+A path sends people somewhere other than the next page, based on what they answered. "When the budget is under $1k, end on Not a fit yet." "When they chose to pay now, go to Checkout." Each person sees only the pages their answers lead to.
+
+Under each page in the left column sits a sentence that says where people go after it, such as *Go to the next page.* Click the sentence to open that page's paths.
+
+<Frame caption="The sentence under a page says where people go next. Click it to change that.">
+  <img src="/images/forms/build/16-path-sentence.png" alt="The builder with the sentence under the second page highlighted. It reads: When How would you like to start? is Pay $297 and start now, go to Checkout. Otherwise, go to the next page." />
+</Frame>
+
+### Add a path
+
+1. Click the sentence under the page. A panel opens, headed **After** and the page's name.
+2. Click **Add a path**.
+3. Under **When**, pick the question, the test and the answer. Use **Add condition** for a second test, or **Add group** for a set of tests with its own any or all.
+4. Under **Then**, pick where they go: a page, or an ending.
+5. Under **Otherwise**, pick where everyone else goes. It starts on **The next page**.
+
+Paths run top to bottom, and the first match wins. The arrows on a path move it up or down. A path can test answers from its own page or an earlier one, never a later page. There is no Save button here either: the panel reads **Changes save automatically.**
+
+<Frame caption="A path: when the answer is this, go there. Otherwise covers everyone else.">
+  <img src="/images/forms/build/17-paths-sheet.png" alt="The paths panel for the page Your next step. 1 marks the When row: Answer, How would you like to start?, Equals, Pay $297 and start now. 2 marks Then, set to Go to Checkout. 3 marks the Add a path button. 4 marks Otherwise, set to The next page." />
+</Frame>
+
+### End on a named ending
+
+Pick an ending under **Then** to stop the form there, or **New ending** to make one. Name it under **Ending name**, then pick **Redirect to a URL** or **Show a message**. A message has a **Headline** and a **Body**. A redirect has its address and its **URL parameters**: which answers to add to the address.
+
+One ending can serve several paths. Its panel says how many, and an edit to it applies everywhere it is used. An ending a path still uses cannot be removed until you choose another destination for that path.
+
+<Frame caption="A named ending: its name, then a message or a redirect.">
+  <img src="/images/forms/build/18-path-ending.png" alt="The paths panel for the page About you. 1 marks Then, set to End on Not a fit yet. 2 marks the Ending name box. 3 marks the choice between Redirect to a URL and Show a message, with Show a message picked and its Headline and Body below." />
+</Frame>
+
+<Note>
+  A form whose paths never name an ending ends as before: on your **Ending rules**, then the Default screen. [Design and endings](/forms-design) covers them.
+</Note>
+
+### Book a call or take a payment inside the form
+
+Two kinds in the question picker are steps rather than questions. Find them at the bottom, under **Steps**:
+
+- **Payment** takes money on your own Stripe or Whop account. Cortana takes 0%.
+- **Calendar** puts one of your booking calendars inside the form. Pick it under **Which calendar?** in **Field settings**.
+
+<Frame caption="Payment and Calendar sit under Steps, at the bottom of the picker.">
+  <img src="/images/forms/build/20-steps-library.png" alt="The Add a question box scrolled to the bottom. 1 marks Payment, Take money on your own Stripe, 0% fee. 2 marks Calendar, Book one of your calendars inside the form." />
+</Frame>
+
+A path can read a Calendar block's answer: **Booked**, or **Left without booking** when the calendar's own questions turn someone away. If no path says where a turned-away person goes, the form ends for them on that page.
+
+<Frame caption="A path on a Calendar block: send people the calendar turned away to an ending of their own.">
+  <img src="/images/forms/build/19-calendar-path.png" alt="The paths panel for the page Book your call. 1 marks the When row: Answer, Pick a time for your strategy call, Equals, Left without booking. 2 marks Then, set to End on Not a fit yet." />
+</Frame>
+
+Each path can carry its own Payment step, so "book a call" and "pay now" can each have their own. No single path may pass through two Payment steps: the builder will not save one that does.
+
+After a payment, a redirect ending adds `paid=true`, the amount, the currency and the payment's id to the address. Stripe's id goes as `session_id` unless you rename it under **Payment id as**, so your own app can look the payment up.
+
+### Test the lead score in a path
+
+Under **When**, switch **Answer** to **Lead score** and compare it with a number. The score is the points of the answers up to this page, set on your custom fields. Until a field on this form carries points, the panel says *The score counts as 0 until a field on this form carries points.*
+
+### See every path on the Map
+
+Click **Map** above the preview. It draws every page and every ending, with a line for each path. Drag an answer onto a page or an ending to make a path for it, or click the answer to choose.
+
+<Frame caption="The Map draws the whole form. Drag an answer to send it somewhere.">
+  <img src="/images/forms/build/21-map.png" alt="The Map tab showing five pages as cards with their questions and answers, the path out of each page, and two endings, Not a fit yet and Call booked. 1 marks the answer Pay $297 and start now on page 2." />
+</Frame>
+
+## 8. Check it in the preview
 
 Type into the middle column. Press **Enter** to move on, or click the round tick at the bottom. The tick stays greyed out until every required question on that page is answered correctly. Nothing you type is stored.
 
 **Desktop** and **Mobile** sit above the preview. **Mobile** draws the form at real phone width. Most people fill a form in on a phone, so look at it here before you send the link out.
 
 <Frame caption="Mobile draws the form at real phone width, scaled to fit.">
-  <img className="block dark:hidden" src="/images/forms/build/13-mobile-preview.png" alt="The builder with the Mobile button highlighted above the preview, and the form redrawn narrow inside a phone-shaped frame in the middle column." />
-  <img className="hidden dark:block" src="/images/forms/build/13-mobile-preview-dark.png" alt="The builder with the Mobile button highlighted above the preview, and the form redrawn narrow inside a phone-shaped frame in the middle column." />
+  <img src="/images/forms/build/13-mobile-preview.png" alt="The builder with the Mobile button highlighted above the preview, and the form redrawn narrow inside a phone-shaped frame in the middle column." />
 </Frame>
 
 The arrows button at the top right of the preview fills the whole screen with your form. The editing handles disappear here, so this is the closest thing to the real page. Press **Esc** to come back.
 
 <Frame caption="Full screen hides the editing handles, so you see what a visitor sees.">
-  <img className="block dark:hidden" src="/images/forms/build/14-fullscreen.png" alt="The form filling the whole screen with no builder columns around it, and the exit full screen button highlighted at the top right." />
-  <img className="hidden dark:block" src="/images/forms/build/14-fullscreen-dark.png" alt="The form filling the whole screen with no builder columns around it, and the exit full screen button highlighted at the top right." />
+  <img src="/images/forms/build/14-fullscreen.png" alt="The form filling the whole screen with no builder columns around it, and the exit full screen button highlighted at the top right." />
 </Frame>
 
 Answer the last page and press the tick. The preview shows your ending screen and a **Start again** link, which clears your practice answers and puts you back on page one.
 
 <Frame caption="The preview's ending, with Start again to clear your practice answers.">
-  <img className="block dark:hidden" src="/images/forms/build/15-preview-ending.png" alt="The builder preview showing the ending screen with a headline and message, and the Start again link highlighted underneath." />
-  <img className="hidden dark:block" src="/images/forms/build/15-preview-ending-dark.png" alt="The builder preview showing the ending screen with a headline and message, and the Start again link highlighted underneath." />
+  <img src="/images/forms/build/15-preview-ending.png" alt="The builder preview showing the ending screen with a headline and message, and the Start again link highlighted underneath." />
 </Frame>
 
 <Warning>
-  **The preview always shows the Default ending.**
+  **The preview follows your paths, with two exceptions.**
 
-  Even when one of your ending rules would match what you typed, the preview shows the Default screen.
+  Answer as a visitor would, and the preview moves to the page your paths pick and ends on the path's named ending.
 
-  To test a rule, open the real page. [Share your form](/forms-share) covers that.
+  It never tests your **Ending rules**: where they would decide, it shows the Default screen. And on a page whose path tests the lead score, it takes **Otherwise** and says so.
+
+  To test those, open the real page. [Share your form](/forms-share) covers that.
 </Warning>
 
 ## The 31 question types
@@ -259,9 +319,9 @@ Answer the last page and press the tick. The preview shows your ending screen an
     | | **Multiple choice** | Pick any number. |
     | | **Dropdown** | One answer out of many. |
     | | **Yes / No** | A two-way question, using the words **Yes** and **No**. For your own wording use **Single choice**. |
-    | | **Picture choice** | Choose by image. The picture itself is still being finished, so use **Single choice** for now. |
+    | | **Picture choice** | Choose by image. Each choice has its picture. |
     | | **Ranking** | Put the choices in order. |
-    | | **Matrix** | One answer per row. Its rows and columns are still being finished, so pick another kind for now. |
+    | | **Matrix** | One answer per row, in a grid of rows and columns. |
     | **Rating** | **Star rating** | Stars. You choose how many. |
     | | **Opinion scale** | A numbered scale, the sort used for "how likely are you to recommend us". |
     | | **Slider** | Drag along a range. |
@@ -274,11 +334,11 @@ Answer the last page and press the tick. The preview shows your ending screen an
     | **Upload and sign** | **File upload** | Documents and images. |
     | | **Signature** | Draw to sign. Stored as evidence you cannot change afterwards. |
     | **Display only** | **Statement** | Text to read. Nothing to answer. Its wording is edited in the middle column, with headings, bold and colour. |
-    | | **Image** | Show a picture. The picture itself is still being finished. |
-    | | **Video** | Embed a video. The video itself is still being finished. |
+    | | **Image** | Show a picture. |
+    | | **Video** | Show a video, from a link or a file. |
     | | **Divider** | A line between sections. |
     | **Steps** | **Payment** | Take money on your own Stripe or Whop account. Cortana takes 0%. |
-    | | **Scheduler** | Put one of your booking calendars inside the form. |
+    | | **Calendar** | Put one of your booking calendars inside the form. A path can read whether they booked. |
   </Accordion>
 
   <Accordion title="Settings reference: every question">
@@ -290,7 +350,7 @@ Answer the last page and press the tick. The preview shows your ending screen an
     | **Placeholder** | Faint example text inside the answer box. | Empty | Show the shape you want, such as `+44 7700 900123`. | Not offered on choice questions or display-only blocks. They have no box. |
     | **Options** | The choices, one per line. Blank lines are ignored. | Empty | Keep them short. Long choices wrap badly on a phone. | The same list as **Edit choices** in the middle column. Editing either changes both. |
     | **Text size** | The size of this one question, from 12 to 24. Every other question keeps the form's size. | **Match form**, so it follows the whole form | Use it on an opening question, then leave the rest alone. | The form-wide size lives under **Typography** on the **Form** tab. |
-    | **Space above** | The gap above this one question, from 0 to 96. It replaces the gap rather than adding to it. | **Match form**. A page's first question reads 0 | Use 0 to pair two short questions, or 48 to start a new section. | Moving the slider at all is what sets it. There is no switch to turn on first. |
+    | **Space above** | The gap above this one question, from 0 to 96. It replaces the gap rather than adding to it. | **Match form**. A page's first question reads 0 | Use 0 to pair two short questions, or 48 to start a new section. | Typing a number is what sets it. There is no switch to turn on first. |
     | **Logic** | Shows or hides this question depending on an earlier answer. | No rule, so always shown | Use it to keep pages short. | Only questions above this one can be used. The middle column ignores rules. |
     | **Required** | Stops people continuing without answering. | Off | On for anything you cannot follow up without, such as email. | Nothing warns you if every question is optional. |
     | **Hide until the previous field is completed** | Shows the question once the one above it is filled in. | Off | On for long pages, so people see one thing at a time. | Greyed out on a page's first question. It has nothing to wait for. |
@@ -317,8 +377,9 @@ Answer the last page and press the tick. The preview shows your ending screen an
     | **How much?** | Payment | **A fixed amount**, or **From an answer**. | A fixed amount | **From an answer** only offers **Number** and **Currency** questions. Add one first. |
     | **Amount** | Payment, fixed | What to charge. *In whole currency units. 49.99 is charged as 49.99.* | Empty | Leave it empty and the payment is refused rather than charging nothing. |
     | **Which answer sets the price?** | Payment, from an answer | The question whose answer becomes the charge. | Empty | Whatever they type is charged. Only use it where you control the choices. |
-    | **Which calendar?** | Scheduler | The booking calendar to put inside the form. | Empty | With none you see *You have no booking calendars yet. Create one first, then pick it here.* |
-    | **Intro text** | Scheduler | A line above the times. | Empty. The faint example reads `Pick a time that suits you` | Shown above the picker. |
+    | **Which calendar?** | Calendar | The booking calendar to put inside the form. | Empty | With none you see *You have no booking calendars yet. Create one first, then pick it here.* |
+    | **Intro text** | Calendar | A line above the times. | Empty. The faint example reads `Pick a time that suits you` | Shown above the picker. |
+    | **Routes** | Calendar | Sends people to a different booking from their answers: **Book with a team member**, **Book with a team pool**, **Book a different event** or **End the form**. Click **Add a route**. | None, so everyone books on the block's calendar | Routes run top to bottom. A route that ends the form ends on its usual ending, or on one of your named endings. |
   </Accordion>
 
   <Accordion title="Troubleshooting">
@@ -330,15 +391,19 @@ Answer the last page and press the tick. The preview shows your ending screen an
 
     **Hide until the previous field is completed is greyed out.** You are on the first question of a page. The panel says *The first field on a page always shows.* Move the question down, or use it on a later one.
 
-    **Text size and Space above both say Match form.** That is the starting state and the right one for most questions. Drag either slider to change this question on its own.
+    **Text size and Space above both say Match form.** That is the starting state and the right one for most questions. Type a number in either box to change this question on its own.
 
-    **Space above says 0 and the slider will not help.** You are on the first question of a page, so there is no gap above it to change.
+    **Space above says 0 and typing a number will not help.** You are on the first question of a page, so there is no gap above it to change.
 
     **My logic rule does not seem to work in the preview.** It is not meant to. The middle column shows every question whatever your rules say. Open the form's own page to test a rule for real.
 
     **I cannot pick the question I want in a logic rule.** Only questions above this one can be used. Drag the question you are editing lower down.
 
-    **Picture choice shows grey No image squares.** That is all it can do today. Use **Single choice** instead until this is finished.
+    **A picture choice shows grey No image squares.** Its choices have no pictures yet. Click it and drop a picture on each row under **Choices & pictures** in **Field settings**.
+
+    **My path does nothing in the preview.** Check the page's sentence in the left column: it says what the path tests and where it goes. A path tests answers from its own page or an earlier one. If the path tests the lead score, the preview takes **Otherwise** on purpose: open the real page to test it.
+
+    **The form ended right after the calendar.** The calendar's own questions turned the person away, and no path says where they go. Add a path on that page for **Left without booking**.
 
     **The Payment question will not let me pick a processor.** The business has no payment account connected. Connect Stripe or Whop in **Settings**, then reopen the question. Those two are the only ones Forms can use.
   </Accordion>
@@ -373,6 +438,18 @@ Answer the last page and press the tick. The preview shows your ending screen an
 
   <Accordion title="How do I change the writing on the whole form?">
     On the **Form** tab, under **Typography**. That sets the font and the size for every question at once. [Design and endings](/forms-design) covers it.
+  </Accordion>
+
+  <Accordion title="How do I send people to a different page depending on their answer?">
+    Click the sentence under the page in the left column, then **Add a path**. Pick the question and the answer under **When**, and the page or ending under **Then**. Everyone else goes where **Otherwise** says.
+  </Accordion>
+
+  <Accordion title="Can people book a call or pay inside the form?">
+    Yes. Add a **Calendar** block or a **Payment** step from **Steps** at the bottom of the question picker, each on its own page. A path can send "book a call" people to the calendar and "pay now" people to the payment.
+  </Accordion>
+
+  <Accordion title="Can I send people who do not qualify to a different ending?">
+    Yes. Make a path on the page with the qualifying question, and under **Then** pick an ending such as "Not a fit yet". It can show a message or send them to another address.
   </Accordion>
 
   <Accordion title="Can two forms share the same questions?">
