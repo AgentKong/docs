@@ -2547,6 +2547,18 @@ These settings appear on more than one source. Where a source uses one, its acco
 - **Recommendation:** use it to build a *Qualified Lead* conversion separate from raw *Lead* volume, for example only counting people who picked a budget above a threshold.
 - **Caveat:** rules run against the field catalog of that specific form. If you change the form's questions, revisit the rules.
 
+### Lead Filters by tag
+
+{/* last-verified: 2026-11-20 against the app source (sprint lead-filter-tags). Screens: the Lead Filter card of a GoHighLevel form, survey or appointment source and of a Cortana Forms or Cortana Calendars source. Screenshots: TODO. */}
+
+- **What it does:** counts a lead only when its contact has, or does not have, a tag. In a **Lead Filter** card, pick **Tags** as the field. It is the first field in the list.
+- **Available on:** GoHighLevel forms, surveys, and appointments, and Cortana Forms and Cortana Calendars sources.
+- **Options:** **has tag**, **doesn't have tag**, **has any tag**, and **has no tags**. For the first two, pick the tag from the list. The list holds your GoHighLevel tags and your Cortana tags. With more than 1,000 tags you can also type the tag name.
+- **Which tags are checked:** the contact's tags in GoHighLevel at that moment, together with the tags the contact has in Cortana. Tag names match whatever the capitalisation.
+- **When tags are checked:** the moment the lead comes in, and again for 2 minutes. If a tag that lands a moment later could still change the answer, Cortana waits and looks again after 20 seconds and after 2 minutes. The conversion keeps the time the lead really came in.
+- **Recommendation:** make sure your automation adds the tag right away, with no wait step before it. A tag added later than 2 minutes after the lead may not be seen.
+- **Caveat:** every tag rule shows a warning icon with this same reminder. A rule saved without a tag picked is not saved. Importing past leads uses the tags the contact has on the day of the import.
+
 ### Dedup window
 
 - **What it does:** stops the same contact converting twice within a set period. Used by the **URL Parameter** and **Body Tracking Snippet** pixel sub-types.
@@ -2731,6 +2743,16 @@ These settings appear on more than one source. Where a source uses one, its acco
 ## FAQ
 
 <AccordionGroup>
+  <Accordion title="Can I only count leads that have a certain tag, like Qualified?">
+    Yes. Open the source, find its **Lead Filter** card, pick **Tags** as the field, choose **has tag**, and pick the tag. Use **doesn't have tag** to leave out leads with a tag such as Unqualified. It works on GoHighLevel forms, surveys, and appointments, and on Cortana Forms and Cortana Calendars sources.
+
+    Cortana checks the contact's tags the moment the lead comes in and again for 2 minutes. If your GoHighLevel workflow adds the tag after a wait step, the lead may not be counted. Add the tag as the first step of the workflow.
+  </Accordion>
+
+  <Accordion title="My lead has the Qualified tag but did not count. Why?">
+    The tag was most likely added more than 2 minutes after the lead came in. A **Lead Filter** on **Tags** checks the contact when the lead arrives and again for 2 minutes. Open your automation and move the step that adds the tag to the very start, with no wait before it. New leads will then count.
+  </Accordion>
+
   <Accordion title="How do I track Stripe payments?">
     Connect Stripe at **Settings → Integrations**, then open your revenue conversion, click **Add Source**, pick **Stripe**, choose your **Stripe Account**, and pick a **Stripe Event**. For total revenue use **Payment Succeeded**; for new customers only use **First Stripe Purchase**. Optionally filter to specific products or add a minimum amount under **Payment Filters**, then click **Submit**.
   </Accordion>
