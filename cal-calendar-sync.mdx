@@ -1,6 +1,6 @@
 ---
 title: "3) Calendar Sync"
-description: "Connect GoHighLevel, Calendly or iClosed so their bookings show up in Cortana, and book straight into them from a Cortana page."
+description: "Connect GoHighLevel, Calendly, HubSpot or iClosed. Their calendars come over with their questions, their bookings show up in Cortana, and a Cortana page books straight into them."
 ---
 
 {/* TODO: verify. No Loom walkthrough was supplied for this page. Add the embed and a
@@ -8,7 +8,7 @@ description: "Connect GoHighLevel, Calendly or iClosed so their bookings show up
 
 ## Overview
 
-Your team may already book calls in GoHighLevel, Calendly or iClosed. **Calendar Sync** joins those tools to Cortana. You then stop having two separate pictures of your calendar.
+Your team may already book calls in GoHighLevel, Calendly, HubSpot or iClosed. **Calendar Sync** joins those tools to Cortana. You then stop having two separate pictures of your calendar.
 
 It does two jobs. Keep them apart in your head.
 
@@ -17,7 +17,7 @@ It does two jobs. Keep them apart in your head.
     Cortana copies every booking made in the other tool into your calendar and your reports. This happens on its own. The booking still lives in the other tool, and that tool is still in charge of it.
   </Card>
   <Card title="Bookings go out" icon="arrow-up-from-line">
-    You can point a Cortana booking page at one of those tools. The lead books on your Cortana page. The meeting itself gets created over in GoHighLevel, Calendly or iClosed.
+    You can point a Cortana booking page at one of those tools. The lead books on your Cortana page. The meeting itself gets created over in GoHighLevel, Calendly, HubSpot or iClosed, with the lead's answers on it.
   </Card>
 </CardGroup>
 
@@ -28,18 +28,22 @@ To find this page, go to **Appointments → Settings → Calendar Sync**. This i
 
   **GHL** is short for **GoHighLevel**. The product uses both names.
 
-  A **mirror** is a copy you can look at but not change. When Cortana mirrors a calendar, it makes its own copy and keeps copying the bookings across. You cannot change a mirrored calendar's questions, hours or reminders in Cortana. The other tool owns those.
+  A **mirror** is Cortana's copy of a calendar in another tool. When Cortana mirrors a calendar, it makes its own copy, brings over its questions, and keeps copying the bookings across. The other tool still owns the hours and who takes the call. The questions are yours to change: see [What comes over with each calendar](#3-what-comes-over-with-each-calendar).
 </Note>
 
 <Note>
-  **Google, Outlook and Zoom are not on this page.** Each person connects those alone, under **Settings → Users → My Profile**. They are that one person's own calendar and video account. GoHighLevel, Calendly and iClosed get connected once for the whole business, so they live here instead.
+  **Google, Outlook and Zoom are not on this page.** Each person connects those alone, under **Settings → Users → My Profile**. They are that one person's own calendar and video account. GoHighLevel, Calendly, HubSpot and iClosed get connected once for the whole business, so they live here instead.
+</Note>
+
+<Note>
+  **HubSpot works a little differently.** It has no card on this page. Each HubSpot meeting link becomes its own Cortana calendar once HubSpot is connected. [HubSpot calendars](#9-hubspot-calendars) covers it.
 </Note>
 
 ---
 
 ## 1. Connect a Tool
 
-You connect the tool on the business **Integrations** page, not here. Go to **Settings → Integrations**. Find GoHighLevel, Calendly or iClosed. Click **Connect**, then sign in to that tool when it asks you.
+You connect the tool on the business **Integrations** page, not here. Go to **Settings → Integrations**. Find GoHighLevel, Calendly, HubSpot or iClosed. Click **Connect**, then sign in to that tool when it asks you.
 
 Now come back to **Appointments → Settings → Calendar Sync** to manage it.
 
@@ -59,13 +63,13 @@ This part runs on its own. It is **not instant**. Knowing the timing saves you a
 
 <Steps>
   <Step title="Cortana copies the tool's calendars, within about two hours">
-    Cortana checks the other tool every two hours. On the next check after you connect, it creates one Cortana calendar for every calendar in the other tool. In Calendly these are called event types. Seven calendars in GoHighLevel gives you seven copies here.
+    Cortana checks the other tool every two hours. On the next check after you connect, it creates one Cortana calendar for every calendar in the other tool. In Calendly these are called event types. In HubSpot they are meeting links. Seven calendars in GoHighLevel gives you seven copies here.
 
     Nothing shows up the moment you connect. If you look straight away and see nothing, that is normal.
   </Step>
 
   <Step title="Or press Pull, if you don't want to wait">
-    Open **Manage reps → Calendars** and click **Pull**. This does the same job right now. It then tells you how many it found, for example *Pulled 7 calendar(s)*.
+    Open **Manage reps → Calendars** and click **Pull**. This does the same job right now. It then tells you how many it found, for example *Pulled 7 calendar(s)*. HubSpot has no **Pull** button, so its calendars arrive on the next check.
   </Step>
 
   <Step title="From then on, bookings arrive on their own">
@@ -76,6 +80,7 @@ This part runs on its own. It is **not instant**. Knowing the timing saves you a
     | **GoHighLevel** | Straight away. Cortana also double-checks every 15 minutes, in case one gets missed. |
     | **Calendly** | Straight away. Cortana also double-checks every 5 minutes, in case one gets missed. |
     | **iClosed** | Cortana checks every 5 minutes, so a booking can take up to 5 minutes. |
+    | **HubSpot** | Cortana checks every 5 minutes, so a booking made on HubSpot's own page can take up to 5 minutes. |
   </Step>
 </Steps>
 
@@ -84,14 +89,67 @@ This part runs on its own. It is **not instant**. Knowing the timing saves you a
 </Warning>
 
 <Note>
-  **You cannot change a mirrored calendar in Cortana.** These copies arrive with rescheduling and cancelling switched off. Leads are sent to the other tool to change their booking. Anything you change here gets wiped on the next two-hourly check. Change the questions, hours and reminders in the tool the calendar came from.
+  **The other tool still runs the calendar.** These copies arrive with rescheduling and cancelling switched off. Leads are sent to the other tool to change their booking. Change the hours, the meeting length and the reminders in the tool the calendar came from.
+
+  The questions are different. They come over from the other tool and keep following it until you edit them in Cortana. [The next section](#3-what-comes-over-with-each-calendar) explains how.
 
   Renaming a calendar in the other tool does **not** rename the Cortana copy. The copy keeps the name it started with.
 </Note>
 
 ---
 
-## 3. Match Your Team to the Other Tool
+## 3. What Comes Over With Each Calendar
+
+A calendar does not arrive empty. Cortana brings over what the lead sees on the other tool's own booking page, so your Cortana page asks the same things.
+
+### The questions
+
+Each calendar comes over with its questions. The wording, the answer choices, the order, and whether each one must be answered all match the other tool.
+
+| Tool | What your Cortana calendar asks |
+| --- | --- |
+| **GoHighLevel** | The questions on the form the calendar uses in GoHighLevel. Name, email and phone fill in the person's record. Questions tied to a GoHighLevel custom field stay tied to that field. A calendar with no form in GoHighLevel keeps Cortana's built-in name, email and phone page, which is what GoHighLevel asks too. |
+| **Calendly** | Name and email, then each question switched on in Calendly, in Calendly's order. A phone number is asked only when Calendly asks for one. A question with an "other" box gets an **Other** choice. |
+| **iClosed** | Two pages, like iClosed's own page. Page one asks the contact details with iClosed's wording. Page two asks the rest of the questions. Email is always asked, because iClosed needs it to take a booking. |
+| **HubSpot** | First name, last name and email, then the meeting link's own questions, then any consent boxes as Yes or No questions. |
+
+<Note>
+  **Imported questions stay in sync until you edit them.** Cortana re-reads them every time it checks the other tool. Change a question in GoHighLevel, Calendly or iClosed and your Cortana calendar follows.
+
+  The moment you edit the questions in Cortana, Cortana keeps your version. It never writes over your changes again.
+
+  Two GoHighLevel calendars that use the same GoHighLevel form also share one form in Cortana. Editing it changes it on both, the same as [two calendars sharing one form](/cal-calendars#3-build-the-booking-form).
+</Note>
+
+### Calendars you already had
+
+Calendars that came over before this existed get their questions filled in on their own, over the next few checks. That happens only when the calendar has no questions yet and nobody has booked on its Cortana page.
+
+A calendar with questions you already set up in Cortana is left alone.
+
+A calendar that has no questions but **has** already taken bookings on its Cortana page is not changed on its own. Open it, go to the **Questions** tab, and click **Import questions from GoHighLevel**, **Import questions from Calendly** or **Import questions from iClosed**. The button reads *Importing questions…* while it works, then *Questions imported from* the tool.
+
+If there is nothing to bring over, the button tells you why. For example, a GoHighLevel calendar that only asks for a name, email and phone has nothing more to import.
+
+### The screen after booking
+
+What the other tool shows after a lead books comes over too.
+
+- **GoHighLevel**: the redirect page, or the thank-you message, set on the calendar in GoHighLevel.
+- **iClosed**: the outside page iClosed sends people to after booking. If iClosed shows its own confirmation page instead, your Cortana page shows Cortana's confirmation.
+- **HubSpot**: the page the meeting link sends people to after booking.
+
+It keeps following the other tool. If you set your own screen in **Ending rules**, yours wins.
+
+### The calendar type
+
+Calendars from GoHighLevel, Calendly and HubSpot start on the **Standard** calendar type: times first, then the questions. That is the order those tools use. Calendars from iClosed start on **Application + Cal**: every question first, then the times. That is the order iClosed uses.
+
+Calendars you already had keep the type they were on. You can change any of them under **Questions → Calendar → Calendar type**. [The three calendar types](/cal-calendars#the-three-calendar-types) compares them.
+
+---
+
+## 4. Match Your Team to the Other Tool
 
 People skip this step. It decides whether bookings land on the right person, so do not skip it.
 
@@ -125,7 +183,7 @@ People skip this step. It decides whether bookings land on the right person, so 
 
 ---
 
-## 4. Take Bookings Straight Into Another Tool
+## 5. Take Bookings Straight Into Another Tool
 
 You can also point a Cortana booking page **at** one of these tools. Cortana becomes the front door. The meeting itself gets created in the tool your team already works from.
 
@@ -138,6 +196,8 @@ This is worth doing when your team lives in GoHighLevel all day. You still get a
 
   <Step title="Change the Calendar setting">
     Under **Calendar**, change **Cortana Calendar** to **Go High Level**, **Calendly** or **iClosed**. A tool you have not connected is greyed out. A note next to it tells you to connect it in Integrations first.
+
+    **HubSpot** is on the list too, but only a calendar that came over from HubSpot can use it. On any other calendar it is greyed out with *HubSpot calendars come over from HubSpot: open the one for the meeting link you want.*
   </Step>
 
   <Step title="Pick the exact calendar to book into">
@@ -153,8 +213,9 @@ This is worth doing when your team lives in GoHighLevel all day. You still get a
 | --- | --- |
 | The times the lead can pick from | The other tool. Cortana asks it for free times as the lead is looking. |
 | Working hours, gaps between calls, and taking turns | The other tool. Cortana hides its own **Availability** tab and shows a "Managed by" panel instead. |
-| Who the meeting is given to | The other tool. Cortana has no say in it. |
+| Who the meeting is given to | The other tool, unless your **Ending rules** pick a person. GoHighLevel and iClosed can follow those rules. Calendly and HubSpot always pick the person themselves. |
 | Your questions, lead scoring and rules | Cortana. These stay on the booking page as normal. |
+| The lead's answers | Both. Cortana keeps them, and sends them to the other tool with the booking. See [Answers go back to the other tool](#6-answers-go-back-to-the-other-tool). |
 | Confirmation email, calendar invite, reminders | **The other tool.** Cortana does not send any of these for these bookings. |
 | Ad tracking and reporting | Cortana, the same as on any of its own booking pages. |
 
@@ -168,29 +229,152 @@ This is worth doing when your team lives in GoHighLevel all day. You still get a
 
 ---
 
-## 5. What Each Tool Can and Cannot Do
+## 6. Answers Go Back to the Other Tool
+
+When a lead books on a Cortana page that books into another tool, their answers go with the booking. Your team sees them where they already work.
+
+| Tool | Where the answers show up |
+| --- | --- |
+| **Calendly** | On the booking in Calendly, next to each question, the same as if the lead had booked on Calendly's own page. |
+| **iClosed** | On the call in iClosed, next to each question. |
+| **GoHighLevel** | In the appointment's description. Each answer is a line, *Question: answer*, in the order of your form. Name, email and phone are left out, because they are already on the contact. Answers tied to a GoHighLevel custom field still fill that field on the contact too. |
+| **HubSpot** | With the booking in HubSpot, on the fields the meeting link asks for. |
+
+<Note>
+  **Calendly and iClosed only take answers to their own questions.** Only questions that came over from Calendly or iClosed are sent back. A question you add yourself in Cortana has no place to go in those tools. Its answer stays on the person's record in Cortana.
+
+  The booking always comes first. If the other tool refuses an answer, Cortana books the meeting without it and keeps the answer in Cortana.
+
+  On Calendly, if a question Calendly requires has no answer, the lead finishes on Calendly's own page instead.
+</Note>
+
+---
+
+## 7. What Each Tool Can and Cannot Do
 
 The three tools do not all do the same things. Read this table before you decide which one to send bookings through.
 
-| Question | GoHighLevel | Calendly | iClosed | Google / Outlook |
-| --- | --- | --- | --- | --- |
-| **Who connects it** | Once, for the whole business | Once, for the whole business | Once, for the whole business | Each person connects their own account |
-| **Bookings made there show up in Cortana** | Yes, all of them | Yes, all of them | Yes, all of them | No. These are personal calendars, not booking tools, so there is nothing to pull in. |
-| **A Cortana page can book into it** | Yes, pick it in **Details** | Yes, pick it in **Details** | Yes, pick it in **Details** | No. Cortana adds the meeting to your calendar so you see it, but leads cannot pick a time from it. |
-| **You must match your team to their users** | Yes, in **Manage reps** | Yes, in **Manage reps** | Yes, in **Manage reps** | No. Each person connects their own account, so Cortana already knows whose calendar it is. |
-| **Cortana can send a booking to one named person** | Yes, set it in **Ending rules** | No. Calendly picks the person itself. | No. iClosed picks the person itself. | No. Leads never book on these calendars directly. |
-| **Cancelling in Cortana also cancels it there** | Yes, straight away | No. You have to cancel in Calendly too. | No. You have to cancel in iClosed too. | Yes, the meeting is removed from your calendar. |
-| **Hides times you are already busy** | No. It does not check your personal calendar. | No. It does not check your personal calendar. | No. It does not check your personal calendar. | Yes. Cortana reads your meetings and hides those times from leads. |
+| Question | GoHighLevel | Calendly | iClosed | HubSpot | Google / Outlook |
+| --- | --- | --- | --- | --- | --- |
+| **Who connects it** | Once, for the whole business | Once, for the whole business | Once, for the whole business | Once, for the whole business | Each person connects their own account |
+| **Bookings made there show up in Cortana** | Yes, all of them | Yes, all of them | Yes, all of them | Yes, on the meeting links Cortana copied | No. These are personal calendars, not booking tools, so there is nothing to pull in. |
+| **Questions come over** | Yes | Yes | Yes | Yes | Not applicable |
+| **The lead's answers go back** | Yes, in the appointment's description | Yes, on the booking | Yes, on the call | Yes, with the booking | Not applicable |
+| **A Cortana page can book into it** | Yes, pick it in **Details** | Yes, pick it in **Details** | Yes, pick it in **Details** | Yes, on the calendar Cortana made for each meeting link | No. Cortana adds the meeting to your calendar so you see it, but leads cannot pick a time from it. |
+| **You must match your team to their users** | Yes, in **Manage reps** | Yes, in **Manage reps** | Yes, in **Manage reps** | No. Cortana matches HubSpot's people to your team by email. | No. Each person connects their own account, so Cortana already knows whose calendar it is. |
+| **Cortana can send a booking to one named person** | Yes, set it in **Ending rules** | No. Calendly picks the person itself. | Yes, set it in **Ending rules**, once the rep is matched in **Manage reps** | Only by sending the lead to that rep's own HubSpot meeting link | No. Leads never book on these calendars directly. |
+| **Cancelling in Cortana also cancels it there** | Yes, straight away | No. You have to cancel in Calendly too. | No. You have to cancel in iClosed too. | No. Move or cancel it in HubSpot. | Yes, the meeting is removed from your calendar. |
+| **Hides times you are already busy** | No. It does not check your personal calendar. | No. It does not check your personal calendar. | No. It does not check your personal calendar. | Shows the open times HubSpot gives for the link. | Yes. Cortana reads your meetings and hides those times from leads. |
 
 <Warning>
-  **With Calendly and iClosed you cannot choose who a booking goes to.** Those tools decide that themselves, using their own settings.
+  **With Calendly and HubSpot you cannot choose who a booking goes to.** Those tools decide that themselves, using their own settings.
 
-  This matters if you use rules to send leads to certain people. Open **Ending rules** on a Calendly or iClosed calendar. Two options are greyed out there. One sends the booking to a chosen person. The other sends it to a group of people who take turns. Hover over either one and Cortana tells you why it is greyed out. Need to send a lead to one named person? Use GoHighLevel or a Cortana booking calendar instead.
+  This matters if you use rules to send leads to certain people. Open **Ending rules** on a Calendly or HubSpot calendar. **Book with a team member** and **Book with a team pool** are greyed out there. Cortana says why, next to them. Need to send a lead to one named person? On Calendly or HubSpot, use **Book a different event** and send them to that person's own calendar. Or use GoHighLevel, iClosed or a Cortana booking calendar.
 </Warning>
 
 <Warning>
-  **Cancellations and changes of time only reach GoHighLevel.** Say a lead cancels a Calendly or iClosed booking using a link Cortana sent them. Cortana marks it cancelled, but Calendly or iClosed still think the call is going ahead. The lead may still get a reminder from them, and the time stays blocked. So cancel it in that tool as well. Do this whether you cancelled it or the lead did.
+  **Cancellations and changes of time made in Cortana only reach GoHighLevel.** Say a lead cancels a Calendly or iClosed booking using a link Cortana sent them. Cortana marks it cancelled, but Calendly or iClosed still think the call is going ahead. The lead may still get a reminder from them, and the time stays blocked. So cancel it in that tool as well. Do this whether you cancelled it or the lead did.
 </Warning>
+
+---
+
+## 8. iClosed: Who Gets the Call
+
+An iClosed calendar can follow two sets of routing rules: yours in Cortana, and the ones you already built in iClosed.
+
+### Your Cortana rules
+
+**Book with a team member** and **Book with a team pool** work on iClosed calendars. A rule can send a lead to one closer, or to a group of closers.
+
+<Steps>
+  <Step title="Match each rep to their iClosed user">
+    Go to **Appointments → Settings → Calendar Sync**. Click **Manage reps** on the **iClosed Calendar Mirror** card. Pick the Cortana rep for each iClosed user. Click **Sync iClosed users** if a closer is missing from the list.
+  </Step>
+
+  <Step title="Add the rule">
+    Open the iClosed calendar. Go to **Questions → Ending rules** and add a rule with **Book with a team member** or **Book with a team pool**.
+
+    A rep who is not matched to an iClosed user shows **Not linked** and cannot be picked.
+  </Step>
+</Steps>
+
+The lead then only sees the times that closer is free, and the call is booked with that closer.
+
+On the **Standard** calendar type the lead picks a time before answering, so the closer is a preference, not a promise. Cortana books that closer if they are still free at that time, and lets iClosed pick if not. [The warning under Ending rules](/cal-calendars#5-route-people-with-ending-rules) explains why.
+
+If iClosed no longer knows a closer, the lead sees the calendar's normal times and iClosed picks who takes the call. The booking is never lost.
+
+### Your iClosed rules
+
+A calendar that came over from iClosed with its questions also follows the rules you built in iClosed: its disqualify rules and its routing rules. You do not need to build them again in Cortana.
+
+- **Disqualified in iClosed**: the lead sees iClosed's disqualify message. If iClosed sends disqualified leads to a page, they go there.
+- **Routed in iClosed**: the lead sees the times of the closers iClosed picked, and the call is booked with them. On **Standard** this is a preference, the same as your Cortana rules.
+
+Your Cortana rules come first. When a Cortana rule turns the lead away, sends them to another page or calendar, or picks a closer, iClosed's rules are not asked. A rep's own booking link also wins.
+
+<Note>
+  **iClosed's rules need the lead to be an iClosed contact.** When the lead finishes the questions, Cortana finds them in iClosed by email, or adds them as a new contact. iClosed's own booking page does the same. So a lead who answers but never books still shows up in iClosed as a contact.
+
+  If iClosed cannot be reached, the lead is never turned away. They see the calendar's normal times and can book.
+</Note>
+
+---
+
+## 9. HubSpot Calendars
+
+Connect HubSpot, and your HubSpot meeting links become Cortana calendars. Your Cortana page shows HubSpot's real open times and books straight into HubSpot.
+
+### Connect HubSpot
+
+Go to **Settings → Integrations** and click **Connect** on the **HubSpot** card. Sign in and approve the access. [Connecting HubSpot](/1-connect-integrations#connecting-hubspot) shows each step.
+
+### What you get
+
+<Steps>
+  <Step title="One Cortana calendar for each meeting link">
+    Within about two hours, every meeting link in your HubSpot account shows up under **Appointments → Calendars**. That includes each rep's personal link, so each rep gets a calendar of their own.
+
+    Each calendar comes with the link's name, its meeting length, its questions, and the page HubSpot sends people to after booking. HubSpot's people on the link are matched to your Cortana team by email. New HubSpot calendars start on the **Standard** calendar type.
+  </Step>
+
+  <Step title="The calendar books into HubSpot">
+    Open one of these calendars. Under **Details → Calendar** it reads **HubSpot**, and **HubSpot Meeting Link** shows the link it books into, with its kind: **Personal**, **Round robin** or **Group**. The link is shown, not changed: each HubSpot calendar always books into its own link.
+
+    A **Managed by HubSpot** card takes the place of the hours, the scheduling rules and the team. Those come from the meeting link, so you change them in HubSpot.
+  </Step>
+
+  <Step title="Share the Cortana link">
+    Share the calendar's Cortana booking link the usual way. Leads see HubSpot's open times, answer your questions, and book.
+
+    The meeting is created in HubSpot, on the host's calendar, with the contact. The answers go with it. Cortana tracks which ad the lead came from, the same as on any Cortana page.
+  </Step>
+</Steps>
+
+### Meetings booked on HubSpot's own page
+
+Meetings booked on HubSpot's own page for these links show up in **Appointments** too. Cortana checks HubSpot every 5 minutes. When a meeting is moved or cancelled in HubSpot, Cortana follows.
+
+### Moving and cancelling
+
+HubSpot meetings are moved and cancelled in HubSpot. HubSpot calendars arrive in Cortana with rescheduling and cancelling switched off. Leads use the links in HubSpot's confirmation email.
+
+A lead who opens a Cortana move or cancel link for a HubSpot meeting sees *This meeting is booked in HubSpot, so it can only be moved there. Use the reschedule link in your HubSpot confirmation email.*
+
+### Sending a lead to one rep
+
+Inside a round-robin meeting link, HubSpot picks the host. So **Book with a team member** and **Book with a team pool** are greyed out on HubSpot calendars, the same as on Calendly.
+
+To send a lead to one rep, send them to that rep's own calendar. Every HubSpot meeting link is its own Cortana calendar, so each rep's personal link is one.
+
+<Steps>
+  <Step title="Open Ending rules on the calendar the lead starts on">
+    Go to **Questions → Ending rules** and click **Add rule**.
+  </Step>
+  <Step title="Pick Book a different event">
+    Under **Then**, pick **Book a different event**. Choose the Cortana calendar for that rep's personal HubSpot meeting link.
+  </Step>
+</Steps>
 
 ---
 
@@ -228,6 +412,26 @@ The three tools do not all do the same things. Read this table before you decide
   <Accordion title="I cancelled in Cortana but the lead still has the meeting">
     This is normal for Calendly and iClosed. Go and cancel it in that tool too.
   </Accordion>
+
+  <Accordion title="My imported calendar stopped following the other tool's questions">
+    You edited its questions in Cortana. From then on Cortana keeps your version and never writes over it. Make further changes in Cortana.
+  </Accordion>
+
+  <Accordion title="An imported calendar has no questions, and no Import button">
+    Calendars nobody has booked on through Cortana get their questions on their own, on one of the next checks. The **Import questions from** button only shows on calendars that already took bookings on their Cortana page.
+  </Accordion>
+
+  <Accordion title="A rep shows Not linked on an iClosed calendar">
+    That rep is not matched to an iClosed user yet. Open **Calendar Sync → iClosed Calendar Mirror → Manage reps** and pick them next to their iClosed user.
+  </Accordion>
+
+  <Accordion title="A HubSpot calendar says its meeting link was removed">
+    The link was deleted in HubSpot, so that calendar cannot take bookings. Each HubSpot meeting link has its own calendar. Open the one for the link you use now.
+  </Accordion>
+
+  <Accordion title="A HubSpot calendar says HubSpot isn't connected">
+    Go to **Settings → Integrations** and connect HubSpot again. Until then the calendar cannot take bookings.
+  </Accordion>
 </AccordionGroup>
 
 ---
@@ -240,7 +444,11 @@ The three tools do not all do the same things. Read this table before you decide
   </Accordion>
 
   <Accordion title="Is the sync really two-way?">
-    Only with GoHighLevel, and even then only for the booking itself. Bookings come **in** from all three tools. Changes only go back **out** to GoHighLevel. Calendly and iClosed get nothing back from Cortana, apart from a new booking made on a Cortana page.
+    Partly. Bookings come **in** from all four tools. A booking made on a Cortana page goes **out** to the tool, with the lead's answers. Changes to an existing booking made in Cortana only go back out to GoHighLevel. Move or cancel Calendly, iClosed and HubSpot bookings in those tools.
+  </Accordion>
+
+  <Accordion title="Do I have to rebuild my questions in Cortana?">
+    No. GoHighLevel, Calendly, iClosed and HubSpot calendars bring their questions with them. Check them once on the **Questions** tab. Edit them there if you want, and Cortana keeps your version.
   </Accordion>
 
   <Accordion title="Where do I connect Google Calendar?">

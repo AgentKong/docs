@@ -205,8 +205,8 @@ It has four tabs. **Details**, **Questions**, **Availability** and **Notificatio
   <Step title="Style the booking page">
     The panel on the right has two tabs, **Calendar** and **Field settings**. Under **Calendar** you set the look of the whole page, top to bottom.
 
-    - **Calendar type**: **Calendar Combo** shows the questions and the calendar side by side. **Application + Cal** asks every question first, then shows the calendar.
-    - **Booking page header**: **Hide title** and **Hide business name**. On **Application + Cal** you also get **Hide duration**. The panel says *Trim what shows above the questions. None of this changes what you collect.*
+    - **Calendar type**: **Calendar Combo** shows the questions and the calendar side by side. **Application + Cal** asks every question first, then shows the calendar. **Standard** shows the times first, then the questions. A new calendar starts on **Standard**. [The three calendar types](#the-three-calendar-types) below compares them.
+    - **Booking page header**: **Hide title** and **Hide business name**. On **Application + Cal** and **Standard** you also get **Hide duration**. The panel says *Trim what shows above the questions. None of this changes what you collect.*
     - **Transition** and **Sticky Contact**. **Sticky Contact** fills in the details of people who have booked with you before.
     - **Theme**: six light looks (Sage, Snow, Cream, Azure, Blush, Lavender) and six dark ones (Midnight, Royal, Obsidian, Forest, Ember, Rose).
     - **Colors**: five of them. **Background**, **Text**, **Accent**, **Button** and **Button Text**.
@@ -250,6 +250,28 @@ It has four tabs. **Details**, **Questions**, **Availability** and **Notificatio
     </Frame>
   </Step>
 </Steps>
+
+### The three calendar types
+
+**Calendar type** decides the order people see things in. Pick it in the **Questions** tab, in the **Calendar** panel on the right.
+
+| Calendar type | What people see | Pick it when |
+| --- | --- | --- |
+| **Standard** | The times first. They pick a time and click **Continue**. Then they answer your questions, with the time they picked shown above them. The last button, **Confirm Booking**, books it. | You want the most people to book. Seeing open times first feels like a normal booking page. **Every new calendar starts here.** |
+| **Calendar Combo** | The questions and the calendar side by side. The calendar unlocks once the questions are answered. | You want both on one screen. |
+| **Application + Cal** | Every question first, then the calendar. | You screen people hard before they ever see a time. |
+
+On **Standard**, your **Ending rules** still run. They run when the person clicks the last button. A rule that turns a lead away, sends them to another page or sends them to another calendar books nothing.
+
+If another lead books that time while the person is typing, they go back to the times and see *That time was just booked. Pick another.* Their answers are kept. They pick a new time and book.
+
+<Note>
+  **Calendars you bring in from another tool start on a layout too.** Calendars that come over from GoHighLevel, Calendly or HubSpot start on **Standard**, because those tools also show the times first. Calendars from iClosed start on **Application + Cal**, because iClosed asks its questions first. You can change any of them here. Calendars you already had keep the type they were on. [3) Calendar Sync](/cal-calendar-sync) explains what comes over.
+</Note>
+
+<Tip>
+  **Duplicate** (in the menu on a calendar card) keeps the calendar type, the whole look (the theme, the colours, the font and the size) and your date overrides. A copy of an imported calendar is a normal Cortana calendar: it does not book into the other tool.
+</Tip>
 
 ---
 
@@ -354,7 +376,7 @@ Set this up if you want to spot your best enquiries at a glance. It also lets yo
     - **Several answers to one question**: a choice question starts on **Is One Of**, and you tick the answers that count. "Grade **is one of** 9th, 10th" **and** "maths **is one of** Algebra, Geometry" is two tests and no group.
     - **and** and **or** in one rule, across different questions: hover a test and click **Group** to give it its own **Any of these** or **All of these** (hover a group for **Ungroup**), or write the tests in a row and click the word between two of them to switch it; the tests on each side fold into their own groups. The word stays plain text where a switch would need a group inside a group. A new rule starts with no tests, just **Add condition** and **Add group**.
     - **Add group**, next to **Add condition**, builds the same thing by hand: a set of tests inside the rule with its own **Any of these** or **All of these** switch. A group can hold answers and the lead score alike, and the rule's own **Match all** or **Match any** joins the group with the tests outside it. Taking the last test out of a group removes the group; remove every test and the rule is empty again, ready for **Add condition** or **Add group**, and cannot be saved until it has one.
-    - **Then**: pick what happens. **Show the calendar** lets them book as normal. You can instead give the meeting to one chosen person, or to a group who take turns. You can also send them to a different meeting type, or turn them away.
+    - **Then**: pick what happens. **Show the calendar** lets them book as normal. **Book with a team member** gives the meeting to one chosen person. **Book with a team pool** gives it to a group who take turns. **Book a different event** sends them to a different meeting type. **Disqualify from Booking** turns them away.
     - **Screen after booking**: this one is optional. Leave it switched off and they see the Default screen.
   </Step>
 
@@ -368,6 +390,16 @@ Set this up if you want to spot your best enquiries at a glance. It also lets yo
     Click **Save**.
   </Step>
 </Steps>
+
+<Warning>
+  **On Standard, a rule that books one person is a preference, not a promise.**
+
+  On **Standard** people pick a time before they answer your questions. So when a rule says **Book with a team member** or **Book with a team pool**, the time is already chosen. Cortana books that person, or a rep in that pool, if they are free at that time. If they are not, it books anyone on the calendar who is free. The rule never stops the booking.
+
+  The rule editor says this under the person or pool you pick: *On the Standard layout people pick a time before they answer, so Cortana books this team member when they're free at that time, and anyone free otherwise.* Once you pick a person, their name takes the place of "this team member". The **Ending rules** card shows **Reps prioritized, not promised**.
+
+  Need the lead to land with one exact person every time? Switch **Calendar type** to **Calendar Combo** or **Application + Cal**. Those ask the questions before showing times, so they only show the times that person is free. A rep's own booking link also still goes to that rep on every calendar type.
+</Warning>
 
 ---
 
@@ -460,6 +492,8 @@ Always book your own calendar once before you send it to anyone.
   <Step title="Open the booking page">
     Click **View Site**. Or open the **Booking link** in a private browser window, so you see the page as a stranger does.
 
+    What comes first depends on your **Calendar type**. On **Standard** you see the times first. On **Calendar Combo** and **Application + Cal** you see the questions first.
+
     People answer your questions one page at a time. The page works out their local time on its own and shows it at the bottom. They can change it if it is wrong.
 
     The phone box picks their country for them.
@@ -472,9 +506,9 @@ Always book your own calendar once before you send it to anyone.
   <Step title="Answer the questions and continue">
     Fill in each box. Then click the **round checkmark button** at the bottom of the form to move on. Pressing **Enter** does the same thing.
 
-    The calendar on the right stays locked and grey until you answer the last page.
+    On **Calendar Combo** the calendar on the right stays locked and grey until you answer the last page. That is on purpose. It means you get the person's details before you show them your free times.
 
-    That is on purpose. It means you get the person's details before you show them your free times.
+    On **Standard** you already picked your time. The last button reads **Confirm Booking** and books it.
   </Step>
 
   <Step title="Pick a day and a time">
@@ -543,7 +577,7 @@ Always book your own calendar once before you send it to anyone.
 
 | Setting | What it does | Default |
 | --- | --- | --- |
-| **Calendar type** | Chooses whether people see the questions and calendar together, or answer everything first. | Calendar Combo, so both show together |
+| **Calendar type** | Chooses the order: times first (**Standard**), questions and calendar together (**Calendar Combo**), or every question first (**Application + Cal**). | Standard, so the times show first |
 | **Theme** | Sets the overall look. Six light and six dark ones. Colours only, never the font or the size. | Whichever look you use in Cortana when you make the calendar |
 | **Colors** | Sets the Background, Text, Accent, Button and Button Text colours. | Blue, `#3B82F6`, for Accent and Button |
 | **Font** | Sets the writing for the whole page. Seven to pick from, including **System**, the visitor's own device font. | Inter |
@@ -569,7 +603,7 @@ Always book your own calendar once before you send it to anyone.
   <Accordion title="No times are showing, or every day is greyed out">
     Work through these five in order.
 
-    1. **The form is not finished.** The calendar stays locked on purpose until the last question is answered. Fill it in, then click the round checkmark button.
+    1. **The form is not finished.** On **Calendar Combo** and **Application + Cal** the calendar stays locked on purpose until the last question is answered. Fill it in, then click the round checkmark button.
     2. **The day has no hours.** Only days with hours in **Availability** can be clicked. Weekends are closed to start with.
     3. **A date override closed it.** Check **Availability → Date overrides**. An override wipes out that day's normal hours completely.
     4. **Min Notice is hiding the day.** Set Min Notice high and the next day or two disappear.
@@ -602,6 +636,8 @@ Always book your own calendar once before you send it to anyone.
     Add the right people under **Details → Distribution & Team**.
 
     Then check your **Ending rules**. A rule that gives the meeting to one chosen person beats the taking-turns setting.
+
+    On **Standard**, that rule is a preference. If the person was not free at the time the lead picked, Cortana books anyone free instead. See [the warning under Ending rules](#5-route-people-with-ending-rules).
   </Accordion>
 
   <Accordion title="I edited a question and it changed on another calendar">
