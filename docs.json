@@ -368,6 +368,28 @@
         ]
       },
       {
+        "tab": "SEO",
+        "icon": "magnifying-glass-chart",
+        "groups": [
+          {
+            "group": "Getting Started",
+            "icon": "rocket",
+            "pages": [
+              "seo/connect-search-console",
+              "seo/connect-bing"
+            ]
+          },
+          {
+            "group": "For Agencies",
+            "icon": "briefcase",
+            "pages": [
+              "seo/client-access",
+              "seo/run-seo-for-clients"
+            ]
+          }
+        ]
+      },
+      {
         "tab": "Cortana Claw",
         "icon": "user-robot",
         "groups": [
