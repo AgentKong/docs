@@ -1,0 +1,151 @@
+---
+title: "Pipelines & deals"
+description: "See your pipelines and deals, add deals, move them through your stages, mark them won or lost, and add or rename stages."
+---
+
+These tools let your AI work your CRM pipelines the way your team does on the board. It reads what sits in each stage, adds deals, edits them, moves them, marks them won, lost or abandoned, and adds, renames or reorders stages.
+
+Every change goes through the same steps as the app: a CRM you sync with is told, a stage that tracks a conversion records it, and the deal's **Changes** tab names who did it ("Moved to Proposal · Claude, for Sarah Lee").
+
+<Note>
+  On every connection, with nothing extra to tick on the consent screen. Each call uses your own access to the business in Cortana. Every tool takes an optional `businessId` when your connection reaches more than one business. Nothing here deletes a deal, a stage or a pipeline.
+</Note>
+
+## Reading your pipeline
+
+### `list_pipelines`
+
+Your pipelines, each with its stages in the board's order.
+
+No parameters.
+
+**Returns:** each pipeline's id and stages, which pipeline is the default, and the CRM a pipeline is kept in sync with (its new stages are added there). Also your lost reasons, what `set_deal_status` takes. A business with no pipeline yet answers none; the first deal you add makes its Sales Pipeline.
+
+**Ask it:** "What pipelines do we have?" · "What are the stages of Sales?"
+
+### `list_deals`
+
+The deals in one pipeline or one stage, a page at a time.
+
+| Parameter | Type | Required | Description |
+| --- | --- | --- | --- |
+| `pipelineId` | string | One of the two | A pipeline's deals, in a stable order |
+| `stageId` | string | One of the two | A stage's deals, the most recently changed first, as the board's column shows them |
+| `status` | array | No | Any of `open` (what the board shows), `won`, `lost`, `abandoned` |
+| `owner` | string | No | A teammate's user id, email or name |
+| `limit` | number | No | Up to 100, 25 by default |
+| `cursor` | string | No | The `nextCursor` of the previous page |
+
+**Returns:** each deal's name, contact, stage, status, value, owner and when it last changed, and `nextCursor` when there are more. A filtered page can hold fewer deals than asked and still have more: your AI asks again for the rest.
+
+**Ask it:** "What's in Demo?" · "Sarah's open deals in Sales." · "Which deals did we win?"
+
+### `get_deal`
+
+One deal with everything you can change on it.
+
+| Parameter | Type | Required | Description |
+| --- | --- | --- | --- |
+| `dealId` | string | Yes | From `list_deals` |
+
+**Returns:** its name, contact, pipeline and stage, status and lost reason, value and how it recurs, cash collected, owner, source, custom fields (with their choices) and when it last changed.
+
+**Ask it:** "Tell me about the Acme deal."
+
+## Changing deals
+
+### `create_deal`
+
+Add a deal for a contact, as **New deal** on the board does. It lands in the stage you name, or the first stage of your default pipeline, and is named after the contact unless you name it.
+
+| Parameter | Type | Required | Description |
+| --- | --- | --- | --- |
+| `contactId` | string | Yes | The contact, from `get_contacts` |
+| `pipelineId` | string | No | Default: your default pipeline |
+| `stageId` | string | No | Default: the pipeline's first stage |
+| `name` | string | No | Up to 200 characters. Default: the contact's name. |
+| `value` | number | No | The deal's value |
+| `valuePeriod` | enum | No | `ONE_TIME`, `MONTHLY` or `ANNUAL` |
+| `owner` | string | No | The teammate who owns it: user id, email or name |
+| `source` | string | No | Where it came from, up to 200 characters |
+| `idempotencyKey` | string | No | Only to add a second, identical deal on purpose |
+
+If the same request comes again within the hour (a retry), the deal already made is answered instead of a second one: "Already added 14 minutes ago: …". Your AI asks you before it adds a second, identical deal.
+
+**Returns:** "Added Maria Lopez to Sales Pipeline · New Lead (value 4,000).", and the deal.
+
+**Ask it:** "Add a deal for Maria, $4,000." · "Put Acme in Proposal at $12k a month."
+
+### `update_deal`
+
+Change a deal as its card does: name, value and how it recurs, cash collected, owner, source and custom fields. Send only what changes.
+
+| Parameter | Type | Required | Description |
+| --- | --- | --- | --- |
+| `dealId` | string | Yes | From `list_deals` |
+| `name` | string | No | The deal's name, up to 200 characters |
+| `value` | number | No | `null` clears it |
+| `valuePeriod` | enum | No | `ONE_TIME`, `MONTHLY` or `ANNUAL` |
+| `cashCollected` | number | No | What has been paid on it so far |
+| `owner` | string | No | A teammate's id, email or name; `null` to unassign |
+| `source` | string | No | Where it came from |
+| `customFields` | array | No | Up to 100 `{ fieldId, value }` pairs, `fieldId` from `get_deal`: text up to 5,000 characters, a number, or a list of choices; `null` clears one |
+| `expectedUpdatedAt` | string | No | When the deal last changed, as `get_deal` showed it |
+
+With `expectedUpdatedAt`, a deal a teammate changed since you looked is refused ("This deal changed a moment ago. Reload it and try again.") instead of written over. On a deal synced with a CRM that carries owners, the owner must be one that CRM knows.
+
+**Ask it:** "Make the Acme deal $5,000." · "Give the Jones deal to Ben." · "Set its Budget field to 12,500."
+
+### `move_deal`
+
+Move a deal to another stage of its pipeline, as dragging its card on the board does.
+
+| Parameter | Type | Required | Description |
+| --- | --- | --- | --- |
+| `dealId` | string | Yes | From `list_deals` |
+| `toStageId` | string | Yes | A stage of the deal's own pipeline |
+| `fromStageId` | string | No | The stage you saw it in |
+
+With `fromStageId`, a deal a teammate moved since is not moved again from a place you no longer see.
+
+**Returns:** "Moved Acme Windows from Demo to Proposal."
+
+**Ask it:** "Move Acme to Proposal." · "Push the Jones deal to Demo."
+
+### `set_deal_status`
+
+Mark a deal won, lost or abandoned, or reopen it, as the deal card does. A win or a loss a conversion tracks records it.
+
+| Parameter | Type | Required | Description |
+| --- | --- | --- | --- |
+| `dealId` | string | Yes | From `list_deals` |
+| `status` | enum | Yes | `won`, `lost`, `abandoned`, or `open` to reopen |
+| `lostReason` | string | No | With `lost` or `abandoned`: one of your lost reasons, by label or id |
+| `fromStatus` | enum | No | The status you saw |
+
+Deals are never deleted from here: lost or abandoned, then reopened, is the undo.
+
+**Ask it:** "Mark the Jones deal won." · "Acme is lost, budget." · "Reopen the Maria deal."
+
+## Stages
+
+### `save_pipeline_stage`
+
+Add a stage to a pipeline, or rename, reorder or tune one.
+
+| Parameter | Type | Required | Description |
+| --- | --- | --- | --- |
+| `stageId` | string | To change one | The stage to change. Leave out to add a new one. |
+| `pipelineId` | string | To add one | The pipeline a new stage goes in |
+| `name` | string | To add one | Up to 120 characters |
+| `winProbability` | number | No | 0 to 1: 0.4 is 40% |
+| `staleAfterDays` | number | No | 1 to 365: a deal sitting here longer shows as stale; `null` for never |
+| `position` | number | No | 0 to 100, its place in the order: 0 is first; past the end is last |
+
+A new stage goes last unless you pass `position`. A pipeline holds up to 30 stages. A stage of that name already in the pipeline is answered as it is, never added twice. A pipeline kept in sync with a CRM takes its new stages there (the answer says where); renaming and reordering still work here. Stages are never deleted from here.
+
+**Ask it:** "Rename the Qualified stage to Discovery." · "Add a Negotiation stage after Proposal." · "Move Demo before Qualified."
+
+<Card title="Do the same from your own app" icon="code" href="/api-reference/endpoint/list-pipelines">
+  Every one of these is also in the REST API, under Pipelines & Deals.
+</Card>

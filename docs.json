@@ -420,7 +420,8 @@
           {
             "group": "Webhooks",
             "pages": [
-              "automation"
+              "automation",
+              "webhook-events"
             ]
           },
           {
@@ -438,6 +439,8 @@
                   "mcp/tools/whop",
                   "mcp/tools/sales-calls",
                   "mcp/tools/contacts-conversations",
+                  "mcp/tools/appointments",
+                  "mcp/tools/pipelines",
                   "mcp/tools/audiences",
                   "mcp/tools/forms",
                   "mcp/tools/ai-media-buyer",
@@ -446,6 +449,7 @@
                   "mcp/tools/slack",
                   "mcp/tools/checkouts",
                   "mcp/tools/youtube",
+                  "mcp/tools/history",
                   "mcp/tools/business"
                 ]
               },
@@ -513,6 +517,18 @@
                 ]
               },
               {
+                "group": "Calendars",
+                "pages": [
+                  "api-reference/endpoint/list-calendars",
+                  "api-reference/endpoint/create-calendar",
+                  "api-reference/endpoint/get-calendar",
+                  "api-reference/endpoint/update-calendar",
+                  "api-reference/endpoint/get-calendar-slots",
+                  "api-reference/endpoint/set-calendar-hours",
+                  "api-reference/endpoint/set-calendar-team"
+                ]
+              },
+              {
                 "group": "Contacts",
                 "pages": [
                   "api-reference/endpoint/list-contacts",
@@ -564,10 +580,28 @@
                 ]
               },
               {
+                "group": "Custom Metrics",
+                "pages": [
+                  "api-reference/endpoint/list-custom-metrics",
+                  "api-reference/endpoint/create-custom-metric",
+                  "api-reference/endpoint/validate-custom-metric",
+                  "api-reference/endpoint/get-custom-metric",
+                  "api-reference/endpoint/update-custom-metric",
+                  "api-reference/endpoint/get-custom-metric-values"
+                ]
+              },
+              {
                 "group": "Form Submissions",
                 "pages": [
                   "api-reference/endpoint/list-form-submissions",
                   "api-reference/endpoint/get-form-submission"
+                ]
+              },
+              {
+                "group": "History",
+                "pages": [
+                  "api-reference/endpoint/list-business-history",
+                  "api-reference/endpoint/get-record-history"
                 ]
               },
               {
@@ -581,6 +615,19 @@
                 "group": "Meeting Recordings",
                 "pages": [
                   "api-reference/endpoint/meetings"
+                ]
+              },
+              {
+                "group": "Pipelines & Deals",
+                "pages": [
+                  "api-reference/endpoint/list-pipelines",
+                  "api-reference/endpoint/create-stage",
+                  "api-reference/endpoint/update-stage",
+                  "api-reference/endpoint/list-deals",
+                  "api-reference/endpoint/create-deal",
+                  "api-reference/endpoint/get-deal",
+                  "api-reference/endpoint/update-deal",
+                  "api-reference/endpoint/move-deal"
                 ]
               },
               {

@@ -1,0 +1,291 @@
+---
+title: "Appointment and deal events"
+description: "Get a signed message the moment an appointment is booked, moved, cancelled or marked, or a deal is added, moved, won or lost, whoever made the change."
+---
+
+Your endpoint (Zapier, Make, n8n, or your own app) can receive one signed message for every real change to an appointment or a deal. It comes whichever way the change was made: in the app, on your booking page, from the Chrome extension, through the API, by Claude or ChatGPT, by a CRM's sync, or by GoHighLevel, Calendly or iClosed.
+
+Each message says what changed, who changed it and from where, each field before and after, and the appointment or deal itself.
+
+## The seven events
+
+| Event | Sent when |
+| --- | --- |
+| `appointment.booked` | A new appointment is booked |
+| `appointment.rescheduled` | An appointment moves to a new time |
+| `appointment.cancelled` | An appointment is cancelled (a cancel that also moved its time is this one event) |
+| `appointment.status_changed` | An appointment is marked shown, not shown or completed, or set back to booked |
+| `deal.created` | A new deal is added |
+| `deal.moved` | A deal moves to another stage |
+| `deal.status_changed` | A deal is marked won, lost or abandoned, or reopened. A move to another stage at the same moment comes in this one event, with `changes.stage`. |
+
+One message per change: a deal moved five times sends five messages, each with its own `id`.
+
+### When nothing is sent
+
+- A change that was refused, that changed nothing, or that did not go through.
+- An edit these events do not cover: an appointment's title, notes, place or meeting link, or handing it to another rep; a deal's value, name, owner or custom fields; deals moved because their stage was deleted.
+- Records brought in by an import.
+- A deal your CRM made more than 24 hours before Cortana copied it, or one your CRM sends without the time it was made. A deal your CRM makes live sends `deal.created`.
+- A GoHighLevel, Calendly or iClosed booking copied after the fact: Cortana sends `appointment.booked` for one only while it is live, before the meeting starts and within 24 hours of when it was booked there. The older bookings copied when you first connect a calendar, or when a sync catches up, send nothing. A GoHighLevel booking Cortana first hears about through a later update to it sends nothing either.
+- [Cortana's own test bookings](/cortana-test-bookings).
+
+## Subscribe
+
+Your endpoint receives these events only when it names them. An endpoint subscribed to `*` (every event) does **not** get them: add each one you want.
+
+<Tabs>
+  <Tab title="In the app">
+    Go to your business, then **Settings**, then the **Webhooks** tab. Add or edit an endpoint and tick the appointment and deal events you want. The signing secret is shown once, when you add the endpoint.
+  </Tab>
+  <Tab title="With the API">
+    `POST /api/v1/businesses/{businessId}/webhooks` with your `targetUrl` and the `events` you want. The answer carries the endpoint's `signingSecret`, shown only here and when you rotate it with `POST …/webhooks/{webhookId}/rotate-secret`. Change an endpoint with `PATCH …/webhooks/{webhookId}`.
+
+    ```json
+    {
+      "targetUrl": "https://example.com/hooks/cortana",
+      "events": ["appointment.booked", "appointment.cancelled", "deal.status_changed"]
+    }
+    ```
+
+    The key needs `webhooks:write`, the read scope of each family it subscribes to (`appointments:read` for the `appointment.*` events, `deals:read` for the `deal.*` events), and `contacts:read`, since every event carries the booking's or the deal's contact: their email, phone, tags and fields. That is checked when you create the endpoint and on every change to it, a new URL or switching it back on included, against the events it holds. A key without one of them is refused with `403` naming the first it lacks, such as "Insufficient scope. Required: contacts:read", and nothing is saved.
+  </Tab>
+</Tabs>
+
+## What a message looks like
+
+Every message is a `POST` with a JSON body and these headers:
+
+| Header | Value |
+| --- | --- |
+| `X-Cortana-Event` | The event, such as `deal.status_changed` |
+| `X-Cortana-Delivery` | This delivery's id |
+| `X-Cortana-Signature` | `t=<unix seconds>,v1=<signature>` |
+
+To check a message came from Cortana, compute an HMAC-SHA256 of `<t>.<the raw body>` with your endpoint's signing secret, as hex, and compare it with `v1`:
+
+```js
+import crypto from 'node:crypto';
+
+function isFromCortana(rawBody, header, signingSecret) {
+  const parts = Object.fromEntries(header.split(',').map((p) => p.split('=')));
+  const expected = crypto.createHmac('sha256', signingSecret).update(`${parts.t}.${rawBody}`).digest('hex');
+  return parts.v1.length === expected.length && crypto.timingSafeEqual(Buffer.from(parts.v1), Buffer.from(expected));
+}
+```
+
+The body, here for a deal Claude marked won for a teammate:
+
+```json
+{
+  "event": "deal.status_changed",
+  "deliveryId": "5b0e2f1c-8a4d-4d0e-9f7a-1c2b3d4e5f60",
+  "timestamp": "2026-11-19T20:00:04.000Z",
+  "businessId": "00000000-0000-4000-8000-000000000001",
+  "id": "3f6c2a1e-8d4b-4c7a-9e21-5b0d7f4a9c13",
+  "data": {
+    "change": {
+      "id": "3f6c2a1e-8d4b-4c7a-9e21-5b0d7f4a9c13",
+      "action": "deal.won",
+      "at": "2026-11-19T20:00:00.000Z",
+      "when": "Thu, Nov 19, 3:00 PM",
+      "timeZone": "America/New_York",
+      "what": "Marked won",
+      "line": "Marked won · Claude, for Sarah Lee"
+    },
+    "actor": { "kind": "ai", "name": "Claude", "forPerson": "Sarah Lee", "where": "for Sarah Lee" },
+    "changes": {
+      "status": { "before": "open", "after": "won" }
+    },
+    "deal": {
+      "id": "8a2e4f60-1c3b-4d5e-9f70-2b1c3d4e5f61",
+      "name": "Max Roe",
+      "contactId": "1b9d6bcd-bbfd-4b2d-9b5d-ab8dfbbd4bed",
+      "contact": { "id": "1b9d6bcd-bbfd-4b2d-9b5d-ab8dfbbd4bed", "name": "Max Roe" },
+      "pipelineId": "0d6f2c4a-7b1e-4f3a-8c5d-9e2a1b3c4d50",
+      "stageId": "5a1b2c3d-4e5f-4a6b-8c7d-9e0f1a2b3c42",
+      "stage": { "id": "5a1b2c3d-4e5f-4a6b-8c7d-9e0f1a2b3c42", "name": "Demo" },
+      "status": "won",
+      "monetaryValue": 4000,
+      "valuePeriod": "ONE_TIME",
+      "cashCollected": null,
+      "ownerId": "7c9e6679-7425-40de-944b-e07fc1f90ae7",
+      "owner": { "id": "7c9e6679-7425-40de-944b-e07fc1f90ae7", "name": "Sarah Lee" },
+      "source": "Meta ads",
+      "lostReason": null,
+      "syncedWith": [],
+      "stageChangedAt": "2026-11-17T14:12:00.000Z",
+      "statusChangedAt": "2026-11-19T20:00:00.000Z",
+      "closedAt": "2026-11-19T20:00:00.000Z",
+      "lastActivityAt": "2026-11-19T20:00:00.000Z",
+      "createdAt": "2026-11-12T10:21:09.000Z",
+      "updatedAt": "2026-11-19T20:00:00.000Z",
+      "pipeline": { "id": "0d6f2c4a-7b1e-4f3a-8c5d-9e2a1b3c4d50", "name": "Sales Pipeline" },
+      "customFields": []
+    },
+    "contact": {
+      "id": "1b9d6bcd-bbfd-4b2d-9b5d-ab8dfbbd4bed",
+      "ghlContactId": null,
+      "email": "max@example.com",
+      "phone": "+14165550100",
+      "firstName": "Max",
+      "lastName": "Roe",
+      "name": "Max Roe",
+      "company": "Acme",
+      "tags": ["Hot lead"],
+      "customFields": {},
+      "createdAt": "2026-10-01T00:00:00.000Z"
+    }
+  }
+}
+```
+
+### What each part holds
+
+| Field | What it is |
+| --- | --- |
+| `id` | The change's own id. Each change has one, so use it to tell changes apart. |
+| `data.change` | The change as the record's **History** panel reads it: `what` and the whole `line`, `at` (UTC) and `when` (on the business's clock, in `timeZone`), and `action`, the kind of change (`deal.won`, `deal.lost`, `deal.abandoned` or `deal.reopened` for a `deal.status_changed`). |
+| `data.actor` | Who made the change: `kind` (`person`, `contact` for a lead, `api_key`, `ai`, `crm_sync`, `automation` or `system`), `name`, `forPerson` (the teammate an AI acted for) and `where` ("in the app", "via API", "on the booking page", "for Sarah Lee"; `null` for a sync). An email never stands as a name: a teammate with no name on file reads "A teammate", a lead "A lead". |
+| `data.changes` | Only the fields this change moved, each with `before` and `after` as they were at that moment. Times in ISO 8601, statuses as the API names them, a deal's `stage` and `owner` as `{ id, name }`. On a new appointment or deal it holds every field it was made with, each `before` `null`. A long text arrives cut at 1,000 characters, ending in "…". If one side of the change was over 8,000 characters, `changes` is `{}`: read the record. |
+| `data.appointment` or `data.deal` | The record as `GET` answers it in the [API](/api-reference/endpoint/get-deal). It is read when the message is sent, so it can already show a later change: read `changes` for the moment of this one. |
+| `data.contact` | The contact, the same block as `contact.created` carries. |
+
+A message over 32 KB is trimmed: an appointment's `notes` and `description` become `null`, a deal's `customFields` become `[]` with `customFieldsTruncated: true`, and the contact's `customFields` become `{}`.
+
+## An example of each
+
+The `data.change`, `data.actor` and `data.changes` of each event. The record and the contact come as in the full message above.
+
+<AccordionGroup>
+  <Accordion title="appointment.booked: a lead books on your booking page">
+    ```json
+    {
+      "change": {
+        "action": "appointment.booked",
+        "what": "Booked for Wed, Nov 25, 4:30 PM",
+        "line": "Booked for Wed, Nov 25, 4:30 PM · Jane Doe, on the booking page"
+      },
+      "actor": { "kind": "contact", "name": "Jane Doe", "forPerson": null, "where": "on the booking page" },
+      "changes": {
+        "status": { "before": null, "after": "BOOKED" },
+        "scheduledAt": { "before": null, "after": "2026-11-25T21:30:00.000Z" },
+        "duration": { "before": null, "after": 30 },
+        "timezone": { "before": null, "after": "America/New_York" },
+        "title": { "before": null, "after": "Intro Call" },
+        "eventTypeId": { "before": null, "after": "2c4e6a8b-0d1f-4a3b-8c5d-7e9f1a2b3c4d" },
+        "contactId": { "before": null, "after": "6b0f3e4c-1f2a-4d1b-9c33-2a7e5d0c9a11" },
+        "assignedTo": { "before": null, "after": "Ben Ortiz" }
+      }
+    }
+    ```
+  </Accordion>
+
+  <Accordion title="appointment.rescheduled: Claude moves a call for a teammate">
+    ```json
+    {
+      "change": {
+        "action": "appointment.rescheduled",
+        "what": "Rescheduled to Wed, Nov 25, 4:30 PM",
+        "line": "Rescheduled to Wed, Nov 25, 4:30 PM · Claude, for Sarah Lee"
+      },
+      "actor": { "kind": "ai", "name": "Claude", "forPerson": "Sarah Lee", "where": "for Sarah Lee" },
+      "changes": {
+        "status": { "before": "BOOKED", "after": "RESCHEDULED" },
+        "scheduledAt": { "before": "2026-11-24T20:00:00.000Z", "after": "2026-11-25T21:30:00.000Z" }
+      }
+    }
+    ```
+  </Accordion>
+
+  <Accordion title="appointment.cancelled: your app cancels through the API">
+    ```json
+    {
+      "change": {
+        "action": "appointment.cancelled",
+        "what": "Cancelled",
+        "line": "Cancelled · Acme Scheduler, via API"
+      },
+      "actor": { "kind": "api_key", "name": "Acme Scheduler", "forPerson": null, "where": "via API" },
+      "changes": {
+        "status": { "before": "BOOKED", "after": "CANCELLED" },
+        "cancellationReason": { "before": null, "after": "Client asked to move it to January" }
+      }
+    }
+    ```
+  </Accordion>
+
+  <Accordion title="appointment.status_changed: a rep marks a no-show in the app">
+    ```json
+    {
+      "change": {
+        "action": "appointment.status_changed",
+        "what": "Marked not shown",
+        "line": "Marked not shown · Sarah Lee, in the app"
+      },
+      "actor": { "kind": "person", "name": "Sarah Lee", "forPerson": null, "where": "in the app" },
+      "changes": {
+        "status": { "before": "BOOKED", "after": "NO_SHOW" }
+      }
+    }
+    ```
+  </Accordion>
+
+  <Accordion title="deal.created: your app adds a deal through the API">
+    ```json
+    {
+      "change": {
+        "action": "deal.created",
+        "what": "Created in New Lead",
+        "line": "Created in New Lead · Acme Scheduler, via API"
+      },
+      "actor": { "kind": "api_key", "name": "Acme Scheduler", "forPerson": null, "where": "via API" },
+      "changes": {
+        "stage": { "before": null, "after": { "id": "5a1b2c3d-4e5f-4a6b-8c7d-9e0f1a2b3c41", "name": "New Lead" } },
+        "status": { "before": null, "after": "open" },
+        "name": { "before": null, "after": "Maria Lopez" },
+        "monetaryValue": { "before": null, "after": 4000 },
+        "valuePeriod": { "before": null, "after": "ONE_TIME" },
+        "owner": { "before": null, "after": { "id": "9b2f4e1a-3c5d-4e6f-8a7b-0c1d2e3f4a5b", "name": "Ben Ortiz" } }
+      }
+    }
+    ```
+  </Accordion>
+
+  <Accordion title="deal.moved: a rep drags a deal on the board">
+    ```json
+    {
+      "change": {
+        "action": "deal.moved",
+        "what": "Moved to Proposal",
+        "line": "Moved to Proposal · Sarah Lee, in the app"
+      },
+      "actor": { "kind": "person", "name": "Sarah Lee", "forPerson": null, "where": "in the app" },
+      "changes": {
+        "stage": { "before": { "id": "5a1b2c3d-4e5f-4a6b-8c7d-9e0f1a2b3c42", "name": "Demo" }, "after": { "id": "5a1b2c3d-4e5f-4a6b-8c7d-9e0f1a2b3c43", "name": "Proposal" } }
+      }
+    }
+    ```
+  </Accordion>
+
+  <Accordion title="deal.status_changed: your CRM's sync marks a deal lost and moves it">
+    ```json
+    {
+      "change": {
+        "action": "deal.lost",
+        "what": "Marked lost in Closing",
+        "line": "Marked lost in Closing · GoHighLevel sync"
+      },
+      "actor": { "kind": "crm_sync", "name": "GoHighLevel sync", "forPerson": null, "where": null },
+      "changes": {
+        "stage": { "before": { "id": "5a1b2c3d-4e5f-4a6b-8c7d-9e0f1a2b3c42", "name": "Demo" }, "after": { "id": "5a1b2c3d-4e5f-4a6b-8c7d-9e0f1a2b3c44", "name": "Closing" } },
+        "status": { "before": "open", "after": "lost" }
+      }
+    }
+    ```
+  </Accordion>
+</AccordionGroup>
+
+<Card title="Read the whole history" icon="clock-rotate-left" href="/api-reference/endpoint/list-business-history">
+  Missed a message, or want the changes these events do not cover? The history API answers every change, in the same words.
+</Card>

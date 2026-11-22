@@ -18,17 +18,17 @@ Most people connect with the hosted connector over OAuth, no API key needed. Pow
     Choose which business or businesses the assistant is allowed to access.
   </Step>
   <Step title="Approve permissions">
-    Review the consent screen and approve. Ad analytics is granted by default.
+    Review the consent screen and approve. It lists what the assistant can see and do by default, and the opt-ins below it.
   </Step>
 </Steps>
 
 This works in Claude (web and desktop), ChatGPT, Codex, and any client that supports remote MCP connectors. The assistant discovers every Cortana tool automatically.
 
-## Read vs manage
+## Included vs opt-in
 
 <CardGroup cols={2}>
-  <Card title="Read (default)" icon="eye">
-    Attribution, revenue, CRM, audiences, sales calls, and YouTube data. Granted as soon as you connect.
+  <Card title="Included (default)" icon="eye">
+    Reads your attribution, revenue, CRM, audiences, sales calls, and YouTube data. Books, moves and cancels appointments, edits your calendars, works your pipelines and deals, edits custom metrics, sets up conversions and Meta tracking, edits your Business Info, and reads who changed what. Granted as soon as you connect, each call with your own permissions in Cortana.
   </Card>
 
   <Card title="Manage (opt-in)" icon="sliders">
@@ -37,7 +37,7 @@ This works in Claude (web and desktop), ChatGPT, Codex, and any client that supp
 </CardGroup>
 
 <Warning>
-  The manage checkbox lets the assistant spend money on ads. Everything is created paused, and going live or changing budgets requires your confirmation. Leave it unchecked if you only want reads.
+  The ad management checkbox lets the assistant spend money on ads. Everything is created paused, and going live or changing budgets requires your confirmation. Leave it unchecked if you don't want the assistant to create or launch ads.
 </Warning>
 
 ## Option 2: Local connector (advanced)
