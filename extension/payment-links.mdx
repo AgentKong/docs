@@ -302,6 +302,20 @@ Commas has no **+ New price**: its price and billing are set on each link, under
   <Accordion title="Where do payments show up afterwards?">
     Against the contact, and in your conversion columns if that payment is one of your tracked conversion sources. See [Contact details and journey](/extension/contact-details-and-journey).
   </Accordion>
+  <Accordion title="Can buyers pay with Klarna, Affirm, Afterpay or other financing?">
+    Yes. Cortana never limits a link to cards: the buyer sees every payment method you have turned on in the platform the link is from.
+
+    - **Stripe:** in your Stripe dashboard, open **Settings**, then **Payment methods**, and turn on Klarna, Affirm or Afterpay / Clearpay. Your Cortana links show them right away. Nothing to change in Cortana.
+    - **Whop:** turn on the financing methods for that plan in Whop. Cortana links use the plan's payment methods.
+    - **Commas (Fanbasis):** turn on the financing options in your Commas account, for example ClarityPay, Klarna, Sezzle or Zip. Cortana links show them.
+    - **PayPal:** the buyer pays on PayPal's own page, and PayPal decides whether to offer them Pay Later.
+
+    Still only cards on the checkout? Check three things:
+
+    - The method is turned on in that platform's account.
+    - The price is a one-time payment. Financing options mostly work on one-time payments only; PayPal Pay Later, Affirm and Afterpay never work on subscriptions.
+    - The buyer's country, currency and the price are inside what that provider accepts. The provider hides itself when they are not.
+  </Accordion>
 </AccordionGroup>
 
 ## Next step

@@ -98,7 +98,7 @@ Move an appointment to a new date and time, as dragging it in the app's calendar
 | `time` | string | Yes | "4:00 PM" or "16:00" |
 | `timezone` | string | No | Default: the business's own |
 
-A time the rep already has is refused, and so is a time in the past. A cancelled appointment is not moved: book it again. A booking that lives in Calendly or iClosed is not moved here: the answer says "This booking lives in Calendly. Move it there and Cortana follows." Move it in Calendly or iClosed, and Cortana's copy follows at that system's next sync.
+A time the rep already has is refused, and so is a time in the past. A cancelled appointment is not moved: book it again. A booking that lives in Calendly, iClosed or HubSpot is not moved here: the answer says "This booking lives in Calendly. Move it there and Cortana follows." Move it in Calendly, iClosed or HubSpot, and Cortana's copy follows at that system's next sync.
 
 **Returns:** a line with the new time, and the appointment.
 
@@ -113,7 +113,7 @@ Cancel an appointment, as **Cancel** in the app does. The record stays, the time
 | `appointmentId` | string | Yes | From `list_appointments` |
 | `reason` | string | No | Up to 1,000 characters, kept on the appointment |
 
-A booking that lives in Calendly or iClosed is not cancelled here: the answer says "This booking lives in Calendly. Cancel it there and Cortana follows." Cancel it in Calendly or iClosed, and Cortana's copy follows at that system's next sync. Asking again for one already cancelled says that it is.
+A booking that lives in Calendly, iClosed or HubSpot is not cancelled here: the answer says "This booking lives in Calendly. Cancel it there and Cortana follows." Cancel it in Calendly, iClosed or HubSpot, and Cortana's copy follows at that system's next sync. Asking again for one already cancelled says that it is.
 
 **Returns:** "Cancelled Jane Doe's appointment on Wed Dec 2, 3:00 PM EST. The time is open again."
 

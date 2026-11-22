@@ -3,11 +3,11 @@ title: "5) Where your answers go"
 description: "Every answer lands on the person's contact record, under Custom Fields, named after the question you asked."
 ---
 
-{/* last-verified: 2026-09-10 · Contacts contact window; Ad Tracking > Conversion Setup */}
+{/* last-verified: 2026-11-20 · Contacts contact window (Custom Fields, Forms tab); Ad Tracking > Conversion Setup */}
 
 Every answer a visitor gives is saved onto that person's contact record. You read them in the contact window, the same window you open from **Contacts**.
 
-Each question becomes a field named after the question you asked. There is no separate submissions table and no per-form analytics.
+Each question becomes a field named after the question you asked. The contact's **Forms** tab lists every form they sent, with what they answered. Each form's card in the Forms list also says how many submissions it has: click it to see each one, with the path the person took through your pages.
 
 <Note>
   **Before you start.** You need a live form. See [Share your form](/forms-share).
@@ -30,8 +30,7 @@ Click **Contacts** in the menu on the left of your business, and search for the 
 **Custom Fields** is further down the left side of the window, under the line *Additional information for this contact*. Each question you asked is a field here, named after the question, with the answer in the box under it.
 
 <Frame caption="Custom Fields on a contact. Each form question is a field, named after the question.">
-  <img className="block dark:hidden" src="/images/forms/answers/01-contact-custom-fields.png" alt="The contact window scrolled to the Custom Fields section, headed Additional information for this contact. Two form questions appear as fields, one a dropdown holding the choice the visitor picked and one a text box holding what they typed." />
-  <img className="hidden dark:block" src="/images/forms/answers/01-contact-custom-fields-dark.png" alt="The contact window scrolled to the Custom Fields section, headed Additional information for this contact. Two form questions appear as fields, one a dropdown holding the choice the visitor picked and one a text box holding what they typed." />
+  <img src="/images/forms/answers/01-contact-custom-fields.png" alt="The contact window scrolled to the Custom Fields section, headed Additional information for this contact. Two form questions appear as fields, one a dropdown holding the choice the visitor picked and one a text box holding what they typed." />
 </Frame>
 
 <Note>
@@ -41,6 +40,27 @@ Click **Contacts** in the menu on the left of your business, and search for the 
 
   If the same person fills in two different forms, both forms' answers appear on that one contact. Nothing is overwritten unless the same question is answered twice, and then the newer answer wins.
 </Note>
+
+### See every form they sent
+
+The contact window's right column has a row of tabs. Click **Forms**, next to **Journey**.
+
+Every form this person sent is listed, newest first. So is every calendar they answered questions on: those say **Calendar** beside the name. Each one shows:
+
+- The form's name, or the calendar's.
+- When they sent it.
+- How it ended: **Sent**, **Started, not sent**, **Booked**, **Turned away**, or **Sent, not booked**.
+- Their answers, in the order your form asks them. A booked time shows in your business's time zone.
+
+A long form shows its first six answers. Click **Show all** to read the rest.
+
+<Frame caption="The Forms tab on a contact. Every form they sent, newest first, with what they answered.">
+  <img src="/images/forms/answers/05-contact-forms-tab.png" alt="The contact window's right column on the Forms tab. Three submissions are listed, newest first. The first shows the form's name, 13 hours ago, Sent, and its answers as question and answer pairs, with a Show all 10 answers link under the sixth. The second is a calendar's form marked Calendar and Turned away. The third reads Started, not sent." />
+</Frame>
+
+<Tip>
+  **Custom Fields hold the latest answer to each question. The Forms tab holds every submission.** If someone sends your form twice, Custom Fields show their newest answers, and the Forms tab shows both times, each with what they said then.
+</Tip>
 
 ### How each kind of answer looks
 
@@ -67,8 +87,7 @@ You can tell Cortana that finishing your form counts as a conversion. Then it sh
 Go to **Ad Tracking** in the menu on the left, then the **Conversion Setup** tab. You see your list of conversion events. Each row is one thing you count, such as a lead or a purchase.
 
 <Frame caption="Conversion Setup. Each row is one thing you count in your ad reports.">
-  <img className="block dark:hidden" src="/images/forms/answers/02-conversion-setup.png" alt="The Ad Tracking area with the Conversion Setup tab highlighted, showing a table of conversion events with their status, name, recent activity, last event and number of sources." />
-  <img className="hidden dark:block" src="/images/forms/answers/02-conversion-setup-dark.png" alt="The Ad Tracking area with the Conversion Setup tab highlighted, showing a table of conversion events with their status, name, recent activity, last event and number of sources." />
+  <img src="/images/forms/answers/02-conversion-setup.png" alt="The Ad Tracking area with the Conversion Setup tab highlighted, showing a table of conversion events with their status, name, recent activity, last event and number of sources." />
 </Frame>
 
 ### Add a source to a conversion event
@@ -76,8 +95,7 @@ Go to **Ad Tracking** in the menu on the left, then the **Conversion Setup** tab
 Click the name of the conversion event you want your form to feed. Use **Add Custom Event** first if you need a new one. In the box that opens, scroll to **Sources** and click **Add Source**.
 
 <Frame caption="A conversion event holds sources. A source is one place its conversions come from.">
-  <img className="block dark:hidden" src="/images/forms/answers/03-add-source.png" alt="The Edit Conversion box with the Add Source button highlighted in its Sources section, above a line reading no sources created yet." />
-  <img className="hidden dark:block" src="/images/forms/answers/03-add-source-dark.png" alt="The Edit Conversion box with the Add Source button highlighted in its Sources section, above a line reading no sources created yet." />
+  <img src="/images/forms/answers/03-add-source.png" alt="The Edit Conversion box with the Add Source button highlighted in its Sources section, above a line reading no sources created yet." />
 </Frame>
 
 ### Choose Cortana Forms
@@ -113,8 +131,7 @@ The list is in two groups.
 Tick what you want, then click **Submit**. With nothing to pick from you see *You have no forms yet. Create a form or a booking calendar first, then come back and track it.*
 
 <Frame caption="Pick what counts, then tick the forms. Only ticked ones feed this event.">
-  <img className="block dark:hidden" src="/images/forms/answers/04-cortana-form-source.png" alt="The Create Conversion Source box with Cortana Forms chosen as the integration, a form submission event chosen, and the Which forms to track list highlighted, showing tickboxes beside each form name with draft labels on the ones that are off." />
-  <img className="hidden dark:block" src="/images/forms/answers/04-cortana-form-source-dark.png" alt="The Create Conversion Source box with Cortana Forms chosen as the integration, a form submission event chosen, and the Which forms to track list highlighted, showing tickboxes beside each form name with draft labels on the ones that are off." />
+  <img src="/images/forms/answers/04-cortana-form-source.png" alt="The Create Conversion Source box with Cortana Forms chosen as the integration, a form submission event chosen, and the Which forms to track list highlighted, showing tickboxes beside each form name with draft labels on the ones that are off." />
 </Frame>
 
 {/* TODO: verify. The screenshot above predates the 2026-09-10 change that split this picker into
@@ -161,8 +178,8 @@ A **Signature** question keeps more than the drawing. Cortana stores four things
     | **Which forms to track?** | The same box | The forms and booking calendar forms this event counts. | None ticked | Tick only what really means a lead. | A form marked **draft** is off and a calendar marked **inactive** is switched off. Neither can fire. |
     | **Lead quality** and the partial checklist | The same box, on a picked booking calendar | Narrows which partials count, using that calendar's own questions. | Not set | Leave alone unless partial numbers look inflated. | Only appears with a booking calendar ticked, and the checklist only on **Partial submission**. |
     | **Form pixel** | Nothing to open. It is kept out of your tracking pixel list | Counts visits to the form's page and ties them to the ad they came from. | Made for you, with the form | Nothing to do. It looks after itself. | There is nothing to copy, rename or install, and no snippet to paste. |
-    | **Scheduler question** | The form builder, **Add a question → Scheduler** | Puts a booking calendar inside the form. Booking there also makes an appointment. | Not on a form | Add one when you want the person to pick a time as well. | The booking page brings its own questions, separate from yours. |
-    | **Payment question** | The form builder, **Add a question → Payment** | Charges the card inside the form, on your own account. | Not on a form | Only Stripe and Whop. Nothing else can be used. | The money lands in your own account, so check it there. |
+    | **Calendar block** | The form builder, **Add a question → Calendar** | Puts a booking calendar inside the form. Booking there also makes an appointment. | Not on a form | Add one when you want the person to pick a time as well. | The booking page brings its own questions, separate from yours. |
+    | **Payment step** | The form builder, **Add a question → Payment** | Charges the card inside the form, on your own account. | Not on a form | Stripe, Whop or Commas (Fanbasis). Nothing else can be used. | The money lands in your own account, so check it there. |
   </Accordion>
 
   <Accordion title="Troubleshooting">
@@ -198,7 +215,7 @@ A **Signature** question keeps more than the drawing. Cortana stores four things
   </Accordion>
 
   <Accordion title="How do I spot new answers?">
-    Open **Contacts** and sort by **Created**. Everyone who filled your form in is there, newest first. A **Scheduler** step also sends a confirmation email to the person who booked.
+    Open **Contacts** and sort by **Created**. Everyone who filled your form in is there, newest first. A **Calendar** block also sends a confirmation email to the person who booked.
   </Accordion>
 
   <Accordion title="How do I get my answers out of Cortana?">

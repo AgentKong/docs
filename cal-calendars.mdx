@@ -1,7 +1,9 @@
 ---
 title: "1) Creating Your Booking Calendar"
-description: "Make a booking page, choose the questions you ask, set the hours you are free, and share a link people can book on."
+description: "Make a booking page, choose the questions you ask, send people down their own path, set the hours you are free, and share a link people can book on."
 ---
+
+{/* last-verified: 2026-11-16 (section 3, the Questions tab) · route: /business/[businessId]/appointments, Calendars tab */}
 
 {/* TODO: verify. No Loom walkthrough was supplied for this page. Add the embed + a
     verbatim transcript inside an <Accordion title="Video transcript"> here once recorded,
@@ -42,7 +44,7 @@ Anyone can open that link, answer a few questions, pick a time and book. The boo
     Click **Add calendar** at the top right.
 
     <Frame caption="The Calendars tab. Each card is one kind of meeting. Add calendar starts a new one.">
-      <img src="/images/appointments/calendars/01-calendars-tab.png" alt="The Calendars tab of the Appointments area, showing a grid of booking calendar cards with their duration, booking count and web address. The Add calendar button at the top right is highlighted." />
+      <img src="/images/appointments/calendars/01-calendars-tab.png" alt="The Calendars tab of the Appointments area, showing a grid of booking calendar cards, each with its on and off switch, duration, team size and web address. The Add calendar button at the top right is highlighted." />
     </Frame>
   </Step>
 
@@ -80,7 +82,7 @@ It has four tabs. **Details**, **Questions**, **Availability** and **Notificatio
 
   It reads **Saved** when everything is stored. It turns into a blue **Save** button the moment you change something. So if it says **Save**, click it. You have work that is not stored yet.
 
-  The **Ending rules** dialog is separate. It has its own **Cancel** and **Save** buttons.
+  The **Ending rules & redirects** panel is separate. It has its own **Cancel** and **Save** buttons.
 </Tip>
 
 <Steps>
@@ -160,8 +162,10 @@ It has four tabs. **Details**, **Questions**, **Availability** and **Notificatio
 
     Click **Create a form**.
 
-    <Frame caption="A new form starts with Name, Email and Phone on Page 1. It also adds an empty Page 2.">
-      <img src="/images/appointments/calendars/06-questions.png" alt="The Questions tab after creating a form, showing Page 1 containing Name, Email and Phone, an empty Page 2, an Add page button, and the Endings section below. A live preview of the booking page is shown alongside." />
+    The **Questions** tab is the same builder as [Build your form](/forms-build), with your calendar around it. On the left: your form's card, then each page with its questions and the sentence that says where people go after it, then **Lead routing**: **Conditional logic** opens the Map, **Ending rules & redirects** opens your rules. In the middle: your booking page, and **Map** beside **Preview**. On the right: **Calendar** for the page's look, and **Field settings** for one question.
+
+    <Frame caption="The Questions tab. 1 is the form, 2 says where people go after a page, 3 draws every path.">
+      <img src="/images/appointments/calendars/06-questions.png" alt="The Questions tab of a calendar. 1 marks the FORM card, naming the form and saying Used by 2 calendars. Edits apply to all. 2 marks the sentence under Page 1: When Your monthly marketing budget is Under $1k, end on Not a fit yet. Otherwise, go to the next page. 3 marks the Map tab beside Preview. The booking page preview sits in the middle and the Calendar panel on the right." />
     </Frame>
   </Step>
 </Steps>
@@ -177,7 +181,7 @@ It has four tabs. **Details**, **Questions**, **Availability** and **Notificatio
 <Note>
   **Two calendars can use one form.**
 
-  **Select a form** points at the *same* form, not a copy. So editing a question changes it on every calendar that uses that form. Cortana tells you when a form is already in use somewhere else.
+  **Select a form** points at the *same* form, not a copy. So editing a question changes it on every calendar that uses that form. The form's card says so, such as *Used by 2 calendars. Edits apply to all.* Click **Change** on the card to point the calendar at another form.
 
   Copying a calendar works differently. The copy always gets its own private form.
 </Note>
@@ -186,34 +190,52 @@ It has four tabs. **Details**, **Questions**, **Availability** and **Notificatio
   <Step title="Add your qualifying questions">
     Click **Add question** under the page you want the question on.
 
-    The picker says: *Pick a field to collect its answer, or create a new one. Every question saves to the contact, so answers are reusable and scoreable.*
+    The picker is the one the Forms builder uses. It says *Pick what you want to ask for, or one of your custom fields. You can change it later.*
 
-    The questions come in four groups.
-
-    - **Contact fields**: First Name, Last Name, Company Website, City, State / Province, Zip / Postal Code, Country.
-    - **Content**: **Text Block**. This shows a message, a heading or a block of colour. People do not answer it.
-    - **Custom fields**: every question you already made for this business, with the kind of answer it takes.
-    - **Create a field**: build a brand new question without leaving this screen.
+    - **Contact**: the details a booking saves onto the person. Name, First name, Last name, Email, Phone number, Company website, City, State / province, Zip / postal code, Country, and a full Address. A detail the form already asks is not offered twice.
+    - **Text**, **Choice**, **Rating**, **Numbers**, **Date and time**, **Upload and sign** and **Display only**: every kind a form can ask, as on [Build your form](/forms-build).
+    - **Steps**: **Payment** takes money inside the booking form. **Calendar** says *Where this calendar's time picker sits in the form*: add it to put the time picker on a page of your choosing. Pages after it are asked once the person has booked.
+    - **Custom fields**: every question you already made for this business. **Create a new custom field** builds one without leaving this screen.
 
     Use the search box at the top to find a question fast. You can also type a new name there to create one.
 
-    <Frame caption="The field picker. Every answer is saved onto the person's record, so you can use it again and score it.">
-      <img src="/images/appointments/calendars/07-field-library.png" alt="The Add a question dialog showing a search box and grouped lists of contact fields, a Text Block content option, existing custom fields with their answer types, and a Create a new field option." />
+    <Frame caption="The question picker. The Contact group lists the details a booking saves onto the person.">
+      <img src="/images/appointments/calendars/07-field-library.png" alt="The Add a question dialog on a calendar, with the search box at the top and 1 marking the Contact group: Name, Last name, Phone number, Company website, City, State / province, Zip / postal code, Country and Address. The Text and Choice groups start below." />
+    </Frame>
+
+    <Frame caption="Steps: a Payment inside the booking form, and where the calendar's own time picker sits.">
+      <img src="/images/appointments/calendars/18-calendar-steps.png" alt="The Add a question dialog scrolled to the bottom. 1 marks Payment, Take money on your own Stripe, 0% fee. 2 marks Calendar, Where this calendar's time picker sits in the form. Create a new custom field sits underneath." />
+    </Frame>
+  </Step>
+
+  <Step title="Send people down different paths">
+    A path sends people somewhere other than the next page, based on their answers. It works on a booking page exactly as it does on a form: see [Send people down different paths](/forms-build#7-send-people-down-different-paths).
+
+    Click the sentence under a page, such as *Go to the next page.* In the panel, click **Add a path**. Under **When**, pick the question, the test and the answer. Under **Then**, pick a page or an ending. Under **Otherwise**, pick where everyone else goes.
+
+    On a booking page this lets you:
+
+    - End the form before the calendar for people who do not qualify, on an ending of their own, such as a message or your free guide.
+    - Send "pay now" people to a **Payment** page, and "book a call" people to the time picker.
+    - Ask some pages only of the people who need them.
+
+    <Frame caption="A path on a booking form. People under $1k end on Not a fit yet, before they ever see the calendar.">
+      <img src="/images/appointments/calendars/19-calendar-paths.png" alt="The paths panel for the page A little about you. 1 marks the When row: Answer, Your monthly marketing budget, Equals, Under $1k. 2 marks Then, set to End on Not a fit yet, with that ending's name and its message below." />
     </Frame>
   </Step>
 
   <Step title="Style the booking page">
     The panel on the right has two tabs, **Calendar** and **Field settings**. Under **Calendar** you set the look of the whole page, top to bottom.
 
-    - **Calendar type**: **Calendar Combo** shows the questions and the calendar side by side. **Application + Cal** asks every question first, then shows the calendar.
-    - **Booking page header**: **Hide title** and **Hide business name**. On **Application + Cal** you also get **Hide duration**. The panel says *Trim what shows above the questions. None of this changes what you collect.*
+    - **Calendar type**: **Calendar Combo** shows the questions and the calendar side by side. **Application + Cal** asks every question first, then shows the calendar. **Standard** shows the times first, then the questions. A new calendar starts on **Standard**. [The three calendar types](#the-three-calendar-types) below compares them.
+    - **Booking page header**: **Hide title** and **Hide business name**. On **Application + Cal** and **Standard** you also get **Hide duration**. The panel says *Trim what shows above the questions. None of this changes what you collect.*
     - **Transition** and **Sticky Contact**. **Sticky Contact** fills in the details of people who have booked with you before.
     - **Theme**: six light looks (Sage, Snow, Cream, Azure, Blush, Lavender) and six dark ones (Midnight, Royal, Obsidian, Forest, Ember, Rose).
     - **Colors**: five of them. **Background**, **Text**, **Accent**, **Button** and **Button Text**.
     - **Typography**: the **Font** and the **Size** of the writing, plus a **Reset theme and typography** link. The next step covers it.
     - **Logo**: a PNG, JPG or WebP image file, up to 2 MB.
 
-    The middle column shows your real booking page as you edit it. Use the **Desktop** and **Mobile** buttons to see how it looks on a computer and on a phone.
+    The middle column shows your real booking page as you edit it. On **Calendar Combo**, the **Desktop** and **Mobile** buttons show how it looks on a computer and on a phone.
   </Step>
 
   <Step title="Pick a font and a text size">
@@ -221,14 +243,14 @@ It has four tabs. **Details**, **Questions**, **Availability** and **Notificatio
 
     **Font** gives you seven to choose from: **Inter**, **Roboto**, **Open Sans**, **Lato**, **Poppins**, **Montserrat** and **System**. **System** means the visitor's own device font, the one their phone or computer uses everywhere. A new calendar uses **Inter**.
 
-    **Size** makes all the writing bigger or smaller. Drag it anywhere from 12 to 24. It starts at 16.
+    **Size** makes all the writing bigger or smaller. Type any number from 12 to 24. It starts at 16.
 
-    The middle column changes as you drag, so you can watch it. Check it on **Mobile** too.
+    The middle column changes as you type, so you can watch it. Check it on **Mobile** too.
 
-    Under the slider it says *Sets the base size for the whole form. Default is 16px. Inputs never go below 16px, so phones do not zoom on them.*
+    Under the box it says *Sets the base size for the whole form, anything from 12px to 24px. Default is 16px. Inputs never go below 16px, so phones do not zoom on them.*
 
     <Frame caption="Typography sets the font and the size of the writing for the whole booking page.">
-      <img src="/images/appointments/calendars/16-typography.png" alt="The Calendar tab of the calendar builder with the Typography block highlighted, showing a Font dropdown set to Inter, a Size slider reading 20px, the hint about the default size and inputs never going below 16px, and a Reset theme and typography link underneath." />
+      <img src="/images/appointments/calendars/16-typography.png" alt="The Calendar tab of the calendar builder with the Typography block highlighted, showing a Font dropdown set to Inter, a Size box reading 20 px, the hint about the size range, the default size and inputs never going below 16px, and a Reset theme and typography link underneath." />
     </Frame>
 
     Picking a **Theme** tile changes the colours only. It never changes your font or your size.
@@ -237,7 +259,7 @@ It has four tabs. **Details**, **Questions**, **Availability** and **Notificatio
   <Step title="Make one question bigger, or push it down">
     Every question can break away from the form's size and spacing.
 
-    Click a question, then switch the panel to **Field settings**. **Text size** and **Space above** sit under **Hide field till ready**.
+    Click a question, then switch the panel to **Field settings**. Scroll down past the question's own settings to **Text size** and **Space above**.
 
     Both read **Match form** until you move them. That means the question is following the whole form.
 
@@ -246,10 +268,32 @@ It has four tabs. **Details**, **Questions**, **Availability** and **Notificatio
     **Space above** replaces the gap above the question, it does not add to it. Set it to 0 and the question sits right against the one above, which is how two short fields read as one pair. On the first question of a page it reads 0, because there is nothing above it.
 
     <Frame caption="Text size and Space above, on one question. The links put it back to following the form.">
-      <img src="/images/appointments/calendars/17-question-typography.png" alt="The Field settings tab of the calendar builder with the Text size row highlighted, reading 14px above a Match the form's size link, and the Space above row underneath reading 48px above a Match the form's spacing link." />
+      <img src="/images/appointments/calendars/17-question-typography.png" alt="The Field settings tab of the calendar builder. 1 marks the Text size row, reading 14 px above a Match the form's size link, and 2 marks the Space above row underneath, reading 48 px above a Match the form's spacing link." />
     </Frame>
   </Step>
 </Steps>
+
+### The three calendar types
+
+**Calendar type** decides the order people see things in. Pick it in the **Questions** tab, in the **Calendar** panel on the right.
+
+| Calendar type | What people see | Pick it when |
+| --- | --- | --- |
+| **Standard** | The times first. They pick a time and click **Continue**. Then they answer your questions, with the time they picked shown above them. The last button, **Confirm Booking**, books it. | You want the most people to book. Seeing open times first feels like a normal booking page. **Every new calendar starts here.** |
+| **Calendar Combo** | The questions and the calendar side by side. The calendar unlocks once the questions are answered. | You want both on one screen. |
+| **Application + Cal** | Every question first, then the calendar. | You screen people hard before they ever see a time. |
+
+On **Standard**, your **Ending rules** still run. They run when the person clicks the last button. A rule that turns a lead away, sends them to another page or sends them to another calendar books nothing.
+
+If another lead books that time while the person is typing, they go back to the times and see *That time was just booked. Pick another.* Their answers are kept. They pick a new time and book.
+
+<Note>
+  **Calendars you bring in from another tool start on a layout too.** Calendars that come over from GoHighLevel, Calendly or HubSpot start on **Standard**, because those tools also show the times first. Calendars from iClosed start on **Application + Cal**, because iClosed asks its questions first. You can change any of them here. Calendars you already had keep the type they were on. [3) Calendar Sync](/cal-calendar-sync) explains what comes over.
+</Note>
+
+<Tip>
+  **Duplicate** (in the menu on a calendar card) keeps the calendar type, the whole look (the theme, the colours, the font and the size) and your date overrides. A copy of an imported calendar is a normal Cortana calendar: it does not book into the other tool.
+</Tip>
 
 ---
 
@@ -265,7 +309,7 @@ Set this up if you want to spot your best enquiries at a glance. It also lets yo
   <Step title="Open a question's field settings">
     Go to the **Questions** tab. In the form column on the left, click the question you want to score. It opens in the panel on the right.
 
-    Switch that panel from **Calendar** to **Field settings**. Then scroll down to the **Lead score** box at the bottom.
+    Switch that panel from **Calendar** to **Field settings**. Then scroll down to the **Lead score** box, just below the question's choices.
 
     Only four kinds of question can be scored: **single select**, **multi-select**, **dropdown** and **number**.
 
@@ -284,7 +328,7 @@ Set this up if you want to spot your best enquiries at a glance. It also lets yo
     The first range that fits wins. So put your narrowest range at the top, and never let two ranges overlap.
 
     <Frame caption="Field settings for a Budget question, with points next to each answer.">
-      <img src="/images/appointments/calendars/15-lead-scoring.png" alt="The calendar builder Questions tab with a question selected. The right-hand Field settings panel shows the field type, a Required toggle, a Hide field till ready toggle, the Text size and Space above sliders, an Opt-in consent toggle, and the Lead score box at the bottom." />
+      <img src="/images/appointments/calendars/15-lead-scoring.png" alt="The calendar builder's Questions tab with the budget question selected. The Field settings panel on the right has its Lead score box highlighted, giving Under $1k 0 points, $1k to $10k 20 points and $10k+ 40 points, above the Text size and Space above boxes, the Logic block and the Required switch." />
     </Frame>
   </Step>
 
@@ -338,12 +382,12 @@ Set this up if you want to spot your best enquiries at a glance. It also lets yo
 
 <Steps>
   <Step title="Open Ending rules">
-    Go to the bottom of the **Questions** tab and click **Ending rules**.
+    Go to the bottom of the **Questions** tab. Under **Lead routing**, click **Ending rules & redirects**.
 
     The dialog explains how it works in one line: *Rules run top to bottom; the first match wins. If none match, the Default books the calendar.*
 
     <Frame caption="Ending rules. The Default sits at the bottom. It always exists and you cannot delete it.">
-      <img src="/images/appointments/calendars/08-endings.png" alt="The Ending rules dialog explaining that rules run top to bottom with first match winning, showing an Add rule button and a pinned Default rule with options to redirect to a URL or show a message after booking." />
+      <img src="/images/appointments/calendars/08-endings.png" alt="The Ending rules & redirects panel of a calendar, explaining that rules run top to bottom with first match winning, with an Add rule button and the pinned Default highlighted, set to show a message after booking, with the choice to redirect to a URL instead." />
     </Frame>
   </Step>
 
@@ -354,7 +398,7 @@ Set this up if you want to spot your best enquiries at a glance. It also lets yo
     - **Several answers to one question**: a choice question starts on **Is One Of**, and you tick the answers that count. "Grade **is one of** 9th, 10th" **and** "maths **is one of** Algebra, Geometry" is two tests and no group.
     - **and** and **or** in one rule, across different questions: hover a test and click **Group** to give it its own **Any of these** or **All of these** (hover a group for **Ungroup**), or write the tests in a row and click the word between two of them to switch it; the tests on each side fold into their own groups. The word stays plain text where a switch would need a group inside a group. A new rule starts with no tests, just **Add condition** and **Add group**.
     - **Add group**, next to **Add condition**, builds the same thing by hand: a set of tests inside the rule with its own **Any of these** or **All of these** switch. A group can hold answers and the lead score alike, and the rule's own **Match all** or **Match any** joins the group with the tests outside it. Taking the last test out of a group removes the group; remove every test and the rule is empty again, ready for **Add condition** or **Add group**, and cannot be saved until it has one.
-    - **Then**: pick what happens. **Show the calendar** lets them book as normal. You can instead give the meeting to one chosen person, or to a group who take turns. You can also send them to a different meeting type, or turn them away.
+    - **Then**: pick what happens. **Show the calendar** lets them book as normal. **Book with a team member** gives the meeting to one chosen person. **Book with a team pool** gives it to a group who take turns. **Book a different event** sends them to a different meeting type. **Disqualify from Booking** turns them away.
     - **Screen after booking**: this one is optional. Leave it switched off and they see the Default screen.
   </Step>
 
@@ -365,9 +409,21 @@ Set this up if you want to spot your best enquiries at a glance. It also lets yo
 
     Choose **Redirect to a URL** and you can also use **URL parameters**. This passes the meeting name, the date, the time, the score and any answer over to your own thank-you page.
 
+    When your form takes a payment, a **Payment** row adds `paid=true` and the payment's Stripe id, as `session_id` unless you rename it under **Payment id as**. A booking page never sends the amount or the currency. The id cannot take the name of the booking's own parameters (`date`, `time`, `event_name`, `score`, `utm_source`, `utm_medium`, `utm_campaign`, `utm_content`): the row says so and the id goes as `session_id`.
+
     Click **Save**.
   </Step>
 </Steps>
+
+<Warning>
+  **On Standard, a rule that books one person is a preference, not a promise.**
+
+  On **Standard** people pick a time before they answer your questions. So when a rule says **Book with a team member** or **Book with a team pool**, the time is already chosen. Cortana books that person, or a rep in that pool, if they are free at that time. If they are not, it books anyone on the calendar who is free. The rule never stops the booking.
+
+  The rule editor says this under the person or pool you pick: *On the Standard layout people pick a time before they answer, so Cortana books this team member when they're free at that time, and anyone free otherwise.* Once you pick a person, their name takes the place of "this team member". The **Ending rules** card shows **Reps prioritized, not promised**.
+
+  Need the lead to land with one exact person every time? Switch **Calendar type** to **Calendar Combo** or **Application + Cal**. Those ask the questions before showing times, so they only show the times that person is free. A rep's own booking link also still goes to that rep on every calendar type.
+</Warning>
 
 ---
 
@@ -445,7 +501,7 @@ Use the merge fields to drop in real details. They fill in the person's name, th
     - **One-time link**: stops working after someone opens it once. Good for private invites.
 
     <Frame caption="The Share dialog. The Booking link is the one to give people.">
-      <img src="/images/appointments/calendars/11-share.png" alt="The Share dialog showing a short link with a Customize button, the main booking link, a QR code, an embed snippet for a website, and a Generate one-time link button." />
+      <img src="/images/appointments/calendars/11-share.png" alt="The Share dialog showing the Domain box, a short link with a Customize button, the main booking link highlighted, a QR code, and the start of the Embed on your site section." />
     </Frame>
   </Step>
 </Steps>
@@ -460,21 +516,23 @@ Always book your own calendar once before you send it to anyone.
   <Step title="Open the booking page">
     Click **View Site**. Or open the **Booking link** in a private browser window, so you see the page as a stranger does.
 
+    What comes first depends on your **Calendar type**. On **Standard** you see the times first. On **Calendar Combo** and **Application + Cal** you see the questions first.
+
     People answer your questions one page at a time. The page works out their local time on its own and shows it at the bottom. They can change it if it is wrong.
 
     The phone box picks their country for them.
 
     <Frame caption="The public booking page. The calendar stays greyed out until the questions are answered.">
-      <img src="/images/appointments/calendars/12-public-page.png" alt="The public booking page showing the event title, description, the Name and Email questions, a greyed-out month calendar on the right, and the detected timezone at the bottom." />
+      <img src="/images/appointments/calendars/12-public-page.png" alt="The public booking page showing the event title, description, the Your name, Email address and monthly marketing budget questions, a greyed-out month calendar on the right, and the detected timezone under it." />
     </Frame>
   </Step>
 
   <Step title="Answer the questions and continue">
     Fill in each box. Then click the **round checkmark button** at the bottom of the form to move on. Pressing **Enter** does the same thing.
 
-    The calendar on the right stays locked and grey until you answer the last page.
+    On **Calendar Combo** the calendar on the right stays locked and grey until you answer the last page. That is on purpose. It means you get the person's details before you show them your free times.
 
-    That is on purpose. It means you get the person's details before you show them your free times.
+    On **Standard** you already picked your time. The last button reads **Confirm Booking** and books it.
   </Step>
 
   <Step title="Pick a day and a time">
@@ -499,8 +557,6 @@ Always book your own calendar once before you send it to anyone.
     Go back to **Appointments**. Your booking sits on the **Business Cal** tab, on the day you picked.
 
     It also shows as a row under **Events → Appointment Booked**, with the person's name, email and date.
-
-    Open the **Calendars** tab. Your calendar card now shows **1 booking**.
 
     <Frame caption="The test booking on Business Cal. Seeing it here proves the whole chain works.">
       <img src="/images/appointments/calendars/14-verify.png" alt="The Business Cal month view with the newly created test appointment visible on its day, showing the booking time and the invitee's name." />
@@ -543,7 +599,7 @@ Always book your own calendar once before you send it to anyone.
 
 | Setting | What it does | Default |
 | --- | --- | --- |
-| **Calendar type** | Chooses whether people see the questions and calendar together, or answer everything first. | Calendar Combo, so both show together |
+| **Calendar type** | Chooses the order: times first (**Standard**), questions and calendar together (**Calendar Combo**), or every question first (**Application + Cal**). | Standard, so the times show first |
 | **Theme** | Sets the overall look. Six light and six dark ones. Colours only, never the font or the size. | Whichever look you use in Cortana when you make the calendar |
 | **Colors** | Sets the Background, Text, Accent, Button and Button Text colours. | Blue, `#3B82F6`, for Accent and Button |
 | **Font** | Sets the writing for the whole page. Seven to pick from, including **System**, the visitor's own device font. | Inter |
@@ -569,7 +625,7 @@ Always book your own calendar once before you send it to anyone.
   <Accordion title="No times are showing, or every day is greyed out">
     Work through these five in order.
 
-    1. **The form is not finished.** The calendar stays locked on purpose until the last question is answered. Fill it in, then click the round checkmark button.
+    1. **The form is not finished.** On **Calendar Combo** and **Application + Cal** the calendar stays locked on purpose until the last question is answered. Fill it in, then click the round checkmark button.
     2. **The day has no hours.** Only days with hours in **Availability** can be clicked. Weekends are closed to start with.
     3. **A date override closed it.** Check **Availability → Date overrides**. An override wipes out that day's normal hours completely.
     4. **Min Notice is hiding the day.** Set Min Notice high and the next day or two disappear.
@@ -602,6 +658,8 @@ Always book your own calendar once before you send it to anyone.
     Add the right people under **Details → Distribution & Team**.
 
     Then check your **Ending rules**. A rule that gives the meeting to one chosen person beats the taking-turns setting.
+
+    On **Standard**, that rule is a preference. If the person was not free at the time the lead picked, Cortana books anyone free instead. See [the warning under Ending rules](#5-route-people-with-ending-rules).
   </Accordion>
 
   <Accordion title="I edited a question and it changed on another calendar">
