@@ -1,0 +1,214 @@
+---
+title: "1) Connect WhatsApp"
+description: "Connect your WhatsApp Business number to Cortana. Then you can see which ad started each chat, and reply from Cortana."
+---
+
+{/* last-verified: 2026-11-24 · route: /business/[businessId]/settings?tab=integrations (the WhatsApp card) and /connect/whatsapp/[token] · source: src/components/integrations/whatsapp/WhatsAppConnectDialog.tsx, WhatsAppDialogSteps.tsx, WhatsAppNumberRow.tsx, WhatsAppTemplatesPanel.tsx, src/app/connect/whatsapp/[token]/page.tsx */}
+
+## Overview
+
+Connect your WhatsApp Business number to Cortana.
+
+Then Cortana can:
+
+- Show which ad started each chat.
+- Put every chat in your inbox.
+- Let you and your AI agent reply.
+
+It takes about a minute.
+
+<Note>
+  **WhatsApp is new.** It is open to a few businesses first. If the card says it is coming soon, it is not open for you yet.
+</Note>
+
+---
+
+## 1. Open the WhatsApp card
+
+<Steps>
+  <Step title="Go to Settings">
+    Click **Settings** in the left menu. The **Integrations** tab opens.
+  </Step>
+  <Step title="Find the WhatsApp card">
+    Type `WhatsApp` in the search box if you need to.
+  </Step>
+  <Step title="Click the button on the card">
+    It says **Connect** before you connect. It says **Manage** after. It says **Reconnect** if a number stopped working.
+  </Step>
+</Steps>
+
+<Frame caption="The WhatsApp card on Integrations.">
+  <img className="block dark:hidden" src="/images/integrations/whatsapp/01-whatsapp-card.png" alt="The WhatsApp card. It reads: See which ad started each WhatsApp chat, and reply to WhatsApp chats from Cortana. A Manage button is at the bottom." />
+  <img className="hidden dark:block" src="/images/integrations/whatsapp/01-whatsapp-card-dark.png" alt="The WhatsApp card. It reads: See which ad started each WhatsApp chat, and reply to WhatsApp chats from Cortana. A Manage button is at the bottom." />
+</Frame>
+
+---
+
+## 2. Connect your number
+
+<Steps>
+  <Step title="Click Connect WhatsApp">
+    Meta opens a small window. Cortana shows **Finish in Meta's window**.
+  </Step>
+  <Step title="Pick your business">
+    Choose your Meta business in Meta's window.
+  </Step>
+  <Step title="Pick your WhatsApp number">
+    Choose the number you want in Cortana.
+  </Step>
+  <Step title="Done">
+    Cortana shows your number with **Connected.**
+  </Step>
+</Steps>
+
+<Tip>
+  **Use the WhatsApp Business app on your phone?** Meta shows a QR code. Scan it with the app. Your phone keeps working.
+</Tip>
+
+<Note>
+  **Personal WhatsApp numbers cannot connect.** Use a number on WhatsApp Business.
+</Note>
+
+<Frame caption="The WhatsApp window with two numbers connected.">
+  <img className="block dark:hidden" src="/images/integrations/whatsapp/02-whatsapp-window.png" alt="The WhatsApp window. It shows 2 connected numbers, +1 555-0101 and +1 555-0102, each Connected with a red Disconnect button. Below are Message templates, Connect another number and Send your client a connect link." />
+  <img className="hidden dark:block" src="/images/integrations/whatsapp/02-whatsapp-window-dark.png" alt="The WhatsApp window. It shows 2 connected numbers, +1 555-0101 and +1 555-0102, each Connected with a red Disconnect button. Below are Message templates, Connect another number and Send your client a connect link." />
+</Frame>
+
+You can connect more than one number. Click **Connect another number**.
+
+---
+
+## 3. Send your client a link
+
+Do you run ads for a client? They can connect their own number. They do not need a Cortana login.
+
+<Steps>
+  <Step title="Click Send your client a connect link">
+    It is at the bottom of the WhatsApp window.
+  </Step>
+  <Step title="Click Make a link">
+    Cortana makes the link.
+  </Step>
+  <Step title="Click Copy">
+    Send the link to your client. Use email or chat.
+  </Step>
+</Steps>
+
+<Frame caption="Make a link for your client.">
+  <img className="block dark:hidden" src="/images/integrations/whatsapp/05-connect-link.png" alt="The Connect link step. It reads: Your client opens the link on their own phone or computer, with no Cortana login, and connects their own WhatsApp number to this business. A Make a link button is below." />
+  <img className="hidden dark:block" src="/images/integrations/whatsapp/05-connect-link-dark.png" alt="The Connect link step. It reads: Your client opens the link on their own phone or computer, with no Cortana login, and connects their own WhatsApp number to this business. A Make a link button is below." />
+</Frame>
+
+<Frame caption="The link, ready to copy. Your links are listed below it.">
+  <img className="block dark:hidden" src="/images/integrations/whatsapp/06-connect-link-made.png" alt="The new link with a Copy button. Under it: Shown once. It works until 1 Dec, or until a number is connected through it. Links you made lists one link, Waiting for your client, with Revoke." />
+  <img className="hidden dark:block" src="/images/integrations/whatsapp/06-connect-link-made-dark.png" alt="The new link with a Copy button. Under it: Shown once. It works until 1 Dec, or until a number is connected through it. Links you made lists one link, Waiting for your client, with Revoke." />
+</Frame>
+
+Good to know:
+
+- **Copy it now.** Cortana shows the link only once.
+- **It works for 7 days.**
+- **It connects one number.** Then it stops working.
+- **Changed your mind?** Click **Revoke**.
+
+Your client opens the link. They click **Connect WhatsApp**. Meta's window opens, and they pick their number.
+
+<Frame caption="What your client sees.">
+  <img className="block dark:hidden" src="/images/integrations/whatsapp/07-client-page.png" alt="The Connect your WhatsApp page for Bloom Bakery. Three steps explain Meta's window and the QR code. A Connect WhatsApp button is at the bottom." />
+  <img className="hidden dark:block" src="/images/integrations/whatsapp/07-client-page-dark.png" alt="The Connect your WhatsApp page for Bloom Bakery. Three steps explain Meta's window and the QR code. A Connect WhatsApp button is at the bottom." />
+</Frame>
+
+---
+
+## 4. See your message templates
+
+After 24 hours, WhatsApp only lets you send a template. Meta must approve each template first.
+
+Click **Message templates** in the WhatsApp window. You see each template and its status.
+
+<Frame caption="Your templates and their status from Meta.">
+  <img className="block dark:hidden" src="/images/integrations/whatsapp/04-templates.png" alt="Message templates. Three templates: order_ready and call_reminder are Approved, weekend_offer is In review. A button reads Create a template in WhatsApp Manager." />
+  <img className="hidden dark:block" src="/images/integrations/whatsapp/04-templates-dark.png" alt="Message templates. Three templates: order_ready and call_reminder are Approved, weekend_offer is In review. A button reads Create a template in WhatsApp Manager." />
+</Frame>
+
+To make a new one, click **Create a template in WhatsApp Manager**. You make it in Meta. Meta checks it, often in minutes.
+
+---
+
+## 5. Disconnect a number
+
+<Steps>
+  <Step title="Click Disconnect">
+    It is the red button next to the number.
+  </Step>
+  <Step title="Click Disconnect again to confirm">
+    Or click **Keep it** to stop.
+  </Step>
+</Steps>
+
+<Frame caption="Cortana asks before it disconnects.">
+  <img className="block dark:hidden" src="/images/integrations/whatsapp/03-disconnect-confirm.png" alt="The question under +1 555-0101: Disconnect +1 555-0101? Cortana stops hearing its new chats. Chats already in Cortana stay. Buttons: Keep it and Disconnect." />
+  <img className="hidden dark:block" src="/images/integrations/whatsapp/03-disconnect-confirm-dark.png" alt="The question under +1 555-0101: Disconnect +1 555-0101? Cortana stops hearing its new chats. Chats already in Cortana stay. Buttons: Keep it and Disconnect." />
+</Frame>
+
+Cortana stops hearing new chats on that number. Old chats stay in Cortana.
+
+---
+
+<AccordionGroup>
+  <Accordion title="What Cortana does with your number">
+    - Every message a customer sends lands in your inbox.
+    - A chat from a click-to-WhatsApp ad keeps the ad. Your reports show the campaign, ad set and ad.
+    - A chat with no ad shows as **WhatsApp DM (Organic)**.
+    - You and your AI agent can reply from the number.
+  </Accordion>
+  <Accordion title="The WhatsApp Business app on your phone">
+    If your number is on the WhatsApp Business app, it keeps working there.
+
+    - Replies you send from your phone show in Cortana too.
+    - You can share your last 180 days of chats once, when you connect. They show up in Cortana over a few minutes.
+    - Old chats never count as new conversions.
+  </Accordion>
+  <Accordion title="When a number stops working">
+    Meta can disconnect a number. It happens if the WhatsApp Business app is not opened for about 14 days. A new phone can do it too.
+
+    Then:
+
+    - The WhatsApp window says why, in plain words.
+    - The WhatsApp card's button says **Reconnect**.
+    - Cortana emails you.
+
+    Connect the number again to fix it.
+  </Accordion>
+  <Accordion title="Connect link rules">
+    - It works for 7 days.
+    - It connects one number, then it stops.
+    - Cortana shows it once. Only a scrambled copy is kept.
+    - Up to 10 links can wait at once. Your links show under **Links you made**.
+    - A wrong, old or revoked link says **This link does not work**.
+  </Accordion>
+</AccordionGroup>
+
+## FAQ
+
+<AccordionGroup>
+  <Accordion title="Why can't I click Connect on the WhatsApp card?">
+    WhatsApp is open to a few businesses first. If the card says it is coming soon, it is not open for you yet.
+  </Accordion>
+  <Accordion title="Meta's window did not open. What do I do?">
+    An ad blocker can stop it. Allow facebook.com, then close and open the WhatsApp window again.
+  </Accordion>
+  <Accordion title="Can I connect my personal WhatsApp?">
+    No. Use a number on WhatsApp Business.
+  </Accordion>
+  <Accordion title="Will my phone app stop working?">
+    No. If you scan Meta's QR code, your WhatsApp Business app keeps working.
+  </Accordion>
+  <Accordion title="I lost the client link. Can I see it again?">
+    No. Cortana shows it once. Revoke the old one and make a new link.
+  </Accordion>
+</AccordionGroup>
+
+<Card title="Next: 2) Chat On WhatsApp" icon="arrow-right" href="/platform/business/whatsapp-inbox">
+  Reply to WhatsApp chats from your inbox.
+</Card>

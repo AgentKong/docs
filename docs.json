@@ -104,6 +104,17 @@
                       "platform/business/imessage-in-the-inbox",
                       "platform/business/imessage-ghl-workflows"
                     ]
+                  },
+                  {
+                    "group": "WhatsApp",
+                    "icon": "whatsapp",
+                    "pages": [
+                      "platform/business/whatsapp-connect",
+                      "platform/business/whatsapp-inbox",
+                      "platform/business/whatsapp-conversions",
+                      "platform/business/whatsapp-meta-capi",
+                      "platform/business/whatsapp-ai-agent"
+                    ]
                   }
                 ]
               }
