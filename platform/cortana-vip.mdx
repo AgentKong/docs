@@ -1,15 +1,15 @@
 ---
 title: "Cortana VIP 2.0"
-description: "What Cortana VIP 2.0 and your rep do for you in your shared Slack channel and the in-app bug reporter: find and fix attribution problems, make changes for you with an Undo button, ask which forms count, send your weekly attribution report, work bug tickets and answer questions."
+description: "What Cortana VIP 2.0 and your AI rep do for you in your shared Slack channel and the app: find and fix attribution problems, make changes for you with an Undo button, ask which forms count, send your weekly attribution report, and answer questions."
 ---
 
-{/* last-verified: 2026-11-23 against AgentKong_App main 4a1da5c4c. Surfaces: the shared Slack support channel (Cortana VIP and the account's rep, Diego or Sophia) and the in-app bug report widget. Sources: src/server/services/cs-session (human-on-thread.ts: a teammate on the thread never mutes her; human-law.ts: the true line), .claude/skills/cs-brain/SKILL.md (THE OFFER, the five change tools), src/lib/cs-machine/rep-door.ts (48 h preview, 72 h Undo, who says yes), src/server/services/rep-door (slack-undo.ts, slack-undo-press.ts: the Undo button), src/lib/investigator-bridge/cs/what-counts-connect.ts, take-back-line.ts and src/server/services/cs-brain/what-counts-ask.ts (the which-forms question), same-day-voice.ts (who sends). The weekly report has its own page (platform/weekly-attribution-report). No intro line since 2026-10-06 (vip-intro.ts), no daily cap since 2026-09-23 (door-ceiling.ts). Keep it current: it is the live list of what the agent can do. */}
+{/* last-verified: 2026-11-23 */}
 
 ## Overview
 
-Cortana VIP 2.0 is the engineer that lives in your shared Slack channel and behind the in-app bug reporter. Post what is wrong, in your own words. Cortana picks the case up, investigates with real access to your account, and replies in the same thread. When the fix is a change she can make, she offers to make it for you.
+Cortana VIP 2.0 is the engineer that lives in your shared Slack channel and behind the **Report Issue** button in the app. Post what is wrong, in your own words. Cortana picks the case up, investigates with real access to your account, and replies in the same thread. When the fix is a change she can make, she offers to make it for you.
 
-Your account also has its own rep in the channel: Diego or Sophia. AI does the digging on your data, and real people on our team watch every conversation and jump in.
+Your account also has its own AI rep in the channel, Diego or Sophia. People on our team read every conversation and step in, sometimes writing as your rep.
 
 This page is what they can do today. It grows as they do.
 
@@ -24,7 +24,7 @@ This page is what they can do today. It grows as they do.
     **Try:** "Hey, my Meta leads from this week are showing as direct. Can you check the funnel at example.com/apply?"
   </Step>
   <Step title="Fix your attribution setup">
-    When the break is on your side of the setup, she tells you the exact change: the missing script, the form that does not pass the email, the URL parameter that is being dropped. When it is a change she can make herself, she offers to make it for you ([see below](#cortana-does-it-for-you)). When the fix is on our side, she opens the fix itself (next card).
+    When the break is in your setup, she tells you the exact change: the missing script, the form that does not pass the email, the URL parameter that is being dropped. When it is a change she can make herself, she offers to make it for you ([see below](#cortana-does-it-for-you)).
 
     **Outcome:** the specific change, made for you or listed in order, and a check that it worked.
 
@@ -37,10 +37,10 @@ This page is what they can do today. It grows as they do.
 
     **Try:** "How do I merge these two leads? jane@example.com and jane.doe@example.com"
   </Step>
-  <Step title="Work bug tickets and hand the fix to a human engineer">
-    Report a bug in the app, from Slack or from the in-app bug reporter. She reproduces the problem, and when the cause is in our code she writes the fix and submits it to a human engineer for review. Nothing ships without a person approving it. You get a note in the thread when the fix is live.
+  <Step title="Report a problem">
+    Tell her what is not working, in Slack or with the **Report Issue** button in the app. She investigates, and anything for our engineers goes to them. You hear back in the thread.
 
-    **Outcome:** a reproduced bug, a proposed fix under human review, and a "fixed, could you check" when it deploys.
+    **Outcome:** an answer in the same thread.
 
     **Try:** "The export button on the contacts page does nothing when I filter by tag."
   </Step>
@@ -62,19 +62,19 @@ When you ask how to do something Cortana can do herself, or the fix for your pro
     The test changes nothing. If your message does not say exactly what to change (which two leads, which ad), she asks that one question first.
   </Step>
   <Step title="She shows you what would change">
-    Her reply starts with "Actually, I can do that for you." Then "I ran a test: this would …", with every detail of the change. If the change cannot be undone, she says so and why.
+    She says "Actually, I can do that for you." Then "I ran a test: this would …", with every detail of the change. If the change cannot be undone, she says so and why.
   </Step>
   <Step title="You say yes">
     Reply in the thread. Nothing changes until you do, and she does not chase you for it.
   </Step>
   <Step title="She makes the change">
-    When the change can be undone, her message in Slack carries an **Undo** button for 72 hours. See [The Undo button](#the-undo-button).
+    When the change can be undone, her message in Slack carries an **Undo** button that works for 72 hours. See [The Undo button](#the-undo-button).
   </Step>
 </Steps>
 
 **Who can say yes.** Anyone on your team with a Cortana login on the account. The account owner says yes to merging or splitting contacts, adding a teammate, and inviting someone to your Slack channel.
 
-**A test is good for 48 hours.** Say yes after that and she runs it again and shows you before changing anything. The same happens if a message from our side lands between her test and your yes: your yes always answers what you just read.
+**A test is good for 48 hours;** after that she shows you again first.
 
 **Rather do it yourself?** Say "just tell me how" and she sends the steps instead.
 
@@ -82,7 +82,7 @@ When you ask how to do something Cortana can do herself, or the fix for your pro
 
 - **Your conversions:** create or change a conversion, add or change a source that feeds it, pick the Facebook Page your new ads post under, and your Meta setup (Conversions API, a pixel, a custom event or a custom conversion).
 - **Your data:** delete or restore an entry, remove a test lead, add a sale by hand, change which ad gets credit, merge two contacts or split them again.
-- **Imports:** import your history or a CSV, replay a webhook that failed, or send an entry to Meta again.
+- **Imports:** import your history or a CSV, replay a webhook, or send an entry to Meta again.
 - **Your team:** add a teammate, or invite someone to your Slack channel.
 - **Your Meta ads:** add Cortana's URL parameters to an ad. Meta reviews the ad again, and it may not deliver until Meta approves it, so she does one ad at a time.
 
@@ -104,7 +104,7 @@ After Cortana makes a change in your Slack thread, her message carries one **Und
 
 ## Which forms count
 
-Once, your rep asks which of your forms and calendars Cortana should count as conversions. The question names what Cortana sees on your businesses that no conversion counts yet (forms, surveys, calendars and Meta lead forms, up to eight), and the conversions you have now. It reads like this:
+Once, your AI rep asks which of your forms and calendars Cortana should count as conversions. The question names what Cortana sees on your businesses that no conversion counts yet (forms, surveys, calendars and Meta lead forms), and the conversions you have now. It reads like this:
 
 > Hey, we see these forms and calendars: "Contact us", "Free Audit", "Careers". These are your conversions: "Lead", "Booked Call". Want me to turn any of them on, and for which conversion?
 
@@ -119,28 +119,27 @@ Good to know:
 - The question is the preview. Only the forms and conversions it names can be connected from your answer.
 - Your answer needs to come from someone on your team with a Cortana login on the account.
 - For a Typeform or Tally form, turning it on adds a webhook to that form in Typeform or Tally. The webhook stays there after an Undo.
-- If one cannot be connected exactly as you asked, she says a teammate is finishing it and will confirm in the thread.
 - It is asked once, during your business hours, with no reminders. You can add a form yourself any time in [Conversion Sources](/4-conversion-tracking), or ask in your channel later.
 
 ## Your weekly attribution report
 
-Once a week, usually on Monday, your rep posts your weekly attribution report in your channel: every conversion of the week next to the week before, what is tracking well, payments with no ad behind them, and what in your setup still needs a fix. See [Weekly attribution report](/platform/weekly-attribution-report).
+Once a week, usually on Monday, your AI rep posts your weekly attribution report in your channel: every conversion of the week next to the week before, what is tracking well, payments with no ad behind them, and what in your setup still needs a fix. See [Weekly attribution report](/platform/weekly-attribution-report).
 
-## Your rep
+## Your AI rep
 
-Your account has its own rep in the channel, Diego or Sophia. Cortana does the digging and the changes. Your rep:
+Your AI rep, Diego or Sophia, works beside Cortana in your channel. Cortana does the digging and the changes. Your rep:
 
 - checks in when a thread goes quiet after Cortana answered,
 - sends your weekly attribution report, and asks which forms count,
 - sends a same-day heads-up when a check finds a break in your setup that is costing you leads now,
-- picks it up when you tag them, ask for a person, or ask for a call.
+- answers when you tag them or ask for a call; ask for a person and someone on our team is brought in.
 
 When an answer needs digging, your rep tags Cortana in and her answer follows. If your rep cannot post in your channel, Cortana sends these messages herself.
 
 ## Where it works
 
-- **Your shared Slack channel.** Post a new message, or reply in a thread Cortana is already on. She handles attribution problems, bugs, hands-on setup, billing questions and feature requests. Anything else goes to a person as before.
-- **The in-app bug reporter.** Submit a bug from inside the app. Cortana VIP 2.0 picks it up, replies on the ticket, and the same review rules apply to any fix.
+- **Your shared Slack channel.** Post a new message, or reply in a thread Cortana is already on. She handles attribution problems, problems with the app, hands-on setup, billing questions and feature requests. Anything else goes to a person as before.
+- **The Report Issue button in the app.** Tell us what is not working from inside the app. Cortana picks it up and replies on your report.
 
 ## How to talk to Cortana
 
@@ -153,11 +152,10 @@ When an answer needs digging, your rep tags Cortana in and her answer follows. I
     - Pretend to be a human, or speak for our founders.
     - Go ahead with a change she offered before you have said yes.
     - Change anything in your account without telling you in the thread.
-    - Ship code without a human engineer reviewing and approving the fix.
   </Accordion>
   <Accordion title="Limits">
     - If she cannot make progress within a reasonable time, she hands the case to a person with everything she found, and tells you.
-    - Payments and refunds are answered by a person.
+    - She answers questions about your charges and failed payments and sends you the pay link. Refunds, credits and prices are handled by a person on our team.
   </Accordion>
 </AccordionGroup>
 
@@ -165,9 +163,7 @@ When an answer needs digging, your rep tags Cortana in and her answer follows. I
 
 **Do I need to tag her?** No. A new message in your shared channel is enough. Tagging the bot works too.
 
-**Can I still talk to a real person?** Yes, always. Ask in the thread and someone from our team is brought in. Real people on our team watch every conversation and can jump in at any time.
-
-**It said it is fixing something in your code. When will I see it?** When a human engineer approves the fix and it deploys, you get a message in the same thread asking you to check.
+**Can I still talk to a real person?** Yes, always. Ask in the thread and someone from our team is brought in. People on our team read every conversation and can step in at any time.
 
 **Does she see my data?** She reads your account the way our support team does, to investigate your case. She never edits your tracking or your contacts without saying so in the thread, and a change she offers waits for your yes.
 
