@@ -67,6 +67,7 @@
               "platform/overview",
               "platform/onboarding-survey",
               "platform/cortana-vip",
+              "platform/weekly-attribution-report",
               {
                 "group": "Control Centre",
                 "icon": "gauge",
