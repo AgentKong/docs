@@ -107,7 +107,7 @@ A new account starts with no column preset. Until you create one:
 2. Select **Create New Preset** from the menu.
 3. The **Which funnel is this?** window opens. Pick the template card that matches your funnel, or click **Start from scratch** to choose every column yourself.
 4. Picking a template creates the preset and switches your table to it right away. If your business doesn't have one of the template's conversions, the preset is created without that column and a short note lists what was left out.
-5. With **Start from scratch**, add columns (see **Arranging columns** below), type a name in the **Preset Name** field at the bottom, and click **Save**.
+5. With **Start from scratch**, the window opens with the standard funnel already in place: your traffic columns at the top, a dashed **Conversions go here** slot in the middle, and New Revenue, ROAS, ROI and LTV (Revenue) at the bottom. Add your conversions (see **Arranging columns** below), type a name in the **Preset Name** field at the bottom, and click **Save**.
 
 You can change any column afterwards. Presets you already have are never changed by the templates.
 
@@ -125,12 +125,14 @@ Every template starts with your traffic columns and ends with revenue, so the ta
 <AccordionGroup>
   <Accordion title="The exact column order of every template">
     1. Pixel, URL Params, Status, Budget
-    2. CPM, Spent, Reach, Frequency, Unique CTR
+    2. Spent, CPM, Reach, Frequency, Unique Link CTR
     3. Page Views, Unique Visitors
     4. Cost per Unique Visitor, Opt-in Rate (the two standard custom metrics, see **Creating Custom Metrics**)
-    5. The template's funnel steps, in the order shown in the table above
+    5. The template's funnel steps, in the order shown in the table above. The two sales funnel templates end them with All Payments.
     6. New Revenue, ROAS, ROI
-    7. The two sales funnel templates also add All Payments and LTV (Revenue) at the end.
+    7. The two sales funnel templates also add LTV (Revenue) at the end.
+
+    **Start from scratch** uses the same order with no funnel steps yet, and ends with LTV (Revenue).
   </Accordion>
   <Accordion title="How the templates count conversions">
     In the two sales funnel templates, Lead and the booked and shown call steps (and Qualified) count one per person, using **Unique Per Attribution Fingerprint**. A rescheduled call from the same ad counts once, so your booked calls aren't inflated. Purchase always counts every sale. The Low Ticket and Free Trial templates count every event. You can change this on any conversion column afterwards (see **De-duplicating Conversions with "Show Unique"**).
@@ -151,6 +153,18 @@ Custom metrics drag the same way from the **Custom Metrics** tab. A custom metri
 <Accordion title="Arranging columns with the keyboard">
   Tab to the grip handle on the right of an available column and press Space to pick it up. Use the arrow keys to move it into **Selected Columns**, one slot at a time, then press Space to drop it. Press Escape to cancel the move without closing the window.
 </Accordion>
+
+### Where conversions can go
+
+**Selected Columns** reads top to bottom the way your table reads left to right, in three groups: **Ads and traffic**, **Conversions**, and **Revenue and return**. Conversions only ever sit in the middle, so the table always reads as one funnel.
+
+- Click **+** on a conversion and it lands at the end of your conversions, just above New Revenue. It never lands at the bottom of the list.
+- Drag a conversion anywhere and it lands at the nearest spot among your conversions. While you drag, that spot lights up.
+- Drag a conversion up or down inside **Selected Columns** and it stops at the edge of the conversions.
+- Ad and traffic columns stay above the conversions. Revenue columns stay below them.
+- Custom metrics can sit anywhere.
+- A preset saved before this rule keeps its order until you open it to edit and save it. It then opens already laid out this way.
+
 
 > 💡 **Tip:** Any preset can be edited, duplicated or deleted from the same menu.
 
@@ -185,6 +199,7 @@ To tie creative performance indicators directly to your conversion metrics, swit
 
 - **Video Performance:** Hook Rate, Hold Rate, Completion Rate, ThruPlays, Video Views (25%, 50%, 75%, 100%).
 - **Delivery & Engagement:** Reach, Frequency, CPM, CTR, Link Clicks, Likes, Comments, Shares, Saves.
+- **Unique Link CTR:** the people who clicked through to your page, as a share of the people your ads reached (Unique Link Clicks ÷ Reach). **Unique CTR** counts every click on the ad, including likes and "see more". Unique Link CTR is the one in every funnel template.
 
 ---
 
@@ -219,7 +234,8 @@ Every business comes with two ready-made custom metrics, and every funnel templa
 | **Cost per Unique Visitor** | Total Ad Spend ÷ Unique Visitors | Currency |
 | **Opt-in Rate** | Lead ÷ Unique Visitors | Percent |
 
-- **Opt-in Rate is blank until Lead is turned on.** The standard Lead conversion starts turned off. Turn it on in your conversion settings and Opt-in Rate starts showing. When you open the metric, the builder shows a note that the conversion isn't turned on yet.
+- **Opt-in Rate is blank until Lead is turned on.** The standard Lead conversion starts turned off, and turns on by itself as soon as you set up a source for it (a form, a webhook, an integration). When you open the metric before that, the builder shows a note that the conversion isn't turned on yet.
+- **Check that it counts your real opt-in.** Cortana can't know which conversion is your opt-in, so Opt-in Rate starts on Lead. If your opt-in is a different conversion, swap it (see the next point).
 - **Change what it counts.** Opt-in Rate is a normal custom metric: open it in the **Custom Metrics** tab and swap Lead for another conversion (for example, Purchase for an e-commerce store).
 - **Deleting one is permanent.** A standard metric you delete stays deleted: picking a template later leaves its column out instead of bringing it back.
 
