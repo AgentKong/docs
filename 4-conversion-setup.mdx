@@ -16,7 +16,7 @@ Alright, now that we have our pixel installed and our contact tracking dialed in
 
 ## Getting Started with Events
 
-Right out of the gate, we give you a set of standard events—things like Lead, Intro Call Booked, Appointment Shown, and New Deals Closed. These are the basics, but you aren’t limited to them.
+Right out of the gate, we give you a set of standard events: things like Lead, Intro Call Booked, Appointment Shown, and New Deals Closed. These are the basics, but you aren’t limited to them.
 
 <Tip>
   You can create **unlimited custom events**. If you want to track a "VIP Webinar Upsell," just click **Add Custom Event**, give it a name, and a description.
@@ -77,7 +77,7 @@ It copies the **whole** attribution picture from the earlier conversion, not jus
 
 It does **not** touch dates. A qualified call still counts on the day it happened. Only the credited ad changes.
 
-It never makes attribution worse. If the earlier conversion has nothing useful on it — no ad, no session, just "Direct/Organic" — Cortana leaves the conversion alone rather than overwrite something real with a blank.
+It never makes attribution worse. If the earlier conversion has nothing useful on it (no ad, no session, just "Direct/Organic"), Cortana leaves the conversion alone rather than overwrite something real with a blank.
 
 <Note>
   Mirror Attribution applies to **new conversions from the moment you switch it on**. Your existing conversions keep the attribution they already have. If you want your history corrected too, reach out to support.
@@ -87,7 +87,7 @@ It never makes attribution worse. If the earlier conversion has nothing useful o
 
 Open any contact's **Customer Journey**. A conversion that mirrored will show a line underneath it reading *"Ad credited from Booked Call"* with the date.
 
-The lead's other page views stay in the timeline exactly as they were. Nothing is hidden — that overnight ad click still happened, it just stops taking credit for a call it had nothing to do with.
+The lead's other page views stay in the timeline exactly as they were. Nothing is hidden: that overnight ad click still happened, it just stops taking credit for a call it had nothing to do with.
 
 ## Adding Conversion Sources
 
@@ -97,8 +97,148 @@ A conversion event is just a bucket; you need to tell it where the data is comin
   **Automatic Setup:** When you connect a native payment processor like **Stripe** or **Whop**, we automatically create an "All Payments LTV" event for you. We know the best methodology for tracking this, so we handle the heavy lifting out of the box.
 </Note>
 
-Our system doesn't really care where the data comes from—you can have multiple sources (like a Webhook and a CRM) all feeding into a single "Intro Call Booked" event. This gives you the "Lego pieces" you need to build a tracking setup that fits your specific business.
+Our system doesn't really care where the data comes from: you can have multiple sources (like a Webhook and a CRM) all feeding into a single "Intro Call Booked" event. This gives you the "Lego pieces" you need to build a tracking setup that fits your specific business.
 
 If you have any questions on how to map these out, feel free to reach out to the support team in the bottom right!
 
 You can also ask in your Slack channel. Cortana can add a source to a conversion for you: she shows you exactly what will change, waits for your yes, and her message carries an **Undo** button. See [Cortana does it for you](/platform/cortana-vip#cortana-does-it-for-you).
+
+## Tiered conversions: count every lead and your qualified leads
+
+{/* last-verified: 2026-11-25 against the app source (sprint lead-filter-groups L11, L11a, L13, F1, D14). Release tree claude/lead-filter-release-2 at 22a9c9c3fc; Duplicate read in claude/lead-filter-duplicate at 8a6902f3dc (D14 final): it copies metaCapiMappings and googleAdsCapiMappings only; TikTokEventsConversionMapping, LinkedInCapiConversionMapping, BingCapiConversionMapping and WhopCapiConversionMapping (prisma/schema.prisma) are not copied. Paths: src/app/api/tracking/events/duplicate/route.ts, src/lib/tracking/duplicate-conversion-holds.ts, src/lib/tracking/source-switch-on-claims.ts, src/lib/tracking/copy-destination-guard.ts, src/lib/tracking/meta-form-ids.ts, src/lib/tracking/calendly-shared-calendar-guard.ts, src/lib/facebook/meta-copy-claims.ts, src/lib/cal-com/meeting-type-claims.ts, src/lib/cal-com/copy-capi.ts, src/lib/capi/copy-send-dedup.ts, src/components/tracking/webhook-setup-table.tsx (Duplicate conversion), src/components/tracking/source-hold-feedback.tsx, src/components/tracking/conversion-setup-dialog.tsx (source switch). */}
+
+A tiered setup is two conversions on the same leads. **Lead** counts every lead. **Qualified lead** sits beside it with a lead filter, so it counts only the leads that pass. Both can count the same Meta lead forms, the same Cal.com meeting type, or the same form or calendar on any other source. Your reports then show cost per lead and cost per qualified lead side by side.
+
+<Steps>
+  <Step title="Leave your main conversion as it is">
+    Your main conversion, for example **Lead**, keeps no lead filter and goes on counting every lead.
+  </Step>
+
+  <Step title="Make the copy">
+    In **Conversion Setup → Conversion Events**, click the copy icon (tooltip **Duplicate conversion**) in the **Actions** column of the main conversion. The copy appears right under it as **Lead (Copy)**. Rename it, for example to **Qualified lead**, with the pencil that appears beside its name on hover. See [Duplicate a conversion](#duplicate-a-conversion) for what it copies and what it holds back.
+
+    You can also create a new conversion and add the same source to it yourself. On Meta lead forms and Cal.com, switch on that source's **Lead filter** before you click **Submit**.
+  </Step>
+
+  <Step title="Give the copy's source a lead filter">
+    Open the copy with the gear icon, then open its source with the edit icon in the **Sources** table. Switch on **Lead filter**, add your rules, and click **Save**. See [Lead Filters](/4-conversion-tracking#lead-filters-form-qualification-rules).
+  </Step>
+
+  <Step title="Switch the copy's source on">
+    Sources that would count the same leads twice come over paused. Once the filter is saved, switch the source on with its switch in the **Sources** table.
+  </Step>
+
+  <Step title="Send the copy to your ad platforms as its own event">
+    Map the copy to its own event, for example a custom *QualifiedLead* event in Meta, or its own Google Ads conversion, so the platforms learn which leads are the good ones. Each platform still hears about each lead once: see **How each ad platform gets each lead once** below.
+  </Step>
+</Steps>
+
+{/* SCREENSHOT TODO: Conversion Events table with "Lead" and "Qualified lead" one under the other, the Duplicate conversion tooltip showing on Lead's copy icon. Light mode, fake data. */}
+
+<AccordionGroup>
+  <Accordion title="What each conversion counts">
+    - The main conversion counts every lead. The copy counts only the leads that pass its filter, so a qualified lead counts once in each conversion.
+    - The filter counts leads from the moment it is saved. To fill the copy with the past leads that pass it, run a history import on its source. Every source that can be imported does this through its filter, Meta lead forms, Calendly, Cal.com, Typeform, Tally, HubSpot forms, GoHighLevel, iClosed, Cortana Forms and Cortana Calendars included: see [Import the history of a filtered conversion](/4-backfill-history#import-the-history-of-a-filtered-conversion).
+    - Inside one conversion a lead counts once: two sources of the same conversion cannot take the same Meta form or the same Cal.com meeting type.
+  </Accordion>
+
+  <Accordion title="How each ad platform gets each lead once">
+    Every lead the copy counts is also counted by the main conversion, so Cortana makes sure an ad platform hears about it only once.
+
+    - **Meta**, for copies on Meta lead forms and on Cal.com: when the copy is mapped to the same event on the same pixel as the main conversion, Cortana does not send that lead again from the copy, because the main conversion already sends it. On the copy's conversion, that lead's Meta status badge reads **Not Sent**. Hover it for **Not sent to Meta** and *"Sent once by Lead as Lead"* (the main conversion's name and the event). You see the badge in the conversion details, in the customer journey and on the conversion dashboard. Map the copy to a different event or pixel and it sends as normal. **TikTok** works the same way for copies on Meta lead forms.
+    - **Google Ads and LinkedIn** have no way to take one lead from two conversions. So a copy may not send the same Google Ads conversion, or the same LinkedIn conversion, as its main conversion. Saving the source, or turning such a mapping on later, is refused with *"This conversion sends the same Google Ads conversion as Lead. Pick another Google conversion for the copy."* (or the LinkedIn version).
+    - **Cal.com copies** are refused the same way on Google Ads, TikTok, and LinkedIn, for example: *"Demo call" is also counted by "Lead", and both conversions send Google Ads "Booked call". One booking would be reported to the ad platform twice. Give one of them a different event, or remove its mapping, then add the meeting type again.*
+    - **Calendly**: a calendar can feed several conversions. Saving is refused when both would send the same Meta event or Google Ads conversion for one booking.
+    - **Every other source** (Typeform, Tally, GoHighLevel, HubSpot, iClosed, Cortana Forms, Cortana Calendars): each conversion sends its own events. Map the copy to its own event, so one qualified lead is never reported twice as the same event.
+  </Accordion>
+
+  <Accordion title="Which sources need a filter before they can be copied">
+    - **Meta lead forms:** a form keeps at most one source without a filter. Any number of sources with a filter, in other conversions, can count it beside that one. A second conversion with no filter is refused with *"This form is already counted by Lead. A second conversion on it needs a lead filter."* Turning off a copy's filter while the main conversion counts the form is refused with the same words.
+    - **Cal.com:** the same rule per meeting type, with *"This meeting type is already counted by Lead. A second conversion on it needs a lead filter."*
+    - **Calendly and every other source:** several conversions can count the same calendar or form, with or without a filter. **Duplicate conversion** still starts an unfiltered Calendly copy paused (see below), because it would count every booking its original counts.
+  </Accordion>
+</AccordionGroup>
+
+## Duplicate a conversion
+
+{/* last-verified: 2026-11-25, same sources as the section above, with Duplicate read in claude/lead-filter-duplicate at f762838f45 (F7, F8): src/lib/tracking/duplicate-conversion-holds.ts (planCalendly, calendlyNeedsFilterMessage, unheldMeta on every source but WEBHOOK, an unfiltered Meta lead forms source and an unfiltered Cal.com source), src/lib/tracking/calendly-shared-calendar-guard.ts, src/lib/tracking/source-switch-on-claims.ts (CALENDLY_WEBHOOK now claimed). The held-back note and the toast: src/components/tracking/source-hold-feedback.tsx (CopyHoldsNotice, showConversionChangeFeedback, SourceHoldNotice) and its mount at the top of the Sources in conversion-setup-dialog.tsx, claude/lead-filter-editor at deac5a3da2. */}
+
+**Duplicate conversion** makes a safe copy: everything the original has, minus anything that would count or report the same lead twice.
+
+<Steps>
+  <Step title="Click Duplicate conversion">
+    In **Conversion Setup → Conversion Events**, click the copy icon in the **Actions** column of the conversion. Its tooltip reads **Duplicate conversion**.
+  </Step>
+
+  <Step title="Find the copy under the original">
+    The copy appears right under the original, named after it with **(Copy)** (a second one gets **(Copy 2)**). It counts the same way as the original, with the same column presets, and copies every source (lead filters included) and its Meta events and Google Ads conversions. TikTok, LinkedIn, Microsoft Ads and Whop conversions are not copied: set them on the copy.
+  </Step>
+
+  <Step title="Read what it held back">
+    When Duplicate held something back, a short message points you to it: *"Copy made. Some of its sources are paused: see the note at the top of its sources."* (or *"Copy made. Some of its ad platform events are off: see the note at the top of its sources."*). When nothing was held back, the message reads *"Booked calls" duplicated successfully* with your conversion's name.
+
+    Open the copy with the gear icon. At the top of its **Sources**, a note titled **Held back on this copy, so no lead counts twice** lists:
+
+    - each paused source and why, for example *Meta leads is paused. This form is already counted by Booked calls. A second conversion on it needs a lead filter.*
+    - each ad platform event that was turned off, for example *Meta event "Lead" was turned off when this copy was made, so the same lead would not reach Meta twice from the copy and the original.*
+
+    A paused source leaves the note once you switch it on. The lines about turned-off events stay until you close the note with its **x**, and the note goes away by itself once nothing is left on it. Cortana keeps it in this browser only, for up to 30 days, so a teammate on another computer does not see it.
+
+    <Frame caption="The note at the top of a copy's sources says what Duplicate held back, and why.">
+      <img src="/images/conversion-tracking/lead-filters/05-copy-held-back-note.png" alt="A note titled Held back on this copy, so no lead counts twice, with a close x. It lists three lines: Calendly bookings is paused. Discovery call is also tracked by Booked calls, so one booking would count twice. Add a lead filter to the copy, then switch it on. Meta leads is paused. This form is already counted by Booked calls. A second conversion on it needs a lead filter. Meta event Lead was turned off when this copy was made, so the same lead would not reach Meta twice from the copy and the original." />
+    </Frame>
+  </Step>
+
+  <Step title="Add a lead filter to each paused source, then switch it on">
+    Open each paused source, switch on **Lead filter**, add your rules, and click **Save**. Then switch the source on in the **Sources** table.
+  </Step>
+</Steps>
+
+{/* SCREENSHOT TODO: the copy's Sources table in the Edit Conversion window right after Duplicate, the held-back note at the top and the paused Meta lead forms and Calendly rows below it. Needs the real app page (live walk). Light mode, fake data. */}
+
+<AccordionGroup>
+  <Accordion title="What Duplicate holds back, and why">
+    - **Sources that would count the same leads twice start paused.** A Meta lead forms source or a Cal.com source on forms or a meeting type the original counts comes over paused, unless it already has a lead filter. The note at the top of the copy's sources says, for example, *Meta leads is paused. This form is already counted by Booked calls. A second conversion on it needs a lead filter.* (for Cal.com: *This meeting type is already counted by Booked calls. A second conversion on it needs a lead filter.*). A source that already has a filter stays on when the rules allow it, and otherwise starts paused with the reason.
+    - **A Calendly source with no filter starts paused**, because it would count every booking its original counts. The note says, for example, *Calendly bookings is paused. "Discovery call" is also tracked by "Booked calls", so one booking would count twice. Add a lead filter to the copy, then switch it on.* (*Every calendar is also tracked by…* when the source tracks every calendar). A Calendly source that already has a filter follows the shared-calendar rule: it stays on unless both conversions would send the same Meta event or Google Ads conversion for one booking, and then it starts paused with that reason.
+    - **Google Ads conversions on the copy start off.** A copied mapping would send the very conversion the original sends, so each one comes over switched off, and the note says, for example, *Google Ads conversion "Booked call" was turned off when this copy was made, so Google would not count the same conversion twice.* Give the copy its own Google Ads conversion. On copies of Meta lead forms and Cal.com sources, Cortana refuses to let the copy send the original's Google Ads conversion while both count the same leads.
+    - **Meta events on the copy start off, and the note names each one:** *Meta event "Lead" was turned off when this copy was made, so the same lead would not reach Meta twice from the copy and the original.* Calendly, Typeform, Tally, GoHighLevel, HubSpot, iClosed, Cortana Forms, Cortana Calendars and the payment sources record every lead in both conversions, so a copied Meta event would reach Meta twice. Give the copy its own Meta event, such as *QualifiedLead*, and switch it on.
+    - **Meta events stay as they are only when every source the copy holds is covered:** a Meta lead forms or Cal.com source with no filter yet (once you add one, the send-once rule above sends each lead once), or a **Webhook** source, whose copy gets its own webhook address and counts nothing until something posts to it.
+    - **Every other source is copied as it is**, on or off like the original.
+    - **TikTok, LinkedIn, Microsoft Ads and Whop conversions are not copied.** Set the ones you want on the copy, with its own events.
+
+  </Accordion>
+
+  <Accordion title="Switching a paused copy on before its filter is saved">
+    On Meta lead forms and Cal.com it is refused, so the same lead never counts twice. Switching the source on in the **Sources** table shows the reason, for example *"This form is already counted by Lead. A second conversion on it needs a lead filter."* or *"This meeting type is already counted by Lead. A second conversion on it needs a lead filter."*
+
+    A Calendly copy is asked the shared-calendar rule again: switching it on is refused only when both conversions would send the same Meta event or Google Ads conversion for one booking, with *"Discovery Call" is also tracked by "Lead", and both conversions send Meta "Schedule". One booking would be reported to the ad platform twice. Give one of them a different event, or remove its mapping, then add the calendar again.* Without a filter, a Calendly copy that is switched on counts every booking its original counts.
+
+    Switching the whole copy on with its **Status** switch turns its other sources on and keeps the held ones paused, naming each one: *"Meta leads" stays paused: This form is already counted by Booked calls. A second conversion on it needs a lead filter.* Each held source also shows its reason under its name in the **Sources** table, unless the copy's held-back note already names it.
+
+    Save the source's lead filter first, then switch it on.
+  </Accordion>
+</AccordionGroup>
+
+## FAQ
+
+<AccordionGroup>
+  <Accordion title="How do I track leads and qualified leads from the same Meta form?">
+    Duplicate your **Lead** conversion with **Duplicate conversion**, rename the copy to **Qualified lead**, open its Meta lead forms source, switch on **Lead filter**, add your rules, save, and switch the source on. **Lead** keeps counting every lead and the copy counts only the ones that pass. Map the copy to its own Meta event, such as *QualifiedLead*.
+  </Accordion>
+
+  <Accordion title="Why is my duplicated conversion's source paused?">
+    The original already counts the same Meta forms, Cal.com meeting type or Calendly calendar, so an unfiltered copy would count every lead twice. Add a lead filter to the paused source, save, then switch it on. Switching it on before the filter is saved is refused with *"This form is already counted by Lead. A second conversion on it needs a lead filter."* (or the same words for a meeting type).
+  </Accordion>
+
+  <Accordion title="Why is the Google Ads conversion turned off on my copy?">
+    The copy would have sent the very same Google Ads conversion as the original, and Google would count those leads twice. Pick another Google Ads conversion for the copy, for example a "Qualified lead" conversion action, and turn that one on.
+  </Accordion>
+
+  <Accordion title="Will Meta get my qualified leads twice?">
+    No. On Meta lead form and Cal.com copies, when the copy and the original send the same event to the same pixel, Cortana sends that lead once, from the original, and the copy's Meta status badge reads **Not Sent** (*"Sent once by Lead as Lead"*). On every other source, **Duplicate conversion** turns the copy's Meta events off. Map the copy to its own event, such as *QualifiedLead*, and Meta gets both events: one for every lead, one for the qualified ones.
+  </Accordion>
+
+  <Accordion title="Why does my new qualified conversion show zero past leads?">
+    A filter counts leads from the moment it is saved. To bring in the past leads that pass it, run a history import on the copy's source from the clock icon on its row. See [Import the history of a filtered conversion](/4-backfill-history#import-the-history-of-a-filtered-conversion).
+  </Accordion>
+</AccordionGroup>

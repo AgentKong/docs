@@ -1,7 +1,9 @@
 ---
 title: "4.3) Import your history"
-description: "Import your last 30, 60 or 90 days of leads, calls, bookings and sales into Cortana from Meta lead forms, LinkedIn lead forms, GoHighLevel, Typeform, Tally, ClickFunnels, WooCommerce, Close, Stripe, Shopify, CallRail, Whop, Cal.com or Kajabi, so your old conversions get matched to the ads that created them."
+description: "Import your last 30, 60 or 90 days of leads, calls, bookings and sales into Cortana from Meta lead forms, LinkedIn lead forms, GoHighLevel, Typeform, Tally, ClickFunnels, WooCommerce, Close, Stripe, Shopify, HubSpot, Calendly, iClosed, Whop, Cal.com, Google Local Services Ads, Cortana Calendars or Cortana Forms, so your old conversions get matched to the ads that created them. A source with a lead filter imports only the past leads that pass it."
 ---
+
+{/* last-verified: 2026-11-25 against origin/main and the release tree claude/lead-filter-release-2 22a9c9c3fc (sprint lead-filter-groups C1, C2, E2, L9, L12; sprints/cs-machine/07-HISTORICAL-IMPORT.md Phase 7.5). The tool list is SELF_SERVE_PROVIDERS and SOURCE_TYPE_TO_PROVIDER; the clock icon is isBackfillableSourceType (by source type only). Every strategy runs applyResolveGate with the job's retainDiscarded on a historical import; no Kajabi or CallRail import exists. Paths: src/lib/integration-backfill/provider-windows.ts, start-source-backfill.ts, strategies/*.ts (cal-com, cortana-booking, cortana-form, whop, hubspot, calendly, iclosed, meta-leads), native-import-row.ts, native-sources.ts, src/components/tracking/backfill/backfill-offer-dialog.tsx, src/components/tracking/conversion-setup-dialog.tsx, src/app/api/integrations/backfill/cancel/route.ts. */}
 
 {/* TODO: verify. No Loom walkthrough was supplied for this page. When one is recorded, embed it
     here with a verbatim transcript inside an <Accordion title="Video transcript"> for the KB. */}
@@ -18,9 +20,9 @@ Cortana asks the connected tool for your old records. For each one it works out 
 
 ## Two kinds of import, and the window tells you which one you are getting
 
-What happens to a record with no answer depends on the tool, and the window says so in plain words before you confirm. Read the top of it.
+What happens to a record Cortana cannot explain depends on one switch on the window's **Confirm** step: **Also import conversions we can't attribute**. It is off unless you switch it on, and it works the same on every tool.
 
-### Most tools: only what Cortana can explain is imported
+### By default: only what Cortana can explain is imported
 
 For every old record, Cortana asks one question: **where did this person come from?**
 
@@ -30,24 +32,20 @@ If the only answer is "we do not know", the record is **unresolvable**, and Cort
 
 Throwing it away sounds harsh, but it is the right call. A record with no answer still counts in your totals. It lands in your **untracked** number, which is the share of your conversions Cortana cannot explain. Importing a pile of unknowns makes that number worse, not better. You would end up with more rows and less clarity.
 
-So on these tools a historical import gives you history you can actually use, not just a bigger pile of data.
+So with the switch off, a historical import gives you history you can actually use, not just a bigger pile of data.
 
-### Whop, Cal.com and Kajabi: everything is imported, and it shows as untracked
+### With the switch on: everything is imported, and the rest shows as untracked
 
-Three tools do not tell us where a past sale or booking came from at all. Whop only carries that information when your checkout link had it, Cal.com keeps it in a place its API does not share, and Kajabi does not send it.
+Switch on **Also import conversions we can't attribute** when you want your full past volume inside Cortana. The switch warns you: *"These will show as untracked and will raise your untracked %."*
 
-There is no point asking a question the tool cannot answer, so these imports work differently:
-
-- **Every record is imported.** Nothing is thrown away, and there is no switch to change that.
-- **They count in your totals.** Your revenue and your booking numbers will be right.
-- **They show as untracked**, not as direct. Untracked means "Cortana has no page views for this person", which is the honest answer. Filing them as direct would claim they came straight to your site, which nobody knows.
-
-The window says this before you start, with the tool's name in it: *"These won't include attribution details."* If you see that notice, this is the kind of import you are running.
+- **Every record is imported**, including the ones Cortana cannot explain.
+- **They count in your totals.** Your lead, booking and revenue numbers for that period are complete.
+- **The ones Cortana cannot explain show as untracked**, not as direct. Untracked means "Cortana has no page views for this person", which is the honest answer. Filing them as direct would claim they came straight to your site, which nobody knows.
 
 <Note>
   **Your untracked number will go up, on purpose.**
 
-  That is the trade. You get the sale or the booking counted, and you keep an honest view of what Cortana can and cannot explain. If you would rather not raise it, do not run the import on these three tools.
+  That is the trade. You get every past record counted, and you keep an honest view of what Cortana can and cannot explain. If you would rather not raise it, leave the switch off. Turning it off later does not remove what an import already brought in.
 </Note>
 
 You will find it in **Ad Tracking → Conversion Setup**, on the source's own row.
@@ -62,34 +60,41 @@ You will find it in **Ad Tracking → Conversion Setup**, on the source's own ro
 
 ## Which sources can be imported
 
-Sixteen tools can be imported. How far back you can go depends on how much history each tool will give us.
+Nineteen tools can be imported. How far back you can go depends on how much history each tool will give us. Every one of them imports only what Cortana can explain, unless you switch on **Also import conversions we can't attribute**.
 
-| Tool | Furthest back you can go | What arrives |
-| --- | --- | --- |
-| Meta lead forms | 90 days | Only what Cortana can explain |
-| LinkedIn lead forms | 90 days | Only what Cortana can explain |
-| GoHighLevel | 90 days | Only what Cortana can explain |
-| Typeform | 90 days | Only what Cortana can explain |
-| Tally | 90 days | Only what Cortana can explain |
-| ClickFunnels | 90 days | Only what Cortana can explain |
-| WooCommerce | 90 days | Only what Cortana can explain |
-| Stripe | 90 days | Only what Cortana can explain |
-| CallRail | 90 days | Only what Cortana can explain |
-| Shopify | 60 days | Only what Cortana can explain |
-| Close | 30 days | Only what Cortana can explain |
-| Google Local Services Ads | 90 days | Only what Cortana can explain |
-| Whop | Back to the day you connected Whop | Everything, shown as untracked |
-| Cal.com | 90 days | Everything, shown as untracked |
-| Kajabi | 90 days | Everything, shown as untracked |
-| Instagram / Facebook comments | Back to the day comment recording was switched on | Only what Cortana can explain |
+| Tool | Furthest back you can go |
+| --- | --- |
+| Meta lead forms | 90 days |
+| LinkedIn lead forms | 90 days |
+| GoHighLevel | 90 days |
+| Typeform | 90 days |
+| Tally | 90 days |
+| HubSpot | 90 days |
+| Calendly | 90 days |
+| Cal.com | 90 days |
+| iClosed | 90 days |
+| ClickFunnels | 90 days |
+| WooCommerce | 90 days |
+| Stripe | 90 days |
+| Whop | 90 days |
+| Shopify | 60 days |
+| Close | 30 days |
+| Google Local Services Ads | 90 days |
+| Cortana Calendars | 90 days |
+| Cortana Forms | 90 days |
+| Instagram / Facebook comments | Back to the day comment recording was switched on |
 
-**CallRail** imports calls: the ones that completed, and the ones CallRail marked a good lead. Form submissions to CallRail cannot be imported yet.
+**HubSpot** imports **Form Submitted** and **Meeting Booked** sources. A form submission is dated when it was sent, a meeting when it was booked (not when the meeting takes place). HubSpot's list of past form submissions can be short, so a form import may find fewer than you expect. Meetings reach back the whole window. **Deal Stage Changed**, **Meeting Updated** and **Custom Field Updated** sources cannot be imported.
 
-**Whop** reads the payments Cortana already stored when Whop sent them, rather than asking Whop again, because that stored copy keeps information Whop's own history does not. That is why Whop's limit is the day you connected it: there is nothing older to read. If your window reaches back further, the import says so rather than pretending that was all there was.
+**Calendly** imports **Meeting Scheduled** and **Meeting Canceled** sources, on the source's calendars and through its lead filter, including the bookings your teammates host. A booking is dated when it was made, not when the meeting takes place.
 
-**Cal.com** imports bookings that were created. Cancellations and reschedules cannot be imported, because Cal.com does not record when either actually happened.
+**iClosed** imports every event its sources can track, through the source's calendars, outcomes and lead filter, each dated at its own moment. A booking is dated when it was made, not when the call takes place.
 
-**Kajabi** imports payments and purchases. Orders and form submissions cannot be imported: an order is not money yet, and a form submission carries no date to file the conversion under.
+**Whop** asks Whop for your store's payments in the window, oldest first, and books each one the way a live payment is booked, with the source's products and payment filters. A buyer's first purchase is booked before their renewals, so a new-customers-only conversion comes out right.
+
+**Cal.com** imports whatever the source tracks: bookings created, bookings cancelled, or bookings rescheduled, on its meeting links and through its lead filter. Each one keeps its own date. Cal.com rarely says which ad a booking came from, so most bookings are matched through the visits Cortana's pixel recorded for that person. See [Import the history of a filtered conversion](#import-the-history-of-a-filtered-conversion).
+
+**Cortana Calendars** and **Cortana Forms** import from Cortana's own records, which are never deleted, so 90 days really is 90 days. They follow the source's calendars or forms, its stage, and its lead filter.
 
 **Instagram / Facebook comments** imports the comments Cortana already recorded. Meta never sends old comments, so nothing from before **Record comments** was switched on can be imported. See [13) Instagram & Facebook comments](/14-instagram-facebook-comments).
 
@@ -97,11 +102,10 @@ Sixteen tools can be imported. How far back you can go depends on how much histo
 
 ### Why 90 days does not always mean 90 days
 
-Every source shows the same three buttons, so you can always click **90 days**. But three tools will not give us that much history:
+Every source shows the same three buttons, so you can always click **90 days**. But two tools will not give us that much history:
 
 - **Shopify** only hands over 60 days of orders.
 - **Close** only keeps 30 days of the record Cortana reads.
-- **Whop** goes back to the day you connected it, however old your Whop account is.
 
 On those two, Cortana asks for as much as the tool allows and imports that. You do not get an error, and nothing fails. You simply get less history than the button says.
 
@@ -110,7 +114,7 @@ On those two, Cortana asks for as much as the tool allows and imports that. You 
 
   The button keeps reading **Preview my last 90 days**, and the line at the top of the window still says *"Import your last 90 days"*. Only the import itself is shortened.
 
-  So on a Shopify source, 90 days on screen means 60 days of orders. On a Close source, it means 30 days. On a Whop source it means back to your connection date, and the import tells you in its notes when your window started earlier than that. Everywhere else, 90 days really is 90 days.
+  So on a Shopify source, 90 days on screen means 60 days of orders. On a Close source, it means 30 days. Everywhere else, 90 days really is 90 days.
 </Warning>
 
 **Meta lead forms** and **LinkedIn lead forms** mean the lead ads you run on Facebook, Instagram and LinkedIn, where someone fills in a form without leaving the platform. These are separate from your ad spend and performance figures, which Cortana already brings in on its own.
@@ -122,7 +126,7 @@ On those two, Cortana asks for as much as the tool allows and imports that. You 
 <Note>
   **Other sources cannot be imported, and show no clock icon.**
 
-  Tracking pixels, CSV uploads, URL parameter sources and sources you made by hand have no tool for Cortana to ask, so there is nothing to fetch. Salesforce, HubSpot, Calendly, iClosed and Fathom sources cannot be imported either.
+  Tracking pixels, CSV uploads, URL parameter sources and sources you made by hand have no tool for Cortana to ask, so there is nothing to fetch. Salesforce, Fathom, CallRail, Kajabi, PayPal and Fanbasis sources have no clock icon either.
 
   A CSV upload is still how you bring in history from a tool Cortana does not connect to. See [Conversion tracking](/4-conversion-tracking).
 </Note>
@@ -169,7 +173,7 @@ On those two, Cortana asks for as much as the tool allows and imports that. You 
   </Step>
 
   <Step title="Choose how far back to go">
-    The window is called **Backfill your history**. The line under the title tells you which source you are importing and what will happen: *"Import your last 90 days of [your source name] and resolve their attribution — only what resolves is imported."*
+    The window is called **Backfill your history**. The line under the title tells you which source you are importing and what will happen: *"Import your last 90 days of [your source name] and resolve their attribution: only what resolves is imported."*
 
     Along the top are five steps, so you always know where you are: **Window**, **Preview**, **Confirm**, **Importing**, **Done**.
 
@@ -217,7 +221,7 @@ On those two, Cortana asks for as much as the tool allows and imports that. You 
 
     Some tools show it a little differently:
 
-    - For some tools Cortana cannot check a sample at all. Then you just see **"N records found"**, plus the line *"Recovery is not sampled for this provider — we still import only the ones whose attribution resolves"*. **Stripe**, **Meta lead forms** and **LinkedIn lead forms** all work this way. You still get a real count of what is there, and the import still only keeps what it can trace.
+    - For some tools Cortana cannot check a sample at all. Then you just see **"N records found"**, plus the line *"Recovery is not sampled for this provider: we still import only the ones whose attribution resolves"*. **Stripe**, **Meta lead forms**, **LinkedIn lead forms**, **HubSpot**, **Calendly**, **iClosed**, **Cortana Calendars** and **Cortana Forms** all work this way. You still get a real count of what is there, and the import still only keeps what it can trace.
     - If a tool will only confirm a minimum, the number starts with **"At least "**.
 
     <Note>
@@ -236,7 +240,7 @@ On those two, Cortana asks for as much as the tool allows and imports that. You 
 
     CAPI is the direct line from Cortana to Facebook, Google and your other ad platforms. It tells them a conversion happened, so their algorithms can learn from it.
 
-    The setting explains its own catch: *"Off or on is your call. If on: only conversions from the last 7 days are sent — ad platforms reject older events — and this may lower your Event Match Quality for about 7 days, since much of this historical data lacks click IDs."*
+    The setting explains its own catch: *"Off or on is your call. If on: only conversions from the last 7 days are sent (ad platforms reject older events), and this may lower your Event Match Quality for about 7 days, since much of this historical data lacks click IDs."*
 
     In plain terms:
 
@@ -245,26 +249,23 @@ On those two, Cortana asks for as much as the tool allows and imports that. You 
 
     **We recommend leaving it off.** The real value of an import is inside Cortana, where every imported record counts no matter how old it is. Sending one thin week of weaker data to your ad platforms gains you very little and can knock your score for a while.
 
-    <Frame caption="The Confirm step. The CAPI setting is off.">
-      <img className="block dark:hidden" src="/images/ad-tracking/backfill/06-confirm.png" alt="The Backfill your history window on the Confirm step, showing the Send imported conversions to ad platforms CAPI toggle switched off with its explanatory paragraph, the Also import conversions we can't attribute toggle switched off, and the Back and Import buttons." />
-      <img className="hidden dark:block" src="/images/ad-tracking/backfill/06-confirm-dark.png" alt="The Backfill your history window on the Confirm step, showing the Send imported conversions to ad platforms CAPI toggle switched off with its explanatory paragraph, the Also import conversions we can't attribute toggle switched off, and the Back and Import buttons." />
+    <Frame caption="The Confirm step. Both settings are on screen, and both are off.">
+      <img className="block dark:hidden" src="/images/ad-tracking/backfill/06-confirm.png" alt="The Backfill your history window on the Confirm step, showing the Send imported conversions to ad platforms CAPI switch off with its explanatory paragraph, the Also import conversions we can't attribute switch off with its untracked warning below it, and the Back and Import buttons." />
+      <img className="hidden dark:block" src="/images/ad-tracking/backfill/06-confirm-dark.png" alt="The Backfill your history window on the Confirm step, showing the Send imported conversions to ad platforms CAPI switch off with its explanatory paragraph, the Also import conversions we can't attribute switch off with its untracked warning below it, and the Back and Import buttons." />
     </Frame>
+
+    {/* SCREENSHOT TODO: recapture 06-confirm.png (and its dark twin if the page keeps them). Since 0c460d4b0e there is no Advanced settings link: the Confirm step shows the CAPI switch and the Also import conversions we can't attribute switch together, both off. 07-confirm-advanced.png is no longer used. Light mode, fake data. */}
   </Step>
 
   <Step title="Choose what to do with records Cortana cannot answer for">
-    Right below the CAPI setting is **Also import conversions we can't attribute**. It is **off**, and it warns you *"These will show as untracked and will raise your untracked %."*
+    The second setting on the **Confirm** step, right under the first, is **Also import conversions we can't attribute**. It is **off**, and it warns you *"These will show as untracked and will raise your untracked %."*
 
-    - **Off** is what this page has described so far. Records Cortana cannot answer for are thrown away. On Whop, Cal.com and Kajabi this switch is not shown at all, because everything is imported there.
+    - **Off** is what this page has described so far. Records Cortana cannot answer for are thrown away.
     - **On** imports them anyway. They arrive labelled **untracked**, and your untracked percentage goes up.
 
-    **We recommend leaving it off.** Only turn it on if you want a full count of your past volume inside Cortana and you are happy for your untracked number to rise to match.
+    It works the same on every tool. **We recommend leaving it off.** Only turn it on if you want a full count of your past volume inside Cortana and you are happy for your untracked number to rise to match.
 
     Be sure before you switch it on. Turning it back off later does not remove the records it brought in.
-
-    <Frame caption="Advanced settings opened, showing the second setting and its warning.">
-      <img className="block dark:hidden" src="/images/ad-tracking/backfill/07-confirm-advanced.png" alt="The Backfill your history window on the Confirm step with Advanced settings expanded, showing the Also import conversions we can't attribute toggle switched off and the warning that these will show as untracked and raise the untracked percentage." />
-      <img className="hidden dark:block" src="/images/ad-tracking/backfill/07-confirm-advanced-dark.png" alt="The Backfill your history window on the Confirm step with Advanced settings expanded, showing the Also import conversions we can't attribute toggle switched off and the warning that these will show as untracked and raise the untracked percentage." />
-    </Frame>
 
     **Back** takes you to the preview. **Import** starts the real thing.
   </Step>
@@ -274,7 +275,7 @@ On those two, Cortana asks for as much as the tool allows and imports that. You 
 
     The window now shows *"Importing… 0 imported so far"*. Both numbers climb as it works: how many have been imported, and how many have been thrown away.
 
-    Under that it says *"This runs in the background — you can close this window and the import continues."* That is exactly true.
+    Under that it says *"This runs in the background: you can close this window and the import continues."* That is exactly true.
 
     - **Run in background** closes the window and lets the import carry on.
     - **Cancel import** only works if the import has not actually started yet. See **Cancel import did not work** below.
@@ -351,6 +352,55 @@ On those two, Cortana asks for as much as the tool allows and imports that. You 
   </Step>
 </Steps>
 
+## Import the history of a filtered conversion
+
+{/* last-verified: 2026-11-25 against the app source (sprint lead-filter-groups C1, C2, E2, L9, L12; A1b: no import offer for a source whose filter did not save). Paths: src/lib/integration-backfill/strategies/cortana-booking.ts, strategies/cortana-form.ts, strategies/cal-com.ts, strategies/meta-leads.ts, native-import-row.ts, native-sources.ts (youngTagLeadsNote), src/lib/booking/native-recorder-backfill.ts, src/components/tracking/backfill/backfill-offer-dialog.tsx. */}
+
+A new conversion with a [lead filter](/4-conversion-tracking#lead-filters-form-qualification-rules) starts at zero, because the filter only counts leads from the moment it is saved. A history import fills it with the past leads that pass the filter, dated when they really happened and credited to the ad they came from. This is how a **Qualified lead** conversion beside your **Lead** conversion gets its history on day one. See [Tiered conversions](/4-conversion-setup#tiered-conversions-count-every-lead-and-your-qualified-leads).
+
+Every source that can be imported and holds a lead filter imports through it: Meta lead forms, Calendly, Cal.com, Typeform, Tally, HubSpot forms, GoHighLevel, iClosed, Cortana Forms and Cortana Calendars. The three that joined with lead filter groups work like this:
+
+- **Cortana Calendars**: past bookings on the source's calendars.
+- **Cortana Forms**: past forms started or sent on the source's forms, plus the bookings of any calendar that shows one of those forms, unless the same conversion already counts that calendar.
+- **Cal.com**: past bookings on the source's meeting links, for the event it tracks (created, cancelled, or rescheduled).
+
+<Steps>
+  <Step title="Save the source with its lead filter">
+    Set up the source and its **Lead filter**, then save. On a new source, the **Backfill your history** window opens by itself. On a source you already have, click the clock icon on its row.
+
+    If the filter could not be saved, Cortana does not offer the import, so history never comes in unfiltered.
+  </Step>
+
+  <Step title="Pick how far back, and preview">
+    Pick **30 days**, **60 days** or **90 days**, then click **Preview my last 90 days** (the number matches your pick). On Cortana Calendars and Cortana Forms the preview is a plain count of the past leads that pass the filter and reach the source's stage, with no estimate of how many will resolve. Past 5,000 it reads **At least**. Every other tool previews the way **Read the preview** above describes.
+  </Step>
+
+  <Step title="Confirm and import">
+    On the **Confirm** step, the same two choices apply as on any import: **Send imported conversions to ad platforms (CAPI)** and **Also import conversions we can't attribute**, both off. Click **Import**.
+  </Step>
+</Steps>
+
+{/* SCREENSHOT TODO: the Backfill your history window on the Preview step for a Cortana Calendars source of a "Qualified booking" conversion, showing its records found count. Light mode, fake data. */}
+
+<AccordionGroup>
+  <Accordion title="What a filtered import keeps">
+    - **The filter.** Only past leads that pass the source's lead filter as it is now are imported, judged exactly as a new lead would be: groups, **is one of**, tags and all. A lead that does not pass is left out and appears in none of the three numbers on the **Done** step.
+    - **The original times.** A Cortana Calendars booking is dated when the lead came in. A Cortana Forms lead is dated when the person started the form or sent it, whichever stage the source counts. A Cal.com booking is dated at its own moment: when it was made, when it was cancelled, or when the new booking of a reschedule was made.
+    - **The original attribution.** Each lead is credited to the ad it came from, worked out the same way as for a live lead. On Cortana Calendars and Cortana Forms, Cortana also ties the imported lead to the visit its own browser made around the time of the lead, so the ad of that visit gets the credit.
+    - **Quiet.** No webhook, no Zapier, no GoHighLevel workflow, no team notification. Ad platforms only hear about it when **Send imported conversions to ad platforms (CAPI)** is on, and then only for the last 7 days.
+    - **No duplicates.** A lead the source already counted is reported as **already present**.
+    - **Your main conversion.** The import only adds to the conversion you run it on. Your main **Lead** conversion keeps its numbers; at most, an existing conversion of the same person can be credited to a better ad (see **What an import does to conversions you already had** below).
+  </Accordion>
+
+  <Accordion title="What a filtered import leaves out">
+    - **GoHighLevel appointments read today's answers.** A GoHighLevel appointment filter judges each contact's custom fields as they are on the day of the import, not as they were when the person booked.
+    - **Tag rules read today's tags.** A filter with a tag rule checks the tags each contact has on the day of the import. Leads from the last 2 minutes are left out, because a tag may not have landed yet, and the result's notes say so: *"3 leads from the last 2 minutes were not imported: a tag this conversion's filter reads may not have landed on them yet. Import again in a few minutes to count them"*.
+    - **Bookings a team member made for a lead** on a Cortana calendar are not imported.
+    - **Older Cortana Forms submissions** sometimes have no record of when they were sent. Those are dated when the person started the form, and the result's notes count them.
+    - **Cal.com bookings with no email** are skipped: Cortana needs an email to know who booked.
+  </Accordion>
+</AccordionGroup>
+
 ## Sub-features
 
 <AccordionGroup>
@@ -389,7 +439,7 @@ On those two, Cortana asks for as much as the tool allows and imports that. You 
   </Accordion>
 
   <Accordion title="What happens to records Cortana cannot answer for">
-    This depends on which of the two kinds of import you are running. On Whop, Cal.com and Kajabi every record is imported and shown as untracked, and none of what follows applies. On every other tool:
+    This depends on the **Also import conversions we can't attribute** switch. With it on, every record is imported and the ones Cortana cannot explain are shown as untracked, and none of what follows applies. With it off, which is the default:
 
     They are not imported as conversions. Cortana checks them, finds nothing solid, and leaves them out rather than filing them as untracked.
 
@@ -410,7 +460,7 @@ On those two, Cortana asks for as much as the tool allows and imports that. You 
     <Note>
       **Kept-but-unexplained conversions show as untracked, never as direct.**
 
-      This is true whether they were kept by that switch or because you imported from Whop, Cal.com or Kajabi. Direct would mean the person typed your address in; untracked means Cortana has no page views for them. Only the second one is known to be true, so that is what it says, even if that person has visited your site since.
+      This is true for every record that switch kept. Direct would mean the person typed your address in; untracked means Cortana has no page views for them. Only the second one is known to be true, so that is what it says, even if that person has visited your site since.
     </Note>
   </Accordion>
 
@@ -443,6 +493,10 @@ On those two, Cortana asks for as much as the tool allows and imports that. You 
 
     **Stripe.** The preview gives you a record count but no estimate of how many will import, because checking a payment properly means running the full process on it. The import still leaves out anything it cannot answer for.
 
+    **Cal.com.** The import follows the source's event: **Booking Created** brings in every booking made in the window, including ones that were later cancelled or moved, as live tracking counted them; **Booking Cancelled** and **Booking Rescheduled** bring in those changes, each dated when it happened. Its meeting links and its lead filter apply. Bookings with no email are skipped.
+
+    **Cortana Calendars and Cortana Forms.** The import reads Cortana's own records, so the window is never cut short. It follows the source's calendars or forms, its stage and its lead filter, and the preview is a plain count. See [Import the history of a filtered conversion](#import-the-history-of-a-filtered-conversion).
+
     <Warning>
       **For payment tools, the revenue Cortana shows is ad-attributable revenue, not your total revenue.**
 
@@ -470,22 +524,22 @@ On those two, Cortana asks for as much as the tool allows and imports that. You 
 
 <AccordionGroup>
   <Accordion title="I set up a source and no import was offered">
-    The window only pops up for the ten tools listed above, and only when a source is **created**. Editing a source never brings it up.
+    The window only pops up for the tools listed above, and only when a source is **created**. Editing a source never brings it up.
 
-    If your source is one of the ten, open **Edit Conversion**, find the row, and click the clock icon. That takes you through exactly the same steps.
+    If your source is one of them, open **Edit Conversion**, find the row, and click the clock icon. That takes you through exactly the same steps.
 
-    If there is no clock icon, that kind of source cannot be imported. Pixels, CSV uploads, URL parameter sources and sources made by hand have no tool for Cortana to ask.
+    If there is no clock icon, that kind of source cannot be imported. Pixels, CSV uploads, URL parameter sources and sources made by hand have no tool for Cortana to ask. Salesforce, Fathom, CallRail, Kajabi, PayPal and Fanbasis sources have no import either.
+
+    A source whose lead filter could not be saved is not offered the import either, so its history never comes in unfiltered. Save the filter again, then use the clock icon.
   </Accordion>
 
   <Accordion title="The clock icon is missing from the row">
-    Four reasons, most likely first.
+    Two reasons, most likely first.
 
-    1. **That kind of source cannot be imported.** See the table near the top of this page.
-    2. **The source watches something that cannot be imported, even though the tool can be.** The icon follows the trigger, not just the tool. A Cal.com source watching cancellations or reschedules has no icon, while one watching bookings does. A Kajabi source watching orders or form submissions has none, while payments and purchases do. The same is true of a Shopify source built on anything other than orders/paid or orders/create, and of a CallRail source watching form submissions.
-    3. **The source has no trigger set at all.** Cortana cannot work out what to fetch, so it offers nothing.
-    4. **You do not have permission to manage tracking for this business.** The icon is hidden rather than greyed out, so ask whoever runs your account.
+    1. **That kind of source cannot be imported.** See the table near the top of this page. Salesforce, Fathom, CallRail, Kajabi, PayPal and Fanbasis sources, pixels, CSV uploads and sources made by hand have no clock icon.
+    2. **You do not have permission to manage tracking for this business.** The icon is hidden rather than greyed out, so ask whoever runs your account.
 
-    The icon is hidden in these cases rather than shown and refused. If an import cannot run, clicking would only produce an error, so there is nothing to click.
+    The icon follows the kind of source, not what it watches. A source of a tool that can be imported always shows it, even when it watches an event that cannot be imported, such as a Shopify source on anything other than orders/paid or orders/create, or a HubSpot **Deal Stage Changed** source. Clicking it then stops at the preview with the reason: see **The preview says zero, or will not run** below.
   </Accordion>
 
   <Accordion title="The preview says zero, or will not run">
@@ -495,16 +549,16 @@ On those two, Cortana asks for as much as the tool allows and imports that. You 
 
     | Message | What to do |
     | --- | --- |
-    | **"This source has no form configured, so there is nothing to import"** | Open the source's settings and pick the form it should watch. |
-    | **"This source has no trigger configured, so there is nothing to import"** | Open the source's settings and pick what it should watch. |
+    | **"This source has no form configured: nothing to backfill"** | Open the source's settings and pick the form it should watch. |
+    | **"This source has no trigger configured: nothing to backfill"** | Open the source's settings and pick what it should watch. |
     | **"This source has no pipeline configured"** | A GoHighLevel opportunity source needs its pipeline set. |
     | **"This source has no calendar configured"** | A GoHighLevel appointment source needs its calendar set. |
-    | **"The [trigger] trigger is not backfillable yet"** | That kind of event cannot be imported yet. Your live tracking still works as normal. |
+    | **"The "[trigger]" trigger is not backfillable yet"** | That kind of event cannot be imported yet, for example a HubSpot **Deal Stage Changed** source or a Shopify source on an event other than orders/paid or orders/create. Your live tracking still works as normal. |
     | **"Backfill is not yet available for [source type]"** | That kind of source cannot be imported. |
 
     The first two messages do not apply to **Meta lead forms** or **LinkedIn lead forms**. Those sources have no form or event for you to pick, so they can never be missing one. If a Meta or LinkedIn import returns nothing, the usual causes are that no lead forms are mapped for this business yet, or that the connection needs reconnecting.
 
-    If Cortana cannot measure the preview, it tells you honestly rather than showing a fake zero: *"A preview is not available for this source yet — you can still run the import; unresolvable records are discarded, never imported blind."*
+    If Cortana cannot measure the preview, it tells you honestly rather than showing a fake zero: *"A preview is not available for this source yet: you can still run the import; unresolvable records are discarded, never imported blind."*
   </Accordion>
 
   <Accordion title="The preview number did not match what actually imported">
@@ -528,7 +582,7 @@ On those two, Cortana asks for as much as the tool allows and imports that. You 
   <Accordion title="Cancel import did not work">
     **Cancel only works while the import is still waiting to start.**
 
-    Once it is actually running, pressing Cancel does nothing and you see **"Job is RUNNING — only queued jobs can be cancelled"**.
+    Once it is actually running, pressing Cancel does nothing and you see **"Job is RUNNING: only queued jobs can be cancelled"**.
 
     A large import runs in batches, and it goes back to waiting between them. If you press Cancel during one of those gaps, it stops before the next batch. So you may need to try more than once.
 
@@ -562,19 +616,15 @@ On those two, Cortana asks for as much as the tool allows and imports that. You 
   </Accordion>
 
   <Accordion title="Why did it only import a small part of my records?">
-    Because on most tools Cortana only imports the records it can trace. The rest were either impossible to trace, or already in your account.
+    Because, unless you switch on **Also import conversions we can't attribute**, Cortana only imports the records it can trace. The rest were either impossible to trace, or already in your account. On a source with a lead filter, the past leads that do not pass it are left out too.
 
     A small number is not a failure. Importing records Cortana cannot explain would push your untracked percentage up and teach you nothing, which is exactly what this feature is built to avoid.
-
-    This does not apply to Whop, Cal.com or Kajabi. Those import everything, so a small number there means Cortana genuinely found few records in your window, not that it left any out.
   </Accordion>
 
-  <Accordion title="Why did my untracked number go up after importing from Whop, Cal.com or Kajabi?">
-    Because that is what those imports do, and the window told you so before you started.
+  <Accordion title="Why did my untracked number go up after an import?">
+    Because **Also import conversions we can't attribute** was on for that import. With it on, Cortana imports every past record, and the ones it cannot trace are marked untracked, which means "no page views recorded for this person". Your totals for that period are now complete. The untracked share is the honest cost of that.
 
-    Those three tools do not tell us where a past sale or booking came from. Rather than drop your history, Cortana imports all of it and marks it untracked, which means "no page views recorded for this person". Your revenue and booking totals are now right. The untracked share is the honest cost of that.
-
-    It is not a mistake to fix, and there is no setting to change it. If you would rather keep the smaller untracked number, do not import from those three.
+    It is not a mistake to fix. Switching the setting off later does not remove what that import brought in. Next time, leave the switch off to import only what Cortana can explain.
   </Accordion>
 
   <Accordion title="Will my team get emails, or will this set off my automations?">
