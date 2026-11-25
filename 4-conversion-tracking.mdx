@@ -139,6 +139,12 @@ Every source is added the same way. Follow these six steps, then open your sourc
         If nothing loads you will see **"No event types found. Create an event type in Cal.com first."** If the list fails you will see **"Failed to load meeting links. Try reconnecting Cal.com in Settings."**
       </Step>
 
+      <Step title="Add a lead filter (optional)">
+        Once a meeting link is ticked, a **Lead filter** card appears under the list. Switch it on to count only the bookings whose answers to your booking questions match your rules. See [Lead Filters](#lead-filters-form-qualification-rules).
+
+        A meeting type that another conversion already counts can only be added with the lead filter on. Without one, saving is refused with **"This meeting type is already counted by Lead. A second conversion on it needs a lead filter."** (with your own conversion's name). That is how you build a qualified copy beside your main booking conversion: see [Tiered conversions](/4-conversion-setup#tiered-conversions-count-every-lead-and-your-qualified-leads).
+      </Step>
+
       <Step title="Save">
         Click **Submit**. The dialog closes and the source appears in the conversion's **Sources** table.
       </Step>
@@ -178,6 +184,12 @@ Every source is added the same way. Follow these six steps, then open your sourc
         A **Calendars** checkbox list appears showing your Calendly event types with their duration in minutes. Only **active** event types are listed. Archived and disabled ones are hidden. Tick the ones that count. A counter reads **"X calendars selected"**.
 
         Empty state: **"No event types found. Create a scheduling link in Calendly first."** Load failure: **"Failed to load calendars. Go to Settings → Integrations to reconnect Calendly."**
+      </Step>
+
+      <Step title="Add a lead filter (optional)">
+        Once a calendar is ticked, a **Lead filter** card appears. Switch it on to count only the bookings whose answers to your Calendly questions match your rules. See [Lead Filters](#lead-filters-form-qualification-rules).
+
+        A Calendly calendar can feed several conversions, with or without a filter. Saving is refused only when both conversions would send the same Meta event or the same Google Ads conversion for one booking. Give one of them a different event.
       </Step>
 
       <Step title="Confirm the connected account and save">
@@ -228,7 +240,7 @@ Every source is added the same way. Follow these six steps, then open your sourc
       </Step>
 
       <Step title="Save">
-        Click **Submit**. You will see **"CallRail source created — webhook installed in CallRail!"**. Cortana installs the webhook into your CallRail company for you. There is nothing to copy, paste, or map.
+        Click **Submit**. You will see **"CallRail source created: webhook installed in CallRail!"**. Cortana installs the webhook into your CallRail company for you. There is nothing to copy, paste, or map.
       </Step>
     </Steps>
 
@@ -504,7 +516,7 @@ Every source is added the same way. Follow these six steps, then open your sourc
   <Accordion title="Fanbasis">
     **What it tracks:** payments, refunds, subscriptions, and disputes from a Fanbasis account. Payment events carry revenue.
 
-    **Refunds:** tracked automatically. Covers both refunds and opened disputes. You do not add a refund source — Cortana matches the refund to the original sale and files it in a companion refunds conversion named after it. See [Refunds](#refunds).
+    **Refunds:** tracked automatically. Covers both refunds and opened disputes. You do not add a refund source: Cortana matches the refund to the original sale and files it in a companion refunds conversion named after it. See [Refunds](#refunds).
 
     **Prerequisite integration:** Fanbasis. If it is not connected you get `Please connect Fanbasis first. Go to Settings → Integrations to connect.`
 
@@ -553,7 +565,7 @@ Every source is added the same way. Follow these six steps, then open your sourc
       </Step>
 
       <Step title="Add Payment Filters if you need them">
-        Optional qualification rules, for example a minimum payment amount. See **Payment Filters** in the settings reference below.
+        Optional rules that a payment must match to count, for example a minimum payment amount. See [Payment Filters](#payment-filters-qualification-rules) in the settings reference below.
       </Step>
 
       <Step title="Save">
@@ -665,15 +677,15 @@ Every source is added the same way. Follow these six steps, then open your sourc
 
         Empty states: *"No forms found in your GoHighLevel account."* or *"All available forms have already been added to this conversion."*
 
-        Each selected form gets its own **Lead Filter** card so you can require, for example, a particular answer before it counts. A blue banner confirms: **"Entries will be synced automatically every 5 minutes."**
+        Each selected form gets its own **Lead filter** card so you can require, for example, a particular answer before it counts (see [Lead Filters](#lead-filters-form-qualification-rules)). A blue banner confirms: **"Entries will be synced automatically every 5 minutes."**
       </Step>
 
       <Step title="Survey Submission: select your surveys">
-        **Select Surveys** (required). Works exactly like forms: search, Select All / Deselect All, per-survey Lead Filter cards, and the same 5-minute sync banner.
+        **Select Surveys** (required). Works exactly like forms: search, Select All / Deselect All, a **Lead filter** card per survey, and the same 5-minute sync banner.
       </Step>
 
       <Step title="Appointment Booked: select calendars">
-        **Select Calendars** (required). It has a search box, **Select All** / **Deselect All** controls, and Prev / Next pagination when you have a lot of calendars. A Lead Filter card for **Appointment Booked** appears once at least one calendar is selected.
+        **Select Calendars** (required). It has a search box, **Select All** / **Deselect All** controls, and Prev / Next pagination when you have a lot of calendars. A **Lead filter** card for **Appointment Booked** appears once at least one calendar is selected.
 
         Empty state: *"No calendars found in your GoHighLevel account."*
       </Step>
@@ -683,11 +695,11 @@ Every source is added the same way. Follow these six steps, then open your sourc
 
         **New** · **Confirmed** · **Showed** · **No Show** · **Cancelled** · **Invalid**
 
-        Pick **Showed** to track attendance rather than bookings.
+        Pick **Showed** to track attendance rather than bookings. A **Lead filter** card for **Appointment Status Update** appears once a calendar is selected.
       </Step>
 
       <Step title="Opportunity Stage Changed: revenue, dedup, pipeline, stages">
-        - **Revenue** is a dropdown with three choices. **Off — count only, no dollar value** records the stage change with no money attached. **Opportunity value** uses the deal's own monetary value. **Custom field — pick a number field** lets you choose a number custom field on the opportunity and uses whatever is typed there. A blank field counts as 0. With either revenue option on, a currency picker appears (defaults to **USD**).
+        - **Revenue** is a dropdown with three choices. **Off** (the option adds *count only, no dollar value*) records the stage change with no money attached. **Opportunity value** uses the deal's own monetary value. **Custom field** (the option adds *pick a number field*) lets you choose a number custom field on the opportunity and uses whatever is typed there. A blank field counts as 0. With either revenue option on, a currency picker appears (defaults to **USD**).
         - **Only one entry per stage, per contact** is a checkbox. When on, a contact moved into the same stage more than once is recorded once. Leave off to log every stage entry separately.
         - **Select Pipeline** (required), then **Select Stages to Track** (required) with Select All / Deselect All.
       </Step>
@@ -708,7 +720,7 @@ Every source is added the same way. Follow these six steps, then open your sourc
     </Frame>
 
     <Tip>
-      Feed two conversions from the same pipeline with two different dollar figures. Point a **Deal closed — new revenue** conversion at a custom field your team fills in on close, and an **LTV Revenue** conversion at the opportunity value. Each conversion reports the number that fits it.
+      Feed two conversions from the same pipeline with two different dollar figures. Point a **Deal closed (new revenue)** conversion at a custom field your team fills in on close, and an **LTV Revenue** conversion at the opportunity value. Each conversion reports the number that fits it.
     </Tip>
 
     <Warning>
@@ -817,7 +829,7 @@ Every source is added the same way. Follow these six steps, then open your sourc
       <Step title="Form Submitted: pick the form">
         **Form**. The placeholder is **"Select which form to track"**. If you have none: *"No forms found. Create a form in HubSpot Marketing → Forms first."*
 
-        Once selected, a **Lead Filter** card appears so you can require specific field answers before a submission counts.
+        Once selected, a **Lead filter** card appears so you can require specific field answers before a submission counts. See [Lead Filters](#lead-filters-form-qualification-rules).
       </Step>
 
       <Step title="Meeting Booked / Meeting Updated: pick meeting links">
@@ -882,6 +894,10 @@ Every source is added the same way. Follow these six steps, then open your sourc
         **Sale** · **No Sale** · **Qualified** · **Unqualified** · **Approved** · **Rejected**
       </Step>
 
+      <Step title="Lead Generated or Appointment Booked: add a lead filter (optional)">
+        These two events show a **Lead filter** card, so only leads whose answers match your rules count. The card notes: *"Questions come from recent iClosed submissions. Values are suggestions. Type your own if it is not listed."* See [Lead Filters](#lead-filters-form-qualification-rules).
+      </Step>
+
       <Step title="Review the summary and save">
         The form shows an **Example** of the chosen event and a **How this works** panel explaining: *"We poll the iClosed API every 5 minutes and pull the latest &lt;event&gt; events into this source. No webhook setup needed."* Click **Submit** and ingestion starts on the next poll cycle.
       </Step>
@@ -893,7 +909,7 @@ Every source is added the same way. Follow these six steps, then open your sourc
   </Accordion>
 
   <Accordion title="Kajabi">
-    **What it tracks:** every successful payment on your Kajabi site, including subscription rebills, as **lifetime value**. Connecting once covers **every offer you have and every offer you create later** — there is nothing to set up per offer.
+    **What it tracks:** every successful payment on your Kajabi site, including subscription rebills, as **lifetime value**. Connecting once covers **every offer you have and every offer you create later**. There is nothing to set up per offer.
 
     **Prerequisite integration:** Kajabi. When not connected the entry is locked.
 
@@ -921,16 +937,16 @@ Every source is added the same way. Follow these six steps, then open your sourc
         </Frame>
       </Step>
 
-      <Step title="Paste 1 — Kajabi site pages">
+      <Step title="Paste 1: Kajabi site pages">
         In Kajabi: **Settings → Site Details → Page Scripts**, into the **Header** box. Save.
 
         This covers your website pages and landing pages. It does **not** cover checkout.
       </Step>
 
-      <Step title="Paste 2 — Kajabi checkout pages (do not skip this)">
+      <Step title="Paste 2: Kajabi checkout pages (do not skip this)">
         In Kajabi: **Settings → Checkout → Checkout Tracking Code**, into the **Header tracking code** box. Save.
 
-        Kajabi treats checkout as a completely separate scripting surface — Page Scripts are **not** inherited there. This second paste is also what enables checkout email capture, which is how a purchase gets matched back to the ad that caused it.
+        Kajabi treats checkout as a completely separate scripting surface: Page Scripts are **not** inherited there. This second paste is also what enables checkout email capture, which is how a purchase gets matched back to the ad that caused it.
       </Step>
 
       <Step title="Create your Kajabi API keys">
@@ -971,13 +987,13 @@ Every source is added the same way. Follow these six steps, then open your sourc
     | **Kajabi Payment** | `all_payments` (All Payments LTV) | LTV | Every successful charge, including the first one and every subscription rebill |
 
     <Warning>
-      **Connecting Kajabi never touches New Deals Closed.** What counts as a *sale* for your business is your decision — which offers count, whether a rebill counts, whether a payment plan counts. Cortana will not answer that for you by connecting an integration. This is the same rule Stripe, Whop, Fanbasis and PayPal follow: connecting wires **All Payments (LTV)** and nothing else.
+      **Connecting Kajabi never touches New Deals Closed.** What counts as a *sale* for your business is your decision: which offers count, whether a rebill counts, whether a payment plan counts. Cortana will not answer that for you by connecting an integration. This is the same rule Stripe, Whop, Fanbasis and PayPal follow: connecting wires **All Payments (LTV)** and nothing else.
 
       Because `payment_succeeded` fires on **every** successful charge including the first, your full Kajabi revenue is captured in LTV from the moment you connect. Nothing is missed.
     </Warning>
 
     <Note>
-      **Want Kajabi sales in New Deals Closed too?** That is a deliberate step, and you can do it yourself. Open the conversion, click **Add Source**, pick **Kajabi**, and choose **Purchase** under *When to track*. Cortana registers the extra site-wide webhook in Kajabi for you — still every offer, still nothing per offer.
+      **Want Kajabi sales in New Deals Closed too?** That is a deliberate step, and you can do it yourself. Open the conversion, click **Add Source**, pick **Kajabi**, and choose **Purchase** under *When to track*. Cortana registers the extra site-wide webhook in Kajabi for you: still every offer, still nothing per offer.
 
       <Frame caption="Kajabi in the Add Source list. It stays locked with a padlock until the integration is connected.">
         <img src="/images/ad-tracking/conversion-sources/kajabi/06-add-source-dropdown.png" alt="Create Conversion Source dialog with the Integration dropdown open, showing Kajabi listed alphabetically between iClosed and Meta Ads with a padlock icon indicating it is not yet connected." />
@@ -1003,10 +1019,10 @@ Every source is added the same way. Follow these six steps, then open your sourc
 
     Cortana's pixel reaches into that component and reads the email **as the buyer types it, before they pay**. That matters twice over:
 
-    - A buyer who lands straight on your checkout from an ad — with no prior opt-in — still gets matched to that ad. Tools that wait for the purchase webhook have nothing to match against and book the sale as organic.
+    - A buyer who lands straight on your checkout from an ad, with no prior opt-in, still gets matched to that ad. Tools that wait for the purchase webhook have nothing to match against and book the sale as organic.
     - A buyer who abandons partway through an upsell sequence is still identified.
 
-    This ships inside the pixel itself. There is no extra snippet to paste and nothing to maintain — it is the reason **Paste 2** above is not optional.
+    This ships inside the pixel itself. There is no extra snippet to paste and nothing to maintain. It is the reason **Paste 2** above is not optional.
 
     ### Disconnecting
 
@@ -1226,8 +1242,10 @@ Every source is added the same way. Follow these six steps, then open your sourc
     </Expandable>
 
     <Frame caption="The Meta Ads source form, with Track all forms on by default.">
-      <img src="/images/ad-tracking/conversion-sources/meta-ads/01-meta-ads-form.png" alt="Create Conversion Source dialog with Integration set to Meta Ads, showing Source set to Lead Form Submissions, the Ad Accounts dropdown, and the Track all forms toggle switched on with a Default badge." />
+      <img src="/images/ad-tracking/conversion-sources/meta-ads/01-meta-ads-form.png" alt="Create Conversion Source dialog with Integration set to Meta Ads, showing Source set to Lead Form Submissions and the Track all forms toggle switched on with a Default badge." />
     </Frame>
+
+    {/* SCREENSHOT TODO: recapture 01-meta-ads-form.png. The form no longer has an Ad Accounts dropdown (conversion-source-dialog.tsx: "No ad-account picker for lead forms"); show Source set to Lead Form Submissions, Track all forms on with its Default badge, and the Lead filter card below. Light mode, fake data. */}
 
     <Steps>
       <Step title="Enable your pages and forms first">
@@ -1250,23 +1268,29 @@ Every source is added the same way. Follow these six steps, then open your sourc
         5. If **Cortana AI** is not listed, click **Assign CRM**, search for it, and hit **Confirm**.
       </Step>
 
-      <Step title="Add the source and pick the Source and Ad Account">
+      <Step title="Add the source and pick the Source">
         Back in your conversion, click **Add Source** and pick **Meta Ads**.
 
         - **Source**: the only option is **Lead Form Submissions**.
-        - **Ad Accounts**. The placeholder is **"Select ad account"**. Only active ad accounts are listed. If Meta is connected but nothing appears you will see **"No ad accounts found"**.
+        - There is no ad account to pick. Leads are counted by the form they came from, whichever ad account ran the ad. If Meta is not connected, the form says *"Connect Meta Ads first (Settings → Integrations), then your lead forms appear here."*
       </Step>
 
       <Step title="Choose Track all forms, or pick specific forms">
         A **Track all forms** panel appears, carrying a **Default** badge, with the toggle **on**. Its description reads: *"All current and future lead forms are tracked. New forms you build in Meta count automatically."*
 
-        Toggle it off to pick individual forms. Forms already claimed by another source are disabled, and if another source already holds the catch-all, **Track all forms** is locked off and you must narrow to specific forms.
+        Toggle it off to pick individual forms. Forms already claimed by another source are disabled, and if another source already holds the catch-all, **Track all forms** is locked off and you must narrow to specific forms. Both locks lift while this source's **Lead filter** is on (next step).
 
         Saving with the toggle off and nothing selected fails with: `Pick at least one form, or turn "Track all forms" back on`.
       </Step>
 
+      <Step title="Add a lead filter (optional)">
+        Under the forms, a **Lead filter** card lets you count only the leads whose answers to your form's questions match your rules. See [Lead Filters](#lead-filters-form-qualification-rules).
+
+        With the filter on, you can pick forms another conversion already counts. That makes this source a filtered copy: your main conversion keeps counting every lead, and this one counts only the leads that pass. Without a filter, a second conversion on the same form is refused with **"This form is already counted by Lead. A second conversion on it needs a lead filter."** (with your own conversion's name). See [Tiered conversions](/4-conversion-setup#tiered-conversions-count-every-lead-and-your-qualified-leads).
+      </Step>
+
       <Step title="Save">
-        Click **Submit**. Every lead on the selected forms now flows into this conversion.
+        Click **Submit**. Every lead on the selected forms now flows into this conversion, or every lead that passes its filter.
       </Step>
     </Steps>
 
@@ -1465,7 +1489,7 @@ Every source is added the same way. Follow these six steps, then open your sourc
   <Accordion title="Shopier">
     **What it tracks:** paid Shopier orders, with revenue.
 
-    **Refunds:** tracked automatically. Picked up by the regular sync, plus a daily sweep that catches refunds issued long after the order. You do not add a refund source — Cortana matches the refund to the original sale and files it in a companion refunds conversion named after it. See [Refunds](#refunds).
+    **Refunds:** tracked automatically. Picked up by the regular sync, plus a daily sweep that catches refunds issued long after the order. You do not add a refund source: Cortana matches the refund to the original sale and files it in a companion refunds conversion named after it. See [Refunds](#refunds).
 
     **Prerequisite integration:** Shopier. If it is not connected: `Please connect Shopier first. Go to Settings → Integrations to connect.`
 
@@ -2000,7 +2024,7 @@ Every source is added the same way. Follow these six steps, then open your sourc
   <Accordion title="Stripe">
     **What it tracks:** payments, checkouts, subscriptions, refunds, and recovery events from a Stripe account. Payment events carry revenue.
 
-    **Refunds:** tracked automatically. Works on any charge, including subscription payments, and works even if you have not added a separate refund event as a source. You do not add a refund source — Cortana matches the refund to the original sale and files it in a companion refunds conversion named after it. See [Refunds](#refunds).
+    **Refunds:** tracked automatically. Works on any charge, including subscription payments, and works even if you have not added a separate refund event as a source. You do not add a refund source: Cortana matches the refund to the original sale and files it in a companion refunds conversion named after it. See [Refunds](#refunds).
 
     **Prerequisite integration:** Stripe. If no Stripe account is connected: `Please connect Stripe first. Go to Settings → Integrations to connect.`
 
@@ -2087,7 +2111,7 @@ Every source is added the same way. Follow these six steps, then open your sourc
       </Step>
 
       <Step title="Add Lead Filters per form (optional)">
-        Each selected form gets its own **Lead Filter** card. Use it to require particular answers before a submission counts, for example only counting people who selected a certain budget.
+        Each selected form gets its own **Lead filter** card. Use it to require particular answers before a submission counts, for example only counting people who selected a certain budget. See [Lead Filters](#lead-filters-form-qualification-rules).
       </Step>
 
       <Step title="Save">
@@ -2123,7 +2147,7 @@ Every source is added the same way. Follow these six steps, then open your sourc
       </Step>
 
       <Step title="Add Lead Filters per form (optional)">
-        Each selected form gets its own **Lead Filter** card for qualification rules.
+        Each selected form gets its own **Lead filter** card, so only submissions whose answers match your rules count. See [Lead Filters](#lead-filters-form-qualification-rules).
       </Step>
 
       <Step title="Save">
@@ -2176,8 +2200,9 @@ Every source is added the same way. Follow these six steps, then open your sourc
         - **Attribution** (advanced). If the page has no pixel you can pass attribution through the webhook: ad ID, campaign, medium, UTM source, `fbclid`, `gclid`. Prefer **ad ID**, since it is unique. Ad *names* are frequently duplicated across campaigns, and when several ads share a name we can only match the first one we find, which misattributes the rest.
         - **Contact custom fields**: company, address, city, and your own custom fields. Worth mapping if you use AI Agents and want the agent to know this context.
         - **Lead expense** is an optional per-lead cost. It shows in the Attribution Table as spend, so 10 leads at 50 each shows as 500 in spend.
+        - **Payload filters** (optional, below the fields). Switch on **Enable payload filter** to count a post only when its payload matches your rules, for example only approved payments. Type the path of a payload field (placeholder **Payload path**), pick a comparison and a value. Each rule is tried on the sample payload as you type: *"The sample matches this rule"* or *"The sample does not match this rule"*, and a path that is missing says *"Not in this sample payload, so it reads as empty here."* A post that does not match is still received, but creates no contact or conversion and is never sent to ad platforms. The rules work like a lead filter, groups included: see [Lead Filters](#lead-filters-form-qualification-rules).
 
-        Click **Save Mapping** when done.
+        Click **Save Mappings** when done (**Update Mappings** when you edit an existing mapping).
       </Step>
 
       <Step title="Check the logs">
@@ -2199,7 +2224,7 @@ Every source is added the same way. Follow these six steps, then open your sourc
   <Accordion title="Whop">
     **What it tracks:** payments and membership lifecycle events from a Whop company. Payment events carry revenue.
 
-    **Refunds:** tracked automatically. Only refunds Whop reports as completed are booked. You do not add a refund source — Cortana matches the refund to the original sale and files it in a companion refunds conversion named after it. See [Refunds](#refunds).
+    **Refunds:** tracked automatically. Only refunds Whop reports as completed are booked. You do not add a refund source: Cortana matches the refund to the original sale and files it in a companion refunds conversion named after it. See [Refunds](#refunds).
 
     **Prerequisite integration:** Whop. When not connected: `Please connect Whop first. Go to Dashboard → Integrations to connect.`
 
@@ -2258,7 +2283,7 @@ Every source is added the same way. Follow these six steps, then open your sourc
   <Accordion title="WooCommerce">
     **What it tracks:** the WooCommerce order lifecycle plus client-side cart and checkout signals. Order events carry revenue.
 
-    **Refunds:** tracked automatically. Refunds recorded against an order are picked up, including partial ones. You do not add a refund source — Cortana matches the refund to the original sale and files it in a companion refunds conversion named after it. See [Refunds](#refunds).
+    **Refunds:** tracked automatically. Refunds recorded against an order are picked up, including partial ones. You do not add a refund source: Cortana matches the refund to the original sale and files it in a companion refunds conversion named after it. See [Refunds](#refunds).
 
     **Prerequisite integration:** WooCommerce. When not connected: `Please connect WooCommerce first. Go to Settings → Integrations to connect.`
 
@@ -2506,7 +2531,7 @@ These settings appear on more than one source. Where a source uses one, its acco
 - **Caveat:** CRM opportunity values are one-time cash collected, not recurring revenue. For subscription revenue use Stripe or Whop as the source of truth.
 
 <Tip>
-  The custom field option is how one CRM feeds two different numbers. A common setup is a **Deal closed — new revenue** conversion that reads a custom field your closers fill in with the cash collected, alongside an **LTV Revenue** conversion on the same pipeline that reads the opportunity value. Works the same in GoHighLevel, HubSpot, Close.io, and Cortana CRM.
+  The custom field option is how one CRM feeds two different numbers. A common setup is a **Deal closed (new revenue)** conversion that reads a custom field your closers fill in with the cash collected, alongside an **LTV Revenue** conversion on the same pipeline that reads the opportunity value. Works the same in GoHighLevel, HubSpot, Close.io, and Cortana CRM.
 </Tip>
 
 ### Which revenue should this track?
@@ -2533,25 +2558,176 @@ These settings appear on more than one source. Where a source uses one, its acco
 
 ### Payment Filters (qualification rules)
 
-- **What it does:** only counts a payment when it matches your rules. Available on Stripe, PayPal, Whop, and Fanbasis. The section explains itself in the dialog: *"Only count payments matching these rules, e.g. only payments of $100 or more. Filtered payments are still recorded and count toward LTV, but won't create this conversion event or be sent to ad platforms."*
+{/* last-verified: 2026-11-25 against the app source (sprint lead-filter-groups). Paths: src/components/tracking/payment-qualification-rules-section.tsx, src/components/tracking/lead-filter/lead-filter-editor.tsx, src/lib/lead-filter-check/readers/index.ts (Whop, Fanbasis, PayPal readers; no Stripe reader). */}
+
+- **What it does:** only counts a payment when it matches your rules. Available on Stripe, PayPal, Whop, and Fanbasis. The **Payment filters** section explains itself in the dialog: *"Only count payments matching these rules, for example payments of $100 or more. Filtered payments are still recorded and count toward LTV, but won't create this conversion event or be sent to ad platforms."*
 - **Fields you can build rules on:** **Payment Amount** (number), **Currency**, **Customer Email**, **Product Name**, and **Billing Reason**. PayPal offers the first four; it has no **Billing Reason** field.
-- **Options:** an **Enable Payment Filter** toggle (*"Only matching payments will create conversions"*), and a **Payment must match** selector offering **ALL rules** (AND) or **ANY rule** (OR).
+- **Options:** an **Enable payment filter** switch (*"Only matching payments will create conversions"*), then **Payment must match** with two buttons, **all** and **any**, followed by **of these**. Rules can sit in groups, built exactly like a lead filter's: see **Build rules and groups** under [Lead Filters](#lead-filters-form-qualification-rules). **is one of** is not offered on payment fields.
 - **Default:** disabled.
 - **Recommendation:** the most useful rule by far is a minimum **Payment Amount**, to exclude small test charges or trial authorisations from a revenue conversion.
-- **Caveat:** a filtered-out payment is not deleted. It still counts toward lifetime value, it just does not fire this conversion or get sent to Meta, Google, or TikTok. Rules are also evaluated when the payment arrives, so turning them on does not retroactively remove conversions that already counted.
+- **Caveat:** a filtered-out payment is not deleted. It still counts toward lifetime value, it just does not fire this conversion or get sent to Meta, Google, or TikTok.
+- **Changing it later:** changing the rules on a source that already has payments runs the same check as a lead filter. Cortana counts the past payments that no longer match and asks whether to keep or remove them (see **Changing a filter on a source that already has leads** under [Lead Filters](#lead-filters-form-qualification-rules)). Whop, Fanbasis and PayPal payments are checked. Stripe payments cannot be checked yet, so they always stay. Removing a sale removes its refund with it.
 
 ### Lead Filters (form qualification rules)
 
-- **What it does:** only counts a form or survey submission when the answers match your rules. Available per form on Typeform, Tally Forms, HubSpot forms, and GoHighLevel forms, surveys, and appointments.
-- **Default:** none, so every submission counts.
-- **Recommendation:** use it to build a *Qualified Lead* conversion separate from raw *Lead* volume, for example only counting people who picked a budget above a threshold.
-- **Caveat:** rules run against the field catalog of that specific form. If you change the form's questions, revisit the rules.
+{/* last-verified: 2026-11-25 against the app source (sprint lead-filter-groups, decisions L1 to L17, L18, D14). Release tree claude/lead-filter-release-2 at 22a9c9c3fc; editor review fixes read in claude/lead-filter-editor-b at da101384c4 (the and/or flip, the after-save removal words: filter-change-dialog.tsx, filter-remove-retry.ts, lead-filter-joiners.ts). Paths: src/components/tracking/lead-filter/lead-filter-editor.tsx, lead-filter-editor-content.tsx, lead-filter-group-block.tsx, lead-filter-controls.tsx, lead-filter-rule-row.tsx, lead-filter-pickers.tsx, lead-filter-model.ts, lead-filter-joiners.ts, form-lead-filter.tsx, use-source-lead-filter.tsx, use-editor-hydration.ts, filter-preview-line.tsx, use-filter-preview.ts, filter-change-dialog.tsx, use-filter-change-save.ts, filter-check-client.ts; src/components/tracking/lead-filter-card.tsx, form-qualification-rules-section.tsx, conversion-source-dialog.tsx (the mounts), deleted-audit-log-tab.tsx; src/lib/qualification/qualification-rules-schema.ts, qualification-engine.ts; src/lib/lead-filter-check/types.ts, readers/index.ts, remove-flagged.ts; src/app/api/tracking/conversion-sources/[sourceId]/filter-check/route.ts. */}
+
+- **What it does:** counts a lead only when its answers match your rules. A lead that does not match creates no conversion on this source and is never sent to your ad platforms from it.
+- **Where it works:** a **Lead filter** card appears on these sources once you pick what they track:
+  - **Meta Ads** lead forms
+  - **Calendly** and **Cal.com** bookings, on the calendars or meeting links you tick
+  - **Typeform** and **Tally Forms**, one card per form
+  - **HubSpot** forms (**Form Submitted**)
+  - **GoHighLevel** forms, surveys, and appointments (**Appointment Booked** and **Appointment Status Changed**)
+  - **Cortana Forms** and **Cortana Calendars**
+  - **iClosed** (**Lead Generated** and **Appointment Booked**)
+  - The same rules editor runs the **Payment filters** of Stripe, PayPal, Whop, and Fanbasis (see [Payment Filters](#payment-filters-qualification-rules)) and the **Payload filters** of a Webhook source's field mapping (see the Webhook accordion above).
+- **Default:** off, so every lead counts. The card reads *"Every lead counts. Turn on to choose which leads count."* Switched on, it reads *"Only matching leads create conversions."*
+- **How rules read:** each rule is a question, a comparison and an answer, for example **Budget** **is** **$10,000+**. The line **Match all of these** at the top has two buttons, **all** and **any**. Rules can sit in groups with their own **all** or **any**, two levels at most. One rule can hold several answers with **is one of**.
+- **Recommendation:** keep one conversion that counts every lead, and add a second one with a lead filter for the leads you care about (*Lead* beside *Qualified lead*). Your reports then show cost per lead and cost per qualified lead side by side. See [Tiered conversions](/4-conversion-setup#tiered-conversions-count-every-lead-and-your-qualified-leads).
+- **Caveat:** a filter changes what counts from the moment you save it. Changing it on a source that already has leads first counts the past leads that would no longer match, and asks you. Loosening a filter never adds back leads the old one left out: to bring those in, run a [history import](/4-backfill-history#import-the-history-of-a-filtered-conversion) where the source can be imported.
+
+<Frame caption="A lead filter with a group: budget is one of two ranges, and the country is either of two. The line at the bottom counts the newest 250 leads.">
+  <img src="/images/conversion-tracking/lead-filters/01-filter-groups-preview.png" alt="The Lead filter card for the Discovery call form, switched on, reading Only matching leads create conversions. Match is set to all of these. The first rule reads Budget is one of $20,000–$40,000 and $40,000–$60,000. Below an and joiner, a group set to any of holds two rules joined by or: Country is United Kingdom, and Country is Ireland, with Ungroup and Add rule. Add rule and Add group sit under the list, and the bottom line reads 38 of your last 250 leads match. 12 couldn't be checked." />
+</Frame>
+
+<AccordionGroup>
+  <Accordion title="Build rules and groups">
+    1. Open the source: **Add Source** for a new one, or the edit icon on its row in the conversion's **Sources** table for an existing one. Find the **Lead filter** card and switch it on.
+    2. Click **Add rule**. Pick the question (**Pick a question**), then how to compare it (**Pick a comparison**), then the answer (**Pick a value**). For a typed answer, type it into the box.
+    3. At the top, choose **Match** **all** **of these** (a lead must pass every rule and group) or **any** (one is enough).
+    4. To mix the two, use a group. **Add group** adds a group at the bottom with one empty rule. **Group** on a top-level rule puts it in a group with the rule below it (or with a new empty rule when no rule follows it). Each group has its own **all** or **any** switch and reads **all of:** or **any of:**. A new group starts on the opposite of the top switch, which is usually what you want.
+    5. The small **and** or **or** between two items is a button. Click it to flip that one word. The list splits there: the items on each side fold into their own groups, joined by the new word. With three rules under **all**, clicking the second **and** to make it **or** gives *(rule 1 and rule 2) or rule 3*. Click the same word again to undo it: the rules are flat again. Where a flip would need a group inside a group, the word stays plain text, and hovering it says *"This change would need a group inside a group."*
+    6. **Ungroup** moves a group's rules back to the top level. The **x** on a group asks *"Remove this group and its 2 rules?"* with **Cancel** and **Remove group**. The **x** on a rule removes that rule.
+    7. Click the source's **Save** (or **Submit** on a new source).
+
+    **Example.** Count leads with a big budget who are in the UK or Ireland: **Match all of these**, rule **Budget** **is one of** *$20,000–$40,000*, *$40,000–$60,000*, then a group set to **any of:** with **Country** **is** *UK* and **Country** **is** *Ireland*.
+
+    With no rules, the card says *"No rules yet. Every lead counts."* Groups hold rules only, never another group.
+
+    <Frame caption="The and between the budget rule and the group is a button. Click it to flip that one word.">
+      <img src="/images/conversion-tracking/lead-filters/03-joiner-flip.png" alt="The same Lead filter card with the and joiner between the Budget rule and the any of Country group highlighted on hover, showing its two-way arrows. The or joiner inside the group also shows the arrows." />
+    </Frame>
+  </Accordion>
+
+  <Accordion title="Several answers in one rule (is one of)">
+    On a question with set answers, such as a dropdown, multiple choice, or checkboxes, the comparison list adds **is one of** and **is not one of**. Pick one, open the answer list, and tick every answer that counts. When the question has more than 8 answers, the list has a **Search answers** box at the top.
+
+    For example, **Budget** **is one of** *$10,000–$20,000*, *$20,000–$40,000*, *$40,000–$60,000* is one rule instead of three.
+
+    - **is one of** counts the lead when its answer is any of the ticked answers. On a question where people can tick several answers, the lead counts when any one of their picks is ticked in your rule. Capital letters do not matter.
+    - **is not one of** counts the lead when none of its answers is ticked, and also when the lead left the question blank.
+    - An answer that is no longer on the form stays ticked and is marked **No longer an option** until you untick it.
+    - **Limits:** 100 answers in one rule, and 500 characters per answer. Past that, saving says *"A rule can hold at most 100 answers."* or *"An answer can be at most 500 characters."*
+    - Saving a rule with nothing ticked says *"Pick at least one answer."*
+    - Not offered on typed questions (free text and numbers), or in payment and payload filters. A **Tags** rule offers exactly **has tag**, **doesn't have tag**, **has no tags** and **has any tag**, in every window where you edit it, never **is one of** (see [Lead Filters by tag](#lead-filters-by-tag)).
+
+    {/* last-verified: 2026-11-25, Tags comparisons: src/components/tracking/form-qualification-rules-section.tsx passes operatorsForFormRule and the tag labels (claude/lead-filter-editor 5b54e0c83a), as form-lead-filter.tsx and lead-filter-card.tsx do; lead-filter-model.ts operatorsForFormRule drops the several-answer tests for a Tags rule. */}
+
+    <Frame caption="The answer list of an is one of rule. Every ticked answer counts.">
+      <img src="/images/conversion-tracking/lead-filters/02-is-one-of-answers.png" alt="The Budget rule set to is one of with its answer list open under it: $10,000–$20,000 unticked, $20,000–$40,000 ticked, $40,000–$60,000 ticked, and $60,000+ unticked. The two ticked ranges show as chips in the rule." />
+    </Frame>
+  </Accordion>
+
+  <Accordion title="The preview line: 38 of your last 250 leads match">
+    When you edit the filter of a source you already saved, a line under the rules counts how many of that source's newest leads your rules let through, as you build them. For example: *"38 of your last 250 leads match."*
+
+    - **It counts the newest 250 leads** of the source, or all of them when it has fewer (*"12 of your last 12 leads match."*).
+    - It updates about a second after you stop changing the rules. While it counts it says *"Checking your last 250 leads…"*.
+    - When some of those leads cannot be read again, it adds *"9 couldn't be checked."* See **Leads that couldn't be checked**.
+    - It only counts. Nothing is saved or removed until you click **Save**.
+
+    **When it does not show:** while you add a new source (it has no leads yet), on a source with no leads, while the filter is off or has no rules, while a rule is missing its question or answer, and while the questions are loading or could not be loaded.
+  </Accordion>
+
+  <Accordion title="Changing a filter on a source that already has leads">
+    Before a changed filter is saved, Cortana checks the source's past leads against it, so you decide what happens to the ones that would no longer count. This works on every source with a lead filter, and on payment and payload filters too.
+
+    1. Change the rules in the source's edit window and click **Save**.
+    2. Cortana reads the past leads: *"Checking your past leads…"*. **Cancel** stops here, and nothing is saved.
+    3. **Every past lead still matches:** the filter is saved and the card says *"Saved. All your past leads still match."*
+    4. **Some no longer match:** a window says, for example, *"12 past leads don't match your new filter"* and *"They counted under your old rules. Choose what happens to them."* Pick one:
+       - **Keep them** (already picked): *"Past numbers stay as they are. The new filter counts new leads from now on."* The button reads **Save and keep them**.
+       - **Remove them**: *"Your past numbers drop by 12. You can see each one in the conversion's history log."* The button reads **Save and remove 12**.
+       - **Cancel** closes the window without saving.
+    5. Removed leads are listed on the **Deleted Audit Log** sub-tab of **Conversion Setup**, with the reason **Lead filter changed**. You can restore any of them there. A removed sale takes its refund with it.
+
+    Only leads Cortana could read and judge are ever removed. Leads it could not check always stay, and the window says how many (see **Leads that couldn't be checked**).
+
+    If the check cannot finish before anything is saved, the window reads *"Your changes need attention"* with the reason, for example *"This check expired. Check your past leads again."* Click **Back to filter** and **Save** again.
+
+    **If the filter saved but removing the past leads stopped** (the check expired, or the removal stopped partway), the window stays open and reads *"Your past leads weren't removed"*, with *"Your filter was saved."* and the reason. Your new filter is already counting new leads. Two buttons:
+
+    - **Check again and remove** checks your past leads again against the filter the source now holds, then removes the ones that no longer match. If that count is higher than the one you agreed to, the window shows the new count and asks again (*"Your new filter is saved. They counted under your old rules. Choose what happens to them."*): pick **Remove them** and click **Remove 15** (with your count), or pick **Keep them** and click **Keep them**. When it is done, the card says *"Saved. Past leads that don't match your new filter were removed from your numbers."*
+    - **Close** leaves the past leads where they are. The card says *"Saved. Past leads that don't match your new filter still count."* You can remove them later by changing the filter again.
+
+    <Frame caption="Saving a changed filter on a source with past leads. Keep them is picked for you; leads that couldn't be checked stay either way.">
+      <img src="/images/conversion-tracking/lead-filters/04-past-leads-dialog.png" alt="A window titled 12 past leads don't match your new filter, with the line They counted under your old rules. Choose what happens to them. Two choices: Remove them, Your past numbers drop by 12. You can see each one in the conversion's history log; and Keep them, selected, Past numbers stay as they are. The new filter counts new leads from now on. Under them: 3 leads couldn't be checked (GoHighLevel didn't answer). They stay either way. Buttons Cancel and Save and keep them." />
+    </Frame>
+  </Accordion>
+
+  <Accordion title="Leads that couldn't be checked">
+    Some past leads cannot be judged again, because their answers are not there to read. They are never removed. The window, and the card after you save, say how many and the most common reason, for example *"3 leads couldn't be checked (Typeform didn't answer). They stay either way."* When there are several kinds of reason it adds *"and 2 more"*.
+
+    | The words in brackets | What it means |
+    | --- | --- |
+    | **this source can't be checked yet** | Cortana cannot read past answers for this kind of source yet. Today that is Stripe, iClosed, and GoHighLevel appointments. Every lead stays. |
+    | **their answers weren't kept** | The lead arrived without the answers Cortana needs to judge it again, for example an older lead, or a door that sends no answers. |
+    | **the lead is gone** | The Cortana lead behind the conversion was deleted. |
+    | **Typeform didn't answer** (your tool's name) | The tool that holds the answers did not answer, or the connection cannot read them. Try again later. On a Webhook source it reads **This source didn't answer**. |
+    | **Typeform no longer has them** (your tool's name) | The tool answered, but no longer holds that submission. |
+    | **their tags live in GoHighLevel** | The rule reads tags, and GoHighLevel tags are read one contact at a time, which the check never does. |
+    | **their score couldn't be worked out** | The lead score could not be calculated. |
+    | **too old to read again** | The answers are only kept for a while, and that time has passed. Meta keeps a lead's answers 90 days; Cortana keeps a webhook post 120 days. |
+    | **their post can't be opened any more** | The webhook post arrived encrypted, and the source's key can no longer open it. |
+    | **their answers couldn't be read** | Any other reason. |
+
+    When nothing would be removed but some leads could not be checked, the filter saves and the card says, for example, *"Saved. 40 leads couldn't be checked (this source can't be checked yet). They stay either way."*
+  </Accordion>
+
+  <Accordion title="1 rule was removed because its question is no longer on the form">
+    When a filter opens, Cortana compares each rule with the form's current questions. A rule on a question that is no longer on the form is taken out, and the card says *"1 rule was removed because its question is no longer on the form. Save to confirm."* (or *"3 rules were removed because their questions are no longer on the form. Save to confirm."*).
+
+    - **Why:** under **all**, a rule on a question nobody can answer any more would turn every lead away.
+    - **Nothing changes until you click Save.** Close the window without saving and the stored filter stays exactly as it was, missing question included. Save to make the change.
+    - **If Cortana couldn't read every question, it keeps your rules.** When the questions could not load at all, the card says *"We couldn't load this form's questions."* with **Try again**. When only some loaded, it says *"Some questions could not be loaded. Your saved rules are kept."* Nothing is removed either way.
+    - **By source:**
+      - **Tally**, **Cortana Forms**, **Cortana Calendars**, **Meta lead forms**, **Calendly** and **Cal.com** remove a rule whose question is gone.
+      - **GoHighLevel** removes one only when Cortana read every question of the form, survey or calendar; otherwise it keeps every saved rule, with *"Some questions could not be loaded. Your saved rules are kept."* A rule on a detail GoHighLevel only sends with a submission, such as the name, the phone or a survey's disqualified answer, is never removed.
+      - **Typeform** removes one too, except on a form with a question group, a matrix or a contact block: Cortana can't read every question inside those, so it keeps every rule there. A rule on the **Score** variable is never removed.
+      - **HubSpot** never removes one: a HubSpot field can open follow-up questions Cortana can't read.
+      - **iClosed**, payment filters and payload filters never remove a rule this way.
+    - On a new source in the **Add Source** window, the same rules apply. {/* TODO: verify: the removal notice on the create flows is still settling (sprint lead-filter-groups U5). */}
+
+    {/* last-verified: 2026-11-25 against claude/lead-filter-editor (5b54e0c83a, merged 20b65e8427): src/components/tracking/lead-filter/field-list-coverage.ts (fieldListCoverage, keysNoListProves), form-qualification-rules-section.tsx, typeform-source-edit-dialog.tsx, tally-source-edit-dialog.tsx, lead-filter/use-source-questions.ts, lead-filter/form-lead-filter.tsx, lead-filter/questions-partial-notice.tsx, lead-filter-card.tsx, lead-filter/use-form-field-lists.ts. */}
+  </Accordion>
+
+  <Accordion title="Messages you may see when you save a filter">
+    | Message | What to do |
+    | --- | --- |
+    | **Pick a question** (under a rule) | Pick the question the rule tests. |
+    | **Pick a value** (under a rule) | Pick or type the answer. |
+    | *"Pick a question for every rule."* | A rule has no question yet. Pick one, or remove the rule. |
+    | *"Pick at least one answer."* | An **is one of** or **is not one of** rule has nothing ticked. |
+    | *"Every filter rule needs a value to compare with. Only "is empty" and "is not empty" work without one."* | Fill in the answer, or switch the comparison to **is empty** or **is not empty**. |
+    | *"A rule can hold at most 100 answers."* | Untick some answers, or split them over two rules inside an **any of:** group. |
+    | *"An answer can be at most 500 characters."* | Shorten the answer. |
+    | *"A rule group can hold rules only, not another group."* | A filter sent through the API held a group inside a group. Put those rules straight into the outer group. |
+    | *"Add a rule, or turn off the lead filter to count every lead."* | On Meta, Calendly, and Cal.com, a switched-on filter needs at least one rule. |
+    | *"Wait for the questions to load."* | Wait a moment and click **Save** again. |
+    | *"The questions could not be loaded. Try again before saving the lead filter."* | Click **Try again** on the card, then **Save**. |
+  </Accordion>
+
+  <Accordion title="Bring in past leads that pass a new filter">
+    A new filtered conversion starts at zero. On every source that can be imported (Meta lead forms, Calendly, Cal.com, Typeform, Tally, HubSpot forms, GoHighLevel, iClosed, Cortana Forms and Cortana Calendars), a history import fills it with the past leads that pass its filter, at their original dates and with their original attribution. See [Import the history of a filtered conversion](/4-backfill-history#import-the-history-of-a-filtered-conversion).
+  </Accordion>
+</AccordionGroup>
 
 ### Lead Filters by tag
 
 {/* last-verified: 2026-11-20 against the app source (sprint lead-filter-tags). Screens: the Lead Filter card of a GoHighLevel form, survey or appointment source and of a Cortana Forms or Cortana Calendars source. Screenshots: TODO. */}
 
-- **What it does:** counts a lead only when its contact has, or does not have, a tag. In a **Lead Filter** card, pick **Tags** as the field. It is the first field in the list.
+- **What it does:** counts a lead only when its contact has, or does not have, a tag. In a **Lead filter** card, pick **Tags** as the field. It is the first field in the list. A tag rule works inside groups like any other rule (see [Lead Filters](#lead-filters-form-qualification-rules)).
 - **Available on:** GoHighLevel forms, surveys, and appointments, and Cortana Forms and Cortana Calendars sources.
 - **Options:** **has tag**, **doesn't have tag**, **has any tag**, and **has no tags**. For the first two, pick the tag from the list. The list holds your GoHighLevel tags and your Cortana tags. With more than 1,000 tags you can also type the tag name.
 - **Which tags are checked:** the contact's tags in GoHighLevel at that moment, together with the tags the contact has in Cortana. Tag names match whatever the capitalisation.
@@ -2744,13 +2920,53 @@ These settings appear on more than one source. Where a source uses one, its acco
 
 <AccordionGroup>
   <Accordion title="Can I only count leads that have a certain tag, like Qualified?">
-    Yes. Open the source, find its **Lead Filter** card, pick **Tags** as the field, choose **has tag**, and pick the tag. Use **doesn't have tag** to leave out leads with a tag such as Unqualified. It works on GoHighLevel forms, surveys, and appointments, and on Cortana Forms and Cortana Calendars sources.
+    Yes. Open the source, find its **Lead filter** card, pick **Tags** as the field, choose **has tag**, and pick the tag. Use **doesn't have tag** to leave out leads with a tag such as Unqualified. It works on GoHighLevel forms, surveys, and appointments, and on Cortana Forms and Cortana Calendars sources.
 
     Cortana checks the contact's tags the moment the lead comes in and again for 2 minutes. If your GoHighLevel workflow adds the tag after a wait step, the lead may not be counted. Add the tag as the first step of the workflow.
   </Accordion>
 
   <Accordion title="My lead has the Qualified tag but did not count. Why?">
-    The tag was most likely added more than 2 minutes after the lead came in. A **Lead Filter** on **Tags** checks the contact when the lead arrives and again for 2 minutes. Open your automation and move the step that adds the tag to the very start, with no wait before it. New leads will then count.
+    The tag was most likely added more than 2 minutes after the lead came in. A **Lead filter** on **Tags** checks the contact when the lead arrives and again for 2 minutes. Open your automation and move the step that adds the tag to the very start, with no wait before it. New leads will then count.
+  </Accordion>
+
+  <Accordion title="Why did my qualified lead count drop after I changed the filter?">
+    When the filter was saved, someone chose **Remove them** in the window that said, for example, *"12 past leads don't match your new filter"*. Those past leads came out of your numbers, so the count dropped by that many.
+
+    Each removed lead is on the **Deleted Audit Log** sub-tab of **Conversion Setup**, with the reason **Lead filter changed**, and you can restore it there.
+
+    If **Keep them** was chosen, past numbers did not change. A lower count from then on means fewer new leads pass the stricter rules. Before you save a change, the line under the rules (*"38 of your last 250 leads match."*) shows how many of your newest leads would still count. See [Lead Filters](#lead-filters-form-qualification-rules).
+  </Accordion>
+
+  <Accordion title="Can one rule match several budget ranges?">
+    Yes. Pick the budget question, choose **is one of**, and tick every range that counts, for example *$10,000–$20,000*, *$20,000–$40,000* and *$40,000–$60,000*. A lead counts when its answer is any one of them. One rule holds up to 100 answers.
+
+    **is one of** shows on questions with set answers (a dropdown, multiple choice, or checkboxes). On a question where people tick several answers, the lead counts when any of their picks is in your list.
+  </Accordion>
+
+  <Accordion title="I don't see 'is one of' for my question">
+    **is one of** and **is not one of** only show on questions with set answers: a dropdown, multiple choice, or checkboxes. A typed answer (free text or a number) has no list to pick from, so use **is**, **contains**, or a number comparison instead. Tag rules and payment filters do not offer it either.
+
+    If the question does have set answers and the list is still missing, wait for *"Updating questions..."* to finish, or click **Try again** if the card says *"We couldn't load this form's questions."*
+  </Accordion>
+
+  <Accordion title="How do I count leads with a big budget who are from the UK or Ireland?">
+    Use a group. In the **Lead filter** card, keep **Match all of these** at the top and add the budget rule. Then click **Add group**: the new group reads **any of:**. Inside it, add **Country** **is** *UK*, then **Add rule** for **Country** **is** *Ireland*. A lead now counts when its budget matches and its country is either one.
+
+    You can also write the rules in a row and click the small **and** or **or** between two of them to flip it. The rules on each side fold into their own groups.
+  </Accordion>
+
+  <Accordion title="It says some leads couldn't be checked. Will they be removed?">
+    No. A lead Cortana cannot judge again always stays, whatever you choose. The words in brackets say why, for example *"(Typeform didn't answer)"* or *"(this source can't be checked yet)"*. Stripe, iClosed, and GoHighLevel appointment sources cannot be checked yet, so all their past leads stay. See **Leads that couldn't be checked** under [Lead Filters](#lead-filters-form-qualification-rules).
+  </Accordion>
+
+  <Accordion title="A rule disappeared from my lead filter when I opened it">
+    Its question is no longer on the form, so Cortana took the rule out and said *"1 rule was removed because its question is no longer on the form. Save to confirm."* Under **all**, a rule nobody can answer would turn every lead away.
+
+    Nothing has changed yet. Click **Save** to keep the filter without that rule, or close the window to leave the stored filter as it was. If you replaced the question with a new one, add a rule on the new question before you save.
+  </Accordion>
+
+  <Accordion title="Can I count all my leads and my qualified leads from the same form?">
+    Yes. Keep your main conversion with no filter, and add a second conversion on the same form, booking calendar, or meeting link with a lead filter on. On Meta lead forms and Cal.com, the second conversion needs its filter before it can count the same leads. The fastest way is **Duplicate conversion**. See [Tiered conversions](/4-conversion-setup#tiered-conversions-count-every-lead-and-your-qualified-leads).
   </Accordion>
 
   <Accordion title="How do I track Stripe payments?">
