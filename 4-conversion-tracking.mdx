@@ -1,6 +1,6 @@
 ---
 title: "4.2) Conversion Sources"
-description: "Add conversion sources to track sales and leads in Cortana, gross or after processor fees. Connect Stripe, PayPal, Shopify, Kajabi, GoHighLevel, Meta Ads, LinkedIn Ads, Meta and Instagram DMs, Calendly, CallRail, webhooks, pixels, CSV and 14 other source types to any conversion."
+description: "Add conversion sources to track sales and leads in Cortana, gross or after processor fees. Connect Stripe, PayPal, Shopify, Kajabi, NMI, GoHighLevel, Meta Ads, LinkedIn Ads, Meta and Instagram DMs, Calendly, CallRail, webhooks, pixels, CSV and 14 other source types to any conversion."
 ---
 
 ## <u>Conversion Sources</u>
@@ -1297,6 +1297,51 @@ Every source is added the same way. Follow these six steps, then open your sourc
     </Warning>
   </Accordion>
 
+  <Accordion title="NMI">
+    **What it tracks:** payments, subscriptions, refunds and voids from a connected NMI account. Payment events carry revenue.
+
+    **Refunds:** tracked automatically. A refund comes off its sale, in a refunds conversion named after it. A voided sale ends at $0. See [Refunds](#refunds).
+
+    **Prerequisite integration:** NMI. If no NMI account is connected: `Please connect NMI first. Go to Settings → Integrations to connect.` If the setup is not finished, the row says **Finish connecting**.
+
+    The NMI questions open right here, in **Create Conversion Source**. The full guide is [14) NMI payments](/15-nmi).
+
+    <Frame caption="The NMI source: account, then event.">
+      <img className="block dark:hidden" src="/images/ad-tracking/nmi/10-source-ready.png" alt="Create Conversion Source with Integration set to NMI. 1 marks the NMI account. 2 marks the event, Payment Succeeded. 3 marks the Submit button." />
+      <img className="hidden dark:block" src="/images/ad-tracking/nmi/10-source-ready-dark.png" alt="Create Conversion Source with Integration set to NMI. 1 marks the NMI account. 2 marks the event, Payment Succeeded. 3 marks the Submit button." />
+    </Frame>
+
+    <Steps>
+      <Step title="Check the NMI account">
+        **NMI account**. With one account, Cortana shows it. With more, pick one.
+      </Step>
+
+      <Step title="Pick the Event">
+        **Event** (required). The placeholder is **Pick an event**. Type in **Search events...** to find one. Point at an event to see what it counts.
+
+        | Category | Events |
+        | --- | --- |
+        | **payments** | Payment Succeeded · First NMI Purchase |
+        | **subscriptions** | Subscription Started · Subscription Payment · Subscription Canceled |
+        | **refunds** | Payment Refunded |
+
+        On **All Payments (LTV)** only **Payment Succeeded** is offered. It counts every payment once.
+      </Step>
+
+      <Step title="Add Payment Filters if you need them">
+        Optional rules, like only payments of $100 or more. Filtered payments still count toward LTV.
+      </Step>
+
+      <Step title="Save">
+        Click **Submit**. Cortana then offers to import up to 90 days of past payments.
+      </Step>
+    </Steps>
+
+    <Warning>
+      Do not put **Payment Succeeded** and **First NMI Purchase** on the same conversion. New buyers would count twice.
+    </Warning>
+  </Accordion>
+
   <Accordion title="PayPal">
     **What it tracks:** payments, subscription payments, and refunds taken through a connected PayPal business account. Every PayPal event carries revenue.
 
@@ -2457,6 +2502,7 @@ Two things happen, and the difference matters.
     <tr><td>**Whop**</td><td>Yes</td><td>A completed refund on a payment</td></tr>
     <tr><td>**Shopier**</td><td>Yes</td><td>A refunded order picked up by the sync</td></tr>
     <tr><td>**Fanbasis**</td><td>Yes</td><td>A refund or an opened dispute</td></tr>
+    <tr><td>**NMI**</td><td>Yes</td><td>A refund, full or partial, or a void on a sale</td></tr>
     <tr><td>ClickFunnels</td><td>No</td><td>Record refunds by CSV, see below</td></tr>
     <tr><td>GoHighLevel</td><td>No</td><td>Record refunds by CSV, see below</td></tr>
     <tr><td>Kajabi</td><td>No</td><td>Kajabi sends no refund webhook. Record refunds by CSV, see below</td></tr>
@@ -2464,7 +2510,7 @@ Two things happen, and the difference matters.
   </tbody>
 </table>
 
-For the seven that say yes, you do not need a separate refund source. Cortana matches the refund to the original sale and files it against whatever conversion that sale landed in.
+For the eight that say yes, you do not need a separate refund source. Cortana matches the refund to the original sale and files it against whatever conversion that sale landed in.
 
 ### Sources that do not track refunds automatically
 
