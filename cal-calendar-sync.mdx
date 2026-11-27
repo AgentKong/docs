@@ -262,7 +262,7 @@ The three tools do not all do the same things. Read this table before you decide
 | **The lead's answers go back** | Yes, in the appointment's description | Yes, on the booking | Yes, on the call | Yes, with the booking | Not applicable |
 | **A Cortana page can book into it** | Yes, pick it in **Details** | Yes, pick it in **Details** | Yes, pick it in **Details** | Yes, on the calendar Cortana made for each meeting link | No. Cortana adds the meeting to your calendar so you see it, but leads cannot pick a time from it. |
 | **You must match your team to their users** | Yes, in **Manage reps** | Yes, in **Manage reps** | Yes, in **Manage reps** | No. Cortana matches HubSpot's people to your team by email. | No. Each person connects their own account, so Cortana already knows whose calendar it is. |
-| **Cortana can send a booking to one named person** | Yes, set it in **Ending rules** | No. Calendly picks the person itself. | Yes, set it in **Ending rules**, once the rep is matched in **Manage reps** | Only by sending the lead to that rep's own HubSpot meeting link | No. Leads never book on these calendars directly. |
+| **Cortana can send a booking to one named person** | Yes, set it in **Ending rules**. On a collective, event or class calendar, anyone free takes a **Standard** booking. | No. Calendly picks the person itself. | Yes, set it in **Ending rules**, once the rep is matched in **Manage reps** | Only by sending the lead to that rep's own HubSpot meeting link | No. Leads never book on these calendars directly. |
 | **Cancelling in Cortana also cancels it there** | Yes, straight away | No. You have to cancel in Calendly too. | No. You have to cancel in iClosed too. | No. Move or cancel it in HubSpot. | Yes, the meeting is removed from your calendar. |
 | **Moving a booking to a new time in Cortana** | Yes, GoHighLevel moves with it | No. Move it in Calendly; Cortana's copy follows. | No. Move it in iClosed; Cortana's copy follows. | No. Move it in HubSpot; Cortana's copy follows. | Yes, the meeting moves on your calendar. |
 | **Hides times you are already busy** | No. It does not check your personal calendar. | No. It does not check your personal calendar. | No. It does not check your personal calendar. | Shows the open times HubSpot gives for the link. | Yes. Cortana reads your meetings and hides those times from leads. |
@@ -303,7 +303,7 @@ An iClosed calendar can follow two sets of routing rules: yours in Cortana, and 
 
 The lead then only sees the times that closer is free, and the call is booked with that closer.
 
-On the **Standard** calendar type the lead picks a time before answering, so the closer is a preference, not a promise. Cortana books that closer if they are still free at that time, and lets iClosed pick if not. [The warning under Ending rules](/cal-calendars#5-route-people-with-ending-rules) explains why.
+On the **Standard** calendar type the lead picks a time before answering. With the latest update, the rule keeps the lead with that closer. If the closer is free at the picked time, the call is theirs. If not, the lead is asked to pick one of the closer's times, with their answers kept. If the closer has no open times, iClosed picks who takes the call. [Routing rules on Standard](/cal-calendars#routing-rules-on-standard) shows what the lead sees.
 
 If iClosed no longer knows a closer, the lead sees the calendar's normal times and iClosed picks who takes the call. The booking is never lost.
 
@@ -312,7 +312,7 @@ If iClosed no longer knows a closer, the lead sees the calendar's normal times a
 A calendar that came over from iClosed with its questions also follows the rules you built in iClosed: its disqualify rules and its routing rules. You do not need to build them again in Cortana.
 
 - **Disqualified in iClosed**: the lead sees iClosed's disqualify message. If iClosed sends disqualified leads to a page, they go there.
-- **Routed in iClosed**: the lead sees the times of the closers iClosed picked, and the call is booked with them. On **Standard** this is a preference, the same as your Cortana rules.
+- **Routed in iClosed**: the lead sees the times of the closers iClosed picked, and the call is booked with them. On **Standard** the lead picks a time first, and the routing is kept the same way as your Cortana rules: if those closers are not free then, the lead is asked to pick one of their times.
 
 Your Cortana rules come first. When a Cortana rule turns the lead away, sends them to another page or calendar, or picks a closer, iClosed's rules are not asked. A rep's own booking link also wins.
 
