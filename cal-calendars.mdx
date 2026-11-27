@@ -3,7 +3,7 @@ title: "1) Creating Your Booking Calendar"
 description: "Make a booking page, choose the questions you ask, send people down their own path, set the hours you are free, and share a link people can book on."
 ---
 
-{/* last-verified: 2026-11-16 (section 3, the Questions tab) · route: /business/[businessId]/appointments, Calendars tab */}
+{/* last-verified: 2026-11-27 (booking page v2: the Calendar panel, the three calendar types, the countdown, routing on Standard, the embed, the test booking) · route: /business/[businessId]/appointments, Calendars tab */}
 
 {/* TODO: verify. No Loom walkthrough was supplied for this page. Add the embed + a
     verbatim transcript inside an <Accordion title="Video transcript"> here once recorded,
@@ -162,10 +162,12 @@ It has four tabs. **Details**, **Questions**, **Availability** and **Notificatio
 
     Click **Create a form**.
 
-    The **Questions** tab is the same builder as [Build your form](/forms-build), with your calendar around it. On the left: your form's card, then each page with its questions and the sentence that says where people go after it, then **Lead routing**: **Conditional logic** opens the Map, **Ending rules & redirects** opens your rules. In the middle: your booking page, and **Map** beside **Preview**. On the right: **Calendar** for the page's look, and **Field settings** for one question.
+    The **Questions** tab is the same builder as [Build your form](/forms-build), with your calendar around it. On the left: your form's card, then each page with its questions and the sentence that says where people go after it, then **Lead routing**: **Conditional logic** opens the Map of your paths, **Ending rules & redirects** opens your rules. In the middle: your booking page, working. On the right: **Calendar** for the page's look, and **Field settings** for one question.
 
-    <Frame caption="The Questions tab. 1 is the form, 2 says where people go after a page, 3 draws every path.">
-      <img src="/images/appointments/calendars/06-questions.png" alt="The Questions tab of a calendar. 1 marks the FORM card, naming the form and saying Used by 2 calendars. Edits apply to all. 2 marks the sentence under Page 1: When Your monthly marketing budget is Under $1k, end on Not a fit yet. Otherwise, go to the next page. 3 marks the Map tab beside Preview. The booking page preview sits in the middle and the Calendar panel on the right." />
+    The middle column opens on **Mobile**, with your booking page drawn inside an iPhone at real phone width, because most people book on a phone. Click **Desktop** beside it to see the page on a computer. Both work on every calendar type.
+
+    <Frame caption="The Questions tab. 1 is the form, 2 says where people go after a page, 3 opens the Map of every path, 4 switches the preview between a phone and a computer.">
+      <img src="/images/appointments/calendars/06-questions.png" alt="The Questions tab of a calendar on the Standard type. 1 marks the FORM card for Sales call form. 2 marks the sentence under Page 1, Go to the next page. 3 marks Conditional logic under Lead routing. 4 marks the Mobile button beside Desktop above the preview, which shows the booking page inside an iPhone: the title, 30 min, the description, a week of days and the times. The Calendar panel on the right starts with Calendar type, Standard picked and first in the list." />
     </Frame>
   </Step>
 </Steps>
@@ -227,30 +229,40 @@ It has four tabs. **Details**, **Questions**, **Availability** and **Notificatio
   <Step title="Style the booking page">
     The panel on the right has two tabs, **Calendar** and **Field settings**. Under **Calendar** you set the look of the whole page, top to bottom.
 
-    - **Calendar type**: **Calendar Combo** shows the questions and the calendar side by side. **Application + Cal** asks every question first, then shows the calendar. **Standard** shows the times first, then the questions. A new calendar starts on **Standard**. [The three calendar types](#the-three-calendar-types) below compares them.
-    - **Booking page header**: **Hide title** and **Hide business name**. On **Application + Cal** and **Standard** you also get **Hide duration**. The panel says *Trim what shows above the questions. None of this changes what you collect.*
-    - **Transition** and **Sticky Contact**. **Sticky Contact** fills in the details of people who have booked with you before.
-    - **Theme**: six light looks (Sage, Snow, Cream, Azure, Blush, Lavender) and six dark ones (Midnight, Royal, Obsidian, Forest, Ember, Rose).
+    - **Calendar type**: **Standard** sits first and shows the times first, then the questions. **Calendar Combo** shows the questions and the calendar side by side. **Application + Cal** asks every question first, then shows the calendar. A new calendar starts on **Standard**. [The three calendar types](#the-three-calendar-types) below compares them.
+    - **Booking page header**: the panel says *Trim what shows above the questions. None of this changes what you collect.* What it offers follows the calendar type.
+      - On **Standard**: **Hide title and description** (one switch for both), **Hide duration**, then **Hide subtitle**.
+      - On **Application + Cal**: a note, *Application + Cal never shows the title or description, so it reads as an application, not a calendar.*, then **Hide subtitle**.
+      - On **Calendar Combo**: **Hide title**, then **Hide subtitle**.
+      - **Hide subtitle** is always last. While the subtitle shows, its box sits right under it, already filled with the words the page uses, in the page's language: *Where should we send the invite?* in English. Type over them to change them. Empty the box and leave it, and the standard words come back.
+    - **Booking countdown**: a switch, the **Message** the top bar shows (already filled with *Hurry, book now to secure your slot*) and its **Length**. [The booking countdown](#the-booking-countdown) below shows what people see.
+    - **Transition** and **Sticky Contact**, side by side. **Sticky Contact** fills in the details of people who have booked with you before.
+    - **Typography**: **Font** and **Size** side by side. The next step covers them.
     - **Colors**: five of them. **Background**, **Text**, **Accent**, **Button** and **Button Text**.
-    - **Typography**: the **Font** and the **Size** of the writing, plus a **Reset theme and typography** link. The next step covers it.
-    - **Logo**: a PNG, JPG or WebP image file, up to 2 MB.
+    - **Theme**: six light looks (Sage, Snow, Cream, Azure, Blush, Lavender) and six dark ones (Midnight, Royal, Obsidian, Forest, Ember, Rose).
+    - **Button wording**: the word on the button that moves people on. It is already filled with *Continue*. Empty the box and the button shows just the check mark, as its hint says: *Empty shows just the check mark.*
+    - **Page language** and **Time format**: the language the page writes its own words and dates in, and 12-hour or 24-hour times.
+    - **Reset theme and typography**: puts the shipped look back.
+    - **Logo**: a PNG, JPG or WebP image file, up to 2 MB. **Hide "Powered by"** sits under it.
 
-    The middle column shows your real booking page as you edit it. On **Calendar Combo**, the **Desktop** and **Mobile** buttons show how it looks on a computer and on a phone.
+    The business name never shows on a booking page, on any calendar type, so there is no switch for it.
+
+    <Frame caption="The top of the Calendar panel. 1 is the calendar type, 2 the booking page header, 3 the booking countdown.">
+      <img src="/images/appointments/calendars/27-calendar-panel.png" alt="The Calendar tab of the calendar builder. 1 marks Calendar type: Standard, Times first, then the questions, picked and first in the list, then Calendar Combo and Application + Cal. 2 marks Booking page header with Hide title and description, Hide duration and Hide subtitle, and a box under it reading Where should we send the invite?. 3 marks Booking countdown switched on, its note, a Message box reading Hurry, book now to secure your slot, and Length set to 1 min 30 sec." />
+    </Frame>
   </Step>
 
   <Step title="Pick a font and a text size">
-    **Typography** sits under **Colors**.
+    **Typography** sits above **Colors**, with **Font** and **Size** side by side.
 
     **Font** gives you seven to choose from: **Inter**, **Roboto**, **Open Sans**, **Lato**, **Poppins**, **Montserrat** and **System**. **System** means the visitor's own device font, the one their phone or computer uses everywhere. A new calendar uses **Inter**.
 
-    **Size** makes all the writing bigger or smaller. Type any number from 12 to 24. It starts at 16.
+    **Size** makes all the writing bigger or smaller. Type any number from 12 to 24. It starts at 16. The boxes people type in never go below 16, so phones do not zoom in on them.
 
-    The middle column changes as you type, so you can watch it. Check it on **Mobile** too.
+    The middle column changes as you type, so you can watch it on **Mobile** and on **Desktop**.
 
-    Under the box it says *Sets the base size for the whole form, anything from 12px to 24px. Default is 16px. Inputs never go below 16px, so phones do not zoom on them.*
-
-    <Frame caption="Typography sets the font and the size of the writing for the whole booking page.">
-      <img src="/images/appointments/calendars/16-typography.png" alt="The Calendar tab of the calendar builder with the Typography block highlighted, showing a Font dropdown set to Inter, a Size box reading 20 px, the hint about the size range, the default size and inputs never going below 16px, and a Reset theme and typography link underneath." />
+    <Frame caption="Font and Size side by side, then the colours, the Theme tiles and the button's word.">
+      <img src="/images/appointments/calendars/16-typography.png" alt="The lower part of the Calendar panel. 1 marks Font set to Inter beside Size reading 16 px. Below sit the five Colors, then Theme with its Light Mode and Dark Mode tiles, where 2 marks Sage, picked. 3 marks Button wording, a box reading Continue with the hint Empty shows just the check mark." />
     </Frame>
 
     Picking a **Theme** tile changes the colours only. It never changes your font or your size.
@@ -279,13 +291,68 @@ It has four tabs. **Details**, **Questions**, **Availability** and **Notificatio
 
 | Calendar type | What people see | Pick it when |
 | --- | --- | --- |
-| **Standard** | The times first. They pick a time and click **Continue**. Then they answer your questions, with the time they picked shown above them. The last button, **Confirm Booking**, books it. | You want the most people to book. Seeing open times first feels like a normal booking page. **Every new calendar starts here.** |
+| **Standard** | One card split in two: your title, the meeting's length and your description on the left, the times on the right. They tap a time, then tap it again to move on. Then they answer your questions, with the time they picked on the left. The last button, **Book**, books it. | You want the most people to book. Seeing open times first feels like a normal booking page. **Every new calendar starts here.** |
 | **Calendar Combo** | The questions and the calendar side by side. The calendar unlocks once the questions are answered. | You want both on one screen. |
-| **Application + Cal** | Every question first, then the calendar. | You screen people hard before they ever see a time. |
+| **Application + Cal** | Every question first, then the calendar, in one card. The title and the description never show, so it reads as an application, not a calendar. | You screen people hard before they ever see a time. |
 
-On **Standard**, your **Ending rules** still run. They run when the person clicks the last button. A rule that turns a lead away, sends them to another page or sends them to another calendar books nothing.
+On **Standard**, your **Ending rules** still run. They run when the person presses the last button. A rule that turns a lead away, sends them to another page or sends them to another calendar books nothing. A rule that books one person or a pool keeps the lead with them: see [Routing rules on Standard](#routing-rules-on-standard).
 
 If another lead books that time while the person is typing, they go back to the times and see *That time was just booked. Pick another.* Their answers are kept. They pick a new time and book.
+
+### What people see on Standard
+
+Standard and Application + Cal are drawn as one card in your colours, with a top bar in the same colour as the card. The bar shows the subtitle (*Where should we send the invite?*) and how far along they are, or the countdown while it runs.
+
+**Picking a time, on a computer.** The left of the card holds your title, the meeting's length and your description. The right holds a month calendar beside a column of that day's times, with the timezone underneath. Open days are tinted in your accent colour.
+
+Tapping a time once picks it: **Continue** grows in beside it. Tapping the time or **Continue** again moves them on. There is no separate button to find.
+
+<Frame caption="Standard on a computer. 1 is a picked time with Continue beside it, 2 the top bar, here counting down.">
+  <img src="/images/appointments/calendars/20-standard-times.png" alt="The Standard booking card in the green Sage theme. The left panel shows Strategy call, 30 min and a two-line description. The right shows November 2026 with the open days 23 to 27 and 30 tinted, Tuesday 24 picked, and a column of times for Tuesday, Nov 24. 1 marks 10:00 AM picked with a green Continue button beside it. 2 marks the top bar reading 1:29 left and Hurry, book now to secure your slot." />
+</Frame>
+
+**Answering the questions.** Once they move on, the description steps aside. The left becomes a short summary: the title, the length, the time they picked and **Change**, which takes them back to the times.
+
+A single-choice question that is the last one on its page moves on by itself once they pick an answer, on a phone and on a computer. Typed answers and questions with several answers still need **Continue**, or **Enter**. **Back** is always there.
+
+On a computer the card keeps one height for every step, so it never jumps as they move through. A step that is taller scrolls inside the card.
+
+<Frame caption="The questions after the time is picked. 1 is the summary of the picked time, with Change.">
+  <img src="/images/appointments/calendars/21-standard-details.png" alt="The Standard booking card on its first page of questions, A little about you, with Your name filled in as Alex Morgan and Email address as alex.morgan@example.com. The left panel now shows Strategy call and 30 min, and 1 marks Tue, Nov 24 · 10:00 AM with a Change link. Back and Continue sit at the bottom. The top bar still counts down." />
+</Frame>
+
+**On a phone.** The card fills the screen. Your title, length and description come first, then a week of days in one row: **This week** with its dates, and arrows on each side for the weeks ahead. Under it sit the day's times, full width and easy to tap. Tapping works the same as on a computer: once to pick, again to go.
+
+<Frame caption="Standard on a phone: a row of days for the week, then the day's times.">
+  <img src="/images/appointments/calendars/22-standard-phone.png" alt="The Standard booking page on a phone in the Sage theme. The top bar reads Hurry, book now to secure your slot and 1:29 left. Under it, Strategy call, 30 min and the description, then This week · Nov 22 to 28 with Wednesday 25 picked, Wednesday, November 25, and the times, with 10:00 AM picked and a Continue button beside it." />
+</Frame>
+
+### What people see on Application + Cal
+
+The same card, a little narrower, with no title and no description. People answer one page of questions at a time, with the subtitle and how far along they are in the top bar. After the last page, the calendar opens in the same card.
+
+Answers to a choice question are lettered rows they tap. A single choice at the end of its page moves on by itself, as on Standard.
+
+<Frame caption="Application + Cal: no title, no description, one page of questions at a time.">
+  <img src="/images/appointments/calendars/23-application-cal.png" alt="The Application + Cal card on its second page, Your goals, with no title or description above it. The top bar reads 75% done and Where should we send the invite?. The question Your monthly marketing budget shows three lettered answers, A Under $1k, B $1k to $10k and C $10k+, above a box for What would a great quarter look like?, with Back and Continue at the bottom." />
+</Frame>
+
+### The booking countdown
+
+Switch on **Booking countdown** in the **Calendar** panel to add a gentle push to book. Choose the **Message** and the **Length**, from 30 seconds to 5 minutes. A new countdown runs for 1 minute 30 seconds.
+
+- **On Standard and Application + Cal** it starts when the person picks a time, and keeps running while they answer.
+- **On Calendar Combo** it starts when the times show.
+
+While it runs, the top bar shows your message, a clock such as *1:29 left*, and a line that drains as the time runs out.
+
+With the latest update, the countdown never moves anyone. At zero, the top bar says *Try booking your slot to confirm it's still available.* and stays that way, on every calendar type. Nothing refreshes, the time they picked stays picked, and whatever they are typing stays where it is. The countdown never hides or blocks a time either.
+
+The real check is the booking itself. If someone else took that time in the meantime, the person sees *That time was just booked. Pick another.*, with their answers kept.
+
+<Frame caption="The countdown at zero. 1 is the top bar's message; the picked time and the answers stay.">
+  <img src="/images/appointments/calendars/25-countdown-zero.png" alt="The Standard booking card on its questions page after the countdown ran out. 1 marks the top bar reading Try booking your slot to confirm it's still available. The summary on the left still shows Tue, Nov 24 · 10:00 AM with Change, and Your name and Email address are still filled in." />
+</Frame>
 
 <Note>
   **Calendars you bring in from another tool start on a layout too.** Calendars that come over from GoHighLevel, Calendly or HubSpot start on **Standard**, because those tools also show the times first. Calendars from iClosed start on **Application + Cal**, because iClosed asks its questions first. You can change any of them here. Calendars you already had keep the type they were on. [3) Calendar Sync](/cal-calendar-sync) explains what comes over.
@@ -415,15 +482,30 @@ Set this up if you want to spot your best enquiries at a glance. It also lets yo
   </Step>
 </Steps>
 
-<Warning>
-  **On Standard, a rule that books one person is a preference, not a promise.**
+### Routing rules on Standard
 
-  On **Standard** people pick a time before they answer your questions. So when a rule says **Book with a team member** or **Book with a team pool**, the time is already chosen. Cortana books that person, or a rep in that pool, if they are free at that time. If they are not, it books anyone on the calendar who is free. The rule never stops the booking.
+On **Standard** people pick a time before they answer your questions. With the latest update, a rule that says **Book with a team member** or **Book with a team pool** keeps the lead with that person or pool. This works on Cortana calendars, GoHighLevel calendars and iClosed calendars.
 
-  The rule editor says this under the person or pool you pick: *On the Standard layout people pick a time before they answer, so Cortana books this team member when they're free at that time, and anyone free otherwise.* Once you pick a person, their name takes the place of "this team member". The **Ending rules** card shows **Reps prioritized, not promised**.
+- **They are free at the picked time.** The booking is theirs.
+- **They are not free then, but have other times.** Nothing is booked yet. The lead goes back to the times and sees *Sorry, our calendar timing had some changes, and we had to refresh. Please select a new time. (No need to re-enter your information.)* The times now shown are only that person's, or the pool's. The answers are kept. On a phone the title and the description step aside, so the times come first. A tapped time now says **Book**, and the next tap books it with them.
+- **They have no open time at all** in the days people can book ahead (your **Rolling Window**). Anyone free on the calendar takes the picked time, so the lead is never stuck.
+- **They cannot be booked on this calendar**, for example they are not on its team, or not matched to their user in the other tool. Anyone free takes it.
+- **A calendar that takes more than one booking per time** (**Max Bookings / Slot** above 1) keeps the rule as a preference: that person when they are free then, anyone free when they are not.
+- **A GoHighLevel collective, event or class calendar** has no single host, so anyone free takes it.
 
-  Need the lead to land with one exact person every time? Switch **Calendar type** to **Calendar Combo** or **Application + Cal**. Those ask the questions before showing times, so they only show the times that person is free. A rep's own booking link also still goes to that rep on every calendar type.
-</Warning>
+<Frame caption="The lead's view when the routed rep is not free at the picked time. 1 is the message above that rep's own times.">
+  <img src="/images/appointments/calendars/24-route-refresh.png" alt="The Standard booking card back on its times after the last button was pressed. 1 marks the message Sorry, our calendar timing had some changes, and we had to refresh. Please select a new time. (No need to re-enter your information.) above three times for Tuesday, Nov 24: 1:30 PM, 3:00 PM and 4:30 PM. The countdown keeps running in the top bar." />
+</Frame>
+
+The rule editor says this under the person or pool you pick: *On the Standard layout people pick a time before they answer. If this team member isn't free then, they're asked to pick one of this team member's times. If this team member has no open times, anyone free takes it.* Once you pick a person, their name takes the place of "this team member". For a pool it says *If nobody in this pool is free then, they're asked to pick one of the pool's times. If the pool has no open times, anyone free takes it.* On a GoHighLevel calendar it adds *On a GoHighLevel collective, event or class calendar, anyone free takes it.*
+
+The **Ending rules** card shows **Leads book with the routed rep** (on a calendar that takes more than one booking per time: **Leads book with the routed rep when free**).
+
+<Frame caption="A rule that books one rep on a Standard calendar. 1 is the note under the rep.">
+  <img src="/images/appointments/calendars/28-standard-routing-note.png" alt="The Ending rules and redirects sheet with rule 1, Big budgets go to Priya: When Answer, Your monthly marketing budget, Equals $10k+, Then Book with a team member, Priya Natarajan. 1 marks the note On the Standard layout people pick a time before they answer. If Priya Natarajan isn't free then, they're asked to pick one of Priya Natarajan's times. If Priya Natarajan has no open times, anyone free takes it." />
+</Frame>
+
+On **Calendly** and **HubSpot** calendars, **Book with a team member** and **Book with a team pool** are greyed out, because those tools pick the person themselves. Send the lead to that rep's own calendar with **Book a different event** instead. A rep's own booking link still goes to that rep on every calendar type.
 
 ---
 
@@ -506,6 +588,16 @@ Use the merge fields to drop in real details. They fill in the person's name, th
   </Step>
 </Steps>
 
+### How the embed looks on your site
+
+With the latest update, a **Standard** or **Application + Cal** calendar embedded on your site sits on your page as a card with rounded corners, on a phone and on a computer.
+
+The card also keeps one steady height from the first question to the booking. Your page around it never grows, shrinks or jumps as the person moves through. The top bar stays at the top and the buttons stay at the bottom. Only the middle of the card scrolls, and only when a step holds more than fits, such as a long list of times. When everything fits, nothing scrolls, and a flick inside the card never scrolls your page instead.
+
+<Frame caption="A Standard calendar embedded on a website: one card with rounded corners and one steady height.">
+  <img src="/images/appointments/calendars/26-embed.png" alt="A plain business website with the heading Book your strategy call and the line Pick a time that suits you. It takes less than a minute. Under it, the embedded Standard booking card with rounded corners: the top bar reading 50% done and Where should we send the invite?, the title, length and description on the left, and the month calendar with the day's times on the right." />
+</Frame>
+
 ---
 
 ## 9. Test It Yourself
@@ -518,38 +610,38 @@ Always book your own calendar once before you send it to anyone.
 
     What comes first depends on your **Calendar type**. On **Standard** you see the times first. On **Calendar Combo** and **Application + Cal** you see the questions first.
 
-    People answer your questions one page at a time. The page works out their local time on its own and shows it at the bottom. They can change it if it is wrong.
-
-    The phone box picks their country for them.
-
-    <Frame caption="The public booking page. The calendar stays greyed out until the questions are answered.">
-      <img src="/images/appointments/calendars/12-public-page.png" alt="The public booking page showing the event title, description, the Your name, Email address and monthly marketing budget questions, a greyed-out month calendar on the right, and the detected timezone under it." />
-    </Frame>
-  </Step>
-
-  <Step title="Answer the questions and continue">
-    Fill in each box. Then click the **round checkmark button** at the bottom of the form to move on. Pressing **Enter** does the same thing.
-
-    On **Calendar Combo** the calendar on the right stays locked and grey until you answer the last page. That is on purpose. It means you get the person's details before you show them your free times.
-
-    On **Standard** you already picked your time. The last button reads **Confirm Booking** and books it.
+    The page works out the person's local time on its own and shows it with the times. They can change it if it is wrong.
   </Step>
 
   <Step title="Pick a day and a time">
-    Finish the form and the calendar unlocks. Only the days you are free on can be clicked.
+    Only the days you are free on can be picked. Pick a day, then tap a time.
 
-    Pick a day, then pick a time.
+    On **Standard**, the first tap picks the time and **Continue** grows in beside it. Tap the time or **Continue** again to move on to the questions. If the booking countdown is on, it starts now.
 
-    Click **Select Timeslot** to confirm it.
+    On **Application + Cal** the questions come first, and the calendar opens in the same card after the last page. The first tap on a time shows **Book** beside it, and the second tap books it.
+
+    On **Calendar Combo** the calendar stays locked and grey until the last page of questions is answered. That is on purpose: you get the person's details before you show them your free times. Then pick a time and click **Select Timeslot**.
+  </Step>
+
+  <Step title="Answer the questions">
+    People answer your questions one page at a time. Fill in each box, then press **Continue**, or **Enter**. A single choice at the end of a page moves on by itself.
+
+    The phone box picks their country for them.
+
+    On **Standard** the time you picked stays on the left, with **Change** to pick another. The last button reads **Book** and books it.
+
+    <Frame caption="Standard after the time is picked: the summary on the left, the questions on the right.">
+      <img src="/images/appointments/calendars/21-standard-details.png" alt="The Standard booking card on its first page of questions, A little about you, with Your name and Email address filled in. The left panel shows Strategy call, 30 min, and 1 marks Tue, Nov 24 · 10:00 AM with a Change link." />
+    </Frame>
   </Step>
 
   <Step title="Check the confirmation">
-    You should now see **Booking Confirmed!**, plus the date, the time, how long the meeting is and the local clock in use.
+    You should now see **Booking Confirmed!** and *You will receive a confirmation email shortly.*, then the date, the time and how long the meeting is.
 
-    You'll also see **Reschedule** and **Cancel** buttons. These are the same two links the person gets in their email.
+    The **Reschedule** and **Cancel** links reach the person in their confirmation email. On **Calendar Combo** the confirmation screen also shows them as buttons.
 
-    <Frame caption="The confirmation people see, with buttons to move or cancel the booking themselves.">
-      <img src="/images/appointments/calendars/13-confirmed.png" alt="The booking confirmation screen reading Booking Confirmed, stating a confirmation email is on its way, and showing the booked date, time, duration, timezone and Reschedule and Cancel buttons." />
+    <Frame caption="The confirmation on Standard: the day, the time and the length of the meeting.">
+      <img src="/images/appointments/calendars/13-confirmed.png" alt="The booking confirmation in the Standard card, reading Booking Confirmed! and You will receive a confirmation email shortly., above a box showing Tuesday, November 24, 2026 · 10:00 AM and 30 min." />
     </Frame>
   </Step>
 
@@ -599,7 +691,7 @@ Always book your own calendar once before you send it to anyone.
 
 | Setting | What it does | Default |
 | --- | --- | --- |
-| **Calendar type** | Chooses the order: times first (**Standard**), questions and calendar together (**Calendar Combo**), or every question first (**Application + Cal**). | Standard, so the times show first |
+| **Calendar type** | Chooses the order: times first (**Standard**), questions and calendar together (**Calendar Combo**), or every question first (**Application + Cal**). Standard is first in the list. | Standard, so the times show first |
 | **Theme** | Sets the overall look. Six light and six dark ones. Colours only, never the font or the size. | Whichever look you use in Cortana when you make the calendar |
 | **Colors** | Sets the Background, Text, Accent, Button and Button Text colours. | Blue, `#3B82F6`, for Accent and Button |
 | **Font** | Sets the writing for the whole page. Seven to pick from, including **System**, the visitor's own device font. | Inter |
@@ -609,7 +701,13 @@ Always book your own calendar once before you send it to anyone.
 | **Reset theme and typography** | Puts back the shipped look: the theme for the mode you are in, all five colours, the font and the size. | Not applicable. A toast offers **Undo** for ten seconds |
 | **Logo** | Puts your logo on the page. Takes PNG, JPG or WebP files. | No logo. Files up to 2 MB |
 | **Sticky Contact** | Fills in the details of people who booked with you before. | On, so returning people type less |
-| **Hide title** | Hides the meeting name on the booking page. | Off, so the name is shown |
+| **Hide title and description** | On **Standard**: hides the meeting name and your description, in one switch. **Calendar Combo** has **Hide title**. **Application + Cal** never shows either. | Off, so both are shown |
+| **Hide duration** | On **Standard**: hides the meeting's length. | Off, so the length is shown |
+| **Hide subtitle** | Hides the line in the top bar. While it shows, the box under the switch sets its words. | Off. The box reads *Where should we send the invite?*, in the page's language |
+| **Booking countdown** | Shows your message and a clock in the top bar. Starts when a time is picked on Standard and Application + Cal, and when the times show on Calendar Combo. At zero the bar says *Try booking your slot to confirm it's still available.* | Off. When on: *Hurry, book now to secure your slot*, for 1 minute 30 seconds |
+| **Button wording** | The word on the button that moves people on. Empty shows just the check mark. | *Continue* |
+| **Page language** and **Time format** | The language the page writes its own words and dates in, and 12-hour or 24-hour times. | English, 12-hour |
+| **Hide "Powered by"** | Hides the Powered by line at the bottom of the card. | Off |
 
 ---
 
@@ -659,7 +757,17 @@ Always book your own calendar once before you send it to anyone.
 
     Then check your **Ending rules**. A rule that gives the meeting to one chosen person beats the taking-turns setting.
 
-    On **Standard**, that rule is a preference. If the person was not free at the time the lead picked, Cortana books anyone free instead. See [the warning under Ending rules](#5-route-people-with-ending-rules).
+    On **Standard**, the rule keeps the lead with that person. Anyone free takes the booking only when that person has no open time at all, cannot be booked on this calendar, or the calendar takes more than one booking per time. See [Routing rules on Standard](#routing-rules-on-standard).
+  </Accordion>
+
+  <Accordion title="A lead says the page asked them to pick a new time">
+    That is a **Standard** calendar keeping a routing rule. The lead picked a time, then their answers sent them to a rep or a pool who was not free at that time. So the page showed *Sorry, our calendar timing had some changes, and we had to refresh. Please select a new time. (No need to re-enter your information.)* with only that rep's times.
+
+    Their answers were kept. They pick one of the times shown and book. Nothing was booked before that. See [Routing rules on Standard](#routing-rules-on-standard).
+  </Accordion>
+
+  <Accordion title="The countdown ran out and the lead could still book">
+    That is how it works. At zero the top bar says *Try booking your slot to confirm it's still available.* The times are never hidden or blocked, and the picked time stays picked. The booking itself checks the time is still free. See [The booking countdown](#the-booking-countdown).
   </Accordion>
 
   <Accordion title="I edited a question and it changed on another calendar">
@@ -713,7 +821,7 @@ Always book your own calendar once before you send it to anyone.
   <Accordion title="Can invitees reschedule or cancel themselves?">
     Yes, as long as **Allow Reschedule** and **Allow Cancellation** are switched on.
 
-    Both links show on the confirmation screen and in their confirmation email.
+    Both links come in their confirmation email. On **Calendar Combo** they also show as buttons on the confirmation screen.
   </Accordion>
 
   <Accordion title="Does rescheduling change the person's name, email or phone?">
@@ -722,6 +830,14 @@ Always book your own calendar once before you send it to anyone.
     - A different email typed while rescheduling is kept as an extra email on the same contact.
     - A name or phone only fills in what was empty, and a blank phone never wipes the one you have.
     - A reschedule never merges two of your contacts.
+  </Accordion>
+
+  <Accordion title="Why doesn't my business name show on the booking page?">
+    With the latest update, no booking page shows the business name, on any calendar type, so the **Calendar** panel has no switch for it. Your title and your description still show where the calendar type shows them.
+  </Accordion>
+
+  <Accordion title="My embedded calendar makes my website jump up and down">
+    With the latest update, an embedded **Standard** or **Application + Cal** calendar keeps one steady height from the first question to the booking, with rounded corners. Only the middle of the card scrolls, and only when a step holds more than fits. See [How the embed looks on your site](#how-the-embed-looks-on-your-site).
   </Accordion>
 
   <Accordion title="Do bookings from my ads stay attributed?">
