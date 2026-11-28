@@ -3,7 +3,7 @@ title: "4) Share your form"
 description: "Turn the form on, get its link, make a short or single-use link, or paste the form straight into your own website."
 ---
 
-{/* last-verified: 2026-09-10 · route: /business/[businessId]/forms/[formId], Share this form dialog */}
+{/* last-verified: 2026-11-28 (section 5, the Embed section: the embed holds one height while the page loads; new code fills its box with the form centred; pictures one light picture each) · route: /business/[businessId]/forms/[formId], Share dialog */}
 
 {/* TODO: verify. The screenshots on this page were taken on the Forms preview deployment,
     because Forms is not on app.usecortana.ai yet. The links inside them therefore show the
@@ -24,15 +24,13 @@ This page turns it on and hands you four ways to get it in front of people. Then
 In the builder, the switch sits at the top right. The word beside it reads **Off** or **Live**. Click it. The word changes to **Live** and a **View site** button appears next to **Share**.
 
 <Frame caption="The switch at the top of the builder. Live means the form's page is online.">
-  <img className="block dark:hidden" src="/images/forms/share/01-live.png" alt="The top right of the form builder with the Live label and its switch highlighted, beside the Share button, a View site button and a Saved chip." />
-  <img className="hidden dark:block" src="/images/forms/share/01-live-dark.png" alt="The top right of the form builder with the Live label and its switch highlighted, beside the Share button, a View site button and a Saved chip." />
+  <img src="/images/forms/share/01-live.png" alt="The top right of the form builder with the Live label and its switch highlighted, beside the Share button, a View site button and a Saved chip." />
 </Frame>
 
 The same switch sits on the form's card in the Forms list, beside its name. Either one does the job.
 
 <Frame caption="The same switch on the Forms list. A form that is off looks faded.">
-  <img className="block dark:hidden" src="/images/forms/share/09-list-toggle.png" alt="A form card in the Forms list with its green on and off switch highlighted, to the right of the form name." />
-  <img className="hidden dark:block" src="/images/forms/share/09-list-toggle-dark.png" alt="A form card in the Forms list with its green on and off switch highlighted, to the right of the form name." />
+  <img src="/images/forms/share/09-list-toggle.png" alt="A form card in the Forms list with its green on and off switch highlighted, to the right of the form name." />
 </Frame>
 
 <Warning>
@@ -50,15 +48,13 @@ Click **Share** at the top of the builder, to the left of **View site**. It is a
 A box opens headed **Share this form**, with the line *Send people a link, or put the form straight on your own website.* On a form that is still off, the box only says **Publish the form first. Until then it has no public address to share.**
 
 <Frame caption="Share opens everything at once. There are no tabs inside it.">
-  <img className="block dark:hidden" src="/images/forms/share/02-share-button.png" alt="The top right of the form builder with the Share button highlighted, between the Live switch and the View site button." />
-  <img className="hidden dark:block" src="/images/forms/share/02-share-button-dark.png" alt="The top right of the form builder with the Share button highlighted, between the Live switch and the View site button." />
+  <img src="/images/forms/share/02-share-button.png" alt="The top right of the form builder with the Share button highlighted, between the Live switch and the View site button." />
 </Frame>
 
 **Link** is the first row, described as *The form's own address*. Click the copy button on the right of the row. It turns into a green tick for a moment.
 
 <Frame caption="The Link row. Copy it here, then tidy it up before you send it out.">
-  <img className="block dark:hidden" src="/images/forms/share/03-link.png" alt="The Share this form box with the Link row highlighted, showing the form's full web address in a grey box and a copy button beside it, with the line The form's own address underneath." />
-  <img className="hidden dark:block" src="/images/forms/share/03-link-dark.png" alt="The Share this form box with the Link row highlighted, showing the form's full web address in a grey box and a copy button beside it, with the line The form's own address underneath." />
+  <img src="/images/forms/share/03-link.png" alt="The Share this form box with the Link row highlighted, showing the form's full web address in a grey box and a copy button beside it, with the line The form's own address underneath." />
 </Frame>
 
 ### Use the tidy version of the address
@@ -87,8 +83,7 @@ The **Short link** row starts empty, showing a dash. Click **Create** on its rig
 Its line reads *Nicer in an SMS or a printed QR. Works as many times as you like.* Once you have one, the button changes to **New code**.
 
 <Frame caption="Short link. Better for a text message or anything printed.">
-  <img className="block dark:hidden" src="/images/forms/share/04-short-link.png" alt="The Share this form box with the Short link row highlighted, showing a short web address ending in a seven character code, a copy button, and a New code button above it." />
-  <img className="hidden dark:block" src="/images/forms/share/04-short-link-dark.png" alt="The Share this form box with the Short link row highlighted, showing a short web address ending in a seven character code, a copy button, and a New code button above it." />
+  <img src="/images/forms/share/04-short-link.png" alt="The Share this form box with the Short link row highlighted, showing a short web address ending in a seven character code, a copy button, and a New code button above it." />
 </Frame>
 
 <Warning>
@@ -108,8 +103,7 @@ Its line reads *Stops working after ONE submission. The link survives being open
 Click **Create** again for another one. Each click makes a fresh link, so you can hand a different one to each person.
 
 <Frame caption="Single-use link. Good for one named person, and it dies after they submit.">
-  <img className="block dark:hidden" src="/images/forms/share/05-single-use.png" alt="The Share this form box with the Single-use link row highlighted, showing a short web address, a copy button, and a Create button above it." />
-  <img className="hidden dark:block" src="/images/forms/share/05-single-use-dark.png" alt="The Share this form box with the Single-use link row highlighted, showing a short web address, a copy button, and a Create button above it." />
+  <img src="/images/forms/share/05-single-use.png" alt="The Share this form box with the Single-use link row highlighted, showing a short web address, a copy button, and a Create button above it." />
 </Frame>
 
 <Note>
@@ -124,25 +118,28 @@ Click **Create** again for another one. Each click makes a fresh link, so you ca
 
 ## 5. Put the form on your own website
 
-Scroll to the bottom of the **Share this form** box. **Embed on your website** is the last section.
+In the **Share** box, scroll to **Embed on your site**. Pick how the form sits on your page: **Inline**, **Fixed card**, **Popup button** or **Full page**.
 
-Click **Copy code**, then paste it into your website wherever you want the form to appear. Most site builders call this a custom HTML block, an embed block, or a code block.
+Click the block of code to copy it, then paste it into your website wherever you want the form to appear. Most site builders call this a custom HTML block, an embed block, or a code block.
 
-The line under it reads *Paste this where you want the form. It resizes itself, so it never scrolls inside a box.*
+With **Inline** picked, the line above the code reads *Height follows the form as the visitor goes through it, and never changes while it loads.*
 
-<Frame caption="One block of code. Paste it where you want the form to sit.">
-  <img className="block dark:hidden" src="/images/forms/share/06-embed.png" alt="The Share this form box scrolled to the Embed on your website section, with the Copy code button highlighted above a block of code shown in a grey panel." />
-  <img className="hidden dark:block" src="/images/forms/share/06-embed-dark.png" alt="The Share this form box scrolled to the Embed on your website section, with the Copy code button highlighted above a block of code shown in a grey panel." />
+<Frame caption="One block of code. 1 is the line about its height, 2 the code: click it to copy.">
+  <img src="/images/forms/share/06-embed.png" alt="The Share box for the Contact Us form scrolled to Embed on your site, with Inline picked among Inline, Fixed card, Popup button and Full page, and Width 552 beside Height reading Grows with the form. 1 marks the line Height follows the form as the visitor goes through it, and never changes while it loads. 2 marks the block of code underneath, starting with Cortana form." />
 </Frame>
+
+With the latest update, the embedded form keeps one height while your page loads, so nothing on your page jumps as it opens. It follows the form only once the person starts filling it in.
+
+Code you copy with the latest update also fills its space on your page, with the form in the middle of it. Code you pasted earlier keeps the form as it looks today. Copy the code again from **Share** to get the new look. The **Popup button** keeps its own look either way.
 
 <Note>
   **The code does two things for you, so paste it exactly as copied.**
 
-  It grows and shrinks the form to fit, so the form never has its own scrollbar inside your page.
+  It holds the form's height steady while your page loads, then follows the form as the person goes through it.
 
   It also carries the tracking tags from your ad links through to the form, so a person who came from an ad stays joined up to the answers they leave.
 
-  The embed puts the form **in** the page, where you paste it. For anything that opens on top of the page, such as a button that pops the form up, put the link on a button of your own instead.
+  To open the form on top of your page from a button, pick **Popup button** before you copy the code.
 </Note>
 
 ## 6. Test it yourself
@@ -152,8 +149,7 @@ Always fill your own form in once before you send it anywhere.
 Click **View site** in the builder, or paste the link into a private browser window so you see it exactly as a stranger does. You should see your form in your chosen colours and font, with the form name and a progress line above the questions.
 
 <Frame caption="The real page. This is what everyone you send the link to will see.">
-  <img className="block dark:hidden" src="/images/forms/share/07-public-form.png" alt="The public form page, showing the form name and a progress line above a page heading, then a name box, a required email box, a phone box with a country picker and a dropdown, with a round continue button at the bottom." />
-  <img className="hidden dark:block" src="/images/forms/share/07-public-form-dark.png" alt="The public form page, showing the form name and a progress line above a page heading, then a name box, a required email box, a phone box with a country picker and a dropdown, with a round continue button at the bottom." />
+  <img src="/images/forms/share/07-public-form.png" alt="The public form page, showing the form name and a progress line above a page heading, then a name box, a required email box, a phone box with a country picker and a dropdown, with a round continue button at the bottom." />
 </Frame>
 
 Answer the questions. The round button at the bottom stays greyed out until every required question on the page is answered properly. Press **Enter** to move on, or click the round button.
@@ -163,8 +159,7 @@ This is where you find out whether your rules work. A question you hid behind an
 Finish the last page and press the button. You should see the ending you wrote: a rule's screen if one matched, the **Default** screen if none did.
 
 <Frame caption="The ending. A rule's screen when one matched, the Default when none did.">
-  <img className="block dark:hidden" src="/images/forms/share/08-thank-you.png" alt="The public form page after submitting, showing an ending screen with a headline reading Thanks, a salesperson will call you, and a line saying they will be in touch within one working day." />
-  <img className="hidden dark:block" src="/images/forms/share/08-thank-you-dark.png" alt="The public form page after submitting, showing an ending screen with a headline reading Thanks, a salesperson will call you, and a line saying they will be in touch within one working day." />
+  <img src="/images/forms/share/08-thank-you.png" alt="The public form page after submitting, showing an ending screen with a headline reading Thanks, a salesperson will call you, and a line saying they will be in touch within one working day." />
 </Frame>
 
 <Check>
@@ -198,7 +193,7 @@ Finish the last page and press the button. You should see the ending you wrote: 
 
     **The form is squashed or scrolls inside a box on my website.** Something is holding the block at a fixed height, or the code was changed on the way in. Paste the code again exactly as copied, then remove any height setting on the block.
 
-    **The embed shows a black rectangle on my page.** That used to happen to anyone who had used the Cortana dashboard in dark mode, and it is fixed. If you still see it, copy the code again from **Share**.
+    **The embed shows a black rectangle on my page.** Copy the code again from **Share** and paste it in place of the old one. With the latest update, the embed draws in your form's own colours.
 
     **My conditional question does not appear on the real page.** Check the rule against the choice's exact wording: `Sales` will not match `Sales question`. Also check the rule is on the question you meant to hide.
 
@@ -226,7 +221,7 @@ Finish the last page and press the button. You should see the ending you wrote: 
   </Accordion>
 
   <Accordion title="How do I open the form from a button on my site?">
-    Put the link on a button of your own. The embed code is for showing the form inside the page itself.
+    In **Share**, under **Embed on your site**, pick **Popup button**, set its label, then copy the code and paste it where the button should sit. Or put the form's link on a button of your own.
   </Accordion>
 
   <Accordion title="Will people who came from an ad stay joined up?">
