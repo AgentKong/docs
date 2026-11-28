@@ -1,17 +1,13 @@
 ---
 title: "4) Share your form"
-description: "Turn the form on, get its link, make a short or single-use link, or paste the form straight into your own website."
+description: "Turn the form on, copy its link or QR code, make a short or one-time link, or paste the form straight into your own website."
 ---
 
-{/* last-verified: 2026-11-28 (section 5, the Embed section: the embed holds one height while the page loads; new code fills its box with the form centred; pictures one light picture each) · route: /business/[businessId]/forms/[formId], Share dialog */}
-
-{/* TODO: verify. The screenshots on this page were taken on the Forms preview deployment,
-    because Forms is not on app.usecortana.ai yet. The links inside them therefore show the
-    preview address. Retake every image on this page once Forms ships to production. */}
+{/* last-verified: 2026-11-28 (the whole page against the app: the builder's top bar, the Share box top to bottom (Short link, Form link, QR code, Embed on your site, One-time link), the Forms list card, the public form and its ending; every picture retaken from today's app on the Sage theme, one light picture each) · route: /business/[businessId]/forms/[formId], Share dialog */}
 
 A form is off when you make it. Off means it has no page, so nobody can reach it.
 
-This page turns it on and hands you four ways to get it in front of people. Then it walks you through filling your own form in, which you should always do once.
+This page turns it on and hands you five ways to get it in front of people. Then it walks you through filling your own form in, which you should always do once.
 
 <Note>
   **Before you start.** Your form should be finished. See [Build your form](/forms-build) and [Design and endings](/forms-design).
@@ -21,16 +17,16 @@ This page turns it on and hands you four ways to get it in front of people. Then
 
 ## 1. Turn the form on
 
-In the builder, the switch sits at the top right. The word beside it reads **Off** or **Live**. Click it. The word changes to **Live** and a **View site** button appears next to **Share**.
+In the builder, the switch sits at the top right, just left of **Share**. The word beside it reads **Off** or **Live**. Click it. The word changes to **Live** and a **View site** button appears next to **Share**.
 
 <Frame caption="The switch at the top of the builder. Live means the form's page is online.">
-  <img src="/images/forms/share/01-live.png" alt="The top right of the form builder with the Live label and its switch highlighted, beside the Share button, a View site button and a Saved chip." />
+  <img src="/images/forms/share/01-live.png" alt="The top of the form builder for the Contact Us form, with the Live label and its green switch highlighted between the Test a variant and Share buttons, followed by View site and a Saved chip." />
 </Frame>
 
-The same switch sits on the form's card in the Forms list, beside its name. Either one does the job.
+The same switch sits on the form's card in the Forms list, at the right end of the line with its name. Either one does the job.
 
 <Frame caption="The same switch on the Forms list. A form that is off looks faded.">
-  <img src="/images/forms/share/09-list-toggle.png" alt="A form card in the Forms list with its green on and off switch highlighted, to the right of the form name." />
+  <img src="/images/forms/share/09-list-toggle.png" alt="The Forms list with six form cards. The green switch at the right of the Contact Us card's name is highlighted. Three cards are on and three are off, and the off ones look faded." />
 </Frame>
 
 <Warning>
@@ -43,32 +39,32 @@ The same switch sits on the form's card in the Forms list, beside its name. Eith
 
 ## 2. Get the link
 
-Click **Share** at the top of the builder, to the left of **View site**. It is also on the card's three-dot menu on the Forms list.
+Click **Share** at the top of the builder, between the switch and **View site**. On the Forms list, the link button at the bottom right of a form's card, beside its three-dot menu, opens the same box.
 
-A box opens headed **Share this form**, with the line *Send people a link, or put the form straight on your own website.* On a form that is still off, the box only says **Publish the form first. Until then it has no public address to share.**
+A box opens headed **Share "Contact Us"**, with your form's name, and the line *Share the link, embed it on your site, or send a single-use link.* On a form that is still off, the box only says *Turn this form on first. Until then it has no public address to share.*
 
 <Frame caption="Share opens everything at once. There are no tabs inside it.">
-  <img src="/images/forms/share/02-share-button.png" alt="The top right of the form builder with the Share button highlighted, between the Live switch and the View site button." />
+  <img src="/images/forms/share/02-share-button.png" alt="The top of the form builder with the Share button highlighted, between the Live switch and the View site button." />
 </Frame>
 
-**Link** is the first row, described as *The form's own address*. Click the copy button on the right of the row. It turns into a green tick for a moment.
+**Form link** is the second row, under **Short link**, described as *Your main shareable URL. Works everywhere.* This is the address to give people. Click the copy button at the right of the row. It turns into a green tick for a moment.
 
-<Frame caption="The Link row. Copy it here, then tidy it up before you send it out.">
-  <img src="/images/forms/share/03-link.png" alt="The Share this form box with the Link row highlighted, showing the form's full web address in a grey box and a copy button beside it, with the line The form's own address underneath." />
+<Frame caption="1 is the Form link: copy it here. 2 is the QR code, which opens the same address.">
+  <img src="/images/forms/share/03-link.png" alt="The Share Contact Us box. 1 marks the Form link row, with the line Your main shareable URL. Works everywhere, the address https://app.usecortana.ai/northstar/contact-us and a copy button. 2 marks the QR code card, with its download button and the code itself. The Short link row sits above, and Embed on your site starts below." />
 </Frame>
 
-### Use the tidy version of the address
+### What the address looks like
 
-Your form answers on two addresses. They open exactly the same form.
+The Form link already carries your handle, the short word your booking links use. Send it as it is.
 
 | Address | Looks like |
 | --- | --- |
-| **Your handle**, the short word your booking links already use | `https://app.usecortana.ai/your-handle/f/contact-us` |
-| **Your business id**, which is what the **Link** row copies | `https://app.usecortana.ai/f/8f3c…/contact-us` |
+| **The Form link**, with your handle | `https://app.usecortana.ai/your-handle/contact-us` |
+| **Your business id**, which is what **View site** opens | `https://app.usecortana.ai/f/8f3c…/contact-us` |
 
-Give people the handle one. It is shorter, it reads as yours, and it does not put a long string of characters in front of your customer.
+Both open exactly the same form. An address you copied before, such as `https://app.usecortana.ai/your-handle/f/contact-us`, keeps working too.
 
-The **Share** box does not offer it, so swap the business id for your handle yourself after you copy.
+If you connected your own domain, a **Domain** box sits at the top of **Share**. With your domain picked, the Form link reads `https://yourdomain.com/contact-us`, with the line *Served straight from your domain, with no redirect.* Pick the Cortana address in the box to share that one instead.
 
 <Note>
   **Where the ending of the address comes from.**
@@ -76,34 +72,42 @@ The **Share** box does not offer it, so swap the business id for your handle you
   The first real name you gave the form set it, and it is fixed after that. [Create your form](/forms-create) covers that in full.
 </Note>
 
-## 3. Make a short link
+### Print the QR code
 
-The **Short link** row starts empty, showing a dash. Click **Create** on its right. A few seconds later a short address appears, ending in seven letters and numbers.
+Under the links sits **QR code**, with the line *Scans straight to your form. Print it, or drop it in decks and signage.* It opens your Form link.
 
-Its line reads *Nicer in an SMS or a printed QR. Works as many times as you like.* Once you have one, the button changes to **New code**.
+Click the download arrow at the top right of the card to save it as a picture.
 
-<Frame caption="Short link. Better for a text message or anything printed.">
-  <img src="/images/forms/share/04-short-link.png" alt="The Share this form box with the Short link row highlighted, showing a short web address ending in a seven character code, a copy button, and a New code button above it." />
+## 3. Use the short link
+
+The **Short link** row sits above **Form link**, described as *Easier to paste in DMs and social posts.* Cortana makes it the first time you open **Share**, so it is ready to copy: a short address ending in seven letters and numbers. It works as many times as you like.
+
+To choose how it ends, click **Customize** above the row. Type up to 12 letters, numbers, hyphens or underscores, then press **Enter** or click the tick. If that ending is already in use, you see *That short link is already taken* and your link stays as it was.
+
+<Frame caption="Short link. 1 is the address to copy, 2 chooses your own ending, 3 makes a new code.">
+  <img src="/images/forms/share/04-short-link.png" alt="The Share Contact Us box with three marks on the Short link row: 1 on the short address https://app.usecortana.ai/k7Qm2xP, 2 on the Customize button above it, and 3 on the circular arrow at the end of the row, beside the copy button." />
 </Frame>
 
 <Warning>
-  **New code breaks the short link you already sent out.**
+  **A new code breaks the short link you already sent out.**
 
-  It does not add a second one. It replaces the code, and the old short address stops working straight away.
+  The circular arrow at the end of the row makes a new code, and so does a new ending under **Customize**. Neither adds a second link. Each replaces the code, and the old short address stops working straight away.
 
-  Only click it if you want to kill the link you handed out before.
+  Picking another address in the **Domain** box moves the short link too.
+
+  Only do these if you want to kill the link you handed out before.
 </Warning>
 
-## 4. Make a single-use link
+## 4. Make a one-time link
 
-Click **Create** on the **Single-use link** row. You get a short address that looks just like the last one.
+At the bottom of the **Share** box, under **Embed on your site**, sits **One-time link**. Click **Generate one-time link**. You get a short address that looks just like the short link.
 
-Its line reads *Stops working after ONE submission. The link survives being opened and previewed, so email scanners cannot burn it before your customer clicks.*
+Its line reads *Stops working after ONE submission. It survives being opened and previewed, so email scanners cannot burn it before your customer clicks.*
 
-Click **Create** again for another one. Each click makes a fresh link, so you can hand a different one to each person.
+For another one, click the circular arrow beside the copy button. Each click makes a fresh link, so you can hand a different one to each person. The ones you made before keep working until someone answers through them.
 
-<Frame caption="Single-use link. Good for one named person, and it dies after they submit.">
-  <img src="/images/forms/share/05-single-use.png" alt="The Share this form box with the Single-use link row highlighted, showing a short web address, a copy button, and a Create button above it." />
+<Frame caption="One-time link. Good for one named person, and it dies after they submit.">
+  <img src="/images/forms/share/05-single-use.png" alt="The bottom of the Share Contact Us box, under the embed code, with the One-time link card highlighted: its line about stopping after one submission, and the short address https://app.usecortana.ai/Rt8vQ2m with a copy button and a circular arrow." />
 </Frame>
 
 <Note>
@@ -113,7 +117,7 @@ Click **Create** again for another one. Each click makes a fresh link, so you ca
 
   That is on purpose. Email systems open every link in a message to check it is safe, and dying when a link is opened would kill yours before your customer ever saw it.
 
-  Once it is used, that address shows **This link has already been used**, with the line *It was a single-use link, so it only works once. Ask whoever sent it for a new one.*
+  Once it is used, the link no longer opens the form. Anyone who goes back to the form from it, by refreshing or from a tab left open, sees **This link has already been used**, with the line *It was a single-use link, so it only works once. Ask whoever sent it for a new one.*
 </Note>
 
 ## 5. Put the form on your own website
@@ -149,17 +153,17 @@ Always fill your own form in once before you send it anywhere.
 Click **View site** in the builder, or paste the link into a private browser window so you see it exactly as a stranger does. You should see your form in your chosen colours and font, with the form name and a progress line above the questions.
 
 <Frame caption="The real page. This is what everyone you send the link to will see.">
-  <img src="/images/forms/share/07-public-form.png" alt="The public form page, showing the form name and a progress line above a page heading, then a name box, a required email box, a phone box with a country picker and a dropdown, with a round continue button at the bottom." />
+  <img src="/images/forms/share/07-public-form.png" alt="The public page of the Contact Us form on the green Sage theme: the form name and 50% done above a progress line, the page heading About you, then a name box, a required email box, a phone box with a country picker and a dropdown, with a greyed-out Continue button at the bottom." />
 </Frame>
 
-Answer the questions. The round button at the bottom stays greyed out until every required question on the page is answered properly. Press **Enter** to move on, or click the round button.
+Answer the questions. The button at the bottom reads **Continue**, and **Submit** on the last page, unless you gave it your own word. It stays greyed out until every required question on the page is answered properly. Press **Enter** to move on, or click the button. From the second page on, **Back** takes you to the page before.
 
 This is where you find out whether your rules work. A question you hid behind an answer should appear only when that answer is picked.
 
 Finish the last page and press the button. You should see the ending you wrote: a rule's screen if one matched, the **Default** screen if none did.
 
 <Frame caption="The ending. A rule's screen when one matched, the Default when none did.">
-  <img src="/images/forms/share/08-thank-you.png" alt="The public form page after submitting, showing an ending screen with a headline reading Thanks, a salesperson will call you, and a line saying they will be in touch within one working day." />
+  <img src="/images/forms/share/08-thank-you.png" alt="The public form page after submitting, on the green Sage theme: a green circle with a tick above the headline Thanks, a salesperson will call you, and the line We will be in touch within one working day." />
 </Frame>
 
 <Check>
@@ -170,26 +174,28 @@ Finish the last page and press the button. You should see the ending you wrote: 
 
 <AccordionGroup>
   <Accordion title="Settings reference">
-    Every control in the **Share this form** box, plus the switch that fills it.
+    Every control in the **Share** box, top to bottom, plus the switch that fills it.
 
     | Setting | What it does | Default | We recommend | Watch out for |
     | --- | --- | --- | --- | --- |
     | **Live / Off switch** | Puts the form's page online, or takes it down. | Off on a new form | Leave it off until you have filled the form in yourself. | Nothing checks the form first. An empty form can go live. |
-    | **Link** | The form's own address. Works everywhere. | Made from the form's name | Swap the business id for your handle before you send it out. | You cannot edit it, and the copied version carries your business id in the middle. |
-    | **Short link** | A shorter address for the same form. | None until you click **Create** | Use it in text messages and anything printed. | **New code** replaces the code. The one you sent out stops working. |
-    | **Single-use link** | An address that dies after one answer. | None until you click **Create** | One per person, for private invites. | Each **Create** makes a new one. There is no list of the ones you made. |
-    | **Embed on your website** | A block of code that puts the form in your own page. | Always the same code | Paste it exactly as copied. | The only embed. No pop-up and no slide-in. |
+    | **Domain** | Picks the address your links, QR code and code use. | Your own domain, unless your short link already lives on another address | Use your own domain when you have one. | Only shows once your own domain is connected and verified. Switching it moves your short link. |
+    | **Short link** | A short address for the same form. | Made for you the first time you open **Share** | Use it in text messages and social posts. | The circular arrow and **Customize** replace the code. The one you sent out stops working. |
+    | **Form link** | The form's own address, with your handle in it. Works everywhere. | Made from the form's name | Send this one. | You cannot change how it ends. |
+    | **QR code** | A picture that scans straight to the Form link. | Always there on a live form | Download it for anything printed. | It follows the **Domain** box. |
+    | **Embed on your site** | A block of code that puts the form in your own page. | **Inline** | Paste it exactly as copied. | Pick how the form sits before you copy. The code changes with it. |
+    | **One-time link** | An address that dies after one answer. | None until you click **Generate one-time link** | One per person, for private invites. | Each click makes a new one. There is no list of the ones you made. |
     | **View site** | Opens the form's page in a new tab. | Not applicable | Use it after every change you make. | Only appears once the form is live. |
   </Accordion>
 
   <Accordion title="Troubleshooting">
-    **The Share box only says Publish the form first.** The form is off, so it has no public address. **Publish** is Cortana's word for turning a form on. Turn the switch on at the top of the builder, then open **Share** again.
+    **The Share box only says Turn this form on first.** The form is off, so it has no public address. Turn the switch on at the top of the builder, then open **Share** again.
 
-    **My link shows an error page.** Two things to check. The form may be off: look at the switch on its card. Or the address is wrong: copy it again from **Share** rather than typing it.
+    **My link shows an error page.** Three things to check. The form may be off: look at the switch on its card. The address may be wrong: copy it again from **Share** rather than typing it. Or it was a one-time link someone has already answered through: make a fresh one.
 
-    **A short link I sent out has stopped working.** Someone clicked **New code** on that form, which replaces the code rather than adding one. Copy the new short link and send it again.
+    **A short link I sent out has stopped working.** Someone gave that form a new code: the circular arrow, a new ending under **Customize**, or another address in the **Domain** box. Each one replaces the code rather than adding one. Copy the new short link and send it again.
 
-    **Someone says my single-use link is already used.** Either they already filled the form in on it, or someone else did. Open **Share** and click **Create** for a fresh one.
+    **Someone says my one-time link is already used.** Either they already filled the form in on it, or someone else did. Open **Share** and click **Generate one-time link** for a fresh one.
 
     **The form is squashed or scrolls inside a box on my website.** Something is holding the block at a fixed height, or the code was changed on the way in. Paste the code again exactly as copied, then remove any height setting on the block.
 
@@ -205,11 +211,11 @@ Finish the last page and press the button. You should see the ending you wrote: 
 
 <AccordionGroup>
   <Accordion title="How do I get a tidier link?">
-    Two ways. Swap your business id for your handle, as section 2 explains. Or make a **Short link**, which is the shortest of all.
+    The **Form link** already carries your handle, as section 2 explains. For a shorter one, copy the **Short link**, and click **Customize** to choose how it ends.
   </Accordion>
 
   <Accordion title="How do I make a QR code for my form?">
-    Make the **Short link**, then put it through any free QR code maker. A short link is the right one for print, because it stays readable at a small size.
+    Open **Share** and use the **QR code** card. It scans straight to your Form link. Click the download arrow to save it as a picture for anything printed.
   </Accordion>
 
   <Accordion title="How do I choose my form's web address?">
@@ -229,7 +235,7 @@ Finish the last page and press the button. You should see the ending you wrote: 
   </Accordion>
 
   <Accordion title="How do I give each person their own link?">
-    Click **Create** on the **Single-use link** row once per person. Keep your own note of who got which, so you can tell them apart later.
+    Click **Generate one-time link**, then the circular arrow beside it once for each next person. Keep your own note of who got which, so you can tell them apart later.
   </Accordion>
 </AccordionGroup>
 
