@@ -3,7 +3,7 @@ title: "1) Creating Your Booking Calendar"
 description: "Make a booking page, choose the questions you ask, send people down their own path, set the hours you are free, and share a link people can book on."
 ---
 
-{/* last-verified: 2026-11-27 (booking page v2: the Calendar panel, the three calendar types, the countdown, routing on Standard, the embed, the test booking) · route: /business/[businessId]/appointments, Calendars tab */}
+{/* last-verified: 2026-11-28 (booking page v2: the Calendar panel, the three calendar types, the countdown, routing on Standard, the questions spaced and centred, the embed holding one height while it loads (Calendar Combo too), the test booking) · route: /business/[businessId]/appointments, Calendars tab */}
 
 {/* TODO: verify. No Loom walkthrough was supplied for this page. Add the embed + a
     verbatim transcript inside an <Accordion title="Video transcript"> here once recorded,
@@ -275,12 +275,14 @@ It has four tabs. **Details**, **Questions**, **Availability** and **Notificatio
 
     Both read **Match form** until you move them. That means the question is following the whole form.
 
+    On **Standard** and **Application + Cal**, **Space above** shows 32 px while the preview is on **Mobile** and 36 px on **Desktop**, at the 16 px size: the room the card leaves between questions. It grows and shrinks with the size. On **Calendar Combo** it shows 20 px.
+
     Move a handle and the question is on its own. A link then appears to put it back: **Match the form's size**, or **Match the form's spacing**.
 
     **Space above** replaces the gap above the question, it does not add to it. Set it to 0 and the question sits right against the one above, which is how two short fields read as one pair. On the first question of a page it reads 0, because there is nothing above it.
 
     <Frame caption="Text size and Space above, on one question. The links put it back to following the form.">
-      <img src="/images/appointments/calendars/17-question-typography.png" alt="The Field settings tab of the calendar builder. 1 marks the Text size row, reading 14 px above a Match the form's size link, and 2 marks the Space above row underneath, reading 48 px above a Match the form's spacing link." />
+      <img src="/images/appointments/calendars/17-question-typography.png" alt="The Field settings tab of the calendar builder, with Email address picked and the preview on Desktop. 1 marks the Text size row, reading 14 px above a Match the form's size link, and 2 marks the Space above row underneath, reading 48 px above a Match the form's spacing link. In the preview, Email address sits further below Your name than the usual gap." />
     </Frame>
   </Step>
 </Steps>
@@ -315,10 +317,12 @@ Tapping a time once picks it: **Continue** grows in beside it. Tapping the time 
 
 A single-choice question that is the last one on its page moves on by itself once they pick an answer, on a phone and on a computer. Typed answers and questions with several answers still need **Continue**, or **Enter**. **Back** is always there.
 
+With the latest update, the questions sit in the middle of the card, between the picked time and the **Back** and **Continue** buttons, with more room between one question and the next. A question's own **Space above**, set in **Field settings**, still wins.
+
 On a computer the card keeps one height for every step, so it never jumps as they move through. A step that is taller scrolls inside the card.
 
 <Frame caption="The questions after the time is picked. 1 is the summary of the picked time, with Change.">
-  <img src="/images/appointments/calendars/21-standard-details.png" alt="The Standard booking card on its first page of questions, A little about you, with Your name filled in as Alex Morgan and Email address as alex.morgan@example.com. The left panel now shows Strategy call and 30 min, and 1 marks Tue, Nov 24 · 10:00 AM with a Change link. Back and Continue sit at the bottom. The top bar still counts down." />
+  <img src="/images/appointments/calendars/21-standard-details.png" alt="The Standard booking card on its first page of questions, A little about you, with Your name filled in as Alex Morgan and Email address as alex.morgan@example.com. The two questions sit in the middle of the card with room between them. The left panel now shows Strategy call and 30 min, and 1 marks Tue, Nov 24 · 10:00 AM with a Change link. Back and Continue sit at the bottom. The top bar still counts down." />
 </Frame>
 
 **On a phone.** The card fills the screen. Your title, length and description come first, then a week of days in one row: **This week** with its dates, and arrows on each side for the weeks ahead. Under it sit the day's times, full width and easy to tap. Tapping works the same as on a computer: once to pick, again to go.
@@ -331,10 +335,10 @@ On a computer the card keeps one height for every step, so it never jumps as the
 
 The same card, a little narrower, with no title and no description. People answer one page of questions at a time, with the subtitle and how far along they are in the top bar. After the last page, the calendar opens in the same card.
 
-Answers to a choice question are lettered rows they tap. A single choice at the end of its page moves on by itself, as on Standard.
+Answers to a choice question are lettered rows they tap. A single choice at the end of its page moves on by itself, as on Standard. The questions sit in the middle of the card with room between them, as on Standard.
 
 <Frame caption="Application + Cal: no title, no description, one page of questions at a time.">
-  <img src="/images/appointments/calendars/23-application-cal.png" alt="The Application + Cal card on its second page, Your goals, with no title or description above it. The top bar reads 75% done and Where should we send the invite?. The question Your monthly marketing budget shows three lettered answers, A Under $1k, B $1k to $10k and C $10k+, above a box for What would a great quarter look like?, with Back and Continue at the bottom." />
+  <img src="/images/appointments/calendars/23-application-cal.png" alt="The Application + Cal card on its second page, Your goals, with no title or description above it. The top bar reads 75% done and Where should we send the invite?. The question Your monthly marketing budget shows three lettered answers, A Under $1k, B $1k to $10k and C $10k+, above a box for What would a great quarter look like?, both in the middle of the card with room between them, with Back and Continue at the bottom." />
 </Frame>
 
 ### The booking countdown
@@ -395,7 +399,7 @@ Set this up if you want to spot your best enquiries at a glance. It also lets yo
     The first range that fits wins. So put your narrowest range at the top, and never let two ranges overlap.
 
     <Frame caption="Field settings for a Budget question, with points next to each answer.">
-      <img src="/images/appointments/calendars/15-lead-scoring.png" alt="The calendar builder's Questions tab with the budget question selected. The Field settings panel on the right has its Lead score box highlighted, giving Under $1k 0 points, $1k to $10k 20 points and $10k+ 40 points, above the Text size and Space above boxes, the Logic block and the Required switch." />
+      <img src="/images/appointments/calendars/15-lead-scoring.png" alt="The calendar builder's Questions tab with the budget question selected and the preview on Desktop, showing the page Your goals. The Field settings panel on the right has its Lead score box highlighted, giving Under $1k 0 points, $1k to $10k 20 points and $10k+ 40 points, above the Text size and Space above boxes and the Logic block." />
     </Frame>
   </Step>
 
@@ -594,6 +598,10 @@ With the latest update, a **Standard** or **Application + Cal** calendar embedde
 
 The card also keeps one steady height from the first question to the booking. Your page around it never grows, shrinks or jumps as the person moves through. The top bar stays at the top and the buttons stay at the bottom. Only the middle of the card scrolls, and only when a step holds more than fits, such as a long list of times. When everything fits, nothing scrolls, and a flick inside the card never scrolls your page instead.
 
+With the latest update, a **Calendar Combo** embedded on your site also holds one height while your page loads, so nothing on your page moves as it opens. It grows only once the person starts using it: their first tap, click or key. Then it follows the card as they move through, and grows downwards, never pushing your page up.
+
+On a computer, code you copy now starts the Combo at the card's own height, so it never changes size at all. On a phone, the Combo's questions stack above its calendar, so the card can be taller than the space it starts in: it scrolls inside that space until the first tap, then grows to fit. Code you pasted before also holds its height while your page loads. Copy the code again from **Share** to start at the card's own height.
+
 <Frame caption="A Standard calendar embedded on a website: one card with rounded corners and one steady height.">
   <img src="/images/appointments/calendars/26-embed.png" alt="A plain business website with the heading Book your strategy call and the line Pick a time that suits you. It takes less than a minute. Under it, the embedded Standard booking card with rounded corners: the top bar reading 50% done and Where should we send the invite?, the title, length and description on the left, and the month calendar with the day's times on the right." />
 </Frame>
@@ -697,7 +705,7 @@ Always book your own calendar once before you send it to anyone.
 | **Font** | Sets the writing for the whole page. Seven to pick from, including **System**, the visitor's own device font. | Inter |
 | **Size** | Makes all the writing bigger or smaller, from 12 to 24. | `16px`. The boxes people type in never go below `16px` |
 | **Text size** | On one question, in **Field settings**. Overrides the form's size for that question only, from 12 to 24. | **Match form**, so it follows the whole page |
-| **Space above** | On one question, in **Field settings**. Replaces the gap above it, from 0 to 96. | **Match form**. The first question on a page reads 0 |
+| **Space above** | On one question, in **Field settings**. Replaces the gap above it, from 0 to 96. | **Match form**: 32 on a phone and 36 on a computer on Standard and Application + Cal, 20 on Calendar Combo, at the 16px size. The first question on a page reads 0 |
 | **Reset theme and typography** | Puts back the shipped look: the theme for the mode you are in, all five colours, the font and the size. | Not applicable. A toast offers **Undo** for ten seconds |
 | **Logo** | Puts your logo on the page. Takes PNG, JPG or WebP files. | No logo. Files up to 2 MB |
 | **Sticky Contact** | Fills in the details of people who booked with you before. | On, so returning people type less |
@@ -837,7 +845,7 @@ Always book your own calendar once before you send it to anyone.
   </Accordion>
 
   <Accordion title="My embedded calendar makes my website jump up and down">
-    With the latest update, an embedded **Standard** or **Application + Cal** calendar keeps one steady height from the first question to the booking, with rounded corners. Only the middle of the card scrolls, and only when a step holds more than fits. See [How the embed looks on your site](#how-the-embed-looks-on-your-site).
+    With the latest update, an embedded **Standard** or **Application + Cal** calendar keeps one steady height from the first question to the booking, with rounded corners. Only the middle of the card scrolls, and only when a step holds more than fits. An embedded **Calendar Combo** holds one height while your page loads and grows only after the person's first tap, click or key, downwards. See [How the embed looks on your site](#how-the-embed-looks-on-your-site).
   </Accordion>
 
   <Accordion title="Do bookings from my ads stay attributed?">
